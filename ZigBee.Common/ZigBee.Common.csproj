@@ -1,0 +1,108 @@
+<Project Sdk="Microsoft.NET.Sdk">
+
+  <PropertyGroup>
+    <TargetFramework>net6.0-windows</TargetFramework>
+    <UseWPF>true</UseWPF>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <None Remove="Fonts\Aileron-Black.otf" />
+    <None Remove="Fonts\Aileron-BlackItalic.otf" />
+    <None Remove="Fonts\Aileron-Bold.otf" />
+    <None Remove="Fonts\Aileron-BoldItalic.otf" />
+    <None Remove="Fonts\Aileron-Heavy.otf" />
+    <None Remove="Fonts\Aileron-HeavyItalic.otf" />
+    <None Remove="Fonts\Aileron-Italic.otf" />
+    <None Remove="Fonts\Aileron-Light.otf" />
+    <None Remove="Fonts\Aileron-LightItalic.otf" />
+    <None Remove="Fonts\Aileron-Regular.otf" />
+    <None Remove="Fonts\Aileron-SemiBold.otf" />
+    <None Remove="Fonts\Aileron-SemiBoldItalic.otf" />
+    <None Remove="Fonts\Aileron-Thin.otf" />
+    <None Remove="Fonts\Aileron-ThinItalic.otf" />
+    <None Remove="Fonts\Aileron-UltraLight.otf" />
+    <None Remove="Fonts\Aileron-UltraLightItalic.otf" />
+    <None Remove="Fonts\Font Awesome 5 Brands-Regular-400.otf" />
+    <None Remove="Fonts\Font Awesome 5 Free-Regular-400.otf" />
+    <None Remove="Fonts\Font Awesome 5 Free-Solid-900.otf" />
+    <None Remove="Fonts\Rubik-Black.ttf" />
+    <None Remove="Fonts\Rubik-BlackItalic.ttf" />
+    <None Remove="Fonts\Rubik-Bold.ttf" />
+    <None Remove="Fonts\Rubik-BoldItalic.ttf" />
+    <None Remove="Fonts\Rubik-ExtraBold.ttf" />
+    <None Remove="Fonts\Rubik-ExtraBoldItalic.ttf" />
+    <None Remove="Fonts\Rubik-Italic.ttf" />
+    <None Remove="Fonts\Rubik-Light.ttf" />
+    <None Remove="Fonts\Rubik-LightItalic.ttf" />
+    <None Remove="Fonts\Rubik-Medium.ttf" />
+    <None Remove="Fonts\Rubik-MediumItalic.ttf" />
+    <None Remove="Fonts\Rubik-Regular.ttf" />
+    <None Remove="Fonts\Rubik-SemiBold.ttf" />
+    <None Remove="Fonts\Rubik-SemiBoldItalic.ttf" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <Page Remove="Images\Logo\ChameraLogoLong.xaml" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <Resource Include="Fonts\Aileron-Black.otf" />
+    <Resource Include="Fonts\Aileron-BlackItalic.otf" />
+    <Resource Include="Fonts\Aileron-Bold.otf" />
+    <Resource Include="Fonts\Aileron-BoldItalic.otf" />
+    <Resource Include="Fonts\Aileron-Heavy.otf" />
+    <Resource Include="Fonts\Aileron-HeavyItalic.otf" />
+    <Resource Include="Fonts\Aileron-Italic.otf" />
+    <Resource Include="Fonts\Aileron-Light.otf" />
+    <Resource Include="Fonts\Aileron-LightItalic.otf" />
+    <Resource Include="Fonts\Aileron-Regular.otf" />
+    <Resource Include="Fonts\Aileron-SemiBold.otf" />
+    <Resource Include="Fonts\Aileron-SemiBoldItalic.otf" />
+    <Resource Include="Fonts\Aileron-Thin.otf" />
+    <Resource Include="Fonts\Aileron-ThinItalic.otf" />
+    <Resource Include="Fonts\Aileron-UltraLight.otf" />
+    <Resource Include="Fonts\Aileron-UltraLightItalic.otf" />
+    <Resource Include="Fonts\Font Awesome 5 Brands-Regular-400.otf" />
+    <Resource Include="Fonts\Font Awesome 5 Free-Regular-400.otf" />
+    <Resource Include="Fonts\Font Awesome 5 Free-Solid-900.otf" />
+    <Resource Include="Fonts\Rubik-Black.ttf" />
+    <Resource Include="Fonts\Rubik-BlackItalic.ttf" />
+    <Resource Include="Fonts\Rubik-Bold.ttf" />
+    <Resource Include="Fonts\Rubik-BoldItalic.ttf" />
+    <Resource Include="Fonts\Rubik-ExtraBold.ttf" />
+    <Resource Include="Fonts\Rubik-ExtraBoldItalic.ttf" />
+    <Resource Include="Fonts\Rubik-Italic.ttf" />
+    <Resource Include="Fonts\Rubik-Light.ttf" />
+    <Resource Include="Fonts\Rubik-LightItalic.ttf" />
+    <Resource Include="Fonts\Rubik-Medium.ttf" />
+    <Resource Include="Fonts\Rubik-MediumItalic.ttf" />
+    <Resource Include="Fonts\Rubik-Regular.ttf" />
+    <Resource Include="Fonts\Rubik-SemiBold.ttf" />
+    <Resource Include="Fonts\Rubik-SemiBoldItalic.ttf" />
+    <Resource Include="Images\Logo\ChameraLogoLong.xaml">
+      <Generator>MSBuild:Compile</Generator>
+    </Resource>
+  </ItemGroup>
+
+  <ItemGroup>
+    <PackageReference Include="FontAwesome.WPF" Version="4.7.0.9" />
+    <PackageReference Include="SharpVectors" Version="1.7.5" />
+    <PackageReference Include="System.Drawing.Common" Version="5.0.2" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <Compile Update="Strings\SR.Designer.cs">
+      <DesignTime>True</DesignTime>
+      <AutoGen>True</AutoGen>
+      <DependentUpon>SR.resx</DependentUpon>
+    </Compile>
+  </ItemGroup>
+
+  <ItemGroup>
+    <EmbeddedResource Update="Strings\SR.resx">
+      <Generator>ResXFileCodeGenerator</Generator>
+      <LastGenOutput>SR.Designer.cs</LastGenOutput>
+    </EmbeddedResource>
+  </ItemGroup>
+
+</Project>

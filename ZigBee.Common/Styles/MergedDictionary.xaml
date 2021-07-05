@@ -1,0 +1,14 @@
+﻿<ResourceDictionary xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+                    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml">
+    <ResourceDictionary.MergedDictionaries>
+        <ResourceDictionary Source="/ZigBee.Common;component/Styles/Misc.xaml"></ResourceDictionary>
+        <ResourceDictionary Source="/ZigBee.Common;component/Styles/Colors.xaml"></ResourceDictionary>
+        <ResourceDictionary Source="/ZigBee.Common;component/Styles/Fonts.xaml"></ResourceDictionary>
+        <ResourceDictionary Source="/ZigBee.Common;component/Styles/Buttons.xaml"></ResourceDictionary>
+        <ResourceDictionary Source="/ZigBee.Common;component/Styles/TextBoxes.xaml"></ResourceDictionary>
+        <ResourceDictionary Source="/ZigBee.Common;component/Styles/ListViews.xaml"></ResourceDictionary>
+        <ResourceDictionary Source="/ZigBee.Common;component/Styles/ComboBoxes.xaml"></ResourceDictionary>
+        <ResourceDictionary Source="/ZigBee.Common;component/Styles/Windows.xaml"></ResourceDictionary>
+        <ResourceDictionary Source="/ZigBee.Common;component/Styles/Menus.xaml"></ResourceDictionary>
+    </ResourceDictionary.MergedDictionaries>
+</ResourceDictionary>

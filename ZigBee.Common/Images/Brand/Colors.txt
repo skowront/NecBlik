@@ -1,0 +1,8 @@
+﻿https://colorschemedesigner.com/csd-3.5/#1O32tw0w0w0w00WrZC8WTZRgWTSjh..FZ
+
+Primary Color:
+F4ED23	//BFBB30	//A6A000	FFF940	//FFFB73
+Secondary Color A:
+F62A20	//BF3730	//A60800	FF4940	//FF7A73
+Secondary Color B:
+186ABA	//26527C	//04396C	408AD2	//679ED2

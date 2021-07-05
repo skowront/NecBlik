@@ -1,0 +1,37 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio Version 16
+VisualStudioVersion = 16.0.31410.223
+MinimumVisualStudioVersion = 10.0.40219.1
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ZigBee", "ZigBee\ZigBee.csproj", "{407C095C-0D1A-4F84-A03A-906DB542D79B}"
+EndProject
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "ZigBee.Common", "ZigBee.Common\ZigBee.Common.csproj", "{0CBC35C6-B821-46A9-BCF7-8D29C1AE5F11}"
+EndProject
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "WPFLocalizeextension", "WPFLocalizeextension\WPFLocalizeextension.csproj", "{230A1A31-1CB1-474F-91CE-E985939CB49C}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{407C095C-0D1A-4F84-A03A-906DB542D79B}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{407C095C-0D1A-4F84-A03A-906DB542D79B}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{407C095C-0D1A-4F84-A03A-906DB542D79B}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{407C095C-0D1A-4F84-A03A-906DB542D79B}.Release|Any CPU.Build.0 = Release|Any CPU
+		{0CBC35C6-B821-46A9-BCF7-8D29C1AE5F11}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{0CBC35C6-B821-46A9-BCF7-8D29C1AE5F11}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{0CBC35C6-B821-46A9-BCF7-8D29C1AE5F11}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{0CBC35C6-B821-46A9-BCF7-8D29C1AE5F11}.Release|Any CPU.Build.0 = Release|Any CPU
+		{230A1A31-1CB1-474F-91CE-E985939CB49C}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{230A1A31-1CB1-474F-91CE-E985939CB49C}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{230A1A31-1CB1-474F-91CE-E985939CB49C}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{230A1A31-1CB1-474F-91CE-E985939CB49C}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(ExtensibilityGlobals) = postSolution
+		SolutionGuid = {1F4A2145-EEEA-4F10-911C-AA037861A949}
+	EndGlobalSection
+EndGlobal

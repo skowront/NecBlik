@@ -1,0 +1,35 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!--This file is NOT compatible with Silverlight-->
+<Viewbox xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation" Stretch="Uniform">
+  <Canvas Name="svg817" Width="700" Height="200" Canvas.Left="0" Canvas.Top="0">
+    <Canvas.RenderTransform>
+      <TranslateTransform X="0" Y="0"/>
+    </Canvas.RenderTransform>
+    <Canvas.Resources/>
+    <!--Unknown tag: metadata-->
+    <!--Unknown tag: sodipodi:namedview-->
+    <TextBlock xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml" FontSize="355.19824219" FontWeight="Normal" FontFamily="sans-serif" FontStyle="normal" Foreground="#FF000000" Canvas.Left="34.002792" Canvas.Top="-199.6" Name="text852"/>
+    <Path xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml" Name="path858" Fill="#FFFFFFFF" StrokeThickness="3.0555985" StrokeMiterLimit="4" StrokeLineJoin="Miter" StrokeStartLineCap="Flat" StrokeEndLineCap="Flat">
+      <Path.Data>
+        <PathGeometry Figures="M 0 199.57927 V 0.55688 H 700 V 200 Z" FillRule="NonZero"/>
+      </Path.Data>
+    </Path>
+    <Path xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml" Name="path14304" Fill="#FF727678" StrokeThickness="2.3763876">
+      <Path.Data>
+        <PathGeometry Figures="M 230.26744 93.40211 C 232.50126 80.63854 230.10589 67.64919 223.3712 56.4279 215.95921 44.07781 204.18186 35.35411 190.20634 31.86557 c -4.2894 -1.07177 -8.69045 -1.61595 -13.08439 -1.61595 -19.98306 0 -38.14816 11.00505 -47.48499 28.4002 -4.46523 -3.05128 -9.74319 -4.69335 -15.25878 -4.69335 -7.34304 0 -14.21793 2.88492 -19.360427 8.12485 -4.296514 4.37732 -6.977075 10.13055 -7.618702 16.18321 -21.539575 1.29038 -39.070187 19.20121 -39.590614 41.03307 -0.268526 11.24506 3.859253 21.92456 11.620534 30.0613 7.76366 8.14151 18.229268 12.77071 29.479087 13.03924 l 134.377582 0.012 c 19.22023 0 34.85448 -15.63426 34.85448 -34.85448 0 -16.86285 -11.72985 -30.9073 -27.87268 -34.15343 z" FillRule="NonZero"/>
+      </Path.Data>
+    </Path>
+    <Path xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml" Name="path1430" Fill="#FF000000" StrokeThickness="2.3763876">
+      <Path.Data>
+        <PathGeometry Figures="m 214.27801 98.92227 c 2.2338 -12.76358 -0.16155 -25.75291 -6.89629 -36.97422 -7.41194 -12.35007 -19.18932 -21.0738 -33.16486 -24.56234 -4.28937 -1.07174 -8.69044 -1.61594 -13.08438 -1.61594 -19.98305 0 -38.14815 11.00505 -47.48498 28.40022 -4.46523 -3.05128 -9.74319 -4.69338 -15.258777 -4.69338 -7.343042 0 -14.21793 2.88495 -19.360433 8.12488 -4.296508 4.37729 -6.977071 10.13053 -7.618697 16.18319 -21.539576 1.29038 -39.070187 19.20121 -39.590612 41.03309 -0.268528 11.24506 3.85925 21.92454 11.620533 30.0613 7.763659 8.14149 18.229267 12.7707 29.479085 13.03923 l 134.377581 0.012 c 19.22022 0 34.85446 -15.63425 34.85446 -34.85448 0 -16.86284 -11.72981 -30.90728 -27.87263 -34.15344 z" FillRule="NonZero"/>
+      </Path.Data>
+    </Path>
+    <TextBlock xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml" FontSize="411.06219482" FontWeight="Normal" FontFamily="Aileron" FontStyle="normal" Foreground="#FF000000" Canvas.Left="272.97058" Canvas.Top="-248.3" Name="text837">
+      <Span whiteSpaceCollapse="preserve" FontSize="80" FontWeight="Bold" FontFamily="Orbitron" FontStyle="normal">Chamera</Span>
+    </TextBlock>
+    <TextBlock xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml" FontSize="411.06219482" FontWeight="Normal" FontFamily="Metrosant" FontStyle="normal" Foreground="#FFFFFFFF" Canvas.Left="94.309181" Canvas.Top="-256.6" Name="text856">
+      <Span whiteSpaceCollapse="preserve" Foreground="#FFFFFFFF" FontSize="102.76554871">C</Span>
+    </TextBlock>
+    <TextBlock xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml" FontSize="133.33332825" FontWeight="Normal" FontFamily="Aileron" FontStyle="normal" Foreground="#FF000000" TextWrapping="Wrap" Name="flowRoot891" Width="314.43915" Height="230.31026" Canvas.Left="-110.97852" Canvas.Top="136.4"/>
+  </Canvas>
+</Viewbox>

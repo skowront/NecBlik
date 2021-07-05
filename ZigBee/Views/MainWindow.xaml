@@ -1,0 +1,65 @@
+﻿<Window x:Class="ZigBee.Views.MainWindow"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="clr-namespace:ZigBee.Views"
+        xmlns:lexp="clr-namespace:WPFLocalizeExtension.Providers;assembly=WPFLocalizeextension"
+        xmlns:lex="clr-namespace:WPFLocalizeExtension.Extensions;assembly=WPFLocalizeextension"
+        lexp:ResxLocalizationProvider.DefaultAssembly="ZigBee"
+        lexp:ResxLocalizationProvider.DefaultDictionary="SR"
+        xmlns:ext="clr-namespace:ZigBee.Common.WpfExtensions.UI;assembly=ZigBee.Common"
+        xmlns:resx="clr-namespace:ZigBee.Strings"
+        ext:Translation.ResourceManager="{x:Static resx:SR.ResourceManager}"
+        WindowStartupLocation="CenterScreen"
+        WindowState="Maximized"
+        mc:Ignorable="d"
+        Title="ZigBeeMap" Height="450" Width="800">
+    <Grid>
+        <Grid.RowDefinitions>
+            <RowDefinition Height="auto"></RowDefinition>
+            <RowDefinition Height="*"></RowDefinition>
+        </Grid.RowDefinitions>
+        <Grid Grid.Row="0" Background="{StaticResource AccentSecondaryBrush}">
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="1*"></ColumnDefinition>
+                <ColumnDefinition Width="auto"></ColumnDefinition>
+            </Grid.ColumnDefinitions>
+            <Grid.RowDefinitions>
+                <RowDefinition Height="1*"></RowDefinition>
+                <RowDefinition Height="2"></RowDefinition>
+            </Grid.RowDefinitions>
+            <Menu Grid.Row="0" VerticalAlignment="Stretch" VerticalContentAlignment="Bottom">
+                <MenuItem Header="{ext:Loc MainWindowMenuHeaderNew}" Margin="4">
+                    <MenuItem Header="{ext:Loc MainWindowMenuHeaderProject}"/>
+                </MenuItem>
+                <MenuItem Header="{ext:Loc MainWindowMenuHeaderProject}" Margin="4">
+                    <MenuItem Header="{ext:Loc MainWindowMenuHeaderProjectLoad}"/>
+                    <MenuItem Header="{ext:Loc MainWindowMenuHeaderProjectSave}"/>
+                    <MenuItem Header="{ext:Loc MainWindowMenuHeaderProjectEdit}"/>
+                    <MenuItem Header="{ext:Loc MainWindowMenuHeaderProjectAddZigBee}"/>
+                </MenuItem>
+                <MenuItem Header="{ext:Loc MainWindowMenuAbout}" Margin="4">
+                </MenuItem>
+            </Menu>
+            <TextBlock Grid.Row="0" 
+                       Grid.Column="1" 
+                       Text="{Binding ProjectName}" 
+                       HorizontalAlignment="Center" 
+                       Style="{StaticResource NormalTextBlock}"/>
+        </Grid>
+        <Grid Grid.Row="1">
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="1*"></ColumnDefinition>
+                <ColumnDefinition Width="5*"></ColumnDefinition>
+            </Grid.ColumnDefinitions>
+            <Expander Grid.Column="0">
+                <ListView>
+                </ListView>
+            </Expander>
+            <Canvas Grid.ColumnSpan="2">
+                
+            </Canvas>
+        </Grid>
+    </Grid>
+</Window>

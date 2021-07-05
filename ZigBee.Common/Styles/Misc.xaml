@@ -1,0 +1,12 @@
+﻿<ResourceDictionary xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+                    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+                    xmlns:local="clr-namespace:ZigBee.Common.Styles"
+                    xmlns:sys="clr-namespace:System;assembly=System"
+                    xmlns:System="clr-namespace:System;assembly=mscorlib">
+    <ImageSource x:Key="ZigBeeLogoSource">/ZigBee.Common;component/Images/Logo/ZigBeeLogo.png</ImageSource>
+    <ImageSource x:Key="ZigBeeLogoSmallSource">/ZigBee.Common;component/Images/Logo/ZigBeeLogo.png</ImageSource>
+    <ImageSource x:Key="ZigBeeLogoLong">/ZigBee.Common;component/Images/Logo/ZigBeeLogoLong.png</ImageSource>
+    <sys:Uri x:Key="ZigBeeLogoLongSVG">/ZigBee.Common;component/Images/Logo/ZigBeeLogoLongPlain.svg</sys:Uri>
+    <!--Icons-->
+    <sys:Uri x:Key="OganisationIconSvg">/ZigBee.Common;component/Images/Icons/organisationIconic.svg</sys:Uri>
+</ResourceDictionary>
