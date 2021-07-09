@@ -11,6 +11,7 @@
   </ItemGroup>
 
   <ItemGroup>
+    <ProjectReference Include="..\DiagramsExtension\DiagramsExtension.csproj" />
     <ProjectReference Include="..\WPFLocalizeextension\WPFLocalizeextension.csproj" />
     <ProjectReference Include="..\ZigBee.Common\ZigBee.Common.csproj" />
   </ItemGroup>

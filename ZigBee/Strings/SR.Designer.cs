@@ -61,6 +61,15 @@ namespace ZigBee.Strings {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Available ZigBees.
+        /// </summary>
+        public static string MainWindowExpanderTitle {
+            get {
+                return ResourceManager.GetString("MainWindowExpanderTitle", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to About.
         /// </summary>
         public static string MainWindowMenuAbout {

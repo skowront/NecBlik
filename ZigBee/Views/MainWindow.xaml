@@ -6,6 +6,7 @@
         xmlns:local="clr-namespace:ZigBee.Views"
         xmlns:lexp="clr-namespace:WPFLocalizeExtension.Providers;assembly=WPFLocalizeextension"
         xmlns:lex="clr-namespace:WPFLocalizeExtension.Extensions;assembly=WPFLocalizeextension"
+        xmlns:diagrams="clr-namespace:DiagramDesigner;assembly=DiagramsExtension"
         lexp:ResxLocalizationProvider.DefaultAssembly="ZigBee"
         lexp:ResxLocalizationProvider.DefaultDictionary="SR"
         xmlns:ext="clr-namespace:ZigBee.Common.WpfExtensions.UI;assembly=ZigBee.Common"
@@ -53,13 +54,13 @@
                 <ColumnDefinition Width="1*"></ColumnDefinition>
                 <ColumnDefinition Width="5*"></ColumnDefinition>
             </Grid.ColumnDefinitions>
-            <Expander Grid.Column="0">
-                <ListView>
+            <Expander Grid.Column="0" Style="{StaticResource BaseStyle}">
+                <ListView ItemsSource="{Binding AvailableZigBees}">
                 </ListView>
             </Expander>
-            <Canvas Grid.ColumnSpan="2">
+            <diagrams:DesignerCanvas Grid.ColumnSpan="2">
                 
-            </Canvas>
+            </diagrams:DesignerCanvas>
         </Grid>
     </Grid>
 </Window>
