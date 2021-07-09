@@ -1,4 +1,5 @@
 ﻿using DiagramDesigner;
+using Microsoft.Win32;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -37,21 +38,6 @@ namespace ZigBee.Views
             this.ViewModel = new MainWindowViewModel();
             this.DataContext = this.ViewModel;
             this.buildResponseProviders();
-        }
-
-        private void buildResponseProviders()
-        {
-            this.ViewModel.NewZigBeeResponseProvider = new GenericResponseProvider<ZigBeeViewModel,ZigBeeViewModel>((o) =>
-            {
-                bool result = false;
-                var window = new ZigBeeEditorWindow(o, new Action(()=>result=true), new Action(()=> result = false));
-                window.ShowDialog();
-                if (result == false)
-                {
-                    return null;
-                }
-                return o;
-            });
         }
 
         private void ListView_PreviewMouseLeftButtonDown(object sender, MouseButtonEventArgs e)
@@ -107,6 +93,35 @@ namespace ZigBee.Views
             }
             while (current != null);
             return null;
+        }
+
+        private void buildResponseProviders()
+        {
+            this.ViewModel.NewZigBeeResponseProvider = new GenericResponseProvider<ZigBeeViewModel, ZigBeeViewModel>((o) =>
+            {
+                bool result = false;
+                var window = new ZigBeeEditorWindow(o, new Action(() => result = true), new Action(() => result = false));
+                window.ShowDialog();
+                if (result == false)
+                {
+                    return null;
+                }
+                return o;
+            });
+
+            this.ViewModel.SaveProjectFilePathProvider = new GenericResponseProvider<string, object>(o =>
+            {
+                OpenFileDialog openFileDialog = new OpenFileDialog() { CheckFileExists = false, Filter = "Text files (*.json)|*.json" };
+                openFileDialog.ShowDialog();
+                return openFileDialog.FileName;
+            });
+
+            this.ViewModel.LoadProjectFilePathProvider = new GenericResponseProvider<string, object>(o =>
+            {
+                OpenFileDialog openFileDialog = new OpenFileDialog() { CheckFileExists = true, Filter = "Text files (*.json)|*.json" };
+                openFileDialog.ShowDialog();
+                return openFileDialog.FileName;
+            });
         }
     }
 }

@@ -168,7 +168,7 @@ namespace DiagramDesigner
             }
         }
 
-        public ArrowSymbol sinkArrowSymbol = ArrowSymbol.Arrow;
+        public ArrowSymbol sinkArrowSymbol = ArrowSymbol.None;
         public ArrowSymbol SinkArrowSymbol
         {
             get { return sinkArrowSymbol; }

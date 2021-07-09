@@ -13,7 +13,7 @@ namespace DiagramDesigner
     // Helper class to provide an orthogonal connection path
     internal class PathFinder
     {
-        private const int margin = 20;
+        private const int margin = 0;
 
         internal static List<Point> GetConnectionLine(ConnectorInfo source, ConnectorInfo sink, bool showLastLine)
         {
@@ -26,6 +26,9 @@ namespace DiagramDesigner
             Point endPoint = GetOffsetPoint(sink, rectSink);
 
             linePoints.Add(startPoint);
+            linePoints.Add(endPoint);
+            return linePoints;
+
             Point currentPoint = startPoint;
 
             if (!rectSink.Contains(currentPoint) && !rectSource.Contains(endPoint))
@@ -209,12 +212,13 @@ namespace DiagramDesigner
         internal static List<Point> GetConnectionLine(ConnectorInfo source, Point sinkPoint, ConnectorOrientation preferredOrientation)
         {
             List<Point> linePoints = new List<Point>();
-            Rect rectSource = GetRectWithMargin(source, 10);
+            Rect rectSource = GetRectWithMargin(source, margin);
             Point startPoint = GetOffsetPoint(source, rectSource);
             Point endPoint = sinkPoint;
 
             linePoints.Add(startPoint);
             linePoints.Add(endPoint);
+            return linePoints;
 
             Point currentPoint = startPoint;
 

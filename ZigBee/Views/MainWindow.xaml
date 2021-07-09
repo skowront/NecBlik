@@ -37,8 +37,8 @@
                     <MenuItem Header="{ext:Loc MainWindowMenuHeaderProject}"/>
                 </MenuItem>
                 <MenuItem Header="{ext:Loc MainWindowMenuHeaderProject}" Margin="4">
-                    <MenuItem Header="{ext:Loc MainWindowMenuHeaderProjectLoad}"/>
-                    <MenuItem Header="{ext:Loc MainWindowMenuHeaderProjectSave}"/>
+                    <MenuItem Header="{ext:Loc MainWindowMenuHeaderProjectLoad}" Command="{Binding LoadProjectCommand}"/>
+                    <MenuItem Header="{ext:Loc MainWindowMenuHeaderProjectSave}" Command="{Binding SaveProjectCommand}"/>
                     <MenuItem Header="{ext:Loc MainWindowMenuHeaderProjectEdit}"/>
                     <MenuItem Header="{ext:Loc MainWindowMenuHeaderProjectAddZigBee}" Command="{Binding AddNewZigBeeCommand}"/>
                 </MenuItem>
