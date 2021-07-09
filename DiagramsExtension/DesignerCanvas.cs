@@ -16,7 +16,7 @@ namespace DiagramDesigner
         private Point? rubberbandSelectionStartPoint = null;
 
         private SelectionService selectionService;
-        internal SelectionService SelectionService
+        public SelectionService SelectionService
         {
             get
             {
@@ -100,11 +100,12 @@ namespace DiagramDesigner
                         DesignerCanvas.SetLeft(newItem, Math.Max(0, position.X));
                         DesignerCanvas.SetTop(newItem, Math.Max(0, position.Y));
                     }
-
+                    
                     Canvas.SetZIndex(newItem, this.Children.Count);
                     this.Children.Add(newItem);                    
                     SetConnectorDecoratorTemplate(newItem);
-
+                    return;
+                    
                     //update selection
                     this.SelectionService.SelectItem(newItem);
                     newItem.Focus();
@@ -141,7 +142,7 @@ namespace DiagramDesigner
             return size;
         }
 
-        private void SetConnectorDecoratorTemplate(DesignerItem item)
+        protected void SetConnectorDecoratorTemplate(DesignerItem item)
         {
             if (item.ApplyTemplate() && item.Content is UIElement)
             {

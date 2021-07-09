@@ -164,6 +164,10 @@ namespace DiagramDesigner
                     this.Template.FindName("PART_ContentPresenter", this) as ContentPresenter;
                 if (contentPresenter != null)
                 {
+                    if(VisualTreeHelper.GetChildrenCount(contentPresenter)==0)
+                    {
+                        return;
+                    }
                     UIElement contentVisual = VisualTreeHelper.GetChild(contentPresenter, 0) as UIElement;
                     if (contentVisual != null)
                     {

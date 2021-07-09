@@ -4,11 +4,12 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using ZigBee.Common.WpfExtensions.Base;
+using ZigBee.Common.WpfExtensions.Interfaces;
 using ZigBee.Models;
 
 namespace ZigBee.ViewModels
 {
-    public class ZigBeeViewModel:BaseViewModel
+    public class ZigBeeViewModel:BaseViewModel,IDuplicable<ZigBeeViewModel>
     {
         public ZigBeeModel Model;
 
@@ -32,6 +33,11 @@ namespace ZigBee.ViewModels
                 this.Model = new ZigBeeModel();
                 return;
             }
+        }
+
+        public ZigBeeViewModel Duplicate()
+        {
+            return new ZigBeeViewModel(this.Model.Duplicate());
         }
     }
 }

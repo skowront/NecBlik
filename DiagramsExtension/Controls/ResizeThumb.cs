@@ -84,6 +84,10 @@ namespace DiagramDesigner.Controls
             {
                 double groupItemLeft = Canvas.GetLeft(groupItem);
                 double delta = (groupLeft - groupItemLeft) * (scale - 1);
+                if (double.IsNaN(delta))
+                {
+                    delta = 0;
+                }
                 Canvas.SetLeft(groupItem, groupItemLeft - delta);
                 groupItem.Width = groupItem.ActualWidth * scale;
             }
@@ -97,6 +101,10 @@ namespace DiagramDesigner.Controls
             {
                 double groupItemTop = Canvas.GetTop(groupItem);
                 double delta = (groupBottom - groupItemTop) * (scale - 1);
+                if(double.IsNaN(delta))
+                {
+                    delta = 0;
+                }
                 Canvas.SetTop(groupItem, groupItemTop - delta);
                 groupItem.Height = groupItem.ActualHeight * scale;
             }
@@ -111,7 +119,10 @@ namespace DiagramDesigner.Controls
             {
                 double groupItemLeft = Canvas.GetLeft(groupItem);
                 double delta = (groupItemLeft - groupLeft) * (scale - 1);
-
+                if (double.IsNaN(delta))
+                {
+                    delta = 0;
+                }
                 Canvas.SetLeft(groupItem, groupItemLeft + delta);
                 groupItem.Width = groupItem.ActualWidth * scale;
             }
@@ -125,7 +136,10 @@ namespace DiagramDesigner.Controls
             {
                 double groupItemTop = Canvas.GetTop(groupItem);
                 double delta = (groupItemTop - groupTop) * (scale - 1);
-
+                if (double.IsNaN(delta))
+                {
+                    delta = 0;
+                }
                 Canvas.SetTop(groupItem, groupItemTop + delta);
                 groupItem.Height = groupItem.ActualHeight * scale;
             }

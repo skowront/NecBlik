@@ -11,5 +11,7 @@ namespace ZigBee.Models
         public string ProjectName { get; set; } = Resources.Resources.ProjectModelPojectNameDefault;
 
         public List<ZigBeeModel> AvailableZigBees { get; set; } = new List<ZigBeeModel>();
+
+        public ZigBeeModel ZigBeeTemplate { get; set; } = new ZigBeeModel();
     }
 }

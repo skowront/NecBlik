@@ -4,7 +4,7 @@ using System.Linq;
 
 namespace DiagramDesigner
 {
-    internal class SelectionService
+    public class SelectionService
     {
         private DesignerCanvas designerCanvas;
 
@@ -25,7 +25,7 @@ namespace DiagramDesigner
             this.designerCanvas = canvas;
         }
 
-        internal void SelectItem(ISelectable item)
+        public void SelectItem(ISelectable item)
         {
             this.ClearSelection();
             this.AddToSelection(item);

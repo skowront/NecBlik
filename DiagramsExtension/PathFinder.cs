@@ -204,7 +204,7 @@ namespace DiagramDesigner
 
             CheckPathEnd(source, sink, showLastLine, linePoints);
             return linePoints;
-        }        
+        }
 
         internal static List<Point> GetConnectionLine(ConnectorInfo source, Point sinkPoint, ConnectorOrientation preferredOrientation)
         {
@@ -214,6 +214,8 @@ namespace DiagramDesigner
             Point endPoint = sinkPoint;
 
             linePoints.Add(startPoint);
+            linePoints.Add(endPoint);
+
             Point currentPoint = startPoint;
 
             if (!rectSource.Contains(endPoint))

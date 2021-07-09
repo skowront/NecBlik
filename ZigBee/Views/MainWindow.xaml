@@ -12,6 +12,8 @@
         xmlns:ext="clr-namespace:ZigBee.Common.WpfExtensions.UI;assembly=ZigBee.Common"
         xmlns:resx="clr-namespace:ZigBee.Strings"
         ext:Translation.ResourceManager="{x:Static resx:SR.ResourceManager}"
+        xmlns:wpfExt="clr-namespace:WPFExtensions.Controls;assembly=WPFExtensions"
+        xmlns:controls="clr-namespace:ZigBee.Views.Controls"
         WindowStartupLocation="CenterScreen"
         WindowState="Maximized"
         mc:Ignorable="d"
@@ -38,7 +40,7 @@
                     <MenuItem Header="{ext:Loc MainWindowMenuHeaderProjectLoad}"/>
                     <MenuItem Header="{ext:Loc MainWindowMenuHeaderProjectSave}"/>
                     <MenuItem Header="{ext:Loc MainWindowMenuHeaderProjectEdit}"/>
-                    <MenuItem Header="{ext:Loc MainWindowMenuHeaderProjectAddZigBee}"/>
+                    <MenuItem Header="{ext:Loc MainWindowMenuHeaderProjectAddZigBee}" Command="{Binding AddNewZigBeeCommand}"/>
                 </MenuItem>
                 <MenuItem Header="{ext:Loc MainWindowMenuAbout}" Margin="4">
                 </MenuItem>
@@ -51,16 +53,28 @@
         </Grid>
         <Grid Grid.Row="1">
             <Grid.ColumnDefinitions>
-                <ColumnDefinition Width="1*"></ColumnDefinition>
                 <ColumnDefinition Width="5*"></ColumnDefinition>
+                <ColumnDefinition Width="1*"></ColumnDefinition>
             </Grid.ColumnDefinitions>
-            <Expander Grid.Column="0" Style="{StaticResource BaseStyle}">
-                <ListView ItemsSource="{Binding AvailableZigBees}">
+            <!--<Expander Grid.Column="1" Style="{StaticResource BaseStyle}">-->
+                <ListView Grid.Column="1" 
+                          ItemsSource="{Binding AvailableZigBees}" 
+                          PreviewMouseLeftButtonDown="ListView_PreviewMouseLeftButtonDown" 
+                          MouseMove="ListView_MouseMove">
+                    <ListView.ItemTemplate>
+                        <DataTemplate>
+                            <TextBlock Text="{Binding Name}"></TextBlock>
+                        </DataTemplate>
+                    </ListView.ItemTemplate>
                 </ListView>
-            </Expander>
-            <diagrams:DesignerCanvas Grid.ColumnSpan="2">
-                
-            </diagrams:DesignerCanvas>
+            <!--</Expander>-->
+            <!--<wpfExt:ZoomControl Grid.ColumnSpan="1" Visibility="Visible">-->
+            <ScrollViewer VerticalScrollBarVisibility="Visible" HorizontalScrollBarVisibility="Visible" Grid.Column="0">
+                <controls:ZigBeeDesignerCanvas x:Name="designerCanvas" 
+                        AllowDrop="True" 
+                        Background="Transparent">
+                </controls:ZigBeeDesignerCanvas>
+            </ScrollViewer>
         </Grid>
     </Grid>
 </Window>
