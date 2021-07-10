@@ -1,7 +1,10 @@
 ﻿using DiagramDesigner;
 using Microsoft.Win32;
+using Newtonsoft.Json;
+using SharpVectors.Converters;
 using System;
 using System.Collections.Generic;
+using System.IO;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -16,6 +19,7 @@ using System.Windows.Media.Imaging;
 using System.Windows.Navigation;
 using System.Windows.Shapes;
 using ZigBee.Common.WpfExtensions.Base;
+using ZigBee.Models;
 using ZigBee.ViewModels;
 using ZigBee.Views.Controls;
 
@@ -95,6 +99,15 @@ namespace ZigBee.Views
             return null;
         }
 
+        protected override void OnKeyDown(KeyEventArgs e)
+        {
+            base.OnKeyDown(e);
+            if(e.Key==Key.Delete)
+            {
+                this.designerCanvas.ClearSelection();
+            }
+        }
+
         private void buildResponseProviders()
         {
             this.ViewModel.NewZigBeeResponseProvider = new GenericResponseProvider<ZigBeeViewModel, ZigBeeViewModel>((o) =>
@@ -122,6 +135,47 @@ namespace ZigBee.Views
                 openFileDialog.ShowDialog();
                 return openFileDialog.FileName;
             });
+
+            this.ViewModel.DiagramZigBeesProivider = new GenericResponseProvider<IEnumerable<DiagramZigBee>, object>((o) =>
+            {
+                return this.designerCanvas.GetDiagramZigBees();
+            });
+
+            this.ViewModel.DiagramZigBeesLoadedProvider = new GenericResponseProvider<object,IEnumerable<DiagramZigBee>>((o) =>
+            {
+                //this.designerCanvas.LoadDiagramZigBees(o,this.ViewModel.AvailableZigBees);
+                return null;
+            });
+
+            this.ViewModel.ProjectMapPathProvider = new GenericResponseProvider<string, object>(o =>
+            {
+                OpenFileDialog openFileDialog = new OpenFileDialog() { CheckFileExists = true, Filter = "Text files (*.svg)|*.svg" };
+                openFileDialog.ShowDialog();
+                return openFileDialog.FileName;
+            });
+
+            this.ViewModel.ProjectMapLoadedProvider = new GenericResponseProvider<object, string>(o =>
+            {
+                if (o == null)
+                {
+                    return null;
+                }
+                if (o == string.Empty)
+                {
+                    return null;
+                }
+                var mapBackground = new SvgViewbox() { Source = new Uri(o) };
+                this.designerCanvas.SetBackground(mapBackground);
+                return null;
+            });
+
+            //this.ViewModel.OnProjectSaved = new Action(() =>
+            //{
+            //    var diagramZigBees = JsonConvert.SerializeObject(this.designerCanvas.GetDiagramZigBees());
+            //    File.WriteAllText(this.ViewModel.ZigBeesDiagramJsonFile,this.ViewModel.ZigBeesDiagramJsonFile);
+            //    return;
+            //});
+
         }
     }
 }

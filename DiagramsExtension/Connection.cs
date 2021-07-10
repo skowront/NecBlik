@@ -243,7 +243,6 @@ namespace DiagramDesigner
             base.Unloaded += new RoutedEventHandler(Connection_Unloaded);
         }
 
-
         protected override void OnMouseDown(System.Windows.Input.MouseButtonEventArgs e)
         {
             base.OnMouseDown(e);

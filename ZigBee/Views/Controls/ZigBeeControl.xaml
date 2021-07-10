@@ -7,7 +7,9 @@
              xmlns:diagram="clr-namespace:DiagramDesigner;assembly=DiagramsExtension"
              mc:Ignorable="d" 
              d:DesignHeight="450" d:DesignWidth="800">
-    <Grid Background="Turquoise" Width="auto" Height="auto" MinHeight="100" MinWidth="100" Margin="5">
-        <TextBlock Text="{Binding Name}"></TextBlock>
-    </Grid>
+    <Viewbox IsHitTestVisible="True">
+        <Grid Background="Turquoise" Width="auto" Height="auto" Margin="5">
+            <TextBlock VerticalAlignment="Center" HorizontalAlignment="Center" Text="{Binding Name}"></TextBlock>
+        </Grid>
+    </Viewbox>
 </UserControl>

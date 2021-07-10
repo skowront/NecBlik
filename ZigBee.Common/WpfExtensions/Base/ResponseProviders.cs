@@ -31,7 +31,7 @@ namespace ZigBee.Common.WpfExtensions.Base
         /// Ctor
         /// </summary>
         /// <param name="providerFunction">Function that gets the response when provider is asked for one.</param>
-        public GenericResponseProvider(Func<Q, R> providerFunction)
+        public GenericResponseProvider(Func<Q, R> providerFunction=null)
         {
             this.ProviderFunction = providerFunction;
         }

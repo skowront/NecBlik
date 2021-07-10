@@ -13,6 +13,11 @@ namespace ZigBee.ViewModels
     {
         public ZigBeeModel Model;
 
+        public Guid Guid
+        {
+            get { return this.Model.Guid; }
+        }
+
         public string Name
         {
             get { return this.Model.Name; }

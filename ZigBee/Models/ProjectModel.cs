@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Diagnostics.Contracts;
 using System.Linq;
 using System.Text;
 using System.Text.Json.Serialization;
@@ -17,5 +18,9 @@ namespace ZigBee.Models
         public List<ZigBeeModel> AvailableZigBees { get; set; } = new List<ZigBeeModel>();
         [JsonProperty]
         public ZigBeeModel ZigBeeTemplate { get; set; } = new ZigBeeModel();
+        [JsonProperty]
+        public IEnumerable<DiagramZigBee> DiagramZigBees { get; set; } = new List<DiagramZigBee>();
+        [JsonProperty]
+        public string MapFile { get; set; }
     }
 }

@@ -40,6 +40,7 @@ namespace DiagramDesigner
                 foreach (ISelectable groupItem in groupItems)
                 {
                     groupItem.IsSelected = true;
+                    item.IsSelected = true;
                     CurrentSelection.Add(groupItem);
                 }
             }

@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Configuration.Internal;
 using System.Windows;
 using System.Windows.Controls;
 using System.Windows.Documents;
@@ -74,20 +75,25 @@ namespace DiagramDesigner
             designerCanvas.SelectionService.ClearSelection();
 
             Rect rubberBand = new Rect(startPoint.Value, endPoint.Value);
-            foreach (Control item in designerCanvas.Children)
+            foreach (var item in designerCanvas.Children)
             {
-                Rect itemRect = VisualTreeHelper.GetDescendantBounds(item);
-                Rect itemBounds = item.TransformToAncestor(designerCanvas).TransformBounds(itemRect);
-
-                if (rubberBand.Contains(itemBounds))
+                if (item is Control)
                 {
-                    if (item is Connection)
-                        designerCanvas.SelectionService.AddToSelection(item as ISelectable);
-                    else
+                    var control = (Control)item;
+
+                    Rect itemRect = VisualTreeHelper.GetDescendantBounds(control);
+                    Rect itemBounds = control.TransformToAncestor(designerCanvas).TransformBounds(itemRect);
+
+                    if (rubberBand.Contains(itemBounds))
                     {
-                        DesignerItem di = item as DesignerItem;
-                        if (di.ParentID == Guid.Empty)
-                            designerCanvas.SelectionService.AddToSelection(di);
+                        if (item is Connection)
+                            designerCanvas.SelectionService.AddToSelection(item as ISelectable);
+                        else
+                        {
+                            DesignerItem di = item as DesignerItem;
+                            if (di.ParentID == Guid.Empty)
+                                designerCanvas.SelectionService.AddToSelection(di);
+                        }
                     }
                 }
             }

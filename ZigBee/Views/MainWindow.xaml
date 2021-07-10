@@ -18,6 +18,12 @@
         WindowState="Maximized"
         mc:Ignorable="d"
         Title="ZigBeeMap" Height="450" Width="800">
+    <Window.Resources>
+        <ContextMenu x:Key="DesignerCanvasContextMenu">
+                <MenuItem Header="Paste" Command="{x:Static ApplicationCommands.Paste}" IsEnabled="True"/>
+                <MenuItem Header="Select All" Command="{x:Static controls:ZigBeeDesignerCanvas.SelectAll}" IsEnabled="True"/>
+        </ContextMenu>
+    </Window.Resources>
     <Grid>
         <Grid.RowDefinitions>
             <RowDefinition Height="auto"></RowDefinition>
@@ -40,6 +46,7 @@
                     <MenuItem Header="{ext:Loc MainWindowMenuHeaderProjectLoad}" Command="{Binding LoadProjectCommand}"/>
                     <MenuItem Header="{ext:Loc MainWindowMenuHeaderProjectSave}" Command="{Binding SaveProjectCommand}"/>
                     <MenuItem Header="{ext:Loc MainWindowMenuHeaderProjectEdit}"/>
+                    <MenuItem Header="{ext:Loc MainWindowManuHeaderProjectLoadMap}" Command="{Binding LoadProjectMapCommand}"/>
                     <MenuItem Header="{ext:Loc MainWindowMenuHeaderProjectAddZigBee}" Command="{Binding AddNewZigBeeCommand}"/>
                 </MenuItem>
                 <MenuItem Header="{ext:Loc MainWindowMenuAbout}" Margin="4">
@@ -56,9 +63,12 @@
                 <ColumnDefinition Width="5*"></ColumnDefinition>
                 <ColumnDefinition Width="1*"></ColumnDefinition>
             </Grid.ColumnDefinitions>
-            <!--<Expander Grid.Column="1" Style="{StaticResource BaseStyle}">-->
-                <ListView Grid.Column="1" 
-                          ItemsSource="{Binding AvailableZigBees}" 
+            <Grid.RowDefinitions>
+                <RowDefinition></RowDefinition>
+                <RowDefinition></RowDefinition>
+            </Grid.RowDefinitions>
+            <ScrollViewer Grid.Column="1" Grid.RowSpan="2">
+                <ListView ItemsSource="{Binding AvailableZigBees}" 
                           PreviewMouseLeftButtonDown="ListView_PreviewMouseLeftButtonDown" 
                           MouseMove="ListView_MouseMove">
                     <ListView.ItemTemplate>
@@ -67,14 +77,33 @@
                         </DataTemplate>
                     </ListView.ItemTemplate>
                 </ListView>
-            <!--</Expander>-->
-            <!--<wpfExt:ZoomControl Grid.ColumnSpan="1" Visibility="Visible">-->
-            <ScrollViewer VerticalScrollBarVisibility="Visible" HorizontalScrollBarVisibility="Visible" Grid.Column="0">
-                <controls:ZigBeeDesignerCanvas x:Name="designerCanvas" 
-                        AllowDrop="True" 
-                        Background="Transparent">
-                </controls:ZigBeeDesignerCanvas>
             </ScrollViewer>
+            
+            <ScrollViewer Grid.Column="0" Grid.RowSpan="2" HorizontalScrollBarVisibility="Visible">
+                <Grid>
+                    <Grid.LayoutTransform>
+                        <ScaleTransform ScaleX="{Binding ElementName=sldZoom, Path=Value}" ScaleY="{Binding ElementName=sldZoom, Path=Value}" />
+                    </Grid.LayoutTransform>
+
+                    <!--<controls:ZigBeeDesignerCanvas x:Name="designerCanvas" 
+                                               AllowDrop="True" 
+                                               Background="Transparent"
+                                               VerticalAlignment="Stretch"
+                                               HorizontalAlignment="Stretch"
+                                               IsHitTestVisible="True"
+                                               ContextMenu="{StaticResource DesignerCanvasContextMenu}">
+                    </controls:ZigBeeDesignerCanvas>-->
+                    <diagrams:DesignerCanvas x:Name="designerCanvas" 
+                                               AllowDrop="True" 
+                                               Background="Transparent"
+                                               VerticalAlignment="Stretch"
+                                               HorizontalAlignment="Stretch"
+                                               IsHitTestVisible="True"
+                                               ContextMenu="{StaticResource DesignerCanvasContextMenu}">
+                    </diagrams:DesignerCanvas>
+                </Grid>
+            </ScrollViewer>
+            <Slider Grid.Row="0" Minimum="1" Maximum="10" x:Name="sldZoom" Margin="10" Orientation="Vertical" HorizontalAlignment="Left"/>
         </Grid>
     </Grid>
 </Window>

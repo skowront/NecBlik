@@ -262,7 +262,7 @@ namespace DiagramDesigner
 
         private void Delete_Enabled(object sender, CanExecuteRoutedEventArgs e)
         {
-            e.CanExecute = this.SelectionService.CurrentSelection.Count() > 0;
+            e.CanExecute = true;
         }
 
         #endregion
@@ -903,7 +903,7 @@ namespace DiagramDesigner
             Clipboard.SetData(DataFormats.Xaml, root);
         }
 
-        private void DeleteCurrentSelection()
+        protected void DeleteCurrentSelection()
         {
             foreach (Connection connection in SelectionService.CurrentSelection.OfType<Connection>())
             {

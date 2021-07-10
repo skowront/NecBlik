@@ -74,6 +74,13 @@ namespace DiagramDesigner
 
         #endregion
 
+        private object payload;
+        public object Payload
+        {
+            get { return this.payload; }
+            set { this.payload = value; }
+        }
+
         #region ConnectorDecoratorTemplate Property
 
         // can be used to replace the default template for the ConnectorDecorator

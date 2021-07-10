@@ -121,7 +121,7 @@
     <value>Project</value>
   </data>
   <data name="ZigBeeModelNameDefault" xml:space="preserve">
-    <value>UnkownZigbee</value>
+    <value>UnknownZigbee</value>
   </data>
   <data name="ZigBeeVersionDefault" xml:space="preserve">
     <value>Unknown version</value>

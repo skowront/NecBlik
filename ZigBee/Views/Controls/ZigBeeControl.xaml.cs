@@ -12,6 +12,7 @@ using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using System.Windows.Navigation;
 using System.Windows.Shapes;
+using ZigBee.Interfaces;
 using ZigBee.ViewModels;
 
 namespace ZigBee.Views.Controls
@@ -19,7 +20,7 @@ namespace ZigBee.Views.Controls
     /// <summary>
     /// Interaction logic for ZigBeeControl.xaml
     /// </summary>
-    public partial class ZigBeeControl : UserControl
+    public partial class ZigBeeControl : UserControl, IZigBeePresenter
     {
         public ZigBeeControl()
         {
@@ -30,6 +31,11 @@ namespace ZigBee.Views.Controls
         {
             InitializeComponent();
             this.DataContext = zigBeeViewModel;
+        }
+
+        public ZigBeeViewModel GetZigBeeViewModel()
+        {
+            return this.DataContext as ZigBeeViewModel;
         }
     }
 }

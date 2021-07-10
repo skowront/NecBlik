@@ -70,7 +70,7 @@ namespace ZigBee.Resources {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to UnkownZigbee.
+        ///   Looks up a localized string similar to UnknownZigbee.
         /// </summary>
         public static string ZigBeeModelNameDefault {
             get {

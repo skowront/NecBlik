@@ -70,6 +70,15 @@ namespace ZigBee.Strings {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Load project map.
+        /// </summary>
+        public static string MainWindowManuHeaderProjectLoadMap {
+            get {
+                return ResourceManager.GetString("MainWindowManuHeaderProjectLoadMap", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to About.
         /// </summary>
         public static string MainWindowMenuAbout {
@@ -106,7 +115,7 @@ namespace ZigBee.Strings {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Edit.
+        ///   Looks up a localized string similar to Edit project.
         /// </summary>
         public static string MainWindowMenuHeaderProjectEdit {
             get {

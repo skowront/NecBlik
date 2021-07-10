@@ -8,6 +8,7 @@ using System.Windows.Documents;
 using System.Windows.Input;
 using System.Windows.Markup;
 using System.Xml;
+using System.Runtime.CompilerServices;
 
 namespace DiagramDesigner
 {
