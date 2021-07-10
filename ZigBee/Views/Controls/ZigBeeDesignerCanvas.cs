@@ -21,7 +21,8 @@ namespace ZigBee.Views.Controls
 
         public ZigBeeDesignerCanvas() : base()
         {
-
+            this.Focusable = true;
+            this.IsHitTestVisible = true;
         }
 
         protected override void OnDrop(DragEventArgs e)
@@ -102,7 +103,7 @@ namespace ZigBee.Views.Controls
             }
         }
 
-        public void SetBackground(UIElement background)
+        public void SetBackground(UIElement background,DiagramItemMetadata backgroundMeta)
         {
             if(this.background!=null)
             {
@@ -111,10 +112,10 @@ namespace ZigBee.Views.Controls
                 {
                     if(item is DesignerItem)
                     {
-                        var di = (DesignerItem)item;
-                        if(di.Content==this.background)
+                        var designerItem = (DesignerItem)item;
+                        if(designerItem.Content==this.background)
                         {
-                            currentBg = di;
+                            currentBg = designerItem;
                             break;
                         }
                     }
@@ -122,8 +123,44 @@ namespace ZigBee.Views.Controls
                 this.Children.Remove(currentBg);
             }
             this.background = background;
-            this.Children.Add(new DesignerItem() { Content = background});
-            DesignerCanvas.SetZIndex(this.background, ZigBeeDesignerCanvas.BackgroundZIndex);
+            var di = new DesignerItem() { Content = background };
+            this.Children.Add(di);
+            ZigBeeDesignerCanvas.SetZIndex(di, ZigBeeDesignerCanvas.BackgroundZIndex);
+            ZigBeeDesignerCanvas.SetLeft(di,backgroundMeta.Point.X);
+            ZigBeeDesignerCanvas.SetTop(di,backgroundMeta.Point.Y);
+            if(backgroundMeta.Size.Width==double.NaN || backgroundMeta.Size.Height==double.NaN)
+            {
+                return;
+            }
+            di.Width = backgroundMeta.Size.Width;
+            di.Height = backgroundMeta.Size.Height;
+        }
+
+        public DiagramItemMetadata GetMapMetadata()
+        {
+            DesignerItem backgroundContainer = null;
+            foreach (var child in this.Children)
+            {
+                if (child is DesignerItem)
+                {
+                    var designerItem = (DesignerItem)child;
+                    if (designerItem.Content == this.background)
+                    {
+                        backgroundContainer = designerItem;
+                        break;
+                    }
+                }
+            }
+            if (backgroundContainer == null)
+            {
+                return null;
+            }
+            var item = new DiagramItemMetadata()
+            {
+                Point = new Point<double>(ZigBeeDesignerCanvas.GetLeft(backgroundContainer),ZigBeeDesignerCanvas.GetTop(backgroundContainer)),
+                Size = new Size(backgroundContainer.Width, backgroundContainer.Height)
+            };
+            return item;
         }
 
         public void ClearCanvas()
@@ -131,7 +168,7 @@ namespace ZigBee.Views.Controls
             this.Children.Clear();
         }
 
-        public void ClearSelection()
+        public void DeleteSelection()
         {
             this.DeleteCurrentSelection();
         }

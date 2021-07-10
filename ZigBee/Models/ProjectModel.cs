@@ -22,5 +22,7 @@ namespace ZigBee.Models
         public IEnumerable<DiagramZigBee> DiagramZigBees { get; set; } = new List<DiagramZigBee>();
         [JsonProperty]
         public string MapFile { get; set; }
+        [JsonProperty]
+        public DiagramItemMetadata DiagramMapMetadata { get; set; } = new DiagramItemMetadata();
     }
 }

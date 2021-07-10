@@ -6,6 +6,7 @@ using System.IO;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using System.Windows.Navigation;
 using ZigBee.Common.WpfExtensions.Base;
 using ZigBee.Common.WpfExtensions.Interfaces;
 using ZigBee.Models;
@@ -28,6 +29,12 @@ namespace ZigBee.ViewModels
             set { this.model.MapFile = value; this.OnPropertyChanged(); }
         }
 
+        public DiagramItemMetadata MapMetadata
+        {
+            get { return this.model.DiagramMapMetadata; }
+            set { this.model.DiagramMapMetadata = value; this.OnPropertyChanged(); }
+        }
+
         public BindingList<ZigBeeViewModel> AvailableZigBees { get; set; } = new BindingList<ZigBeeViewModel>();
 
         public IResponseProvider<ZigBeeViewModel, ZigBeeViewModel> NewZigBeeResponseProvider { get; set; } = new GenericResponseProvider<ZigBeeViewModel, ZigBeeViewModel>(new ZigBeeViewModel());
@@ -35,10 +42,12 @@ namespace ZigBee.ViewModels
         public IResponseProvider<string, object> SaveProjectFilePathProvider { get; set; } = new GenericResponseProvider<string, object>(string.Empty);
         public IResponseProvider<object, IEnumerable<DiagramZigBee>> DiagramZigBeesLoadedProvider { get; set; } = new GenericResponseProvider<object, IEnumerable<DiagramZigBee>>(null);
         public IResponseProvider<IEnumerable<DiagramZigBee>, object> DiagramZigBeesProivider { get; set; } = new GenericResponseProvider<IEnumerable<DiagramZigBee>, object>();
+        public IResponseProvider<DiagramItemMetadata, object> DiagramMapMetadataProvider { get; set; } = new GenericResponseProvider<DiagramItemMetadata, object>(new DiagramItemMetadata());
         public IResponseProvider<string, object> ProjectMapPathProvider { get; set; } = new GenericResponseProvider<string, object>(string.Empty);
-        public IResponseProvider<object, string> ProjectMapLoadedProvider { get; set; } = new GenericResponseProvider<object, string>();
+        public IResponseProvider<object, Tuple<string, DiagramItemMetadata>> ProjectMapLoadedProvider { get; set; } = new GenericResponseProvider<object, Tuple<string,DiagramItemMetadata>>();
+        public IResponseProvider<object, object> NewProjectLoadedProvider { get; set; } = new GenericResponseProvider<object, object>();
 
-        public RelayCommand NewProject { get; set; }
+        public RelayCommand NewProjectCommand { get; set; }
         public RelayCommand SaveProjectCommand { get; set; }
         public RelayCommand LoadProjectCommand { get; set; }
         public RelayCommand AddNewZigBeeCommand { get; set; }
@@ -53,9 +62,11 @@ namespace ZigBee.ViewModels
 
         private void buildCommands()
         {
-            this.NewProject = new RelayCommand(o =>
+            this.NewProjectCommand = new RelayCommand(o =>
             {
                 this.model = new ProjectModel();
+                this.SyncFromModel();
+                this.NewProjectLoadedProvider?.ProvideResponse();
             });
 
             this.AddNewZigBeeCommand = new RelayCommand(o =>
@@ -99,7 +110,7 @@ namespace ZigBee.ViewModels
                 }
                 this.model = JsonConvert.DeserializeObject<ProjectModel>(File.ReadAllText(path));
                 this.SyncFromModel();
-                this.ProjectMapLoadedProvider.ProvideResponse(this.MapFilePath);
+                this.ProjectMapLoadedProvider.ProvideResponse(new Tuple<string, DiagramItemMetadata>(this.MapFilePath,this.MapMetadata));
             });
 
             this.LoadProjectMapCommand = new RelayCommand(o =>
@@ -114,13 +125,14 @@ namespace ZigBee.ViewModels
                     return;
                 }
                 this.MapFilePath = path;
-                this.ProjectMapLoadedProvider.ProvideResponse(this.MapFilePath);
+                this.ProjectMapLoadedProvider.ProvideResponse(new Tuple<string, DiagramItemMetadata>(this.MapFilePath, this.MapMetadata));
             });
         }
 
         private void SyncToModel()
         {
             this.model.DiagramZigBees = this.DiagramZigBeesProivider.ProvideResponse();
+            this.model.DiagramMapMetadata = this.DiagramMapMetadataProvider.ProvideResponse();
             this.model.AvailableZigBees.Clear();
             foreach (var item in this.AvailableZigBees)
             {

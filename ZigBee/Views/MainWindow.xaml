@@ -40,7 +40,7 @@
             </Grid.RowDefinitions>
             <Menu Grid.Row="0" VerticalAlignment="Stretch" VerticalContentAlignment="Bottom">
                 <MenuItem Header="{ext:Loc MainWindowMenuHeaderNew}" Margin="4">
-                    <MenuItem Header="{ext:Loc MainWindowMenuHeaderProject}"/>
+                    <MenuItem Header="{ext:Loc MainWindowMenuHeaderProject}" Command="{Binding NewProjectCommand}"/>
                 </MenuItem>
                 <MenuItem Header="{ext:Loc MainWindowMenuHeaderProject}" Margin="4">
                     <MenuItem Header="{ext:Loc MainWindowMenuHeaderProjectLoad}" Command="{Binding LoadProjectCommand}"/>
@@ -85,22 +85,14 @@
                         <ScaleTransform ScaleX="{Binding ElementName=sldZoom, Path=Value}" ScaleY="{Binding ElementName=sldZoom, Path=Value}" />
                     </Grid.LayoutTransform>
 
-                    <!--<controls:ZigBeeDesignerCanvas x:Name="designerCanvas" 
+                    <controls:ZigBeeDesignerCanvas x:Name="designerCanvas" 
                                                AllowDrop="True" 
                                                Background="Transparent"
                                                VerticalAlignment="Stretch"
                                                HorizontalAlignment="Stretch"
                                                IsHitTestVisible="True"
                                                ContextMenu="{StaticResource DesignerCanvasContextMenu}">
-                    </controls:ZigBeeDesignerCanvas>-->
-                    <diagrams:DesignerCanvas x:Name="designerCanvas" 
-                                               AllowDrop="True" 
-                                               Background="Transparent"
-                                               VerticalAlignment="Stretch"
-                                               HorizontalAlignment="Stretch"
-                                               IsHitTestVisible="True"
-                                               ContextMenu="{StaticResource DesignerCanvasContextMenu}">
-                    </diagrams:DesignerCanvas>
+                    </controls:ZigBeeDesignerCanvas>
                 </Grid>
             </ScrollViewer>
             <Slider Grid.Row="0" Minimum="1" Maximum="10" x:Name="sldZoom" Margin="10" Orientation="Vertical" HorizontalAlignment="Left"/>

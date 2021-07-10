@@ -262,7 +262,7 @@ namespace DiagramDesigner
 
         private void Delete_Enabled(object sender, CanExecuteRoutedEventArgs e)
         {
-            e.CanExecute = true;
+            e.CanExecute = this.selectionService.CurrentSelection.Count>0;
         }
 
         #endregion

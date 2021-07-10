@@ -104,7 +104,7 @@ namespace ZigBee.Views
             base.OnKeyDown(e);
             if(e.Key==Key.Delete)
             {
-                this.designerCanvas.ClearSelection();
+                this.designerCanvas.DeleteSelection();
             }
         }
 
@@ -141,9 +141,14 @@ namespace ZigBee.Views
                 return this.designerCanvas.GetDiagramZigBees();
             });
 
+            this.ViewModel.DiagramMapMetadataProvider = new GenericResponseProvider<DiagramItemMetadata, object>((o) =>
+            {
+                return this.designerCanvas.GetMapMetadata();
+            });
+
             this.ViewModel.DiagramZigBeesLoadedProvider = new GenericResponseProvider<object,IEnumerable<DiagramZigBee>>((o) =>
             {
-                //this.designerCanvas.LoadDiagramZigBees(o,this.ViewModel.AvailableZigBees);
+                this.designerCanvas.LoadDiagramZigBees(o,this.ViewModel.AvailableZigBees);
                 return null;
             });
 
@@ -154,18 +159,29 @@ namespace ZigBee.Views
                 return openFileDialog.FileName;
             });
 
-            this.ViewModel.ProjectMapLoadedProvider = new GenericResponseProvider<object, string>(o =>
+            this.ViewModel.ProjectMapLoadedProvider = new GenericResponseProvider<object, Tuple<string, DiagramItemMetadata>>(o =>
             {
                 if (o == null)
                 {
                     return null;
                 }
-                if (o == string.Empty)
+                if(o.Item1==null)
                 {
                     return null;
                 }
-                var mapBackground = new SvgViewbox() { Source = new Uri(o) };
-                this.designerCanvas.SetBackground(mapBackground);
+                if (o.Item1 == string.Empty)
+                {
+                    return null;
+                }
+                var mapBackground = new SvgViewbox() { Source = new Uri(o.Item1) };
+                this.designerCanvas.SetBackground(mapBackground, o.Item2);
+                return null;
+            });
+
+            this.ViewModel.NewProjectLoadedProvider = new GenericResponseProvider<object, object>((o) =>
+            {
+                this.designerCanvas.ClearCanvas();
+                this.designerCanvas.DeleteSelection();
                 return null;
             });
 
