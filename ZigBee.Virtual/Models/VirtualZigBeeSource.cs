@@ -1,0 +1,43 @@
+﻿using System;
+using System.Collections.Generic;
+using System.Collections.ObjectModel;
+using System.Linq;
+using ZigBee.Core.Interfaces;
+
+namespace ZigBee.Virtual.Models
+{
+    public class VirtualZigBeeSource : IZigBeeSource
+    {
+        private string cachedAddress = string.Empty;
+
+        public virtual string GetAddress()
+        {
+            if (cachedAddress == string.Empty)
+            {
+                this.cachedAddress = this.generateAddress64bit();
+            }
+            return this.cachedAddress;
+        }
+
+        public string generateAddress64bit()
+        {
+            Random random = new Random();
+            const string chars = "0123456789ABCDEF";
+            var value = new string(Enumerable.Repeat(chars, 16)
+              .Select(s => s[random.Next(s.Length)]).ToArray());
+            while (value == "0000000000000000" || value == "000000000000FFFF" || TakenAddresses.Contains(value))
+            {
+                value = new string(Enumerable.Repeat(chars, 16)
+              .Select(s => s[random.Next(s.Length)]).ToArray());
+            }
+            return value;
+        }
+
+        public VirtualZigBeeSource()
+        {
+
+        }
+
+        private static Collection<string> TakenAddresses = new Collection<string>();
+    }
+}

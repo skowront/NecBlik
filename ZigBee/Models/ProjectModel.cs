@@ -6,6 +6,7 @@ using System.Text;
 using System.Text.Json.Serialization;
 using System.Threading.Tasks;
 using Newtonsoft.Json;
+using ZigBee.Core.Models;
 
 namespace ZigBee.Models
 {

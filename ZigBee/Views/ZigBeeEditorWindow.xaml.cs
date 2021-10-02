@@ -13,6 +13,7 @@ using System.Windows.Media.Imaging;
 using System.Windows.Shapes;
 using ZigBee.Common.WpfExtensions.Base;
 using ZigBee.Common.WpfExtensions.Interfaces;
+using ZigBee.Core.GUI;
 using ZigBee.ViewModels;
 
 namespace ZigBee.Views

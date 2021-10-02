@@ -5,9 +5,10 @@ using System.Text;
 using System.Threading.Tasks;
 using ZigBee.Common.WpfExtensions.Base;
 using ZigBee.Common.WpfExtensions.Interfaces;
-using ZigBee.Models;
+using ZigBee.Core.Interfaces;
+using ZigBee.Core.Models;
 
-namespace ZigBee.ViewModels
+namespace ZigBee.Core.GUI
 {
     public class ZigBeeViewModel:BaseViewModel,IDuplicable<ZigBeeViewModel>
     {
@@ -30,7 +31,18 @@ namespace ZigBee.ViewModels
             set { this.Model.Version = value; this.OnPropertyChanged(); }
         }
 
-        public ZigBeeViewModel(ZigBeeModel model = null)
+        public string InternalFactoryType
+        {
+            get { return this.Model.InternalFactoryType; }
+            set { this.Model.InternalFactoryType = value; this.OnPropertyChanged(); }
+        }
+
+        public string Address
+        {
+            get { return this.Model.AddressName; }
+        }
+
+        public ZigBeeViewModel( ZigBeeModel model = null)
         {
             this.Model = model;
             if(this.Model == null)

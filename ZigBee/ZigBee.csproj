@@ -15,6 +15,8 @@
     <ProjectReference Include="..\DiagramsExtension\DiagramsExtension.csproj" />
     <ProjectReference Include="..\WPFLocalizeextension\WPFLocalizeextension.csproj" />
     <ProjectReference Include="..\ZigBee.Common\ZigBee.Common.csproj" />
+    <ProjectReference Include="..\ZigBee.Core.GUI\ZigBee.Core.GUI.csproj" />
+    <ProjectReference Include="..\ZigBee.Core\ZigBee.Core.csproj" />
   </ItemGroup>
 
   <ItemGroup>

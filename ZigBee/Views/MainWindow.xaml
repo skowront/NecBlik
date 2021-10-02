@@ -73,7 +73,7 @@
                           MouseMove="ListView_MouseMove">
                     <ListView.ItemTemplate>
                         <DataTemplate>
-                            <TextBlock Text="{Binding Name}"></TextBlock>
+                            <TextBlock Text="{Binding Name}" Foreground="{StaticResource ForegroundMainBrush}"></TextBlock>
                         </DataTemplate>
                     </ListView.ItemTemplate>
                 </ListView>

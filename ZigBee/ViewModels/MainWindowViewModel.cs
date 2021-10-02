@@ -1,14 +1,13 @@
 ﻿using Newtonsoft.Json;
 using System;
 using System.Collections.Generic;
+using System.Collections.ObjectModel;
 using System.ComponentModel;
 using System.IO;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using System.Windows.Navigation;
 using ZigBee.Common.WpfExtensions.Base;
 using ZigBee.Common.WpfExtensions.Interfaces;
+using ZigBee.Core.GUI;
+using ZigBee.Core.Models;
 using ZigBee.Models;
 
 namespace ZigBee.ViewModels
@@ -35,7 +34,9 @@ namespace ZigBee.ViewModels
             set { this.model.DiagramMapMetadata = value; this.OnPropertyChanged(); }
         }
 
-        public BindingList<ZigBeeViewModel> AvailableZigBees { get; set; } = new BindingList<ZigBeeViewModel>();
+        public ObservableCollection<ZigBeeViewModel> AvailableZigBees { get; set; } = new ObservableCollection<ZigBeeViewModel>();
+
+        public ObservableCollection<ZigBeeNetworkManager> ZigBeeNetworkManagers { get; set; } = new ObservableCollection<ZigBeeNetworkManager>();
 
         public IResponseProvider<ZigBeeViewModel, ZigBeeViewModel> NewZigBeeResponseProvider { get; set; } = new GenericResponseProvider<ZigBeeViewModel, ZigBeeViewModel>(new ZigBeeViewModel());
         public IResponseProvider<string, object> LoadProjectFilePathProvider { get; set; } = new GenericResponseProvider<string, object>(string.Empty);

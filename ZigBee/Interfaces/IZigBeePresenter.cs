@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using ZigBee.Core.GUI;
 using ZigBee.ViewModels;
 
 namespace ZigBee.Interfaces

@@ -7,6 +7,7 @@ using System.Threading.Tasks;
 using System.Windows;
 using System.Windows.Controls;
 using System.Windows.Input;
+using ZigBee.Core.GUI;
 using ZigBee.Interfaces;
 using ZigBee.Models;
 using ZigBee.ViewModels;
