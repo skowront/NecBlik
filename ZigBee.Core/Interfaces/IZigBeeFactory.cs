@@ -11,10 +11,18 @@ namespace ZigBee.Core.Interfaces
     {
         string GetInternalFactoryType();
 
-        IZigBeeSource Build();
+        void AttachOtherFactories(List<IZigBeeFactory> zigBeeFactories);
+
+        IZigBeeSource BuildNewSource();
+
+        IZigBeeSource BuildSourceFromJsonFile(string pathToFile);
 
         IZigBeeCoordinator BuildCoordinator();
 
+        IZigBeeCoordinator BuildCoordinatorFromJsonFile(string pathToFile);
+
         ZigBeeNetwork BuildNetwork();
+
+        ZigBeeNetwork BuildNetworkFromDirectory(string pathToDirectory);
     }
 }

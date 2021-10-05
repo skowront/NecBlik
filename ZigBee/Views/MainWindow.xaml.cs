@@ -135,7 +135,7 @@ namespace ZigBee.Views
 
             this.ViewModel.LoadProjectFilePathProvider = new GenericResponseProvider<string, object>(o =>
             {
-                OpenFileDialog openFileDialog = new OpenFileDialog() { CheckFileExists = true, Filter = "Directory" };
+                OpenFileDialog openFileDialog = new OpenFileDialog() { CheckFileExists = true, Filter = "Json (*.json) | *.json" };
                 openFileDialog.ShowDialog();
                 return openFileDialog.FileName;
             });

@@ -14,10 +14,11 @@ namespace ZigBee.Virtual.Models
     {
         public VirtualZigBeeNetwork()
         {
+            this.ZigBeeFactory = new VirtualZigBeeFactory();
             this.internalNetworkType = this.ZigBeeFactory.GetInternalFactoryType();
         }
 
-        public VirtualZigBeeNetwork(bool setupExampleNetwork) : base()
+        public VirtualZigBeeNetwork(bool setupExampleNetwork) : this()
         {
             if(setupExampleNetwork)
                 this.SetupExampleNetwork();

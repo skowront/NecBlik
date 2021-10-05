@@ -128,7 +128,18 @@ namespace ZigBee.ViewModels
                 {
                     return;
                 }
-                this.model = JsonConvert.DeserializeObject<ProjectModel>(File.ReadAllText(path));
+                var file = path;
+                var dir = Path.GetDirectoryName(path);
+                if (File.Exists(file))
+                {
+                    var projectStr = File.ReadAllText(file);
+                    this.model = JsonConvert.DeserializeObject<ProjectModel>(projectStr);
+                }
+                else
+                {
+                    this.model.Save(path);
+                }
+                this.model.Load(dir);
                 this.SyncFromModel();
                 //this.ProjectMapLoadedProvider.ProvideResponse(new Tuple<string, DiagramItemMetadata>(this.MapFilePath,this.MapMetadata));
             });

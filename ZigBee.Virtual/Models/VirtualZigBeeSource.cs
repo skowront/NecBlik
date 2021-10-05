@@ -13,6 +13,12 @@ namespace ZigBee.Virtual.Models
     {
         [JsonProperty]
         public Guid Guid { get; set; } = Guid.NewGuid();
+        [JsonProperty]
+        public string Address
+        {
+            get { return this.GetAddress(); }
+            set { this.cachedAddress = value; }
+        }
 
         private string internalSourceType = "Virtual";
         

@@ -7,6 +7,7 @@ using System.Text;
 using System.Text.Json.Serialization;
 using System.Threading.Tasks;
 using Newtonsoft.Json;
+using ZigBee.Core.Factories;
 using ZigBee.Core.Models;
 
 namespace ZigBee.Core.Models
@@ -35,6 +36,27 @@ namespace ZigBee.Core.Models
                 foreach (var ZigBeeNetwork in this.ZigBeeNetworks)
                 {
                     ZigBeeNetwork.Save(dir);
+                }
+            }
+        }
+
+        public void Load(string projectFolder)
+        {
+            var dir = projectFolder + Resources.Resources.ZigBeeNetworksDirectory;
+            if (!Directory.Exists(dir))
+            {
+                return;
+            }
+            else
+            {
+                var networkSubDirs = Directory.EnumerateDirectories(dir);
+                foreach(var networkSubDir in networkSubDirs)
+                {
+                    var network = ZigBeeAnyFactory.Instance.BuildNetworkFromDirectory(networkSubDir);
+                    if(network!=null)
+                    {
+                        this.ZigBeeNetworks.Add(network);
+                    }
                 }
             }
         }

@@ -19,9 +19,9 @@ namespace ZigBee.Core.Models
         [JsonProperty]
         public Guid Guid { get; set; } = Guid.NewGuid();
 
-        public ZigBeeCoordinator ZigBeeCoordinator { get; set; }
+        public IZigBeeCoordinator ZigBeeCoordinator { get; set; }
 
-        public Collection<IZigBeeSource> ZigBeeSources { get; set; }
+        public Collection<IZigBeeSource> ZigBeeSources { get; set; } = new Collection<IZigBeeSource>();
 
         public Collection<Tuple<string, string>> ZigBeeConnections { get; set; }
 
@@ -32,6 +32,16 @@ namespace ZigBee.Core.Models
         public ZigBeeNetwork()
         {
             this.internalNetworkType = ZigBeeFactory.GetInternalFactoryType();
+        }
+
+        public void SetCoordinator(IZigBeeCoordinator zigBeeCoordinator)
+        {
+            this.ZigBeeCoordinator = zigBeeCoordinator;
+        }
+
+        public void AddSource(IZigBeeSource source)
+        {
+            this.ZigBeeSources.Add(source);
         }
 
         public void Save(string folderName)

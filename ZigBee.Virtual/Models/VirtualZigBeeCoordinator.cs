@@ -39,12 +39,12 @@ namespace ZigBee.Virtual.Models
         private void setupExampleZigBees()
         {
             this.zigBeeSources = new List<IZigBeeSource>();
-            this.zigBeeSources.Add(this.zigBeeFactory.Build());
-            this.zigBeeSources.Add(this.zigBeeFactory.Build());
-            this.zigBeeSources.Add(this.zigBeeFactory.Build());
-            this.zigBeeSources.Add(this.zigBeeFactory.Build());
-            this.zigBeeSources.Add(this.zigBeeFactory.Build());
-            this.zigBeeSources.Add(this.zigBeeFactory.Build());
+            this.zigBeeSources.Add(this.zigBeeFactory.BuildNewSource());
+            this.zigBeeSources.Add(this.zigBeeFactory.BuildNewSource());
+            this.zigBeeSources.Add(this.zigBeeFactory.BuildNewSource());
+            this.zigBeeSources.Add(this.zigBeeFactory.BuildNewSource());
+            this.zigBeeSources.Add(this.zigBeeFactory.BuildNewSource());
+            this.zigBeeSources.Add(this.zigBeeFactory.BuildNewSource());
 
             this.connections.Add(new Tuple<string, string>(this.zigBeeSources[0].GetAddress(),this.zigBeeSources[1].GetAddress()));
             this.connections.Add(new Tuple<string, string>(this.zigBeeSources[1].GetAddress(),this.zigBeeSources[2].GetAddress()));
