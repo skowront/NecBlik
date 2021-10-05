@@ -9,6 +9,7 @@ using ZigBee.Common.WpfExtensions.Interfaces;
 using ZigBee.Core.GUI;
 using ZigBee.Core.Models;
 using ZigBee.Models;
+using ZigBee.Virtual.Models;
 
 namespace ZigBee.ViewModels
 {
@@ -28,15 +29,15 @@ namespace ZigBee.ViewModels
             set { this.model.MapFile = value; this.OnPropertyChanged(); }
         }
 
-        public DiagramItemMetadata MapMetadata
-        {
-            get { return this.model.DiagramMapMetadata; }
-            set { this.model.DiagramMapMetadata = value; this.OnPropertyChanged(); }
-        }
+        //public DiagramItemMetadata MapMetadata
+        //{
+        //    get { return this.model.DiagramMapMetadata; }
+        //    set { this.model.DiagramMapMetadata = value; this.OnPropertyChanged(); }
+        //}
 
         public ObservableCollection<ZigBeeViewModel> AvailableZigBees { get; set; } = new ObservableCollection<ZigBeeViewModel>();
 
-        public ObservableCollection<ZigBeeNetworkManager> ZigBeeNetworkManagers { get; set; } = new ObservableCollection<ZigBeeNetworkManager>();
+        public ObservableCollection<ZigBeeNetwork> ZigBeeNetworks { get; set; } = new ObservableCollection<ZigBeeNetwork>();
 
         public IResponseProvider<ZigBeeViewModel, ZigBeeViewModel> NewZigBeeResponseProvider { get; set; } = new GenericResponseProvider<ZigBeeViewModel, ZigBeeViewModel>(new ZigBeeViewModel());
         public IResponseProvider<string, object> LoadProjectFilePathProvider { get; set; } = new GenericResponseProvider<string, object>(string.Empty);
@@ -57,6 +58,7 @@ namespace ZigBee.ViewModels
         public MainWindowViewModel()
         {
             this.model = new ProjectModel();
+            this.model.ZigBeeNetworks.Add(new VirtualZigBeeNetwork(true));
             this.SyncFromModel();
             this.buildCommands();
         }
@@ -95,7 +97,24 @@ namespace ZigBee.ViewModels
                     return;
                 }
                 this.SyncToModel();
-                File.WriteAllText(path, JsonConvert.SerializeObject(this.model, Formatting.Indented));
+                var file = path + "\\" + this.ProjectName + "\\" + this.ProjectName + ".json";
+                var dir = path + "\\" + this.ProjectName;
+                if (File.Exists(file))
+                {
+                    File.WriteAllText(file, JsonConvert.SerializeObject(this.model, Formatting.Indented));
+                }
+                else
+                {
+                    if (!Directory.Exists(dir))
+                    {
+                        Directory.CreateDirectory(dir);
+                    }
+                    if (Directory.Exists(dir))
+                    {
+                        File.AppendAllText(file, JsonConvert.SerializeObject(this.model, Formatting.Indented));
+                    }
+                }
+                this.model.Save(dir);
             });
 
             this.LoadProjectCommand = new RelayCommand(o =>
@@ -111,7 +130,7 @@ namespace ZigBee.ViewModels
                 }
                 this.model = JsonConvert.DeserializeObject<ProjectModel>(File.ReadAllText(path));
                 this.SyncFromModel();
-                this.ProjectMapLoadedProvider.ProvideResponse(new Tuple<string, DiagramItemMetadata>(this.MapFilePath,this.MapMetadata));
+                //this.ProjectMapLoadedProvider.ProvideResponse(new Tuple<string, DiagramItemMetadata>(this.MapFilePath,this.MapMetadata));
             });
 
             this.LoadProjectMapCommand = new RelayCommand(o =>
@@ -126,29 +145,29 @@ namespace ZigBee.ViewModels
                     return;
                 }
                 this.MapFilePath = path;
-                this.ProjectMapLoadedProvider.ProvideResponse(new Tuple<string, DiagramItemMetadata>(this.MapFilePath, this.MapMetadata));
+                //this.ProjectMapLoadedProvider.ProvideResponse(new Tuple<string, DiagramItemMetadata>(this.MapFilePath, this.MapMetadata));
             });
         }
 
         private void SyncToModel()
         {
-            this.model.DiagramZigBees = this.DiagramZigBeesProivider.ProvideResponse();
-            this.model.DiagramMapMetadata = this.DiagramMapMetadataProvider.ProvideResponse();
-            this.model.AvailableZigBees.Clear();
-            foreach (var item in this.AvailableZigBees)
-            {
-                this.model.AvailableZigBees.Add(item.Model);
-            }
+            //this.model.DiagramZigBees = this.DiagramZigBeesProivider.ProvideResponse();
+            //this.model.DiagramMapMetadata = this.DiagramMapMetadataProvider.ProvideResponse();
+            //this.model.AvailableZigBees.Clear();
+            //foreach (var item in this.AvailableZigBees)
+            //{
+            //    this.model.AvailableZigBees.Add(item.Model);
+            //}
         }
 
         private void SyncFromModel()
         {
-            this.AvailableZigBees.Clear();
-            foreach (var item in this.model.AvailableZigBees)
-            {
-                this.AvailableZigBees.Add(new ZigBeeViewModel(item));
-            }
-            this.DiagramZigBeesLoadedProvider.ProvideResponse(this.model.DiagramZigBees);
+            //this.AvailableZigBees.Clear();
+            //foreach (var item in this.model.AvailableZigBees)
+            //{
+            //    this.AvailableZigBees.Add(new ZigBeeViewModel(item));
+            //}
+            //this.DiagramZigBeesLoadedProvider.ProvideResponse(this.model.DiagramZigBees);
             this.Refresh();
         }
 

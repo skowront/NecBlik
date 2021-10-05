@@ -19,6 +19,7 @@ using System.Windows.Media.Imaging;
 using System.Windows.Navigation;
 using System.Windows.Shapes;
 using ZigBee.Common.WpfExtensions.Base;
+using ZigBee.Core.GUI;
 using ZigBee.Models;
 using ZigBee.ViewModels;
 using ZigBee.Views.Controls;
@@ -124,14 +125,17 @@ namespace ZigBee.Views
 
             this.ViewModel.SaveProjectFilePathProvider = new GenericResponseProvider<string, object>(o =>
             {
-                OpenFileDialog openFileDialog = new OpenFileDialog() { CheckFileExists = false, Filter = "Text files (*.json)|*.json" };
-                openFileDialog.ShowDialog();
-                return openFileDialog.FileName;
+                var dialog = new Ookii.Dialogs.Wpf.VistaFolderBrowserDialog();
+                if (dialog.ShowDialog(this).GetValueOrDefault())
+                {
+                    return dialog.SelectedPath;
+                }
+                return string.Empty;
             });
 
             this.ViewModel.LoadProjectFilePathProvider = new GenericResponseProvider<string, object>(o =>
             {
-                OpenFileDialog openFileDialog = new OpenFileDialog() { CheckFileExists = true, Filter = "Text files (*.json)|*.json" };
+                OpenFileDialog openFileDialog = new OpenFileDialog() { CheckFileExists = true, Filter = "Directory" };
                 openFileDialog.ShowDialog();
                 return openFileDialog.FileName;
             });

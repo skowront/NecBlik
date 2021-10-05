@@ -1,5 +1,7 @@
-﻿using System;
+﻿using Newtonsoft.Json;
+using System;
 using System.Collections.Generic;
+using System.IO;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -8,8 +10,14 @@ using ZigBee.Core.Models;
 
 namespace ZigBee.Virtual.Models
 {
+    [JsonObject(MemberSerialization.OptIn)]
     public class VirtualZigBeeCoordinator:ZigBeeCoordinator
     {
+        [JsonProperty]
+        public Guid Guid { get; set; } = Guid.NewGuid();
+
+        private string internalCoordinatorType = "Virtual";
+        
         private List<IZigBeeSource> zigBeeSources = new List<IZigBeeSource>();
 
         private List<Tuple<string, string>> connections = new List<Tuple<string, string>>();
@@ -52,6 +60,20 @@ namespace ZigBee.Virtual.Models
         public override IEnumerable<Tuple<string, string>> GetConnections()
         {
             return this.connections;
+        }
+
+        public override void Save(string folderPath)
+        {
+            var json = JsonConvert.SerializeObject(this, Formatting.Indented);
+            var file = this.Guid + "." + this.internalCoordinatorType + ".json";
+            if (File.Exists(folderPath + "\\" + file))
+            {
+                File.WriteAllText(folderPath + "\\" + file, json);
+            }
+            else
+            {
+                File.AppendAllText(folderPath + "\\" + file, json);
+            }
         }
     }
 }

@@ -7,9 +7,8 @@ using ZigBee.Core.Interfaces;
 
 namespace ZigBee.Core.Models
 {
-    public abstract class ZigBeeCoordinator: IZigBeeCoordinator
+    public class ZigBeeCoordinator: IZigBeeCoordinator
     {
-
         public ZigBeeCoordinator()
         {
 
@@ -31,6 +30,11 @@ namespace ZigBee.Core.Models
         }
 
         public virtual string GetPanID()
+        {
+            throw new NotImplementedException();
+        }
+
+        public virtual void Save(string folderPath)
         {
             throw new NotImplementedException();
         }

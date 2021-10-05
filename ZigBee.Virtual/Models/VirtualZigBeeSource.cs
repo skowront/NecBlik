@@ -1,13 +1,21 @@
-﻿using System;
+﻿using Newtonsoft.Json;
+using System;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
+using System.IO;
 using System.Linq;
 using ZigBee.Core.Interfaces;
 
 namespace ZigBee.Virtual.Models
 {
+    [JsonObject(MemberSerialization.OptIn)]
     public class VirtualZigBeeSource : IZigBeeSource
     {
+        [JsonProperty]
+        public Guid Guid { get; set; } = Guid.NewGuid();
+
+        private string internalSourceType = "Virtual";
+        
         private string cachedAddress = string.Empty;
 
         public virtual string GetAddress()
@@ -31,6 +39,20 @@ namespace ZigBee.Virtual.Models
               .Select(s => s[random.Next(s.Length)]).ToArray());
             }
             return value;
+        }
+
+        public void Save(string folderPath)
+        {
+            var json = JsonConvert.SerializeObject(this, Formatting.Indented);
+            var file = this.Guid + "." + this.internalSourceType + ".json";
+            if (File.Exists(folderPath + "\\" + file))
+            {
+                File.WriteAllText(folderPath + "\\" + file, json);
+            }
+            else
+            {
+                File.AppendAllText(folderPath + "\\" + file, json);
+            }
         }
 
         public VirtualZigBeeSource()

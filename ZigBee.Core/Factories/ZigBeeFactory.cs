@@ -4,20 +4,37 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using ZigBee.Core.Interfaces;
+using ZigBee.Core.Models;
 
 namespace ZigBee.Core.Factories
 {
-    public abstract class ZigBeeFactory:IZigBeeFactory
+    public class ZigBeeFactory:IZigBeeFactory
     {
-        private string internalFactoryType { get; set; } = string.Empty;
+        private string internalFactoryType { get; set; } = "Default";
 
         public ZigBeeFactory()
         {
 
         }
 
-        public abstract string GetInternalFactoryType();
+        public virtual string GetInternalFactoryType()
+        {
+            return this.internalFactoryType;
+        }
 
-        public abstract IZigBeeSource Build();
+        public virtual IZigBeeSource Build()
+        {
+            return new ZigBeeSource();
+        }
+
+        public virtual IZigBeeCoordinator BuildCoordinator()
+        {
+            return new ZigBeeCoordinator();
+        }
+
+        public virtual ZigBeeNetwork BuildNetwork()
+        {
+            return new ZigBeeNetwork();
+        }
     }
 }

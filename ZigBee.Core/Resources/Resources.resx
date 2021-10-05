@@ -123,6 +123,12 @@
   <data name="ZigBeeModelNameDefault" xml:space="preserve">
     <value>UnknownZigbee</value>
   </data>
+  <data name="ZigBeeNetworksDirectory" xml:space="preserve">
+    <value>\Networks</value>
+  </data>
+  <data name="ZigBeeNetworkSourcesSubdirectory" xml:space="preserve">
+    <value>\Sources</value>
+  </data>
   <data name="ZigBeeUnableToRetrieveAddress" xml:space="preserve">
     <value>Unable to retrieve address</value>
   </data>

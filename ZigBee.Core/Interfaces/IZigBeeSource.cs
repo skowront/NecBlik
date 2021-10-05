@@ -9,5 +9,7 @@ namespace ZigBee.Core.Interfaces
     public interface IZigBeeSource
     {
         public string GetAddress();
+
+        public void Save(string folderPath);
     }
 }

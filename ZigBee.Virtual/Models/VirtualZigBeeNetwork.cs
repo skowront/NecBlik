@@ -10,14 +10,14 @@ using ZigBee.Virtual.Factories;
 
 namespace ZigBee.Virtual.Models
 {
-    public class VirtualZigBeeNetworkManager:ZigBeeNetworkManager
+    public class VirtualZigBeeNetwork:ZigBeeNetwork
     {
-        public VirtualZigBeeNetworkManager()
+        public VirtualZigBeeNetwork()
         {
-            
+            this.internalNetworkType = this.ZigBeeFactory.GetInternalFactoryType();
         }
 
-        public VirtualZigBeeNetworkManager(bool setupExampleNetwork)
+        public VirtualZigBeeNetwork(bool setupExampleNetwork) : base()
         {
             if(setupExampleNetwork)
                 this.SetupExampleNetwork();
@@ -26,7 +26,7 @@ namespace ZigBee.Virtual.Models
         public void SetupExampleNetwork()
         {
             this.ZigBeeFactory = new VirtualZigBeeFactory();
-            this.ZigBeeCoordinator = new VirtualZigBeeCoordinator(this.ZigBeeFactory);
+            this.ZigBeeCoordinator = new VirtualZigBeeCoordinator(this.ZigBeeFactory,true);
             this.ZigBeeSources = new Collection<IZigBeeSource>(this.ZigBeeCoordinator.GetDevices().ToList());
             this.ZigBeeConnections = new Collection<Tuple<string, string>>(this.ZigBeeCoordinator.GetConnections().ToList());
         }

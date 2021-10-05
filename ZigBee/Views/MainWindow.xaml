@@ -68,7 +68,7 @@
                 <RowDefinition></RowDefinition>
             </Grid.RowDefinitions>
             <ScrollViewer Grid.Column="1" Grid.RowSpan="2">
-                <ListView ItemsSource="{Binding AvailableZigBees}" 
+                <ListView ItemsSource="{Binding ZigBeeNetworks}" 
                           PreviewMouseLeftButtonDown="ListView_PreviewMouseLeftButtonDown" 
                           MouseMove="ListView_MouseMove">
                     <ListView.ItemTemplate>
