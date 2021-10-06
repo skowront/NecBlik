@@ -19,7 +19,7 @@ namespace ZigBee.Virtual.Factories
             this.internalFactoryType = "Virtual";
         }
 
-        public override string GetInternalFactoryType()
+        public override string GetVendorID()
         {
             return this.internalFactoryType;
         }
@@ -44,7 +44,7 @@ namespace ZigBee.Virtual.Factories
             var path = Path.GetDirectoryName(pathToFile);
             var fileName = Path.GetFileName(pathToFile);
             var type = fileName.Split('.')[1];
-            if (type != this.GetInternalFactoryType())
+            if (type != this.GetVendorID())
             {
                 return null;
             }
@@ -61,7 +61,7 @@ namespace ZigBee.Virtual.Factories
             var path = Path.GetDirectoryName(pathToFile);
             var fileName = Path.GetFileName(pathToFile);
             var type = fileName.Split('.')[1];
-            if (type != this.GetInternalFactoryType())
+            if (type != this.GetVendorID())
             {
                 return null;
             }
@@ -75,7 +75,7 @@ namespace ZigBee.Virtual.Factories
 
         public override ZigBeeNetwork BuildNetworkFromDirectory(string pathToDirectory)
         {
-            if(pathToDirectory.Split('.').LastOrDefault() != this.GetInternalFactoryType())
+            if(pathToDirectory.Split('.').LastOrDefault() != this.GetVendorID())
             {
                 return null;
             }

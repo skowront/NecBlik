@@ -15,7 +15,7 @@ namespace ZigBee.Virtual.Models
         public VirtualZigBeeNetwork()
         {
             this.ZigBeeFactory = new VirtualZigBeeFactory();
-            this.internalNetworkType = this.ZigBeeFactory.GetInternalFactoryType();
+            this.internalNetworkType = this.ZigBeeFactory.GetVendorID();
         }
 
         public VirtualZigBeeNetwork(bool setupExampleNetwork) : this()

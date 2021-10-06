@@ -14,6 +14,7 @@
         ext:Translation.ResourceManager="{x:Static resx:SR.ResourceManager}"
         xmlns:wpfExt="clr-namespace:WPFExtensions.Controls;assembly=WPFExtensions"
         xmlns:controls="clr-namespace:ZigBee.Views.Controls"
+        xmlns:dataSelectors="clr-namespace:ZigBee.Core.GUI.DataTemplateSelectors;assembly=ZigBee.Core.GUI"
         WindowStartupLocation="CenterScreen"
         WindowState="Maximized"
         mc:Ignorable="d"
@@ -23,6 +24,7 @@
                 <MenuItem Header="Paste" Command="{x:Static ApplicationCommands.Paste}" IsEnabled="True"/>
                 <MenuItem Header="Select All" Command="{x:Static controls:ZigBeeDesignerCanvas.SelectAll}" IsEnabled="True"/>
         </ContextMenu>
+        <dataSelectors:ZigBeeAnyDataBriefTemplateSelector x:Key="NetworkBriefDataTemplateSelector"></dataSelectors:ZigBeeAnyDataBriefTemplateSelector>
     </Window.Resources>
     <Grid>
         <Grid.RowDefinitions>
@@ -68,15 +70,15 @@
                 <RowDefinition></RowDefinition>
             </Grid.RowDefinitions>
             <ScrollViewer Grid.Column="1" Grid.RowSpan="2">
-                <ListView ItemsSource="{Binding ZigBeeNetworks}" 
+                <Expander ExpandDirection="Down" Style="{StaticResource MaterialDesignExpander}" 
+                          Foreground="{StaticResource ForegroundLightBrush}"
+                          Header="Networks">
+                    <ListView ItemsSource="{Binding ZigBeeNetworks}" 
                           PreviewMouseLeftButtonDown="ListView_PreviewMouseLeftButtonDown" 
-                          MouseMove="ListView_MouseMove">
-                    <ListView.ItemTemplate>
-                        <DataTemplate>
-                            <TextBlock Text="{Binding Name}" Foreground="{StaticResource ForegroundMainBrush}"></TextBlock>
-                        </DataTemplate>
-                    </ListView.ItemTemplate>
-                </ListView>
+                          MouseMove="ListView_MouseMove" 
+                          ItemTemplateSelector="{StaticResource NetworkBriefDataTemplateSelector}">
+                    </ListView>
+                </Expander>
             </ScrollViewer>
             
             <ScrollViewer Grid.Column="0" Grid.RowSpan="2" HorizontalScrollBarVisibility="Visible">

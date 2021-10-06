@@ -17,9 +17,9 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "ZigBee.digidotcom.xbee-csha
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "ZigBee.Virtual", "ZigBee.Virtual\ZigBee.Virtual.csproj", "{C7230AE8-C493-4E2E-A4FC-EC9F52305CC5}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ZigBee.Virtual.GUI", "ZigBee.Virtual.GUI\ZigBee.Virtual.GUI.csproj", "{35DFD984-1351-4B3B-8D2D-08F559619F47}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ZigBee.Virtual.GUI", "ZigBee.Virtual.GUI\ZigBee.Virtual.GUI.csproj", "{439FC5A9-49D2-48FC-B136-097762C57A1D}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ZigBee.Core.GUI", "ZigBee.Core.GUI\ZigBee.Core.GUI.csproj", "{54B9117B-E779-49F2-B672-82D2A20F0998}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ZigBee.Core.GUI", "ZigBee.Core.GUI\ZigBee.Core.GUI.csproj", "{7329BD04-6A70-465C-A7ED-93604778EBA3}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -55,14 +55,14 @@ Global
 		{C7230AE8-C493-4E2E-A4FC-EC9F52305CC5}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{C7230AE8-C493-4E2E-A4FC-EC9F52305CC5}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{C7230AE8-C493-4E2E-A4FC-EC9F52305CC5}.Release|Any CPU.Build.0 = Release|Any CPU
-		{35DFD984-1351-4B3B-8D2D-08F559619F47}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{35DFD984-1351-4B3B-8D2D-08F559619F47}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{35DFD984-1351-4B3B-8D2D-08F559619F47}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{35DFD984-1351-4B3B-8D2D-08F559619F47}.Release|Any CPU.Build.0 = Release|Any CPU
-		{54B9117B-E779-49F2-B672-82D2A20F0998}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{54B9117B-E779-49F2-B672-82D2A20F0998}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{54B9117B-E779-49F2-B672-82D2A20F0998}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{54B9117B-E779-49F2-B672-82D2A20F0998}.Release|Any CPU.Build.0 = Release|Any CPU
+		{439FC5A9-49D2-48FC-B136-097762C57A1D}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{439FC5A9-49D2-48FC-B136-097762C57A1D}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{439FC5A9-49D2-48FC-B136-097762C57A1D}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{439FC5A9-49D2-48FC-B136-097762C57A1D}.Release|Any CPU.Build.0 = Release|Any CPU
+		{7329BD04-6A70-465C-A7ED-93604778EBA3}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{7329BD04-6A70-465C-A7ED-93604778EBA3}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{7329BD04-6A70-465C-A7ED-93604778EBA3}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{7329BD04-6A70-465C-A7ED-93604778EBA3}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

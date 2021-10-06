@@ -6,10 +6,8 @@ using System.Threading.Tasks;
 
 namespace ZigBee.Core.Interfaces
 {
-    public interface IZigBeeSource: IVendable
+    public interface IVendable
     {
-        public string GetAddress();
-
-        public void Save(string folderPath);
+        string GetVendorID();
     }
 }

@@ -7,6 +7,7 @@ using System.IO;
 using ZigBee.Common.WpfExtensions.Base;
 using ZigBee.Common.WpfExtensions.Interfaces;
 using ZigBee.Core.GUI;
+using ZigBee.Core.GUI.ViewModels;
 using ZigBee.Core.Models;
 using ZigBee.Models;
 using ZigBee.Virtual.Models;
@@ -37,7 +38,7 @@ namespace ZigBee.ViewModels
 
         public ObservableCollection<ZigBeeViewModel> AvailableZigBees { get; set; } = new ObservableCollection<ZigBeeViewModel>();
 
-        public ObservableCollection<ZigBeeNetwork> ZigBeeNetworks { get; set; } = new ObservableCollection<ZigBeeNetwork>();
+        public ObservableCollection<ZigBeeNetworkViewModel> ZigBeeNetworks { get; set; } = new ObservableCollection<ZigBeeNetworkViewModel>();
 
         public IResponseProvider<ZigBeeViewModel, ZigBeeViewModel> NewZigBeeResponseProvider { get; set; } = new GenericResponseProvider<ZigBeeViewModel, ZigBeeViewModel>(new ZigBeeViewModel());
         public IResponseProvider<string, object> LoadProjectFilePathProvider { get; set; } = new GenericResponseProvider<string, object>(string.Empty);
@@ -162,6 +163,11 @@ namespace ZigBee.ViewModels
 
         private void SyncToModel()
         {
+            this.model.ZigBeeNetworks.Clear();
+            foreach(var item in this.ZigBeeNetworks)
+            {
+                this.model.ZigBeeNetworks.Add(item.Model);
+            }
             //this.model.DiagramZigBees = this.DiagramZigBeesProivider.ProvideResponse();
             //this.model.DiagramMapMetadata = this.DiagramMapMetadataProvider.ProvideResponse();
             //this.model.AvailableZigBees.Clear();
@@ -173,6 +179,12 @@ namespace ZigBee.ViewModels
 
         private void SyncFromModel()
         {
+            var zbn = this.model.ZigBeeNetworks;
+            this.ZigBeeNetworks.Clear();
+            foreach (var item in zbn)
+            {
+                this.ZigBeeNetworks.Add(new ZigBeeNetworkViewModel(item));
+            }
             //this.AvailableZigBees.Clear();
             //foreach (var item in this.model.AvailableZigBees)
             //{

@@ -12,7 +12,7 @@ using ZigBee.Core.Interfaces;
 namespace ZigBee.Core.Models
 {
     [JsonObject(MemberSerialization.OptIn)]
-    public class ZigBeeNetwork
+    public class ZigBeeNetwork:IVendable
     {
         [JsonProperty]
         public string Name { get; set; } = "Unnamed network";
@@ -25,13 +25,13 @@ namespace ZigBee.Core.Models
 
         public Collection<Tuple<string, string>> ZigBeeConnections { get; set; }
 
-        public IZigBeeFactory ZigBeeFactory { get; set; } = new ZigBeeFactory();
+        public IZigBeeFactory ZigBeeFactory { get; set; } = new ZigBeeDefaultFactory();
 
         protected string internalNetworkType { get; set; } = string.Empty;
 
         public ZigBeeNetwork()
         {
-            this.internalNetworkType = ZigBeeFactory.GetInternalFactoryType();
+            this.internalNetworkType = ZigBeeFactory.GetVendorID();
         }
 
         public void SetCoordinator(IZigBeeCoordinator zigBeeCoordinator)
@@ -67,6 +67,11 @@ namespace ZigBee.Core.Models
                     }
                 }
             }
+        }
+
+        public string GetVendorID()
+        {
+            return this.internalNetworkType;
         }
     }
 }

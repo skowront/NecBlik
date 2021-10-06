@@ -9,13 +9,13 @@ using ZigBee.Core.Models;
 
 namespace ZigBee.Core.Factories
 {
-    public abstract class ZigBeeFactory:IZigBeeFactory
+    public class ZigBeeDefaultFactory : IZigBeeFactory
     {
-        protected string internalFactoryType { get; set; } = "Abstract";
+        protected string internalFactoryType { get; set; } = "Default";
 
         protected List<IZigBeeFactory> OtherFactories { get; set; } = new List<IZigBeeFactory>();
 
-        public ZigBeeFactory()
+        public ZigBeeDefaultFactory()
         {
 
         }

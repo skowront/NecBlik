@@ -9,6 +9,13 @@ namespace ZigBee.Core.Models
 {
     public class ZigBeeSource : IZigBeeSource
     {
+        private string internalType { get; set; } = "Default";
+
+        public virtual string GetVendorID()
+        {
+            return internalType;
+        }
+
         public string GetAddress()
         {
             return "??";

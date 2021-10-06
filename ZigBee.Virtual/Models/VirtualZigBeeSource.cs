@@ -61,6 +61,11 @@ namespace ZigBee.Virtual.Models
             }
         }
 
+        public string GetVendorID()
+        {
+            return this.internalSourceType;
+        }
+
         public VirtualZigBeeSource()
         {
 

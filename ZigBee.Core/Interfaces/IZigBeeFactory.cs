@@ -7,10 +7,8 @@ using ZigBee.Core.Models;
 
 namespace ZigBee.Core.Interfaces
 {
-    public interface IZigBeeFactory
+    public interface IZigBeeFactory: IVendable
     {
-        string GetInternalFactoryType();
-
         void AttachOtherFactories(List<IZigBeeFactory> zigBeeFactories);
 
         IZigBeeSource BuildNewSource();

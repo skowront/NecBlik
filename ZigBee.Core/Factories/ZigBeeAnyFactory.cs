@@ -26,6 +26,8 @@ namespace ZigBee.Core.Factories
             }
         }
 
+        private IZigBeeFactory DefaultFactory = new ZigBeeDefaultFactory();
+
         private List<IZigBeeFactory> Factories = new List<IZigBeeFactory>();
 
         public ZigBeeAnyFactory()
@@ -63,7 +65,7 @@ namespace ZigBee.Core.Factories
                 {
                     if (typeof(IZigBeeFactory).IsAssignableFrom(type) && !type.IsAbstract)
                     {
-                        if(Activator.CreateInstance(type) as ZigBeeAnyFactory !=null)
+                        if(Activator.CreateInstance(type) as ZigBeeDefaultFactory != null || Activator.CreateInstance(type) as ZigBeeAnyFactory != null)
                         {
                             continue;
                         }
@@ -90,7 +92,7 @@ namespace ZigBee.Core.Factories
             return factories;
         }
 
-        public string GetInternalFactoryType()
+        public string GetVendorID()
         {
             return "Internal";
         }
@@ -110,7 +112,7 @@ namespace ZigBee.Core.Factories
                     return product;
                 }
             }
-            return null;
+            return this.DefaultFactory.BuildNewSource();
         }
 
         public IZigBeeSource BuildSourceFromJsonFile(string pathToFile)
@@ -123,7 +125,7 @@ namespace ZigBee.Core.Factories
                     return product;
                 }
             }
-            return null;
+            return this.DefaultFactory.BuildSourceFromJsonFile(pathToFile);
         }
 
         public IZigBeeCoordinator BuildCoordinator()
@@ -136,7 +138,7 @@ namespace ZigBee.Core.Factories
                     return product;
                 }
             }
-            return null;
+            return this.DefaultFactory.BuildCoordinator();
         }
 
         public IZigBeeCoordinator BuildCoordinatorFromJsonFile(string pathToFile)
@@ -149,7 +151,7 @@ namespace ZigBee.Core.Factories
                     return product;
                 }
             }
-            return null;
+            return this.DefaultFactory.BuildCoordinatorFromJsonFile(pathToFile);
         }
 
         public ZigBeeNetwork BuildNetwork()
@@ -162,7 +164,7 @@ namespace ZigBee.Core.Factories
                     return product;
                 }
             }
-            return null;
+            return this.DefaultFactory.BuildNetwork();
         }
 
         public ZigBeeNetwork BuildNetworkFromDirectory(string pathToDirectory)
@@ -175,7 +177,7 @@ namespace ZigBee.Core.Factories
                     return product;
                 }
             }
-            return null;
+            return this.DefaultFactory.BuildNetworkFromDirectory(pathToDirectory);
         }
     }
 }

@@ -9,9 +9,16 @@ namespace ZigBee.Core.Models
 {
     public class ZigBeeCoordinator: IZigBeeCoordinator
     {
+        private string internalType { get; set; } = "Default";
+
         public ZigBeeCoordinator()
         {
 
+        }
+
+        public virtual string GetVendorID()
+        {
+            return this.internalType;
         }
 
         public virtual string GetAddress()
