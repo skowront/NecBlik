@@ -8,8 +8,8 @@ using ZigBee.Common.WpfExtensions.Base;
 using ZigBee.Common.WpfExtensions.Interfaces;
 using ZigBee.Core.GUI;
 using ZigBee.Core.GUI.ViewModels;
+using ZigBee.Core.GUI.Models;
 using ZigBee.Core.Models;
-using ZigBee.Models;
 using ZigBee.Virtual.Models;
 
 namespace ZigBee.ViewModels
@@ -17,6 +17,8 @@ namespace ZigBee.ViewModels
     public class MainWindowViewModel : BaseViewModel
     {
         private ProjectModel model;
+
+        private ProjectGuiModel guiModel;
 
         public string ProjectName
         {
@@ -29,12 +31,6 @@ namespace ZigBee.ViewModels
             get { return this.model.MapFile; }
             set { this.model.MapFile = value; this.OnPropertyChanged(); }
         }
-
-        //public DiagramItemMetadata MapMetadata
-        //{
-        //    get { return this.model.DiagramMapMetadata; }
-        //    set { this.model.DiagramMapMetadata = value; this.OnPropertyChanged(); }
-        //}
 
         public ObservableCollection<ZigBeeViewModel> AvailableZigBees { get; set; } = new ObservableCollection<ZigBeeViewModel>();
 
@@ -60,6 +56,7 @@ namespace ZigBee.ViewModels
         {
             this.model = new ProjectModel();
             this.model.ZigBeeNetworks.Add(new VirtualZigBeeNetwork(true));
+            this.guiModel = new ProjectGuiModel();
             this.SyncFromModel();
             this.buildCommands();
         }
@@ -88,77 +85,149 @@ namespace ZigBee.ViewModels
 
             this.SaveProjectCommand = new RelayCommand(o =>
             {
-                var path = this.SaveProjectFilePathProvider.ProvideResponse();
-                if (path == null)
-                {
-                    return;
-                }
-                if (path == string.Empty)
-                {
-                    return;
-                }
-                this.SyncToModel();
-                var file = path + "\\" + this.ProjectName + "\\" + this.ProjectName + ".json";
-                var dir = path + "\\" + this.ProjectName;
-                if (File.Exists(file))
-                {
-                    File.WriteAllText(file, JsonConvert.SerializeObject(this.model, Formatting.Indented));
-                }
-                else
-                {
-                    if (!Directory.Exists(dir))
-                    {
-                        Directory.CreateDirectory(dir);
-                    }
-                    if (Directory.Exists(dir))
-                    {
-                        File.AppendAllText(file, JsonConvert.SerializeObject(this.model, Formatting.Indented));
-                    }
-                }
-                this.model.Save(dir);
+                this.SaveProject();
             });
 
             this.LoadProjectCommand = new RelayCommand(o =>
             {
-                var path = this.LoadProjectFilePathProvider.ProvideResponse();
-                if (path == null)
-                {
-                    return;
-                }
-                if (path == string.Empty)
-                {
-                    return;
-                }
-                var file = path;
-                var dir = Path.GetDirectoryName(path);
-                if (File.Exists(file))
-                {
-                    var projectStr = File.ReadAllText(file);
-                    this.model = JsonConvert.DeserializeObject<ProjectModel>(projectStr);
-                }
-                else
-                {
-                    this.model.Save(path);
-                }
-                this.model.Load(dir);
-                this.SyncFromModel();
-                //this.ProjectMapLoadedProvider.ProvideResponse(new Tuple<string, DiagramItemMetadata>(this.MapFilePath,this.MapMetadata));
+                this.LoadProject();
             });
 
             this.LoadProjectMapCommand = new RelayCommand(o =>
             {
                 var path = this.ProjectMapPathProvider.ProvideResponse();
-                if (path == null)
-                {
-                    return;
-                }
-                if (path == string.Empty)
-                {
-                    return;
-                }
-                this.MapFilePath = path;
-                //this.ProjectMapLoadedProvider.ProvideResponse(new Tuple<string, DiagramItemMetadata>(this.MapFilePath, this.MapMetadata));
+                this.LoadProjectMap(path);
             });
+        }
+
+        private void LoadProjectMap(string path)
+        {
+            if (path == null)
+            {
+                return;
+            }
+            if (path == string.Empty)
+            {
+                return;
+            }
+            this.MapFilePath = path;
+            this.ProjectMapLoadedProvider.ProvideResponse(new Tuple<string, DiagramItemMetadata>(this.MapFilePath, this.guiModel.mapDiagramMetadata));
+        }
+
+        private void LoadProject()
+        {
+            var path = this.LoadProjectFilePathProvider.ProvideResponse();
+            if (path == null)
+            {
+                return;
+            }
+            if (path == string.Empty)
+            {
+                return;
+            }
+            var file = path;
+            var dir = Path.GetDirectoryName(path);
+            if (File.Exists(file))
+            {
+                var projectStr = File.ReadAllText(file);
+                this.model = JsonConvert.DeserializeObject<ProjectModel>(projectStr);
+            }
+            else
+            {
+                this.model.Save(path);
+                this.SaveProjectGui(path);
+            }
+            this.model.Load(dir);
+            this.SyncFromModel();
+            this.LoadProjectGui(path);
+            this.ProjectMapLoadedProvider.ProvideResponse(new Tuple<string, DiagramItemMetadata>(this.MapFilePath, this.guiModel.mapDiagramMetadata));
+        }
+
+        private void LoadProjectGui(string path)
+        {
+            if (path == null)
+            {
+                return;
+            }
+            if (path == string.Empty)
+            {
+                return;
+            }
+            var file = path;
+            var dir = Path.GetDirectoryName(path);
+            file = file.Replace(".json", ".Gui.json");
+            if (File.Exists(file))
+            {
+                var projectStr = File.ReadAllText(file);
+                this.guiModel = JsonConvert.DeserializeObject<ProjectGuiModel>(projectStr);
+            }
+            else
+            {
+                this.guiModel.Save(path);
+            }
+        }
+
+        private void SaveProject()
+        {
+            var path = this.SaveProjectFilePathProvider.ProvideResponse();
+            if (path == null)
+            {
+                return;
+            }
+            if (path == string.Empty)
+            {
+                return;
+            }
+            this.SyncToModel();
+            var file = path + "\\" + this.ProjectName + "\\" + this.ProjectName + ".json";
+            var dir = path + "\\" + this.ProjectName;
+            if (File.Exists(file))
+            {
+                File.WriteAllText(file, JsonConvert.SerializeObject(this.model, Formatting.Indented));
+            }
+            else
+            {
+                if (!Directory.Exists(dir))
+                {
+                    Directory.CreateDirectory(dir);
+                }
+                if (Directory.Exists(dir))
+                {
+                    File.AppendAllText(file, JsonConvert.SerializeObject(this.model, Formatting.Indented));
+                }
+            }
+            this.model.Save(dir);
+        }
+
+        public void SaveProjectGui(string path)
+        {
+            if (path == null)
+            {
+                return;
+            }
+            if (path == string.Empty)
+            {
+                return;
+            }
+            this.SyncToModel();
+            var file = path + "\\" + this.ProjectName + "\\" + this.ProjectName + ".Gui.json";
+            var dir = path + "\\" + this.ProjectName;
+            if (File.Exists(file))
+            {
+                File.WriteAllText(file, JsonConvert.SerializeObject(this.guiModel, Formatting.Indented));
+            }
+            else
+            {
+                if (!Directory.Exists(dir))
+                {
+                    Directory.CreateDirectory(dir);
+                }
+                if (Directory.Exists(dir))
+                {
+                    File.AppendAllText(file, JsonConvert.SerializeObject(this.guiModel, Formatting.Indented));
+                }
+            }
+            this.guiModel.Save(dir);
         }
 
         private void SyncToModel()
@@ -169,7 +238,7 @@ namespace ZigBee.ViewModels
                 this.model.ZigBeeNetworks.Add(item.Model);
             }
             //this.model.DiagramZigBees = this.DiagramZigBeesProivider.ProvideResponse();
-            //this.model.DiagramMapMetadata = this.DiagramMapMetadataProvider.ProvideResponse();
+            this.guiModel.mapDiagramMetadata = this.DiagramMapMetadataProvider.ProvideResponse();
             //this.model.AvailableZigBees.Clear();
             //foreach (var item in this.AvailableZigBees)
             //{
@@ -191,6 +260,7 @@ namespace ZigBee.ViewModels
             //    this.AvailableZigBees.Add(new ZigBeeViewModel(item));
             //}
             //this.DiagramZigBeesLoadedProvider.ProvideResponse(this.model.DiagramZigBees);
+            this.LoadProjectMap(this.model.MapFile);
             this.Refresh();
         }
 

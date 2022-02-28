@@ -6,7 +6,6 @@ using System.Windows;
 using System.Windows.Controls;
 using System.Windows.Input;
 using ZigBee.Core.GUI;
-using ZigBee.Models;
 using ZigBee.ViewModels;
 using ZigBee.Views.Controls;
 

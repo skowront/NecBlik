@@ -5,7 +5,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace ZigBee.Models
+namespace ZigBee.Core.GUI.Models
 {
     [JsonObject(MemberSerialization.OptIn)]
     public class Point<T>
