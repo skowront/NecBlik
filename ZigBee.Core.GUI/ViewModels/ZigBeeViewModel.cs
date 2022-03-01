@@ -33,7 +33,12 @@ namespace ZigBee.Core.GUI
 
         public string InternalFactoryType
         {
-            get { return this.Model.InternalFactoryType; }
+            get 
+            {
+                if (this.Model.ZigBeeSource != null)
+                    return this.Model.ZigBeeSource.GetVendorID();
+                return this.Model.InternalFactoryType; 
+            }
             set { this.Model.InternalFactoryType = value; this.OnPropertyChanged(); }
         }
 
@@ -41,6 +46,8 @@ namespace ZigBee.Core.GUI
         {
             get { return this.Model.AddressName; }
         }
+
+        public RelayCommand EditCommand { get; set; }
 
         public ZigBeeViewModel( ZigBeeModel model = null)
         {
@@ -55,6 +62,11 @@ namespace ZigBee.Core.GUI
         public ZigBeeViewModel Duplicate()
         {
             return new ZigBeeViewModel(this.Model.Duplicate());
+        }
+
+        protected virtual void BuildCommands()
+        {
+            this.EditCommand = new RelayCommand((o) => { });
         }
     }
 }

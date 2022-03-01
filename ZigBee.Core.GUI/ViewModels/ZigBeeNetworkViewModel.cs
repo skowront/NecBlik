@@ -11,7 +11,7 @@ namespace ZigBee.Core.GUI.ViewModels
 {
     public class ZigBeeNetworkViewModel : BaseViewModel
     {
-        private ZigBeeNetwork model { get; set; }
+        protected ZigBeeNetwork model { get; set; }
 
         public ZigBeeNetwork Model
         {

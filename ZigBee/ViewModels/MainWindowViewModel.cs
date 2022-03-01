@@ -11,6 +11,8 @@ using ZigBee.Core.GUI.ViewModels;
 using ZigBee.Core.GUI.Models;
 using ZigBee.Core.Models;
 using ZigBee.Virtual.Models;
+using ZigBee.Core.Factories;
+using ZigBee.Core.GUI.Factories;
 
 namespace ZigBee.ViewModels
 {
@@ -197,6 +199,7 @@ namespace ZigBee.ViewModels
                 }
             }
             this.model.Save(dir);
+            this.SaveProjectGui(dir);
         }
 
         public void SaveProjectGui(string path)
@@ -210,8 +213,8 @@ namespace ZigBee.ViewModels
                 return;
             }
             this.SyncToModel();
-            var file = path + "\\" + this.ProjectName + "\\" + this.ProjectName + ".Gui.json";
-            var dir = path + "\\" + this.ProjectName;
+            var file = path + "\\" + this.ProjectName + ".Gui.json";
+            var dir = path;
             if (File.Exists(file))
             {
                 File.WriteAllText(file, JsonConvert.SerializeObject(this.guiModel, Formatting.Indented));
@@ -252,7 +255,7 @@ namespace ZigBee.ViewModels
             this.ZigBeeNetworks.Clear();
             foreach (var item in zbn)
             {
-                this.ZigBeeNetworks.Add(new ZigBeeNetworkViewModel(item));
+                this.ZigBeeNetworks.Add(ZigBeeGuiAnyFactory.Instance.GetNetworkViewModel(item));
             }
             //this.AvailableZigBees.Clear();
             //foreach (var item in this.model.AvailableZigBees)

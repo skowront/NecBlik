@@ -54,6 +54,7 @@ namespace ZigBee.Core.Models
             if (Directory.Exists(dir))
             {
                 this.ZigBeeCoordinator.Save(dir);
+                File.WriteAllText(dir+"\\"+"Network.json",JsonConvert.SerializeObject(this,Formatting.Indented));
                 var sourcesSubDir = dir + Resources.Resources.ZigBeeNetworkSourcesSubdirectory;
                 if (!Directory.Exists(sourcesSubDir))
                 {
@@ -61,6 +62,7 @@ namespace ZigBee.Core.Models
                 }
                 if (Directory.Exists(sourcesSubDir))
                 {
+                    
                     foreach (var item in this.ZigBeeSources)
                     {
                         item.Save(sourcesSubDir);

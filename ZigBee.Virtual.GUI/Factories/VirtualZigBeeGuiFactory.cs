@@ -8,7 +8,9 @@ using System.Threading.Tasks;
 using System.Windows;
 using ZigBee.Core.GUI.Factories;
 using ZigBee.Core.GUI.Interfaces;
+using ZigBee.Core.GUI.ViewModels;
 using ZigBee.Core.Models;
+using ZigBee.Virtual.GUI.ViewModels;
 
 namespace ZigBee.Virtual.GUI.Factories
 {
@@ -18,6 +20,7 @@ namespace ZigBee.Virtual.GUI.Factories
         {
             this.internalFactoryType = "Virtual";
         }
+
 
         public override DataTemplate GetNetworkDataTemplate(ZigBeeNetwork zigBeeNetwork)
         {
@@ -41,6 +44,11 @@ namespace ZigBee.Virtual.GUI.Factories
                 return template;
             }
             return null;
+        }
+
+        public override ZigBeeNetworkViewModel GetNetworkViewModel(ZigBeeNetwork zigBeeNetwork)
+        {
+            return new VirtualZigBeeNetworkViewModel(zigBeeNetwork);
         }
 
         public override string GetVendorID()

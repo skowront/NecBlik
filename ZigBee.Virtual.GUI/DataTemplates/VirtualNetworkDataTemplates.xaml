@@ -1,7 +1,7 @@
 ﻿<ResourceDictionary xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
                     xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
                     xmlns:viewModels="clr-namespace:ZigBee.Virtual.GUI.ViewModels">
-    <DataTemplate x:Key="VirtualNetworkBriefDataTemplate" DataType="{x:Type viewModels:VirtualZigBeeViewModel}">
+    <DataTemplate x:Key="VirtualNetworkBriefDataTemplate" DataType="{x:Type viewModels:VirtualZigBeeNetworkViewModel}">
         <StackPanel>
             <TextBlock Text="Virtual"></TextBlock>
             <TextBlock Text="{Binding Name}"></TextBlock>
@@ -9,7 +9,7 @@
         </StackPanel>
     </DataTemplate>
 
-    <DataTemplate x:Key="VirtualNetworkDataTemplate" DataType="{x:Type viewModels:VirtualZigBeeViewModel}">
+    <DataTemplate x:Key="VirtualNetworkDataTemplate" DataType="{x:Type viewModels:VirtualZigBeeNetworkViewModel}">
         <StackPanel>
             <TextBlock Text="Virtual"></TextBlock>
             <TextBlock Text="{Binding Name}"></TextBlock>

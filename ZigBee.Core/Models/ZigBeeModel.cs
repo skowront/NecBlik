@@ -44,6 +44,11 @@ namespace ZigBee.Core.Models
 
         public IZigBeeSource ZigBeeSource { get; set; }
 
+        public ZigBeeModel(IZigBeeSource source=null)
+        {
+            this.ZigBeeSource = source;
+        }
+
         public ZigBeeModel Duplicate()
         {
             return new ZigBeeModel() { Guid = Guid.NewGuid(), Name = this.Name, Version = this.Version, addressName = this.AddressName };

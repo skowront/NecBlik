@@ -4,6 +4,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows;
+using ZigBee.Core.GUI.ViewModels;
 using ZigBee.Core.Interfaces;
 using ZigBee.Core.Models;
 
@@ -16,5 +17,7 @@ namespace ZigBee.Core.GUI.Interfaces
         DataTemplate GetNetworkDataTemplate(ZigBeeNetwork zigBeeNetwork);
 
         DataTemplate GetNetworkBriefDataTemplate(ZigBeeNetwork zigBeeNetwork);
+
+        ZigBeeNetworkViewModel GetNetworkViewModel(ZigBeeNetwork zigBeeNetwork);
     }
 }

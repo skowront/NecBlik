@@ -34,11 +34,6 @@ namespace ZigBee.Virtual.Factories
             return new VirtualZigBeeCoordinator(this);
         }
 
-        public override ZigBeeNetwork BuildNetwork()
-        {
-            return new VirtualZigBeeNetwork();
-        }
-
         public override IZigBeeCoordinator BuildCoordinatorFromJsonFile(string pathToFile)
         {
             var path = Path.GetDirectoryName(pathToFile);
@@ -82,7 +77,7 @@ namespace ZigBee.Virtual.Factories
 
             var path = Path.GetDirectoryName(pathToDirectory);
             var fileName = Path.GetFileName(pathToDirectory);
-            var network = new VirtualZigBeeNetwork();
+            var network = JsonConvert.DeserializeObject<VirtualZigBeeNetwork>(File.ReadAllText(pathToDirectory + "\\Network.json"));
 
             var files = new List<string>(Directory.EnumerateFiles(pathToDirectory));
             if (files.Count() < 1)

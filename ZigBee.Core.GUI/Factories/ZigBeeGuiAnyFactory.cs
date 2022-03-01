@@ -7,6 +7,7 @@ using System.Text;
 using System.Threading.Tasks;
 using System.Windows;
 using ZigBee.Core.GUI.Interfaces;
+using ZigBee.Core.GUI.ViewModels;
 using ZigBee.Core.Models;
 
 namespace ZigBee.Core.GUI.Factories
@@ -123,6 +124,19 @@ namespace ZigBee.Core.GUI.Factories
                 }
             }
             return this.DefaultFactory.GetNetworkBriefDataTemplate(zigBeeNetwork);
+        }
+
+        public virtual ZigBeeNetworkViewModel GetNetworkViewModel(ZigBeeNetwork zigBeeNetwork)
+        {
+            foreach(var item in this.Factories)
+            {
+                var r = item.GetNetworkViewModel(zigBeeNetwork);
+                if(r !=null)
+                {
+                    return r;
+                }
+            }
+            return this.DefaultFactory.GetNetworkViewModel(zigBeeNetwork);
         }
 
         public string GetVendorID()
