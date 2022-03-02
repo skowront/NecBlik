@@ -82,19 +82,22 @@ namespace ZigBee.Virtual.Factories
             var files = new List<string>(Directory.EnumerateFiles(pathToDirectory));
             if (files.Count() < 1)
                 return null;
-            IZigBeeCoordinator zigBeeCoordinator = this.BuildCoordinatorFromJsonFile(files[0]);
-            if(zigBeeCoordinator == null)
+            if(network.HasCoordinator)
             {
-                foreach (var factory in this.OtherFactories)
+                IZigBeeCoordinator zigBeeCoordinator = this.BuildCoordinatorFromJsonFile(files[0]);
+                if (zigBeeCoordinator == null)
                 {
-                    zigBeeCoordinator = factory.BuildCoordinatorFromJsonFile(files[0]);
-                    if (zigBeeCoordinator != null)
-                        break;
+                    foreach (var factory in this.OtherFactories)
+                    {
+                        zigBeeCoordinator = factory.BuildCoordinatorFromJsonFile(files[0]);
+                        if (zigBeeCoordinator != null)
+                            break;
+                    }
                 }
+                if (zigBeeCoordinator == null)
+                    return null;
+                network.SetCoordinator(zigBeeCoordinator);
             }
-            if (zigBeeCoordinator == null)
-                return null;
-            network.SetCoordinator(zigBeeCoordinator);
             foreach (var file in Directory.EnumerateFiles(pathToDirectory + "\\Sources"))
             {
                 IZigBeeSource source = this.BuildSourceFromJsonFile(file);

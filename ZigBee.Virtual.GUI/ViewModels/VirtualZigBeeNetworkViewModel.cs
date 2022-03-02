@@ -31,8 +31,8 @@ namespace ZigBee.Virtual.GUI.ViewModels
         public void SyncFromModel()
         {
             this.ZigBees.Clear();
-            var zb = this.model.ZigBeeCoordinator.GetDevices();
-            foreach(var device in zb)
+           
+            foreach (var device in this.model.ZigBeeSources)
             {
                 var vm = new VirtualZigBeeViewModel(new ZigBeeModel(device));
                 this.ZigBees.Add(vm);

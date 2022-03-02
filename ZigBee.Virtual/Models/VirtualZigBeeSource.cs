@@ -20,6 +20,9 @@ namespace ZigBee.Virtual.Models
             set { this.cachedAddress = value; }
         }
 
+        [JsonProperty]
+        public string Name { get; set; } = "Virtualbee";
+
         private string internalSourceType = "Virtual";
         
         private string cachedAddress = string.Empty;
@@ -64,6 +67,17 @@ namespace ZigBee.Virtual.Models
         public string GetVendorID()
         {
             return this.internalSourceType;
+        }
+
+        public string GetName()
+        {
+            return this.Name;
+        }
+
+        public void SetName(string name)
+        {
+            this.Name = name;
+            return;
         }
 
         public VirtualZigBeeSource()

@@ -9,9 +9,9 @@
     <Grid>
         <StackPanel>
             <TextBlock Text="Name"></TextBlock>
-            <TextBox Text="{Binding ViewModel.Name}"></TextBox>
+            <TextBox Text="{Binding Name}"></TextBox>
             <TextBlock Text="Version"></TextBlock>
-            <TextBox Text="{Binding ViewModel.Version}"></TextBox>
+            <TextBlock Text="{Binding Version}"></TextBlock>
             <!--<StackPanel Orientation="Horizontal" HorizontalAlignment="Center">
                 <Button Command="{Binding OnConfirmCommand}">Confirm</Button>
                 <Button Command="{Binding OnCancelCommand}">Cancel</Button>

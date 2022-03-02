@@ -25,7 +25,7 @@ namespace ZigBee.Virtual.GUI.Views
             InitializeComponent();
         }
 
-        public VirtualZigBeeWindow(VirtualZigBeeViewModel virtualZigBeeViewModel)
+        public VirtualZigBeeWindow(VirtualZigBeeViewModel virtualZigBeeViewModel) : this()
         {
             this.DataContext = virtualZigBeeViewModel;
         }

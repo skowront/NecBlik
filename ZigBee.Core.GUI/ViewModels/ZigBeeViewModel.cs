@@ -57,6 +57,7 @@ namespace ZigBee.Core.GUI
                 this.Model = new ZigBeeModel();
                 return;
             }
+            this.BuildCommands();
         }
 
         public ZigBeeViewModel Duplicate()

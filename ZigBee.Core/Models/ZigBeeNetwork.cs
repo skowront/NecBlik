@@ -19,7 +19,10 @@ namespace ZigBee.Core.Models
         [JsonProperty]
         public Guid Guid { get; set; } = Guid.NewGuid();
 
-        public IZigBeeCoordinator ZigBeeCoordinator { get; set; }
+        [JsonProperty]
+        public bool HasCoordinator { get; private set; } = false;
+
+        public IZigBeeCoordinator ZigBeeCoordinator { get; private set; }
 
         public Collection<IZigBeeSource> ZigBeeSources { get; set; } = new Collection<IZigBeeSource>();
 
@@ -37,6 +40,15 @@ namespace ZigBee.Core.Models
         public void SetCoordinator(IZigBeeCoordinator zigBeeCoordinator)
         {
             this.ZigBeeCoordinator = zigBeeCoordinator;
+            if(this.ZigBeeCoordinator!=null)
+            {
+                this.ZigBeeSources = new Collection<IZigBeeSource>(this.ZigBeeCoordinator.GetDevices().ToList());
+                this.HasCoordinator = true;
+            }
+            else
+            {
+                this.HasCoordinator = false;
+            }
         }
 
         public void AddSource(IZigBeeSource source)
@@ -53,7 +65,10 @@ namespace ZigBee.Core.Models
             }
             if (Directory.Exists(dir))
             {
-                this.ZigBeeCoordinator.Save(dir);
+                if(this.HasCoordinator)
+                {
+                    this.ZigBeeCoordinator.Save(dir);
+                }
                 File.WriteAllText(dir+"\\"+"Network.json",JsonConvert.SerializeObject(this,Formatting.Indented));
                 var sourcesSubDir = dir + Resources.Resources.ZigBeeNetworkSourcesSubdirectory;
                 if (!Directory.Exists(sourcesSubDir))

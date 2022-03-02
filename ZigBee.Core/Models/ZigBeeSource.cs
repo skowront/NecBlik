@@ -25,5 +25,15 @@ namespace ZigBee.Core.Models
         {
             return;
         }
+
+        public string GetName()
+        {
+            return "ZigBee";
+        }
+
+        public void SetName(string name)
+        {
+            return;
+        }
     }
 }

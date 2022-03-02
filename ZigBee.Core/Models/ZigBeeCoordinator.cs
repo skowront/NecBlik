@@ -45,5 +45,15 @@ namespace ZigBee.Core.Models
         {
             throw new NotImplementedException();
         }
+
+        public string GetName()
+        {
+            throw new NotImplementedException();
+        }
+
+        public void SetName(string name)
+        {
+            throw new NotImplementedException();
+        }
     }
 }

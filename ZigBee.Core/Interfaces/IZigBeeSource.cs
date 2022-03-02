@@ -10,6 +10,9 @@ namespace ZigBee.Core.Interfaces
     {
         public string GetAddress();
 
+        public string GetName();
+        public void SetName(string name);
+
         public void Save(string folderPath);
     }
 }

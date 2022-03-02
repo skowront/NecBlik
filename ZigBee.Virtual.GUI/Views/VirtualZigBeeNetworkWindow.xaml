@@ -16,10 +16,10 @@
             <TextBlock Text="Network name:"></TextBlock>
             <TextBox Text="{Binding ViewModel.Name}"></TextBox>
         </StackPanel>
-        <ListView Grid.Row="1" ItemsSource="{Binding ViewModel.ZigBees}" ScrollViewer.VerticalScrollBarVisibility="Visible">
+        <ListView Grid.Row="1" ItemsSource="{Binding ViewModel.ZigBees}" ScrollViewer.VerticalScrollBarVisibility="Visible" Style="{StaticResource ZigBeeListViewHoverless}">
             <ListView.ItemTemplate>
                 <DataTemplate DataType="{x:Type viewModels:VirtualZigBeeViewModel}">
-                    <StackPanel>
+                    <StackPanel Orientation="Vertical">
                         <TextBlock Text="Virtual"></TextBlock>
                         <TextBlock Text="{Binding Name}"></TextBlock>
                         <TextBlock Text="{Binding Guid}"></TextBlock>
