@@ -9,6 +9,7 @@ using System.Windows.Markup;
 using System.Windows.Media;
 using ZigBee.Common.WpfExtensions.Base;
 using ZigBee.Core.GUI;
+using ZigBee.Core.GUI.Interfaces;
 using ZigBee.Core.GUI.Models;
 using ZigBee.ViewModels;
 using ZigBee.Views.Controls;
@@ -18,7 +19,7 @@ namespace ZigBee.Views
     /// <summary>
     /// Interaction logic for MainWindow.xaml
     /// </summary>
-    public partial class MainWindow : Window
+    public partial class MainWindow : Window, ISelectionSubscriber<ZigBeeViewModel>
     {
         private Point startPoint = new Point();
 
@@ -29,7 +30,7 @@ namespace ZigBee.Views
         public MainWindow()
         {
             InitializeComponent();
-            this.ViewModel = new MainWindowViewModel();
+            this.ViewModel = new MainWindowViewModel(this);
             this.DataContext = this.ViewModel;
             this.buildResponseProviders();
         }
@@ -56,20 +57,24 @@ namespace ZigBee.Views
                 {
                     return;
                 }
-                var vm = (ZigBeeViewModel)lv.ItemContainerGenerator.ItemFromContainer(lvi);
-                var xaml = XamlWriter.Save(new ZigBeeControl(vm));
-                //DragObject dataObject = new DragObject();
-                //dataObject.Xaml = xaml; 
-                //WrapPanel panel = VisualTreeHelper.GetParent(this) as WrapPanel;
-                //if (panel != null)
-                //{
-                //    // desired size for DesignerCanvas is the stretched Toolbox item size
-                //    double scale = 1.3;
-                //    dataObject.DesiredSize = new Size(panel.ItemWidth * scale, panel.ItemHeight * scale);
-                //}
+                if(lv.ItemContainerGenerator.ItemFromContainer(lvi) is ZigBeeViewModel)
+                {
+                    var vm = (ZigBeeViewModel)lv.ItemContainerGenerator.ItemFromContainer(lvi);
+                    var xaml = XamlWriter.Save(new ZigBeeControl(vm));
+                    //DragObject dataObject = new DragObject();
+                    //dataObject.Xaml = xaml; 
+                    //WrapPanel panel = VisualTreeHelper.GetParent(this) as WrapPanel;
+                    //if (panel != null)
+                    //{
+                    //    // desired size for DesignerCanvas is the stretched Toolbox item size
+                    //    double scale = 1.3;
+                    //    dataObject.DesiredSize = new Size(panel.ItemWidth * scale, panel.ItemHeight * scale);
+                    //}
 
-                DragDrop.DoDragDrop(lvi, new DataObject(vm.GetType(),vm), DragDropEffects.Copy);
-                //DragDrop.DoDragDrop(lvi, dataObject, DragDropEffects.Copy);
+                    DragDrop.DoDragDrop(lvi, new DataObject(vm.GetType(), vm), DragDropEffects.Copy);
+                    //DragDrop.DoDragDrop(lvi, dataObject, DragDropEffects.Copy);
+                }
+
             }
         }
 
@@ -178,6 +183,8 @@ namespace ZigBee.Views
                 return null;
             });
 
+            this.ViewModel.ZigBeeSelectionSubscriber = this;
+
             //this.ViewModel.OnProjectSaved = new Action(() =>
             //{
             //    var diagramZigBees = JsonConvert.SerializeObject(this.designerCanvas.GetDiagramZigBees());
@@ -187,5 +194,9 @@ namespace ZigBee.Views
 
         }
 
+        public void NotifySelected(ZigBeeViewModel obj)
+        {
+            this.designerCanvas.AddZigBee(obj,new Point(0,0));
+        }
     }
 }

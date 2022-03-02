@@ -34,24 +34,29 @@ namespace ZigBee.Views.Controls
                 var data = (ZigBeeViewModel)e.Data.GetData(typeof(ZigBeeViewModel));
                 if (data != null)
                 {
-                    //var newItem = new ZigBeeDesignerItem(data, new ZigBeeControl(data));
-                    var newItem = new DesignerItem();
-                    newItem.Content = new ZigBeeControl(data);
-                    newItem.Payload = data;
-
-                    Point position = e.GetPosition(this);
-                    DesignerCanvas.SetLeft(newItem, Math.Max(0, position.X));
-                    DesignerCanvas.SetTop(newItem, Math.Max(0, position.Y));
-
-                    //Canvas.SetZIndex(newItem, this.Children.Count);
-                    this.Children.Add(newItem);
-                    SetConnectorDecoratorTemplate(newItem);
-
-                    //////update selection
-                    //this.SelectionService.SelectItem(newItem);
-                    //newItem.Focus();
+                    this.AddZigBee(data, e.GetPosition(this));
                 }
             }
+        }
+
+        public void AddZigBee(ZigBeeViewModel zigBeeViewModel, Point point)
+        {
+            //var newItem = new ZigBeeDesignerItem(data, new ZigBeeControl(data));
+            var newItem = new DesignerItem();
+            newItem.Content = new ZigBeeControl(zigBeeViewModel);
+            newItem.Payload = zigBeeViewModel;
+
+            Point position = point;
+            DesignerCanvas.SetLeft(newItem, Math.Max(0, position.X));
+            DesignerCanvas.SetTop(newItem, Math.Max(0, position.Y));
+
+            //Canvas.SetZIndex(newItem, this.Children.Count);
+            this.Children.Add(newItem);
+            SetConnectorDecoratorTemplate(newItem);
+
+            //////update selection
+            //this.SelectionService.SelectItem(newItem);
+            //newItem.Focus();
         }
 
         protected IEnumerable<DesignerItem> GetDesignerItems()

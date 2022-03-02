@@ -6,6 +6,8 @@ using System.Text;
 using System.Threading.Tasks;
 using System.Windows;
 using ZigBee.Common.WpfExtensions.Base;
+using ZigBee.Core.GUI;
+using ZigBee.Core.GUI.Interfaces;
 using ZigBee.Core.GUI.ViewModels;
 using ZigBee.Core.Models;
 using ZigBee.Virtual.GUI.Views;
@@ -35,8 +37,15 @@ namespace ZigBee.Virtual.GUI.ViewModels
             foreach (var device in this.model.ZigBeeSources)
             {
                 var vm = new VirtualZigBeeViewModel(new ZigBeeModel(device));
+                vm.PullSelectionSubscriber = this.ZigBeeSelectionSubscriber;
                 this.ZigBees.Add(vm);
             }
+        }
+
+        public override void Sync()
+        {
+            base.Sync();
+            this.SyncFromModel();
         }
     }
 }

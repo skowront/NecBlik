@@ -13,6 +13,7 @@ using ZigBee.Core.Models;
 using ZigBee.Virtual.Models;
 using ZigBee.Core.Factories;
 using ZigBee.Core.GUI.Factories;
+using ZigBee.Core.GUI.Interfaces;
 
 namespace ZigBee.ViewModels
 {
@@ -47,6 +48,7 @@ namespace ZigBee.ViewModels
         public IResponseProvider<string, object> ProjectMapPathProvider { get; set; } = new GenericResponseProvider<string, object>(string.Empty);
         public IResponseProvider<object, Tuple<string, DiagramItemMetadata>> ProjectMapLoadedProvider { get; set; } = new GenericResponseProvider<object, Tuple<string,DiagramItemMetadata>>();
         public IResponseProvider<object, object> NewProjectLoadedProvider { get; set; } = new GenericResponseProvider<object, object>();
+        public ISelectionSubscriber<ZigBeeViewModel> ZigBeeSelectionSubscriber { get; set; }
 
         public RelayCommand NewProjectCommand { get; set; }
         public RelayCommand SaveProjectCommand { get; set; }
@@ -54,8 +56,9 @@ namespace ZigBee.ViewModels
         public RelayCommand AddNewZigBeeCommand { get; set; }
         public RelayCommand LoadProjectMapCommand { get; set; }
 
-        public MainWindowViewModel()
+        public MainWindowViewModel(ISelectionSubscriber<ZigBeeViewModel> zigBeeSelectionSubscriber)
         {
+            this.ZigBeeSelectionSubscriber = zigBeeSelectionSubscriber; 
             this.model = new ProjectModel();
             this.model.ZigBeeNetworks.Add(new VirtualZigBeeNetwork(true));
             this.guiModel = new ProjectGuiModel();
@@ -255,7 +258,10 @@ namespace ZigBee.ViewModels
             this.ZigBeeNetworks.Clear();
             foreach (var item in zbn)
             {
-                this.ZigBeeNetworks.Add(ZigBeeGuiAnyFactory.Instance.GetNetworkViewModel(item));
+                var nvm = ZigBeeGuiAnyFactory.Instance.GetNetworkViewModel(item);
+                nvm.ZigBeeSelectionSubscriber = this.ZigBeeSelectionSubscriber;
+                nvm.Sync();
+                this.ZigBeeNetworks.Add(nvm);
             }
             //this.AvailableZigBees.Clear();
             //foreach (var item in this.model.AvailableZigBees)

@@ -5,6 +5,7 @@ using System.Text;
 using System.Threading.Tasks;
 using ZigBee.Common.WpfExtensions.Base;
 using ZigBee.Common.WpfExtensions.Interfaces;
+using ZigBee.Core.GUI.Interfaces;
 using ZigBee.Core.Models;
 
 namespace ZigBee.Core.GUI.ViewModels
@@ -30,6 +31,8 @@ namespace ZigBee.Core.GUI.ViewModels
             get { return this.model.Guid; }
         }
 
+        public ISelectionSubscriber<ZigBeeViewModel> ZigBeeSelectionSubscriber { get; set; }
+
         public RelayCommand EditCommand { get; set; }
         
         public IResponseProvider<string,ZigBeeNetworkViewModel> EditResponseProvider { get; set; }
@@ -38,6 +41,11 @@ namespace ZigBee.Core.GUI.ViewModels
         {
             this.model = network;
             this.BuildCommands();
+        }
+
+        public virtual void Sync()
+        {
+
         }
 
         private void BuildCommands()
