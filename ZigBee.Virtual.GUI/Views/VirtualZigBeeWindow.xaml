@@ -9,9 +9,9 @@
     <Grid>
         <StackPanel>
             <TextBlock Text="Name"></TextBlock>
-            <TextBox Text="{Binding Name}"></TextBox>
+            <TextBox Text="{Binding Name,UpdateSourceTrigger=PropertyChanged}"></TextBox>
             <TextBlock Text="Version"></TextBlock>
-            <TextBlock Text="{Binding Version}"></TextBlock>
+            <TextBlock Text="{Binding Version,UpdateSourceTrigger=PropertyChanged}"></TextBlock>
             <!--<StackPanel Orientation="Horizontal" HorizontalAlignment="Center">
                 <Button Command="{Binding OnConfirmCommand}">Confirm</Button>
                 <Button Command="{Binding OnCancelCommand}">Cancel</Button>

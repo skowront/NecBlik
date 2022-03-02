@@ -82,7 +82,7 @@ namespace ZigBee.Virtual.Models
 
         public VirtualZigBeeSource()
         {
-
+            this.Name = "Virtualbee";
         }
 
         private static Collection<string> TakenAddresses = new Collection<string>();

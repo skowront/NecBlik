@@ -13,9 +13,6 @@ namespace ZigBee.Virtual.Models
     [JsonObject(MemberSerialization.OptIn)]
     public class VirtualZigBeeCoordinator:ZigBeeCoordinator
     {
-        [JsonProperty]
-        public Guid Guid { get; set; } = Guid.NewGuid();
-
         private string internalCoordinatorType = "Virtual";
         
         private List<IZigBeeSource> zigBeeSources = new List<IZigBeeSource>();
@@ -27,11 +24,11 @@ namespace ZigBee.Virtual.Models
         public VirtualZigBeeCoordinator(IZigBeeFactory zigBeeFactory)
         {
             this.zigBeeFactory = zigBeeFactory;
+            this.Name = "Virtual ZigBee Coordinator";
         }
 
-        public VirtualZigBeeCoordinator(IZigBeeFactory zigBeeFactory, bool setupExampleZigBees)
+        public VirtualZigBeeCoordinator(IZigBeeFactory zigBeeFactory, bool setupExampleZigBees): this(zigBeeFactory)
         {
-            this.zigBeeFactory = zigBeeFactory;
             if (setupExampleZigBees)
                 this.setupExampleZigBees();
         }

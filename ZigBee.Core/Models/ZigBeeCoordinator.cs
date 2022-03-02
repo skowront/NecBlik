@@ -1,4 +1,5 @@
-﻿using System;
+﻿using Newtonsoft.Json;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -10,6 +11,12 @@ namespace ZigBee.Core.Models
     public class ZigBeeCoordinator: IZigBeeCoordinator
     {
         private string internalType { get; set; } = "Default";
+
+        [JsonProperty]
+        public Guid Guid { get; set; } = Guid.NewGuid();
+
+        [JsonProperty]
+        protected string Name { get; set; } = "ZigBee Coordingator";
 
         public ZigBeeCoordinator()
         {
@@ -48,12 +55,13 @@ namespace ZigBee.Core.Models
 
         public string GetName()
         {
-            throw new NotImplementedException();
+            return this.Name;
         }
 
         public void SetName(string name)
         {
-            throw new NotImplementedException();
+            this.Name = name;
+            return;
         }
     }
 }

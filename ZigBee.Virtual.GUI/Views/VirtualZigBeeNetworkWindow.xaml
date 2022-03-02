@@ -10,19 +10,33 @@
     <Grid>
         <Grid.RowDefinitions>
             <RowDefinition Height="1*"></RowDefinition>
+            <RowDefinition Height="auto"></RowDefinition>
             <RowDefinition Height="9*"></RowDefinition>
         </Grid.RowDefinitions>
         <StackPanel Grid.Row="0">
             <TextBlock Text="Network name:"></TextBlock>
             <TextBox Text="{Binding ViewModel.Name}"></TextBox>
         </StackPanel>
-        <ListView Grid.Row="1" ItemsSource="{Binding ViewModel.ZigBees}" ScrollViewer.VerticalScrollBarVisibility="Visible" Style="{StaticResource ZigBeeListViewHoverless}">
+        <ContentPresenter Grid.Row="1" Content="{Binding ViewModel.ZigBeeCoordinator}">
+            <ContentPresenter.ContentTemplate>
+                <DataTemplate DataType="{x:Type viewModels:VirtualZigBeeViewModel}">
+                    <StackPanel Orientation="Vertical">
+                        <TextBlock Text="Virtual"></TextBlock>
+                        <TextBlock Text="{Binding Name, UpdateSourceTrigger=PropertyChanged}"></TextBlock>
+                        <TextBlock Text="{Binding Guid, UpdateSourceTrigger=PropertyChanged}"></TextBlock>
+                        <Button Command="{Binding EditCommand}" Content="Open"></Button>
+                        <Button Command="{Binding SelectCommand}" Content="SendToMap"></Button>
+                    </StackPanel>
+                </DataTemplate>
+            </ContentPresenter.ContentTemplate>
+        </ContentPresenter>
+        <ListView Grid.Row="2" ItemsSource="{Binding ViewModel.ZigBees}" ScrollViewer.VerticalScrollBarVisibility="Visible" Style="{StaticResource ZigBeeListViewHoverless}">
             <ListView.ItemTemplate>
                 <DataTemplate DataType="{x:Type viewModels:VirtualZigBeeViewModel}">
                     <StackPanel Orientation="Vertical">
                         <TextBlock Text="Virtual"></TextBlock>
-                        <TextBlock Text="{Binding Name}"></TextBlock>
-                        <TextBlock Text="{Binding Guid}"></TextBlock>
+                        <TextBlock Text="{Binding Name, UpdateSourceTrigger=PropertyChanged}"></TextBlock>
+                        <TextBlock Text="{Binding Guid, UpdateSourceTrigger=PropertyChanged}"></TextBlock>
                         <Button Command="{Binding EditCommand}" Content="Open"></Button>
                         <Button Command="{Binding SelectCommand}" Content="SendToMap"></Button>
                     </StackPanel>

@@ -31,6 +31,14 @@ namespace ZigBee.Core.GUI.ViewModels
             get { return this.model.Guid; }
         }
 
+        public ZigBeeViewModel ZigBeeCoordinator
+        {
+            get 
+            {
+                return this.GetZigBeeCoordinatorViewModel();
+            }
+        }
+
         public ISelectionSubscriber<ZigBeeViewModel> ZigBeeSelectionSubscriber { get; set; }
 
         public RelayCommand EditCommand { get; set; }
@@ -41,6 +49,14 @@ namespace ZigBee.Core.GUI.ViewModels
         {
             this.model = network;
             this.BuildCommands();
+        }
+
+        public virtual ZigBeeViewModel GetZigBeeCoordinatorViewModel()
+        {
+            var zvm = new ZigBeeModel(this.Model.ZigBeeCoordinator);
+            var vm = new ZigBeeViewModel(zvm);
+            vm.PullSelectionSubscriber = ZigBeeSelectionSubscriber;
+            return vm;    
         }
 
         public virtual void Sync()

@@ -42,6 +42,14 @@ namespace ZigBee.Virtual.GUI.ViewModels
             }
         }
 
+        public override ZigBeeViewModel GetZigBeeCoordinatorViewModel()
+        {
+            var zvm = new ZigBeeModel(this.Model.ZigBeeCoordinator);
+            var vm = new VirtualZigBeeViewModel(zvm);
+            vm.PullSelectionSubscriber = ZigBeeSelectionSubscriber;
+            return vm;
+        }
+
         public override void Sync()
         {
             base.Sync();
