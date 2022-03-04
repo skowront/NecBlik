@@ -30,7 +30,7 @@ namespace ZigBee.Core.Factories
             return new ZigBeeSource();
         }
 
-        public virtual IZigBeeCoordinator BuildCoordinator()
+        public virtual ZigBeeCoordinator BuildCoordinator()
         {
             return new ZigBeeCoordinator();
         }
@@ -52,7 +52,7 @@ namespace ZigBee.Core.Factories
             return new ZigBeeSource();
         }
 
-        public virtual IZigBeeCoordinator BuildCoordinatorFromJsonFile(string pathToFile)
+        public virtual ZigBeeCoordinator BuildCoordinatorFromJsonFile(string pathToFile)
         {
             var path = Path.GetDirectoryName(pathToFile);
             var fileName = Path.GetFileName(pathToFile);

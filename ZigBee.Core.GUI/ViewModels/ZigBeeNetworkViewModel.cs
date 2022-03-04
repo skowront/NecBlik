@@ -59,6 +59,11 @@ namespace ZigBee.Core.GUI.ViewModels
             return vm;    
         }
 
+        public virtual IEnumerable<ZigBeeViewModel> GetZigBeeViewModels()
+        {
+            return new List<ZigBeeViewModel>();
+        }
+
         public virtual void Sync()
         {
 

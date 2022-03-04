@@ -5,14 +5,13 @@ using System.Collections.ObjectModel;
 using System.IO;
 using System.Linq;
 using ZigBee.Core.Interfaces;
+using ZigBee.Core.Models;
 
 namespace ZigBee.Virtual.Models
 {
     [JsonObject(MemberSerialization.OptIn)]
-    public class VirtualZigBeeSource : IZigBeeSource
+    public class VirtualZigBeeSource : ZigBeeSource
     {
-        [JsonProperty]
-        public Guid Guid { get; set; } = Guid.NewGuid();
         [JsonProperty]
         public string Address
         {

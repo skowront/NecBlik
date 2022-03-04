@@ -65,6 +65,7 @@ namespace ZigBee.Core.Models
 
         public ZigBeeModel(IZigBeeSource source=null)
         {
+            this.Guid = source?.GetGuid() ?? Guid.NewGuid();
             this.ZigBeeSource = source;
             this.Name = this.ZigBeeSource?.GetName();
         }

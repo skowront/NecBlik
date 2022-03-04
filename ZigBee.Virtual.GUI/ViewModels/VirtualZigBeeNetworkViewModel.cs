@@ -50,6 +50,11 @@ namespace ZigBee.Virtual.GUI.ViewModels
             return vm;
         }
 
+        public override IEnumerable<ZigBeeViewModel> GetZigBeeViewModels()
+        {
+            return this.ZigBees;
+        }
+
         public override void Sync()
         {
             base.Sync();

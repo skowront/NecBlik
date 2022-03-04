@@ -35,15 +35,36 @@ namespace ZigBee.ViewModels
             set { this.model.MapFile = value; this.OnPropertyChanged(); }
         }
 
-        public ObservableCollection<ZigBeeViewModel> AvailableZigBees { get; set; } = new ObservableCollection<ZigBeeViewModel>();
+        public Collection<ZigBeeViewModel> AvailableZigBees 
+        {
+            get
+            {
+                var all = new Collection<ZigBeeViewModel>();
+                foreach (var net in this.ZigBeeNetworks)
+                {
+                    var zbs = net.GetZigBeeViewModels();
+                    foreach(var item in zbs)
+                    {
+                        all.Add(item);
+                    }
+                    var coordinator = net.GetZigBeeCoordinatorViewModel();
+                    if(coordinator!=null)
+                    {
+                        all.Add(coordinator);
+                    }
+                }
+                return all;
+            }
+        }
+
 
         public ObservableCollection<ZigBeeNetworkViewModel> ZigBeeNetworks { get; set; } = new ObservableCollection<ZigBeeNetworkViewModel>();
 
         public IResponseProvider<ZigBeeViewModel, ZigBeeViewModel> NewZigBeeResponseProvider { get; set; } = new GenericResponseProvider<ZigBeeViewModel, ZigBeeViewModel>(new ZigBeeViewModel());
         public IResponseProvider<string, object> LoadProjectFilePathProvider { get; set; } = new GenericResponseProvider<string, object>(string.Empty);
         public IResponseProvider<string, object> SaveProjectFilePathProvider { get; set; } = new GenericResponseProvider<string, object>(string.Empty);
-        public IResponseProvider<object, IEnumerable<DiagramZigBee>> DiagramZigBeesLoadedProvider { get; set; } = new GenericResponseProvider<object, IEnumerable<DiagramZigBee>>(null);
-        public IResponseProvider<IEnumerable<DiagramZigBee>, object> DiagramZigBeesProivider { get; set; } = new GenericResponseProvider<IEnumerable<DiagramZigBee>, object>();
+        public IResponseProvider<object, IEnumerable<DiagramZigBee>> DiagramZigBeesLoadProvider { get; set; } = new GenericResponseProvider<object, IEnumerable<DiagramZigBee>>(null);
+        public IResponseProvider<IEnumerable<DiagramZigBee>, object> DiagramZigBeesProvider { get; set; } = new GenericResponseProvider<IEnumerable<DiagramZigBee>, object>();
         public IResponseProvider<DiagramItemMetadata, object> DiagramMapMetadataProvider { get; set; } = new GenericResponseProvider<DiagramItemMetadata, object>(new DiagramItemMetadata());
         public IResponseProvider<string, object> ProjectMapPathProvider { get; set; } = new GenericResponseProvider<string, object>(string.Empty);
         public IResponseProvider<object, Tuple<string, DiagramItemMetadata>> ProjectMapLoadedProvider { get; set; } = new GenericResponseProvider<object, Tuple<string,DiagramItemMetadata>>();
@@ -84,7 +105,8 @@ namespace ZigBee.ViewModels
                 }
                 else
                 {
-                    this.AvailableZigBees.Add(response);
+                    throw new NotImplementedException();
+                    //this.AvailableZigBees.Add(response);
                 }
             });
 
@@ -245,6 +267,7 @@ namespace ZigBee.ViewModels
             }
             //this.model.DiagramZigBees = this.DiagramZigBeesProivider.ProvideResponse();
             this.guiModel.mapDiagramMetadata = this.DiagramMapMetadataProvider.ProvideResponse();
+            this.guiModel.mapItemsMetadata = new Collection<DiagramZigBee>(new List<DiagramZigBee>(this.DiagramZigBeesProvider?.ProvideResponse()));
             //this.model.AvailableZigBees.Clear();
             //foreach (var item in this.AvailableZigBees)
             //{
@@ -263,6 +286,7 @@ namespace ZigBee.ViewModels
                 nvm.Sync();
                 this.ZigBeeNetworks.Add(nvm);
             }
+            this.DiagramZigBeesLoadProvider.ProvideResponse(this.guiModel.mapItemsMetadata);
             //this.AvailableZigBees.Clear();
             //foreach (var item in this.model.AvailableZigBees)
             //{

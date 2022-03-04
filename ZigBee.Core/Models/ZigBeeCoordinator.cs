@@ -42,6 +42,10 @@ namespace ZigBee.Core.Models
         {
             throw new NotImplementedException();
         }
+        public virtual void SetDevices(IEnumerable<IZigBeeSource> sources)
+        {
+            return;
+        }
 
         public virtual string GetPanID()
         {
@@ -61,6 +65,17 @@ namespace ZigBee.Core.Models
         public void SetName(string name)
         {
             this.Name = name;
+            return;
+        }
+
+        public Guid GetGuid()
+        {
+            return this.Guid;
+        }
+
+        public void SetGuid(Guid guid)
+        {
+            this.Guid = guid;
             return;
         }
     }

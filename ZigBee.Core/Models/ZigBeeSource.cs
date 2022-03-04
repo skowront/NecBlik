@@ -1,4 +1,5 @@
-﻿using System;
+﻿using Newtonsoft.Json;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -9,6 +10,8 @@ namespace ZigBee.Core.Models
 {
     public class ZigBeeSource : IZigBeeSource
     {
+        [JsonProperty]
+        public Guid Guid { get; set; } = Guid.NewGuid();
         private string internalType { get; set; } = "Default";
 
         public virtual string GetVendorID()
@@ -34,6 +37,16 @@ namespace ZigBee.Core.Models
         public void SetName(string name)
         {
             return;
+        }
+
+        public Guid GetGuid()
+        {
+            return this.Guid;
+        }
+
+        public void SetGuid(Guid guid)
+        {
+            this.Guid = guid;
         }
     }
 }

@@ -54,6 +54,11 @@ namespace ZigBee.Virtual.Models
             return this.zigBeeSources;
         }
 
+        public override void SetDevices(IEnumerable<IZigBeeSource> sources)
+        {
+            this.zigBeeSources = new List<IZigBeeSource>(sources);
+        }
+
         public override IEnumerable<Tuple<string, string>> GetConnections()
         {
             return this.connections;

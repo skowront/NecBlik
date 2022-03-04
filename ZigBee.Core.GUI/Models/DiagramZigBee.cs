@@ -16,6 +16,6 @@ namespace ZigBee.Core.GUI.Models
         [JsonProperty]
         public Point<double> Point { get; set; } = new Point<double>(0, 0);
         [JsonProperty]
-        public Guid ZigBeeGuid { get; set; } = new Guid();
+        public string CachedObjectId { get; set; } = string.Empty;
     }
 }

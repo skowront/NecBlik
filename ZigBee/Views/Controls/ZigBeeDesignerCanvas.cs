@@ -80,7 +80,7 @@ namespace ZigBee.Views.Controls
                     var zigBeePresenter = (IZigBeePresenter)item.Content;
                     var viewModel = zigBeePresenter.GetZigBeeViewModel();
 
-                    var diagramZigBee = new DiagramZigBee() { ZigBeeGuid = viewModel.Guid, Point = new Point<double>(DesignerCanvas.GetLeft(item), DesignerCanvas.GetTop(item)), Size = new Size(item.Width, item.Height) };
+                    var diagramZigBee = new DiagramZigBee() { CachedObjectId = viewModel.GetCacheId(), Point = new Point<double>(DesignerCanvas.GetLeft(item), DesignerCanvas.GetTop(item)), Size = new Size(item.ActualWidth, item.ActualHeight) };
                     diagramZigBees.Add(diagramZigBee);
                 }
             }
@@ -95,7 +95,7 @@ namespace ZigBee.Views.Controls
                 ZigBeeViewModel zigBeeViewModel = null;
                 foreach(var zigBee in availableZigBees)
                 {
-                    if(item.ZigBeeGuid == zigBee.Guid)
+                    if(item.CachedObjectId == zigBee.GetCacheId())
                     {
                         zigBeeViewModel = zigBee;
                     }
@@ -159,7 +159,7 @@ namespace ZigBee.Views.Controls
             }
             if (backgroundContainer == null)
             {
-                return null;
+                return new DiagramItemMetadata();
             }
             var item = new DiagramItemMetadata()
             {

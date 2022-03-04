@@ -2,6 +2,7 @@
 using SharpVectors.Converters;
 using System;
 using System.Collections.Generic;
+using System.Collections.ObjectModel;
 using System.Windows;
 using System.Windows.Controls;
 using System.Windows.Input;
@@ -134,7 +135,7 @@ namespace ZigBee.Views
                 return openFileDialog.FileName;
             });
 
-            this.ViewModel.DiagramZigBeesProivider = new GenericResponseProvider<IEnumerable<DiagramZigBee>, object>((o) =>
+            this.ViewModel.DiagramZigBeesProvider = new GenericResponseProvider<IEnumerable<DiagramZigBee>, object>((o) =>
             {
                 return this.designerCanvas.GetDiagramZigBees();
             });
@@ -144,7 +145,7 @@ namespace ZigBee.Views
                 return this.designerCanvas.GetMapMetadata();
             });
 
-            this.ViewModel.DiagramZigBeesLoadedProvider = new GenericResponseProvider<object,IEnumerable<DiagramZigBee>>((o) =>
+            this.ViewModel.DiagramZigBeesLoadProvider = new GenericResponseProvider<object,IEnumerable<DiagramZigBee>>((o) =>
             {
                 this.designerCanvas.LoadDiagramZigBees(o,this.ViewModel.AvailableZigBees);
                 return null;

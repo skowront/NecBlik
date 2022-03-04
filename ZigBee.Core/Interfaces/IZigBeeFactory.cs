@@ -15,9 +15,9 @@ namespace ZigBee.Core.Interfaces
 
         IZigBeeSource BuildSourceFromJsonFile(string pathToFile);
 
-        IZigBeeCoordinator BuildCoordinator();
+        ZigBeeCoordinator BuildCoordinator();
 
-        IZigBeeCoordinator BuildCoordinatorFromJsonFile(string pathToFile);
+        ZigBeeCoordinator BuildCoordinatorFromJsonFile(string pathToFile);
 
         ZigBeeNetwork BuildNetwork();
 

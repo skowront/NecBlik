@@ -29,12 +29,12 @@ namespace ZigBee.Virtual.Factories
             return new VirtualZigBeeSource();
         }
 
-        public override IZigBeeCoordinator BuildCoordinator()
+        public override ZigBeeCoordinator BuildCoordinator()
         {
             return new VirtualZigBeeCoordinator(this);
         }
 
-        public override IZigBeeCoordinator BuildCoordinatorFromJsonFile(string pathToFile)
+        public override ZigBeeCoordinator BuildCoordinatorFromJsonFile(string pathToFile)
         {
             var path = Path.GetDirectoryName(pathToFile);
             var fileName = Path.GetFileName(pathToFile);
@@ -70,7 +70,7 @@ namespace ZigBee.Virtual.Factories
 
         public override ZigBeeNetwork BuildNetworkFromDirectory(string pathToDirectory)
         {
-            if(pathToDirectory.Split('.').LastOrDefault() != this.GetVendorID())
+            if (pathToDirectory.Split('.').LastOrDefault() != this.GetVendorID())
             {
                 return null;
             }
@@ -82,9 +82,9 @@ namespace ZigBee.Virtual.Factories
             var files = new List<string>(Directory.EnumerateFiles(pathToDirectory));
             if (files.Count() < 1)
                 return null;
-            if(network.HasCoordinator)
+            if (network.HasCoordinator)
             {
-                IZigBeeCoordinator zigBeeCoordinator = this.BuildCoordinatorFromJsonFile(files[0]);
+                var zigBeeCoordinator = this.BuildCoordinatorFromJsonFile(files[0]);
                 if (zigBeeCoordinator == null)
                 {
                     foreach (var factory in this.OtherFactories)
@@ -103,14 +103,14 @@ namespace ZigBee.Virtual.Factories
                 IZigBeeSource source = this.BuildSourceFromJsonFile(file);
                 if (source == null)
                 {
-                    foreach(var factory in this.OtherFactories)
+                    foreach (var factory in this.OtherFactories)
                     {
                         source = factory.BuildSourceFromJsonFile(file);
                         if (source != null)
                             break;
                     }
                 }
-                if(source!=null)
+                if (source != null)
                 {
                     network.AddSource(source);
                 }

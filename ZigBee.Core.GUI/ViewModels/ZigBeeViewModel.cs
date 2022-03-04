@@ -11,7 +11,7 @@ using ZigBee.Core.Models;
 
 namespace ZigBee.Core.GUI
 {
-    public class ZigBeeViewModel:BaseViewModel,IDuplicable<ZigBeeViewModel>
+    public class ZigBeeViewModel:BaseViewModel,IDuplicable<ZigBeeViewModel>,ICachable
     {
         public ZigBeeModel Model;
 
@@ -79,6 +79,11 @@ namespace ZigBee.Core.GUI
             this.SelectCommand = new RelayCommand((o) => { 
                 this.PullSelectionSubscriber?.NotifySelected(this); 
             });
+        }
+
+        public string GetCacheId()
+        {
+            return this.Guid.ToString();
         }
     }
 }

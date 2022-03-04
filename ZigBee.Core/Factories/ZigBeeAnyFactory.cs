@@ -128,7 +128,7 @@ namespace ZigBee.Core.Factories
             return this.DefaultFactory.BuildSourceFromJsonFile(pathToFile);
         }
 
-        public IZigBeeCoordinator BuildCoordinator()
+        public ZigBeeCoordinator BuildCoordinator()
         {
             foreach (var factory in this.Factories)
             {
@@ -141,7 +141,7 @@ namespace ZigBee.Core.Factories
             return this.DefaultFactory.BuildCoordinator();
         }
 
-        public IZigBeeCoordinator BuildCoordinatorFromJsonFile(string pathToFile)
+        public ZigBeeCoordinator BuildCoordinatorFromJsonFile(string pathToFile)
         {
             foreach (var factory in this.Factories)
             {

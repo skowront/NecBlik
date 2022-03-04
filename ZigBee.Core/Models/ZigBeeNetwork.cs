@@ -22,7 +22,7 @@ namespace ZigBee.Core.Models
         [JsonProperty]
         public bool HasCoordinator { get; private set; } = false;
 
-        public IZigBeeCoordinator ZigBeeCoordinator { get; private set; }
+        public ZigBeeCoordinator ZigBeeCoordinator { get; private set; }
 
         public Collection<IZigBeeSource> ZigBeeSources { get; set; } = new Collection<IZigBeeSource>();
 
@@ -37,7 +37,7 @@ namespace ZigBee.Core.Models
             this.internalNetworkType = ZigBeeFactory.GetVendorID();
         }
 
-        public void SetCoordinator(IZigBeeCoordinator zigBeeCoordinator)
+        public void SetCoordinator(ZigBeeCoordinator zigBeeCoordinator)
         {
             this.ZigBeeCoordinator = zigBeeCoordinator;
             if(this.ZigBeeCoordinator!=null)
@@ -51,7 +51,7 @@ namespace ZigBee.Core.Models
             }
         }
 
-        public void AddSource(IZigBeeSource source)
+        public virtual void AddSource(IZigBeeSource source)
         {
             this.ZigBeeSources.Add(source);
         }
