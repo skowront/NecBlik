@@ -12,10 +12,6 @@
             <TextBox Text="{Binding ViewModel.Name}"></TextBox>
             <TextBlock Text="Version"></TextBlock>
             <TextBox Text="{Binding ViewModel.Version}"></TextBox>
-            <StackPanel Orientation="Horizontal" HorizontalAlignment="Center">
-                <Button Command="{Binding OnConfirmCommand}">Confirm</Button>
-                <Button Command="{Binding OnCancelCommand}">Cancel</Button>
-            </StackPanel>
         </StackPanel>
     </Grid>
 </Window>

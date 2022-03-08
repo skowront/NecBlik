@@ -3,13 +3,24 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using ZigBee.Core.Models;
 
 namespace ZigBee.Core.Interfaces
 {
-    public interface IZigBeeFactory
+    public interface IZigBeeFactory: IVendable
     {
-        string GetInternalFactoryType();
+        void AttachOtherFactories(List<IZigBeeFactory> zigBeeFactories);
 
-        IZigBeeSource Build();
+        IZigBeeSource BuildNewSource();
+
+        IZigBeeSource BuildSourceFromJsonFile(string pathToFile);
+
+        ZigBeeCoordinator BuildCoordinator();
+
+        ZigBeeCoordinator BuildCoordinatorFromJsonFile(string pathToFile);
+
+        ZigBeeNetwork BuildNetwork();
+
+        ZigBeeNetwork BuildNetworkFromDirectory(string pathToDirectory);
     }
 }

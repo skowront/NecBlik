@@ -13,10 +13,9 @@ using System.Windows.Media.Imaging;
 using System.Windows.Navigation;
 using System.Windows.Shapes;
 using ZigBee.Core.GUI;
-using ZigBee.Interfaces;
-using ZigBee.ViewModels;
+using ZigBee.Core.GUI.Interfaces;
 
-namespace ZigBee.Views.Controls
+namespace ZigBee.Core.GUI.Views.Controls
 {
     /// <summary>
     /// Interaction logic for ZigBeeControl.xaml

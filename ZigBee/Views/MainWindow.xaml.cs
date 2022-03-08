@@ -1,25 +1,17 @@
-﻿using DiagramDesigner;
-using Microsoft.Win32;
-using Newtonsoft.Json;
+﻿using Microsoft.Win32;
 using SharpVectors.Converters;
 using System;
 using System.Collections.Generic;
-using System.IO;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+using System.Collections.ObjectModel;
 using System.Windows;
 using System.Windows.Controls;
-using System.Windows.Data;
-using System.Windows.Documents;
 using System.Windows.Input;
 using System.Windows.Markup;
 using System.Windows.Media;
-using System.Windows.Media.Imaging;
-using System.Windows.Navigation;
-using System.Windows.Shapes;
 using ZigBee.Common.WpfExtensions.Base;
-using ZigBee.Models;
+using ZigBee.Core.GUI;
+using ZigBee.Core.GUI.Interfaces;
+using ZigBee.Core.GUI.Models;
 using ZigBee.ViewModels;
 using ZigBee.Views.Controls;
 
@@ -28,7 +20,7 @@ namespace ZigBee.Views
     /// <summary>
     /// Interaction logic for MainWindow.xaml
     /// </summary>
-    public partial class MainWindow : Window
+    public partial class MainWindow : Window, ISelectionSubscriber<ZigBeeViewModel>
     {
         private Point startPoint = new Point();
 
@@ -39,7 +31,7 @@ namespace ZigBee.Views
         public MainWindow()
         {
             InitializeComponent();
-            this.ViewModel = new MainWindowViewModel();
+            this.ViewModel = new MainWindowViewModel(this);
             this.DataContext = this.ViewModel;
             this.buildResponseProviders();
         }
@@ -66,20 +58,24 @@ namespace ZigBee.Views
                 {
                     return;
                 }
-                var vm = (ZigBeeViewModel)lv.ItemContainerGenerator.ItemFromContainer(lvi);
-                var xaml = XamlWriter.Save(new ZigBeeControl(vm));
-                //DragObject dataObject = new DragObject();
-                //dataObject.Xaml = xaml; 
-                //WrapPanel panel = VisualTreeHelper.GetParent(this) as WrapPanel;
-                //if (panel != null)
-                //{
-                //    // desired size for DesignerCanvas is the stretched Toolbox item size
-                //    double scale = 1.3;
-                //    dataObject.DesiredSize = new Size(panel.ItemWidth * scale, panel.ItemHeight * scale);
-                //}
+                if(lv.ItemContainerGenerator.ItemFromContainer(lvi) is ZigBeeViewModel)
+                {
+                    var vm = (ZigBeeViewModel)lv.ItemContainerGenerator.ItemFromContainer(lvi);
+                    var xaml = XamlWriter.Save(ZigBee.Core.GUI.Factories.ZigBeeGuiAnyFactory.Instance.GetZigBeeControl(vm));
+                    //DragObject dataObject = new DragObject();
+                    //dataObject.Xaml = xaml; 
+                    //WrapPanel panel = VisualTreeHelper.GetParent(this) as WrapPanel;
+                    //if (panel != null)
+                    //{
+                    //    // desired size for DesignerCanvas is the stretched Toolbox item size
+                    //    double scale = 1.3;
+                    //    dataObject.DesiredSize = new Size(panel.ItemWidth * scale, panel.ItemHeight * scale);
+                    //}
 
-                DragDrop.DoDragDrop(lvi, new DataObject(vm.GetType(),vm), DragDropEffects.Copy);
-                //DragDrop.DoDragDrop(lvi, dataObject, DragDropEffects.Copy);
+                    DragDrop.DoDragDrop(lvi, new DataObject(vm.GetType(), vm), DragDropEffects.Copy);
+                    //DragDrop.DoDragDrop(lvi, dataObject, DragDropEffects.Copy);
+                }
+
             }
         }
 
@@ -124,19 +120,22 @@ namespace ZigBee.Views
 
             this.ViewModel.SaveProjectFilePathProvider = new GenericResponseProvider<string, object>(o =>
             {
-                OpenFileDialog openFileDialog = new OpenFileDialog() { CheckFileExists = false, Filter = "Text files (*.json)|*.json" };
-                openFileDialog.ShowDialog();
-                return openFileDialog.FileName;
+                var dialog = new Ookii.Dialogs.Wpf.VistaFolderBrowserDialog();
+                if (dialog.ShowDialog(this).GetValueOrDefault())
+                {
+                    return dialog.SelectedPath;
+                }
+                return string.Empty;
             });
 
             this.ViewModel.LoadProjectFilePathProvider = new GenericResponseProvider<string, object>(o =>
             {
-                OpenFileDialog openFileDialog = new OpenFileDialog() { CheckFileExists = true, Filter = "Text files (*.json)|*.json" };
+                OpenFileDialog openFileDialog = new OpenFileDialog() { CheckFileExists = true, Filter = "Json (*.json) | *.json" };
                 openFileDialog.ShowDialog();
                 return openFileDialog.FileName;
             });
 
-            this.ViewModel.DiagramZigBeesProivider = new GenericResponseProvider<IEnumerable<DiagramZigBee>, object>((o) =>
+            this.ViewModel.DiagramZigBeesProvider = new GenericResponseProvider<IEnumerable<DiagramZigBee>, object>((o) =>
             {
                 return this.designerCanvas.GetDiagramZigBees();
             });
@@ -146,7 +145,7 @@ namespace ZigBee.Views
                 return this.designerCanvas.GetMapMetadata();
             });
 
-            this.ViewModel.DiagramZigBeesLoadedProvider = new GenericResponseProvider<object,IEnumerable<DiagramZigBee>>((o) =>
+            this.ViewModel.DiagramZigBeesLoadProvider = new GenericResponseProvider<object,IEnumerable<DiagramZigBee>>((o) =>
             {
                 this.designerCanvas.LoadDiagramZigBees(o,this.ViewModel.AvailableZigBees);
                 return null;
@@ -185,6 +184,8 @@ namespace ZigBee.Views
                 return null;
             });
 
+            this.ViewModel.ZigBeeSelectionSubscriber = this;
+
             //this.ViewModel.OnProjectSaved = new Action(() =>
             //{
             //    var diagramZigBees = JsonConvert.SerializeObject(this.designerCanvas.GetDiagramZigBees());
@@ -192,6 +193,11 @@ namespace ZigBee.Views
             //    return;
             //});
 
+        }
+
+        public void NotifySelected(ZigBeeViewModel obj)
+        {
+            this.designerCanvas.AddZigBee(obj,new Point(0,0));
         }
     }
 }

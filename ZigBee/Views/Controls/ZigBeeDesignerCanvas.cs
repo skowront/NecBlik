@@ -8,9 +8,10 @@ using System.Windows;
 using System.Windows.Controls;
 using System.Windows.Input;
 using ZigBee.Core.GUI;
-using ZigBee.Interfaces;
-using ZigBee.Models;
+using ZigBee.Core.GUI.Models;
+using ZigBee.Core.GUI.Interfaces;
 using ZigBee.ViewModels;
+using ZigBee.Core.GUI.Factories;
 
 namespace ZigBee.Views.Controls
 {
@@ -34,24 +35,29 @@ namespace ZigBee.Views.Controls
                 var data = (ZigBeeViewModel)e.Data.GetData(typeof(ZigBeeViewModel));
                 if (data != null)
                 {
-                    //var newItem = new ZigBeeDesignerItem(data, new ZigBeeControl(data));
-                    var newItem = new DesignerItem();
-                    newItem.Content = new ZigBeeControl(data);
-                    newItem.Payload = data;
-
-                    Point position = e.GetPosition(this);
-                    DesignerCanvas.SetLeft(newItem, Math.Max(0, position.X));
-                    DesignerCanvas.SetTop(newItem, Math.Max(0, position.Y));
-
-                    //Canvas.SetZIndex(newItem, this.Children.Count);
-                    this.Children.Add(newItem);
-                    SetConnectorDecoratorTemplate(newItem);
-
-                    //////update selection
-                    //this.SelectionService.SelectItem(newItem);
-                    //newItem.Focus();
+                    this.AddZigBee(data, e.GetPosition(this));
                 }
             }
+        }
+
+        public void AddZigBee(ZigBeeViewModel zigBeeViewModel, Point point)
+        {
+            //var newItem = new ZigBeeDesignerItem(data, new ZigBeeControl(data));
+            var newItem = new DesignerItem();
+            newItem.Content = ZigBeeGuiAnyFactory.Instance.GetZigBeeControl(zigBeeViewModel);
+            newItem.Payload = zigBeeViewModel;
+
+            Point position = point;
+            DesignerCanvas.SetLeft(newItem, Math.Max(0, position.X));
+            DesignerCanvas.SetTop(newItem, Math.Max(0, position.Y));
+
+            //Canvas.SetZIndex(newItem, this.Children.Count);
+            this.Children.Add(newItem);
+            SetConnectorDecoratorTemplate(newItem);
+
+            //////update selection
+            //this.SelectionService.SelectItem(newItem);
+            //newItem.Focus();
         }
 
         protected IEnumerable<DesignerItem> GetDesignerItems()
@@ -75,7 +81,7 @@ namespace ZigBee.Views.Controls
                     var zigBeePresenter = (IZigBeePresenter)item.Content;
                     var viewModel = zigBeePresenter.GetZigBeeViewModel();
 
-                    var diagramZigBee = new DiagramZigBee() { ZigBeeGuid = viewModel.Guid, Point = new Point<double>(DesignerCanvas.GetLeft(item), DesignerCanvas.GetTop(item)), Size = new Size(item.Width, item.Height) };
+                    var diagramZigBee = new DiagramZigBee() { CachedObjectId = viewModel.GetCacheId(), Point = new Point<double>(DesignerCanvas.GetLeft(item), DesignerCanvas.GetTop(item)), Size = new Size(item.ActualWidth, item.ActualHeight) };
                     diagramZigBees.Add(diagramZigBee);
                 }
             }
@@ -90,12 +96,12 @@ namespace ZigBee.Views.Controls
                 ZigBeeViewModel zigBeeViewModel = null;
                 foreach(var zigBee in availableZigBees)
                 {
-                    if(item.ZigBeeGuid == zigBee.Guid)
+                    if(item.CachedObjectId == zigBee.GetCacheId())
                     {
                         zigBeeViewModel = zigBee;
                     }
                 }
-                designerItem.Content = new ZigBeeControl(zigBeeViewModel);
+                designerItem.Content = ZigBeeGuiAnyFactory.Instance.GetZigBeeControl(zigBeeViewModel);
                 DesignerCanvas.SetLeft(designerItem, item.Point.X);
                 DesignerCanvas.SetTop(designerItem, item.Point.Y);
                 designerItem.Width = item.Size.Width;
@@ -154,7 +160,7 @@ namespace ZigBee.Views.Controls
             }
             if (backgroundContainer == null)
             {
-                return null;
+                return new DiagramItemMetadata();
             }
             var item = new DiagramItemMetadata()
             {

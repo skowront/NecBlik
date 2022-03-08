@@ -86,10 +86,10 @@
 
   <ItemGroup>
     <PackageReference Include="FontAwesome.WPF" Version="4.7.0.9" />
-    <PackageReference Include="MaterialDesignColors" Version="2.0.3" />
-    <PackageReference Include="MaterialDesignThemes" Version="4.2.1" />
-    <PackageReference Include="SharpVectors" Version="1.7.5" />
-    <PackageReference Include="System.Drawing.Common" Version="5.0.2" />
+    <PackageReference Include="MaterialDesignColors" Version="2.0.4" />
+    <PackageReference Include="MaterialDesignThemes" Version="4.3.0" />
+    <PackageReference Include="SharpVectors" Version="1.7.7" />
+    <PackageReference Include="System.Drawing.Common" Version="6.0.0" />
   </ItemGroup>
 
   <ItemGroup>

@@ -14,8 +14,27 @@ namespace ZigBee.Core.Models
     {
         [JsonProperty]
         public Guid Guid { get; set; } = Guid.NewGuid();
-        [JsonProperty]
-        public string Name { get; set; } = Resources.Resources.ZigBeeModelNameDefault;
+
+        private string name = Resources.Resources.ZigBeeModelNameDefault;
+        public string Name 
+        {
+            get
+            {
+                if (this.ZigBeeSource != null)
+                {
+                    return this.ZigBeeSource.GetName();
+                }
+                else return name;
+            }
+            set 
+            {
+                if (this.ZigBeeSource != null)
+                {
+                    this.ZigBeeSource.SetName(value);
+                }
+                else this.name = value;
+            }  
+        } 
         [JsonProperty]
         public string InternalFactoryType { get; set; }
 
@@ -43,6 +62,13 @@ namespace ZigBee.Core.Models
         public List <Guid> ConnectedZigBeGuids { get; set; } = new List<Guid>();
 
         public IZigBeeSource ZigBeeSource { get; set; }
+
+        public ZigBeeModel(IZigBeeSource source=null)
+        {
+            this.Guid = source?.GetGuid() ?? Guid.NewGuid();
+            this.ZigBeeSource = source;
+            this.Name = this.ZigBeeSource?.GetName();
+        }
 
         public ZigBeeModel Duplicate()
         {

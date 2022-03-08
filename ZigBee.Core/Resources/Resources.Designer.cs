@@ -79,6 +79,24 @@ namespace ZigBee.Core.Resources {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to \Networks.
+        /// </summary>
+        public static string ZigBeeNetworksDirectory {
+            get {
+                return ResourceManager.GetString("ZigBeeNetworksDirectory", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to \Sources.
+        /// </summary>
+        public static string ZigBeeNetworkSourcesSubdirectory {
+            get {
+                return ResourceManager.GetString("ZigBeeNetworkSourcesSubdirectory", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Unable to retrieve address.
         /// </summary>
         public static string ZigBeeUnableToRetrieveAddress {

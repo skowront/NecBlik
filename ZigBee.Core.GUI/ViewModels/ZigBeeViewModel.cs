@@ -5,12 +5,13 @@ using System.Text;
 using System.Threading.Tasks;
 using ZigBee.Common.WpfExtensions.Base;
 using ZigBee.Common.WpfExtensions.Interfaces;
+using ZigBee.Core.GUI.Interfaces;
 using ZigBee.Core.Interfaces;
 using ZigBee.Core.Models;
 
 namespace ZigBee.Core.GUI
 {
-    public class ZigBeeViewModel:BaseViewModel,IDuplicable<ZigBeeViewModel>
+    public class ZigBeeViewModel:BaseViewModel,IDuplicable<ZigBeeViewModel>,ICachable,IVendable
     {
         public ZigBeeModel Model;
 
@@ -33,7 +34,12 @@ namespace ZigBee.Core.GUI
 
         public string InternalFactoryType
         {
-            get { return this.Model.InternalFactoryType; }
+            get 
+            {
+                if (this.Model.ZigBeeSource != null)
+                    return this.Model.ZigBeeSource.GetVendorID();
+                return this.Model.InternalFactoryType; 
+            }
             set { this.Model.InternalFactoryType = value; this.OnPropertyChanged(); }
         }
 
@@ -42,7 +48,12 @@ namespace ZigBee.Core.GUI
             get { return this.Model.AddressName; }
         }
 
-        public ZigBeeViewModel( ZigBeeModel model = null)
+        public ISelectionSubscriber<ZigBeeViewModel> PullSelectionSubscriber { get; set; }
+
+        public RelayCommand EditCommand { get; set; }
+        public RelayCommand SelectCommand { get; set; }
+
+        public ZigBeeViewModel(ZigBeeModel model = null)
         {
             this.Model = model;
             if(this.Model == null)
@@ -50,11 +61,34 @@ namespace ZigBee.Core.GUI
                 this.Model = new ZigBeeModel();
                 return;
             }
+            this.BuildCommands();
         }
 
         public ZigBeeViewModel Duplicate()
         {
-            return new ZigBeeViewModel(this.Model.Duplicate());
+            var zb = new ZigBeeViewModel(this.Model.Duplicate());
+            zb.SelectCommand = this.SelectCommand = new RelayCommand((o) => {
+                this.PullSelectionSubscriber?.NotifySelected(zb);
+            });
+            return zb;
+        }
+
+        protected virtual void BuildCommands()
+        {
+            this.EditCommand = new RelayCommand((o) => { });
+            this.SelectCommand = new RelayCommand((o) => { 
+                this.PullSelectionSubscriber?.NotifySelected(this); 
+            });
+        }
+
+        public string GetCacheId()
+        {
+            return this.Guid.ToString();
+        }
+
+        public virtual string GetVendorID()
+        {
+            return this.InternalFactoryType;
         }
     }
 }

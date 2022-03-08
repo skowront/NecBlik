@@ -1,4 +1,5 @@
-﻿using System;
+﻿using Newtonsoft.Json;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -7,12 +8,24 @@ using ZigBee.Core.Interfaces;
 
 namespace ZigBee.Core.Models
 {
-    public abstract class ZigBeeCoordinator: IZigBeeCoordinator
+    public class ZigBeeCoordinator: IZigBeeCoordinator
     {
+        protected string internalType { get; set; } = "Default";
+
+        [JsonProperty]
+        public Guid Guid { get; set; } = Guid.NewGuid();
+
+        [JsonProperty]
+        protected string Name { get; set; } = "ZigBee Coordingator";
 
         public ZigBeeCoordinator()
         {
 
+        }
+
+        public virtual string GetVendorID()
+        {
+            return this.internalType;
         }
 
         public virtual string GetAddress()
@@ -29,10 +42,41 @@ namespace ZigBee.Core.Models
         {
             throw new NotImplementedException();
         }
+        public virtual void SetDevices(IEnumerable<IZigBeeSource> sources)
+        {
+            return;
+        }
 
         public virtual string GetPanID()
         {
             throw new NotImplementedException();
+        }
+
+        public virtual void Save(string folderPath)
+        {
+            throw new NotImplementedException();
+        }
+
+        public string GetName()
+        {
+            return this.Name;
+        }
+
+        public void SetName(string name)
+        {
+            this.Name = name;
+            return;
+        }
+
+        public Guid GetGuid()
+        {
+            return this.Guid;
+        }
+
+        public void SetGuid(Guid guid)
+        {
+            this.Guid = guid;
+            return;
         }
     }
 }

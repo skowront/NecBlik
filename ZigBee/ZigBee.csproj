@@ -8,6 +8,7 @@
 
   <ItemGroup>
     <PackageReference Include="Newtonsoft.Json" Version="13.0.1" />
+    <PackageReference Include="Ookii.Dialogs.Wpf" Version="4.0.0" />
     <PackageReference Include="WPFExtensions" Version="1.0.0" />
   </ItemGroup>
 
@@ -17,6 +18,8 @@
     <ProjectReference Include="..\ZigBee.Common\ZigBee.Common.csproj" />
     <ProjectReference Include="..\ZigBee.Core.GUI\ZigBee.Core.GUI.csproj" />
     <ProjectReference Include="..\ZigBee.Core\ZigBee.Core.csproj" />
+    <ProjectReference Include="..\ZigBee.Virtual.GUI\ZigBee.Virtual.GUI.csproj" />
+    <ProjectReference Include="..\ZigBee.Virtual\ZigBee.Virtual.csproj" />
   </ItemGroup>
 
   <ItemGroup>
@@ -41,6 +44,10 @@
       <Generator>PublicResXFileCodeGenerator</Generator>
       <LastGenOutput>SR.Designer.cs</LastGenOutput>
     </EmbeddedResource>
+  </ItemGroup>
+
+  <ItemGroup>
+    <Folder Include="Models\" />
   </ItemGroup>
 
 </Project>

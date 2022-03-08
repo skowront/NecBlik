@@ -2,11 +2,18 @@
 
   <PropertyGroup>
     <TargetFramework>net6.0-windows</TargetFramework>
+    <UseWPF>true</UseWPF>
   </PropertyGroup>
 
   <ItemGroup>
     <ProjectReference Include="..\ZigBee.Common\ZigBee.Common.csproj" />
     <ProjectReference Include="..\ZigBee.Core\ZigBee.Core.csproj" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <Page Update="Views\Controls\ZigBeeControl.xaml">
+      <XamlRuntime>$(DefaultXamlRuntime)</XamlRuntime>
+    </Page>
   </ItemGroup>
 
 </Project>

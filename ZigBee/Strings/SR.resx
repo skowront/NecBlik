@@ -126,6 +126,9 @@
   <data name="MainWindowMenuAbout" xml:space="preserve">
     <value>About</value>
   </data>
+  <data name="MainWindowMenuHeaderAddZigBeeNetworkManager" xml:space="preserve">
+    <value>Add ZigBee Network Manager</value>
+  </data>
   <data name="MainWindowMenuHeaderNew" xml:space="preserve">
     <value>New</value>
   </data>

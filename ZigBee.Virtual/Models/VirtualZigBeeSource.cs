@@ -1,13 +1,28 @@
-﻿using System;
+﻿using Newtonsoft.Json;
+using System;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
+using System.IO;
 using System.Linq;
 using ZigBee.Core.Interfaces;
+using ZigBee.Core.Models;
+using ZigBee.Virtual.Factories;
 
 namespace ZigBee.Virtual.Models
 {
-    public class VirtualZigBeeSource : IZigBeeSource
+    [JsonObject(MemberSerialization.OptIn)]
+    public class VirtualZigBeeSource : ZigBeeSource
     {
+        [JsonProperty]
+        public string Address
+        {
+            get { return this.GetAddress(); }
+            set { this.cachedAddress = value; }
+        }
+
+        [JsonProperty]
+        public string Name { get; set; } = "Virtualbee";
+        
         private string cachedAddress = string.Empty;
 
         public virtual string GetAddress()
@@ -33,9 +48,40 @@ namespace ZigBee.Virtual.Models
             return value;
         }
 
+        public override void Save(string folderPath)
+        {
+            var json = JsonConvert.SerializeObject(this, Formatting.Indented);
+            var file = this.Guid + "." + this.internalType + ".json";
+            if (File.Exists(folderPath + "\\" + file))
+            {
+                File.WriteAllText(folderPath + "\\" + file, json);
+            }
+            else
+            {
+                File.AppendAllText(folderPath + "\\" + file, json);
+            }
+        }
+
+        public string GetVendorID()
+        {
+            return this.internalType;
+        }
+
+        public string GetName()
+        {
+            return this.Name;
+        }
+
+        public void SetName(string name)
+        {
+            this.Name = name;
+            return;
+        }
+
         public VirtualZigBeeSource()
         {
-
+            this.Name = "Virtualbee";
+            this.internalType = (new VirtualZigBeeFactory()).GetVendorID();
         }
 
         private static Collection<string> TakenAddresses = new Collection<string>();
