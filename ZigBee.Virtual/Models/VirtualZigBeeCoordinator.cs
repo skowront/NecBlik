@@ -12,9 +12,7 @@ namespace ZigBee.Virtual.Models
 {
     [JsonObject(MemberSerialization.OptIn)]
     public class VirtualZigBeeCoordinator:ZigBeeCoordinator
-    {
-        private string internalCoordinatorType = "Virtual";
-        
+    {        
         private List<IZigBeeSource> zigBeeSources = new List<IZigBeeSource>();
 
         private List<Tuple<string, string>> connections = new List<Tuple<string, string>>();
@@ -25,6 +23,7 @@ namespace ZigBee.Virtual.Models
         {
             this.zigBeeFactory = zigBeeFactory;
             this.Name = "Virtual ZigBee Coordinator";
+            this.internalType = zigBeeFactory.GetVendorID() ?? "Virtual";
         }
 
         public VirtualZigBeeCoordinator(IZigBeeFactory zigBeeFactory, bool setupExampleZigBees): this(zigBeeFactory)
@@ -67,7 +66,7 @@ namespace ZigBee.Virtual.Models
         public override void Save(string folderPath)
         {
             var json = JsonConvert.SerializeObject(this, Formatting.Indented);
-            var file = this.Guid + "." + this.internalCoordinatorType + ".json";
+            var file = this.Guid + "." + this.internalType + ".json";
             if (File.Exists(folderPath + "\\" + file))
             {
                 File.WriteAllText(folderPath + "\\" + file, json);

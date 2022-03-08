@@ -4,11 +4,10 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using ZigBee.Core.GUI;
-using ZigBee.ViewModels;
 
-namespace ZigBee.Interfaces
+namespace ZigBee.Core.GUI.Interfaces
 {
-    interface IZigBeePresenter
+    public interface IZigBeePresenter
     {
         public ZigBeeViewModel GetZigBeeViewModel();
     }

@@ -10,4 +10,10 @@
     <ProjectReference Include="..\ZigBee.Core\ZigBee.Core.csproj" />
   </ItemGroup>
 
+  <ItemGroup>
+    <Page Update="Views\Controls\ZigBeeControl.xaml">
+      <XamlRuntime>$(DefaultXamlRuntime)</XamlRuntime>
+    </Page>
+  </ItemGroup>
+
 </Project>

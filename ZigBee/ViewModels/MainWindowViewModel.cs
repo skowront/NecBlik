@@ -143,6 +143,7 @@ namespace ZigBee.ViewModels
 
         private void LoadProject()
         {
+            this.NewProjectLoadedProvider?.ProvideResponse();
             var path = this.LoadProjectFilePathProvider.ProvideResponse();
             if (path == null)
             {
@@ -168,6 +169,7 @@ namespace ZigBee.ViewModels
             this.SyncFromModel();
             this.LoadProjectGui(path);
             this.ProjectMapLoadedProvider.ProvideResponse(new Tuple<string, DiagramItemMetadata>(this.MapFilePath, this.guiModel.mapDiagramMetadata));
+            this.DiagramZigBeesLoadProvider.ProvideResponse(this.guiModel.mapItemsMetadata);
         }
 
         private void LoadProjectGui(string path)

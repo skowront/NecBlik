@@ -6,11 +6,13 @@ using System.Resources;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows;
+using ZigBee.Core.GUI;
 using ZigBee.Core.GUI.Factories;
 using ZigBee.Core.GUI.Interfaces;
 using ZigBee.Core.GUI.ViewModels;
 using ZigBee.Core.Models;
 using ZigBee.Virtual.GUI.ViewModels;
+using ZigBee.Virtual.GUI.Views.Controls;
 
 namespace ZigBee.Virtual.GUI.Factories
 {
@@ -54,6 +56,16 @@ namespace ZigBee.Virtual.GUI.Factories
         public override string GetVendorID()
         {
             return this.internalFactoryType;
+        }
+
+        public override UIElement GetZigBeeControl(ZigBeeViewModel zigBeeViewModel)
+        {
+            var zbc = base.GetZigBeeControl(zigBeeViewModel);
+            if(zigBeeViewModel?.Model?.ZigBeeSource is Virtual.Models.VirtualZigBeeCoordinator)
+            {
+                return new VirtualZigBeeCoordinatorUserControl(zigBeeViewModel);
+            }
+            return zbc;
         }
     }
 }

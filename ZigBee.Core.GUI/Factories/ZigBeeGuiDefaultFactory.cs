@@ -6,6 +6,7 @@ using System.Threading.Tasks;
 using System.Windows;
 using ZigBee.Core.GUI.Interfaces;
 using ZigBee.Core.GUI.ViewModels;
+using ZigBee.Core.GUI.Views.Controls;
 using ZigBee.Core.Models;
 
 namespace ZigBee.Core.GUI.Factories
@@ -14,31 +15,41 @@ namespace ZigBee.Core.GUI.Factories
     {
         private List<IZigBeeGuiFactory> otherFactories;
 
-        protected string internalFactoryType { get; set; } = "Abstract";
+        public ZigBeeGuiDefaultFactory()
+        {
+            this.internalFactoryType = "Default";
+        }
 
-        public void AttachOtherFactories(List<IZigBeeGuiFactory> zigBeeFactories)
+        public override void AttachOtherFactories(List<IZigBeeGuiFactory> zigBeeFactories)
         {
             this.otherFactories = zigBeeFactories;
         }
 
-        public DataTemplate GetNetworkBriefDataTemplate(ZigBeeNetwork zigBeeNetwork)
+        public override DataTemplate GetNetworkBriefDataTemplate(ZigBeeNetwork zigBeeNetwork)
         {
             return null;
         }
 
-        public DataTemplate GetNetworkDataTemplate(ZigBeeNetwork zigBeeNetwork)
+        public override DataTemplate GetNetworkDataTemplate(ZigBeeNetwork zigBeeNetwork)
         {
             return null;
         }
 
-        public virtual ZigBeeNetworkViewModel GetNetworkViewModel(ZigBeeNetwork zigBeeNetwork)
+        public override ZigBeeNetworkViewModel GetNetworkViewModel(ZigBeeNetwork zigBeeNetwork)
         {
             return new ZigBeeNetworkViewModel(zigBeeNetwork);
         }
 
-        public virtual string GetVendorID()
+        public override string GetVendorID()
         {
             return this.internalFactoryType;
+        }
+
+        public override UIElement GetZigBeeControl(ZigBeeViewModel zigBeeViewModel)
+        {
+            if (zigBeeViewModel.GetVendorID() == this.GetVendorID())
+                return new ZigBeeControl(zigBeeViewModel);
+            return null;
         }
     }
 }

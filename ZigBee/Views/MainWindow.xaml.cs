@@ -61,7 +61,7 @@ namespace ZigBee.Views
                 if(lv.ItemContainerGenerator.ItemFromContainer(lvi) is ZigBeeViewModel)
                 {
                     var vm = (ZigBeeViewModel)lv.ItemContainerGenerator.ItemFromContainer(lvi);
-                    var xaml = XamlWriter.Save(new ZigBeeControl(vm));
+                    var xaml = XamlWriter.Save(ZigBee.Core.GUI.Factories.ZigBeeGuiAnyFactory.Instance.GetZigBeeControl(vm));
                     //DragObject dataObject = new DragObject();
                     //dataObject.Xaml = xaml; 
                     //WrapPanel panel = VisualTreeHelper.GetParent(this) as WrapPanel;

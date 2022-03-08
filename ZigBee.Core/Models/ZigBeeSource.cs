@@ -12,39 +12,39 @@ namespace ZigBee.Core.Models
     {
         [JsonProperty]
         public Guid Guid { get; set; } = Guid.NewGuid();
-        private string internalType { get; set; } = "Default";
+        protected string internalType { get; set; } = "Default";
 
         public virtual string GetVendorID()
         {
             return internalType;
         }
 
-        public string GetAddress()
+        public virtual string GetAddress()
         {
             return "??";
         }
 
-        public void Save(string folderPath)
+        public virtual void Save(string folderPath)
         {
             return;
         }
 
-        public string GetName()
+        public virtual string GetName()
         {
             return "ZigBee";
         }
 
-        public void SetName(string name)
+        public virtual void SetName(string name)
         {
             return;
         }
 
-        public Guid GetGuid()
+        public virtual Guid GetGuid()
         {
             return this.Guid;
         }
 
-        public void SetGuid(Guid guid)
+        public virtual void SetGuid(Guid guid)
         {
             this.Guid = guid;
         }

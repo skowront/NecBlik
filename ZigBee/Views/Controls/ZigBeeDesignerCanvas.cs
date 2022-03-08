@@ -9,8 +9,9 @@ using System.Windows.Controls;
 using System.Windows.Input;
 using ZigBee.Core.GUI;
 using ZigBee.Core.GUI.Models;
-using ZigBee.Interfaces;
+using ZigBee.Core.GUI.Interfaces;
 using ZigBee.ViewModels;
+using ZigBee.Core.GUI.Factories;
 
 namespace ZigBee.Views.Controls
 {
@@ -43,7 +44,7 @@ namespace ZigBee.Views.Controls
         {
             //var newItem = new ZigBeeDesignerItem(data, new ZigBeeControl(data));
             var newItem = new DesignerItem();
-            newItem.Content = new ZigBeeControl(zigBeeViewModel);
+            newItem.Content = ZigBeeGuiAnyFactory.Instance.GetZigBeeControl(zigBeeViewModel);
             newItem.Payload = zigBeeViewModel;
 
             Point position = point;
@@ -100,7 +101,7 @@ namespace ZigBee.Views.Controls
                         zigBeeViewModel = zigBee;
                     }
                 }
-                designerItem.Content = new ZigBeeControl(zigBeeViewModel);
+                designerItem.Content = ZigBeeGuiAnyFactory.Instance.GetZigBeeControl(zigBeeViewModel);
                 DesignerCanvas.SetLeft(designerItem, item.Point.X);
                 DesignerCanvas.SetTop(designerItem, item.Point.Y);
                 designerItem.Width = item.Size.Width;

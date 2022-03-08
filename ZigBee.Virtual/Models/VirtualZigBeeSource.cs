@@ -6,6 +6,7 @@ using System.IO;
 using System.Linq;
 using ZigBee.Core.Interfaces;
 using ZigBee.Core.Models;
+using ZigBee.Virtual.Factories;
 
 namespace ZigBee.Virtual.Models
 {
@@ -21,8 +22,6 @@ namespace ZigBee.Virtual.Models
 
         [JsonProperty]
         public string Name { get; set; } = "Virtualbee";
-
-        private string internalSourceType = "Virtual";
         
         private string cachedAddress = string.Empty;
 
@@ -49,10 +48,10 @@ namespace ZigBee.Virtual.Models
             return value;
         }
 
-        public void Save(string folderPath)
+        public override void Save(string folderPath)
         {
             var json = JsonConvert.SerializeObject(this, Formatting.Indented);
-            var file = this.Guid + "." + this.internalSourceType + ".json";
+            var file = this.Guid + "." + this.internalType + ".json";
             if (File.Exists(folderPath + "\\" + file))
             {
                 File.WriteAllText(folderPath + "\\" + file, json);
@@ -65,7 +64,7 @@ namespace ZigBee.Virtual.Models
 
         public string GetVendorID()
         {
-            return this.internalSourceType;
+            return this.internalType;
         }
 
         public string GetName()
@@ -82,6 +81,7 @@ namespace ZigBee.Virtual.Models
         public VirtualZigBeeSource()
         {
             this.Name = "Virtualbee";
+            this.internalType = (new VirtualZigBeeFactory()).GetVendorID();
         }
 
         private static Collection<string> TakenAddresses = new Collection<string>();

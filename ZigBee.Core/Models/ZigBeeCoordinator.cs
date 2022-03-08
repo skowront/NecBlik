@@ -10,7 +10,7 @@ namespace ZigBee.Core.Models
 {
     public class ZigBeeCoordinator: IZigBeeCoordinator
     {
-        private string internalType { get; set; } = "Default";
+        protected string internalType { get; set; } = "Default";
 
         [JsonProperty]
         public Guid Guid { get; set; } = Guid.NewGuid();

@@ -11,7 +11,7 @@ using ZigBee.Core.Models;
 
 namespace ZigBee.Core.GUI
 {
-    public class ZigBeeViewModel:BaseViewModel,IDuplicable<ZigBeeViewModel>,ICachable
+    public class ZigBeeViewModel:BaseViewModel,IDuplicable<ZigBeeViewModel>,ICachable,IVendable
     {
         public ZigBeeModel Model;
 
@@ -84,6 +84,11 @@ namespace ZigBee.Core.GUI
         public string GetCacheId()
         {
             return this.Guid.ToString();
+        }
+
+        public virtual string GetVendorID()
+        {
+            return this.InternalFactoryType;
         }
     }
 }

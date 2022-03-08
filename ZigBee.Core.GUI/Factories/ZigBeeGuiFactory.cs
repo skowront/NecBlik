@@ -6,6 +6,7 @@ using System.Threading.Tasks;
 using System.Windows;
 using ZigBee.Core.GUI.Interfaces;
 using ZigBee.Core.GUI.ViewModels;
+using ZigBee.Core.GUI.Views.Controls;
 using ZigBee.Core.Models;
 
 namespace ZigBee.Core.GUI.Factories
@@ -16,7 +17,12 @@ namespace ZigBee.Core.GUI.Factories
 
         protected string internalFactoryType { get; set; } = "Abstract";
 
-        public void AttachOtherFactories(List<IZigBeeGuiFactory> zigBeeFactories)
+        public ZigBeeGuiFactory()
+        {
+            this.internalFactoryType = "Abstract";
+        }
+
+        public virtual void AttachOtherFactories(List<IZigBeeGuiFactory> zigBeeFactories)
         {
             this.otherFactories = zigBeeFactories;
         }
@@ -39,6 +45,11 @@ namespace ZigBee.Core.GUI.Factories
         public virtual string GetVendorID()
         {
             return this.internalFactoryType;
+        }
+
+        public virtual UIElement GetZigBeeControl(ZigBeeViewModel zigBeeViewModel)
+        {
+            return new ZigBeeControl(zigBeeViewModel);
         }
     }
 }

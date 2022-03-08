@@ -8,6 +8,7 @@ using System.Threading.Tasks;
 using System.Windows;
 using ZigBee.Core.GUI.Interfaces;
 using ZigBee.Core.GUI.ViewModels;
+using ZigBee.Core.GUI.Views.Controls;
 using ZigBee.Core.Models;
 
 namespace ZigBee.Core.GUI.Factories
@@ -142,6 +143,19 @@ namespace ZigBee.Core.GUI.Factories
         public string GetVendorID()
         {
             return "Internal";
+        }
+
+        public UIElement GetZigBeeControl(ZigBeeViewModel zigBeeViewModel)
+        {
+            foreach (var item in this.Factories)
+            {
+                var r = item.GetZigBeeControl(zigBeeViewModel);
+                if (r != null)
+                {
+                    return r;
+                }
+            }
+            return this.DefaultFactory.GetZigBeeControl(zigBeeViewModel);
         }
     }
 }
