@@ -9,19 +9,19 @@
         Title="VirtualZigBeeNetworkWindow" Height="450" Width="800">
     <Grid>
         <Grid.RowDefinitions>
-            <RowDefinition Height="1*"></RowDefinition>
+            <RowDefinition Height="auto"></RowDefinition>
             <RowDefinition Height="auto"></RowDefinition>
             <RowDefinition Height="9*"></RowDefinition>
         </Grid.RowDefinitions>
         <StackPanel Grid.Row="0">
             <TextBlock Text="Network name:"></TextBlock>
-            <TextBox Text="{Binding ViewModel.Name}"></TextBox>
+            <TextBox Text="{Binding ViewModel.Name,UpdateSourceTrigger=PropertyChanged}"></TextBox>
         </StackPanel>
         <ContentPresenter Grid.Row="1" Content="{Binding ViewModel.ZigBeeCoordinator}">
             <ContentPresenter.ContentTemplate>
                 <DataTemplate DataType="{x:Type viewModels:VirtualZigBeeViewModel}">
                     <StackPanel Orientation="Vertical">
-                        <TextBlock Text="Virtual"></TextBlock>
+                        <TextBlock Text="{Binding InternalFactoryType}"></TextBlock>
                         <TextBlock Text="{Binding Name, UpdateSourceTrigger=PropertyChanged}"></TextBlock>
                         <TextBlock Text="{Binding Guid, UpdateSourceTrigger=PropertyChanged}"></TextBlock>
                         <Button Command="{Binding EditCommand}" Content="Open"></Button>
@@ -34,7 +34,7 @@
             <ListView.ItemTemplate>
                 <DataTemplate DataType="{x:Type viewModels:VirtualZigBeeViewModel}">
                     <StackPanel Orientation="Vertical">
-                        <TextBlock Text="Virtual"></TextBlock>
+                        <TextBlock Text="{Binding InternalFactoryType}"></TextBlock>
                         <TextBlock Text="{Binding Name, UpdateSourceTrigger=PropertyChanged}"></TextBlock>
                         <TextBlock Text="{Binding Guid, UpdateSourceTrigger=PropertyChanged}"></TextBlock>
                         <Button Command="{Binding EditCommand}" Content="Open"></Button>

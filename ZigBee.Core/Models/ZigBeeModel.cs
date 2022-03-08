@@ -56,8 +56,24 @@ namespace ZigBee.Core.Models
                 return this.addressName;
             }
         }
+
+        private string version= Resources.Resources.ZigBeeVersionDefault;
         [JsonProperty]
-        public string Version { get; set; } = Resources.Resources.ZigBeeVersionDefault;
+        public string Version
+        {
+            get 
+            {
+                if(this.ZigBeeSource!=null)
+                {
+                    return ZigBeeSource.GetVersion();
+                }
+                return this.version;
+            }
+            set
+            {
+                this.version = value;
+            }
+        }
         [JsonProperty]
         public List <Guid> ConnectedZigBeGuids { get; set; } = new List<Guid>();
 

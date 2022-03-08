@@ -17,13 +17,13 @@ namespace ZigBee.Virtual.Models
 
         private List<Tuple<string, string>> connections = new List<Tuple<string, string>>();
 
-        private IZigBeeFactory zigBeeFactory;
+        protected IZigBeeFactory zigBeeFactory;
 
         public VirtualZigBeeCoordinator(IZigBeeFactory zigBeeFactory)
         {
             this.zigBeeFactory = zigBeeFactory;
             this.Name = "Virtual ZigBee Coordinator";
-            this.internalType = zigBeeFactory.GetVendorID() ?? "Virtual";
+            this.internalType = zigBeeFactory?.GetVendorID() ?? "Virtual";
         }
 
         public VirtualZigBeeCoordinator(IZigBeeFactory zigBeeFactory, bool setupExampleZigBees): this(zigBeeFactory)

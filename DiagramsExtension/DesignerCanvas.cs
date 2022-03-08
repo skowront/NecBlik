@@ -61,7 +61,7 @@ namespace DiagramDesigner
                 AdornerLayer adornerLayer = AdornerLayer.GetAdornerLayer(this);
                 if (adornerLayer != null)
                 {
-                    RubberbandAdorner adorner = new RubberbandAdorner(this, rubberbandSelectionStartPoint);
+                    RubberbandAdorner adorner = new(this, rubberbandSelectionStartPoint);
                     if (adorner != null)
                     {
                         adornerLayer.Add(adorner);

@@ -14,5 +14,6 @@ namespace ZigBee.Core.Interfaces
         public void Save(string folderPath);
         public Guid GetGuid();
         public void SetGuid(Guid guid);
+        public string GetVersion();
     }
 }

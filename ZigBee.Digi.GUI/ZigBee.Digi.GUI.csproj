@@ -1,0 +1,32 @@
+<Project Sdk="Microsoft.NET.Sdk">
+
+  <PropertyGroup>
+    <TargetFramework>net6.0-windows</TargetFramework>
+    <Nullable>enable</Nullable>
+    <UseWPF>true</UseWPF>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <ProjectReference Include="..\ZigBee.Core.GUI\ZigBee.Core.GUI.csproj" />
+    <ProjectReference Include="..\ZigBee.Digi\ZigBee.Digi.csproj" />
+    <ProjectReference Include="..\ZigBee.Virtual.GUI\ZigBee.Virtual.GUI.csproj" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <Folder Include="Views\" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <PackageReference Include="XBeeLibrary.Core" Version="1.0.1" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <Page Update="DataTemplates\DigiNetworkDataTemplates.xaml">
+      <XamlRuntime>$(DefaultXamlRuntime)</XamlRuntime>
+    </Page>
+    <Page Update="Styles\MergedDictionaries.xaml">
+      <XamlRuntime>$(DefaultXamlRuntime)</XamlRuntime>
+    </Page>
+  </ItemGroup>
+
+</Project>

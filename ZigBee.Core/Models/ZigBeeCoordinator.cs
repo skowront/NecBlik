@@ -57,26 +57,31 @@ namespace ZigBee.Core.Models
             throw new NotImplementedException();
         }
 
-        public string GetName()
+        public virtual string GetName()
         {
             return this.Name;
         }
 
-        public void SetName(string name)
+        public virtual void SetName(string name)
         {
             this.Name = name;
             return;
         }
 
-        public Guid GetGuid()
+        public virtual Guid GetGuid()
         {
             return this.Guid;
         }
 
-        public void SetGuid(Guid guid)
+        public virtual void SetGuid(Guid guid)
         {
             this.Guid = guid;
             return;
+        }
+
+        public virtual string GetVersion()
+        {
+            return "??";
         }
     }
 }

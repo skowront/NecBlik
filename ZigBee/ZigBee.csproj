@@ -18,6 +18,8 @@
     <ProjectReference Include="..\ZigBee.Common\ZigBee.Common.csproj" />
     <ProjectReference Include="..\ZigBee.Core.GUI\ZigBee.Core.GUI.csproj" />
     <ProjectReference Include="..\ZigBee.Core\ZigBee.Core.csproj" />
+    <ProjectReference Include="..\ZigBee.Digi.GUI\ZigBee.Digi.GUI.csproj" />
+    <ProjectReference Include="..\ZigBee.Digi\ZigBee.Digi.csproj" />
     <ProjectReference Include="..\ZigBee.Virtual.GUI\ZigBee.Virtual.GUI.csproj" />
     <ProjectReference Include="..\ZigBee.Virtual\ZigBee.Virtual.csproj" />
   </ItemGroup>

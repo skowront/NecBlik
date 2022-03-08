@@ -81,7 +81,10 @@ namespace ZigBee.ViewModels
         {
             this.ZigBeeSelectionSubscriber = zigBeeSelectionSubscriber; 
             this.model = new ProjectModel();
-            this.model.ZigBeeNetworks.Add(new VirtualZigBeeNetwork(true));
+            //this.model.ZigBeeNetworks.Add(new VirtualZigBeeNetwork(true));
+            var factory = new Digi.Factories.DigiZigBeeFactory();
+            var crd = new Digi.Models.DigiZigBeeUSBCoordinator(factory, new Digi.Models.DigiZigBeeUSBCoordinator.DigiUSBConnectionData() { baud = 9600, port="COM4" });
+            this.model.ZigBeeNetworks.Add(new Digi.Models.DigiZigBeeNetwork(crd));
             this.guiModel = new ProjectGuiModel();
             this.SyncFromModel();
             this.buildCommands();

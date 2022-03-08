@@ -37,7 +37,7 @@ namespace ZigBee.Core.Models
             this.internalNetworkType = ZigBeeFactory.GetVendorID();
         }
 
-        public void SetCoordinator(ZigBeeCoordinator zigBeeCoordinator)
+        public virtual void SetCoordinator(ZigBeeCoordinator zigBeeCoordinator)
         {
             this.ZigBeeCoordinator = zigBeeCoordinator;
             if(this.ZigBeeCoordinator!=null)
@@ -56,7 +56,7 @@ namespace ZigBee.Core.Models
             this.ZigBeeSources.Add(source);
         }
 
-        public void Save(string folderName)
+        public virtual void Save(string folderName)
         {
             var dir = folderName + "\\" + this.Guid + "." + this.internalNetworkType;
             if (!Directory.Exists(dir))
@@ -77,7 +77,6 @@ namespace ZigBee.Core.Models
                 }
                 if (Directory.Exists(sourcesSubDir))
                 {
-                    
                     foreach (var item in this.ZigBeeSources)
                     {
                         item.Save(sourcesSubDir);
