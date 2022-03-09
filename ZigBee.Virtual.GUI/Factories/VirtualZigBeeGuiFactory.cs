@@ -67,5 +67,10 @@ namespace ZigBee.Virtual.GUI.Factories
             }
             return zbc;
         }
+
+        public override ZigBeeNetworkViewModel NetworkViewModelFromWizard(ZigBeeNetwork zigBeeNetwork)
+        {
+            throw new NotImplementedException();
+        }
     }
 }

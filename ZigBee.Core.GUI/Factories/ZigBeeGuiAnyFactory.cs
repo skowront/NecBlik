@@ -33,7 +33,27 @@ namespace ZigBee.Core.GUI.Factories
         private IZigBeeGuiFactory DefaultFactory = new ZigBeeGuiDefaultFactory();
 
         private List<IZigBeeGuiFactory> Factories = new List<IZigBeeGuiFactory>();
+        public IZigBeeGuiFactory GetFactory(string factoryId)
+        {
+            foreach (var item in this.Factories)
+            {
+                if (item.GetVendorID() == factoryId)
+                {
+                    return item;
+                }
+            }
+            return null;
+        }
 
+        public List<string> GetFactoryIds()
+        {
+            List<string> list = new List<string>();
+            foreach (var item in this.Factories)
+            {
+                list.Add(item.GetVendorID());
+            }
+            return list;
+        }
         public ZigBeeGuiAnyFactory()
         {
             
@@ -140,6 +160,25 @@ namespace ZigBee.Core.GUI.Factories
             return this.DefaultFactory.GetNetworkViewModel(zigBeeNetwork);
         }
 
+        public virtual ZigBeeNetworkViewModel NetworkViewModelFromWizard(ZigBeeNetwork zigBeeNetwork)
+        {
+            foreach (var item in this.Factories)
+            {
+                var r = item.NetworkViewModelFromWizard(zigBeeNetwork);
+                if (r != null)
+                {
+                    return r;
+                }
+            }
+            return this.DefaultFactory.NetworkViewModelFromWizard(zigBeeNetwork);
+        }
+
+        public virtual ZigBeeNetworkViewModel NetworkViewModelFromWizard(ZigBeeNetwork zigBeeNetwork,string FactoryID)
+        {
+            var factory = this.Factories.Where((o) => { return o.GetVendorID() == FactoryID; }).FirstOrDefault(this.DefaultFactory);
+            return factory.NetworkViewModelFromWizard(zigBeeNetwork);
+        }
+
         public string GetVendorID()
         {
             return "Internal";
@@ -157,5 +196,6 @@ namespace ZigBee.Core.GUI.Factories
             }
             return this.DefaultFactory.GetZigBeeControl(zigBeeViewModel);
         }
+
     }
 }

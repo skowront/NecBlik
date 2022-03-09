@@ -19,7 +19,10 @@ namespace ZigBee.Core.GUI.Interfaces
         DataTemplate GetNetworkBriefDataTemplate(ZigBeeNetwork zigBeeNetwork);
 
         ZigBeeNetworkViewModel GetNetworkViewModel(ZigBeeNetwork zigBeeNetwork);
+        
+        ZigBeeNetworkViewModel NetworkViewModelFromWizard(ZigBeeNetwork zigBeeNetwork);
 
         UIElement GetZigBeeControl(ZigBeeViewModel zigBeeViewModel);
+
     }
 }

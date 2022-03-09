@@ -150,4 +150,7 @@
   <data name="MainWindowMenuHeaderProjectSave" xml:space="preserve">
     <value>Save project</value>
   </data>
+  <data name="SelectLibrary" xml:space="preserve">
+    <value>Select library</value>
+  </data>
 </root>

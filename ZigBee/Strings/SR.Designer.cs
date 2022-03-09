@@ -158,5 +158,14 @@ namespace ZigBee.Strings {
                 return ResourceManager.GetString("MainWindowMenuHeaderProjectSave", resourceCulture);
             }
         }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Select library.
+        /// </summary>
+        public static string SelectLibrary {
+            get {
+                return ResourceManager.GetString("SelectLibrary", resourceCulture);
+            }
+        }
     }
 }

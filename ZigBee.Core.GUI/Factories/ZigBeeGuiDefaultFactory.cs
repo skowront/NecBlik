@@ -51,5 +51,10 @@ namespace ZigBee.Core.GUI.Factories
                 return new ZigBeeControl(zigBeeViewModel);
             return null;
         }
+
+        public override ZigBeeNetworkViewModel NetworkViewModelFromWizard(ZigBeeNetwork zigBeeNetwork)
+        {
+            return new ZigBeeNetworkViewModel(zigBeeNetwork);
+        }
     }
 }

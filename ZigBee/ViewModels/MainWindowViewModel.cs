@@ -15,6 +15,7 @@ using ZigBee.Core.Factories;
 using ZigBee.Core.GUI.Factories;
 using ZigBee.Core.GUI.Interfaces;
 using System.IO.Ports;
+using ZigBee.Strings;
 
 namespace ZigBee.ViewModels
 {
@@ -105,7 +106,15 @@ namespace ZigBee.ViewModels
 
             this.AddNetworkCommand = new RelayCommand((o) =>
             {
-                var ip = this.ListValueResponseProvider.ProvideResponse(new Tuple<string, IEnumerable<string>>("Select", SerialPort.GetPortNames()));
+                var ip = this.ListValueResponseProvider.ProvideResponse(new Tuple<string, IEnumerable<string>>(SR.SelectLibrary, ZigBeeGuiAnyFactory.Instance.GetFactoryIds()));
+                if(ip != string.Empty)
+                {
+                    var vm = ZigBeeGuiAnyFactory.Instance.NetworkViewModelFromWizard(null,ip);
+                    if(vm!=null)
+                    {
+                        this.ZigBeeNetworks.Add(vm);
+                    }
+                }
             });
 
             this.AddNewZigBeeCommand = new RelayCommand(o =>

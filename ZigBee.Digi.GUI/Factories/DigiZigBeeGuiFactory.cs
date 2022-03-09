@@ -50,5 +50,10 @@ namespace ZigBee.Digi.GUI.Factories
             }
             return null;
         }
+
+        public override ZigBeeNetworkViewModel NetworkViewModelFromWizard(ZigBeeNetwork zigBeeNetwork)
+        {
+            return base.NetworkViewModelFromWizard(zigBeeNetwork);
+        }
     }
 }
