@@ -8,6 +8,7 @@ using System.Windows.Controls;
 using System.Windows.Input;
 using System.Windows.Markup;
 using System.Windows.Media;
+using ZigBee.Common.WpfElements.PopupValuePickers;
 using ZigBee.Common.WpfExtensions.Base;
 using ZigBee.Core.GUI;
 using ZigBee.Core.GUI.Interfaces;
@@ -185,6 +186,8 @@ namespace ZigBee.Views
             });
 
             this.ViewModel.ZigBeeSelectionSubscriber = this;
+
+            this.ViewModel.ListValueResponseProvider = new ListInputValuePicker();
 
             //this.ViewModel.OnProjectSaved = new Action(() =>
             //{

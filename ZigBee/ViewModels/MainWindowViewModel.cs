@@ -14,6 +14,7 @@ using ZigBee.Virtual.Models;
 using ZigBee.Core.Factories;
 using ZigBee.Core.GUI.Factories;
 using ZigBee.Core.GUI.Interfaces;
+using System.IO.Ports;
 
 namespace ZigBee.ViewModels
 {
@@ -71,10 +72,13 @@ namespace ZigBee.ViewModels
         public IResponseProvider<object, object> NewProjectLoadedProvider { get; set; } = new GenericResponseProvider<object, object>();
         public ISelectionSubscriber<ZigBeeViewModel> ZigBeeSelectionSubscriber { get; set; }
 
+        public IResponseProvider<string, Tuple<string, IEnumerable<string>>> ListValueResponseProvider = new GenericResponseProvider<string, Tuple<string, IEnumerable<string>>>(string.Empty);
+
         public RelayCommand NewProjectCommand { get; set; }
         public RelayCommand SaveProjectCommand { get; set; }
         public RelayCommand LoadProjectCommand { get; set; }
         public RelayCommand AddNewZigBeeCommand { get; set; }
+        public RelayCommand AddNetworkCommand { get; set; }
         public RelayCommand LoadProjectMapCommand { get; set; }
 
         public MainWindowViewModel(ISelectionSubscriber<ZigBeeViewModel> zigBeeSelectionSubscriber)
@@ -82,9 +86,9 @@ namespace ZigBee.ViewModels
             this.ZigBeeSelectionSubscriber = zigBeeSelectionSubscriber; 
             this.model = new ProjectModel();
             //this.model.ZigBeeNetworks.Add(new VirtualZigBeeNetwork(true));
-            var factory = new Digi.Factories.DigiZigBeeFactory();
-            var crd = new Digi.Models.DigiZigBeeUSBCoordinator(factory, new Digi.Models.DigiZigBeeUSBCoordinator.DigiUSBConnectionData() { baud = 9600, port="COM4" });
-            this.model.ZigBeeNetworks.Add(new Digi.Models.DigiZigBeeNetwork(crd));
+            //var factory = new Digi.Factories.DigiZigBeeFactory();
+            //var crd = new Digi.Models.DigiZigBeeUSBCoordinator(factory, new Digi.Models.DigiZigBeeUSBCoordinator.DigiUSBConnectionData() { baud = 9600, port="COM4" });
+            //this.model.ZigBeeNetworks.Add(new Digi.Models.DigiZigBeeNetwork(crd));
             this.guiModel = new ProjectGuiModel();
             this.SyncFromModel();
             this.buildCommands();
@@ -97,6 +101,11 @@ namespace ZigBee.ViewModels
                 this.model = new ProjectModel();
                 this.SyncFromModel();
                 this.NewProjectLoadedProvider?.ProvideResponse();
+            });
+
+            this.AddNetworkCommand = new RelayCommand((o) =>
+            {
+                var ip = this.ListValueResponseProvider.ProvideResponse(new Tuple<string, IEnumerable<string>>("Select", SerialPort.GetPortNames()));
             });
 
             this.AddNewZigBeeCommand = new RelayCommand(o =>
