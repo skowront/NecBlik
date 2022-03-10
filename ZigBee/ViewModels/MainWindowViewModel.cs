@@ -2,7 +2,6 @@
 using System;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
-using System.ComponentModel;
 using System.IO;
 using ZigBee.Common.WpfExtensions.Base;
 using ZigBee.Common.WpfExtensions.Interfaces;
@@ -10,11 +9,8 @@ using ZigBee.Core.GUI;
 using ZigBee.Core.GUI.ViewModels;
 using ZigBee.Core.GUI.Models;
 using ZigBee.Core.Models;
-using ZigBee.Virtual.Models;
-using ZigBee.Core.Factories;
 using ZigBee.Core.GUI.Factories;
 using ZigBee.Core.GUI.Interfaces;
-using System.IO.Ports;
 using ZigBee.Strings;
 
 namespace ZigBee.ViewModels

@@ -43,12 +43,9 @@ namespace ZigBee.Virtual.Factories
             {
                 return null;
             }
-            else
-            {
-                var virtualzb = new VirtualZigBeeCoordinator(this);
-                JsonConvert.PopulateObject(File.ReadAllText(pathToFile), virtualzb);
-                return virtualzb;
-            }
+            var virtualzb = new VirtualZigBeeCoordinator(this);
+            JsonConvert.PopulateObject(File.ReadAllText(pathToFile), virtualzb);
+            return virtualzb;
         }
 
         public override IZigBeeSource BuildSourceFromJsonFile(string pathToFile)
@@ -60,12 +57,9 @@ namespace ZigBee.Virtual.Factories
             {
                 return null;
             }
-            else
-            {
-                var source = new VirtualZigBeeSource();
-                JsonConvert.PopulateObject(File.ReadAllText(pathToFile), source);
-                return source;
-            }
+            var source = new VirtualZigBeeSource();
+            JsonConvert.PopulateObject(File.ReadAllText(pathToFile), source);
+            return source;
         }
 
         public override ZigBeeNetwork BuildNetworkFromDirectory(string pathToDirectory)
@@ -96,7 +90,7 @@ namespace ZigBee.Virtual.Factories
                 }
                 if (zigBeeCoordinator == null)
                     return null;
-                network.SetCoordinator(zigBeeCoordinator);
+                Task.Run(async () => { await network.SetCoordinator(zigBeeCoordinator); }).Wait();
             }
             foreach (var file in Directory.EnumerateFiles(pathToDirectory + "\\Sources"))
             {

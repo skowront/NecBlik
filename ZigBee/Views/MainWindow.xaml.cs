@@ -34,7 +34,7 @@ namespace ZigBee.Views
             InitializeComponent();
             this.ViewModel = new MainWindowViewModel(this);
             this.DataContext = this.ViewModel;
-            this.buildResponseProviders();
+            this.BuildResponseProviders();
         }
 
         private void ListView_PreviewMouseLeftButtonDown(object sender, MouseButtonEventArgs e)
@@ -105,7 +105,7 @@ namespace ZigBee.Views
             }
         }
 
-        private void buildResponseProviders()
+        private void BuildResponseProviders()
         {
             this.ViewModel.NewZigBeeResponseProvider = new GenericResponseProvider<ZigBeeViewModel, ZigBeeViewModel>((o) =>
             {
