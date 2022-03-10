@@ -6,6 +6,10 @@
   </PropertyGroup>
 
   <ItemGroup>
+    <PackageReference Include="System.IO.Ports" Version="6.0.0" />
+  </ItemGroup>
+
+  <ItemGroup>
     <ProjectReference Include="..\DiagramsExtension\DiagramsExtension.csproj" />
     <ProjectReference Include="..\ZigBee.Common\ZigBee.Common.csproj" />
     <ProjectReference Include="..\ZigBee.Core.GUI\ZigBee.Core.GUI.csproj" />

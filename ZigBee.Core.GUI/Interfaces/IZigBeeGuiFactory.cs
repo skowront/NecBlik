@@ -20,7 +20,7 @@ namespace ZigBee.Core.GUI.Interfaces
 
         ZigBeeNetworkViewModel GetNetworkViewModel(ZigBeeNetwork zigBeeNetwork);
         
-        ZigBeeNetworkViewModel NetworkViewModelFromWizard(ZigBeeNetwork zigBeeNetwork);
+        Task<ZigBeeNetworkViewModel> NetworkViewModelFromWizard(ZigBeeNetwork zigBeeNetwork);
 
         UIElement GetZigBeeControl(ZigBeeViewModel zigBeeViewModel);
 

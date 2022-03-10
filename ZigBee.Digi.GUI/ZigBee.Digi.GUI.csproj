@@ -13,11 +13,13 @@
   </ItemGroup>
 
   <ItemGroup>
-    <Folder Include="Views\" />
+    <PackageReference Include="XBeeLibrary.Core" Version="1.0.1" />
   </ItemGroup>
 
   <ItemGroup>
-    <PackageReference Include="XBeeLibrary.Core" Version="1.0.1" />
+    <Compile Update="Views\Wizard\DigiNetworkWizard.xaml.cs">
+      <SubType>Code</SubType>
+    </Compile>
   </ItemGroup>
 
   <ItemGroup>
@@ -26,6 +28,10 @@
     </Page>
     <Page Update="Styles\MergedDictionaries.xaml">
       <XamlRuntime>$(DefaultXamlRuntime)</XamlRuntime>
+    </Page>
+    <Page Update="Views\Wizard\DigiNetworkWizard.xaml">
+      <XamlRuntime>$(DefaultXamlRuntime)</XamlRuntime>
+      <SubType>Designer</SubType>
     </Page>
   </ItemGroup>
 

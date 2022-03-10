@@ -9,9 +9,9 @@ using ZigBee.Common.WpfExtensions.Base;
 using ZigBee.Common.WpfElements.PopupValuePickers;
 using ZigBee.Common.WpfElements.PopupValuePickers.ResponseProviders;
 
-namespace ZigBee.Virtual.GUI.ViewModels.Wizard
+namespace ZigBee.Digi.GUI.ViewModels.Wizard
 {
-    public class VirtualNetworkWizardViewModel:BaseViewModel
+    public class DigiNetworkWizardViewModel:BaseViewModel
     {
         private Window window;
 
@@ -20,6 +20,7 @@ namespace ZigBee.Virtual.GUI.ViewModels.Wizard
             get { return window; }
             set { window = value; }
         }
+
         public bool Committed { get; set; } = false;
 
         private string networkName = "vNetwork";
@@ -30,28 +31,45 @@ namespace ZigBee.Virtual.GUI.ViewModels.Wizard
             set { networkName = value; this.OnPropertyChanged(); }
         }
 
-        private int virtualZigBees;
-        public int VirtualZigBees
+        private string serialPortName = SerialPort.GetPortNames().FirstOrDefault("--");
+        public string SerialPortName
         {
-            get { return virtualZigBees; }
-            set { virtualZigBees = value; this.OnPropertyChanged(); }
+            get { return serialPortName; }  
+            set { serialPortName = value; this.OnPropertyChanged(); }
         }
-        public RelayCommand PickVirtualZigBeesCommand { get; set; }
+
+        private int baudRate = 9600;
+        public int BaudRate
+        {
+            get { return baudRate; }
+            set { baudRate = value; this.OnPropertyChanged(); }
+        }
+
+        public RelayCommand PickSerialPortCommand { get; set; }
+        public RelayCommand PickBaudRateCommand { get; set; }
         public RelayCommand ConfirmCommand { get; set; }
         public RelayCommand AbortCommand { get; set; }
-
-        public VirtualNetworkWizardViewModel(Window window=null)
+        public DigiNetworkWizardViewModel()
         {
-            this.window = window;
             this.BuildCommands();
         }
 
         private void BuildCommands()
         {
-            this.PickVirtualZigBeesCommand = new RelayCommand((o) =>
+            this.PickSerialPortCommand = new RelayCommand((o) =>
+            {
+                string[] ports = SerialPort.GetPortNames();
+                var rp = new ListInputValuePicker();
+                var result = rp.ProvideResponse(new Tuple<string,IEnumerable<string>>("Select port",ports));
+                if (result == string.Empty || result == null || ports.Contains(result) == false)
+                    return;
+                this.SerialPortName = result;
+            });
+
+            this.PickBaudRateCommand = new RelayCommand((o) =>
             {
                 var vp = new NumericResponseProvider<int>(new NumericValuePicker());
-                this.VirtualZigBees = vp.ProvideResponse();
+                this.BaudRate = vp.ProvideResponse();
             });
 
             this.ConfirmCommand = new RelayCommand((o) =>

@@ -52,7 +52,7 @@ namespace ZigBee.Core.GUI.Factories
             return new ZigBeeControl(zigBeeViewModel);
         }
 
-        public virtual ZigBeeNetworkViewModel NetworkViewModelFromWizard(ZigBeeNetwork zigBeeNetwork)
+        public virtual async Task<ZigBeeNetworkViewModel> NetworkViewModelFromWizard(ZigBeeNetwork zigBeeNetwork)
         {
             return new ZigBeeNetworkViewModel(zigBeeNetwork);
         }

@@ -10,6 +10,7 @@ using ZigBee.Digi.Factories;
 using ZigBee.Core.Interfaces;
 using ZigBee.Digi.USB;
 using Newtonsoft.Json;
+using ZigBee.Common.WpfExtensions.Interfaces;
 
 namespace ZigBee.Digi.Models
 {
@@ -22,6 +23,14 @@ namespace ZigBee.Digi.Models
         [JsonProperty]
         public DigiUSBConnectionData connectionData { get; set; }
 
+        IUpdatableResponseProvider<int, bool, string> progressResponseProvider = null;
+
+        private const int sleepTime = 500;
+
+        private const long timeout = 25000L;
+
+        private const int maxProgress = (int)timeout/sleepTime;
+
         public DigiZigBeeUSBCoordinator(IZigBeeFactory zigBeeFactory, DigiUSBConnectionData connectionData = null) : base(zigBeeFactory)
         {
             this.zigBeeFactory = new DigiZigBeeFactory();
@@ -30,12 +39,15 @@ namespace ZigBee.Digi.Models
             this.Name = "Digi Coordinator";
         }
 
-        public override IEnumerable<IZigBeeSource> GetDevices()
+        public override async Task<IEnumerable<IZigBeeSource>> GetDevices(IUpdatableResponseProvider<int, bool, string> progressResponseProvider=null)
         {
-            if(this.connectionData.port==string.Empty || this.connectionData.port == null)
+            this.progressResponseProvider = progressResponseProvider;
+            if (this.connectionData.port==string.Empty || this.connectionData.port == null)
             {
                 return null;
             }
+            progressResponseProvider?.Init(0, DigiZigBeeUSBCoordinator.maxProgress, 0);
+            var progress = 0;
             this.zigBee = new ZigBeeDevice(new WinSerialPort(connectionData.port, connectionData.baud));
             this.zigBee.Open();
             var network = this.zigBee.GetNetwork();
@@ -47,10 +59,18 @@ namespace ZigBee.Digi.Models
             network.DiscoveryFinished += Network_DiscoveryFinished;
             network.DeviceDiscovered += Network_DeviceDiscovered;
             network.StartNodeDiscoveryProcess();
-            while (network.IsDiscoveryRunning)
+            var task = Task.Run(() =>
             {
-                Thread.Sleep(500);
-            }
+                while (network.IsDiscoveryRunning)
+                {
+                    Thread.Sleep(sleepTime);
+                    progress++;
+                    progressResponseProvider?.Update(progress);
+                }
+            });
+            await task;
+            this.progressResponseProvider?.Update(DigiZigBeeUSBCoordinator.maxProgress);
+            progressResponseProvider?.SealUpdates();
             var nodes = network.GetDevices();
             this.zigBee.Close();
             List<IZigBeeSource> list = new();
@@ -68,6 +88,7 @@ namespace ZigBee.Digi.Models
 
         private void Network_DiscoveryFinished(object sender, XBeeLibrary.Core.Events.DiscoveryFinishedEventArgs e)
         {
+            
         }
 
         public override void Save(string folderPath)

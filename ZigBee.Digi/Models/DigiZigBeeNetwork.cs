@@ -1,9 +1,11 @@
 ﻿using Newtonsoft.Json;
 using System;
 using System.Collections.Generic;
+using System.Collections.ObjectModel;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using ZigBee.Common.WpfExtensions.Interfaces;
 using ZigBee.Core.Interfaces;
 using ZigBee.Core.Models;
 using ZigBee.Digi.Factories;
@@ -19,11 +21,16 @@ namespace ZigBee.Digi.Models
             this.internalNetworkType = this.ZigBeeFactory.GetVendorID();
         }
 
-        public DigiZigBeeNetwork(ZigBeeCoordinator coordinator) : this()
+        public DigiZigBeeNetwork(ZigBeeCoordinator coordinator, IUpdatableResponseProvider<int, bool, string> updatableResponseProvider=null) : this()
         {
+            this.ProgressResponseProvider = updatableResponseProvider;
             this.ZigBeeFactory = new DigiZigBeeFactory();
             this.internalNetworkType = this.ZigBeeFactory.GetVendorID();
-            this.SetCoordinator(coordinator);
+        }
+
+        public async Task Initialize(ZigBeeCoordinator coordinator)
+        {
+            await this.SetCoordinator(coordinator);
         }
 
         public override void AddSource(IZigBeeSource source)

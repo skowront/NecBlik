@@ -160,23 +160,23 @@ namespace ZigBee.Core.GUI.Factories
             return this.DefaultFactory.GetNetworkViewModel(zigBeeNetwork);
         }
 
-        public virtual ZigBeeNetworkViewModel NetworkViewModelFromWizard(ZigBeeNetwork zigBeeNetwork)
+        public virtual async Task<ZigBeeNetworkViewModel> NetworkViewModelFromWizard(ZigBeeNetwork zigBeeNetwork)
         {
             foreach (var item in this.Factories)
             {
                 var r = item.NetworkViewModelFromWizard(zigBeeNetwork);
                 if (r != null)
                 {
-                    return r;
+                    return await r;
                 }
             }
-            return this.DefaultFactory.NetworkViewModelFromWizard(zigBeeNetwork);
+            return await this.DefaultFactory.NetworkViewModelFromWizard(zigBeeNetwork);
         }
 
-        public virtual ZigBeeNetworkViewModel NetworkViewModelFromWizard(ZigBeeNetwork zigBeeNetwork,string FactoryID)
+        public virtual async Task<ZigBeeNetworkViewModel> NetworkViewModelFromWizard(ZigBeeNetwork zigBeeNetwork,string FactoryID)
         {
             var factory = this.Factories.Where((o) => { return o.GetVendorID() == FactoryID; }).FirstOrDefault(this.DefaultFactory);
-            return factory.NetworkViewModelFromWizard(zigBeeNetwork);
+            return await factory.NetworkViewModelFromWizard(zigBeeNetwork);
         }
 
         public string GetVendorID()

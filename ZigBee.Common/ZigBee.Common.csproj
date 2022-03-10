@@ -108,6 +108,9 @@
   </ItemGroup>
 
   <ItemGroup>
+    <Page Update="WpfElements\PopupValuePickers\NumericValuePicker.xaml">
+      <XamlRuntime>$(DefaultXamlRuntime)</XamlRuntime>
+    </Page>
     <Page Update="WpfElements\SimpleListInputPopup.xaml">
       <XamlRuntime>$(DefaultXamlRuntime)</XamlRuntime>
     </Page>

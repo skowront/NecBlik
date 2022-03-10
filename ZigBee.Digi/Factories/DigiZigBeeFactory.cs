@@ -8,6 +8,8 @@ using ZigBee.Core.Models;
 using ZigBee.Virtual.Factories;
 using ZigBee.Digi.Models;
 using Newtonsoft.Json;
+using ZigBee.Common.WpfElements;
+using ZigBee.Common.WpfElements.ResponseProviders;
 
 namespace ZigBee.Digi.Factories
 {
@@ -39,7 +41,13 @@ namespace ZigBee.Digi.Factories
             var fileName = Path.GetFileName(pathToDirectory);
             var connectionData = JsonConvert.DeserializeObject<DigiZigBeeUSBCoordinator.DigiUSBConnectionData>(File.ReadAllText(pathToDirectory + "\\Coordinator.json"));
             var network = JsonConvert.DeserializeObject<DigiZigBeeNetwork>(File.ReadAllText(pathToDirectory + "\\Network.json"));
-            network?.SetCoordinator(new DigiZigBeeUSBCoordinator(this, connectionData));
+            var popup = new SimpleYesNoProgressBarPopup("Please wait...", "", Popups.ZigBeeIcons.InfoIcon, null, null, 0, 0, 0, false, false);
+            if (network == null)
+            {
+                return null;
+            }
+            network.ProgressResponseProvider = new YesNoProgressBarPopupResponseProvider(popup);
+            network.SetCoordinator(new DigiZigBeeUSBCoordinator(this, connectionData));
             return network;
         }
 

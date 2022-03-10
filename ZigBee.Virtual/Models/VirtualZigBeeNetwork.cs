@@ -22,22 +22,22 @@ namespace ZigBee.Virtual.Models
                 this.SetupExampleNetwork();
         }
 
-        public void SetupExampleNetwork()
+        public async void SetupExampleNetwork()
         {
             this.ZigBeeFactory = new VirtualZigBeeFactory();
-            this.SetCoordinator(new VirtualZigBeeCoordinator(this.ZigBeeFactory, true));
-            this.ZigBeeSources = new Collection<IZigBeeSource>(this.ZigBeeCoordinator.GetDevices().ToList());
+            await this.SetCoordinator(new VirtualZigBeeCoordinator(this.ZigBeeFactory, true));
+            this.ZigBeeSources = new Collection<IZigBeeSource>((await this.ZigBeeCoordinator.GetDevices()).ToList());
             this.ZigBeeConnections = new Collection<Tuple<string, string>>(this.ZigBeeCoordinator.GetConnections().ToList());
         }
 
-        public override void AddSource(IZigBeeSource source)
+        public override async void AddSource(IZigBeeSource source)
         {
             if (this.HasCoordinator)
             {
-                var devs = new List<IZigBeeSource>(this.ZigBeeCoordinator.GetDevices());
+                var devs = new List<IZigBeeSource>(await this.ZigBeeCoordinator.GetDevices());
                 devs.Add(source);
                 this.ZigBeeCoordinator.SetDevices(devs);
-                this.ZigBeeSources = new Collection<IZigBeeSource>(this.ZigBeeCoordinator.GetDevices().ToList());
+                this.ZigBeeSources = new Collection<IZigBeeSource>((await this.ZigBeeCoordinator.GetDevices()).ToList());
             }
             else
             {

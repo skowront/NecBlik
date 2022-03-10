@@ -104,7 +104,7 @@ namespace ZigBee.ViewModels
                 this.NewProjectLoadedProvider?.ProvideResponse();
             });
 
-            this.AddNetworkCommand = new RelayCommand((o) =>
+            this.AddNetworkCommand = new RelayCommand(async (o) =>
             {
                 var ip = this.ListValueResponseProvider.ProvideResponse(new Tuple<string, IEnumerable<string>>(SR.SelectLibrary, ZigBeeGuiAnyFactory.Instance.GetFactoryIds()));
                 if(ip != string.Empty)
@@ -112,7 +112,10 @@ namespace ZigBee.ViewModels
                     var vm = ZigBeeGuiAnyFactory.Instance.NetworkViewModelFromWizard(null,ip);
                     if(vm!=null)
                     {
-                        this.ZigBeeNetworks.Add(vm);
+                        var network = await vm;
+                        this.ZigBeeNetworks.Add(network);
+                        this.SyncToModel();
+                        this.SyncFromModel();
                     }
                 }
             });

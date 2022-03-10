@@ -7,12 +7,16 @@ namespace ZigBee.Common.WpfElements.PopupValuePickers
     /// <summary>
     /// Interaction logic for FloatValuePicker.xaml
     /// </summary>
-    public partial class FloatValuePicker : Window
+    public partial class NumericValuePicker : Window
     {
-        public FloatValuePicker(Action<float> onConfirm, Action<float> onCancel)
+        public NumericValuePicker()
         {
             InitializeComponent();
-            this.DataContext = new GenericValuePicker<float>(this, onConfirm, onCancel);
+        }
+
+        public void Initialize<T>(Action<T> onConfirm, Action<T> onCancel)
+        {
+            this.DataContext = new GenericValuePicker<T>(this, onConfirm, onCancel);
         }
     }
 }

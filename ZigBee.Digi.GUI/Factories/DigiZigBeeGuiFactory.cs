@@ -10,6 +10,8 @@ using ZigBee.Digi.Models;
 using ZigBee.Digi.GUI.ViewModels;
 using ZigBee.Virtual.GUI.Factories;
 using System.Windows;
+using ZigBee.Digi.GUI.Views.Wizard;
+using ZigBee.Digi.GUI.ViewModels.Wizard;
 
 namespace ZigBee.Digi.GUI.Factories
 {
@@ -51,9 +53,11 @@ namespace ZigBee.Digi.GUI.Factories
             return null;
         }
 
-        public override ZigBeeNetworkViewModel NetworkViewModelFromWizard(ZigBeeNetwork zigBeeNetwork)
+        public override async Task<ZigBeeNetworkViewModel> NetworkViewModelFromWizard(ZigBeeNetwork zigBeeNetwork)
         {
-            return base.NetworkViewModelFromWizard(zigBeeNetwork);
+            var vm = new DigiNetworkWizardViewModel();
+            var rp = new DigiNetworkWizard(vm);
+            return await rp.ProvideResponseAsync();
         }
     }
 }

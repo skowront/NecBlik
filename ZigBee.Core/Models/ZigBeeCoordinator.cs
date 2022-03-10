@@ -4,6 +4,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using ZigBee.Common.WpfExtensions.Interfaces;
 using ZigBee.Core.Interfaces;
 
 namespace ZigBee.Core.Models
@@ -38,7 +39,7 @@ namespace ZigBee.Core.Models
             throw new NotImplementedException();
         }
 
-        public virtual IEnumerable<IZigBeeSource> GetDevices()
+        public virtual async Task<IEnumerable<IZigBeeSource>> GetDevices(IUpdatableResponseProvider<int, bool, string> progressResponseProvider = null)
         {
             throw new NotImplementedException();
         }
