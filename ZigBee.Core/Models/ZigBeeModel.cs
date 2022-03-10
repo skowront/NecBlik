@@ -57,6 +57,25 @@ namespace ZigBee.Core.Models
             }
         }
 
+        private string cacheId { get; set; } = null;
+        [JsonProperty]
+        public string CacheId
+        {
+            get
+            {
+                if (this.cacheId != null)
+                {
+                    return this.cacheId;
+                }
+                if (this.ZigBeeSource == null)
+                {
+                    return string.Empty;
+                }
+                this.cacheId = this.ZigBeeSource?.GetCacheId();
+                return this.cacheId;
+            }
+        }
+
         private string version= Resources.Resources.ZigBeeVersionDefault;
         [JsonProperty]
         public string Version

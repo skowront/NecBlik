@@ -21,7 +21,7 @@ namespace ZigBee.Digi.Models
 
         public override string GetAddress()
         {
-            return this.zigBeeDevice?.GetAddressString();
+            return this.zigBeeDevice?.GetAddressString() ?? String.Empty;
         }
 
         public override string GetName()
@@ -33,6 +33,11 @@ namespace ZigBee.Digi.Models
         {
             return zigBeeDevice.GetLocalXBeeDevice().HardwareVersion.Description;
             return zigBeeDevice.HardwareVersion?.Description;
+        }
+
+        public override string GetCacheId()
+        {
+            return this.zigBeeDevice.GetAddressString();
         }
     }
 }

@@ -5,6 +5,7 @@ using System.IO;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using ZigBee.Common.WpfExtensions.Interfaces;
 using ZigBee.Core.Factories;
 using ZigBee.Core.Interfaces;
 using ZigBee.Core.Models;
@@ -62,7 +63,7 @@ namespace ZigBee.Virtual.Factories
             return source;
         }
 
-        public override ZigBeeNetwork BuildNetworkFromDirectory(string pathToDirectory)
+        public override async Task<ZigBeeNetwork> BuildNetworkFromDirectory(string pathToDirectory, IUpdatableResponseProvider<int, bool, string> updatableResponseProvider)
         {
             if (pathToDirectory.Split('.').LastOrDefault() != this.GetVendorID())
             {

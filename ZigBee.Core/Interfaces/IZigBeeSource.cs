@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace ZigBee.Core.Interfaces
 {
-    public interface IZigBeeSource: IVendable
+    public interface IZigBeeSource: IVendable, ICachable
     {
         public string GetAddress();
         public string GetName();

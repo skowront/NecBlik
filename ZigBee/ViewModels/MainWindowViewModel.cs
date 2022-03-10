@@ -12,6 +12,8 @@ using ZigBee.Core.Models;
 using ZigBee.Core.GUI.Factories;
 using ZigBee.Core.GUI.Interfaces;
 using ZigBee.Strings;
+using ZigBee.Common.WpfElements;
+using ZigBee.Common.WpfElements.ResponseProviders;
 
 namespace ZigBee.ViewModels
 {
@@ -109,6 +111,8 @@ namespace ZigBee.ViewModels
                     if(vm!=null)
                     {
                         var network = await vm;
+                        if (network == null)
+                            return;
                         this.ZigBeeNetworks.Add(network);
                         this.SyncToModel();
                         this.SyncFromModel();
@@ -161,7 +165,7 @@ namespace ZigBee.ViewModels
             this.ProjectMapLoadedProvider.ProvideResponse(new Tuple<string, DiagramItemMetadata>(this.MapFilePath, this.guiModel.mapDiagramMetadata));
         }
 
-        private void LoadProject()
+        private async void LoadProject()
         {
             this.NewProjectLoadedProvider?.ProvideResponse();
             var path = this.LoadProjectFilePathProvider.ProvideResponse();
@@ -182,14 +186,15 @@ namespace ZigBee.ViewModels
             }
             else
             {
-                this.model.Save(path);
+                var savepopup = new SimpleYesNoProgressBarPopup("Saving...", "", Popups.ZigBeeIcons.InfoIcon, null, null, 0, 0, 0, false, false);
+                this.model.Save(path, new YesNoProgressBarPopupResponseProvider(savepopup));
                 this.SaveProjectGui(path);
             }
-            this.model.Load(dir);
-            this.SyncFromModel();
+            var popup = new SimpleYesNoProgressBarPopup("Loading...", "", Popups.ZigBeeIcons.InfoIcon, null, null, 0, 0, 0, false, false);
+            await this.model.Load(dir, new YesNoProgressBarPopupResponseProvider(popup));
             this.LoadProjectGui(path);
-            this.ProjectMapLoadedProvider.ProvideResponse(new Tuple<string, DiagramItemMetadata>(this.MapFilePath, this.guiModel.mapDiagramMetadata));
-            this.DiagramZigBeesLoadProvider.ProvideResponse(this.guiModel.mapItemsMetadata);
+            
+            this.SyncFromModel();
         }
 
         private void LoadProjectGui(string path)
@@ -242,10 +247,12 @@ namespace ZigBee.ViewModels
                 }
                 if (Directory.Exists(dir))
                 {
+                    Directory.Delete(dir,true);
                     File.AppendAllText(file, JsonConvert.SerializeObject(this.model, Formatting.Indented));
                 }
             }
-            this.model.Save(dir);
+            var savepopup = new SimpleYesNoProgressBarPopup("Saving...", "", Popups.ZigBeeIcons.InfoIcon, null, null, 0, 0, 0, false, false);
+            this.model.Save(dir, new YesNoProgressBarPopupResponseProvider(savepopup));
             this.SaveProjectGui(dir);
         }
 
@@ -308,6 +315,8 @@ namespace ZigBee.ViewModels
                 nvm.Sync();
                 this.ZigBeeNetworks.Add(nvm);
             }
+            //TODO
+            //this.ProjectMapLoadedProvider.ProvideResponse(new Tuple<string, DiagramItemMetadata>(this.MapFilePath, this.guiModel.mapDiagramMetadata));
             this.DiagramZigBeesLoadProvider.ProvideResponse(this.guiModel.mapItemsMetadata);
             //this.AvailableZigBees.Clear();
             //foreach (var item in this.model.AvailableZigBees)

@@ -90,6 +90,7 @@ namespace ZigBee.Views.Controls
 
         public void LoadDiagramZigBees(IEnumerable<DiagramZigBee> diagramZigBees, IEnumerable<ZigBeeViewModel> availableZigBees)
         {
+            this.Children.Clear();
             foreach(var item in diagramZigBees)
             {
                 var designerItem = new DesignerItem();

@@ -5,6 +5,7 @@ using System.Linq;
 using System.Reflection;
 using System.Text;
 using System.Threading.Tasks;
+using ZigBee.Common.WpfExtensions.Interfaces;
 using ZigBee.Core.Interfaces;
 using ZigBee.Core.Models;
 
@@ -167,17 +168,17 @@ namespace ZigBee.Core.Factories
             return this.DefaultFactory.BuildNetwork();
         }
 
-        public ZigBeeNetwork BuildNetworkFromDirectory(string pathToDirectory)
+        public async Task<ZigBeeNetwork> BuildNetworkFromDirectory(string pathToDirectory, IUpdatableResponseProvider<int, bool, string> updatableResponseProvider)
         {
             foreach (var factory in this.Factories)
             {
-                var product = factory.BuildNetworkFromDirectory(pathToDirectory);
+                var product = await factory.BuildNetworkFromDirectory(pathToDirectory, updatableResponseProvider);
                 if (product != null)
                 {
                     return product;
                 }
             }
-            return this.DefaultFactory.BuildNetworkFromDirectory(pathToDirectory);
+            return await this.DefaultFactory.BuildNetworkFromDirectory(pathToDirectory, updatableResponseProvider);
         }
     }
 }

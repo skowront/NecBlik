@@ -23,7 +23,7 @@ namespace ZigBee.Digi.GUI.ViewModels
             return vm;
         }
 
-        public virtual void SyncFromModel()
+        public override void SyncFromModel()
         {
             this.ZigBees.Clear();
 

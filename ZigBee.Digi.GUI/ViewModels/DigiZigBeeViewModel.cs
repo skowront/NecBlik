@@ -14,5 +14,10 @@ namespace ZigBee.Digi.GUI.ViewModels
         {
             this.Model = model;
         }
+
+        public override string GetCacheId()
+        {
+            return this.Model.CacheId;
+        }
     }
 }

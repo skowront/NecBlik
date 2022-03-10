@@ -55,5 +55,10 @@ namespace ZigBee.Core.Models
         {
             return this.version;
         }
+
+        public virtual string GetCacheId()
+        {
+            return this.Guid.ToString();
+        }
     }
 }

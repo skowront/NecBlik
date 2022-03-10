@@ -19,6 +19,8 @@ namespace ZigBee.Core.Models
         [JsonProperty]
         protected string Name { get; set; } = "ZigBee Coordingator";
 
+        protected IZigBeeSource ZigBeeSource { get; set; }
+
         public ZigBeeCoordinator()
         {
 
@@ -83,6 +85,11 @@ namespace ZigBee.Core.Models
         public virtual string GetVersion()
         {
             return "??";
+        }
+
+        public virtual string GetCacheId()
+        {
+            return this.Guid.ToString();
         }
     }
 }

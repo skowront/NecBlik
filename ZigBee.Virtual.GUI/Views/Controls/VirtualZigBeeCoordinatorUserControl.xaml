@@ -27,9 +27,11 @@
                         <Grid.RowDefinitions>
                             <RowDefinition></RowDefinition>
                             <RowDefinition></RowDefinition>
+                            <RowDefinition></RowDefinition>
                         </Grid.RowDefinitions>
                         <TextBlock Grid.Row="0" VerticalAlignment="Center" HorizontalAlignment="Center" Text="{Binding Name, FallbackValue='???'}"></TextBlock>
                         <TextBlock Grid.Row="1" VerticalAlignment="Center" HorizontalAlignment="Center" Text="{Binding Guid, FallbackValue='???'}"></TextBlock>
+                        <TextBlock Grid.Row="2" VerticalAlignment="Center" HorizontalAlignment="Center" Text="{Binding Address, FallbackValue='???'}"></TextBlock>
                     </Grid>
                 </Grid.ToolTip>
             </Grid>

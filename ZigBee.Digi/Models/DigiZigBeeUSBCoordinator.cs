@@ -110,5 +110,18 @@ namespace ZigBee.Digi.Models
             [JsonProperty]
             public string port = string.Empty;
         }
+
+        public override string GetAddress()
+        {
+            this.zigBee.Open();
+            var r = this.zigBee.XBee64BitAddr.ToString();
+            this.zigBee.Close();
+            return r;
+        }
+
+        public override string GetCacheId()
+        {
+            return "Coordinator"+this.zigBee?.GetAddressString();
+        }
     }
 }
