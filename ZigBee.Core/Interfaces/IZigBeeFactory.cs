@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using ZigBee.Common.WpfExtensions.Interfaces;
 using ZigBee.Core.Models;
 
 namespace ZigBee.Core.Interfaces
@@ -21,6 +22,6 @@ namespace ZigBee.Core.Interfaces
 
         ZigBeeNetwork BuildNetwork();
 
-        ZigBeeNetwork BuildNetworkFromDirectory(string pathToDirectory);
+        Task<ZigBeeNetwork> BuildNetworkFromDirectory(string pathToDirectory, IUpdatableResponseProvider<int, bool, string> updatableResponseProvider);
     }
 }

@@ -48,6 +48,11 @@ namespace ZigBee.Core.GUI
             get { return this.Model.AddressName; }
         }
 
+        public string CacheId
+        {
+            get { return this.Model.CacheId; }
+        }
+
         public ISelectionSubscriber<ZigBeeViewModel> PullSelectionSubscriber { get; set; }
 
         public RelayCommand EditCommand { get; set; }
@@ -81,7 +86,7 @@ namespace ZigBee.Core.GUI
             });
         }
 
-        public string GetCacheId()
+        public virtual string GetCacheId()
         {
             return this.Guid.ToString();
         }

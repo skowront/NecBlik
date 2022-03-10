@@ -43,10 +43,10 @@ namespace ZigBee.Views
             this.ViewModel = zigBeeViewModel;
             this.OnConfirm = onConfirm;
             this.OnCancel = onCancel;
-            this.buildCommands();
+            this.BuildCommands();
         }
 
-        private void buildCommands()
+        private void BuildCommands()
         {
             this.OnConfirmCommand = new RelayCommand(o => { this.OnConfirm?.Invoke(); this.Close(); });
             this.OnCancelCommand = new RelayCommand(o => { this.OnCancel?.Invoke(); this.Close(); });

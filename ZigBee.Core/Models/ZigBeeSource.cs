@@ -14,6 +14,8 @@ namespace ZigBee.Core.Models
         public Guid Guid { get; set; } = Guid.NewGuid();
         protected string internalType { get; set; } = "Default";
 
+        protected string version { get; set; }
+
         public virtual string GetVendorID()
         {
             return internalType;
@@ -47,6 +49,16 @@ namespace ZigBee.Core.Models
         public virtual void SetGuid(Guid guid)
         {
             this.Guid = guid;
+        }
+
+        public virtual string GetVersion()
+        {
+            return this.version;
+        }
+
+        public virtual string GetCacheId()
+        {
+            return this.Guid.ToString();
         }
     }
 }

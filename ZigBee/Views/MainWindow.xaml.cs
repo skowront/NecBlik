@@ -8,6 +8,7 @@ using System.Windows.Controls;
 using System.Windows.Input;
 using System.Windows.Markup;
 using System.Windows.Media;
+using ZigBee.Common.WpfElements.PopupValuePickers;
 using ZigBee.Common.WpfExtensions.Base;
 using ZigBee.Core.GUI;
 using ZigBee.Core.GUI.Interfaces;
@@ -33,7 +34,7 @@ namespace ZigBee.Views
             InitializeComponent();
             this.ViewModel = new MainWindowViewModel(this);
             this.DataContext = this.ViewModel;
-            this.buildResponseProviders();
+            this.BuildResponseProviders();
         }
 
         private void ListView_PreviewMouseLeftButtonDown(object sender, MouseButtonEventArgs e)
@@ -104,7 +105,7 @@ namespace ZigBee.Views
             }
         }
 
-        private void buildResponseProviders()
+        private void BuildResponseProviders()
         {
             this.ViewModel.NewZigBeeResponseProvider = new GenericResponseProvider<ZigBeeViewModel, ZigBeeViewModel>((o) =>
             {
@@ -185,6 +186,8 @@ namespace ZigBee.Views
             });
 
             this.ViewModel.ZigBeeSelectionSubscriber = this;
+
+            this.ViewModel.ListValueResponseProvider = new ListInputValuePicker();
 
             //this.ViewModel.OnProjectSaved = new Action(() =>
             //{

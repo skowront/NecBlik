@@ -5,6 +5,7 @@ using System.IO;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using ZigBee.Common.WpfExtensions.Interfaces;
 using ZigBee.Core.Interfaces;
 using ZigBee.Core.Models;
 
@@ -17,13 +18,13 @@ namespace ZigBee.Virtual.Models
 
         private List<Tuple<string, string>> connections = new List<Tuple<string, string>>();
 
-        private IZigBeeFactory zigBeeFactory;
+        protected IZigBeeFactory zigBeeFactory;
 
         public VirtualZigBeeCoordinator(IZigBeeFactory zigBeeFactory)
         {
             this.zigBeeFactory = zigBeeFactory;
             this.Name = "Virtual ZigBee Coordinator";
-            this.internalType = zigBeeFactory.GetVendorID() ?? "Virtual";
+            this.internalType = zigBeeFactory?.GetVendorID() ?? "Virtual";
         }
 
         public VirtualZigBeeCoordinator(IZigBeeFactory zigBeeFactory, bool setupExampleZigBees): this(zigBeeFactory)
@@ -48,7 +49,7 @@ namespace ZigBee.Virtual.Models
             this.connections.Add(new Tuple<string, string>(this.zigBeeSources[4].GetAddress(),this.zigBeeSources[5].GetAddress()));
         }
 
-        public override IEnumerable<IZigBeeSource> GetDevices()
+        public override async Task<IEnumerable<IZigBeeSource>> GetDevices(IUpdatableResponseProvider<int, bool, string> progressResponseProvider = null)
         {
             return this.zigBeeSources;
         }

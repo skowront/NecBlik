@@ -135,6 +135,9 @@
   <data name="MainWindowMenuHeaderProject" xml:space="preserve">
     <value>Project</value>
   </data>
+  <data name="MainWindowMenuHeaderProjectAddNetwork" xml:space="preserve">
+    <value>Add Network</value>
+  </data>
   <data name="MainWindowMenuHeaderProjectAddZigBee" xml:space="preserve">
     <value>Add ZigBee</value>
   </data>
@@ -146,5 +149,8 @@
   </data>
   <data name="MainWindowMenuHeaderProjectSave" xml:space="preserve">
     <value>Save project</value>
+  </data>
+  <data name="SelectLibrary" xml:space="preserve">
+    <value>Select library</value>
   </data>
 </root>

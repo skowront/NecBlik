@@ -56,8 +56,43 @@ namespace ZigBee.Core.Models
                 return this.addressName;
             }
         }
+
+        private string cacheId { get; set; } = null;
         [JsonProperty]
-        public string Version { get; set; } = Resources.Resources.ZigBeeVersionDefault;
+        public string CacheId
+        {
+            get
+            {
+                if (this.cacheId != null)
+                {
+                    return this.cacheId;
+                }
+                if (this.ZigBeeSource == null)
+                {
+                    return string.Empty;
+                }
+                this.cacheId = this.ZigBeeSource?.GetCacheId();
+                return this.cacheId;
+            }
+        }
+
+        private string version= Resources.Resources.ZigBeeVersionDefault;
+        [JsonProperty]
+        public string Version
+        {
+            get 
+            {
+                if(this.ZigBeeSource!=null)
+                {
+                    return ZigBeeSource.GetVersion();
+                }
+                return this.version;
+            }
+            set
+            {
+                this.version = value;
+            }
+        }
         [JsonProperty]
         public List <Guid> ConnectedZigBeGuids { get; set; } = new List<Guid>();
 

@@ -30,7 +30,7 @@ namespace ZigBee.Virtual.GUI.ViewModels
             this.SyncFromModel();
         }
 
-        public void SyncFromModel()
+        public virtual void SyncFromModel()
         {
             this.ZigBees.Clear();
            

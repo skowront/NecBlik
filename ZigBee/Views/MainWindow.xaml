@@ -50,6 +50,7 @@
                     <MenuItem Header="{ext:Loc MainWindowMenuHeaderProjectEdit}"/>
                     <MenuItem Header="{ext:Loc MainWindowManuHeaderProjectLoadMap}" Command="{Binding LoadProjectMapCommand}"/>
                     <MenuItem Header="{ext:Loc MainWindowMenuHeaderProjectAddZigBee}" Command="{Binding AddNewZigBeeCommand}"/>
+                    <MenuItem Header="{ext:Loc MainWindowMenuHeaderProjectAddNetwork}" Command="{Binding AddNetworkCommand}"/>
                 </MenuItem>
                 <MenuItem Header="{ext:Loc MainWindowMenuAbout}" Margin="4">
                 </MenuItem>

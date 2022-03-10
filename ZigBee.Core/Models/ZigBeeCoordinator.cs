@@ -4,6 +4,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using ZigBee.Common.WpfExtensions.Interfaces;
 using ZigBee.Core.Interfaces;
 
 namespace ZigBee.Core.Models
@@ -17,6 +18,8 @@ namespace ZigBee.Core.Models
 
         [JsonProperty]
         protected string Name { get; set; } = "ZigBee Coordingator";
+
+        protected IZigBeeSource ZigBeeSource { get; set; }
 
         public ZigBeeCoordinator()
         {
@@ -38,7 +41,7 @@ namespace ZigBee.Core.Models
             throw new NotImplementedException();
         }
 
-        public virtual IEnumerable<IZigBeeSource> GetDevices()
+        public virtual async Task<IEnumerable<IZigBeeSource>> GetDevices(IUpdatableResponseProvider<int, bool, string> progressResponseProvider = null)
         {
             throw new NotImplementedException();
         }
@@ -57,26 +60,36 @@ namespace ZigBee.Core.Models
             throw new NotImplementedException();
         }
 
-        public string GetName()
+        public virtual string GetName()
         {
             return this.Name;
         }
 
-        public void SetName(string name)
+        public virtual void SetName(string name)
         {
             this.Name = name;
             return;
         }
 
-        public Guid GetGuid()
+        public virtual Guid GetGuid()
         {
             return this.Guid;
         }
 
-        public void SetGuid(Guid guid)
+        public virtual void SetGuid(Guid guid)
         {
             this.Guid = guid;
             return;
+        }
+
+        public virtual string GetVersion()
+        {
+            return "??";
+        }
+
+        public virtual string GetCacheId()
+        {
+            return this.Guid.ToString();
         }
     }
 }

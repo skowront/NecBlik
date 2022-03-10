@@ -115,6 +115,15 @@ namespace ZigBee.Strings {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Add Network.
+        /// </summary>
+        public static string MainWindowMenuHeaderProjectAddNetwork {
+            get {
+                return ResourceManager.GetString("MainWindowMenuHeaderProjectAddNetwork", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Add ZigBee.
         /// </summary>
         public static string MainWindowMenuHeaderProjectAddZigBee {
@@ -147,6 +156,15 @@ namespace ZigBee.Strings {
         public static string MainWindowMenuHeaderProjectSave {
             get {
                 return ResourceManager.GetString("MainWindowMenuHeaderProjectSave", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Select library.
+        /// </summary>
+        public static string SelectLibrary {
+            get {
+                return ResourceManager.GetString("SelectLibrary", resourceCulture);
             }
         }
     }

@@ -6,6 +6,7 @@ using System.IO;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using ZigBee.Common.WpfExtensions.Interfaces;
 using ZigBee.Core.Factories;
 using ZigBee.Core.Interfaces;
 
@@ -32,17 +33,27 @@ namespace ZigBee.Core.Models
 
         protected string internalNetworkType { get; set; } = string.Empty;
 
+        private IUpdatableResponseProvider<int, bool, string> progressResponseProvider;
+        public IUpdatableResponseProvider<int, bool, string> ProgressResponseProvider
+        {
+            get { return progressResponseProvider; }
+            set
+            {
+                this.progressResponseProvider = value;
+            }
+        }
+
         public ZigBeeNetwork()
         {
             this.internalNetworkType = ZigBeeFactory.GetVendorID();
         }
 
-        public void SetCoordinator(ZigBeeCoordinator zigBeeCoordinator)
+        public virtual async Task SetCoordinator(ZigBeeCoordinator zigBeeCoordinator)
         {
             this.ZigBeeCoordinator = zigBeeCoordinator;
             if(this.ZigBeeCoordinator!=null)
             {
-                this.ZigBeeSources = new Collection<IZigBeeSource>(this.ZigBeeCoordinator.GetDevices().ToList());
+                this.ZigBeeSources = new Collection<IZigBeeSource>((await this.ZigBeeCoordinator.GetDevices(ProgressResponseProvider)).ToList());
                 this.HasCoordinator = true;
             }
             else
@@ -56,7 +67,7 @@ namespace ZigBee.Core.Models
             this.ZigBeeSources.Add(source);
         }
 
-        public void Save(string folderName)
+        public virtual void Save(string folderName)
         {
             var dir = folderName + "\\" + this.Guid + "." + this.internalNetworkType;
             if (!Directory.Exists(dir))
@@ -77,7 +88,6 @@ namespace ZigBee.Core.Models
                 }
                 if (Directory.Exists(sourcesSubDir))
                 {
-                    
                     foreach (var item in this.ZigBeeSources)
                     {
                         item.Save(sourcesSubDir);

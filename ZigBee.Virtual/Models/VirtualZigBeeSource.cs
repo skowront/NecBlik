@@ -25,7 +25,7 @@ namespace ZigBee.Virtual.Models
         
         private string cachedAddress = string.Empty;
 
-        public virtual string GetAddress()
+        public override string GetAddress()
         {
             if (cachedAddress == string.Empty)
             {
@@ -62,17 +62,17 @@ namespace ZigBee.Virtual.Models
             }
         }
 
-        public string GetVendorID()
+        public override string GetVendorID()
         {
             return this.internalType;
         }
 
-        public string GetName()
+        public override string GetName()
         {
             return this.Name;
         }
 
-        public void SetName(string name)
+        public override void SetName(string name)
         {
             this.Name = name;
             return;

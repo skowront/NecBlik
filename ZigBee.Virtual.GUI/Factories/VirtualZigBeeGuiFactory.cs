@@ -13,6 +13,7 @@ using ZigBee.Core.GUI.ViewModels;
 using ZigBee.Core.Models;
 using ZigBee.Virtual.GUI.ViewModels;
 using ZigBee.Virtual.GUI.Views.Controls;
+using ZigBee.Virtual.GUI.Views.Wizard;
 
 namespace ZigBee.Virtual.GUI.Factories
 {
@@ -66,6 +67,12 @@ namespace ZigBee.Virtual.GUI.Factories
                 return new VirtualZigBeeCoordinatorUserControl(zigBeeViewModel);
             }
             return zbc;
+        }
+
+        public override async Task<ZigBeeNetworkViewModel> NetworkViewModelFromWizard(ZigBeeNetwork zigBeeNetwork)
+        {
+            var rp = new VirtualNetworkWizard(new ViewModels.Wizard.VirtualNetworkWizardViewModel());
+            return rp.ProvideResponse();
         }
     }
 }

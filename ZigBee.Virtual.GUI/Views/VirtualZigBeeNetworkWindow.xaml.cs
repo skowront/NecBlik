@@ -15,6 +15,8 @@ using System.Windows.Media.Imaging;
 using System.Windows.Shapes;
 using ZigBee.Core.GUI;
 using ZigBee.Virtual.GUI.ViewModels;
+using ZigBee.Common.WpfElements.ResponseProviders;
+using ZigBee.Common.WpfExtensions.Interfaces;
 
 namespace ZigBee.Virtual.GUI.Views
 {
