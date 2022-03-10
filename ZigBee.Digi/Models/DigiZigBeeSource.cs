@@ -32,7 +32,6 @@ namespace ZigBee.Digi.Models
         public override string GetVersion()
         {
             return zigBeeDevice.GetLocalXBeeDevice().HardwareVersion.Description;
-            return zigBeeDevice.HardwareVersion?.Description;
         }
 
         public override string GetCacheId()

@@ -101,16 +101,6 @@ namespace ZigBee.Digi.Models
             return this.zigBee.HardwareVersion?.Description;
         }
 
-        [JsonObject(MemberSerialization.OptIn)]
-        public class DigiUSBConnectionData
-        {
-            [JsonProperty]
-            public int baud;
-
-            [JsonProperty]
-            public string port = string.Empty;
-        }
-
         public override string GetAddress()
         {
             this.zigBee.Open();
@@ -122,6 +112,16 @@ namespace ZigBee.Digi.Models
         public override string GetCacheId()
         {
             return "Coordinator"+this.zigBee?.GetAddressString();
+        }
+
+        [JsonObject(MemberSerialization.OptIn)]
+        public class DigiUSBConnectionData
+        {
+            [JsonProperty]
+            public int baud;
+
+            [JsonProperty]
+            public string port = string.Empty;
         }
     }
 }
