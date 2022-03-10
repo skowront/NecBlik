@@ -19,9 +19,13 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "ZigBee.Virtual.GUI", "ZigBe
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "ZigBee.Core.GUI", "ZigBee.Core.GUI\ZigBee.Core.GUI.csproj", "{7329BD04-6A70-465C-A7ED-93604778EBA3}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ZigBee.Digi.GUI", "ZigBee.Digi.GUI\ZigBee.Digi.GUI.csproj", "{A710CCFD-FB87-48D9-8EDF-E00802E45889}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "ZigBee.Digi.GUI", "ZigBee.Digi.GUI\ZigBee.Digi.GUI.csproj", "{A710CCFD-FB87-48D9-8EDF-E00802E45889}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ZigBee.Digi", "ZigBee.Digi\ZigBee.Digi.csproj", "{2F489C6F-5D3F-4A43-8313-CBA99CC5DE13}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "ZigBee.Digi", "ZigBee.Digi\ZigBee.Digi.csproj", "{2F489C6F-5D3F-4A43-8313-CBA99CC5DE13}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ZigBee.ZigBeeNet", "ZigBee.ZigBeeNet\ZigBee.ZigBeeNet.csproj", "{4075FF82-81D4-4369-8770-35D8FA577030}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ZigBee.ZigBeeNet.GUI", "ZigBee.ZigBeeNet.GUI\ZigBee.ZigBeeNet.GUI.csproj", "{32957790-E985-47BC-8608-DB7A4411C3EB}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -69,6 +73,14 @@ Global
 		{2F489C6F-5D3F-4A43-8313-CBA99CC5DE13}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{2F489C6F-5D3F-4A43-8313-CBA99CC5DE13}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{2F489C6F-5D3F-4A43-8313-CBA99CC5DE13}.Release|Any CPU.Build.0 = Release|Any CPU
+		{4075FF82-81D4-4369-8770-35D8FA577030}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{4075FF82-81D4-4369-8770-35D8FA577030}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{4075FF82-81D4-4369-8770-35D8FA577030}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{4075FF82-81D4-4369-8770-35D8FA577030}.Release|Any CPU.Build.0 = Release|Any CPU
+		{32957790-E985-47BC-8608-DB7A4411C3EB}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{32957790-E985-47BC-8608-DB7A4411C3EB}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{32957790-E985-47BC-8608-DB7A4411C3EB}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{32957790-E985-47BC-8608-DB7A4411C3EB}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
