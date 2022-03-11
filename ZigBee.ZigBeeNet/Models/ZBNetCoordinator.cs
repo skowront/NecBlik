@@ -12,6 +12,7 @@ using ZigBeeNet.Tranport.SerialPort;
 using ZigBeeNet.Transport;
 using Serilog;
 using ZigBeeNet.Hardware.Digi.XBee;
+using ZigBee.ZigBeeNet.USB;
 
 namespace ZigBee.ZigBeeNet.Models
 {
@@ -22,7 +23,7 @@ namespace ZigBee.ZigBeeNet.Models
 
         private ZBNetConnectionData connectionData;
 
-        private ZigBeeSerialPort zigbeePort;
+        private IZigBeePort zigbeePort;
 
         private IZigBeeTransportTransmit dongle;
 
@@ -40,7 +41,7 @@ namespace ZigBee.ZigBeeNet.Models
         {
             try
             {
-                this.zigbeePort = new ZigBeeSerialPort("COM7");
+                this.zigbeePort = new ZigBee.ZigBeeNet.Tranport.SerialPort.ZigBeeSerialPort(this.connectionData.port,this.connectionData.baud);
                 this.dongle = new ZigBeeDongleXBee(zigbeePort);
                 this.networkManager = new ZigBeeNetworkManager(dongle);
                 this.networkManager.Initialize();
@@ -48,26 +49,34 @@ namespace ZigBee.ZigBeeNet.Models
                 if (startupSucceded == ZigBeeStatus.SUCCESS)
                 {
                     Log.Logger.Information("ZigBee console starting up ... [OK]");
+
                     List<ZBNetSource> r = new List<ZBNetSource>();
-                    foreach(var item in this.networkManager.Nodes)
+                    var task = Task.Run(() =>
                     {
-                        ZBNetSource zb = new(item);
-                        r.Add(zb);
-                    }
+                        foreach (var item in this.networkManager.Nodes)
+                        {
+                            ZBNetSource zb = new(item);
+                            r.Add(zb);
+                        }
+                    });
+                    await task;
                     return r;
+                    this.zigbeePort.Close();
                 }
                 else
                 {
                     Log.Logger.Information("ZigBee console starting up ... [FAIL]");
                     return null;
+                    this.zigbeePort.Close();
                 }
 
             }
             catch (Exception ex)
             {
                 var e = ex;
+                this.zigbeePort.Close();
             }
-
+            this.zigbeePort.Close();
             return null;
         }
 
@@ -96,6 +105,9 @@ namespace ZigBee.ZigBeeNet.Models
         {
             [JsonProperty]
             public string port = string.Empty;
+
+            [JsonProperty]
+            public int baud = 9600;
         }
     }
 }

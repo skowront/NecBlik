@@ -13,19 +13,32 @@
   </ItemGroup>
 
   <ItemGroup>
-    <Folder Include="DataTemplates\" />
-    <Folder Include="Factories\" />
-    <Folder Include="ViewModels\Wizard\" />
-    <Folder Include="Styles\" />
-    <Folder Include="Views\Wizard\" />
-  </ItemGroup>
-
-  <ItemGroup>
     <ProjectReference Include="..\ZigBee.Core.GUI\ZigBee.Core.GUI.csproj" />
     <ProjectReference Include="..\ZigBee.Core\ZigBee.Core.csproj" />
     <ProjectReference Include="..\ZigBee.Virtual.GUI\ZigBee.Virtual.GUI.csproj" />
     <ProjectReference Include="..\ZigBee.Virtual\ZigBee.Virtual.csproj" />
     <ProjectReference Include="..\ZigBee.ZigBeeNet\ZigBee.ZigBeeNet.csproj" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <Compile Update="Views\Wizard\ZBNetNetworkWizard.xaml.cs">
+      <SubType>Code</SubType>
+    </Compile>
+  </ItemGroup>
+
+  <ItemGroup>
+    <Page Update="DataTemplates\ZBNetNetworkDataTemplates.xaml">
+      <XamlRuntime>$(DefaultXamlRuntime)</XamlRuntime>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Update="Styles\MergedDictionaries.xaml">
+      <XamlRuntime>$(DefaultXamlRuntime)</XamlRuntime>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Update="Views\Wizard\ZBNetNetworkWizard.xaml">
+      <XamlRuntime>$(DefaultXamlRuntime)</XamlRuntime>
+      <SubType>Designer</SubType>
+    </Page>
   </ItemGroup>
 
 </Project>

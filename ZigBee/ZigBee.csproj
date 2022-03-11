@@ -22,6 +22,8 @@
     <ProjectReference Include="..\ZigBee.Digi\ZigBee.Digi.csproj" />
     <ProjectReference Include="..\ZigBee.Virtual.GUI\ZigBee.Virtual.GUI.csproj" />
     <ProjectReference Include="..\ZigBee.Virtual\ZigBee.Virtual.csproj" />
+    <ProjectReference Include="..\ZigBee.ZigBeeNet.GUI\ZigBee.ZigBeeNet.GUI.csproj" />
+    <ProjectReference Include="..\ZigBee.ZigBeeNet\ZigBee.ZigBeeNet.csproj" />
   </ItemGroup>
 
   <ItemGroup>
