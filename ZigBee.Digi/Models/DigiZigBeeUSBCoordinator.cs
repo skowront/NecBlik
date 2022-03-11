@@ -31,6 +31,8 @@ namespace ZigBee.Digi.Models
 
         private const int maxProgress = (int)timeout/sleepTime;
 
+        private bool discoveryFinished = false;
+
         public DigiZigBeeUSBCoordinator(IZigBeeFactory zigBeeFactory, DigiUSBConnectionData connectionData = null) : base(zigBeeFactory)
         {
             this.zigBeeFactory = new DigiZigBeeFactory();
@@ -61,12 +63,13 @@ namespace ZigBee.Digi.Models
             network.StartNodeDiscoveryProcess();
             var task = Task.Run(() =>
             {
-                while (network.IsDiscoveryRunning)
+                while (network.IsDiscoveryRunning && this.discoveryFinished == false)
                 {
                     Thread.Sleep(sleepTime);
                     progress++;
                     progressResponseProvider?.Update(progress);
                 }
+                this.discoveryFinished = false;
             });
             await task;
             this.progressResponseProvider?.Update(DigiZigBeeUSBCoordinator.maxProgress);
@@ -88,7 +91,7 @@ namespace ZigBee.Digi.Models
 
         private void Network_DiscoveryFinished(object sender, XBeeLibrary.Core.Events.DiscoveryFinishedEventArgs e)
         {
-            
+            this.discoveryFinished = true;
         }
 
         public override void Save(string folderPath)

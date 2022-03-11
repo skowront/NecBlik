@@ -16,6 +16,8 @@ namespace ZigBee.ZigBeeNet.Models
     {
         ZigBeeNode zigBeeNode;
 
+        public string Version { get; set; }
+
         public ZBNetSource(ZigBeeNode zigBeeNode)
         {
             this.zigBeeNode = zigBeeNode;
@@ -35,7 +37,7 @@ namespace ZigBee.ZigBeeNet.Models
 
         public override string GetVersion()
         {
-            return "-??-";
+            return this.Version;
         }
 
         public override string GetCacheId()

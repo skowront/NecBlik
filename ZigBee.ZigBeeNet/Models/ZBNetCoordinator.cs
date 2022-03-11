@@ -19,8 +19,6 @@ namespace ZigBee.ZigBeeNet.Models
     [JsonObject(MemberSerialization.OptIn)]
     public class ZBNetCoordinator: VirtualZigBeeCoordinator
     {
-        private ZigBeeNode zigBeeNode;
-
         private ZBNetConnectionData connectionData;
 
         private IZigBeePort zigbeePort;
@@ -41,35 +39,45 @@ namespace ZigBee.ZigBeeNet.Models
         {
             try
             {
-                this.zigbeePort = new ZigBee.ZigBeeNet.Tranport.SerialPort.ZigBeeSerialPort(this.connectionData.port,this.connectionData.baud);
-                this.dongle = new ZigBeeDongleXBee(zigbeePort);
-                this.networkManager = new ZigBeeNetworkManager(dongle);
-                this.networkManager.Initialize();
-                ZigBeeStatus startupSucceded = networkManager.Startup(false);
-                if (startupSucceded == ZigBeeStatus.SUCCESS)
-                {
-                    Log.Logger.Information("ZigBee console starting up ... [OK]");
-
-                    List<ZBNetSource> r = new List<ZBNetSource>();
-                    var task = Task.Run(() =>
+                List<ZBNetSource> r = new List<ZBNetSource>();
+                Thread thread = new Thread(async () => {
+                    this.zigbeePort = new ZigBeeSerialPort(this.connectionData.port, this.connectionData.baud, FlowControl.FLOWCONTROL_OUT_NONE);
+                    this.dongle = new ZigBeeDongleXBee(zigbeePort);
+                    this.networkManager = new ZigBeeNetworkManager(dongle);
+                    this.networkManager.Initialize();
+                    ZigBeeStatus startupSucceded = networkManager.Startup(false);
+                    if (startupSucceded == ZigBeeStatus.SUCCESS)
                     {
-                        foreach (var item in this.networkManager.Nodes)
+                        Log.Logger.Information("ZigBee console starting up ... [OK]");
+                        
+                        var task = Task.Run(() =>
                         {
-                            ZBNetSource zb = new(item);
-                            r.Add(zb);
-                        }
-                    });
-                    await task;
-                    return r;
-                    this.zigbeePort.Close();
-                }
-                else
-                {
-                    Log.Logger.Information("ZigBee console starting up ... [FAIL]");
-                    return null;
-                    this.zigbeePort.Close();
-                }
+                            foreach (var item in this.networkManager.Nodes)
+                            {
+                                ZBNetSource zb = new(item);
+                                r.Add(zb);
+                                foreach(var endpoint in item.GetEndpoints())
+                                {
+                                    ZBNetSource endpt = new(endpoint.Node) { Version = endpoint.DeviceVersion.ToString() };
+                                    r.Add(endpt);
+                                }
+                            }
+                        });
+                        await task;
+                        this.zigbeePort.Close();
+                        return;
+                    }
+                    else
+                    {
+                        Log.Logger.Information("ZigBee console starting up ... [FAIL]");
+                        this.zigbeePort.Close();
+                        
+                    }
+                });
+                thread.Start();
+                thread.Join();
 
+                return r;
             }
             catch (Exception ex)
             {
@@ -87,7 +95,7 @@ namespace ZigBee.ZigBeeNet.Models
 
         public override string GetAddress()
         {
-            return this.zigBeeNode?.IeeeAddress.ToString();
+            return this.dongle?.IeeeAddress.ToString();
         }
 
         public override string GetVersion()
