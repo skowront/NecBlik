@@ -27,8 +27,6 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "ZigBee.ZigBeeNet", "ZigBee.
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "ZigBee.ZigBeeNet.GUI", "ZigBee.ZigBeeNet.GUI\ZigBee.ZigBeeNet.GUI.csproj", "{32957790-E985-47BC-8608-DB7A4411C3EB}"
 EndProject
-Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "ZigbeeLibrary.ZigbeeNet", "F:\Users\SL\source\repos\Simple Zigbee App\ZigbeeLibrary.ZigbeeNet\ZigbeeLibrary.ZigbeeNet.csproj", "{4C27DA2A-C50D-4EC6-AE37-70ABA615ED12}"
-EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -83,10 +81,6 @@ Global
 		{32957790-E985-47BC-8608-DB7A4411C3EB}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{32957790-E985-47BC-8608-DB7A4411C3EB}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{32957790-E985-47BC-8608-DB7A4411C3EB}.Release|Any CPU.Build.0 = Release|Any CPU
-		{4C27DA2A-C50D-4EC6-AE37-70ABA615ED12}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{4C27DA2A-C50D-4EC6-AE37-70ABA615ED12}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{4C27DA2A-C50D-4EC6-AE37-70ABA615ED12}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{4C27DA2A-C50D-4EC6-AE37-70ABA615ED12}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

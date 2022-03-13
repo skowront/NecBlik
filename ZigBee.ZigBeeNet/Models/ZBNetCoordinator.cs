@@ -13,6 +13,9 @@ using ZigBeeNet.Transport;
 using Serilog;
 using ZigBeeNet.Hardware.Digi.XBee;
 using ZigBee.ZigBeeNet.USB;
+using ZigBeeNet.App.Discovery;
+using ZigBeeNet.App.Basic;
+using ZigBeeNet.App.IasClient;
 
 namespace ZigBee.ZigBeeNet.Models
 {
@@ -27,6 +30,8 @@ namespace ZigBee.ZigBeeNet.Models
 
         ZigBeeNetworkManager networkManager;
 
+        private const byte permitJoinDuration = 255;
+
         public ZBNetCoordinator(IZigBeeFactory zigBeeFactory, ZBNetConnectionData connectionData) : base(zigBeeFactory)
         {
             this.connectionData = connectionData;
@@ -37,6 +42,7 @@ namespace ZigBee.ZigBeeNet.Models
 
         public override async Task<IEnumerable<IZigBeeSource>> GetDevices(IUpdatableResponseProvider<int, bool, string> progressResponseProvider = null)
         {
+            throw new NotImplementedException();
             try
             {
                 List<ZBNetSource> r = new List<ZBNetSource>();
@@ -44,14 +50,23 @@ namespace ZigBee.ZigBeeNet.Models
                     this.zigbeePort = new ZigBeeSerialPort(this.connectionData.port, this.connectionData.baud, FlowControl.FLOWCONTROL_OUT_NONE);
                     this.dongle = new ZigBeeDongleXBee(zigbeePort);
                     this.networkManager = new ZigBeeNetworkManager(dongle);
+                    ZigBeeDiscoveryExtension discoveryExtension = new ZigBeeDiscoveryExtension();
+                    discoveryExtension.SetUpdatePeriod(60);
+                    networkManager.AddExtension(discoveryExtension);
+                    networkManager.AddExtension(new ZigBeeBasicServerExtension());
+                    networkManager.AddExtension(new ZigBeeIasCieExtension());
                     this.networkManager.Initialize();
                     ZigBeeStatus startupSucceded = networkManager.Startup(false);
+                    var discoveryStatus = discoveryExtension.ExtensionStartup();
+                    ZigBeeNodeServiceDiscoverer discoverer = new ZigBeeNodeServiceDiscoverer(networkManager, this.networkManager.Nodes.First());
+                    await discoverer.StartDiscovery();
                     if (startupSucceded == ZigBeeStatus.SUCCESS)
                     {
                         Log.Logger.Information("ZigBee console starting up ... [OK]");
                         
                         var task = Task.Run(() =>
                         {
+                           
                             foreach (var item in this.networkManager.Nodes)
                             {
                                 ZBNetSource zb = new(item);

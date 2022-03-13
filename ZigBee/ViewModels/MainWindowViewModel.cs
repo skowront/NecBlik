@@ -14,7 +14,6 @@ using ZigBee.Core.GUI.Interfaces;
 using ZigBee.Strings;
 using ZigBee.Common.WpfElements;
 using ZigBee.Common.WpfElements.ResponseProviders;
-using ZigbeeLibrary.ZigbeeNet;
 using System.Threading;
 
 namespace ZigBee.ViewModels
