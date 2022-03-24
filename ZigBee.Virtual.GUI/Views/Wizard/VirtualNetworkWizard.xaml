@@ -6,6 +6,10 @@
         xmlns:local="clr-namespace:ZigBee.Virtual.GUI.Views.Wizard"
         xmlns:dtvm="clr-namespace:ZigBee.Virtual.GUI.ViewModels.Wizard"
         xmlns:fa="http://schemas.fontawesome.io/icons/"
+        xmlns:lexp="clr-namespace:WPFLocalizeExtension.Providers;assembly=WPFLocalizeextension"
+        xmlns:lex="clr-namespace:WPFLocalizeExtension.Extensions;assembly=WPFLocalizeextension"
+        lexp:ResxLocalizationProvider.DefaultAssembly="ZigBee.Virtual.GUI"
+        lexp:ResxLocalizationProvider.DefaultDictionary="SR"
         mc:Ignorable="d"
         Title="VirtualNetworkWizard" Height="450" Width="800"
         d:DataContext="{d:DesignInstance {x:Type dtvm:VirtualNetworkWizardViewModel}}">
@@ -22,7 +26,7 @@
                     <ColumnDefinition></ColumnDefinition>
                     <ColumnDefinition></ColumnDefinition>
                 </Grid.ColumnDefinitions>
-                <TextBlock Grid.Column="0" Text="Network Name"></TextBlock>
+                <TextBlock Grid.Column="0" Text="{lex:Loc GPNetworkName}"></TextBlock>
                 <TextBox Grid.Column="1" Grid.ColumnSpan="2" Text="{Binding NetworkName}" VerticalAlignment="Stretch"></TextBox>
             </Grid>
             <Grid Grid.Row="1" Margin="0 10 0 0">
@@ -31,11 +35,11 @@
                     <ColumnDefinition></ColumnDefinition>
                     <ColumnDefinition></ColumnDefinition>
                 </Grid.ColumnDefinitions>
-                <TextBlock Grid.Column="0" Text="Virtual zigbees count:"></TextBlock>
+                <TextBlock Grid.Column="0" Text="{lex:Loc GPVirtualZigBeesCount}"></TextBlock>
                 <TextBlock Grid.Column="1" Text="{Binding VirtualZigBees}"></TextBlock>
                 <Button Grid.Column="2" HorizontalAlignment="Right" HorizontalContentAlignment="Right" Command="{Binding PickVirtualZigBeesCommand}">
                     <StackPanel Orientation="Horizontal">
-                        <TextBlock Text="Select" Margin="0 0 10 0"></TextBlock>
+                        <TextBlock Text="{lex:Loc GPSelect}" Margin="0 0 10 0"></TextBlock>
                         <fa:FontAwesome Icon="MousePointer"></fa:FontAwesome>
                     </StackPanel>
                 </Button>

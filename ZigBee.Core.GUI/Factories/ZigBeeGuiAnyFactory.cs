@@ -181,7 +181,7 @@ namespace ZigBee.Core.GUI.Factories
 
         public string GetVendorID()
         {
-            return "Internal";
+            return ZigBee.Core.Resources.Resources.AnyFactoryId;
         }
 
         public UIElement GetZigBeeControl(ZigBeeViewModel zigBeeViewModel)

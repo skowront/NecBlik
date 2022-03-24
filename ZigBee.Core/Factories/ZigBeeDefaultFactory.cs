@@ -12,7 +12,7 @@ namespace ZigBee.Core.Factories
 {
     public class ZigBeeDefaultFactory : IZigBeeFactory
     {
-        protected string internalFactoryType { get; set; } = "Default";
+        protected string internalFactoryType { get; set; } = Resources.Resources.DefaultFactoryId;
 
         protected List<IZigBeeFactory> OtherFactories { get; set; } = new List<IZigBeeFactory>();
 

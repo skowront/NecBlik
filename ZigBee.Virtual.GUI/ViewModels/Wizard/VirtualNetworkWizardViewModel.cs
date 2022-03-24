@@ -22,7 +22,7 @@ namespace ZigBee.Virtual.GUI.ViewModels.Wizard
         }
         public bool Committed { get; set; } = false;
 
-        private string networkName = "vNetwork";
+        private string networkName = Resources.Resources.VirtualNetworkDefaultName;
 
         public string NetworkName
         {

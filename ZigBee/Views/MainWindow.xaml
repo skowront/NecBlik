@@ -41,16 +41,18 @@
                 <RowDefinition Height="2"></RowDefinition>
             </Grid.RowDefinitions>
             <Menu Grid.Row="0" VerticalAlignment="Top" Height="auto" VerticalContentAlignment="Bottom">
-                <MenuItem Header="{ext:Loc MainWindowMenuHeaderNew}" Margin="4">
-                    <MenuItem Header="{ext:Loc MainWindowMenuHeaderProject}" Command="{Binding NewProjectCommand}"/>
-                    <MenuItem Header="{ext:Loc MainWindowMenuHeaderProjectLoad}" Command="{Binding LoadProjectCommand}"/>
-                    <MenuItem Header="{ext:Loc MainWindowMenuHeaderProjectSave}" Command="{Binding SaveProjectCommand}"/>
-                    <MenuItem Header="{ext:Loc MainWindowMenuHeaderProjectEdit}" Command="{Binding EditProjectCommand}"/>
-                    <MenuItem Header="{ext:Loc MainWindowManuHeaderProjectLoadMap}" Command="{Binding LoadProjectMapCommand}"/>
-                    <MenuItem Header="{ext:Loc MainWindowMenuHeaderProjectAddZigBee}" Command="{Binding AddNewZigBeeCommand}"/>
-                    <MenuItem Header="{ext:Loc MainWindowMenuHeaderProjectAddNetwork}" Command="{Binding AddNetworkCommand}"/>
+                <MenuItem Header="{lex:Loc MainWindowMenuHeaderNew}" Margin="4">
+                    <MenuItem Header="{lex:Loc MainWindowMenuHeaderProject}" Command="{Binding NewProjectCommand}"/>
+                    <MenuItem Header="{lex:Loc MainWindowMenuHeaderProjectLoad}" Command="{Binding LoadProjectCommand}"/>
+                    <MenuItem Header="{lex:Loc MainWindowMenuHeaderProjectSave}" Command="{Binding SaveProjectCommand}"/>
+                    <MenuItem Header="{lex:Loc MainWindowMenuHeaderProjectEdit}" Command="{Binding EditProjectCommand}"/>
+                    <MenuItem Header="{lex:Loc MainWindowManuHeaderProjectLoadMap}" Command="{Binding LoadProjectMapCommand}"/>
+                    <MenuItem Header="{lex:Loc MainWindowMenuHeaderProjectAddZigBee}" Command="{Binding AddNewZigBeeCommand}"/>
+                    <MenuItem Header="{lex:Loc MainWindowMenuHeaderProjectAddNetwork}" Command="{Binding AddNetworkCommand}"/>
                 </MenuItem>
-                <MenuItem Header="{ext:Loc MainWindowMenuAbout}" Margin="4">
+                <MenuItem Header="{lex:Loc MainWindowMenuSettings}" Command="{Binding ApplicationSettingsCommand}" Margin="4">
+                </MenuItem>
+                <MenuItem Header="{lex:Loc MainWindowMenuAbout}" Margin="4">
                 </MenuItem>
             </Menu>
             <TextBlock Grid.Row="0" 
@@ -72,7 +74,7 @@
             <ScrollViewer Grid.Column="1" Grid.RowSpan="2">
                 <Expander ExpandDirection="Down" Style="{StaticResource MaterialDesignExpander}" 
                           Foreground="{StaticResource ForegroundLightBrush}"
-                          Header="Networks">
+                          Header="{lex:Loc MainWindowNetworks}">
                     <ListView ItemsSource="{Binding ZigBeeNetworks}" 
                           PreviewMouseLeftButtonDown="ListView_PreviewMouseLeftButtonDown" 
                           MouseMove="ListView_MouseMove" 

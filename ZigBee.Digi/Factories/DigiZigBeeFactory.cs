@@ -18,7 +18,7 @@ namespace ZigBee.Digi.Factories
     {
         public DigiZigBeeFactory()
         {
-            this.internalFactoryType = "Digi";
+            this.internalFactoryType = Resources.Resources.DigiFactoryId;
         }
 
         public override IZigBeeSource BuildNewSource()
@@ -40,8 +40,8 @@ namespace ZigBee.Digi.Factories
 
             var path = Path.GetDirectoryName(pathToDirectory);
             var fileName = Path.GetFileName(pathToDirectory);
-            var connectionData = JsonConvert.DeserializeObject<DigiZigBeeUSBCoordinator.DigiUSBConnectionData>(File.ReadAllText(pathToDirectory + "\\Coordinator.json"));
-            var network = JsonConvert.DeserializeObject<DigiZigBeeNetwork>(File.ReadAllText(pathToDirectory + "\\Network.json"));
+            var connectionData = JsonConvert.DeserializeObject<DigiZigBeeUSBCoordinator.DigiUSBConnectionData>(File.ReadAllText(pathToDirectory + "\\"+Resources.Resources.CoordinatorFile));
+            var network = JsonConvert.DeserializeObject<DigiZigBeeNetwork>(File.ReadAllText(pathToDirectory + "\\"+Resources.Resources.NetworkFile));
             if (network == null)
             {
                 return null;

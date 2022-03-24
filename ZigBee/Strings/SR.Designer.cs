@@ -61,6 +61,51 @@ namespace ZigBee.Strings {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Are you sure?.
+        /// </summary>
+        public static string AreYouSure {
+            get {
+                return ResourceManager.GetString("AreYouSure", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Language.
+        /// </summary>
+        public static string GPLanguage {
+            get {
+                return ResourceManager.GetString("GPLanguage", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Loading.
+        /// </summary>
+        public static string GPLoading {
+            get {
+                return ResourceManager.GetString("GPLoading", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Saving.
+        /// </summary>
+        public static string GPSaving {
+            get {
+                return ResourceManager.GetString("GPSaving", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Json (*.json) | *.json.
+        /// </summary>
+        public static string JsonFilesOpenFileDialodFilter {
+            get {
+                return ResourceManager.GetString("JsonFilesOpenFileDialodFilter", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Available ZigBees.
         /// </summary>
         public static string MainWindowExpanderTitle {
@@ -160,11 +205,38 @@ namespace ZigBee.Strings {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Settings.
+        /// </summary>
+        public static string MainWindowMenuSettings {
+            get {
+                return ResourceManager.GetString("MainWindowMenuSettings", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Networks.
+        /// </summary>
+        public static string MainWindowNetworks {
+            get {
+                return ResourceManager.GetString("MainWindowNetworks", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Select library.
         /// </summary>
         public static string SelectLibrary {
             get {
                 return ResourceManager.GetString("SelectLibrary", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to SVG files (*.svg)|*.svg.
+        /// </summary>
+        public static string SvgFilesOpenFileDialodFilter {
+            get {
+                return ResourceManager.GetString("SvgFilesOpenFileDialodFilter", resourceCulture);
             }
         }
     }

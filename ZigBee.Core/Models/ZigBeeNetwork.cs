@@ -16,7 +16,7 @@ namespace ZigBee.Core.Models
     public class ZigBeeNetwork:IVendable
     {
         [JsonProperty]
-        public string Name { get; set; } = "Unnamed network";
+        public string Name { get; set; } = Resources.Resources.GPNetwork;
         [JsonProperty]
         public Guid Guid { get; set; } = Guid.NewGuid();
 
