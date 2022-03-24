@@ -3,6 +3,7 @@ using SharpVectors.Converters;
 using System;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
+using System.Threading.Tasks;
 using System.Windows;
 using System.Windows.Controls;
 using System.Windows.Input;
@@ -15,6 +16,7 @@ using ZigBee.Common.WpfExtensions.Base;
 using ZigBee.Core.GUI;
 using ZigBee.Core.GUI.Interfaces;
 using ZigBee.Core.GUI.Models;
+using ZigBee.Models;
 using ZigBee.ViewModels;
 using ZigBee.Views.Controls;
 
@@ -208,6 +210,14 @@ namespace ZigBee.Views
             {
                 var savepopup = new SimpleYesNoProgressBarPopup(Strings.SR.GPLoading+"...", "", Popups.ZigBeeIcons.InfoIcon, null, null, 0, 0, 0, false, false);
                 return new YesNoProgressBarPopupResponseProvider(savepopup);
+            });
+
+            this.ViewModel.ApplicationSettingsResponseProvider = new GenericResponseProvider<Task<ApplicationSettings>, ApplicationSettings>(async (o) =>
+            {
+                var vm = new ApplicationSettingsViewModel(o);
+                var window = new AppSettingsWindow();
+                
+                return (await window.ProvideResponse(vm)).Model;
             });
 
             //this.ViewModel.OnProjectSaved = new Action(() =>

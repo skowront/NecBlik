@@ -16,6 +16,8 @@ using ZigBee.Common.WpfElements;
 using ZigBee.Common.WpfElements.ResponseProviders;
 using ZigBee.Core.GUI.Views;
 using System.Threading;
+using ZigBee.Models;
+using System.Threading.Tasks;
 
 namespace ZigBee.ViewModels
 {
@@ -77,7 +79,10 @@ namespace ZigBee.ViewModels
         public IResponseProvider<string, Tuple<string, IEnumerable<string>>> ListValueResponseProvider = new GenericResponseProvider<string, Tuple<string, IEnumerable<string>>>(string.Empty);
 
         public IResponseProvider<YesNoProgressBarPopupResponseProvider, object> SavingProgressBarResponseProvider = null;
+
         public IResponseProvider<YesNoProgressBarPopupResponseProvider, object> LoadingProgressBarResponseProvider = null;
+
+        public IResponseProvider<Task<ApplicationSettings>, ApplicationSettings> ApplicationSettingsResponseProvider = new GenericResponseProvider<Task<ApplicationSettings>, ApplicationSettings>();
         #endregion
         public ISelectionSubscriber<ZigBeeViewModel> ZigBeeSelectionSubscriber { get; set; }
 
@@ -89,6 +94,7 @@ namespace ZigBee.ViewModels
         public RelayCommand AddNetworkCommand { get; set; }
         public RelayCommand LoadProjectMapCommand { get; set; }
         public RelayCommand EditProjectCommand { get; set; }
+        public RelayCommand ApplicationSettingsCommand { get; set; }
         #endregion
 
         public MainWindowViewModel(ISelectionSubscriber<ZigBeeViewModel> zigBeeSelectionSubscriber)
@@ -168,6 +174,15 @@ namespace ZigBee.ViewModels
                 var window = new ProjectWindow(vm);
                 window.ShowDialog();
                 this.Refresh();
+            });
+
+            this.ApplicationSettingsCommand = new RelayCommand(async o =>
+            {
+                var res = await this.ApplicationSettingsResponseProvider.ProvideResponse(((App)App.Current).ApplicationSettings);
+                if(res!=null)
+                {
+                    ((App)App.Current).ApplicationSettings = res;
+                }
             });
         }
 

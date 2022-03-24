@@ -50,6 +50,8 @@
                     <MenuItem Header="{ext:Loc MainWindowMenuHeaderProjectAddZigBee}" Command="{Binding AddNewZigBeeCommand}"/>
                     <MenuItem Header="{ext:Loc MainWindowMenuHeaderProjectAddNetwork}" Command="{Binding AddNetworkCommand}"/>
                 </MenuItem>
+                <MenuItem Header="{ext:Loc MainWindowMenuSettings}" Command="{Binding ApplicationSettingsCommand}" Margin="4">
+                </MenuItem>
                 <MenuItem Header="{ext:Loc MainWindowMenuAbout}" Margin="4">
                 </MenuItem>
             </Menu>

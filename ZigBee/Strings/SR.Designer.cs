@@ -70,6 +70,15 @@ namespace ZigBee.Strings {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Language.
+        /// </summary>
+        public static string GPLanguage {
+            get {
+                return ResourceManager.GetString("GPLanguage", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Loading.
         /// </summary>
         public static string GPLoading {
@@ -192,6 +201,15 @@ namespace ZigBee.Strings {
         public static string MainWindowMenuHeaderProjectSave {
             get {
                 return ResourceManager.GetString("MainWindowMenuHeaderProjectSave", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Settings.
+        /// </summary>
+        public static string MainWindowMenuSettings {
+            get {
+                return ResourceManager.GetString("MainWindowMenuSettings", resourceCulture);
             }
         }
         
