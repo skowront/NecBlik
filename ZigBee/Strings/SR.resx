@@ -117,6 +117,21 @@
   <resheader name="writer">
     <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </resheader>
+  <data name="AreYouSure" xml:space="preserve">
+    <value>Are you sure?</value>
+  </data>
+  <data name="GPLanguage" xml:space="preserve">
+    <value>Language</value>
+  </data>
+  <data name="GPLoading" xml:space="preserve">
+    <value>Loading</value>
+  </data>
+  <data name="GPSaving" xml:space="preserve">
+    <value>Saving</value>
+  </data>
+  <data name="JsonFilesOpenFileDialodFilter" xml:space="preserve">
+    <value>Json (*.json) | *.json</value>
+  </data>
   <data name="MainWindowExpanderTitle" xml:space="preserve">
     <value>Available ZigBees</value>
   </data>
@@ -150,7 +165,16 @@
   <data name="MainWindowMenuHeaderProjectSave" xml:space="preserve">
     <value>Save project</value>
   </data>
+  <data name="MainWindowMenuSettings" xml:space="preserve">
+    <value>Settings</value>
+  </data>
+  <data name="MainWindowNetworks" xml:space="preserve">
+    <value>Networks</value>
+  </data>
   <data name="SelectLibrary" xml:space="preserve">
     <value>Select library</value>
+  </data>
+  <data name="SvgFilesOpenFileDialodFilter" xml:space="preserve">
+    <value>SVG files (*.svg)|*.svg</value>
   </data>
 </root>

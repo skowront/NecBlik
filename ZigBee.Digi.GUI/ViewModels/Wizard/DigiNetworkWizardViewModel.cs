@@ -23,7 +23,7 @@ namespace ZigBee.Digi.GUI.ViewModels.Wizard
 
         public bool Committed { get; set; } = false;
 
-        private string networkName = "vNetwork";
+        private string networkName = ZigBee.Digi.Resources.Resources.DefaultDigiNetworkName;
 
         public string NetworkName
         {

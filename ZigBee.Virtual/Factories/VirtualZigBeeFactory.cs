@@ -17,7 +17,7 @@ namespace ZigBee.Virtual.Factories
     {
         public VirtualZigBeeFactory()
         {
-            this.internalFactoryType = "Virtual";
+            this.internalFactoryType = Resources.Resources.VirtualFactoryId;
         }
 
         public override string GetVendorID()

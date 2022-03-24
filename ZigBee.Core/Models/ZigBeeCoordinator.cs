@@ -11,13 +11,13 @@ namespace ZigBee.Core.Models
 {
     public class ZigBeeCoordinator: IZigBeeCoordinator
     {
-        protected string internalType { get; set; } = "Default";
+        protected string internalType { get; set; } = Resources.Resources.DefaultFactoryId;
 
         [JsonProperty]
         public Guid Guid { get; set; } = Guid.NewGuid();
 
         [JsonProperty]
-        protected string Name { get; set; } = "ZigBee Coordingator";
+        protected string Name { get; set; } = Resources.Resources.GPZigBeeCoordinator;
 
         protected IZigBeeSource ZigBeeSource { get; set; }
 

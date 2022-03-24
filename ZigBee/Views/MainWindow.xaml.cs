@@ -3,16 +3,20 @@ using SharpVectors.Converters;
 using System;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
+using System.Threading.Tasks;
 using System.Windows;
 using System.Windows.Controls;
 using System.Windows.Input;
 using System.Windows.Markup;
 using System.Windows.Media;
+using ZigBee.Common.WpfElements;
 using ZigBee.Common.WpfElements.PopupValuePickers;
+using ZigBee.Common.WpfElements.ResponseProviders;
 using ZigBee.Common.WpfExtensions.Base;
 using ZigBee.Core.GUI;
 using ZigBee.Core.GUI.Interfaces;
 using ZigBee.Core.GUI.Models;
+using ZigBee.Models;
 using ZigBee.ViewModels;
 using ZigBee.Views.Controls;
 
@@ -131,7 +135,7 @@ namespace ZigBee.Views
 
             this.ViewModel.LoadProjectFilePathProvider = new GenericResponseProvider<string, object>(o =>
             {
-                OpenFileDialog openFileDialog = new OpenFileDialog() { CheckFileExists = true, Filter = "Json (*.json) | *.json" };
+                OpenFileDialog openFileDialog = new OpenFileDialog() { CheckFileExists = true, Filter = Strings.SR.JsonFilesOpenFileDialodFilter };
                 openFileDialog.ShowDialog();
                 return openFileDialog.FileName;
             });
@@ -154,7 +158,7 @@ namespace ZigBee.Views
 
             this.ViewModel.ProjectMapPathProvider = new GenericResponseProvider<string, object>(o =>
             {
-                OpenFileDialog openFileDialog = new OpenFileDialog() { CheckFileExists = true, Filter = "Text files (*.svg)|*.svg" };
+                OpenFileDialog openFileDialog = new OpenFileDialog() { CheckFileExists = true, Filter = Strings.SR.SvgFilesOpenFileDialodFilter };
                 openFileDialog.ShowDialog();
                 return openFileDialog.FileName;
             });
@@ -188,6 +192,33 @@ namespace ZigBee.Views
             this.ViewModel.ZigBeeSelectionSubscriber = this;
 
             this.ViewModel.ListValueResponseProvider = new ListInputValuePicker();
+
+            this.ViewModel.NewProjectLoadEnsureResponseProvider = new GenericResponseProvider<bool, object>((o) =>
+            {
+                var popup = new SimpleYesNoPopup(Strings.SR.AreYouSure, "", Popups.ZigBeeIcons.WarningIcon, null, null);
+                var rp = new YesNoPopupResponseProvider(popup);
+                return rp.ProvideResponse();
+            });
+
+            this.ViewModel.SavingProgressBarResponseProvider = new GenericResponseProvider<YesNoProgressBarPopupResponseProvider, object>((o) =>
+            {
+                var savepopup = new SimpleYesNoProgressBarPopup(Strings.SR.GPSaving+"...", "", Popups.ZigBeeIcons.InfoIcon, null, null, 0, 0, 0, false, false);
+                return new YesNoProgressBarPopupResponseProvider(savepopup);
+            });
+
+            this.ViewModel.LoadingProgressBarResponseProvider = new GenericResponseProvider<YesNoProgressBarPopupResponseProvider, object>((o) =>
+            {
+                var savepopup = new SimpleYesNoProgressBarPopup(Strings.SR.GPLoading+"...", "", Popups.ZigBeeIcons.InfoIcon, null, null, 0, 0, 0, false, false);
+                return new YesNoProgressBarPopupResponseProvider(savepopup);
+            });
+
+            this.ViewModel.ApplicationSettingsResponseProvider = new GenericResponseProvider<Task<ApplicationSettings>, ApplicationSettings>(async (o) =>
+            {
+                var vm = new ApplicationSettingsViewModel(o);
+                var window = new AppSettingsWindow();
+                
+                return (await window.ProvideResponse(vm)).Model;
+            });
 
             //this.ViewModel.OnProjectSaved = new Action(() =>
             //{

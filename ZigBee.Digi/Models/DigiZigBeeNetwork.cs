@@ -48,7 +48,7 @@ namespace ZigBee.Digi.Models
             if (Directory.Exists(dir))
             {
                 this.ZigBeeCoordinator.Save(dir);
-                File.WriteAllText(dir + "\\" + "Network.json", JsonConvert.SerializeObject(this, Formatting.Indented));
+                File.WriteAllText(dir + "\\" + Resources.Resources.NetworkFile, JsonConvert.SerializeObject(this, Formatting.Indented));
             }
         }
     }

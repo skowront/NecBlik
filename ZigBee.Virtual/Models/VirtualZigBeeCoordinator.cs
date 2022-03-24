@@ -23,8 +23,8 @@ namespace ZigBee.Virtual.Models
         public VirtualZigBeeCoordinator(IZigBeeFactory zigBeeFactory)
         {
             this.zigBeeFactory = zigBeeFactory;
-            this.Name = "Virtual ZigBee Coordinator";
-            this.internalType = zigBeeFactory?.GetVendorID() ?? "Virtual";
+            this.Name = Resources.Resources.DefaultVirtualZigBeeCoordinatorName;
+            this.internalType = zigBeeFactory?.GetVendorID() ?? Resources.Resources.VirtualFactoryId;
         }
 
         public VirtualZigBeeCoordinator(IZigBeeFactory zigBeeFactory, bool setupExampleZigBees): this(zigBeeFactory)
