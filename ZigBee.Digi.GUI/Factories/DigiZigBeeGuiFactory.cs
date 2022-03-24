@@ -19,7 +19,7 @@ namespace ZigBee.Digi.GUI.Factories
     {
         public DigiZigBeeGuiFactory()
         {
-            this.internalFactoryType = "Digi";
+            this.internalFactoryType = ZigBee.Digi.Resources.Resources.DigiFactoryId;
         }
 
         public override ZigBeeNetworkViewModel GetNetworkViewModel(ZigBeeNetwork zigBeeNetwork)

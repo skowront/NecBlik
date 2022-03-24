@@ -3,9 +3,13 @@
         xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
         xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
-        xmlns:local="clr-namespace:ZigBee.Virtual.GUI.Views.Wizard"
         xmlns:dtvm="clr-namespace:ZigBee.Digi.GUI.ViewModels.Wizard"
         xmlns:fa="http://schemas.fontawesome.io/icons/"
+        xmlns:lex="clr-namespace:WPFLocalizeExtension.Extensions;assembly=WPFLocalizeextension"
+        xmlns:lexp="clr-namespace:WPFLocalizeExtension.Providers;assembly=WPFLocalizeextension"
+        xmlns:diagrams="clr-namespace:DiagramDesigner;assembly=DiagramsExtension"
+        lexp:ResxLocalizationProvider.DefaultAssembly="ZigBee.Digi.GUI"
+        lexp:ResxLocalizationProvider.DefaultDictionary="Strings.SR"
         mc:Ignorable="d"
         Title="DigiNetworkWizard" Height="450" Width="800"
         d:DataContext="{d:DesignInstance {x:Type dtvm:DigiNetworkWizardViewModel}}">
@@ -23,7 +27,7 @@
                     <ColumnDefinition></ColumnDefinition>
                     <ColumnDefinition></ColumnDefinition>
                 </Grid.ColumnDefinitions>
-                <TextBlock Grid.Column="0" Text="Network Name"></TextBlock>
+                <TextBlock Grid.Column="0" Text="{lex:Loc GPNetworkName}"></TextBlock>
                 <TextBox Grid.Column="1" Grid.ColumnSpan="2" Text="{Binding NetworkName}" VerticalAlignment="Stretch"></TextBox>
             </Grid>
             <Grid Grid.Row="1" Margin="0 10">
@@ -32,11 +36,11 @@
                     <ColumnDefinition></ColumnDefinition>
                     <ColumnDefinition></ColumnDefinition>
                 </Grid.ColumnDefinitions>
-                <TextBlock Grid.Column="0" Text="Serial port"></TextBlock>
+                <TextBlock Grid.Column="0" Text="{lex:Loc GPSerialPort}"></TextBlock>
                 <TextBlock Grid.Column="1" Text="{Binding SerialPortName}"></TextBlock>
                 <Button Grid.Column="2" HorizontalAlignment="Right" HorizontalContentAlignment="Right" Command="{Binding PickSerialPortCommand}">
                     <StackPanel Orientation="Horizontal">
-                        <TextBlock Text="Select" Margin="0 0 10 0"></TextBlock>
+                        <TextBlock Text="{lex:Loc GPSelect}" Margin="0 0 10 0"></TextBlock>
                         <fa:FontAwesome Icon="MousePointer"></fa:FontAwesome>
                     </StackPanel>
                 </Button>
@@ -47,11 +51,11 @@
                     <ColumnDefinition></ColumnDefinition>
                     <ColumnDefinition></ColumnDefinition>
                 </Grid.ColumnDefinitions>
-                <TextBlock Grid.Column="0" Text="Baud rate"></TextBlock>
+                <TextBlock Grid.Column="0" Text="{lex:Loc GPBaudRate}"></TextBlock>
                 <TextBlock Grid.Column="1" Text="{Binding BaudRate}" VerticalAlignment="Stretch"></TextBlock>
                 <Button Grid.Column="2" HorizontalAlignment="Right" HorizontalContentAlignment="Right" Command="{Binding PickBaudRateCommand}">
                     <StackPanel Orientation="Horizontal">
-                        <TextBlock Text="Select" Margin="0 0 10 0"></TextBlock>
+                        <TextBlock Text="{lex:Loc GPSelect}" Margin="0 0 10 0"></TextBlock>
                         <fa:FontAwesome Icon="MousePointer"></fa:FontAwesome>
                     </StackPanel>
                 </Button>

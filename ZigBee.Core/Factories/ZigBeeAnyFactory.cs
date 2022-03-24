@@ -95,7 +95,7 @@ namespace ZigBee.Core.Factories
 
         public string GetVendorID()
         {
-            return "Internal";
+            return Resources.Resources.AnyFactoryId;
         }
 
         public void AttachOtherFactories(List<IZigBeeFactory> zigBeeFactories)

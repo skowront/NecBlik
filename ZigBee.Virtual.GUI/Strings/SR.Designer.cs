@@ -8,7 +8,7 @@
 // </auto-generated>
 //------------------------------------------------------------------------------
 
-namespace ZigBee.Core.Resources {
+namespace ZigBee.Virtual.GUI.Strings {
     using System;
     
     
@@ -22,14 +22,14 @@ namespace ZigBee.Core.Resources {
     [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Resources.Tools.StronglyTypedResourceBuilder", "17.0.0.0")]
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
     [global::System.Runtime.CompilerServices.CompilerGeneratedAttribute()]
-    public class Resources {
+    public class SR {
         
         private static global::System.Resources.ResourceManager resourceMan;
         
         private static global::System.Globalization.CultureInfo resourceCulture;
         
         [global::System.Diagnostics.CodeAnalysis.SuppressMessageAttribute("Microsoft.Performance", "CA1811:AvoidUncalledPrivateCode")]
-        internal Resources() {
+        internal SR() {
         }
         
         /// <summary>
@@ -39,7 +39,7 @@ namespace ZigBee.Core.Resources {
         public static global::System.Resources.ResourceManager ResourceManager {
             get {
                 if (object.ReferenceEquals(resourceMan, null)) {
-                    global::System.Resources.ResourceManager temp = new global::System.Resources.ResourceManager("ZigBee.Core.Resources.Resources", typeof(Resources).Assembly);
+                    global::System.Resources.ResourceManager temp = new global::System.Resources.ResourceManager("ZigBee.Virtual.GUI.Strings.SR", typeof(SR).Assembly);
                     resourceMan = temp;
                 }
                 return resourceMan;
@@ -61,110 +61,92 @@ namespace ZigBee.Core.Resources {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Abstract.
+        ///   Looks up a localized string similar to Coordinator.
         /// </summary>
-        public static string AbstractFactoryId {
+        public static string GPCoordinator {
             get {
-                return ResourceManager.GetString("AbstractFactoryId", resourceCulture);
+                return ResourceManager.GetString("GPCoordinator", resourceCulture);
             }
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Internal.
+        ///   Looks up a localized string similar to Devices.
         /// </summary>
-        public static string AnyFactoryId {
+        public static string GPDevices {
             get {
-                return ResourceManager.GetString("AnyFactoryId", resourceCulture);
+                return ResourceManager.GetString("GPDevices", resourceCulture);
             }
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Default.
+        ///   Looks up a localized string similar to Name.
         /// </summary>
-        public static string DefaultFactoryId {
+        public static string GPName {
             get {
-                return ResourceManager.GetString("DefaultFactoryId", resourceCulture);
+                return ResourceManager.GetString("GPName", resourceCulture);
             }
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Network.
+        ///   Looks up a localized string similar to Network information.
         /// </summary>
-        public static string GPNetwork {
+        public static string GPNetworkInformation {
             get {
-                return ResourceManager.GetString("GPNetwork", resourceCulture);
+                return ResourceManager.GetString("GPNetworkInformation", resourceCulture);
             }
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to ZigBee.
+        ///   Looks up a localized string similar to Network name.
         /// </summary>
-        public static string GPZigBee {
+        public static string GPNetworkName {
             get {
-                return ResourceManager.GetString("GPZigBee", resourceCulture);
+                return ResourceManager.GetString("GPNetworkName", resourceCulture);
             }
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to ZigBee Coordinator.
+        ///   Looks up a localized string similar to Open.
         /// </summary>
-        public static string GPZigBeeCoordinator {
+        public static string GPOpen {
             get {
-                return ResourceManager.GetString("GPZigBeeCoordinator", resourceCulture);
+                return ResourceManager.GetString("GPOpen", resourceCulture);
             }
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Project.
+        ///   Looks up a localized string similar to Select.
         /// </summary>
-        public static string ProjectModelPojectNameDefault {
+        public static string GPSelect {
             get {
-                return ResourceManager.GetString("ProjectModelPojectNameDefault", resourceCulture);
+                return ResourceManager.GetString("GPSelect", resourceCulture);
             }
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to UnknownZigbee.
+        ///   Looks up a localized string similar to Send to map.
         /// </summary>
-        public static string ZigBeeModelNameDefault {
+        public static string GPSendToMap {
             get {
-                return ResourceManager.GetString("ZigBeeModelNameDefault", resourceCulture);
+                return ResourceManager.GetString("GPSendToMap", resourceCulture);
             }
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to \Networks.
+        ///   Looks up a localized string similar to Version.
         /// </summary>
-        public static string ZigBeeNetworksDirectory {
+        public static string GPVersion {
             get {
-                return ResourceManager.GetString("ZigBeeNetworksDirectory", resourceCulture);
+                return ResourceManager.GetString("GPVersion", resourceCulture);
             }
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to \Sources.
+        ///   Looks up a localized string similar to Virtual ZigBees count.
         /// </summary>
-        public static string ZigBeeNetworkSourcesSubdirectory {
+        public static string GPVirtualZigBeesCount {
             get {
-                return ResourceManager.GetString("ZigBeeNetworkSourcesSubdirectory", resourceCulture);
-            }
-        }
-        
-        /// <summary>
-        ///   Looks up a localized string similar to Unable to retrieve address.
-        /// </summary>
-        public static string ZigBeeUnableToRetrieveAddress {
-            get {
-                return ResourceManager.GetString("ZigBeeUnableToRetrieveAddress", resourceCulture);
-            }
-        }
-        
-        /// <summary>
-        ///   Looks up a localized string similar to Unknown version.
-        /// </summary>
-        public static string ZigBeeVersionDefault {
-            get {
-                return ResourceManager.GetString("ZigBeeVersionDefault", resourceCulture);
+                return ResourceManager.GetString("GPVirtualZigBeesCount", resourceCulture);
             }
         }
     }

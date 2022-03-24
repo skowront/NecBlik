@@ -72,10 +72,14 @@ namespace ZigBee.ViewModels
         public IResponseProvider<string, object> ProjectMapPathProvider { get; set; } = new GenericResponseProvider<string, object>(string.Empty);
         public IResponseProvider<object, Tuple<string, DiagramItemMetadata>> ProjectMapLoadedProvider { get; set; } = new GenericResponseProvider<object, Tuple<string,DiagramItemMetadata>>();
         public IResponseProvider<object, object> NewProjectLoadedProvider { get; set; } = new GenericResponseProvider<object, object>();
-        public ISelectionSubscriber<ZigBeeViewModel> ZigBeeSelectionSubscriber { get; set; }
-
+        public IResponseProvider<bool, object> NewProjectLoadEnsureResponseProvider { get; set; } = new GenericResponseProvider<bool, object>(true);
+        
         public IResponseProvider<string, Tuple<string, IEnumerable<string>>> ListValueResponseProvider = new GenericResponseProvider<string, Tuple<string, IEnumerable<string>>>(string.Empty);
+
+        public IResponseProvider<YesNoProgressBarPopupResponseProvider, object> SavingProgressBarResponseProvider = null;
+        public IResponseProvider<YesNoProgressBarPopupResponseProvider, object> LoadingProgressBarResponseProvider = null;
         #endregion
+        public ISelectionSubscriber<ZigBeeViewModel> ZigBeeSelectionSubscriber { get; set; }
 
         #region Commands
         public RelayCommand NewProjectCommand { get; set; }
@@ -100,9 +104,7 @@ namespace ZigBee.ViewModels
         {
             this.NewProjectCommand = new RelayCommand(o =>
             {
-                var popup = new SimpleYesNoPopup("Are you sure?","",Popups.ZigBeeIcons.WarningIcon,null,null);
-                var rp = new YesNoPopupResponseProvider(popup);
-                if(rp.ProvideResponse()==false)
+                if(this.NewProjectLoadEnsureResponseProvider.ProvideResponse() == false)
                 {
                     return;
                 }
@@ -204,12 +206,11 @@ namespace ZigBee.ViewModels
             }
             else
             {
-                var savepopup = new SimpleYesNoProgressBarPopup("Saving...", "", Popups.ZigBeeIcons.InfoIcon, null, null, 0, 0, 0, false, false);
-                this.model.Save(path, new YesNoProgressBarPopupResponseProvider(savepopup));
+                
+                this.model.Save(path, this.SavingProgressBarResponseProvider.ProvideResponse());
                 this.SaveProjectGui(path);
             }
-            var popup = new SimpleYesNoProgressBarPopup("Loading...", "", Popups.ZigBeeIcons.InfoIcon, null, null, 0, 0, 0, false, false);
-            await this.model.Load(dir, new YesNoProgressBarPopupResponseProvider(popup));
+            await this.model.Load(dir, this.LoadingProgressBarResponseProvider.ProvideResponse());
             this.LoadProjectGui(path);
             
             this.SyncFromModel();
@@ -269,8 +270,7 @@ namespace ZigBee.ViewModels
                     File.AppendAllText(file, JsonConvert.SerializeObject(this.model, Formatting.Indented));
                 }
             }
-            var savepopup = new SimpleYesNoProgressBarPopup("Saving...", "", Popups.ZigBeeIcons.InfoIcon, null, null, 0, 0, 0, false, false);
-            this.model.Save(dir, new YesNoProgressBarPopupResponseProvider(savepopup));
+            this.model.Save(dir, this.SavingProgressBarResponseProvider.ProvideResponse());
             this.SaveProjectGui(dir);
         }
 

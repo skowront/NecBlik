@@ -5,6 +5,10 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:ZigBee.Virtual.GUI.Views"
         xmlns:viewModels="clr-namespace:ZigBee.Virtual.GUI.ViewModels"
+        xmlns:lexp="clr-namespace:WPFLocalizeExtension.Providers;assembly=WPFLocalizeextension"
+        xmlns:lex="clr-namespace:WPFLocalizeExtension.Extensions;assembly=WPFLocalizeextension"
+        lexp:ResxLocalizationProvider.DefaultAssembly="ZigBee.Virtual.GUI"
+        lexp:ResxLocalizationProvider.DefaultDictionary="SR"
         mc:Ignorable="d"
         Title="VirtualZigBeeNetworkWindow" Height="450" Width="800">
     <Grid Margin="10">
@@ -15,13 +19,13 @@
             <RowDefinition Height="9*"></RowDefinition>
         </Grid.RowDefinitions>
         <StackPanel Grid.Row="0">
-            <TextBlock Text="Network information" HorizontalAlignment="Center"></TextBlock>
-            <TextBlock Text="Network name:"></TextBlock>
+            <TextBlock Text="{lex:Loc GPNetworkInformation}" HorizontalAlignment="Center"></TextBlock>
+            <TextBlock Text="{lex:Loc GPNetworkName}"></TextBlock>
             <TextBox Text="{Binding ViewModel.Name,UpdateSourceTrigger=PropertyChanged}"></TextBox>
             <Separator Grid.Row="1"></Separator>
         </StackPanel>
         <StackPanel Grid.Row="1">
-            <TextBlock Text="Coordinator" HorizontalAlignment="Center"></TextBlock>
+            <TextBlock Text="{lex:Loc GPCoordinator}" HorizontalAlignment="Center"></TextBlock>
         </StackPanel>
         <ContentPresenter Grid.Row="2" Content="{Binding ViewModel.ZigBeeCoordinator}">
             <ContentPresenter.ContentTemplate>
@@ -31,8 +35,8 @@
                         <TextBlock Text="{Binding Name, UpdateSourceTrigger=PropertyChanged}"></TextBlock>
                         <TextBlock Text="{Binding Guid, UpdateSourceTrigger=PropertyChanged}"></TextBlock>
                         <StackPanel Orientation="Horizontal">
-                            <Button Command="{Binding EditCommand}" Content="Open"></Button>
-                            <Button Command="{Binding SelectCommand}" Content="SendToMap"></Button>
+                            <Button Command="{Binding EditCommand}" Content="{lex:Loc GPOpen}" Margin="5 5"></Button>
+                            <Button Command="{Binding SelectCommand}" Content="{lex:Loc GPSendToMap}"></Button>
                         </StackPanel>
                         <Separator Grid.Row="1"></Separator>
                     </StackPanel>
@@ -44,7 +48,7 @@
                 <RowDefinition Height="auto"></RowDefinition>
                 <RowDefinition Height="*"></RowDefinition>
             </Grid.RowDefinitions>
-            <TextBlock Text="Devices" HorizontalAlignment="Center"></TextBlock>
+            <TextBlock Text="{lex:Loc GPDevices}" HorizontalAlignment="Center"></TextBlock>
             <ListView Grid.Row="1" ItemsSource="{Binding ViewModel.ZigBees}" ScrollViewer.VerticalScrollBarVisibility="Visible" Style="{StaticResource ZigBeeListViewHoverless}">
                 <ListView.ItemTemplate>
                     <DataTemplate DataType="{x:Type viewModels:VirtualZigBeeViewModel}">
@@ -53,8 +57,8 @@
                             <TextBlock Text="{Binding Name, UpdateSourceTrigger=PropertyChanged}"></TextBlock>
                             <TextBlock Text="{Binding Guid, UpdateSourceTrigger=PropertyChanged}"></TextBlock>
                             <StackPanel Orientation="Horizontal">
-                                <Button Command="{Binding EditCommand}" Content="Open"></Button>
-                                <Button Command="{Binding SelectCommand}" Content="SendToMap"></Button>
+                                <Button Command="{Binding EditCommand}" Content="{lex:Loc GPOpen}" Margin="5 5"></Button>
+                                <Button Command="{Binding SelectCommand}" Content="{lex:Loc GPSendToMap}"></Button>
                             </StackPanel>
                         </StackPanel>
                     </DataTemplate>

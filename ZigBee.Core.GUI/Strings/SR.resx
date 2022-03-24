@@ -117,40 +117,7 @@
   <resheader name="writer">
     <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </resheader>
-  <data name="AbstractFactoryId" xml:space="preserve">
-    <value>Abstract</value>
-  </data>
-  <data name="AnyFactoryId" xml:space="preserve">
-    <value>Internal</value>
-  </data>
-  <data name="DefaultFactoryId" xml:space="preserve">
-    <value>Default</value>
-  </data>
-  <data name="GPNetwork" xml:space="preserve">
-    <value>Network</value>
-  </data>
-  <data name="GPZigBee" xml:space="preserve">
-    <value>ZigBee</value>
-  </data>
-  <data name="GPZigBeeCoordinator" xml:space="preserve">
-    <value>ZigBee Coordinator</value>
-  </data>
-  <data name="ProjectModelPojectNameDefault" xml:space="preserve">
-    <value>Project</value>
-  </data>
-  <data name="ZigBeeModelNameDefault" xml:space="preserve">
-    <value>UnknownZigbee</value>
-  </data>
-  <data name="ZigBeeNetworksDirectory" xml:space="preserve">
-    <value>\Networks</value>
-  </data>
-  <data name="ZigBeeNetworkSourcesSubdirectory" xml:space="preserve">
-    <value>\Sources</value>
-  </data>
-  <data name="ZigBeeUnableToRetrieveAddress" xml:space="preserve">
-    <value>Unable to retrieve address</value>
-  </data>
-  <data name="ZigBeeVersionDefault" xml:space="preserve">
-    <value>Unknown version</value>
+  <data name="GPOpen" xml:space="preserve">
+    <value>Open</value>
   </data>
 </root>

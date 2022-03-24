@@ -117,40 +117,34 @@
   <resheader name="writer">
     <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </resheader>
-  <data name="AbstractFactoryId" xml:space="preserve">
-    <value>Abstract</value>
+  <data name="GPCoordinator" xml:space="preserve">
+    <value>Koordynator</value>
   </data>
-  <data name="AnyFactoryId" xml:space="preserve">
-    <value>Internal</value>
+  <data name="GPDevices" xml:space="preserve">
+    <value>Urządzenia</value>
   </data>
-  <data name="DefaultFactoryId" xml:space="preserve">
-    <value>Default</value>
+  <data name="GPName" xml:space="preserve">
+    <value>Nazwa</value>
   </data>
-  <data name="GPNetwork" xml:space="preserve">
-    <value>Network</value>
+  <data name="GPNetworkInformation" xml:space="preserve">
+    <value>Informacje o sieci</value>
   </data>
-  <data name="GPZigBee" xml:space="preserve">
-    <value>ZigBee</value>
+  <data name="GPNetworkName" xml:space="preserve">
+    <value>Nazwa sieci</value>
   </data>
-  <data name="GPZigBeeCoordinator" xml:space="preserve">
-    <value>ZigBee Coordinator</value>
+  <data name="GPOpen" xml:space="preserve">
+    <value>Otwórz</value>
   </data>
-  <data name="ProjectModelPojectNameDefault" xml:space="preserve">
-    <value>Project</value>
+  <data name="GPSelect" xml:space="preserve">
+    <value>Wybierz</value>
   </data>
-  <data name="ZigBeeModelNameDefault" xml:space="preserve">
-    <value>UnknownZigbee</value>
+  <data name="GPSendToMap" xml:space="preserve">
+    <value>Wyślij na mapę</value>
   </data>
-  <data name="ZigBeeNetworksDirectory" xml:space="preserve">
-    <value>\Networks</value>
+  <data name="GPVersion" xml:space="preserve">
+    <value>Wersja</value>
   </data>
-  <data name="ZigBeeNetworkSourcesSubdirectory" xml:space="preserve">
-    <value>\Sources</value>
-  </data>
-  <data name="ZigBeeUnableToRetrieveAddress" xml:space="preserve">
-    <value>Unable to retrieve address</value>
-  </data>
-  <data name="ZigBeeVersionDefault" xml:space="preserve">
-    <value>Unknown version</value>
+  <data name="GPVirtualZigBeesCount" xml:space="preserve">
+    <value>Liczba wirtualnych zigbee</value>
   </data>
 </root>

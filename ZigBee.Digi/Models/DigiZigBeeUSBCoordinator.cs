@@ -16,7 +16,7 @@ namespace ZigBee.Digi.Models
 {
 
     [JsonObject(MemberSerialization.OptIn)]
-    public class DigiZigBeeUSBCoordinator: VirtualZigBeeCoordinator
+    public class DigiZigBeeUSBCoordinator : VirtualZigBeeCoordinator
     {
         private ZigBeeDevice zigBee;
 
@@ -29,7 +29,7 @@ namespace ZigBee.Digi.Models
 
         private const long timeout = 25000L;
 
-        private const int maxProgress = (int)timeout/sleepTime;
+        private const int maxProgress = (int)timeout / sleepTime;
 
         private bool discoveryFinished = false;
 
@@ -38,13 +38,13 @@ namespace ZigBee.Digi.Models
             this.zigBeeFactory = new DigiZigBeeFactory();
             this.internalType = this.zigBeeFactory.GetVendorID();
             this.connectionData = connectionData ?? new() { port = string.Empty, baud = 9600 };
-            this.Name = "Digi Coordinator";
+            this.Name = Resources.Resources.DefaultDigiCoordinatorName;
         }
 
-        public override async Task<IEnumerable<IZigBeeSource>> GetDevices(IUpdatableResponseProvider<int, bool, string> progressResponseProvider=null)
+        public override async Task<IEnumerable<IZigBeeSource>> GetDevices(IUpdatableResponseProvider<int, bool, string> progressResponseProvider = null)
         {
             this.progressResponseProvider = progressResponseProvider;
-            if (this.connectionData.port==string.Empty || this.connectionData.port == null)
+            if (this.connectionData.port == string.Empty || this.connectionData.port == null)
             {
                 return null;
             }
@@ -96,7 +96,7 @@ namespace ZigBee.Digi.Models
 
         public override void Save(string folderPath)
         {
-            File.WriteAllText(folderPath + "\\" + "Coordinator.json", JsonConvert.SerializeObject(this.connectionData, Formatting.Indented));
+            File.WriteAllText(folderPath + "\\" + Resources.Resources.CoordinatorFile, JsonConvert.SerializeObject(this.connectionData, Formatting.Indented));
         }
 
         public override string GetVersion()
@@ -114,7 +114,7 @@ namespace ZigBee.Digi.Models
 
         public override string GetCacheId()
         {
-            return "Coordinator"+this.zigBee?.GetAddressString();
+            return Resources.Resources.CoordinatorCachePrefix + this.zigBee?.GetAddressString();
         }
 
         [JsonObject(MemberSerialization.OptIn)]
