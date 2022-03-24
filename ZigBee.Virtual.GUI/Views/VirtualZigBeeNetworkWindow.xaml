@@ -7,41 +7,59 @@
         xmlns:viewModels="clr-namespace:ZigBee.Virtual.GUI.ViewModels"
         mc:Ignorable="d"
         Title="VirtualZigBeeNetworkWindow" Height="450" Width="800">
-    <Grid>
+    <Grid Margin="10">
         <Grid.RowDefinitions>
+            <RowDefinition Height="auto"></RowDefinition>
             <RowDefinition Height="auto"></RowDefinition>
             <RowDefinition Height="auto"></RowDefinition>
             <RowDefinition Height="9*"></RowDefinition>
         </Grid.RowDefinitions>
         <StackPanel Grid.Row="0">
+            <TextBlock Text="Network information" HorizontalAlignment="Center"></TextBlock>
             <TextBlock Text="Network name:"></TextBlock>
             <TextBox Text="{Binding ViewModel.Name,UpdateSourceTrigger=PropertyChanged}"></TextBox>
+            <Separator Grid.Row="1"></Separator>
         </StackPanel>
-        <ContentPresenter Grid.Row="1" Content="{Binding ViewModel.ZigBeeCoordinator}">
+        <StackPanel Grid.Row="1">
+            <TextBlock Text="Coordinator" HorizontalAlignment="Center"></TextBlock>
+        </StackPanel>
+        <ContentPresenter Grid.Row="2" Content="{Binding ViewModel.ZigBeeCoordinator}">
             <ContentPresenter.ContentTemplate>
                 <DataTemplate DataType="{x:Type viewModels:VirtualZigBeeViewModel}">
                     <StackPanel Orientation="Vertical">
                         <TextBlock Text="{Binding InternalFactoryType}"></TextBlock>
                         <TextBlock Text="{Binding Name, UpdateSourceTrigger=PropertyChanged}"></TextBlock>
                         <TextBlock Text="{Binding Guid, UpdateSourceTrigger=PropertyChanged}"></TextBlock>
-                        <Button Command="{Binding EditCommand}" Content="Open"></Button>
-                        <Button Command="{Binding SelectCommand}" Content="SendToMap"></Button>
+                        <StackPanel Orientation="Horizontal">
+                            <Button Command="{Binding EditCommand}" Content="Open"></Button>
+                            <Button Command="{Binding SelectCommand}" Content="SendToMap"></Button>
+                        </StackPanel>
+                        <Separator Grid.Row="1"></Separator>
                     </StackPanel>
                 </DataTemplate>
             </ContentPresenter.ContentTemplate>
         </ContentPresenter>
-        <ListView Grid.Row="2" ItemsSource="{Binding ViewModel.ZigBees}" ScrollViewer.VerticalScrollBarVisibility="Visible" Style="{StaticResource ZigBeeListViewHoverless}">
-            <ListView.ItemTemplate>
-                <DataTemplate DataType="{x:Type viewModels:VirtualZigBeeViewModel}">
-                    <StackPanel Orientation="Vertical">
-                        <TextBlock Text="{Binding InternalFactoryType}"></TextBlock>
-                        <TextBlock Text="{Binding Name, UpdateSourceTrigger=PropertyChanged}"></TextBlock>
-                        <TextBlock Text="{Binding Guid, UpdateSourceTrigger=PropertyChanged}"></TextBlock>
-                        <Button Command="{Binding EditCommand}" Content="Open"></Button>
-                        <Button Command="{Binding SelectCommand}" Content="SendToMap"></Button>
-                    </StackPanel>
-                </DataTemplate>
-            </ListView.ItemTemplate>
-        </ListView>
+        <Grid Grid.Row="3">
+            <Grid.RowDefinitions>
+                <RowDefinition Height="auto"></RowDefinition>
+                <RowDefinition Height="*"></RowDefinition>
+            </Grid.RowDefinitions>
+            <TextBlock Text="Devices" HorizontalAlignment="Center"></TextBlock>
+            <ListView Grid.Row="1" ItemsSource="{Binding ViewModel.ZigBees}" ScrollViewer.VerticalScrollBarVisibility="Visible" Style="{StaticResource ZigBeeListViewHoverless}">
+                <ListView.ItemTemplate>
+                    <DataTemplate DataType="{x:Type viewModels:VirtualZigBeeViewModel}">
+                        <StackPanel Orientation="Vertical">
+                            <TextBlock Text="{Binding InternalFactoryType}"></TextBlock>
+                            <TextBlock Text="{Binding Name, UpdateSourceTrigger=PropertyChanged}"></TextBlock>
+                            <TextBlock Text="{Binding Guid, UpdateSourceTrigger=PropertyChanged}"></TextBlock>
+                            <StackPanel Orientation="Horizontal">
+                                <Button Command="{Binding EditCommand}" Content="Open"></Button>
+                                <Button Command="{Binding SelectCommand}" Content="SendToMap"></Button>
+                            </StackPanel>
+                        </StackPanel>
+                    </DataTemplate>
+                </ListView.ItemTemplate>
+            </ListView>
+        </Grid>
     </Grid>
 </Window>

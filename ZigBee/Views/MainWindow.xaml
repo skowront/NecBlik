@@ -40,14 +40,12 @@
                 <RowDefinition Height="1*"></RowDefinition>
                 <RowDefinition Height="2"></RowDefinition>
             </Grid.RowDefinitions>
-            <Menu Grid.Row="0" VerticalAlignment="Stretch" VerticalContentAlignment="Bottom">
+            <Menu Grid.Row="0" VerticalAlignment="Top" Height="auto" VerticalContentAlignment="Bottom">
                 <MenuItem Header="{ext:Loc MainWindowMenuHeaderNew}" Margin="4">
                     <MenuItem Header="{ext:Loc MainWindowMenuHeaderProject}" Command="{Binding NewProjectCommand}"/>
-                </MenuItem>
-                <MenuItem Header="{ext:Loc MainWindowMenuHeaderProject}" Margin="4">
                     <MenuItem Header="{ext:Loc MainWindowMenuHeaderProjectLoad}" Command="{Binding LoadProjectCommand}"/>
                     <MenuItem Header="{ext:Loc MainWindowMenuHeaderProjectSave}" Command="{Binding SaveProjectCommand}"/>
-                    <MenuItem Header="{ext:Loc MainWindowMenuHeaderProjectEdit}"/>
+                    <MenuItem Header="{ext:Loc MainWindowMenuHeaderProjectEdit}" Command="{Binding EditProjectCommand}"/>
                     <MenuItem Header="{ext:Loc MainWindowManuHeaderProjectLoadMap}" Command="{Binding LoadProjectMapCommand}"/>
                     <MenuItem Header="{ext:Loc MainWindowMenuHeaderProjectAddZigBee}" Command="{Binding AddNewZigBeeCommand}"/>
                     <MenuItem Header="{ext:Loc MainWindowMenuHeaderProjectAddNetwork}" Command="{Binding AddNetworkCommand}"/>
@@ -59,6 +57,7 @@
                        Grid.Column="1" 
                        Text="{Binding ProjectName}" 
                        HorizontalAlignment="Center" 
+                       Margin="10 0 10 0"
                        Style="{StaticResource NormalTextBlock}"/>
         </Grid>
         <Grid Grid.Row="1">

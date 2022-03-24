@@ -52,7 +52,7 @@ namespace ZigBee.Digi.Models
             this.zigBee.Open();
             var network = this.zigBee.GetNetwork();
             var options = new HashSet<XBeeLibrary.Core.Models.DiscoveryOptions>();
-            options.Add(XBeeLibrary.Core.Models.DiscoveryOptions.DISCOVER_MYSELF);
+            //options.Add(XBeeLibrary.Core.Models.DiscoveryOptions.DISCOVER_MYSELF);
             options.Add(XBeeLibrary.Core.Models.DiscoveryOptions.APPEND_DD);
             network.SetDiscoveryOptions(options);
             network.SetDiscoveryTimeout(25000L);

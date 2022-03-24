@@ -14,11 +14,13 @@ using ZigBee.Core.GUI.Interfaces;
 using ZigBee.Strings;
 using ZigBee.Common.WpfElements;
 using ZigBee.Common.WpfElements.ResponseProviders;
+using ZigBee.Core.GUI.Views;
 
 namespace ZigBee.ViewModels
 {
     public class MainWindowViewModel : BaseViewModel
     {
+        #region Properties
         private ProjectModel model;
 
         private ProjectGuiModel guiModel;
@@ -56,10 +58,10 @@ namespace ZigBee.ViewModels
                 return all;
             }
         }
-
-
         public ObservableCollection<ZigBeeNetworkViewModel> ZigBeeNetworks { get; set; } = new ObservableCollection<ZigBeeNetworkViewModel>();
+        #endregion
 
+        #region ResponseProviders
         public IResponseProvider<ZigBeeViewModel, ZigBeeViewModel> NewZigBeeResponseProvider { get; set; } = new GenericResponseProvider<ZigBeeViewModel, ZigBeeViewModel>(new ZigBeeViewModel());
         public IResponseProvider<string, object> LoadProjectFilePathProvider { get; set; } = new GenericResponseProvider<string, object>(string.Empty);
         public IResponseProvider<string, object> SaveProjectFilePathProvider { get; set; } = new GenericResponseProvider<string, object>(string.Empty);
@@ -72,22 +74,22 @@ namespace ZigBee.ViewModels
         public ISelectionSubscriber<ZigBeeViewModel> ZigBeeSelectionSubscriber { get; set; }
 
         public IResponseProvider<string, Tuple<string, IEnumerable<string>>> ListValueResponseProvider = new GenericResponseProvider<string, Tuple<string, IEnumerable<string>>>(string.Empty);
+        #endregion
 
+        #region Commands
         public RelayCommand NewProjectCommand { get; set; }
         public RelayCommand SaveProjectCommand { get; set; }
         public RelayCommand LoadProjectCommand { get; set; }
         public RelayCommand AddNewZigBeeCommand { get; set; }
         public RelayCommand AddNetworkCommand { get; set; }
         public RelayCommand LoadProjectMapCommand { get; set; }
+        public RelayCommand EditProjectCommand { get; set; }
+        #endregion
 
         public MainWindowViewModel(ISelectionSubscriber<ZigBeeViewModel> zigBeeSelectionSubscriber)
         {
             this.ZigBeeSelectionSubscriber = zigBeeSelectionSubscriber; 
             this.model = new ProjectModel();
-            //this.model.ZigBeeNetworks.Add(new VirtualZigBeeNetwork(true));
-            //var factory = new Digi.Factories.DigiZigBeeFactory();
-            //var crd = new Digi.Models.DigiZigBeeUSBCoordinator(factory, new Digi.Models.DigiZigBeeUSBCoordinator.DigiUSBConnectionData() { baud = 9600, port="COM4" });
-            //this.model.ZigBeeNetworks.Add(new Digi.Models.DigiZigBeeNetwork(crd));
             this.guiModel = new ProjectGuiModel();
             this.SyncFromModel();
             this.buildCommands();
@@ -97,6 +99,13 @@ namespace ZigBee.ViewModels
         {
             this.NewProjectCommand = new RelayCommand(o =>
             {
+                var popup = new SimpleYesNoPopup("Are you sure?","",Popups.ZigBeeIcons.WarningIcon,null,null);
+                var rp = new YesNoPopupResponseProvider(popup);
+                if(rp.ProvideResponse()==false)
+                {
+                    return;
+                }
+
                 this.model = new ProjectModel();
                 this.SyncFromModel();
                 this.NewProjectLoadedProvider?.ProvideResponse();
@@ -148,6 +157,14 @@ namespace ZigBee.ViewModels
             {
                 var path = this.ProjectMapPathProvider.ProvideResponse();
                 this.LoadProjectMap(path);
+            });
+
+            this.EditProjectCommand = new RelayCommand(o =>
+            {
+                var vm = new ProjectViewModel(this.model);
+                var window = new ProjectWindow(vm);
+                window.ShowDialog();
+                this.Refresh();
             });
         }
 
