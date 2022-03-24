@@ -5,7 +5,7 @@
                     xmlns:c="clr-namespace:DiagramDesigner.Controls">
 
     <ContextMenu x:Key="DesignerItemContextMenu">
-        <MenuItem Header="Cut" Command="{x:Static ApplicationCommands.Cut}">
+        <!--<MenuItem Header="Cut" Command="{x:Static ApplicationCommands.Cut}">
             <MenuItem.Icon>
                 <Image Source="Images/Cut.png" Width="16"/>
             </MenuItem.Icon>
@@ -19,14 +19,14 @@
             <MenuItem.Icon>
                 <Image Source="Images/Paste.png" Width="16"/>
             </MenuItem.Icon>
-        </MenuItem>
+        </MenuItem>-->
         <MenuItem Header="Delete" Command="{x:Static ApplicationCommands.Delete}">
             <MenuItem.Icon>
                 <Image Source="Images/Delete.png" Width="16"/>
             </MenuItem.Icon>
         </MenuItem>
         <Separator/>
-        <MenuItem Header="Grouping">
+        <!--<MenuItem Header="Grouping">
             <MenuItem Header="Group" Command="{x:Static s:DesignerCanvas.Group}">
                 <MenuItem.Icon>
                     <Image Source="Images/Group.png" Width="16"/>
@@ -37,8 +37,8 @@
                     <Image Source="Images/Ungroup.png" Width="16"/>
                 </MenuItem.Icon>
             </MenuItem>
-        </MenuItem>
-        <MenuItem Header="Order">
+        </MenuItem>-->
+        <!--<MenuItem Header="Order">
             <MenuItem Header="Bring Forward" Command="{x:Static s:DesignerCanvas.BringForward}">
                 <MenuItem.Icon>
                     <Image Source="Images/BringForward.png" Width="16"/>
@@ -59,11 +59,11 @@
                     <Image Source="Images/SendToBack.png" Width="16"/>
                 </MenuItem.Icon>
             </MenuItem>
-        </MenuItem>
+        </MenuItem>-->
     </ContextMenu>
 
     <!-- Connector Style -->
-    <Style TargetType="{x:Type s:Connector}">
+    <!--<Style TargetType="{x:Type s:Connector}">
         <Setter Property="Width" Value="8"/>
         <Setter Property="Height" Value="8"/>
         <Setter Property="Cursor" Value="Cross"/>
@@ -72,14 +72,14 @@
             <Setter.Value>
                 <ControlTemplate TargetType="{x:Type s:Connector}">
                     <Grid>
-                        <!-- transparent extra space makes connector easier to hit -->
+                        --><!-- transparent extra space makes connector easier to hit --><!--
                         <Rectangle Fill="Transparent" Margin="-2"/>
                         <Rectangle Fill="Lavender" StrokeThickness="1" Stroke="#AA000080"/>
                     </Grid>
                 </ControlTemplate>
             </Setter.Value>
         </Setter>
-    </Style>
+    </Style>-->
 
     <!-- ConnectorDecoratorTemplate Default Template -->
     <ControlTemplate x:Key="ConnectorDecoratorTemplate" TargetType="{x:Type Control}">

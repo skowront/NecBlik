@@ -15,7 +15,7 @@ namespace ZigBee
     {
         public App()
         {
-            this.ShutdownMode = ShutdownMode.OnLastWindowClose;
+            this.ShutdownMode = ShutdownMode.OnMainWindowClose;
         }
     }
 }
