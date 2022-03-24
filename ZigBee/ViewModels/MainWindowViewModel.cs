@@ -122,7 +122,7 @@ namespace ZigBee.ViewModels
 
             this.AddNetworkCommand = new RelayCommand(async (o) =>
             {
-                var ip = this.ListValueResponseProvider.ProvideResponse(new Tuple<string, IEnumerable<string>>(SR.SelectLibrary, ZigBeeGuiAnyFactory.Instance.GetFactoryIds()));
+                var ip = this.ListValueResponseProvider.ProvideResponse(new Tuple<string, IEnumerable<string>>(SR.ResourceManager.GetString("SelectLibrary"), ZigBeeGuiAnyFactory.Instance.GetFactoryIds()));
                 if(ip != string.Empty)
                 {
                     var vm = ZigBeeGuiAnyFactory.Instance.NetworkViewModelFromWizard(null,ip);

@@ -45,11 +45,14 @@ namespace ZigBee
                 this.ApplicationSettings = JsonConvert.DeserializeObject<ApplicationSettings>(File.ReadAllText(SettingsFile));
             }
 
-            //WPFLocalizeExtension.Engine.LocalizeDictionary.Instance.Culture = System.Globalization.CultureInfo.CreateSpecificCulture("PL");
+            WPFLocalizeExtension.Engine.LocalizeDictionary.Instance.SetCurrentThreadCulture = true;
+            WPFLocalizeExtension.Engine.LocalizeDictionary.Instance.Culture = System.Globalization.CultureInfo.CreateSpecificCulture(this.applicationSettings.Language);
         }
 
         private void OnSettingsChanged()
         {
+
+            WPFLocalizeExtension.Engine.LocalizeDictionary.Instance.SetCurrentThreadCulture = true;
             WPFLocalizeExtension.Engine.LocalizeDictionary.Instance.Culture = System.Globalization.CultureInfo.CreateSpecificCulture(this.applicationSettings.Language);
         }
 
