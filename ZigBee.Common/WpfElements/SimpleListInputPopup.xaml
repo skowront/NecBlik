@@ -9,7 +9,7 @@
         AllowsTransparency="True"
         WindowStartupLocation="CenterScreen"
         MinHeight="300"
-        MinWidth="500"
+        MinWidth="300"
         Title="{Binding Title}" 
         Height="300"
         Width="500"
@@ -32,12 +32,12 @@
     </WindowChrome.WindowChrome>
     <Grid>
         <Grid.RowDefinitions>
-            <RowDefinition></RowDefinition>
-            <RowDefinition></RowDefinition>
-            <RowDefinition></RowDefinition>
+            <RowDefinition Height="auto"></RowDefinition>
+            <RowDefinition Height="*"></RowDefinition>
+            <RowDefinition Height="*"></RowDefinition>
         </Grid.RowDefinitions>
         <TextBlock Grid.Row="0" Text="{Binding Message}" FontSize="15"></TextBlock>
-        <ComboBox Grid.Row="1" ItemsSource="{Binding Values}" SelectedItem="{Binding Value}" FontSize="13"></ComboBox>
+        <ComboBox Grid.Row="1" VerticalAlignment="Bottom" ItemsSource="{Binding Values}" SelectedItem="{Binding Value}" FontSize="13"></ComboBox>
         <Grid Grid.Row="2">
             <Grid.ColumnDefinitions>
                 <ColumnDefinition></ColumnDefinition>
