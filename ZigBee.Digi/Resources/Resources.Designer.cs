@@ -61,6 +61,15 @@ namespace ZigBee.Digi.Resources {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to USB Serial Port.
+        /// </summary>
+        public static string AutoDetectionFilterUSBSerialPort {
+            get {
+                return ResourceManager.GetString("AutoDetectionFilterUSBSerialPort", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Coordinator.
         /// </summary>
         public static string CoordinatorCachePrefix {
