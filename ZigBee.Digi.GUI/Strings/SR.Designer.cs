@@ -70,11 +70,38 @@ namespace ZigBee.Digi.GUI.Strings {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Description.
+        /// </summary>
+        public static string GPDescription {
+            get {
+                return ResourceManager.GetString("GPDescription", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Name.
+        /// </summary>
+        public static string GPName {
+            get {
+                return ResourceManager.GetString("GPName", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Network name.
         /// </summary>
         public static string GPNetworkName {
             get {
                 return ResourceManager.GetString("GPNetworkName", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to PID.
+        /// </summary>
+        public static string GPPID {
+            get {
+                return ResourceManager.GetString("GPPID", resourceCulture);
             }
         }
         
@@ -88,11 +115,29 @@ namespace ZigBee.Digi.GUI.Strings {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Select port.
+        /// </summary>
+        public static string GPSelectPort {
+            get {
+                return ResourceManager.GetString("GPSelectPort", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Serial port.
         /// </summary>
         public static string GPSerialPort {
             get {
                 return ResourceManager.GetString("GPSerialPort", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to VID.
+        /// </summary>
+        public static string GPVID {
+            get {
+                return ResourceManager.GetString("GPVID", resourceCulture);
             }
         }
     }

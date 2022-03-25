@@ -129,4 +129,19 @@
   <data name="GPSerialPort" xml:space="preserve">
     <value>Port série</value>
   </data>
+  <data name="GPDescription" xml:space="preserve">
+    <value>Description</value>
+  </data>
+  <data name="GPName" xml:space="preserve">
+    <value>Nom</value>
+  </data>
+  <data name="GPPID" xml:space="preserve">
+    <value>PID</value>
+  </data>
+  <data name="GPVID" xml:space="preserve">
+    <value>VID</value>
+  </data>
+  <data name="GPSelectPort" xml:space="preserve">
+    <value>Choisissez un port</value>
+  </data>
 </root>

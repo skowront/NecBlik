@@ -55,7 +55,7 @@ namespace ZigBee.Digi.GUI.ViewModels.Wizard
         {
             var portInfoList = SerialPortHelper.GetSerialPorts();
             if (portInfoList.Count > 0)
-                this.SerialPortName = portInfoList.Where((o) => o.description.Contains(Digi.Resources.Resources.AutoDetectionFilterUSBSerialPort)).First().name;
+                this.SerialPortName = portInfoList.Where((o) => o.description.Contains(ZigBee.Digi.Resources.Resources.AutoDetectionFilterUSBSerialPort)).First().name;
             else
                 this.SerialPortName = SerialPort.GetPortNames().FirstOrDefault("--");
             this.BuildCommands();
@@ -70,13 +70,14 @@ namespace ZigBee.Digi.GUI.ViewModels.Wizard
                 Dictionary<string, string> dict = new Dictionary<string, string>();
                 foreach (var item in portInfoList)
                 {
-                    var full = "Name: " + item.name + "\nPID: " + item.pid + "\nVID: " + item.vid + "\nDescription: " + item.description;
+                    var full = Strings.SR.GPName + ": " + item.name + "\n" + Strings.SR.GPPID + ": " + item.pid + "\n" 
+                    + Strings.SR.GPVID +": " + item.vid + "\n" + Strings.SR.GPDescription + ": " + item.description;
                     dict[full] = item.name;
                     portNames.Add(full);
                 }
 
                 var rp = new ListInputValuePicker();
-                var result = rp.ProvideResponse(new Tuple<string, IEnumerable<string>>("Select port", portNames));
+                var result = rp.ProvideResponse(new Tuple<string, IEnumerable<string>>(Strings.SR.GPSelectPort, portNames));
                 if (result == string.Empty || result == null || portNames.Contains(result) == false)
                     return;
                 this.SerialPortName = dict[result];
