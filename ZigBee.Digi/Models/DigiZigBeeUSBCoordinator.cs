@@ -112,6 +112,14 @@ namespace ZigBee.Digi.Models
             return r;
         }
 
+        public override string GetPanID()
+        {
+            this.zigBee.Open();
+            var r = this.zigBee.GetPANID();
+            this.zigBee.Close();
+            return Convert.ToHexString(r);
+        }
+
         public override string GetCacheId()
         {
             return Resources.Resources.CoordinatorCachePrefix + this.zigBee?.GetAddressString();

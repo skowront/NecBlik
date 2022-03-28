@@ -106,6 +106,15 @@ namespace ZigBee.Virtual.GUI.Strings {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to PanId.
+        /// </summary>
+        public static string GPNetworkPanId {
+            get {
+                return ResourceManager.GetString("GPNetworkPanId", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Open.
         /// </summary>
         public static string GPOpen {

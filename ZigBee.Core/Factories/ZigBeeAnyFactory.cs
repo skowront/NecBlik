@@ -71,6 +71,7 @@ namespace ZigBee.Core.Factories
                             continue;
                         }
                         var module = Activator.CreateInstance(type) as IZigBeeFactory;
+                        module.Initalize();
                         factories.Add(module);
                     }
                 }
@@ -179,6 +180,11 @@ namespace ZigBee.Core.Factories
                 }
             }
             return await this.DefaultFactory.BuildNetworkFromDirectory(pathToDirectory, updatableResponseProvider);
+        }
+
+        public void Initalize(object args = null)
+        {
+            
         }
     }
 }

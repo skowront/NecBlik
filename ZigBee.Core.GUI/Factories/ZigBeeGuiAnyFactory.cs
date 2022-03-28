@@ -94,6 +94,7 @@ namespace ZigBee.Core.GUI.Factories
                             continue;
                         }
                         var module = Activator.CreateInstance(type) as IZigBeeGuiFactory;
+                        module.Initalize();
                         factories.Add(module);
                     }
                 }
@@ -197,5 +198,9 @@ namespace ZigBee.Core.GUI.Factories
             return this.DefaultFactory.GetZigBeeControl(zigBeeViewModel);
         }
 
+        public void Initalize(object args = null)
+        {
+            
+        }
     }
 }

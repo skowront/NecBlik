@@ -22,6 +22,8 @@
             <TextBlock Text="{lex:Loc GPNetworkInformation}" HorizontalAlignment="Center"></TextBlock>
             <TextBlock Text="{lex:Loc GPNetworkName}"></TextBlock>
             <TextBox Text="{Binding ViewModel.Name,UpdateSourceTrigger=PropertyChanged}"></TextBox>
+            <TextBlock Text="{lex:Loc GPNetworkPanId}"></TextBlock>
+            <TextBlock Text="{Binding ViewModel.PanId,UpdateSourceTrigger=PropertyChanged}"></TextBlock>
             <Separator Grid.Row="1"></Separator>
         </StackPanel>
         <StackPanel Grid.Row="1">

@@ -5,7 +5,8 @@
         <StackPanel>
             <TextBlock Text="Digi"></TextBlock>
             <TextBlock Text="{Binding Name}"></TextBlock>
-            <Button Command="{Binding EditCommand}" Content="Open"></Button>
+            <TextBlock Text="{Binding PanId}"></TextBlock>
+            <Button Command="{Binding EditCommand}" HorizontalAlignment="Left" Content="Open"></Button>
         </StackPanel>
     </DataTemplate>
 
@@ -13,8 +14,9 @@
         <StackPanel>
             <TextBlock Text="Digi"></TextBlock>
             <TextBlock Text="{Binding Name}"></TextBlock>
+            <TextBlock Text="{Binding PanId}"></TextBlock>
             <TextBlock Text="{Binding Guid}"></TextBlock>
-            <Button Command="{Binding EditCommand}" Content="Open"></Button>
+            <Button Command="{Binding EditCommand}" HorizontalAlignment="Left" Content="Open"></Button>
         </StackPanel>
     </DataTemplate>
 </ResourceDictionary>

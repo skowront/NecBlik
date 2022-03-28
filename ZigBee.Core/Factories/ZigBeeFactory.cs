@@ -78,5 +78,10 @@ namespace ZigBee.Core.Factories
         {
             this.OtherFactories = zigBeeFactories;
         }
+
+        public virtual void Initalize(object args = null)
+        {
+            
+        }
     }
 }

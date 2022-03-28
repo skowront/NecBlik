@@ -31,6 +31,16 @@ namespace ZigBee.Core.GUI.ViewModels
             get { return this.model.Guid; }
         }
 
+        public string PanId 
+        {
+            get { 
+                return this.model.ZigBeeCoordinator.PanId; 
+            }
+            set { 
+                this.model.ZigBeeCoordinator.PanId = value; this.OnPropertyChanged(); 
+            }
+        }
+
         public ZigBeeViewModel ZigBeeCoordinator
         {
             get 

@@ -56,5 +56,10 @@ namespace ZigBee.Core.GUI.Factories
         {
             return new ZigBeeNetworkViewModel(zigBeeNetwork);
         }
+
+        public virtual void Initalize(object args = null)
+        {
+            
+        }
     }
 }
