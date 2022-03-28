@@ -124,6 +124,15 @@ namespace ZigBee.Core.Resources {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Unknown PanId.
+        /// </summary>
+        public static string ZigBeeCoordinatorPanIdDefault {
+            get {
+                return ResourceManager.GetString("ZigBeeCoordinatorPanIdDefault", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to UnknownZigbee.
         /// </summary>
         public static string ZigBeeModelNameDefault {

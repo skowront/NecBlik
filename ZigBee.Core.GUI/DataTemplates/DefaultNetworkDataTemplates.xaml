@@ -5,6 +5,7 @@
     <DataTemplate x:Key="DefaultNetworkBriefDataTemplate" DataType="{x:Type viewModels:ZigBeeNetworkViewModel}">
         <StackPanel>
             <TextBlock Text="{Binding Name}"></TextBlock>
+            <TextBlock Text="{Binding PanId}"></TextBlock>
             <Button Command="{Binding EditCommand}" Content="{lex:Loc GPOpen}"></Button>
         </StackPanel>
     </DataTemplate>
@@ -12,6 +13,7 @@
     <DataTemplate x:Key="DefaultNetworkDataTemplate" DataType="{x:Type viewModels:ZigBeeNetworkViewModel}">
         <StackPanel>
             <TextBlock Text="{Binding Name}"></TextBlock>
+            <TextBlock Text="{Binding PanId}"></TextBlock>
             <TextBlock Text="{Binding Guid}"></TextBlock>
             <Button Command="{Binding EditCommand}" Content="{lex:Loc GPOpen}"></Button>
         </StackPanel>

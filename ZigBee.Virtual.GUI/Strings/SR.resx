@@ -132,6 +132,9 @@
   <data name="GPNetworkName" xml:space="preserve">
     <value>Network name</value>
   </data>
+  <data name="GPNetworkPanId" xml:space="preserve">
+    <value>PanId</value>
+  </data>
   <data name="GPOpen" xml:space="preserve">
     <value>Open</value>
   </data>

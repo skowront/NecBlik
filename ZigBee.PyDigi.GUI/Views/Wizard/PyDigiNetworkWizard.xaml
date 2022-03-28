@@ -1,0 +1,79 @@
+﻿<Window x:Class="ZigBee.PyDigi.GUI.Views.Wizard.PyDigiNetworkWizard"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:dtvm="clr-namespace:ZigBee.PyDigi.GUI.ViewModels.Wizard"
+        xmlns:fa="http://schemas.fontawesome.io/icons/"
+        xmlns:lex="clr-namespace:WPFLocalizeExtension.Extensions;assembly=WPFLocalizeextension"
+        xmlns:lexp="clr-namespace:WPFLocalizeExtension.Providers;assembly=WPFLocalizeextension"
+        xmlns:diagrams="clr-namespace:DiagramDesigner;assembly=DiagramsExtension"
+        lexp:ResxLocalizationProvider.DefaultAssembly="ZigBee.PyDigi.GUI"
+        lexp:ResxLocalizationProvider.DefaultDictionary="Strings.SR"
+        mc:Ignorable="d"
+        Title="PyDigiNetworkWizard" Height="450" Width="800"
+        d:DataContext="{d:DesignInstance {x:Type dtvm:PyDigiNetworkWizardViewModel}}">
+    <Grid>
+        <Grid Margin="10">
+            <Grid.RowDefinitions>
+                <RowDefinition Height="auto"></RowDefinition>
+                <RowDefinition Height="auto"></RowDefinition>
+                <RowDefinition Height="auto"></RowDefinition>
+                <RowDefinition Height="*"></RowDefinition>
+            </Grid.RowDefinitions>
+            <Grid Grid.Row="0">
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition></ColumnDefinition>
+                    <ColumnDefinition></ColumnDefinition>
+                    <ColumnDefinition></ColumnDefinition>
+                </Grid.ColumnDefinitions>
+                <TextBlock Grid.Column="0" Text="{lex:Loc GPNetworkName}"></TextBlock>
+                <TextBox Grid.Column="1" Grid.ColumnSpan="2" Text="{Binding NetworkName}" VerticalAlignment="Stretch"></TextBox>
+            </Grid>
+            <Grid Grid.Row="1" Margin="0 10">
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition></ColumnDefinition>
+                    <ColumnDefinition></ColumnDefinition>
+                    <ColumnDefinition></ColumnDefinition>
+                </Grid.ColumnDefinitions>
+                <TextBlock Grid.Column="0" Text="{lex:Loc GPSerialPort}"></TextBlock>
+                <TextBlock Grid.Column="1" Text="{Binding SerialPortName}"></TextBlock>
+                <Button Grid.Column="2" HorizontalAlignment="Right" HorizontalContentAlignment="Right" Command="{Binding PickSerialPortCommand}">
+                    <StackPanel Orientation="Horizontal">
+                        <TextBlock Text="{lex:Loc GPSelect}" Margin="0 0 10 0"></TextBlock>
+                        <fa:FontAwesome Icon="MousePointer"></fa:FontAwesome>
+                    </StackPanel>
+                </Button>
+            </Grid>
+            <Grid Grid.Row="2">
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition></ColumnDefinition>
+                    <ColumnDefinition></ColumnDefinition>
+                    <ColumnDefinition></ColumnDefinition>
+                </Grid.ColumnDefinitions>
+                <TextBlock Grid.Column="0" Text="{lex:Loc GPBaudRate}"></TextBlock>
+                <TextBlock Grid.Column="1" Text="{Binding BaudRate}" VerticalAlignment="Stretch"></TextBlock>
+                <Button Grid.Column="2" HorizontalAlignment="Right" HorizontalContentAlignment="Right" Command="{Binding PickBaudRateCommand}">
+                    <StackPanel Orientation="Horizontal">
+                        <TextBlock Text="{lex:Loc GPSelect}" Margin="0 0 10 0"></TextBlock>
+                        <fa:FontAwesome Icon="MousePointer"></fa:FontAwesome>
+                    </StackPanel>
+                </Button>
+            </Grid>
+            <Grid Grid.Row="3">
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition></ColumnDefinition>
+                    <ColumnDefinition></ColumnDefinition>
+                    <ColumnDefinition></ColumnDefinition>
+                    <ColumnDefinition></ColumnDefinition>
+                </Grid.ColumnDefinitions>
+                <Button Grid.Column="1" HorizontalAlignment="Center" Command="{Binding ConfirmCommand}">
+                    <fa:FontAwesome Icon="Check"></fa:FontAwesome>
+                </Button>
+                <Button Grid.Column="2" HorizontalAlignment="Center" Command="{Binding AbortCommand}">
+                    <fa:FontAwesome Icon="Close"></fa:FontAwesome>
+                </Button>
+            </Grid>
+        </Grid>
+    </Grid>
+</Window>

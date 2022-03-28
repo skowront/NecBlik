@@ -144,4 +144,7 @@
   <data name="GPSelectPort" xml:space="preserve">
     <value>Choisissez un port</value>
   </data>
+  <data name="GPPleaseWait" xml:space="preserve">
+    <value>Attendez s'il vous plait</value>
+  </data>
 </root>

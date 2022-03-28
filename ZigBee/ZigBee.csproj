@@ -21,6 +21,8 @@
     <ProjectReference Include="..\ZigBee.Core\ZigBee.Core.csproj" />
     <ProjectReference Include="..\ZigBee.Digi.GUI\ZigBee.Digi.GUI.csproj" />
     <ProjectReference Include="..\ZigBee.Digi\ZigBee.Digi.csproj" />
+    <ProjectReference Include="..\ZigBee.PyDigi.GUI\ZigBee.PyDigi.GUI.csproj" />
+    <ProjectReference Include="..\ZigBee.PyDigi\ZigBee.PyDigi.csproj" />
     <ProjectReference Include="..\ZigBee.Virtual.GUI\ZigBee.Virtual.GUI.csproj" />
     <ProjectReference Include="..\ZigBee.Virtual\ZigBee.Virtual.csproj" />
     <ProjectReference Include="..\ZigBee.ZigBeeNet.GUI\ZigBee.ZigBeeNet.GUI.csproj" />

@@ -10,7 +10,7 @@ using ZigBee.Core.Models;
 
 namespace ZigBee.Core.GUI.Interfaces
 {
-    public interface IZigBeeGuiFactory:IVendable
+    public interface IZigBeeGuiFactory:IVendable, IInitializable
     {
         void AttachOtherFactories(List<IZigBeeGuiFactory> zigBeeFactories);
 

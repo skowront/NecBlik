@@ -24,6 +24,7 @@ namespace ZigBee.Virtual.Models
         {
             this.zigBeeFactory = zigBeeFactory;
             this.Name = Resources.Resources.DefaultVirtualZigBeeCoordinatorName;
+            this.PanId = Guid.NewGuid().ToString();
             this.internalType = zigBeeFactory?.GetVendorID() ?? Resources.Resources.VirtualFactoryId;
         }
 

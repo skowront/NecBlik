@@ -19,6 +19,14 @@ namespace ZigBee.Core.Models
         [JsonProperty]
         protected string Name { get; set; } = Resources.Resources.GPZigBeeCoordinator;
 
+        protected string panId = Resources.Resources.ZigBeeCoordinatorPanIdDefault;
+        [JsonProperty]
+        public string PanId
+        {
+            get { return this.GetPanID(); }
+            set { this.panId = value; }
+        }
+
         protected IZigBeeSource ZigBeeSource { get; set; }
 
         public ZigBeeCoordinator()
@@ -52,7 +60,7 @@ namespace ZigBee.Core.Models
 
         public virtual string GetPanID()
         {
-            throw new NotImplementedException();
+            return this.panId;
         }
 
         public virtual void Save(string folderPath)

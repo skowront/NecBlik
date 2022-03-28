@@ -106,6 +106,15 @@ namespace ZigBee.Digi.GUI.Strings {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Please wait.
+        /// </summary>
+        public static string GPPleaseWait {
+            get {
+                return ResourceManager.GetString("GPPleaseWait", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Select.
         /// </summary>
         public static string GPSelect {

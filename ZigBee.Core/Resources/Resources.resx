@@ -138,6 +138,9 @@
   <data name="ProjectModelPojectNameDefault" xml:space="preserve">
     <value>Project</value>
   </data>
+  <data name="ZigBeeCoordinatorPanIdDefault" xml:space="preserve">
+    <value>Unknown PanId</value>
+  </data>
   <data name="ZigBeeModelNameDefault" xml:space="preserve">
     <value>UnknownZigbee</value>
   </data>

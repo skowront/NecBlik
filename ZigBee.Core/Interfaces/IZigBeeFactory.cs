@@ -8,7 +8,7 @@ using ZigBee.Core.Models;
 
 namespace ZigBee.Core.Interfaces
 {
-    public interface IZigBeeFactory: IVendable
+    public interface IZigBeeFactory: IVendable, IInitializable
     {
         void AttachOtherFactories(List<IZigBeeFactory> zigBeeFactories);
 
