@@ -7,7 +7,7 @@
             <TextBlock Text="PyDigi"></TextBlock>
             <TextBlock Text="{Binding Name}"></TextBlock>
             <TextBlock Text="{Binding PanId}"></TextBlock>
-            <Button Command="{Binding EditCommand}" HorizontalAlignment="Left" Content="{lex:Loc ZigBee.PyDigi.GUI:SR:GPOpen}"></Button>
+            <Button Command="{Binding EditCommand}" Style="{StaticResource BaseButton}" HorizontalAlignment="Left" Content="{lex:Loc ZigBee.PyDigi.GUI:SR:GPOpen}"></Button>
         </StackPanel>
     </DataTemplate>
 
@@ -17,7 +17,7 @@
             <TextBlock Text="{Binding Name}"></TextBlock>
             <TextBlock Text="{Binding PanId}"></TextBlock>
             <TextBlock Text="{Binding Guid}"></TextBlock>
-            <Button Command="{Binding EditCommand}" HorizontalAlignment="Left" Content="{lex:Loc ZigBee.PyDigi.GUI:SR:GPOpen}"></Button>
+            <Button Command="{Binding EditCommand}" Style="{StaticResource BaseButton}" HorizontalAlignment="Left" Content="{lex:Loc ZigBee.PyDigi.GUI:SR:GPOpen}"></Button>
         </StackPanel>
     </DataTemplate>
 </ResourceDictionary>

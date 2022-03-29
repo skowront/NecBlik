@@ -7,7 +7,7 @@
     <DataTemplate x:Key="VirtualNetworkBriefDataTemplate" DataType="{x:Type viewModels:VirtualZigBeeNetworkViewModel}">
         <StackPanel>
             <TextBlock Text="{Binding Name}"></TextBlock>
-            <Button Command="{Binding EditCommand}" Content="{lex:Loc ZigBee.Virtual.GUI:SR:GPOpen}"></Button>
+            <Button Command="{Binding EditCommand}" Style="{StaticResource BaseButton}" HorizontalAlignment="Left" Content="{lex:Loc ZigBee.Virtual.GUI:SR:GPOpen}"></Button>
         </StackPanel>
     </DataTemplate>
 
@@ -15,7 +15,7 @@
         <StackPanel>
             <TextBlock Text="{Binding Name}"></TextBlock>
             <TextBlock Text="{Binding Guid}"></TextBlock>
-            <Button Command="{Binding EditCommand}" Content="{lex:Loc ZigBee.Virtual.GUI:SR:GPOpen}"></Button>
+            <Button Command="{Binding EditCommand}" Style="{StaticResource BaseButton}" Content="{lex:Loc ZigBee.Virtual.GUI:SR:GPOpen}"></Button>
         </StackPanel>
     </DataTemplate>
 </ResourceDictionary>

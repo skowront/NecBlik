@@ -6,7 +6,7 @@
         <StackPanel>
             <TextBlock Text="{Binding Name}"></TextBlock>
             <TextBlock Text="{Binding PanId}"></TextBlock>
-            <Button Command="{Binding EditCommand}" Content="{lex:Loc GPOpen}"></Button>
+            <Button Command="{Binding EditCommand}" Style="{StaticResource BaseButton}" Content="{lex:Loc GPOpen}"></Button>
         </StackPanel>
     </DataTemplate>
 
@@ -15,7 +15,7 @@
             <TextBlock Text="{Binding Name}"></TextBlock>
             <TextBlock Text="{Binding PanId}"></TextBlock>
             <TextBlock Text="{Binding Guid}"></TextBlock>
-            <Button Command="{Binding EditCommand}" Content="{lex:Loc GPOpen}"></Button>
+            <Button Command="{Binding EditCommand}" Style="{StaticResource BaseButton}" Content="{lex:Loc GPOpen}"></Button>
         </StackPanel>
     </DataTemplate>
 </ResourceDictionary>

@@ -128,6 +128,34 @@ namespace ZigBee.Views.Controls
             }
         }
 
+        public void RemoveZigBee(ZigBeeViewModel zigBeeViewModel)
+        {
+            if(zigBeeViewModel==null)
+            {
+                return;
+            }
+            UIElement toRemove = null;
+            foreach (var item in this.Children)
+            {
+                if (item is DesignerItem)
+                {
+                    if (((DesignerItem)item).Payload is ZigBeeViewModel)
+                    {
+                        var itemvm = ((ZigBeeViewModel)((DesignerItem)item).Payload);
+                        if (itemvm.GetCacheId() == zigBeeViewModel.GetCacheId())
+                        {
+                            toRemove = (DesignerItem)item;
+                            break;
+                        }
+                    }
+                }
+            }
+            if(toRemove!=null)
+            {
+                this.Children.Remove(toRemove);
+            }
+        }
+
         public void SetBackground(FrameworkElement background,DiagramItemMetadata backgroundMeta)
         {
             if(this.background!=null)

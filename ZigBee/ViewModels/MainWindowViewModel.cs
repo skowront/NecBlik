@@ -75,6 +75,8 @@ namespace ZigBee.ViewModels
         public IResponseProvider<object, Tuple<string, DiagramItemMetadata>> ProjectMapLoadedProvider { get; set; } = new GenericResponseProvider<object, Tuple<string,DiagramItemMetadata>>();
         public IResponseProvider<object, object> NewProjectLoadedProvider { get; set; } = new GenericResponseProvider<object, object>();
         public IResponseProvider<bool, object> NewProjectLoadEnsureResponseProvider { get; set; } = new GenericResponseProvider<bool, object>(true);
+        public IResponseProvider<bool, object> ActionEnsureResponseProvider { get; set; } = new GenericResponseProvider<bool, object>(true);
+        public IResponseProvider<bool, ZigBeeNetworkViewModel> NetworkRemovedResponseProvider { get; set; } = new GenericResponseProvider<bool, ZigBeeNetworkViewModel>(true);
         
         public IResponseProvider<string, Tuple<string, IEnumerable<string>>> ListValueResponseProvider = new GenericResponseProvider<string, Tuple<string, IEnumerable<string>>>(string.Empty);
 
@@ -95,6 +97,8 @@ namespace ZigBee.ViewModels
         public RelayCommand LoadProjectMapCommand { get; set; }
         public RelayCommand EditProjectCommand { get; set; }
         public RelayCommand ApplicationSettingsCommand { get; set; }
+        public RelayCommand RemoveNetworkCommand { get; set; }
+
         #endregion
 
         public MainWindowViewModel(ISelectionSubscriber<ZigBeeViewModel> zigBeeSelectionSubscriber)
@@ -186,6 +190,8 @@ namespace ZigBee.ViewModels
                     ((App)App.Current).ApplicationSettings = res;
                 }
             });
+
+            this.RemoveNetworkCommand = new RelayCommand(o => { var vm = o as ZigBeeNetworkViewModel; this.RemoveNetwork(o as ZigBeeNetworkViewModel); });
         }
 
         private void LoadProjectMap(string path)
@@ -361,6 +367,18 @@ namespace ZigBee.ViewModels
             //}
             //this.DiagramZigBeesLoadedProvider.ProvideResponse(this.model.DiagramZigBees);
             this.LoadProjectMap(this.model.MapFile);
+            this.Refresh();
+        }
+
+        private void RemoveNetwork(ZigBeeNetworkViewModel networkViewModel)
+        {
+            var resp = this.ActionEnsureResponseProvider?.ProvideResponse();
+            if (resp == null)
+                return;
+            if (resp == false)
+                return;
+            this.NetworkRemovedResponseProvider?.ProvideResponse(networkViewModel);
+            this.ZigBeeNetworks.Remove(networkViewModel);
             this.Refresh();
         }
 

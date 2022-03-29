@@ -17,6 +17,7 @@ using ZigBee.Common.WpfExtensions.Base;
 using ZigBee.Core.GUI;
 using ZigBee.Core.GUI.Interfaces;
 using ZigBee.Core.GUI.Models;
+using ZigBee.Core.GUI.ViewModels;
 using ZigBee.Models;
 using ZigBee.ViewModels;
 using ZigBee.Views.Controls;
@@ -180,6 +181,13 @@ namespace ZigBee.Views
                 return rp.ProvideResponse();
             });
 
+            this.ViewModel.ActionEnsureResponseProvider = new GenericResponseProvider<bool, object>((o) =>
+            {
+                var popup = new SimpleYesNoPopup(Strings.SR.AreYouSure, "", Popups.ZigBeeIcons.WarningIcon, null, null);
+                var rp = new YesNoPopupResponseProvider(popup);
+                return rp.ProvideResponse();
+            });
+
             this.ViewModel.SavingProgressBarResponseProvider = new GenericResponseProvider<YesNoProgressBarPopupResponseProvider, object>((o) =>
             {
                 var savepopup = new SimpleYesNoProgressBarPopup(Strings.SR.GPSaving+"...", "", Popups.ZigBeeIcons.InfoIcon, null, null, 0, 0, 0, false, false);
@@ -198,6 +206,17 @@ namespace ZigBee.Views
                 var window = new AppSettingsWindow();
                 
                 return (await window.ProvideResponse(vm)).Model;
+            });
+
+            this.ViewModel.NetworkRemovedResponseProvider = new GenericResponseProvider<bool, ZigBeeNetworkViewModel>((o) =>
+            {
+                var vms = o.GetZigBeeViewModels();
+                foreach (var item in vms)
+                {
+                    this.designerCanvas.RemoveZigBee(item);
+                }
+                this.designerCanvas.RemoveZigBee(o.ZigBeeCoordinator);
+                return true;
             });
         }
 

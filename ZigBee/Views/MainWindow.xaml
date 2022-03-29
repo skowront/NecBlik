@@ -77,24 +77,46 @@
                 <RowDefinition Height="9*"></RowDefinition>
                 <RowDefinition Height="*"></RowDefinition>
             </Grid.RowDefinitions>
-            <Grid Grid.Row="0" Grid.Column="1" Background="{StaticResource MaterialDesignDarkBackground}">
-                <TextBlock Text="{lex:Loc MainWindowNetworks}"
+            <Grid Grid.Column="2" Background="{StaticResource MaterialDesignDarkBackground}">
+                <TextBlock  Text="{lex:Loc MainWindowNetworks}"
                        Background="{StaticResource MaterialDesignDarkBackground}"
                        Foreground="{StaticResource MaterialDesignDarkForeground}" 
-                       HorizontalAlignment="Center" 
-                       VerticalAlignment="Center" ></TextBlock>
+                       HorizontalAlignment="Center" VerticalAlignment="Center" MinHeight="30" FontSize="15" Margin="5"></TextBlock>
             </Grid>
-            <ScrollViewer Grid.Column="1" Grid.Row="1" Grid.RowSpan="2">
-                <Expander ExpandDirection="Down" Style="{StaticResource MaterialDesignExpander}" 
+            <Grid Grid.Column="1" Grid.Row="1" Grid.RowSpan="2">
+                <ScrollViewer>
+                    <Expander ExpandDirection="Down" Style="{StaticResource MaterialDesignExpander}" 
                           Foreground="{StaticResource ForegroundLightBrush}"
                           Header="">
-                    <ListView ItemsSource="{Binding ZigBeeNetworks}" 
+                        <ListView ItemsSource="{Binding ZigBeeNetworks}" 
                           PreviewMouseLeftButtonDown="ListView_PreviewMouseLeftButtonDown" 
-                          MouseMove="ListView_MouseMove" 
-                          ItemTemplateSelector="{StaticResource NetworkBriefDataTemplateSelector}">
-                    </ListView>
-                </Expander>
-            </ScrollViewer>
+                          MouseMove="ListView_MouseMove"
+                          HorizontalAlignment="Stretch"
+                          HorizontalContentAlignment="Stretch">
+                            <ListView.ItemTemplate>
+                                <DataTemplate>
+                                    <Border BorderThickness="1 1 1 1">
+                                        <Grid Width="auto">
+                                            <Grid.ColumnDefinitions>
+                                                <ColumnDefinition Width="*"></ColumnDefinition>
+                                                <ColumnDefinition Width="auto"></ColumnDefinition>
+                                            </Grid.ColumnDefinitions>
+                                            <ContentPresenter Grid.Column="0" ContentTemplateSelector="{StaticResource NetworkBriefDataTemplateSelector}" VerticalAlignment="Center" HorizontalAlignment="Stretch">
+                                            </ContentPresenter>
+                                            <Button Grid.Column="1" Command="{Binding RelativeSource={RelativeSource FindAncestor, AncestorType=ListView}, Path=DataContext.RemoveNetworkCommand}" 
+                                                CommandParameter="{Binding RelativeSource={RelativeSource Mode=FindAncestor, AncestorType={x:Type ListViewItem}},Path=DataContext}"
+                                                Style="{StaticResource BaseButton}"
+                                                HorizontalAlignment="Right" VerticalAlignment="Center">
+                                                <TextBlock Text="&#xf057;" FontFamily="{StaticResource FontAwesome}" VerticalAlignment="Center"></TextBlock>
+                                            </Button>
+                                        </Grid>
+                                    </Border>
+                                </DataTemplate>
+                            </ListView.ItemTemplate>
+                        </ListView>
+                    </Expander>
+                </ScrollViewer>
+            </Grid>
 
             <ScrollViewer Grid.Column="0" Grid.Row="0" Grid.RowSpan="3" HorizontalScrollBarVisibility="Visible">
                 <Grid>
