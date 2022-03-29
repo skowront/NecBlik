@@ -129,12 +129,6 @@
   <data name="GPSaving" xml:space="preserve">
     <value>Zapisywanie</value>
   </data>
-  <data name="JsonFilesOpenFileDialodFilter" xml:space="preserve">
-    <value>Json (*.json) | *.json</value>
-  </data>
-  <data name="SvgFilesOpenFileDialodFilter" xml:space="preserve">
-    <value>Pliki svg (*.svg)|*.svg</value>
-  </data>
   <data name="MainWindowExpanderTitle" xml:space="preserve">
     <value>Dostępne ZigBee</value>
   </data>
@@ -160,7 +154,7 @@
     <value>Dodaj ZigBee</value>
   </data>
   <data name="MainWindowMenuHeaderProjectEdit" xml:space="preserve">
-    <value>Edytuj projekt</value>
+    <value>Edytuj</value>
   </data>
   <data name="MainWindowMenuHeaderProjectLoad" xml:space="preserve">
     <value>Załaduj projekt</value>
@@ -176,5 +170,14 @@
   </data>
   <data name="SelectLibrary" xml:space="preserve">
     <value>Wybierz bibliotekę</value>
+  </data>
+  <data name="SvgFilesOpenFileDialogFilter" xml:space="preserve">
+    <value>Obrazy|*.svg;*.png;*.jpg</value>
+  </data>
+  <data name="JsonFilesOpenFileDialogFilter" xml:space="preserve">
+    <value>Json (*.json) | *.json</value>
+  </data>
+  <data name="MainWindowMenuHeaderResizeMap" xml:space="preserve">
+    <value>Zmień rozmiar mapy</value>
   </data>
 </root>

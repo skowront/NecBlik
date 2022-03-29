@@ -129,12 +129,6 @@
   <data name="GPSaving" xml:space="preserve">
     <value>Sauvegardement</value>
   </data>
-  <data name="JsonFilesOpenFileDialodFilter" xml:space="preserve">
-    <value>Json (*.json) | *.json</value>
-  </data>
-  <data name="SvgFilesOpenFileDialodFilter" xml:space="preserve">
-    <value>Pliki svg (*.svg)|*.svg</value>
-  </data>
   <data name="MainWindowExpanderTitle" xml:space="preserve">
     <value>Disponible ZigBees</value>
   </data>
@@ -176,5 +170,14 @@
   </data>
   <data name="SelectLibrary" xml:space="preserve">
     <value>Choisissez une bibliothèque</value>
+  </data>
+  <data name="SvgFilesOpenFileDialogFilter" xml:space="preserve">
+    <value>Images|*.svg;*.png;*.jpg</value>
+  </data>
+  <data name="JsonFilesOpenFileDialogFilter" xml:space="preserve">
+    <value>Json (*.json) | *.json</value>
+  </data>
+  <data name="MainWindowMenuHeaderResizeMap" xml:space="preserve">
+    <value>Redimensionner la carte</value>
   </data>
 </root>

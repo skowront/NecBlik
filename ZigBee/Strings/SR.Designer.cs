@@ -99,9 +99,9 @@ namespace ZigBee.Strings {
         /// <summary>
         ///   Looks up a localized string similar to Json (*.json) | *.json.
         /// </summary>
-        public static string JsonFilesOpenFileDialodFilter {
+        public static string JsonFilesOpenFileDialogFilter {
             get {
-                return ResourceManager.GetString("JsonFilesOpenFileDialodFilter", resourceCulture);
+                return ResourceManager.GetString("JsonFilesOpenFileDialogFilter", resourceCulture);
             }
         }
         
@@ -178,7 +178,7 @@ namespace ZigBee.Strings {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Edit project.
+        ///   Looks up a localized string similar to Edit.
         /// </summary>
         public static string MainWindowMenuHeaderProjectEdit {
             get {
@@ -201,6 +201,15 @@ namespace ZigBee.Strings {
         public static string MainWindowMenuHeaderProjectSave {
             get {
                 return ResourceManager.GetString("MainWindowMenuHeaderProjectSave", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Resize map.
+        /// </summary>
+        public static string MainWindowMenuHeaderResizeMap {
+            get {
+                return ResourceManager.GetString("MainWindowMenuHeaderResizeMap", resourceCulture);
             }
         }
         
@@ -232,11 +241,11 @@ namespace ZigBee.Strings {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to SVG files (*.svg)|*.svg.
+        ///   Looks up a localized string similar to Images|*.svg;*.png;*.jpg.
         /// </summary>
-        public static string SvgFilesOpenFileDialodFilter {
+        public static string SvgFilesOpenFileDialogFilter {
             get {
-                return ResourceManager.GetString("SvgFilesOpenFileDialodFilter", resourceCulture);
+                return ResourceManager.GetString("SvgFilesOpenFileDialogFilter", resourceCulture);
             }
         }
     }

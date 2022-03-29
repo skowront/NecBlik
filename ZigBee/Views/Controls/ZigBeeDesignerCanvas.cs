@@ -141,7 +141,9 @@ namespace ZigBee.Views.Controls
             ZigBeeDesignerCanvas.SetZIndex(di, ZigBeeDesignerCanvas.BackgroundZIndex);
             ZigBeeDesignerCanvas.SetLeft(di,backgroundMeta.Point.X);
             ZigBeeDesignerCanvas.SetTop(di,backgroundMeta.Point.Y);
-            if(backgroundMeta.Size.Width==double.NaN || backgroundMeta.Size.Height==double.NaN)
+            di.HorizontalAlignment = HorizontalAlignment.Left;
+            di.VerticalAlignment = VerticalAlignment.Top;
+            if(double.IsNaN(backgroundMeta.Size.Width) || double.IsNaN(backgroundMeta.Size.Height))
             {
                 return;
             }
@@ -150,19 +152,28 @@ namespace ZigBee.Views.Controls
             di.Height = backgroundMeta.Size.Height;
         }
 
+        public FrameworkElement GetBackground()
+        {
+            return this.background;
+        }
+
+        public void UpdateBackgroundMetadata(DiagramItemMetadata backgroundMeta)
+        {
+            var di = this.background;
+            di.Width = backgroundMeta.Size.Width;
+            di.Height = backgroundMeta.Size.Height;
+            //ZigBeeDesignerCanvas.SetLeft(di, backgroundMeta.Point.X);
+            //ZigBeeDesignerCanvas.SetTop(di, backgroundMeta.Point.Y);
+        }
+
         public DiagramItemMetadata GetMapMetadata()
         {
-            DesignerItem backgroundContainer = null;
-            foreach (var child in this.Children)
+            FrameworkElement backgroundContainer =null;
+            foreach(var child in this.Children)
             {
-                if (child is DesignerItem)
+                if (child == this.background)
                 {
-                    var designerItem = (DesignerItem)child;
-                    if (designerItem.Content == this.background)
-                    {
-                        backgroundContainer = designerItem;
-                        break;
-                    }
+                    backgroundContainer = (FrameworkElement)child;
                 }
             }
             if (backgroundContainer == null)
@@ -172,7 +183,7 @@ namespace ZigBee.Views.Controls
             var item = new DiagramItemMetadata()
             {
                 Point = new Point<double>(ZigBeeDesignerCanvas.GetLeft(backgroundContainer),ZigBeeDesignerCanvas.GetTop(backgroundContainer)),
-                Size = new Size(backgroundContainer.Width, backgroundContainer.Height)
+                Size = new Size(backgroundContainer.ActualWidth, backgroundContainer.ActualHeight)
             };
             return item;
         }

@@ -122,7 +122,7 @@ namespace ZigBee.ViewModels
 
             this.AddNetworkCommand = new RelayCommand(async (o) =>
             {
-                var ip = this.ListValueResponseProvider.ProvideResponse(new Tuple<string, IEnumerable<string>>(SR.ResourceManager.GetString("SelectLibrary"), ZigBeeGuiAnyFactory.Instance.GetFactoryIds()));
+                var ip = this.ListValueResponseProvider.ProvideResponse(new Tuple<string, IEnumerable<string>>(Strings.SR.SelectLibrary, ZigBeeGuiAnyFactory.Instance.GetFactoryIds()));
                 if(ip != string.Empty)
                 {
                     var vm = ZigBeeGuiAnyFactory.Instance.NetworkViewModelFromWizard(null,ip);
@@ -147,8 +147,6 @@ namespace ZigBee.ViewModels
                 }
                 else
                 {
-                    throw new NotImplementedException();
-                    //this.AvailableZigBees.Add(response);
                 }
             });
 
@@ -159,6 +157,10 @@ namespace ZigBee.ViewModels
 
             this.LoadProjectCommand = new RelayCommand(o =>
             {
+                if (this.NewProjectLoadEnsureResponseProvider.ProvideResponse() == false)
+                {
+                    return;
+                }
                 this.LoadProject();
             });
 
@@ -202,7 +204,6 @@ namespace ZigBee.ViewModels
 
         private async void LoadProject()
         {
-            this.NewProjectLoadedProvider?.ProvideResponse();
             var path = this.LoadProjectFilePathProvider.ProvideResponse();
             if (path == null)
             {
@@ -212,6 +213,7 @@ namespace ZigBee.ViewModels
             {
                 return;
             }
+            this.NewProjectLoadedProvider?.ProvideResponse();
             var file = path;
             var dir = Path.GetDirectoryName(path);
             if (File.Exists(file))
@@ -282,6 +284,7 @@ namespace ZigBee.ViewModels
                 if (Directory.Exists(dir))
                 {
                     Directory.Delete(dir,true);
+                    Directory.CreateDirectory(dir);
                     File.AppendAllText(file, JsonConvert.SerializeObject(this.model, Formatting.Indented));
                 }
             }
