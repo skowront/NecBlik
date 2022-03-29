@@ -70,6 +70,15 @@ namespace ZigBee.Strings {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Height.
+        /// </summary>
+        public static string GPHeight {
+            get {
+                return ResourceManager.GetString("GPHeight", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Language.
         /// </summary>
         public static string GPLanguage {
@@ -88,11 +97,29 @@ namespace ZigBee.Strings {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Maintain aspect ratio.
+        /// </summary>
+        public static string GPMaintainAspectRatio {
+            get {
+                return ResourceManager.GetString("GPMaintainAspectRatio", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Saving.
         /// </summary>
         public static string GPSaving {
             get {
                 return ResourceManager.GetString("GPSaving", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Width.
+        /// </summary>
+        public static string GPWidth {
+            get {
+                return ResourceManager.GetString("GPWidth", resourceCulture);
             }
         }
         

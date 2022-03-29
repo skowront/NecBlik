@@ -180,4 +180,13 @@
   <data name="MainWindowMenuHeaderResizeMap" xml:space="preserve">
     <value>Resize map</value>
   </data>
+  <data name="GPHeight" xml:space="preserve">
+    <value>Height</value>
+  </data>
+  <data name="GPWidth" xml:space="preserve">
+    <value>Width</value>
+  </data>
+  <data name="GPMaintainAspectRatio" xml:space="preserve">
+    <value>Maintain aspect ratio</value>
+  </data>
 </root>

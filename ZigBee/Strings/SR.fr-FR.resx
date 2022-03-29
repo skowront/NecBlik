@@ -180,4 +180,13 @@
   <data name="MainWindowMenuHeaderResizeMap" xml:space="preserve">
     <value>Redimensionner la carte</value>
   </data>
+  <data name="GPHeight" xml:space="preserve">
+    <value>L'hauteur</value>
+  </data>
+  <data name="GPWidth" xml:space="preserve">
+    <value>La largeur</value>
+  </data>
+  <data name="GPMaintainAspectRatio" xml:space="preserve">
+    <value>Maintenir la proportion</value>
+  </data>
 </root>
