@@ -37,8 +37,8 @@
                         <TextBlock Text="{Binding Name, UpdateSourceTrigger=PropertyChanged}"></TextBlock>
                         <TextBlock Text="{Binding Guid, UpdateSourceTrigger=PropertyChanged}"></TextBlock>
                         <StackPanel Orientation="Horizontal">
-                            <Button Command="{Binding EditCommand}" Content="{lex:Loc GPOpen}" Margin="5 5"></Button>
-                            <Button Command="{Binding SelectCommand}" Content="{lex:Loc GPSendToMap}"></Button>
+                            <Button Command="{Binding EditCommand}" Style="{StaticResource BaseButton}" Content="{lex:Loc GPOpen}"></Button>
+                            <Button Command="{Binding SelectCommand}" Style="{StaticResource BaseButton}" Content="{lex:Loc GPSendToMap}"></Button>
                         </StackPanel>
                         <Separator Grid.Row="1"></Separator>
                     </StackPanel>
@@ -51,7 +51,7 @@
                 <RowDefinition Height="*"></RowDefinition>
             </Grid.RowDefinitions>
             <TextBlock Text="{lex:Loc GPDevices}" HorizontalAlignment="Center"></TextBlock>
-            <ListView Grid.Row="1" ItemsSource="{Binding ViewModel.ZigBees}" ScrollViewer.VerticalScrollBarVisibility="Visible" Style="{StaticResource ZigBeeListViewHoverless}">
+            <ListView Grid.Row="1" ItemsSource="{Binding ViewModel.ZigBees}" ScrollViewer.VerticalScrollBarVisibility="Visible" Style="{StaticResource ZigBeeListViewHoverless}" d:ItemsSource="{d:SampleData ItemCount=5}">
                 <ListView.ItemTemplate>
                     <DataTemplate DataType="{x:Type viewModels:VirtualZigBeeViewModel}">
                         <StackPanel Orientation="Vertical">
@@ -59,8 +59,8 @@
                             <TextBlock Text="{Binding Name, UpdateSourceTrigger=PropertyChanged}"></TextBlock>
                             <TextBlock Text="{Binding Guid, UpdateSourceTrigger=PropertyChanged}"></TextBlock>
                             <StackPanel Orientation="Horizontal">
-                                <Button Command="{Binding EditCommand}" Content="{lex:Loc GPOpen}" Margin="5 5"></Button>
-                                <Button Command="{Binding SelectCommand}" Content="{lex:Loc GPSendToMap}"></Button>
+                                <Button Command="{Binding EditCommand}" Style="{StaticResource BaseButton}" Content="{lex:Loc GPOpen}"></Button>
+                                <Button Command="{Binding SelectCommand}" Style="{StaticResource BaseButton}" Content="{lex:Loc GPSendToMap}"></Button>
                             </StackPanel>
                         </StackPanel>
                     </DataTemplate>

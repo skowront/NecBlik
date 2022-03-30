@@ -133,7 +133,7 @@
     <value>Disponible ZigBees</value>
   </data>
   <data name="MainWindowManuHeaderProjectLoadMap" xml:space="preserve">
-    <value>Ouvrir la carte</value>
+    <value>Charger la carte</value>
   </data>
   <data name="MainWindowMenuAbout" xml:space="preserve">
     <value>Sur</value>
@@ -188,5 +188,8 @@
   </data>
   <data name="GPMaintainAspectRatio" xml:space="preserve">
     <value>Maintenir la proportion</value>
+  </data>
+  <data name="MainWindowMenuHeaderProjectRename" xml:space="preserve">
+    <value>Renommer</value>
   </data>
 </root>

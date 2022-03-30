@@ -1,11 +1,13 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Collections.ObjectModel;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using ZigBee.Common.WpfExtensions.Base;
 using ZigBee.Common.WpfExtensions.Interfaces;
 using ZigBee.Core.GUI.Interfaces;
+using ZigBee.Core.GUI.ViewModels;
 using ZigBee.Core.Interfaces;
 using ZigBee.Core.Models;
 
@@ -14,6 +16,8 @@ namespace ZigBee.Core.GUI
     public class ZigBeeViewModel:BaseViewModel,IDuplicable<ZigBeeViewModel>,ICachable,IVendable
     {
         public ZigBeeModel Model;
+
+        public ZigBeeNetworkViewModel Network;
 
         public Guid Guid
         {
@@ -53,13 +57,41 @@ namespace ZigBee.Core.GUI
             get { return this.Model.CacheId; }
         }
 
+        private string outputBuffer = string.Empty;
+        public string OutputBuffer
+        {
+            get { return this.outputBuffer; }
+            set { this.outputBuffer = value; this.OnPropertyChanged(); }
+        }
+
+        private string ioHistoryBuffer;
+        public string IOHistoryBuffer
+        {
+            get { return this.ioHistoryBuffer; }
+            set { this.ioHistoryBuffer = value; this.OnPropertyChanged(); }
+        }
+
+        private string selectedDestinationAddress=string.Empty;
+        public string SelectedDestinationAddress
+        {
+            get { return this.selectedDestinationAddress; }
+            set { this.selectedDestinationAddress = value; this.OnPropertyChanged(); }
+        }
+
+        public IEnumerable<string> AvailableDestinationAddresses
+        {
+            get { return this.GetAvailableDestinationAdresses(); }
+        }
+
         public ISelectionSubscriber<ZigBeeViewModel> PullSelectionSubscriber { get; set; }
 
         public RelayCommand EditCommand { get; set; }
         public RelayCommand SelectCommand { get; set; }
+        public RelayCommand SendCommand { get; set; }
 
-        public ZigBeeViewModel(ZigBeeModel model = null)
+        public ZigBeeViewModel(ZigBeeModel model = null, ZigBeeNetworkViewModel networkModel = null)
         {
+            this.Network = networkModel;
             this.Model = model;
             if(this.Model == null)
             {
@@ -71,7 +103,7 @@ namespace ZigBee.Core.GUI
 
         public ZigBeeViewModel Duplicate()
         {
-            var zb = new ZigBeeViewModel(this.Model.Duplicate());
+            var zb = new ZigBeeViewModel(this.Model.Duplicate(),this.Network);
             zb.SelectCommand = this.SelectCommand = new RelayCommand((o) => {
                 this.PullSelectionSubscriber?.NotifySelected(zb);
             });
@@ -84,6 +116,9 @@ namespace ZigBee.Core.GUI
             this.SelectCommand = new RelayCommand((o) => { 
                 this.PullSelectionSubscriber?.NotifySelected(this); 
             });
+            this.SendCommand = new RelayCommand((o) => { 
+                this.Send(); 
+            });
         }
 
         public virtual string GetCacheId()
@@ -94,6 +129,56 @@ namespace ZigBee.Core.GUI
         public virtual string GetVendorID()
         {
             return this.InternalFactoryType;
+        }
+
+        public virtual IEnumerable<string> GetAvailableDestinationAdresses()
+        {
+            var ret = new List<string>(this.Network.Model.ZigBeeSources.Select(x => { return x.GetAddress(); }));
+            if(this.Network.Model.HasCoordinator)
+            {
+                ret.Add(this.Network.Model.ZigBeeCoordinator.GetAddress());
+            }
+            ret.Add(Strings.SR.Broadcast);
+            return ret;
+        }
+
+        public virtual void OnDataRecieved(string data)
+        {
+            this.Model.ZigBeeSource.OnDataRecieved(data);
+        }
+
+        public virtual void Send()
+        {
+            var sources = this.Network.GetZigBeeViewModels();
+            if (this.SelectedDestinationAddress==Strings.SR.Broadcast)
+            {
+                foreach (var source in sources)
+                {
+                    source.OnDataRecieved(this.OutputBuffer);
+                }
+                this.Network.ZigBeeCoordinator.OnDataRecieved(this.outputBuffer);
+            }
+            else
+            {
+                bool sent = false;
+                foreach (var source in sources)
+                {
+                    if (source.Address == this.SelectedDestinationAddress)
+                    {
+                        source.OnDataRecieved(this.OutputBuffer);
+                        sent = true;
+                        break;
+                    }
+                }
+                if(sent == false && this.Network.Model.HasCoordinator)
+                {
+                    if(this.Network.Model.ZigBeeCoordinator.GetAddress()==this.SelectedDestinationAddress)
+                    {
+                        this.Network.ZigBeeCoordinator.OnDataRecieved(this.OutputBuffer);
+                    }
+                }
+            }
+            this.OutputBuffer = string.Empty;
         }
     }
 }

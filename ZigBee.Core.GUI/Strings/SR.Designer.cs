@@ -61,6 +61,15 @@ namespace ZigBee.Core.GUI.Strings {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to 00000000 (Broadcast).
+        /// </summary>
+        internal static string Broadcast {
+            get {
+                return ResourceManager.GetString("Broadcast", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Open.
         /// </summary>
         internal static string GPOpen {

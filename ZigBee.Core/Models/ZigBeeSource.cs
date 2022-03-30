@@ -60,5 +60,10 @@ namespace ZigBee.Core.Models
         {
             return this.Guid.ToString();
         }
+
+        public void OnDataRecieved(string data)
+        {
+            return;
+        }
     }
 }

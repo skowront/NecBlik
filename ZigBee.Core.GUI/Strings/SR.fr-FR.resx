@@ -120,4 +120,7 @@
   <data name="GPOpen" xml:space="preserve">
     <value>Ouvrir</value>
   </data>
+  <data name="Broadcast" xml:space="preserve">
+    <value>00000000 (Tous)</value>
+  </data>
 </root>

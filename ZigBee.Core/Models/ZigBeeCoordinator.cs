@@ -99,5 +99,10 @@ namespace ZigBee.Core.Models
         {
             return this.Guid.ToString();
         }
+
+        public virtual void OnDataRecieved(string data)
+        {
+            return;
+        }
     }
 }
