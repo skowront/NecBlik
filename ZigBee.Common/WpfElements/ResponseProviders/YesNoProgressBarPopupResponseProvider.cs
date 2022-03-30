@@ -52,7 +52,7 @@ namespace ZigBee.Common.WpfElements.ResponseProviders
                 {
                     this.Popup.ViewModel.Message = question;
                 }
-                this.Popup?.ShowDialog();
+                this.Popup?.Show();
 
             });
             return result;
@@ -71,6 +71,16 @@ namespace ZigBee.Common.WpfElements.ResponseProviders
         public void SetLimit(int limit)
         {
             this.Popup.Dispatcher.Invoke(() => { this.Popup.ViewModel.Max = limit; });
+        }
+
+        public void Init(int min, int max, int startValue)
+        {
+            this.Popup.Dispatcher.Invoke(() => {
+                this.Popup.ViewModel.Min = min; 
+                this.Popup.ViewModel.Max = max;
+                this.Popup.ViewModel.Value = startValue;
+                this.ProvideResponse();
+            });
         }
     }
 }

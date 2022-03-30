@@ -4,13 +4,17 @@
         xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:ZigBee.Virtual.GUI.Views"
+        xmlns:lexp="clr-namespace:WPFLocalizeExtension.Providers;assembly=WPFLocalizeextension"
+        xmlns:lex="clr-namespace:WPFLocalizeExtension.Extensions;assembly=WPFLocalizeextension"
+        lexp:ResxLocalizationProvider.DefaultAssembly="ZigBee.Virtual.GUI"
+        lexp:ResxLocalizationProvider.DefaultDictionary="SR"
         mc:Ignorable="d"
-        Title="VirtualZigBeeWindow" Height="450" Width="800">
-    <Grid>
+        Title="VirtualZigBeeWindow" Height="200" Width="400">
+    <Grid Margin="10">
         <StackPanel>
-            <TextBlock Text="Name"></TextBlock>
+            <TextBlock Text="{lex:Loc GPName}"></TextBlock>
             <TextBox Text="{Binding Name,UpdateSourceTrigger=PropertyChanged}"></TextBox>
-            <TextBlock Text="Version"></TextBlock>
+            <TextBlock Text="{lex:Loc GPVersion}"></TextBlock>
             <TextBlock Text="{Binding Version,UpdateSourceTrigger=PropertyChanged}"></TextBlock>
             <!--<StackPanel Orientation="Horizontal" HorizontalAlignment="Center">
                 <Button Command="{Binding OnConfirmCommand}">Confirm</Button>

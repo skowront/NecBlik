@@ -14,7 +14,5 @@ namespace ZigBee.Common.WpfElements.PopupValuePickers
             InitializeComponent();
             this.DataContext = new GenericValuePicker<float>(this, onConfirm, onCancel);
         }
-
-        
     }
 }

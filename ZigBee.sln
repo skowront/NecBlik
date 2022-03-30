@@ -1,7 +1,7 @@
 ﻿
 Microsoft Visual Studio Solution File, Format Version 12.00
-# Visual Studio Version 16
-VisualStudioVersion = 16.0.31410.223
+# Visual Studio Version 17
+VisualStudioVersion = 17.1.32210.238
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "ZigBee", "ZigBee\ZigBee.csproj", "{407C095C-0D1A-4F84-A03A-906DB542D79B}"
 EndProject
@@ -13,13 +13,29 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "DiagramsExtension", "Diagra
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "ZigBee.Core", "ZigBee.Core\ZigBee.Core.csproj", "{35E05B58-3062-401D-9067-7148726A8F6A}"
 EndProject
-Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "ZigBee.digidotcom.xbee-csharp", "ZigBee.digidotcom.xbee-csharp\ZigBee.digidotcom.xbee-csharp.csproj", "{F8CC89AF-F3E3-41EB-9071-8D82EED9B074}"
-EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "ZigBee.Virtual", "ZigBee.Virtual\ZigBee.Virtual.csproj", "{C7230AE8-C493-4E2E-A4FC-EC9F52305CC5}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ZigBee.Virtual.GUI", "ZigBee.Virtual.GUI\ZigBee.Virtual.GUI.csproj", "{439FC5A9-49D2-48FC-B136-097762C57A1D}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "ZigBee.Virtual.GUI", "ZigBee.Virtual.GUI\ZigBee.Virtual.GUI.csproj", "{439FC5A9-49D2-48FC-B136-097762C57A1D}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ZigBee.Core.GUI", "ZigBee.Core.GUI\ZigBee.Core.GUI.csproj", "{7329BD04-6A70-465C-A7ED-93604778EBA3}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "ZigBee.Core.GUI", "ZigBee.Core.GUI\ZigBee.Core.GUI.csproj", "{7329BD04-6A70-465C-A7ED-93604778EBA3}"
+EndProject
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "ZigBee.Digi.GUI", "ZigBee.Digi.GUI\ZigBee.Digi.GUI.csproj", "{A710CCFD-FB87-48D9-8EDF-E00802E45889}"
+EndProject
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "ZigBee.Digi", "ZigBee.Digi\ZigBee.Digi.csproj", "{2F489C6F-5D3F-4A43-8313-CBA99CC5DE13}"
+EndProject
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "ZigBee.ZigBeeNet", "ZigBee.ZigBeeNet\ZigBee.ZigBeeNet.csproj", "{4075FF82-81D4-4369-8770-35D8FA577030}"
+EndProject
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "ZigBee.ZigBeeNet.GUI", "ZigBee.ZigBeeNet.GUI\ZigBee.ZigBeeNet.GUI.csproj", "{32957790-E985-47BC-8608-DB7A4411C3EB}"
+EndProject
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "ZigBee.PyDigi", "ZigBee.PyDigi\ZigBee.PyDigi.csproj", "{CF62018F-2B8B-4B83-8A32-C2EE0F405928}"
+EndProject
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "ZigBee.PyDigi.GUI", "ZigBee.PyDigi.GUI\ZigBee.PyDigi.GUI.csproj", "{8D8ADAA1-87A7-4EB1-8F68-A35D1094C9DF}"
+EndProject
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "ZigBee.PyDigi.Test", "ZigBee.PyDigi.Test\ZigBee.PyDigi.Test.csproj", "{16A86DE4-DDD2-443D-8663-92AC556FB27F}"
+EndProject
+Project("{888888A0-9F3D-457C-B088-3A5042F75D52}") = "ZigBee.PyDigi.Python", "ZigBee.PyDigi.Python\ZigBee.PyDigi.Python.pyproj", "{2FA4C398-1C02-4DC9-A051-E93F62810761}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ZigBee.CLI", "ZigBee.CLI\ZigBee.CLI.csproj", "{24DA3E74-E8B6-4614-908D-49C765164A69}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -47,10 +63,6 @@ Global
 		{35E05B58-3062-401D-9067-7148726A8F6A}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{35E05B58-3062-401D-9067-7148726A8F6A}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{35E05B58-3062-401D-9067-7148726A8F6A}.Release|Any CPU.Build.0 = Release|Any CPU
-		{F8CC89AF-F3E3-41EB-9071-8D82EED9B074}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{F8CC89AF-F3E3-41EB-9071-8D82EED9B074}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{F8CC89AF-F3E3-41EB-9071-8D82EED9B074}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{F8CC89AF-F3E3-41EB-9071-8D82EED9B074}.Release|Any CPU.Build.0 = Release|Any CPU
 		{C7230AE8-C493-4E2E-A4FC-EC9F52305CC5}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
 		{C7230AE8-C493-4E2E-A4FC-EC9F52305CC5}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{C7230AE8-C493-4E2E-A4FC-EC9F52305CC5}.Release|Any CPU.ActiveCfg = Release|Any CPU
@@ -63,6 +75,40 @@ Global
 		{7329BD04-6A70-465C-A7ED-93604778EBA3}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{7329BD04-6A70-465C-A7ED-93604778EBA3}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{7329BD04-6A70-465C-A7ED-93604778EBA3}.Release|Any CPU.Build.0 = Release|Any CPU
+		{A710CCFD-FB87-48D9-8EDF-E00802E45889}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{A710CCFD-FB87-48D9-8EDF-E00802E45889}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{A710CCFD-FB87-48D9-8EDF-E00802E45889}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{A710CCFD-FB87-48D9-8EDF-E00802E45889}.Release|Any CPU.Build.0 = Release|Any CPU
+		{2F489C6F-5D3F-4A43-8313-CBA99CC5DE13}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{2F489C6F-5D3F-4A43-8313-CBA99CC5DE13}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{2F489C6F-5D3F-4A43-8313-CBA99CC5DE13}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{2F489C6F-5D3F-4A43-8313-CBA99CC5DE13}.Release|Any CPU.Build.0 = Release|Any CPU
+		{4075FF82-81D4-4369-8770-35D8FA577030}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{4075FF82-81D4-4369-8770-35D8FA577030}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{4075FF82-81D4-4369-8770-35D8FA577030}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{4075FF82-81D4-4369-8770-35D8FA577030}.Release|Any CPU.Build.0 = Release|Any CPU
+		{32957790-E985-47BC-8608-DB7A4411C3EB}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{32957790-E985-47BC-8608-DB7A4411C3EB}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{32957790-E985-47BC-8608-DB7A4411C3EB}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{32957790-E985-47BC-8608-DB7A4411C3EB}.Release|Any CPU.Build.0 = Release|Any CPU
+		{CF62018F-2B8B-4B83-8A32-C2EE0F405928}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{CF62018F-2B8B-4B83-8A32-C2EE0F405928}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{CF62018F-2B8B-4B83-8A32-C2EE0F405928}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{CF62018F-2B8B-4B83-8A32-C2EE0F405928}.Release|Any CPU.Build.0 = Release|Any CPU
+		{8D8ADAA1-87A7-4EB1-8F68-A35D1094C9DF}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{8D8ADAA1-87A7-4EB1-8F68-A35D1094C9DF}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{8D8ADAA1-87A7-4EB1-8F68-A35D1094C9DF}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{8D8ADAA1-87A7-4EB1-8F68-A35D1094C9DF}.Release|Any CPU.Build.0 = Release|Any CPU
+		{16A86DE4-DDD2-443D-8663-92AC556FB27F}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{16A86DE4-DDD2-443D-8663-92AC556FB27F}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{16A86DE4-DDD2-443D-8663-92AC556FB27F}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{16A86DE4-DDD2-443D-8663-92AC556FB27F}.Release|Any CPU.Build.0 = Release|Any CPU
+		{2FA4C398-1C02-4DC9-A051-E93F62810761}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{2FA4C398-1C02-4DC9-A051-E93F62810761}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{24DA3E74-E8B6-4614-908D-49C765164A69}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{24DA3E74-E8B6-4614-908D-49C765164A69}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{24DA3E74-E8B6-4614-908D-49C765164A69}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{24DA3E74-E8B6-4614-908D-49C765164A69}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

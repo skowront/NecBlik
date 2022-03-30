@@ -12,7 +12,9 @@ namespace ZigBee.Core.Models
     {
         [JsonProperty]
         public Guid Guid { get; set; } = Guid.NewGuid();
-        protected string internalType { get; set; } = "Default";
+        protected string internalType { get; set; } = Resources.Resources.DefaultFactoryId;
+
+        protected string version { get; set; }
 
         public virtual string GetVendorID()
         {
@@ -31,7 +33,7 @@ namespace ZigBee.Core.Models
 
         public virtual string GetName()
         {
-            return "ZigBee";
+            return Resources.Resources.GPZigBee;
         }
 
         public virtual void SetName(string name)
@@ -47,6 +49,16 @@ namespace ZigBee.Core.Models
         public virtual void SetGuid(Guid guid)
         {
             this.Guid = guid;
+        }
+
+        public virtual string GetVersion()
+        {
+            return this.version;
+        }
+
+        public virtual string GetCacheId()
+        {
+            return this.Guid.ToString();
         }
     }
 }

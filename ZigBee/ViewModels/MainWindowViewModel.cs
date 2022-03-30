@@ -2,7 +2,6 @@
 using System;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
-using System.ComponentModel;
 using System.IO;
 using ZigBee.Common.WpfExtensions.Base;
 using ZigBee.Common.WpfExtensions.Interfaces;
@@ -10,15 +9,21 @@ using ZigBee.Core.GUI;
 using ZigBee.Core.GUI.ViewModels;
 using ZigBee.Core.GUI.Models;
 using ZigBee.Core.Models;
-using ZigBee.Virtual.Models;
-using ZigBee.Core.Factories;
 using ZigBee.Core.GUI.Factories;
 using ZigBee.Core.GUI.Interfaces;
+using ZigBee.Strings;
+using ZigBee.Common.WpfElements;
+using ZigBee.Common.WpfElements.ResponseProviders;
+using ZigBee.Core.GUI.Views;
+using System.Threading;
+using ZigBee.Models;
+using System.Threading.Tasks;
 
 namespace ZigBee.ViewModels
 {
     public class MainWindowViewModel : BaseViewModel
     {
+        #region Properties
         private ProjectModel model;
 
         private ProjectGuiModel guiModel;
@@ -56,10 +61,10 @@ namespace ZigBee.ViewModels
                 return all;
             }
         }
-
-
         public ObservableCollection<ZigBeeNetworkViewModel> ZigBeeNetworks { get; set; } = new ObservableCollection<ZigBeeNetworkViewModel>();
+        #endregion
 
+        #region ResponseProviders
         public IResponseProvider<ZigBeeViewModel, ZigBeeViewModel> NewZigBeeResponseProvider { get; set; } = new GenericResponseProvider<ZigBeeViewModel, ZigBeeViewModel>(new ZigBeeViewModel());
         public IResponseProvider<string, object> LoadProjectFilePathProvider { get; set; } = new GenericResponseProvider<string, object>(string.Empty);
         public IResponseProvider<string, object> SaveProjectFilePathProvider { get; set; } = new GenericResponseProvider<string, object>(string.Empty);
@@ -69,19 +74,37 @@ namespace ZigBee.ViewModels
         public IResponseProvider<string, object> ProjectMapPathProvider { get; set; } = new GenericResponseProvider<string, object>(string.Empty);
         public IResponseProvider<object, Tuple<string, DiagramItemMetadata>> ProjectMapLoadedProvider { get; set; } = new GenericResponseProvider<object, Tuple<string,DiagramItemMetadata>>();
         public IResponseProvider<object, object> NewProjectLoadedProvider { get; set; } = new GenericResponseProvider<object, object>();
+        public IResponseProvider<bool, object> NewProjectLoadEnsureResponseProvider { get; set; } = new GenericResponseProvider<bool, object>(true);
+        public IResponseProvider<bool, object> ActionEnsureResponseProvider { get; set; } = new GenericResponseProvider<bool, object>(true);
+        public IResponseProvider<bool, ZigBeeNetworkViewModel> NetworkRemovedResponseProvider { get; set; } = new GenericResponseProvider<bool, ZigBeeNetworkViewModel>(true);
+        
+        public IResponseProvider<string, Tuple<string, IEnumerable<string>>> ListValueResponseProvider = new GenericResponseProvider<string, Tuple<string, IEnumerable<string>>>(string.Empty);
+
+        public IResponseProvider<YesNoProgressBarPopupResponseProvider, object> SavingProgressBarResponseProvider = null;
+
+        public IResponseProvider<YesNoProgressBarPopupResponseProvider, object> LoadingProgressBarResponseProvider = null;
+
+        public IResponseProvider<Task<ApplicationSettings>, ApplicationSettings> ApplicationSettingsResponseProvider = new GenericResponseProvider<Task<ApplicationSettings>, ApplicationSettings>();
+        #endregion
         public ISelectionSubscriber<ZigBeeViewModel> ZigBeeSelectionSubscriber { get; set; }
 
+        #region Commands
         public RelayCommand NewProjectCommand { get; set; }
         public RelayCommand SaveProjectCommand { get; set; }
         public RelayCommand LoadProjectCommand { get; set; }
         public RelayCommand AddNewZigBeeCommand { get; set; }
+        public RelayCommand AddNetworkCommand { get; set; }
         public RelayCommand LoadProjectMapCommand { get; set; }
+        public RelayCommand EditProjectCommand { get; set; }
+        public RelayCommand ApplicationSettingsCommand { get; set; }
+        public RelayCommand RemoveNetworkCommand { get; set; }
+
+        #endregion
 
         public MainWindowViewModel(ISelectionSubscriber<ZigBeeViewModel> zigBeeSelectionSubscriber)
         {
             this.ZigBeeSelectionSubscriber = zigBeeSelectionSubscriber; 
             this.model = new ProjectModel();
-            this.model.ZigBeeNetworks.Add(new VirtualZigBeeNetwork(true));
             this.guiModel = new ProjectGuiModel();
             this.SyncFromModel();
             this.buildCommands();
@@ -91,9 +114,32 @@ namespace ZigBee.ViewModels
         {
             this.NewProjectCommand = new RelayCommand(o =>
             {
+                if(this.NewProjectLoadEnsureResponseProvider.ProvideResponse() == false)
+                {
+                    return;
+                }
+
                 this.model = new ProjectModel();
                 this.SyncFromModel();
                 this.NewProjectLoadedProvider?.ProvideResponse();
+            });
+
+            this.AddNetworkCommand = new RelayCommand(async (o) =>
+            {
+                var ip = this.ListValueResponseProvider.ProvideResponse(new Tuple<string, IEnumerable<string>>(Strings.SR.SelectLibrary, ZigBeeGuiAnyFactory.Instance.GetFactoryIds()));
+                if(ip != string.Empty)
+                {
+                    var vm = ZigBeeGuiAnyFactory.Instance.NetworkViewModelFromWizard(null,ip);
+                    if(vm!=null)
+                    {
+                        var network = await vm;
+                        if (network == null)
+                            return;
+                        this.ZigBeeNetworks.Add(network);
+                        this.SyncToModel();
+                        this.SyncFromModel();
+                    }
+                }
             });
 
             this.AddNewZigBeeCommand = new RelayCommand(o =>
@@ -105,8 +151,6 @@ namespace ZigBee.ViewModels
                 }
                 else
                 {
-                    throw new NotImplementedException();
-                    //this.AvailableZigBees.Add(response);
                 }
             });
 
@@ -117,6 +161,10 @@ namespace ZigBee.ViewModels
 
             this.LoadProjectCommand = new RelayCommand(o =>
             {
+                if (this.NewProjectLoadEnsureResponseProvider.ProvideResponse() == false)
+                {
+                    return;
+                }
                 this.LoadProject();
             });
 
@@ -125,6 +173,25 @@ namespace ZigBee.ViewModels
                 var path = this.ProjectMapPathProvider.ProvideResponse();
                 this.LoadProjectMap(path);
             });
+
+            this.EditProjectCommand = new RelayCommand(o =>
+            {
+                var vm = new ProjectViewModel(this.model);
+                var window = new ProjectWindow(vm);
+                window.ShowDialog();
+                this.Refresh();
+            });
+
+            this.ApplicationSettingsCommand = new RelayCommand(async o =>
+            {
+                var res = await this.ApplicationSettingsResponseProvider.ProvideResponse(((App)App.Current).ApplicationSettings);
+                if(res!=null)
+                {
+                    ((App)App.Current).ApplicationSettings = res;
+                }
+            });
+
+            this.RemoveNetworkCommand = new RelayCommand(o => { var vm = o as ZigBeeNetworkViewModel; this.RemoveNetwork(o as ZigBeeNetworkViewModel); });
         }
 
         private void LoadProjectMap(string path)
@@ -141,9 +208,8 @@ namespace ZigBee.ViewModels
             this.ProjectMapLoadedProvider.ProvideResponse(new Tuple<string, DiagramItemMetadata>(this.MapFilePath, this.guiModel.mapDiagramMetadata));
         }
 
-        private void LoadProject()
+        private async void LoadProject()
         {
-            this.NewProjectLoadedProvider?.ProvideResponse();
             var path = this.LoadProjectFilePathProvider.ProvideResponse();
             if (path == null)
             {
@@ -153,6 +219,7 @@ namespace ZigBee.ViewModels
             {
                 return;
             }
+            this.NewProjectLoadedProvider?.ProvideResponse();
             var file = path;
             var dir = Path.GetDirectoryName(path);
             if (File.Exists(file))
@@ -162,14 +229,14 @@ namespace ZigBee.ViewModels
             }
             else
             {
-                this.model.Save(path);
+                
+                this.model.Save(path, this.SavingProgressBarResponseProvider.ProvideResponse());
                 this.SaveProjectGui(path);
             }
-            this.model.Load(dir);
-            this.SyncFromModel();
+            await this.model.Load(dir, this.LoadingProgressBarResponseProvider.ProvideResponse());
             this.LoadProjectGui(path);
-            this.ProjectMapLoadedProvider.ProvideResponse(new Tuple<string, DiagramItemMetadata>(this.MapFilePath, this.guiModel.mapDiagramMetadata));
-            this.DiagramZigBeesLoadProvider.ProvideResponse(this.guiModel.mapItemsMetadata);
+            
+            this.SyncFromModel();
         }
 
         private void LoadProjectGui(string path)
@@ -222,10 +289,12 @@ namespace ZigBee.ViewModels
                 }
                 if (Directory.Exists(dir))
                 {
+                    Directory.Delete(dir,true);
+                    Directory.CreateDirectory(dir);
                     File.AppendAllText(file, JsonConvert.SerializeObject(this.model, Formatting.Indented));
                 }
             }
-            this.model.Save(dir);
+            this.model.Save(dir, this.SavingProgressBarResponseProvider.ProvideResponse());
             this.SaveProjectGui(dir);
         }
 
@@ -288,6 +357,8 @@ namespace ZigBee.ViewModels
                 nvm.Sync();
                 this.ZigBeeNetworks.Add(nvm);
             }
+            //TODO
+            //this.ProjectMapLoadedProvider.ProvideResponse(new Tuple<string, DiagramItemMetadata>(this.MapFilePath, this.guiModel.mapDiagramMetadata));
             this.DiagramZigBeesLoadProvider.ProvideResponse(this.guiModel.mapItemsMetadata);
             //this.AvailableZigBees.Clear();
             //foreach (var item in this.model.AvailableZigBees)
@@ -296,6 +367,18 @@ namespace ZigBee.ViewModels
             //}
             //this.DiagramZigBeesLoadedProvider.ProvideResponse(this.model.DiagramZigBees);
             this.LoadProjectMap(this.model.MapFile);
+            this.Refresh();
+        }
+
+        private void RemoveNetwork(ZigBeeNetworkViewModel networkViewModel)
+        {
+            var resp = this.ActionEnsureResponseProvider?.ProvideResponse();
+            if (resp == null)
+                return;
+            if (resp == false)
+                return;
+            this.NetworkRemovedResponseProvider?.ProvideResponse(networkViewModel);
+            this.ZigBeeNetworks.Remove(networkViewModel);
             this.Refresh();
         }
 

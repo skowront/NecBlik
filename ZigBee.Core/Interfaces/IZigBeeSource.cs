@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace ZigBee.Core.Interfaces
 {
-    public interface IZigBeeSource: IVendable
+    public interface IZigBeeSource: IVendable, ICachable
     {
         public string GetAddress();
         public string GetName();
@@ -14,5 +14,6 @@ namespace ZigBee.Core.Interfaces
         public void Save(string folderPath);
         public Guid GetGuid();
         public void SetGuid(Guid guid);
+        public string GetVersion();
     }
 }

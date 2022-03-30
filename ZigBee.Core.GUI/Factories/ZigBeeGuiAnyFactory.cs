@@ -33,7 +33,27 @@ namespace ZigBee.Core.GUI.Factories
         private IZigBeeGuiFactory DefaultFactory = new ZigBeeGuiDefaultFactory();
 
         private List<IZigBeeGuiFactory> Factories = new List<IZigBeeGuiFactory>();
+        public IZigBeeGuiFactory GetFactory(string factoryId)
+        {
+            foreach (var item in this.Factories)
+            {
+                if (item.GetVendorID() == factoryId)
+                {
+                    return item;
+                }
+            }
+            return null;
+        }
 
+        public List<string> GetFactoryIds()
+        {
+            List<string> list = new List<string>();
+            foreach (var item in this.Factories)
+            {
+                list.Add(item.GetVendorID());
+            }
+            return list;
+        }
         public ZigBeeGuiAnyFactory()
         {
             
@@ -74,6 +94,7 @@ namespace ZigBee.Core.GUI.Factories
                             continue;
                         }
                         var module = Activator.CreateInstance(type) as IZigBeeGuiFactory;
+                        module.Initalize();
                         factories.Add(module);
                     }
                 }
@@ -140,9 +161,28 @@ namespace ZigBee.Core.GUI.Factories
             return this.DefaultFactory.GetNetworkViewModel(zigBeeNetwork);
         }
 
+        public virtual async Task<ZigBeeNetworkViewModel> NetworkViewModelFromWizard(ZigBeeNetwork zigBeeNetwork)
+        {
+            foreach (var item in this.Factories)
+            {
+                var r = item.NetworkViewModelFromWizard(zigBeeNetwork);
+                if (r != null)
+                {
+                    return await r;
+                }
+            }
+            return await this.DefaultFactory.NetworkViewModelFromWizard(zigBeeNetwork);
+        }
+
+        public virtual async Task<ZigBeeNetworkViewModel> NetworkViewModelFromWizard(ZigBeeNetwork zigBeeNetwork,string FactoryID)
+        {
+            var factory = this.Factories.Where((o) => { return o.GetVendorID() == FactoryID; }).FirstOrDefault(this.DefaultFactory);
+            return await factory.NetworkViewModelFromWizard(zigBeeNetwork);
+        }
+
         public string GetVendorID()
         {
-            return "Internal";
+            return ZigBee.Core.Resources.Resources.AnyFactoryId;
         }
 
         public UIElement GetZigBeeControl(ZigBeeViewModel zigBeeViewModel)
@@ -156,6 +196,11 @@ namespace ZigBee.Core.GUI.Factories
                 }
             }
             return this.DefaultFactory.GetZigBeeControl(zigBeeViewModel);
+        }
+
+        public void Initalize(object args = null)
+        {
+            
         }
     }
 }

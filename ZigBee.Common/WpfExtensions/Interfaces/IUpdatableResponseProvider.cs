@@ -8,6 +8,7 @@ namespace ZigBee.Common.WpfExtensions.Interfaces
 {
     public interface IUpdatableResponseProvider<U,R,Q>:IResponseProvider<R,Q> where Q:class
     {
+        public void Init(U min, U max, U startValue);
         public void Update(U newValue);
 
         public void SealUpdates();

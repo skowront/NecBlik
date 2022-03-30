@@ -15,10 +15,13 @@
         xmlns:wpfExt="clr-namespace:WPFExtensions.Controls;assembly=WPFExtensions"
         xmlns:controls="clr-namespace:ZigBee.Views.Controls"
         xmlns:dataSelectors="clr-namespace:ZigBee.Core.GUI.DataTemplateSelectors;assembly=ZigBee.Core.GUI"
+        xmlns:dtvm="clr-namespace:ZigBee.ViewModels"
+        d:DataContext="{d:DesignInstance {x:Type dtvm:MainWindowViewModel}}"
         WindowStartupLocation="CenterScreen"
         WindowState="Maximized"
         mc:Ignorable="d"
-        Title="ZigBeeMap" Height="450" Width="800">
+        Title="ZigBeeMap" Height="450" Width="800"
+        >
     <Window.Resources>
         <ContextMenu x:Key="DesignerCanvasContextMenu">
             <MenuItem Header="Paste" Command="{x:Static ApplicationCommands.Paste}" IsEnabled="True"/>
@@ -40,24 +43,28 @@
                 <RowDefinition Height="1*"></RowDefinition>
                 <RowDefinition Height="2"></RowDefinition>
             </Grid.RowDefinitions>
-            <Menu Grid.Row="0" VerticalAlignment="Stretch" VerticalContentAlignment="Bottom">
-                <MenuItem Header="{ext:Loc MainWindowMenuHeaderNew}" Margin="4">
-                    <MenuItem Header="{ext:Loc MainWindowMenuHeaderProject}" Command="{Binding NewProjectCommand}"/>
+            <Menu Grid.Row="0" VerticalAlignment="Top" Height="auto" VerticalContentAlignment="Bottom">
+                <MenuItem Header="{lex:Loc MainWindowMenuHeaderNew}" Margin="4">
+                    <MenuItem Header="{lex:Loc MainWindowMenuHeaderProject}" Command="{Binding NewProjectCommand}"/>
+                    <MenuItem Header="{lex:Loc MainWindowMenuHeaderProjectLoad}" Command="{Binding LoadProjectCommand}"/>
+                    <MenuItem Header="{lex:Loc MainWindowMenuHeaderProjectSave}" Command="{Binding SaveProjectCommand}"/>
+                    <MenuItem Header="{lex:Loc MainWindowMenuHeaderProjectEdit}" Command="{Binding EditProjectCommand}"/>
+                    <MenuItem Header="{lex:Loc MainWindowManuHeaderProjectLoadMap}" Command="{Binding LoadProjectMapCommand}"/>
+                    <MenuItem Header="{lex:Loc MainWindowMenuHeaderProjectAddNetwork}" Command="{Binding AddNetworkCommand}"/>
                 </MenuItem>
-                <MenuItem Header="{ext:Loc MainWindowMenuHeaderProject}" Margin="4">
-                    <MenuItem Header="{ext:Loc MainWindowMenuHeaderProjectLoad}" Command="{Binding LoadProjectCommand}"/>
-                    <MenuItem Header="{ext:Loc MainWindowMenuHeaderProjectSave}" Command="{Binding SaveProjectCommand}"/>
-                    <MenuItem Header="{ext:Loc MainWindowMenuHeaderProjectEdit}"/>
-                    <MenuItem Header="{ext:Loc MainWindowManuHeaderProjectLoadMap}" Command="{Binding LoadProjectMapCommand}"/>
-                    <MenuItem Header="{ext:Loc MainWindowMenuHeaderProjectAddZigBee}" Command="{Binding AddNewZigBeeCommand}"/>
+                <MenuItem Header="{lex:Loc MainWindowMenuHeaderProjectEdit}" Margin="4">
+                    <MenuItem Header="{lex:Loc MainWindowMenuHeaderResizeMap}" Click="ResizeMapMenuItemClick"/>
                 </MenuItem>
-                <MenuItem Header="{ext:Loc MainWindowMenuAbout}" Margin="4">
+                <MenuItem Header="{lex:Loc MainWindowMenuSettings}" Command="{Binding ApplicationSettingsCommand}" Margin="4">
+                </MenuItem>
+                <MenuItem Header="{lex:Loc MainWindowMenuAbout}" Margin="4">
                 </MenuItem>
             </Menu>
             <TextBlock Grid.Row="0" 
                        Grid.Column="1" 
                        Text="{Binding ProjectName}" 
                        HorizontalAlignment="Center" 
+                       Margin="10 0 10 0"
                        Style="{StaticResource NormalTextBlock}"/>
         </Grid>
         <Grid Grid.Row="1">
@@ -66,38 +73,71 @@
                 <ColumnDefinition Width="1*"></ColumnDefinition>
             </Grid.ColumnDefinitions>
             <Grid.RowDefinitions>
-                <RowDefinition></RowDefinition>
-                <RowDefinition></RowDefinition>
+                <RowDefinition Height="auto"></RowDefinition>
+                <RowDefinition Height="9*"></RowDefinition>
+                <RowDefinition Height="*"></RowDefinition>
             </Grid.RowDefinitions>
-            <ScrollViewer Grid.Column="1" Grid.RowSpan="2">
-                <Expander ExpandDirection="Down" Style="{StaticResource MaterialDesignExpander}" 
+            <Grid Grid.Column="2" Background="{StaticResource MaterialDesignDarkBackground}">
+                <TextBlock  Text="{lex:Loc MainWindowNetworks}"
+                       Background="{StaticResource MaterialDesignDarkBackground}"
+                       Foreground="{StaticResource MaterialDesignDarkForeground}" 
+                       HorizontalAlignment="Center" VerticalAlignment="Center" MinHeight="30" FontSize="15" Margin="5"></TextBlock>
+            </Grid>
+            <Grid Grid.Column="1" Grid.Row="1" Grid.RowSpan="2">
+                <ScrollViewer>
+                    <Expander ExpandDirection="Down" Style="{StaticResource MaterialDesignExpander}" 
                           Foreground="{StaticResource ForegroundLightBrush}"
-                          Header="Networks">
-                    <ListView ItemsSource="{Binding ZigBeeNetworks}" 
+                          Header="">
+                        <ListView ItemsSource="{Binding ZigBeeNetworks}" 
                           PreviewMouseLeftButtonDown="ListView_PreviewMouseLeftButtonDown" 
-                          MouseMove="ListView_MouseMove" 
-                          ItemTemplateSelector="{StaticResource NetworkBriefDataTemplateSelector}">
-                    </ListView>
-                </Expander>
-            </ScrollViewer>
-            
-            <ScrollViewer Grid.Column="0" Grid.RowSpan="2" HorizontalScrollBarVisibility="Visible">
+                          MouseMove="ListView_MouseMove"
+                          HorizontalAlignment="Stretch"
+                          HorizontalContentAlignment="Stretch">
+                            <ListView.ItemTemplate>
+                                <DataTemplate>
+                                    <Border BorderThickness="1 1 1 1">
+                                        <Grid Width="auto">
+                                            <Grid.ColumnDefinitions>
+                                                <ColumnDefinition Width="*"></ColumnDefinition>
+                                                <ColumnDefinition Width="auto"></ColumnDefinition>
+                                            </Grid.ColumnDefinitions>
+                                            <ContentPresenter Grid.Column="0" ContentTemplateSelector="{StaticResource NetworkBriefDataTemplateSelector}" VerticalAlignment="Center" HorizontalAlignment="Stretch">
+                                            </ContentPresenter>
+                                            <Button Grid.Column="1" Command="{Binding RelativeSource={RelativeSource FindAncestor, AncestorType=ListView}, Path=DataContext.RemoveNetworkCommand}" 
+                                                CommandParameter="{Binding RelativeSource={RelativeSource Mode=FindAncestor, AncestorType={x:Type ListViewItem}},Path=DataContext}"
+                                                Style="{StaticResource BaseButton}"
+                                                HorizontalAlignment="Right" VerticalAlignment="Center">
+                                                <TextBlock Text="&#xf057;" FontFamily="{StaticResource FontAwesome}" VerticalAlignment="Center"></TextBlock>
+                                            </Button>
+                                        </Grid>
+                                    </Border>
+                                </DataTemplate>
+                            </ListView.ItemTemplate>
+                        </ListView>
+                    </Expander>
+                </ScrollViewer>
+            </Grid>
+
+            <ScrollViewer Grid.Column="0" Grid.Row="0" Grid.RowSpan="3" HorizontalScrollBarVisibility="Visible">
                 <Grid>
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition Width="100*"/>
+                        <ColumnDefinition Width="500*"/>
+                    </Grid.ColumnDefinitions>
                     <Grid.LayoutTransform>
                         <ScaleTransform ScaleX="{Binding ElementName=sldZoom, Path=Value}" ScaleY="{Binding ElementName=sldZoom, Path=Value}" />
                     </Grid.LayoutTransform>
-
+                    <!--<Canvas x:Name="BackgroundCanvas" Grid.ColumnSpan="2">
+                        
+                    </Canvas>-->
                     <controls:ZigBeeDesignerCanvas x:Name="designerCanvas" 
                                                AllowDrop="True" 
                                                Background="Transparent"
-                                               VerticalAlignment="Stretch"
-                                               HorizontalAlignment="Stretch"
                                                IsHitTestVisible="True"
-                                               ContextMenu="{StaticResource DesignerCanvasContextMenu}">
-                    </controls:ZigBeeDesignerCanvas>
+                                               ContextMenu="{StaticResource DesignerCanvasContextMenu}" Grid.ColumnSpan="2"/>
                 </Grid>
             </ScrollViewer>
-            <Slider Grid.Row="0" Minimum="1" Maximum="10" x:Name="sldZoom" Margin="10" Orientation="Vertical" HorizontalAlignment="Left"/>
+            <Slider Grid.Row="0" Grid.RowSpan="2" Minimum="1" Maximum="10" x:Name="sldZoom" Margin="10" Orientation="Vertical" HorizontalAlignment="Left"/>
         </Grid>
     </Grid>
 </Window>

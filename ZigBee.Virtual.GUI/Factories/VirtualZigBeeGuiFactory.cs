@@ -1,18 +1,13 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Reflection;
-using System.Resources;
-using System.Text;
 using System.Threading.Tasks;
 using System.Windows;
 using ZigBee.Core.GUI;
 using ZigBee.Core.GUI.Factories;
-using ZigBee.Core.GUI.Interfaces;
 using ZigBee.Core.GUI.ViewModels;
 using ZigBee.Core.Models;
 using ZigBee.Virtual.GUI.ViewModels;
 using ZigBee.Virtual.GUI.Views.Controls;
+using ZigBee.Virtual.GUI.Views.Wizard;
 
 namespace ZigBee.Virtual.GUI.Factories
 {
@@ -20,7 +15,7 @@ namespace ZigBee.Virtual.GUI.Factories
     {
         public VirtualZigBeeGuiFactory()
         {
-            this.internalFactoryType = "Virtual";
+            this.internalFactoryType = ZigBee.Virtual.Resources.Resources.VirtualFactoryId;
         }
 
 
@@ -66,6 +61,12 @@ namespace ZigBee.Virtual.GUI.Factories
                 return new VirtualZigBeeCoordinatorUserControl(zigBeeViewModel);
             }
             return zbc;
+        }
+
+        public override async Task<ZigBeeNetworkViewModel> NetworkViewModelFromWizard(ZigBeeNetwork zigBeeNetwork)
+        {
+            var rp = new VirtualNetworkWizard(new ViewModels.Wizard.VirtualNetworkWizardViewModel());
+            return rp.ProvideResponse();
         }
     }
 }

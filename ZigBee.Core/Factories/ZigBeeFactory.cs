@@ -4,6 +4,7 @@ using System.IO;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using ZigBee.Common.WpfExtensions.Interfaces;
 using ZigBee.Core.Interfaces;
 using ZigBee.Core.Models;
 
@@ -11,7 +12,7 @@ namespace ZigBee.Core.Factories
 {
     public abstract class ZigBeeFactory:IZigBeeFactory
     {
-        protected string internalFactoryType { get; set; } = "Abstract";
+        protected string internalFactoryType { get; set; } = Resources.Resources.AbstractFactoryId;
 
         protected List<IZigBeeFactory> OtherFactories { get; set; } = new List<IZigBeeFactory>();
 
@@ -64,7 +65,7 @@ namespace ZigBee.Core.Factories
             return new ZigBeeCoordinator();
         }
 
-        public virtual ZigBeeNetwork BuildNetworkFromDirectory(string pathToDirectory)
+        public virtual async Task<ZigBeeNetwork> BuildNetworkFromDirectory(string pathToDirectory, IUpdatableResponseProvider<int, bool, string> updatableResponseProvider)
         {
             if (pathToDirectory.Split('.').LastOrDefault() != this.GetVendorID())
             {
@@ -76,6 +77,11 @@ namespace ZigBee.Core.Factories
         public void AttachOtherFactories(List<IZigBeeFactory> zigBeeFactories)
         {
             this.OtherFactories = zigBeeFactories;
+        }
+
+        public virtual void Initalize(object args = null)
+        {
+            
         }
     }
 }

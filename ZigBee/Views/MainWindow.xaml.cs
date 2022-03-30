@@ -3,15 +3,22 @@ using SharpVectors.Converters;
 using System;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
+using System.Threading.Tasks;
 using System.Windows;
 using System.Windows.Controls;
 using System.Windows.Input;
 using System.Windows.Markup;
 using System.Windows.Media;
+using System.Windows.Media.Imaging;
+using ZigBee.Common.WpfElements;
+using ZigBee.Common.WpfElements.PopupValuePickers;
+using ZigBee.Common.WpfElements.ResponseProviders;
 using ZigBee.Common.WpfExtensions.Base;
 using ZigBee.Core.GUI;
 using ZigBee.Core.GUI.Interfaces;
 using ZigBee.Core.GUI.Models;
+using ZigBee.Core.GUI.ViewModels;
+using ZigBee.Models;
 using ZigBee.ViewModels;
 using ZigBee.Views.Controls;
 
@@ -28,12 +35,14 @@ namespace ZigBee.Views
 
         private UIElement draggedItem;
 
+        private FrameworkElement map;
+
         public MainWindow()
         {
             InitializeComponent();
             this.ViewModel = new MainWindowViewModel(this);
             this.DataContext = this.ViewModel;
-            this.buildResponseProviders();
+            this.BuildResponseProviders();
         }
 
         private void ListView_PreviewMouseLeftButtonDown(object sender, MouseButtonEventArgs e)
@@ -62,18 +71,7 @@ namespace ZigBee.Views
                 {
                     var vm = (ZigBeeViewModel)lv.ItemContainerGenerator.ItemFromContainer(lvi);
                     var xaml = XamlWriter.Save(ZigBee.Core.GUI.Factories.ZigBeeGuiAnyFactory.Instance.GetZigBeeControl(vm));
-                    //DragObject dataObject = new DragObject();
-                    //dataObject.Xaml = xaml; 
-                    //WrapPanel panel = VisualTreeHelper.GetParent(this) as WrapPanel;
-                    //if (panel != null)
-                    //{
-                    //    // desired size for DesignerCanvas is the stretched Toolbox item size
-                    //    double scale = 1.3;
-                    //    dataObject.DesiredSize = new Size(panel.ItemWidth * scale, panel.ItemHeight * scale);
-                    //}
-
                     DragDrop.DoDragDrop(lvi, new DataObject(vm.GetType(), vm), DragDropEffects.Copy);
-                    //DragDrop.DoDragDrop(lvi, dataObject, DragDropEffects.Copy);
                 }
 
             }
@@ -104,7 +102,7 @@ namespace ZigBee.Views
             }
         }
 
-        private void buildResponseProviders()
+        private void BuildResponseProviders()
         {
             this.ViewModel.NewZigBeeResponseProvider = new GenericResponseProvider<ZigBeeViewModel, ZigBeeViewModel>((o) =>
             {
@@ -130,7 +128,7 @@ namespace ZigBee.Views
 
             this.ViewModel.LoadProjectFilePathProvider = new GenericResponseProvider<string, object>(o =>
             {
-                OpenFileDialog openFileDialog = new OpenFileDialog() { CheckFileExists = true, Filter = "Json (*.json) | *.json" };
+                OpenFileDialog openFileDialog = new OpenFileDialog() { CheckFileExists = true, Filter = Strings.SR.JsonFilesOpenFileDialogFilter };
                 openFileDialog.ShowDialog();
                 return openFileDialog.FileName;
             });
@@ -153,7 +151,7 @@ namespace ZigBee.Views
 
             this.ViewModel.ProjectMapPathProvider = new GenericResponseProvider<string, object>(o =>
             {
-                OpenFileDialog openFileDialog = new OpenFileDialog() { CheckFileExists = true, Filter = "Text files (*.svg)|*.svg" };
+                OpenFileDialog openFileDialog = new OpenFileDialog() { CheckFileExists = true, Filter = Strings.SR.SvgFilesOpenFileDialogFilter };
                 openFileDialog.ShowDialog();
                 return openFileDialog.FileName;
             });
@@ -161,20 +159,8 @@ namespace ZigBee.Views
             this.ViewModel.ProjectMapLoadedProvider = new GenericResponseProvider<object, Tuple<string, DiagramItemMetadata>>(o =>
             {
                 if (o == null)
-                {
                     return null;
-                }
-                if(o.Item1==null)
-                {
-                    return null;
-                }
-                if (o.Item1 == string.Empty)
-                {
-                    return null;
-                }
-                var mapBackground = new SvgViewbox() { Source = new Uri(o.Item1) };
-                this.designerCanvas.SetBackground(mapBackground, o.Item2);
-                return null;
+                return this.LoadMap(o.Item1,o.Item2);
             });
 
             this.ViewModel.NewProjectLoadedProvider = new GenericResponseProvider<object, object>((o) =>
@@ -186,18 +172,133 @@ namespace ZigBee.Views
 
             this.ViewModel.ZigBeeSelectionSubscriber = this;
 
-            //this.ViewModel.OnProjectSaved = new Action(() =>
-            //{
-            //    var diagramZigBees = JsonConvert.SerializeObject(this.designerCanvas.GetDiagramZigBees());
-            //    File.WriteAllText(this.ViewModel.ZigBeesDiagramJsonFile,this.ViewModel.ZigBeesDiagramJsonFile);
-            //    return;
-            //});
+            this.ViewModel.ListValueResponseProvider = new ListInputValuePicker();
 
+            this.ViewModel.NewProjectLoadEnsureResponseProvider = new GenericResponseProvider<bool, object>((o) =>
+            {
+                var popup = new SimpleYesNoPopup(Strings.SR.AreYouSure, "", Popups.ZigBeeIcons.WarningIcon, null, null);
+                var rp = new YesNoPopupResponseProvider(popup);
+                return rp.ProvideResponse();
+            });
+
+            this.ViewModel.ActionEnsureResponseProvider = new GenericResponseProvider<bool, object>((o) =>
+            {
+                var popup = new SimpleYesNoPopup(Strings.SR.AreYouSure, "", Popups.ZigBeeIcons.WarningIcon, null, null);
+                var rp = new YesNoPopupResponseProvider(popup);
+                return rp.ProvideResponse();
+            });
+
+            this.ViewModel.SavingProgressBarResponseProvider = new GenericResponseProvider<YesNoProgressBarPopupResponseProvider, object>((o) =>
+            {
+                var savepopup = new SimpleYesNoProgressBarPopup(Strings.SR.GPSaving+"...", "", Popups.ZigBeeIcons.InfoIcon, null, null, 0, 0, 0, false, false);
+                return new YesNoProgressBarPopupResponseProvider(savepopup);
+            });
+
+            this.ViewModel.LoadingProgressBarResponseProvider = new GenericResponseProvider<YesNoProgressBarPopupResponseProvider, object>((o) =>
+            {
+                var savepopup = new SimpleYesNoProgressBarPopup(Strings.SR.GPLoading+"...", "", Popups.ZigBeeIcons.InfoIcon, null, null, 0, 0, 0, false, false);
+                return new YesNoProgressBarPopupResponseProvider(savepopup);
+            });
+
+            this.ViewModel.ApplicationSettingsResponseProvider = new GenericResponseProvider<Task<ApplicationSettings>, ApplicationSettings>(async (o) =>
+            {
+                var vm = new ApplicationSettingsViewModel(o);
+                var window = new AppSettingsWindow();
+                
+                return (await window.ProvideResponse(vm)).Model;
+            });
+
+            this.ViewModel.NetworkRemovedResponseProvider = new GenericResponseProvider<bool, ZigBeeNetworkViewModel>((o) =>
+            {
+                var vms = o.GetZigBeeViewModels();
+                foreach (var item in vms)
+                {
+                    this.designerCanvas.RemoveZigBee(item);
+                }
+                this.designerCanvas.RemoveZigBee(o.ZigBeeCoordinator);
+                return true;
+            });
         }
 
         public void NotifySelected(ZigBeeViewModel obj)
         {
             this.designerCanvas.AddZigBee(obj,new Point(0,0));
+        }
+
+        private object LoadMap(string path, DiagramItemMetadata metadata)
+        {
+            if (path == null)
+            {
+                return null;
+            }
+            if (path == string.Empty)
+            {
+                return null;
+            }
+            if(metadata==null)
+            {
+                return null;
+            }
+            else
+            {
+                if(double.IsNaN(metadata.Size.Width))
+                {
+                    metadata.Size = new Size() { Width = this.designerCanvas.ActualWidth, Height = metadata.Size.Height };
+                }
+                if(double.IsNaN(metadata.Size.Height))
+                {
+                    metadata.Size = new Size() { Width = metadata.Size.Width, Height = this.designerCanvas.ActualHeight};
+                }
+            }
+            var temp = path.Split(".");
+            if (temp.Length < 2)
+            {
+                return null;
+            }
+            else
+            {
+                var extension = temp[temp.Length - 1];
+                //this.BackgroundCanvas.Children.Remove(this.map);
+                switch(extension)
+                {
+                    case "svg":
+                        var mapBackground = new SvgViewbox() { Source = new Uri(path) };
+                        this.designerCanvas.SetBackground(mapBackground, metadata);
+                        break;
+                    default:
+                        try
+                        {
+                            var uri = new Uri("file://" + path);
+                            var bitmap = new BitmapImage(uri);
+                            var img = new Image() { Source = bitmap };
+                            this.designerCanvas.SetBackground(img,metadata);
+                        }
+                        catch(Exception ex)
+                        {
+
+                        }
+                        break;
+                }
+                //this.map.HorizontalAlignment = HorizontalAlignment.Left;
+                //this.map.VerticalAlignment = VerticalAlignment.Top;
+                //this.BackgroundCanvas.Children.Add(this.map);
+                return null;
+            }
+        }
+
+        private void ResizeMapMenuItemClick(object sender, RoutedEventArgs e)
+        {
+            if(this.designerCanvas.GetBackground()==null)
+            {
+                return;
+            }
+            var vm = new MapResizeViewModel(this.designerCanvas.GetMapMetadata());
+            vm.OnDiagramItemMedatadaChanged = new Action<DiagramItemMetadata>((o) =>
+            {
+                this.designerCanvas.UpdateBackgroundMetadata(o);
+            });
+            var window = new MapResizeWindow(vm);
+            window.Show();
         }
     }
 }

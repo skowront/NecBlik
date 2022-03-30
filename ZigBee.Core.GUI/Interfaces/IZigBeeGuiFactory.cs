@@ -10,7 +10,7 @@ using ZigBee.Core.Models;
 
 namespace ZigBee.Core.GUI.Interfaces
 {
-    public interface IZigBeeGuiFactory:IVendable
+    public interface IZigBeeGuiFactory:IVendable, IInitializable
     {
         void AttachOtherFactories(List<IZigBeeGuiFactory> zigBeeFactories);
 
@@ -19,7 +19,10 @@ namespace ZigBee.Core.GUI.Interfaces
         DataTemplate GetNetworkBriefDataTemplate(ZigBeeNetwork zigBeeNetwork);
 
         ZigBeeNetworkViewModel GetNetworkViewModel(ZigBeeNetwork zigBeeNetwork);
+        
+        Task<ZigBeeNetworkViewModel> NetworkViewModelFromWizard(ZigBeeNetwork zigBeeNetwork);
 
         UIElement GetZigBeeControl(ZigBeeViewModel zigBeeViewModel);
+
     }
 }
