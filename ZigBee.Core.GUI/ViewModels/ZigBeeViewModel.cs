@@ -13,7 +13,7 @@ using ZigBee.Core.Models;
 
 namespace ZigBee.Core.GUI
 {
-    public class ZigBeeViewModel:BaseViewModel,IDuplicable<ZigBeeViewModel>,ICachable,IVendable
+    public class ZigBeeViewModel:BaseViewModel,IDuplicable<ZigBeeViewModel>,ICachable,IVendable, ISubscriber<Tuple<string, string>>
     {
         public ZigBeeModel Model;
 
@@ -98,6 +98,7 @@ namespace ZigBee.Core.GUI
                 this.Model = new ZigBeeModel();
                 return;
             }
+            this.Model.ZigBeeSource?.SubscribeToDataRecieved(this);
             this.BuildCommands();
         }
 
@@ -144,7 +145,6 @@ namespace ZigBee.Core.GUI
 
         public virtual void OnDataRecieved(string data, string sourceAddress)
         {
-            this.Model.ZigBeeSource.OnDataRecieved(data, sourceAddress);
             this.AddIncomingHistoryBufferEntry(data, sourceAddress);
         }
 
@@ -156,7 +156,7 @@ namespace ZigBee.Core.GUI
             {
                 foreach (var source in sources)
                 {
-                    source.OnDataRecieved(this.OutputBuffer,this.Address);
+                    source.Model.ZigBeeSource.OnDataRecieved(this.OutputBuffer,this.Address);
                     this.AddOutgoingHistoryBufferEntry(this.outputBuffer, source.Address);
                 }
                 this.Network.ZigBeeCoordinator.OnDataRecieved(this.outputBuffer, this.Address);
@@ -168,7 +168,7 @@ namespace ZigBee.Core.GUI
                 {
                     if (source.Address == this.SelectedDestinationAddress)
                     {
-                        source.OnDataRecieved(this.OutputBuffer, this.Address);
+                        source.Model.ZigBeeSource.OnDataRecieved(this.OutputBuffer, this.Address);
                         this.AddOutgoingHistoryBufferEntry(this.outputBuffer, source.Address);
                         sent = true;
                         break;
@@ -178,7 +178,7 @@ namespace ZigBee.Core.GUI
                 {
                     if(this.Network.Model.ZigBeeCoordinator.GetAddress()==this.SelectedDestinationAddress)
                     {
-                        this.Network.ZigBeeCoordinator.OnDataRecieved(this.OutputBuffer, this.Address);
+                        this.Network.ZigBeeCoordinator.Model.ZigBeeSource.OnDataRecieved(this.OutputBuffer, this.Address);
                         this.AddOutgoingHistoryBufferEntry(this.outputBuffer, this.Address);
                     }
                 }
@@ -193,7 +193,12 @@ namespace ZigBee.Core.GUI
 
         protected virtual void AddOutgoingHistoryBufferEntry(string dataSent, string destinationAddress)
         {
-            this.IOHistoryBuffer += Strings.SR.GPTo + ": " + this.Address + " " + Strings.SR.GPSent + ":" + dataSent + "\n";
+            this.IOHistoryBuffer += Strings.SR.GPTo + ": " + destinationAddress + " " + Strings.SR.GPSent + ":" + dataSent + "\n";
+        }
+
+        public virtual void NotifySubscriber(Tuple<string, string> updateInformation)
+        {
+            this.OnDataRecieved(updateInformation.Item1, updateInformation.Item2);
         }
     }
 }

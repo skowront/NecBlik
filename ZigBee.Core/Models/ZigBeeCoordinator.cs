@@ -1,6 +1,7 @@
 ﻿using Newtonsoft.Json;
 using System;
 using System.Collections.Generic;
+using System.Collections.ObjectModel;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -26,6 +27,8 @@ namespace ZigBee.Core.Models
             get { return this.GetPanID(); }
             set { this.panId = value; }
         }
+
+        public Collection<ISubscriber<Tuple<string, string>>> DataRecievedSubscribers = new Collection<ISubscriber<Tuple<string, string>>>();
 
         protected IZigBeeSource ZigBeeSource { get; set; }
 
@@ -102,12 +105,28 @@ namespace ZigBee.Core.Models
 
         public virtual void OnDataRecieved(string data, string sourceAddress)
         {
+            foreach (var item in this.DataRecievedSubscribers)
+            {
+                item.NotifySubscriber(new Tuple<string, string>(data, sourceAddress));
+            }
             return;
         }
 
         public virtual void Send(string data, string address)
         {
             this.ZigBeeSource.Send(data, address);
+        }
+
+        public virtual void SubscribeToDataRecieved(ISubscriber<Tuple<string, string>> subscriber)
+        {
+            if (!this.DataRecievedSubscribers.Contains(subscriber))
+                this.DataRecievedSubscribers.Add(subscriber);
+        }
+
+        public virtual void UnsubscribeFromDataRecieved(ISubscriber<Tuple<string, string>> subscriber)
+        {
+            if (this.DataRecievedSubscribers.Contains(subscriber))
+                this.DataRecievedSubscribers.Remove(subscriber);
         }
     }
 }

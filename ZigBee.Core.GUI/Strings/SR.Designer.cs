@@ -22,7 +22,7 @@ namespace ZigBee.Core.GUI.Strings {
     [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Resources.Tools.StronglyTypedResourceBuilder", "17.0.0.0")]
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
     [global::System.Runtime.CompilerServices.CompilerGeneratedAttribute()]
-    internal class SR {
+    public class SR {
         
         private static global::System.Resources.ResourceManager resourceMan;
         
@@ -36,7 +36,7 @@ namespace ZigBee.Core.GUI.Strings {
         ///   Returns the cached ResourceManager instance used by this class.
         /// </summary>
         [global::System.ComponentModel.EditorBrowsableAttribute(global::System.ComponentModel.EditorBrowsableState.Advanced)]
-        internal static global::System.Resources.ResourceManager ResourceManager {
+        public static global::System.Resources.ResourceManager ResourceManager {
             get {
                 if (object.ReferenceEquals(resourceMan, null)) {
                     global::System.Resources.ResourceManager temp = new global::System.Resources.ResourceManager("ZigBee.Core.GUI.Strings.SR", typeof(SR).Assembly);
@@ -51,7 +51,7 @@ namespace ZigBee.Core.GUI.Strings {
         ///   resource lookups using this strongly typed resource class.
         /// </summary>
         [global::System.ComponentModel.EditorBrowsableAttribute(global::System.ComponentModel.EditorBrowsableState.Advanced)]
-        internal static global::System.Globalization.CultureInfo Culture {
+        public static global::System.Globalization.CultureInfo Culture {
             get {
                 return resourceCulture;
             }
@@ -63,7 +63,7 @@ namespace ZigBee.Core.GUI.Strings {
         /// <summary>
         ///   Looks up a localized string similar to 00000000 (Broadcast).
         /// </summary>
-        internal static string Broadcast {
+        public static string Broadcast {
             get {
                 return ResourceManager.GetString("Broadcast", resourceCulture);
             }
@@ -72,7 +72,7 @@ namespace ZigBee.Core.GUI.Strings {
         /// <summary>
         ///   Looks up a localized string similar to From.
         /// </summary>
-        internal static string GPFrom {
+        public static string GPFrom {
             get {
                 return ResourceManager.GetString("GPFrom", resourceCulture);
             }
@@ -81,7 +81,7 @@ namespace ZigBee.Core.GUI.Strings {
         /// <summary>
         ///   Looks up a localized string similar to Open.
         /// </summary>
-        internal static string GPOpen {
+        public static string GPOpen {
             get {
                 return ResourceManager.GetString("GPOpen", resourceCulture);
             }
@@ -90,7 +90,7 @@ namespace ZigBee.Core.GUI.Strings {
         /// <summary>
         ///   Looks up a localized string similar to Recieved.
         /// </summary>
-        internal static string GPRecieved {
+        public static string GPRecieved {
             get {
                 return ResourceManager.GetString("GPRecieved", resourceCulture);
             }
@@ -99,7 +99,7 @@ namespace ZigBee.Core.GUI.Strings {
         /// <summary>
         ///   Looks up a localized string similar to Sent.
         /// </summary>
-        internal static string GPSent {
+        public static string GPSent {
             get {
                 return ResourceManager.GetString("GPSent", resourceCulture);
             }
@@ -108,7 +108,7 @@ namespace ZigBee.Core.GUI.Strings {
         /// <summary>
         ///   Looks up a localized string similar to To.
         /// </summary>
-        internal static string GPTo {
+        public static string GPTo {
             get {
                 return ResourceManager.GetString("GPTo", resourceCulture);
             }
