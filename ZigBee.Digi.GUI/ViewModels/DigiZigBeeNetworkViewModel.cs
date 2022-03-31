@@ -32,7 +32,7 @@ namespace ZigBee.Digi.GUI.ViewModels
 
             foreach (var device in this.model.ZigBeeSources)
             {
-                var vm = new DigiZigBeeViewModel(new ZigBeeModel(device),this);
+                var vm = new DigiZigBeeViewModel(new ZigBeeModel(device), this);
                 vm.PullSelectionSubscriber = this.ZigBeeSelectionSubscriber;
                 this.ZigBees.Add(vm);
             }

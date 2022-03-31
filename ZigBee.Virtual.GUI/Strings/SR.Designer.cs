@@ -106,6 +106,15 @@ namespace ZigBee.Virtual.GUI.Strings {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to From.
+        /// </summary>
+        public static string GPFrom {
+            get {
+                return ResourceManager.GetString("GPFrom", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Message.
         /// </summary>
         public static string GPMessage {

@@ -142,21 +142,24 @@ namespace ZigBee.Core.GUI
             return ret;
         }
 
-        public virtual void OnDataRecieved(string data)
+        public virtual void OnDataRecieved(string data, string sourceAddress)
         {
-            this.Model.ZigBeeSource.OnDataRecieved(data);
+            this.Model.ZigBeeSource.OnDataRecieved(data, sourceAddress);
+            this.AddIncomingHistoryBufferEntry(data, sourceAddress);
         }
 
         public virtual void Send()
         {
+            
             var sources = this.Network.GetZigBeeViewModels();
             if (this.SelectedDestinationAddress==Strings.SR.Broadcast)
             {
                 foreach (var source in sources)
                 {
-                    source.OnDataRecieved(this.OutputBuffer);
+                    source.OnDataRecieved(this.OutputBuffer,this.Address);
+                    this.AddOutgoingHistoryBufferEntry(this.outputBuffer, source.Address);
                 }
-                this.Network.ZigBeeCoordinator.OnDataRecieved(this.outputBuffer);
+                this.Network.ZigBeeCoordinator.OnDataRecieved(this.outputBuffer, this.Address);
             }
             else
             {
@@ -165,7 +168,8 @@ namespace ZigBee.Core.GUI
                 {
                     if (source.Address == this.SelectedDestinationAddress)
                     {
-                        source.OnDataRecieved(this.OutputBuffer);
+                        source.OnDataRecieved(this.OutputBuffer, this.Address);
+                        this.AddOutgoingHistoryBufferEntry(this.outputBuffer, source.Address);
                         sent = true;
                         break;
                     }
@@ -174,11 +178,22 @@ namespace ZigBee.Core.GUI
                 {
                     if(this.Network.Model.ZigBeeCoordinator.GetAddress()==this.SelectedDestinationAddress)
                     {
-                        this.Network.ZigBeeCoordinator.OnDataRecieved(this.OutputBuffer);
+                        this.Network.ZigBeeCoordinator.OnDataRecieved(this.OutputBuffer, this.Address);
+                        this.AddOutgoingHistoryBufferEntry(this.outputBuffer, this.Address);
                     }
                 }
             }
             this.OutputBuffer = string.Empty;
+        }
+
+        protected virtual void AddIncomingHistoryBufferEntry(string dataRecieved, string sourceAddress)
+        {
+            this.IOHistoryBuffer += Strings.SR.GPFrom + ": " + sourceAddress + " " + Strings.SR.GPRecieved + ":" + dataRecieved + "\n";
+        }
+
+        protected virtual void AddOutgoingHistoryBufferEntry(string dataSent, string destinationAddress)
+        {
+            this.IOHistoryBuffer += Strings.SR.GPTo + ": " + this.Address + " " + Strings.SR.GPSent + ":" + dataSent + "\n";
         }
     }
 }

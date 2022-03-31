@@ -125,6 +125,21 @@ namespace ZigBee.Digi.Models
             return Resources.Resources.CoordinatorCachePrefix + this.zigBee?.GetAddressString();
         }
 
+        public override void Send(string data, string address)
+        {
+            byte[] bytes = Encoding.ASCII.GetBytes(data);
+            if (address == string.Empty)
+            {
+                this.zigBee.SendBroadcastData(bytes);
+            }
+            else
+            {
+                var remote = this.zigBee.GetNetwork().GetDevices().Where((dev) => { return dev.GetAddressString() == address; });
+                if (remote.Count() >= 1)
+                    this.zigBee.SendData(remote.First(),bytes);
+            }
+        }
+
         [JsonObject(MemberSerialization.OptIn)]
         public class DigiUSBConnectionData
         {

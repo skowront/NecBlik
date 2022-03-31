@@ -165,4 +165,7 @@
   <data name="GPAddress" xml:space="preserve">
     <value>Address</value>
   </data>
+  <data name="GPFrom" xml:space="preserve">
+    <value>From</value>
+  </data>
 </root>

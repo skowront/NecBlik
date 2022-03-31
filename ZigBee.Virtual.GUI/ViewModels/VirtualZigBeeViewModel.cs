@@ -30,10 +30,9 @@ namespace ZigBee.Virtual.GUI.ViewModels
             });
         }
 
-        public override void OnDataRecieved(string data)
+        public override void OnDataRecieved(string data, string sourceAddress)
         {
-            base.OnDataRecieved(data);
-            this.IOHistoryBuffer += Strings.SR.GPRecieved + ":" + data + "\n";
+            base.OnDataRecieved(data,sourceAddress);
         }
     }
 }

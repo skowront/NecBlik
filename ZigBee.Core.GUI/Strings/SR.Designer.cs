@@ -70,11 +70,47 @@ namespace ZigBee.Core.GUI.Strings {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to From.
+        /// </summary>
+        internal static string GPFrom {
+            get {
+                return ResourceManager.GetString("GPFrom", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Open.
         /// </summary>
         internal static string GPOpen {
             get {
                 return ResourceManager.GetString("GPOpen", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Recieved.
+        /// </summary>
+        internal static string GPRecieved {
+            get {
+                return ResourceManager.GetString("GPRecieved", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Sent.
+        /// </summary>
+        internal static string GPSent {
+            get {
+                return ResourceManager.GetString("GPSent", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to To.
+        /// </summary>
+        internal static string GPTo {
+            get {
+                return ResourceManager.GetString("GPTo", resourceCulture);
             }
         }
     }

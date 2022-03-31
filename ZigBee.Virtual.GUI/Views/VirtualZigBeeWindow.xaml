@@ -9,7 +9,7 @@
         lexp:ResxLocalizationProvider.DefaultAssembly="ZigBee.Virtual.GUI"
         lexp:ResxLocalizationProvider.DefaultDictionary="SR"
         mc:Ignorable="d"
-        Title="VirtualZigBeeWindow" MinHeight="200" Width="500" Height="250">
+        Title="VirtualZigBeeWindow" MinHeight="200" MinWidth="200" Width="500" Height="250">
     <Grid Background="{StaticResource MaterialDesignDarkBackground}">
         <Grid Margin="10" MinHeight="200">
             <Grid.RowDefinitions>
@@ -23,10 +23,6 @@
                 <TextBlock Text="{Binding Version,UpdateSourceTrigger=PropertyChanged}" Foreground="{StaticResource MaterialDesignDarkForeground}"></TextBlock>
                 <TextBlock Text="{lex:Loc GPAddress}" Foreground="{StaticResource MaterialDesignDarkForeground}"></TextBlock>
                 <TextBlock Text="{Binding Address,UpdateSourceTrigger=PropertyChanged}" Foreground="{StaticResource MaterialDesignDarkForeground}"></TextBlock>
-                <!--<StackPanel Orientation="Horizontal" HorizontalAlignment="Center">
-                <Button Command="{Binding OnConfirmCommand}">Confirm</Button>
-                <Button Command="{Binding OnCancelCommand}">Cancel</Button>
-            </StackPanel>-->
             </StackPanel>
             <Expander Header="{lex:Loc GPAdvanced}" Grid.Row="1" Style="{StaticResource MaterialDesignExpander}" IsExpanded="False" Foreground="{StaticResource MaterialDesignDarkForeground}">
                 <Grid>

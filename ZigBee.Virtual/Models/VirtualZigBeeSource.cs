@@ -34,8 +34,6 @@ namespace ZigBee.Virtual.Models
             return this.cachedAddress;
         }
 
-        
-
         public override void Save(string folderPath)
         {
             var json = JsonConvert.SerializeObject(this, Formatting.Indented);
@@ -72,6 +70,9 @@ namespace ZigBee.Virtual.Models
             this.internalType = (new VirtualZigBeeFactory()).GetVendorID();
         }
 
-        
+        public override void Send(string data, string address)
+        {
+            
+        }
     }
 }

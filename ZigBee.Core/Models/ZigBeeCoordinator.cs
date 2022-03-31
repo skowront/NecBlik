@@ -100,9 +100,14 @@ namespace ZigBee.Core.Models
             return this.Guid.ToString();
         }
 
-        public virtual void OnDataRecieved(string data)
+        public virtual void OnDataRecieved(string data, string sourceAddress)
         {
             return;
+        }
+
+        public virtual void Send(string data, string address)
+        {
+            this.ZigBeeSource.Send(data, address);
         }
     }
 }

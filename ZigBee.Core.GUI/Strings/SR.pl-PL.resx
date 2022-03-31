@@ -123,4 +123,16 @@
   <data name="Broadcast" xml:space="preserve">
     <value>00000000 (Wszyscy)</value>
   </data>
+  <data name="GPTo" xml:space="preserve">
+    <value>Do</value>
+  </data>
+  <data name="GPSent" xml:space="preserve">
+    <value>Wysłano</value>
+  </data>
+  <data name="GPRecieved" xml:space="preserve">
+    <value>Odebrano</value>
+  </data>
+  <data name="GPFrom" xml:space="preserve">
+    <value>Od</value>
+  </data>
 </root>

@@ -61,9 +61,14 @@ namespace ZigBee.Core.Models
             return this.Guid.ToString();
         }
 
-        public void OnDataRecieved(string data)
+        public void OnDataRecieved(string data, string sourceAddress)
         {
             return;
+        }
+
+        public virtual void Send(string data, string address)
+        {
+            throw new NotImplementedException();
         }
     }
 }

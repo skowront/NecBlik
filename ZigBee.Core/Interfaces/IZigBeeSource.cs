@@ -15,7 +15,7 @@ namespace ZigBee.Core.Interfaces
         public Guid GetGuid();
         public void SetGuid(Guid guid);
         public string GetVersion();
-
-        public void OnDataRecieved(string data);
+        public void OnDataRecieved(string data, string sourceAddress);
+        public void Send(string data, string address);
     }
 }
