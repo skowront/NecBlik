@@ -21,7 +21,7 @@ namespace ZigBee.Virtual.GUI.Factories
 
         public override DataTemplate GetNetworkDataTemplate(ZigBeeNetwork zigBeeNetwork)
         {
-            if(zigBeeNetwork.GetVendorID()==this.GetVendorID())
+            if (zigBeeNetwork.GetVendorID() == this.GetVendorID())
             {
                 var myResourceDictionary = new ResourceDictionary();
                 myResourceDictionary.Source = new Uri("/ZigBee.Virtual.GUI;component/Styles/MergedDictionaries.xaml", UriKind.RelativeOrAbsolute);
@@ -55,11 +55,15 @@ namespace ZigBee.Virtual.GUI.Factories
 
         public override UIElement GetZigBeeControl(ZigBeeViewModel zigBeeViewModel)
         {
-            var zbc = base.GetZigBeeControl(zigBeeViewModel);
-            if(zigBeeViewModel?.Model?.ZigBeeSource is Virtual.Models.VirtualZigBeeCoordinator)
+            if (zigBeeViewModel?.Model?.ZigBeeSource is Virtual.Models.VirtualZigBeeCoordinator)
             {
                 return new VirtualZigBeeCoordinatorUserControl(zigBeeViewModel);
             }
+            if (zigBeeViewModel.ViewFactoriesWhitelist.Count > 0 && !zigBeeViewModel.ViewFactoriesWhitelist.Contains(this.internalFactoryType))
+            {
+                return null;
+            }
+            var zbc = base.GetZigBeeControl(zigBeeViewModel);
             return zbc;
         }
 

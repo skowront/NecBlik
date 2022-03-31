@@ -89,5 +89,15 @@ namespace ZigBee.Core.Models
             if (this.DataRecievedSubscribers.Contains(subscriber))
                 this.DataRecievedSubscribers.Remove(subscriber);
         }
+
+        public virtual bool Open()
+        {
+            return true;
+        }
+
+        public virtual void Close()
+        {
+            return;
+        }
     }
 }

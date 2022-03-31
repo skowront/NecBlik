@@ -19,6 +19,8 @@ namespace ZigBee.Core.GUI
 
         public ZigBeeNetworkViewModel Network;
 
+        public List<string> ViewFactoriesWhitelist = new List<string>(); 
+
         public Guid Guid
         {
             get { return this.Model.Guid; }
@@ -194,6 +196,11 @@ namespace ZigBee.Core.GUI
         protected virtual void AddOutgoingHistoryBufferEntry(string dataSent, string destinationAddress)
         {
             this.IOHistoryBuffer += Strings.SR.GPTo + ": " + destinationAddress + " " + Strings.SR.GPSent + ":" + dataSent + "\n";
+        }
+
+        protected virtual void AddHistoryBufferEntry(string entry)
+        {
+            this.IOHistoryBuffer += entry+"\n";
         }
 
         public virtual void NotifySubscriber(Tuple<string, string> updateInformation)

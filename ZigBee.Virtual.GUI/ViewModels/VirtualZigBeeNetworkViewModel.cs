@@ -40,6 +40,9 @@ namespace ZigBee.Virtual.GUI.ViewModels
                 vm.PullSelectionSubscriber = this.ZigBeeSelectionSubscriber;
                 this.ZigBees.Add(vm);
             }
+            this.GetZigBeeCoordinatorViewModel();
+
+            this.OnPropertyChanged();
         }
 
         public override ZigBeeViewModel GetZigBeeCoordinatorViewModel()
@@ -49,6 +52,7 @@ namespace ZigBee.Virtual.GUI.ViewModels
                 var zvm = new ZigBeeModel(this.Model.ZigBeeCoordinator);
                 this.zigBeeCoorinator = new VirtualZigBeeViewModel(zvm, this);
                 this.zigBeeCoorinator.PullSelectionSubscriber = ZigBeeSelectionSubscriber;
+                this.ZigBeeSelectionSubscriber?.NotifyUpdated(this.zigBeeCoorinator);
             }
             return this.zigBeeCoorinator;
         }

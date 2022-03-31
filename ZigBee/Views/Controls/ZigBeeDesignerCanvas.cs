@@ -42,7 +42,6 @@ namespace ZigBee.Views.Controls
 
         public void AddZigBee(ZigBeeViewModel zigBeeViewModel, Point point)
         {
-            //var newItem = new ZigBeeDesignerItem(data, new ZigBeeControl(data));
             var newItem = new DesignerItem();
             var content = ZigBeeGuiAnyFactory.Instance.GetZigBeeControl(zigBeeViewModel);
             newItem.Content = content;
@@ -67,15 +66,30 @@ namespace ZigBee.Views.Controls
             DesignerCanvas.SetLeft(newItem, Math.Max(0, position.X));
             DesignerCanvas.SetTop(newItem, Math.Max(0, position.Y));
 
-
-            //Canvas.SetZIndex(newItem, this.Children.Count);
             this.Children.Add(newItem);
             SetConnectorDecoratorTemplate(newItem);
-
-            //////update selection
-            //this.SelectionService.SelectItem(newItem);
-            //newItem.Focus();
         }
+
+        public void UpdateZigBee(ZigBeeViewModel zigBeeViewModel)
+        {
+            foreach (var item in this.Children)
+            {
+                if (item is DesignerItem)
+                {
+                    if (((DesignerItem)item).Payload is ZigBeeViewModel)
+                    {
+                        var itemvm = ((ZigBeeViewModel)((DesignerItem)item).Payload);
+                        if (itemvm.GetCacheId() == zigBeeViewModel.GetCacheId())
+                        {
+                            ((DesignerItem)item).Content = ZigBeeGuiAnyFactory.Instance.GetZigBeeControl(zigBeeViewModel);
+                            ((DesignerItem)item).Payload = zigBeeViewModel;
+                            return;
+                        }
+                    }
+                }
+            }
+        }
+
 
         protected IEnumerable<DesignerItem> GetDesignerItems()
         {
@@ -190,8 +204,6 @@ namespace ZigBee.Views.Controls
             var di = this.background;
             di.Width = backgroundMeta.Size.Width;
             di.Height = backgroundMeta.Size.Height;
-            //ZigBeeDesignerCanvas.SetLeft(di, backgroundMeta.Point.X);
-            //ZigBeeDesignerCanvas.SetTop(di, backgroundMeta.Point.Y);
         }
 
         public DiagramItemMetadata GetMapMetadata()

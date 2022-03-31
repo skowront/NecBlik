@@ -19,5 +19,7 @@ namespace ZigBee.Core.Interfaces
         public void SubscribeToDataRecieved(ISubscriber<Tuple<string,string>> subscriber);
         public void UnsubscribeFromDataRecieved(ISubscriber<Tuple<string, string>> subscriber);
         public void Send(string data, string address);
+        public bool Open();
+        public void Close();
     }
 }

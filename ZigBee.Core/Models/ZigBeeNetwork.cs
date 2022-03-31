@@ -73,13 +73,18 @@ namespace ZigBee.Core.Models
             if(this.ZigBeeCoordinator!=null)
             {
                 this.CoordinatorChanged?.Invoke();
-                this.ZigBeeSources = new Collection<IZigBeeSource>((await this.ZigBeeCoordinator.GetDevices(ProgressResponseProvider)).ToList());
+                await this.SyncCoordinator();
                 this.HasCoordinator = true;
             }
             else
             {
                 this.HasCoordinator = false;
             }
+        }
+
+        public virtual async Task SyncCoordinator()
+        {
+            this.ZigBeeSources = new Collection<IZigBeeSource>((await this.ZigBeeCoordinator.GetDevices(ProgressResponseProvider)).ToList());
         }
 
         public virtual void AddSource(IZigBeeSource source)

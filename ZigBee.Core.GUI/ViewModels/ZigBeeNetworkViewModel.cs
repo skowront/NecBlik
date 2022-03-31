@@ -41,6 +41,27 @@ namespace ZigBee.Core.GUI.ViewModels
             }
         }
 
+        private bool isOpen = false;
+        public bool IsOpen
+        {
+            get { return this.isOpen; }
+            set {
+                this.isOpen = value; 
+                if(isOpen == true)
+                {
+                    if (!this.Open())
+                        this.isOpen = false;
+                    else
+                        this.isOpen = true; 
+                }
+                else
+                {
+                    this.Close();
+                }
+                this.OnPropertyChanged(); 
+            }
+        }
+
         protected ZigBeeViewModel zigBeeCoorinator = null;
         public ZigBeeViewModel ZigBeeCoordinator
         {
@@ -53,6 +74,8 @@ namespace ZigBee.Core.GUI.ViewModels
         public ISelectionSubscriber<ZigBeeViewModel> ZigBeeSelectionSubscriber { get; set; }
 
         public RelayCommand EditCommand { get; set; }
+        public RelayCommand RefreshCommand { get; set; }
+        public RelayCommand DiscoverCommand { get; set; }
         
         public IResponseProvider<string,ZigBeeNetworkViewModel> EditResponseProvider { get; set; }
 
@@ -61,9 +84,7 @@ namespace ZigBee.Core.GUI.ViewModels
             this.model = network;
             this.model.CoordinatorChanged = new Action(() =>
             {
-                var zvm = new ZigBeeModel(this.Model.ZigBeeCoordinator);
-                this.zigBeeCoorinator = new ZigBeeViewModel(zvm, this);
-                this.zigBeeCoorinator.PullSelectionSubscriber = ZigBeeSelectionSubscriber;
+                this.GetZigBeeCoordinatorViewModel();
             });
             this.BuildCommands();
         }
@@ -75,6 +96,7 @@ namespace ZigBee.Core.GUI.ViewModels
                 var zvm = new ZigBeeModel(this.Model.ZigBeeCoordinator);
                 this.zigBeeCoorinator = new ZigBeeViewModel(zvm, this);
                 this.zigBeeCoorinator.PullSelectionSubscriber = ZigBeeSelectionSubscriber;
+                ZigBeeSelectionSubscriber?.NotifyUpdated(this.zigBeeCoorinator);
             }
             return this.zigBeeCoorinator;    
         }
@@ -89,10 +111,34 @@ namespace ZigBee.Core.GUI.ViewModels
 
         }
 
+        public virtual async Task Discover()
+        {
+
+        }
+
+        public virtual bool Open()
+        {
+            return this.ZigBeeCoordinator.Model.ZigBeeSource.Open();
+        }
+
+        public virtual void Close()
+        {
+            this.ZigBeeCoordinator.Model.ZigBeeSource.Close();
+        }
+
         private void BuildCommands()
         {
             this.EditCommand = new RelayCommand((o) => {
                 this.EditResponseProvider?.ProvideResponse(this);
+            });
+
+            this.RefreshCommand = new RelayCommand((o) =>
+            {
+                this.Sync();
+            });
+            this.DiscoverCommand = new RelayCommand((o) =>
+            {
+                this.Discover();
             });
         }
     }

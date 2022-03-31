@@ -79,6 +79,7 @@ namespace ZigBee.Common.WpfElements.ResponseProviders
                 this.Popup.ViewModel.Min = min; 
                 this.Popup.ViewModel.Max = max;
                 this.Popup.ViewModel.Value = startValue;
+                this.Popup.SetClosureEnabled(false);
                 this.ProvideResponse();
             });
         }

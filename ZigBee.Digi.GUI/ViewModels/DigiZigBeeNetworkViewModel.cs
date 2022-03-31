@@ -20,10 +20,21 @@ namespace ZigBee.Digi.GUI.ViewModels
             if (this.zigBeeCoorinator == null)
             {
                 var zvm = new ZigBeeModel(this.Model.ZigBeeCoordinator);
-                this.zigBeeCoorinator = new DigiZigBeeViewModel(zvm, this);
+                this.zigBeeCoorinator = new DigiZigBeeCoordinatorViewModel(zvm, this);
                 this.zigBeeCoorinator.PullSelectionSubscriber = ZigBeeSelectionSubscriber;
+                this.ZigBeeSelectionSubscriber?.NotifyUpdated(this.zigBeeCoorinator);
             }
             return this.zigBeeCoorinator;
+        }
+
+        public override void Close()
+        {
+            this.zigBeeCoorinator.Model.ZigBeeSource.Close();
+        }
+
+        public override bool Open()
+        {
+            return this.zigBeeCoorinator.Model.ZigBeeSource.Open();
         }
 
         public override void SyncFromModel()
@@ -34,8 +45,23 @@ namespace ZigBee.Digi.GUI.ViewModels
             {
                 var vm = new DigiZigBeeViewModel(new ZigBeeModel(device), this);
                 vm.PullSelectionSubscriber = this.ZigBeeSelectionSubscriber;
+                this.ZigBeeSelectionSubscriber?.NotifyUpdated(vm);
                 this.ZigBees.Add(vm);
             }
+
+            if(this.model.HasCoordinator)
+            {
+                var zvm = new ZigBeeModel(this.Model.ZigBeeCoordinator);
+                this.zigBeeCoorinator = new DigiZigBeeCoordinatorViewModel(zvm, this);
+                this.zigBeeCoorinator.PullSelectionSubscriber = ZigBeeSelectionSubscriber;
+                this.ZigBeeSelectionSubscriber?.NotifyUpdated(this.zigBeeCoorinator);
+            }
+        }
+
+        public override async Task Discover()
+        {
+            await this.model.SyncCoordinator();
+            this.SyncFromModel();
         }
     }
 }

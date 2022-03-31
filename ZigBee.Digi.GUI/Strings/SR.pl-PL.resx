@@ -147,4 +147,7 @@
   <data name="GPPleaseWait" xml:space="preserve">
     <value>Proszę czekać</value>
   </data>
+  <data name="CantSendFromRemoteDevices" xml:space="preserve">
+    <value>Nie można wysyłać ze zdalnego urządzenia.</value>
+  </data>
 </root>
