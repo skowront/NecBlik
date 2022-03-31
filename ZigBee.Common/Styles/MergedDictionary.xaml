@@ -11,6 +11,7 @@
         <ResourceDictionary Source="/ZigBee.Common;component/Styles/ComboBoxes.xaml"></ResourceDictionary>
         <ResourceDictionary Source="/ZigBee.Common;component/Styles/Windows.xaml"></ResourceDictionary>
         <ResourceDictionary Source="/ZigBee.Common;component/Styles/Menus.xaml"></ResourceDictionary>
+        <ResourceDictionary Source="/ZigBee.Common;component/Styles/ScrollViewers.xaml"></ResourceDictionary>
         <ResourceDictionary>
             <ResourceDictionary.MergedDictionaries>
                 <materialDesign:CustomColorTheme BaseTheme="Dark" PrimaryColor="LightSalmon" SecondaryColor="CornflowerBlue" />

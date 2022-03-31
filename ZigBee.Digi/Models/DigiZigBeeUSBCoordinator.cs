@@ -39,6 +39,15 @@ namespace ZigBee.Digi.Models
             this.internalType = this.zigBeeFactory.GetVendorID();
             this.connectionData = connectionData ?? new() { port = string.Empty, baud = 9600 };
             this.Name = Resources.Resources.DefaultDigiCoordinatorName;
+            this.zigBee = new ZigBeeDevice(new WinSerialPort(connectionData.port, connectionData.baud));
+            if (!this.zigBee.IsOpen)
+                this.zigBee.Open();
+            this.zigBee.DataReceived += ZigBeeDataReceived;
+        }
+
+        private void ZigBeeDataReceived(object? sender, XBeeLibrary.Core.Events.DataReceivedEventArgs e)
+        {
+            this.OnDataRecieved(e.DataReceived.DataString, e.DataReceived.Device.GetAddressString());
         }
 
         public override async Task<IEnumerable<IZigBeeSource>> GetDevices(IUpdatableResponseProvider<int, bool, string> progressResponseProvider = null)
@@ -50,11 +59,8 @@ namespace ZigBee.Digi.Models
             }
             progressResponseProvider?.Init(0, DigiZigBeeUSBCoordinator.maxProgress, 0);
             var progress = 0;
-            this.zigBee = new ZigBeeDevice(new WinSerialPort(connectionData.port, connectionData.baud));
-            this.zigBee.Open();
             var network = this.zigBee.GetNetwork();
             var options = new HashSet<XBeeLibrary.Core.Models.DiscoveryOptions>();
-            //options.Add(XBeeLibrary.Core.Models.DiscoveryOptions.DISCOVER_MYSELF);
             options.Add(XBeeLibrary.Core.Models.DiscoveryOptions.APPEND_DD);
             network.SetDiscoveryOptions(options);
             network.SetDiscoveryTimeout(25000L);
@@ -75,7 +81,6 @@ namespace ZigBee.Digi.Models
             this.progressResponseProvider?.Update(DigiZigBeeUSBCoordinator.maxProgress);
             progressResponseProvider?.SealUpdates();
             var nodes = network.GetDevices();
-            this.zigBee.Close();
             List<IZigBeeSource> list = new();
             foreach (var node in nodes)
             {
@@ -83,7 +88,7 @@ namespace ZigBee.Digi.Models
                 list.Add(ZigBeeSource);
             }
             return list;
-        }
+        }        
 
         private void Network_DeviceDiscovered(object sender, XBeeLibrary.Core.Events.DeviceDiscoveredEventArgs e)
         {
@@ -106,23 +111,42 @@ namespace ZigBee.Digi.Models
 
         public override string GetAddress()
         {
-            this.zigBee.Open();
+            if (!this.zigBee.IsOpen)
+                this.zigBee.Open();
             var r = this.zigBee.XBee64BitAddr.ToString();
-            this.zigBee.Close();
             return r;
         }
 
         public override string GetPanID()
         {
-            this.zigBee.Open();
+            if (!this.zigBee.IsOpen)
+                this.zigBee.Open();
             var r = this.zigBee.GetPANID();
-            this.zigBee.Close();
             return Convert.ToHexString(r);
         }
 
         public override string GetCacheId()
         {
             return Resources.Resources.CoordinatorCachePrefix + this.zigBee?.GetAddressString();
+        }
+
+        public override void Send(string data, string address)
+        {
+            byte[] bytes = Encoding.ASCII.GetBytes(data+"\0");
+            if (address == string.Empty)
+            {
+                this.zigBee.SendBroadcastData(bytes);
+            }
+            else
+            {
+                var remote = this.zigBee.GetNetwork().GetDevices().Where((dev) => { return dev.GetAddressString() == address; });
+                if (remote.Count() >= 1)
+                {
+                    if (!this.zigBee.IsOpen)
+                        this.zigBee.Open();
+                    this.zigBee.SendData(remote.First(), bytes);
+                }
+            }
         }
 
         [JsonObject(MemberSerialization.OptIn)]

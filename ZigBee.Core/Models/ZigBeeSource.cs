@@ -1,6 +1,7 @@
 ﻿using Newtonsoft.Json;
 using System;
 using System.Collections.Generic;
+using System.Collections.ObjectModel;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -15,6 +16,8 @@ namespace ZigBee.Core.Models
         protected string internalType { get; set; } = Resources.Resources.DefaultFactoryId;
 
         protected string version { get; set; }
+
+        public Collection<ISubscriber<Tuple<string, string>>> DataRecievedSubscribers = new Collection<ISubscriber<Tuple<string, string>>>();
 
         public virtual string GetVendorID()
         {
@@ -59,6 +62,32 @@ namespace ZigBee.Core.Models
         public virtual string GetCacheId()
         {
             return this.Guid.ToString();
+        }
+
+        public virtual void OnDataRecieved(string data, string sourceAddress)
+        {
+            foreach(var item in this.DataRecievedSubscribers)
+            {
+                item.NotifySubscriber(new Tuple<string,string>(data,sourceAddress));
+            }
+            return;
+        }
+
+        public virtual void Send(string data, string address)
+        {
+            throw new NotImplementedException();
+        }
+
+        public virtual void SubscribeToDataRecieved(ISubscriber<Tuple<string, string>> subscriber)
+        {
+            if(!this.DataRecievedSubscribers.Contains(subscriber))
+                this.DataRecievedSubscribers.Add(subscriber);
+        }
+
+        public virtual void UnsubscribeFromDataRecieved(ISubscriber<Tuple<string, string>> subscriber)
+        {
+            if (this.DataRecievedSubscribers.Contains(subscriber))
+                this.DataRecievedSubscribers.Remove(subscriber);
         }
     }
 }

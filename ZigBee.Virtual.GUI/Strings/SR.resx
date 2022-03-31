@@ -150,4 +150,22 @@
   <data name="GPVirtualZigBeesCount" xml:space="preserve">
     <value>Virtual ZigBees count</value>
   </data>
+  <data name="GPMessage" xml:space="preserve">
+    <value>Message</value>
+  </data>
+  <data name="GPDestinationAddress" xml:space="preserve">
+    <value>Destination address</value>
+  </data>
+  <data name="GPAdvanced" xml:space="preserve">
+    <value>Advanced</value>
+  </data>
+  <data name="GPRecieved" xml:space="preserve">
+    <value>Recieved</value>
+  </data>
+  <data name="GPAddress" xml:space="preserve">
+    <value>Address</value>
+  </data>
+  <data name="GPFrom" xml:space="preserve">
+    <value>From</value>
+  </data>
 </root>

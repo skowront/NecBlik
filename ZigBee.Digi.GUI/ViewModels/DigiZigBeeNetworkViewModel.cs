@@ -17,10 +17,13 @@ namespace ZigBee.Digi.GUI.ViewModels
 
         public override ZigBeeViewModel GetZigBeeCoordinatorViewModel()
         {
-            var zvm = new ZigBeeModel(this.Model.ZigBeeCoordinator);
-            var vm = new DigiZigBeeViewModel(zvm);
-            vm.PullSelectionSubscriber = ZigBeeSelectionSubscriber;
-            return vm;
+            if (this.zigBeeCoorinator == null)
+            {
+                var zvm = new ZigBeeModel(this.Model.ZigBeeCoordinator);
+                this.zigBeeCoorinator = new DigiZigBeeViewModel(zvm, this);
+                this.zigBeeCoorinator.PullSelectionSubscriber = ZigBeeSelectionSubscriber;
+            }
+            return this.zigBeeCoorinator;
         }
 
         public override void SyncFromModel()
@@ -29,7 +32,7 @@ namespace ZigBee.Digi.GUI.ViewModels
 
             foreach (var device in this.model.ZigBeeSources)
             {
-                var vm = new DigiZigBeeViewModel(new ZigBeeModel(device));
+                var vm = new DigiZigBeeViewModel(new ZigBeeModel(device), this);
                 vm.PullSelectionSubscriber = this.ZigBeeSelectionSubscriber;
                 this.ZigBees.Add(vm);
             }

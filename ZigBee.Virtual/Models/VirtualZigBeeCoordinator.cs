@@ -12,8 +12,26 @@ using ZigBee.Core.Models;
 namespace ZigBee.Virtual.Models
 {
     [JsonObject(MemberSerialization.OptIn)]
-    public class VirtualZigBeeCoordinator:ZigBeeCoordinator
-    {        
+    public class VirtualZigBeeCoordinator : ZigBeeCoordinator
+    {
+        [JsonProperty]
+        public string Address
+        {
+            get { return this.GetAddress(); }
+            set { this.cachedAddress = Address; }
+        }
+
+        private string cachedAddress = string.Empty;
+
+        public override string GetAddress()
+        {
+            if (cachedAddress == string.Empty)
+            {
+                this.cachedAddress = VirtualZigBeeNetwork.generateAddress64bit();
+            }
+            return this.cachedAddress;
+        }
+
         private List<IZigBeeSource> zigBeeSources = new List<IZigBeeSource>();
 
         private List<Tuple<string, string>> connections = new List<Tuple<string, string>>();

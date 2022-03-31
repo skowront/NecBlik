@@ -36,5 +36,10 @@ namespace ZigBee.PyDigi.Models
         {
             return this.GetAddress();
         }
+
+        public override void Send(string data, string address)
+        {
+            
+        }
     }
 }

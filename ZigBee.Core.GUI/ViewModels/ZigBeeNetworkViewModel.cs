@@ -34,13 +34,14 @@ namespace ZigBee.Core.GUI.ViewModels
         public string PanId 
         {
             get { 
-                return this.model.ZigBeeCoordinator.PanId; 
+                return this.model.PanId; 
             }
             set { 
-                this.model.ZigBeeCoordinator.PanId = value; this.OnPropertyChanged(); 
+                this.model.PanId = value; this.OnPropertyChanged(); 
             }
         }
 
+        protected ZigBeeViewModel zigBeeCoorinator = null;
         public ZigBeeViewModel ZigBeeCoordinator
         {
             get 
@@ -58,15 +59,24 @@ namespace ZigBee.Core.GUI.ViewModels
         public ZigBeeNetworkViewModel(ZigBeeNetwork network)
         {
             this.model = network;
+            this.model.CoordinatorChanged = new Action(() =>
+            {
+                var zvm = new ZigBeeModel(this.Model.ZigBeeCoordinator);
+                this.zigBeeCoorinator = new ZigBeeViewModel(zvm, this);
+                this.zigBeeCoorinator.PullSelectionSubscriber = ZigBeeSelectionSubscriber;
+            });
             this.BuildCommands();
         }
 
         public virtual ZigBeeViewModel GetZigBeeCoordinatorViewModel()
         {
-            var zvm = new ZigBeeModel(this.Model.ZigBeeCoordinator);
-            var vm = new ZigBeeViewModel(zvm);
-            vm.PullSelectionSubscriber = ZigBeeSelectionSubscriber;
-            return vm;    
+            if(this.zigBeeCoorinator==null)
+            {
+                var zvm = new ZigBeeModel(this.Model.ZigBeeCoordinator);
+                this.zigBeeCoorinator = new ZigBeeViewModel(zvm, this);
+                this.zigBeeCoorinator.PullSelectionSubscriber = ZigBeeSelectionSubscriber;
+            }
+            return this.zigBeeCoorinator;    
         }
 
         public virtual IEnumerable<ZigBeeViewModel> GetZigBeeViewModels()

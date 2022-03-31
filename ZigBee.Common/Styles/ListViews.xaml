@@ -3,6 +3,7 @@
     <ResourceDictionary.MergedDictionaries>
         <ResourceDictionary Source="/ZigBee.Common;component/Styles/Fonts.xaml"/>
         <ResourceDictionary Source="/ZigBee.Common;component/Styles/Colors.xaml"/>
+        <ResourceDictionary Source="pack://application:,,,/MaterialDesignThemes.Wpf;component/Themes/MaterialDesignTheme.ScrollBar.xaml" />
     </ResourceDictionary.MergedDictionaries>
     <Style x:Key="ZigBeeListViewHoverless" TargetType="{x:Type ListView}">
         <Setter Property="BorderBrush" Value="Transparent"></Setter>
@@ -48,8 +49,8 @@
                 </Style>
             </Setter.Value>
         </Setter>
+        <Style.Resources>
+            <Style TargetType="ScrollBar" BasedOn="{StaticResource MaterialDesignScrollBar}"></Style>
+        </Style.Resources>
     </Style>
-
-   
-
 </ResourceDictionary>

@@ -22,6 +22,25 @@ namespace ZigBee.Core.Models
 
         [JsonProperty]
         public bool HasCoordinator { get; private set; } = false;
+        [JsonProperty]
+        private string panId { get; set; } = Guid.NewGuid().ToString();
+        public string PanId
+        {
+            get
+            {
+                if(this.HasCoordinator && this.ZigBeeCoordinator!=null)
+                {
+                    return this.ZigBeeCoordinator.PanId;
+                }
+                return panId;
+            }
+            set
+            {
+                return;
+            }
+        }
+
+        public Action CoordinatorChanged { get; set; } = null;
 
         public ZigBeeCoordinator ZigBeeCoordinator { get; private set; }
 
@@ -53,6 +72,7 @@ namespace ZigBee.Core.Models
             this.ZigBeeCoordinator = zigBeeCoordinator;
             if(this.ZigBeeCoordinator!=null)
             {
+                this.CoordinatorChanged?.Invoke();
                 this.ZigBeeSources = new Collection<IZigBeeSource>((await this.ZigBeeCoordinator.GetDevices(ProgressResponseProvider)).ToList());
                 this.HasCoordinator = true;
             }

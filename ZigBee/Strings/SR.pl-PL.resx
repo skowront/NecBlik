@@ -189,4 +189,7 @@
   <data name="GPWidth" xml:space="preserve">
     <value>Szerokość</value>
   </data>
+  <data name="MainWindowMenuHeaderProjectRename" xml:space="preserve">
+    <value>Zmień nazwę</value>
+  </data>
 </root>

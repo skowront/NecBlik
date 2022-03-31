@@ -61,6 +61,24 @@ namespace ZigBee.Virtual.GUI.Strings {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Address.
+        /// </summary>
+        public static string GPAddress {
+            get {
+                return ResourceManager.GetString("GPAddress", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Advanced.
+        /// </summary>
+        public static string GPAdvanced {
+            get {
+                return ResourceManager.GetString("GPAdvanced", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Coordinator.
         /// </summary>
         public static string GPCoordinator {
@@ -70,11 +88,38 @@ namespace ZigBee.Virtual.GUI.Strings {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Destination address.
+        /// </summary>
+        public static string GPDestinationAddress {
+            get {
+                return ResourceManager.GetString("GPDestinationAddress", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Devices.
         /// </summary>
         public static string GPDevices {
             get {
                 return ResourceManager.GetString("GPDevices", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to From.
+        /// </summary>
+        public static string GPFrom {
+            get {
+                return ResourceManager.GetString("GPFrom", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Message.
+        /// </summary>
+        public static string GPMessage {
+            get {
+                return ResourceManager.GetString("GPMessage", resourceCulture);
             }
         }
         
@@ -120,6 +165,15 @@ namespace ZigBee.Virtual.GUI.Strings {
         public static string GPOpen {
             get {
                 return ResourceManager.GetString("GPOpen", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Recieved.
+        /// </summary>
+        public static string GPRecieved {
+            get {
+                return ResourceManager.GetString("GPRecieved", resourceCulture);
             }
         }
         

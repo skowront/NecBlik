@@ -17,10 +17,13 @@ namespace ZigBee.ZigBeeNet.GUI.ViewModels
 
         public override ZigBeeViewModel GetZigBeeCoordinatorViewModel()
         {
-            var zvm = new ZigBeeModel(this.Model.ZigBeeCoordinator);
-            var vm = new ZBNetSourceViewModel(zvm);
-            vm.PullSelectionSubscriber = ZigBeeSelectionSubscriber;
-            return vm;
+            if (this.zigBeeCoorinator == null)
+            {
+                var zvm = new ZigBeeModel(this.Model.ZigBeeCoordinator);
+                this.zigBeeCoorinator = new ZBNetSourceViewModel(zvm, this);
+                this.zigBeeCoorinator.PullSelectionSubscriber = ZigBeeSelectionSubscriber;
+            }
+            return this.zigBeeCoorinator;
         }
 
         public override void SyncFromModel()

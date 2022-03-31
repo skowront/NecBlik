@@ -120,4 +120,19 @@
   <data name="GPOpen" xml:space="preserve">
     <value>Open</value>
   </data>
+  <data name="Broadcast" xml:space="preserve">
+    <value>00000000 (Broadcast)</value>
+  </data>
+  <data name="GPTo" xml:space="preserve">
+    <value>To</value>
+  </data>
+  <data name="GPSent" xml:space="preserve">
+    <value>Sent</value>
+  </data>
+  <data name="GPRecieved" xml:space="preserve">
+    <value>Recieved</value>
+  </data>
+  <data name="GPFrom" xml:space="preserve">
+    <value>From</value>
+  </data>
 </root>

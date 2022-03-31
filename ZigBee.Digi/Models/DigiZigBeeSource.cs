@@ -38,5 +38,10 @@ namespace ZigBee.Digi.Models
         {
             return this.zigBeeDevice.GetAddressString();
         }
+
+        public override void Send(string data, string address)
+        {
+
+        }
     }
 }

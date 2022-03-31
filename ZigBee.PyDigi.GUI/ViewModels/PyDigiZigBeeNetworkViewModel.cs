@@ -18,10 +18,13 @@ namespace ZigBee.PyDigi.GUI.ViewModels
 
         public override ZigBeeViewModel GetZigBeeCoordinatorViewModel()
         {
-            var zvm = new ZigBeeModel(this.Model.ZigBeeCoordinator);
-            var vm = new PyDigiZigBeeViewModel(zvm);
-            vm.PullSelectionSubscriber = ZigBeeSelectionSubscriber;
-            return vm;
+            if (this.zigBeeCoorinator == null)
+            {
+                var zvm = new ZigBeeModel(this.Model.ZigBeeCoordinator);
+                this.zigBeeCoorinator = new PyDigiZigBeeViewModel(zvm, this);
+                this.zigBeeCoorinator.PullSelectionSubscriber = ZigBeeSelectionSubscriber;
+            }
+            return this.zigBeeCoorinator;
         }
     }
 }
