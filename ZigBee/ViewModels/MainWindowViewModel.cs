@@ -129,10 +129,10 @@ namespace ZigBee.ViewModels
                 var ip = this.ListValueResponseProvider.ProvideResponse(new Tuple<string, IEnumerable<string>>(Strings.SR.SelectLibrary, ZigBeeGuiAnyFactory.Instance.GetFactoryIds()));
                 if(ip != string.Empty)
                 {
-                    var vm = ZigBeeGuiAnyFactory.Instance.NetworkViewModelFromWizard(null,ip);
+                    var vm = await ZigBeeGuiAnyFactory.Instance.NetworkViewModelFromWizard(null,ip);
                     if(vm!=null)
                     {
-                        var network = await vm;
+                        var network = vm;
                         if (network == null)
                             return;
                         this.ZigBeeNetworks.Add(network);

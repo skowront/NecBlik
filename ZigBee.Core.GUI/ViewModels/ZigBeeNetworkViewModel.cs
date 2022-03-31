@@ -1,4 +1,5 @@
-﻿using System;
+﻿using Newtonsoft.Json;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -12,6 +13,8 @@ namespace ZigBee.Core.GUI.ViewModels
 {
     public class ZigBeeNetworkViewModel : BaseViewModel
     {
+       
+
         protected ZigBeeNetwork model { get; set; }
 
         public ZigBeeNetwork Model
@@ -39,6 +42,12 @@ namespace ZigBee.Core.GUI.ViewModels
             set { 
                 this.model.PanId = value; this.OnPropertyChanged(); 
             }
+        }
+
+        public string InternalSubType
+        {
+            get { return this.model.InternalSubType; }
+            set { this.model.InternalSubType = value; this.OnPropertyChanged(); }
         }
 
         private bool isOpen = false;

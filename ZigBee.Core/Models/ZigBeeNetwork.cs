@@ -40,6 +40,9 @@ namespace ZigBee.Core.Models
             }
         }
 
+        [JsonProperty]
+        public string InternalSubType { get; set; } = string.Empty;
+
         public Action CoordinatorChanged { get; set; } = null;
 
         public ZigBeeCoordinator ZigBeeCoordinator { get; private set; }
