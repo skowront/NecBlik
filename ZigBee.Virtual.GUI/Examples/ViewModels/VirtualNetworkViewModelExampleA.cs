@@ -4,6 +4,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using ZigBee.Core.Models;
+using ZigBee.Virtual.GUI.Examples.Views;
 using ZigBee.Virtual.GUI.ViewModels;
 
 namespace ZigBee.Virtual.GUI.Examples.ViewModels
@@ -12,7 +13,11 @@ namespace ZigBee.Virtual.GUI.Examples.ViewModels
     {
         public VirtualNetworkViewModelExampleA(ZigBeeNetwork network) : base(network)
         {
-            this.InternalSubType = nameof(VirtualNetworkViewModelExampleB);
+            this.EditCommand = new Common.WpfExtensions.Base.RelayCommand((o) =>
+            {
+                var window = new VirtualZigBeeNetworkExampleAWindow(this);
+                window.Show();
+            });
         }
     }
 }
