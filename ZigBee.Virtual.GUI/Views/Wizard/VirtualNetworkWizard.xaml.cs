@@ -50,6 +50,7 @@ namespace ZigBee.Virtual.GUI.Views.Wizard
             }
             var network = new VirtualZigBeeNetwork();
             network.Name = this.ViewModel.NetworkName;
+            network.ZigBeeCoordinatorSubtypeFactoryRule= new Core.Factories.FactoryRule() { Value = this.ViewModel.CoordinatorType };
             var coordinator = new VirtualZigBeeCoordinator(new VirtualZigBeeFactory());
             List<IZigBeeSource> zigBeeSources = new List<IZigBeeSource>();
             for(int i = 0; i<this.ViewModel.VirtualZigBees; i++)

@@ -1,8 +1,10 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Collections.ObjectModel;
 using System.Reflection;
 using System.Threading.Tasks;
 using System.Windows;
+using ZigBee.Core.Factories;
 using ZigBee.Core.GUI;
 using ZigBee.Core.GUI.Factories;
 using ZigBee.Core.GUI.ViewModels;
@@ -100,6 +102,56 @@ namespace ZigBee.Virtual.GUI.Factories
                 }
             }
             return ret;
+        }
+        public List<string> GetAvailableZigBeeViewModels()
+        {
+            var ret = new List<string>();
+            var assembly = Assembly.GetAssembly(typeof(VirtualZigBeeGuiFactory));
+            foreach (var type in assembly.GetExportedTypes())
+            {
+                if (typeof(VirtualZigBeeViewModel).IsAssignableFrom(type) && !type.IsAbstract)
+                {
+                    ret.Add(type.FullName);
+                }
+            }
+            return ret;
+        }
+
+        public VirtualZigBeeViewModel ZigBeeViewModelFromRule(ZigBeeModel model, ZigBeeNetworkViewModel network ,FactoryRule rule)
+        {
+            var assembly = Assembly.GetAssembly(typeof(VirtualZigBeeGuiFactory));
+            foreach (var type in assembly.GetExportedTypes())
+            {
+                if (type.FullName == rule.Value)
+                {
+                    network.Model.ZigBeeCoordinatorSubtypeFactoryRule = rule;
+                    return Activator.CreateInstance(type,model, network) as VirtualZigBeeViewModel;
+                }
+            }
+            return new VirtualZigBeeViewModel(model,network);
+        }
+
+        public VirtualZigBeeViewModel ZigBeeViewModelFromRules(ZigBeeModel model, ZigBeeNetworkViewModel network, List<FactoryRule> rules)
+        {
+            var assembly = Assembly.GetAssembly(typeof(VirtualZigBeeGuiFactory));
+            FactoryRule rule = null;
+            foreach(var item in rules)
+            {
+                if(item.CacheObjectId == model.CacheId)
+                {
+                    rule = item;
+                    break;
+                }
+            }
+            if(rule!=null)
+            foreach (var type in assembly.GetExportedTypes())
+            {
+                if (type.FullName == rule.Value)
+                {
+                     return Activator.CreateInstance(type, model, network) as VirtualZigBeeViewModel;
+                }
+            }
+            return new VirtualZigBeeViewModel(model, network);
         }
 
         public override void Initalize(object args = null)

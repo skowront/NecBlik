@@ -38,6 +38,13 @@ namespace ZigBee.Virtual.GUI.ViewModels.Wizard
             set { networkType = value; this.OnPropertyChanged(); }
         }
 
+        private string coordinatorType;
+        public string CoordinatorType
+        {
+            get { return coordinatorType; }
+            set { coordinatorType = value; this.OnPropertyChanged(); }
+        }
+
         private int virtualZigBees;
         public int VirtualZigBees
         {
@@ -46,6 +53,7 @@ namespace ZigBee.Virtual.GUI.ViewModels.Wizard
         }
         public RelayCommand PickVirtualZigBeesCommand { get; set; }
         public RelayCommand PickNetworkTypeCommand { get; set; }
+        public RelayCommand PickCoordinatorTypeCommand { get; set; }
         public RelayCommand ConfirmCommand { get; set; }
         public RelayCommand AbortCommand { get; set; }
 
@@ -69,6 +77,14 @@ namespace ZigBee.Virtual.GUI.ViewModels.Wizard
                 var fac = new VirtualZigBeeGuiFactory();
                 var availableTypes = fac.GetAvailableNetworkViewModels();
                 this.NetworkType = rp.ProvideResponse(new Tuple<string, IEnumerable<string>>(string.Empty,availableTypes));
+            });
+
+            this.PickCoordinatorTypeCommand = new RelayCommand((o) =>
+            {
+                var rp = new ListInputValuePicker();
+                var fac = new VirtualZigBeeGuiFactory();
+                var availableTypes = fac.GetAvailableZigBeeViewModels();
+                this.CoordinatorType = rp.ProvideResponse(new Tuple<string, IEnumerable<string>>(string.Empty, availableTypes));
             });
 
             this.ConfirmCommand = new RelayCommand((o) =>

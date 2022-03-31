@@ -1,11 +1,14 @@
 ﻿using Newtonsoft.Json;
 using System;
 using System.Collections.Generic;
+using System.Collections.ObjectModel;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using ZigBee.Common.WpfExtensions.Base;
 using ZigBee.Common.WpfExtensions.Interfaces;
+using ZigBee.Core.Factories;
+using ZigBee.Core.GUI.Factories.ViewModels;
 using ZigBee.Core.GUI.Interfaces;
 using ZigBee.Core.Models;
 
@@ -13,8 +16,6 @@ namespace ZigBee.Core.GUI.ViewModels
 {
     public class ZigBeeNetworkViewModel : BaseViewModel
     {
-       
-
         protected ZigBeeNetwork model { get; set; }
 
         public ZigBeeNetwork Model
@@ -71,6 +72,8 @@ namespace ZigBee.Core.GUI.ViewModels
             }
         }
 
+        public ObservableCollection<FactoryRuleViewModel> ZigBeesSubtypeFactoryRules = new ObservableCollection<FactoryRuleViewModel>();
+
         protected ZigBeeViewModel zigBeeCoorinator = null;
         public ZigBeeViewModel ZigBeeCoordinator
         {
@@ -95,6 +98,12 @@ namespace ZigBee.Core.GUI.ViewModels
             {
                 this.GetZigBeeCoordinatorViewModel();
             });
+
+            foreach(var item in this.model.ZigBeesSubtypeFactoryRules)
+            {
+                this.ZigBeesSubtypeFactoryRules.Add(new FactoryRuleViewModel(item));
+            }
+
             this.BuildCommands();
         }
 
@@ -107,7 +116,7 @@ namespace ZigBee.Core.GUI.ViewModels
                 this.zigBeeCoorinator.PullSelectionSubscriber = ZigBeeSelectionSubscriber;
                 ZigBeeSelectionSubscriber?.NotifyUpdated(this.zigBeeCoorinator);
             }
-            return this.zigBeeCoorinator;    
+            return this.zigBeeCoorinator;
         }
 
         public virtual IEnumerable<ZigBeeViewModel> GetZigBeeViewModels()
@@ -117,7 +126,11 @@ namespace ZigBee.Core.GUI.ViewModels
 
         public virtual void Sync()
         {
-
+            this.model.ZigBeesSubtypeFactoryRules.Clear();
+            foreach (var item in this.ZigBeesSubtypeFactoryRules)
+            {
+                this.model.ZigBeesSubtypeFactoryRules.Add(item.Model);
+            }
         }
 
         public virtual async Task Discover()

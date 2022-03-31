@@ -18,7 +18,7 @@ using ZigBee.Virtual.GUI.ViewModels;
 using ZigBee.Common.WpfElements.ResponseProviders;
 using ZigBee.Common.WpfExtensions.Interfaces;
 
-namespace ZigBee.Virtual.GUI.Examples.Views
+namespace ZigBee.Virtual.GUI.Examples.Views.Networks
 {
     /// <summary>
     /// Interaction logic for VirtualZigBeeNetworkWindow.xaml

@@ -38,6 +38,9 @@ namespace ZigBee.Core.Models
         [JsonProperty]
         public string InternalFactoryType { get; set; }
 
+        [JsonProperty]
+        public string InternalFactorySubType { get; set; }
+
         private string addressName { get; set; } = null;
         [JsonProperty]
         public string AddressName 

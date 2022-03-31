@@ -14,6 +14,7 @@ namespace ZigBee.Core.Models
         [JsonProperty]
         public Guid Guid { get; set; } = Guid.NewGuid();
         protected string internalType { get; set; } = Resources.Resources.DefaultFactoryId;
+        protected string internalSubType { get; set; } = string.Empty;
 
         protected string version { get; set; }
 
@@ -98,6 +99,16 @@ namespace ZigBee.Core.Models
         public virtual void Close()
         {
             return;
+        }
+
+        public string GetVendorSubType()
+        {
+            return this.internalSubType;   
+        }
+
+        public void SetVendorSubType(string newType)
+        {
+            this.internalSubType = newType;
         }
     }
 }

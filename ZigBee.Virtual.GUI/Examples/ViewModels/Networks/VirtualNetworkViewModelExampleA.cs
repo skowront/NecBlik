@@ -4,10 +4,10 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using ZigBee.Core.Models;
-using ZigBee.Virtual.GUI.Examples.Views;
+using ZigBee.Virtual.GUI.Examples.Views.Networks;
 using ZigBee.Virtual.GUI.ViewModels;
 
-namespace ZigBee.Virtual.GUI.Examples.ViewModels
+namespace ZigBee.Virtual.GUI.Examples.Networks.ViewModels
 {
     public class VirtualNetworkViewModelExampleA : VirtualZigBeeNetworkViewModel
     {

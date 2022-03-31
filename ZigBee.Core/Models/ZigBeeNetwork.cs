@@ -13,7 +13,7 @@ using ZigBee.Core.Interfaces;
 namespace ZigBee.Core.Models
 {
     [JsonObject(MemberSerialization.OptIn)]
-    public class ZigBeeNetwork:IVendable
+    public class ZigBeeNetwork : IVendable
     {
         [JsonProperty]
         public string Name { get; set; } = Resources.Resources.GPNetwork;
@@ -28,7 +28,7 @@ namespace ZigBee.Core.Models
         {
             get
             {
-                if(this.HasCoordinator && this.ZigBeeCoordinator!=null)
+                if (this.HasCoordinator && this.ZigBeeCoordinator != null)
                 {
                     return this.ZigBeeCoordinator.PanId;
                 }
@@ -42,6 +42,10 @@ namespace ZigBee.Core.Models
 
         [JsonProperty]
         public string InternalSubType { get; set; } = string.Empty;
+        [JsonProperty]
+        public Collection<FactoryRule> ZigBeesSubtypeFactoryRules {get;set;} = new Collection<FactoryRule>();
+        [JsonProperty]
+        public FactoryRule ZigBeeCoordinatorSubtypeFactoryRule { get; set; } = new FactoryRule();
 
         public Action CoordinatorChanged { get; set; } = null;
 

@@ -120,6 +120,7 @@ namespace ZigBee.ViewModels
                 }
 
                 this.model = new ProjectModel();
+                this.guiModel = new ProjectGuiModel();
                 this.SyncFromModel();
                 this.NewProjectLoadedProvider?.ProvideResponse();
             });

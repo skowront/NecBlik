@@ -6,13 +6,13 @@ using System.Threading.Tasks;
 using ZigBee.Core.Models;
 using ZigBee.Virtual.GUI.ViewModels;
 
-namespace ZigBee.Virtual.GUI.Examples.ViewModels
+namespace ZigBee.Virtual.GUI.Examples.Networks.ViewModels
 {
     public class VirtualNetworkViewModelExampleB : VirtualZigBeeNetworkViewModel
     {
         public VirtualNetworkViewModelExampleB (ZigBeeNetwork network) : base(network)
         {
-            this.InternalSubType = nameof(VirtualNetworkViewModelExampleB); 
+
         }
     }
 }
