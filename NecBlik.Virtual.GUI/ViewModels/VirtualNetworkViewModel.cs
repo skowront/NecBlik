@@ -14,12 +14,15 @@ using NecBlik.Core.Models;
 using NecBlik.Virtual.GUI.Factories;
 using NecBlik.Virtual.GUI.Views;
 using NecBlik.Virtual.Models;
+using NecBlik.Core.Factories;
 
 namespace NecBlik.Virtual.GUI.ViewModels
 {
     public class VirtualNetworkViewModel : NetworkViewModel
     {
         public ObservableCollection<VirtualDeviceViewModel> Devices { get; set; } = new ObservableCollection<VirtualDeviceViewModel>();
+
+        public static readonly List<string> CustomizableDeviceProperties = new List<string> { "ViewModel" };
 
         public VirtualNetworkViewModel(Network network) : base(network)
         {
@@ -31,6 +34,35 @@ namespace NecBlik.Virtual.GUI.ViewModels
             });
 
             this.SyncFromModel();
+            this.BuildResponseProviders();
+        }
+
+        private void BuildResponseProviders()
+        {
+            this.AvailableCacheObjectIDsProvider = new GenericResponseProvider<List<string>, FactoryRule>((rule) =>
+            {
+                return null;
+            });
+
+            this.AvailablePropertyProvider =
+            new GenericResponseProvider<List<string>, FactoryRule>((rule) =>
+            {
+                return VirtualNetworkViewModel.CustomizableDeviceProperties;
+            });
+
+
+            this.AvailableValueProvider = new GenericResponseProvider<List<string>, FactoryRule>((rule) =>
+            {
+            var factory = new VirtualDeviceGuiFactory();
+                if (rule.Property == CustomizableDeviceProperties[0])
+                {
+                    return factory.GetAvailableDeviceViewModels();
+                }
+                else
+                {
+                    return null;
+                }
+            });
         }
 
         public virtual void SyncFromModel()
@@ -42,6 +74,8 @@ namespace NecBlik.Virtual.GUI.ViewModels
                 var factory = new VirtualDeviceGuiFactory();
                 var vm = factory.DeviceViewModelFromRules(new DeviceModel(device), this, this.model.DeviceSubtypeFactoryRules.ToList());
                 vm.PullSelectionSubscriber = this.DeviceSelectionSubscriber;
+                //TODO
+                //vm.InternalSubtype = rule.where(cache==vm.cache).value;
                 this.Devices.Add(vm);
             }
             this.GetCoordinatorViewModel();

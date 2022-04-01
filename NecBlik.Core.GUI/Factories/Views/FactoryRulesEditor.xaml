@@ -1,0 +1,110 @@
+﻿<Window x:Class="NecBlik.Core.GUI.Views.FactoryRulesEditor"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="clr-namespace:NecBlik.Core.GUI.Views"
+        xmlns:vm="clr-namespace:NecBlik.Core.GUI.Factories.ViewModels"
+        xmlns:fvm="clr-namespace:NecBlik.Core.GUI.Factories.ViewModels"
+        xmlns:fa="http://schemas.fontawesome.io/icons/"
+        xmlns:lexp="clr-namespace:WPFLocalizeExtension.Providers;assembly=WPFLocalizeextension"
+        xmlns:lex="clr-namespace:WPFLocalizeExtension.Extensions;assembly=WPFLocalizeextension"
+        lexp:ResxLocalizationProvider.DefaultAssembly="NecBlik.Core.GUI"
+        lexp:ResxLocalizationProvider.DefaultDictionary="SR"
+        mc:Ignorable="d"
+        d:DataContext="{d:DesignInstance {x:Type vm:FactoryRulesEditorViewModel}}"
+        Title="NetworkFactoryRulesEditor" Height="450" Width="800">
+    <Window.Resources>
+        <DataTemplate x:Key="FactoryRuleDataTemplate" DataType="{x:Type fvm:FactoryRuleViewModel}">
+            <Grid>
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="auto"></ColumnDefinition>
+                    <ColumnDefinition Width="*"></ColumnDefinition>
+                    <ColumnDefinition Width="auto"></ColumnDefinition>
+                </Grid.ColumnDefinitions>
+                <Grid.RowDefinitions>
+                    <RowDefinition Height="auto"></RowDefinition>
+                    <RowDefinition Height="auto"></RowDefinition>   
+                    <RowDefinition Height="auto"></RowDefinition>   
+                    <RowDefinition Height="auto"></RowDefinition>   
+                </Grid.RowDefinitions>
+                <TextBlock Grid.Column="0" VerticalAlignment="Center" Margin="0 0 10 0" TextWrapping="Wrap"
+                           Text="{Binding CacheObjectId}"></TextBlock>
+                <Button Grid.Column="1" HorizontalAlignment="Right" HorizontalContentAlignment="Right" Style="{StaticResource BaseButton}" 
+                        Command="{Binding SelectCacheObjectIDCommand}">
+                    <StackPanel Orientation="Horizontal">
+                        <TextBlock Text="{lex:Loc GPSelect}" Margin="0 0 10 0"></TextBlock>
+                        <fa:FontAwesome Icon="MousePointer" VerticalAlignment="Center"></fa:FontAwesome>
+                    </StackPanel>
+                </Button>
+                <TextBlock Grid.Row="1" Grid.Column="0" VerticalAlignment="Center" Margin="0 0 10 0" TextWrapping="Wrap"
+                           Text="{Binding Property}"></TextBlock>
+                <Button Grid.Row="1"  Grid.Column="1" HorizontalAlignment="Right" HorizontalContentAlignment="Right" Style="{StaticResource BaseButton}" 
+                        Command="{Binding SelectPropertyCommand}">
+                    <StackPanel Orientation="Horizontal">
+                        <TextBlock Text="{lex:Loc GPSelect}" Margin="0 0 10 0"></TextBlock>
+                        <fa:FontAwesome Icon="MousePointer" VerticalAlignment="Center"></fa:FontAwesome>
+                    </StackPanel>
+                </Button>
+                <TextBlock Grid.Row="2" VerticalAlignment="Center" Margin="0 0 10 0" TextWrapping="Wrap"
+                           Text="{Binding Value}"></TextBlock>
+                <Button Grid.Row="2" Grid.Column="1" HorizontalAlignment="Right" HorizontalContentAlignment="Right" Style="{StaticResource BaseButton}"
+                        Command="{Binding SelectValueCommand}">
+                    <StackPanel Orientation="Horizontal">
+                        <TextBlock Text="{lex:Loc GPSelect}" Margin="0 0 10 0"></TextBlock>
+                        <fa:FontAwesome Icon="MousePointer" VerticalAlignment="Center"></fa:FontAwesome>
+                    </StackPanel>
+                </Button>
+            </Grid>
+        </DataTemplate>
+    </Window.Resources>
+    <Grid Background="{StaticResource MaterialDesignDarkBackground}">
+        <Grid.RowDefinitions>
+            <RowDefinition Height="auto"></RowDefinition>
+            <RowDefinition Height="*"></RowDefinition>
+        </Grid.RowDefinitions>
+        <StackPanel Orientation="Horizontal">
+            <Button Margin="5" Grid.Column="0" HorizontalAlignment="Left" HorizontalContentAlignment="Right" Style="{StaticResource BaseButton}"
+                        Command="{Binding AddRuleCommand}">
+                <StackPanel Orientation="Horizontal">
+                    <TextBlock Text="{lex:Loc GPAddRuleCommand}" Margin="0 0 5 0" VerticalAlignment="Center"></TextBlock>
+                    <fa:FontAwesome Icon="Plus" VerticalAlignment="Center" Margin="0 0 5 0"></fa:FontAwesome>
+                </StackPanel>
+            </Button>
+            <Button Margin="5" Grid.Column="0" HorizontalAlignment="Left" HorizontalContentAlignment="Right" Style="{StaticResource BaseButton}"
+                        Command="{Binding ClearRulesCommand}">
+                <StackPanel Orientation="Horizontal">
+                    <TextBlock Text="{lex:Loc GPClearRulesCommand}" Margin="0 0 5 0" VerticalAlignment="Center"></TextBlock>
+                    <fa:FontAwesome Icon="TrashOutline" VerticalAlignment="Center" Margin="0 0 5 0"></fa:FontAwesome>
+                </StackPanel>
+            </Button>
+        </StackPanel>
+        <ScrollViewer Grid.Row="1" Style="{StaticResource ScrollViewer}">
+            <ListView ItemsSource="{Binding FactoryRules}" 
+                          HorizontalAlignment="Stretch"
+                          HorizontalContentAlignment="Stretch"
+                          d:ItemsSource="{d:SampleData ItemCount=10}">
+                <ListView.ItemTemplate>
+                    <DataTemplate>
+                        <Border BorderThickness="1 1 1 1">
+                            <Grid Width="auto">
+                                <Grid.ColumnDefinitions>
+                                    <ColumnDefinition Width="*"></ColumnDefinition>
+                                    <ColumnDefinition Width="auto"></ColumnDefinition>
+                                </Grid.ColumnDefinitions>
+                                <ContentPresenter Grid.Column="0" ContentTemplate="{StaticResource FactoryRuleDataTemplate}" VerticalAlignment="Center" HorizontalAlignment="Stretch">
+                                </ContentPresenter>
+                                <Button Grid.Column="1" Command="{Binding RelativeSource={RelativeSource FindAncestor, AncestorType=ListView}, Path=DataContext.RemoveRuleCommand}" 
+                                                CommandParameter="{Binding RelativeSource={RelativeSource Mode=FindAncestor, AncestorType={x:Type ListViewItem}},Path=DataContext}"
+                                                Style="{StaticResource BaseButton}"
+                                                HorizontalAlignment="Right" VerticalAlignment="Stretch">
+                                    <TextBlock Text="&#xf057;" FontFamily="{StaticResource FontAwesome}" VerticalAlignment="Center"></TextBlock>
+                                </Button>
+                            </Grid>
+                        </Border>
+                    </DataTemplate>
+                </ListView.ItemTemplate>
+            </ListView>
+        </ScrollViewer>
+    </Grid>
+</Window>

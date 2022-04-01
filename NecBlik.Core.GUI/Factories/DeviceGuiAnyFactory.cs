@@ -189,6 +189,10 @@ namespace NecBlik.Core.GUI.Factories
         {
             foreach (var item in this.Factories)
             {
+                //if (deviceViewModel.ViewFactoriesWhitelist.Count > 0 && !deviceViewModel.ViewFactoriesWhitelist.Contains(item.GetVendorID()))
+                //{
+                //    continue;
+                //}
                 var r = item.GetDeviceControl(deviceViewModel);
                 if (r != null)
                 {

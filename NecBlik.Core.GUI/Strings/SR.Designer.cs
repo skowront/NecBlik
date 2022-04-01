@@ -97,6 +97,15 @@ namespace NecBlik.Core.GUI.Strings {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Select.
+        /// </summary>
+        public static string GPSelect {
+            get {
+                return ResourceManager.GetString("GPSelect", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Sent.
         /// </summary>
         public static string GPSent {

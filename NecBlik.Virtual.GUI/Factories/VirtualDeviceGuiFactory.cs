@@ -62,10 +62,7 @@ namespace NecBlik.Virtual.GUI.Factories
             {
                 return new VirtualCoordinatorUserControl(deviceViewModel);
             }
-            if (deviceViewModel.ViewFactoriesWhitelist.Count > 0 && !deviceViewModel.ViewFactoriesWhitelist.Contains(this.internalFactoryType))
-            {
-                return null;
-            }
+            
             var zbc = base.GetDeviceControl(deviceViewModel);
             return zbc;
         }
@@ -103,6 +100,7 @@ namespace NecBlik.Virtual.GUI.Factories
             }
             return ret;
         }
+
         public List<string> GetAvailableDeviceViewModels()
         {
             var ret = new List<string>();

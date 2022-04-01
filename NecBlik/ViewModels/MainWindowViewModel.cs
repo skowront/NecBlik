@@ -66,7 +66,7 @@ namespace NecBlik.ViewModels
         #endregion
 
         #region ResponseProviders
-        public IResponseProvider<DeviceViewModel, DeviceViewModel> NewDeviceResponseProvider { get; set; } = new GenericResponseProvider<DeviceViewModel, DeviceViewModel>(new DeviceViewModel());
+ 
         public IResponseProvider<string, object> LoadProjectFilePathProvider { get; set; } = new GenericResponseProvider<string, object>(string.Empty);
         public IResponseProvider<string, object> SaveProjectFilePathProvider { get; set; } = new GenericResponseProvider<string, object>(string.Empty);
         public IResponseProvider<object, IEnumerable<DiagramDevice>> DiagramDevicesLoadProvider { get; set; } = new GenericResponseProvider<object, IEnumerable<DiagramDevice>>(null);

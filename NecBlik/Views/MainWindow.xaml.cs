@@ -104,17 +104,6 @@ namespace NecBlik.Views
 
         private void BuildResponseProviders()
         {
-            this.ViewModel.NewDeviceResponseProvider = new GenericResponseProvider<DeviceViewModel, DeviceViewModel>((o) =>
-            {
-                bool result = false;
-                var window = new DeviceEditorWindow(o, new Action(() => result = true), new Action(() => result = false));
-                window.ShowDialog();
-                if (result == false)
-                {
-                    return null;
-                }
-                return o;
-            });
 
             this.ViewModel.SaveProjectFilePathProvider = new GenericResponseProvider<string, object>(o =>
             {

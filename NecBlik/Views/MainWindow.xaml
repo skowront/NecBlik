@@ -93,7 +93,7 @@
                         <Expander ExpandDirection="Down" Style="{StaticResource MaterialDesignExpander}" 
                           Foreground="{StaticResource ForegroundLightBrush}"
                           Header="">
-                            <ListView ItemsSource="{Binding ZigBeeNetworks}" 
+                            <ListView ItemsSource="{Binding Networks}" 
                           PreviewMouseLeftButtonDown="ListView_PreviewMouseLeftButtonDown" 
                           MouseMove="ListView_MouseMove"
                           HorizontalAlignment="Stretch"

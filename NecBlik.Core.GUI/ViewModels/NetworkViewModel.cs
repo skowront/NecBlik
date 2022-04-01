@@ -11,6 +11,7 @@ using NecBlik.Core.Factories;
 using NecBlik.Core.GUI.Factories.ViewModels;
 using NecBlik.Core.GUI.Interfaces;
 using NecBlik.Core.Models;
+using NecBlik.Core.GUI.Views;
 
 namespace NecBlik.Core.GUI.ViewModels
 {
@@ -72,6 +73,24 @@ namespace NecBlik.Core.GUI.ViewModels
             }
         }
 
+        protected IResponseProvider<List<string>, FactoryRule> AvailableCacheObjectIDsProvider =
+                new GenericResponseProvider<List<string>, FactoryRule>((rule) =>
+                {
+                    return null;
+                });
+
+        protected IResponseProvider<List<string>, FactoryRule> AvailablePropertyProvider =
+                new GenericResponseProvider<List<string>, FactoryRule>((rule) =>
+                {
+                    return null;
+                });
+
+        protected IResponseProvider<List<string>, FactoryRule> AvailableValueProvider =
+                new GenericResponseProvider<List<string>, FactoryRule>((rule) =>
+                {
+                    return null;
+                });
+
         public ObservableCollection<FactoryRuleViewModel> DevicesSubtypeFactoryRules = new ObservableCollection<FactoryRuleViewModel>();
 
         protected DeviceViewModel coorinator = null;
@@ -88,6 +107,7 @@ namespace NecBlik.Core.GUI.ViewModels
         public RelayCommand EditCommand { get; set; }
         public RelayCommand RefreshCommand { get; set; }
         public RelayCommand DiscoverCommand { get; set; }
+        public RelayCommand EditRulesCommand { get; set; }
         
         public IResponseProvider<string,NetworkViewModel> EditResponseProvider { get; set; }
 
@@ -158,9 +178,17 @@ namespace NecBlik.Core.GUI.ViewModels
             {
                 this.Sync();
             });
-            this.DiscoverCommand = new RelayCommand((o) =>
+
+            this.DiscoverCommand = new RelayCommand(async (o) =>
             {
                 this.Discover();
+            });
+
+            this.EditRulesCommand = new RelayCommand((o) =>
+            {
+                var rp = new GenericResponseProvider<ObservableCollection<FactoryRuleViewModel>, object>((o) => { return this.DevicesSubtypeFactoryRules; });
+                var window = new FactoryRulesEditor(rp, AvailableCacheObjectIDsProvider,AvailablePropertyProvider,AvailableValueProvider);
+                window.Show();
             });
         }
     }

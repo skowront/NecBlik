@@ -135,4 +135,7 @@
   <data name="GPFrom" xml:space="preserve">
     <value>De</value>
   </data>
+  <data name="GPSelect" xml:space="preserve">
+    <value>Choisissez</value>
+  </data>
 </root>

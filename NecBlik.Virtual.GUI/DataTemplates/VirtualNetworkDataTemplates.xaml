@@ -12,10 +12,20 @@
     </DataTemplate>
 
     <DataTemplate x:Key="VirtualNetworkDataTemplate" DataType="{x:Type viewModels:VirtualNetworkViewModel}">
-        <StackPanel>
-            <TextBlock Text="{Binding Name}"></TextBlock>
-            <TextBlock Text="{Binding Guid}"></TextBlock>
-            <Button Command="{Binding EditCommand}" Style="{StaticResource BaseButton}" Content="{lex:Loc NecBlik.Virtual.GUI:SR:GPOpen}"></Button>
-        </StackPanel>
+        <Grid IsHitTestVisible="True">
+            <Grid.RowDefinitions>
+                <RowDefinition Height="1*"></RowDefinition>
+            </Grid.RowDefinitions>
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="5*"></ColumnDefinition>
+                <ColumnDefinition Width="*"></ColumnDefinition>
+            </Grid.ColumnDefinitions>
+            <TextBlock Grid.Row="0" Text="{Binding Name}" VerticalAlignment="Center"></TextBlock>
+            <Button Grid.Column="1" Grid.RowSpan="2" VerticalAlignment="Center" Command="{Binding EditCommand}" Style="{StaticResource BaseButton}" Content="{lex:Loc NecBlik.Virtual.GUI:SR:GPOpen}">
+            </Button>
+            <Grid.ToolTip>
+                <TextBlock Grid.Row="0" Text="{Binding Guid}"></TextBlock>
+            </Grid.ToolTip>
+        </Grid>
     </DataTemplate>
 </ResourceDictionary>
