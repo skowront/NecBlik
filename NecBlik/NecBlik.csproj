@@ -1,0 +1,56 @@
+﻿<Project Sdk="Microsoft.NET.Sdk">
+
+  <PropertyGroup>
+    <OutputType>WinExe</OutputType>
+    <TargetFramework>net6.0-windows</TargetFramework>
+    <UseWPF>true</UseWPF>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <PackageReference Include="FamFamFam.Flags.Wpf" Version="1.2.1" />
+    <PackageReference Include="Newtonsoft.Json" Version="13.0.1" />
+    <PackageReference Include="Ookii.Dialogs.Wpf" Version="4.0.0" />
+    <PackageReference Include="WPFExtensions" Version="1.0.0" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <ProjectReference Include="..\DiagramsExtension\DiagramsExtension.csproj" />
+    <ProjectReference Include="..\NecBlik.Common\NecBlik.Common.csproj" />
+    <ProjectReference Include="..\NecBlik.Core.GUI\NecBlik.Core.GUI.csproj" />
+    <ProjectReference Include="..\NecBlik.Core\NecBlik.Core.csproj" />
+    <ProjectReference Include="..\NecBlik.Digi.GUI\NecBlik.Digi.GUI.csproj" />
+    <ProjectReference Include="..\NecBlik.Digi\NecBlik.Digi.csproj" />
+    <ProjectReference Include="..\NecBlik.PyDigi.GUI\NecBlik.PyDigi.GUI.csproj" />
+    <ProjectReference Include="..\NecBlik.PyDigi\NecBlik.PyDigi.csproj" />
+    <ProjectReference Include="..\NecBlik.Virtual.GUI\NecBlik.Virtual.GUI.csproj" />
+    <ProjectReference Include="..\NecBlik.Virtual\NecBlik.Virtual.csproj" />
+    <ProjectReference Include="..\NecBlik.ZigBeeNet.GUI\NecBlik.ZigBeeNet.GUI.csproj" />
+    <ProjectReference Include="..\NecBlik.ZigBeeNet\NecBlik.ZigBeeNet.csproj" />
+    <ProjectReference Include="..\WPFLocalizeextension\WPFLocalizeextension.csproj" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <Compile Update="Resources\Resources.Designer.cs">
+      <DesignTime>True</DesignTime>
+      <AutoGen>True</AutoGen>
+      <DependentUpon>Resources.resx</DependentUpon>
+    </Compile>
+    <Compile Update="Strings\SR.Designer.cs">
+      <DesignTime>True</DesignTime>
+      <AutoGen>True</AutoGen>
+      <DependentUpon>SR.resx</DependentUpon>
+    </Compile>
+  </ItemGroup>
+
+  <ItemGroup>
+    <EmbeddedResource Update="Resources\Resources.resx">
+      <Generator>PublicResXFileCodeGenerator</Generator>
+      <LastGenOutput>Resources.Designer.cs</LastGenOutput>
+    </EmbeddedResource>
+    <EmbeddedResource Update="Strings\SR.resx">
+      <Generator>PublicResXFileCodeGenerator</Generator>
+      <LastGenOutput>SR.Designer.cs</LastGenOutput>
+    </EmbeddedResource>
+  </ItemGroup>
+
+</Project>

@@ -1,0 +1,21 @@
+﻿<ResourceDictionary xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+                    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+                    xmlns:local="clr-namespace:NecBlik.Common.Styles">
+    <FontFamily x:Key="RubikLight">/NecBlik.Common;component/Fonts/#Rubik Light</FontFamily>
+    <FontFamily x:Key="RubikBold">/NecBlik.Common;component/Fonts/#Rubik Bold</FontFamily>
+    <FontFamily x:Key="FontAwesome">/NecBlik.Common;component/Fonts/Font Awesome 5 Free-Solid-900.otf#Font Awesome 5 Free</FontFamily>
+    <Style TargetType="{x:Type Control}" x:Key="BaseStyle">
+        <Setter Property="FontFamily" Value="{StaticResource RubikLight}"></Setter>
+        <Setter Property="FontSize" Value="15"></Setter>
+    </Style>
+    <Style TargetType="{x:Type TextBlock}" x:Key="BaseTextBlockStyle">
+        <Setter Property="FontFamily" Value="{StaticResource RubikLight}"></Setter>
+        <Setter Property="FontSize" Value="15"></Setter>
+    </Style>
+    <Style TargetType="{x:Type Button}" BasedOn="{StaticResource BaseStyle}"></Style>
+    <Style TargetType="{x:Type Label}" BasedOn="{StaticResource BaseStyle}"></Style>
+    <Style TargetType="{x:Type TextBox}" BasedOn="{StaticResource BaseStyle}"></Style>
+    <Style TargetType="{x:Type TextBlock}" BasedOn="{StaticResource BaseTextBlockStyle}"></Style>
+    <Style TargetType="{x:Type ListView}" BasedOn="{StaticResource BaseStyle}"></Style>
+    
+</ResourceDictionary>

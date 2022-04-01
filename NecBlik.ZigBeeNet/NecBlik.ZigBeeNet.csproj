@@ -1,0 +1,21 @@
+<Project Sdk="Microsoft.NET.Sdk">
+
+  <PropertyGroup>
+    <TargetFramework>net6.0-windows7.0</TargetFramework>
+    <ImplicitUsings>enable</ImplicitUsings>
+    <Nullable>enable</Nullable>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <PackageReference Include="Serilog" Version="2.10.0" />
+    <PackageReference Include="ZigBeeNet" Version="1.5.0" />
+    <PackageReference Include="ZigBeeNet.Hardware.Digi.XBee" Version="1.5.0" />
+    <PackageReference Include="ZigBeeNet.Transport.SerialPort" Version="1.5.0" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <ProjectReference Include="..\NecBlik.Common\NecBlik.Common.csproj" />
+    <ProjectReference Include="..\NecBlik.Core\NecBlik.Core.csproj" />
+    <ProjectReference Include="..\NecBlik.Virtual\NecBlik.Virtual.csproj" />
+  </ItemGroup>
+</Project>

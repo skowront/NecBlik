@@ -1,0 +1,14 @@
+﻿<Application x:Class="NecBlik.App"
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:local="clr-namespace:NecBlik"
+             StartupUri="Views/MainWindow.xaml">
+    <Application.Resources>
+        <ResourceDictionary>
+            <ResourceDictionary.MergedDictionaries>
+                <ResourceDictionary Source="/NecBlik.Common;component/Styles/MergedDictionary.xaml"></ResourceDictionary>
+                <ResourceDictionary Source="/DiagramsExtension;component/Resources/MergedDictionary.xaml"></ResourceDictionary>
+            </ResourceDictionary.MergedDictionaries>
+        </ResourceDictionary>
+    </Application.Resources>
+</Application>
