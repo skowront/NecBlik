@@ -14,24 +14,24 @@ using NecBlik.Common.WpfExtensions.Interfaces;
 
 namespace NecBlik.Digi.Factories
 {
-    public class DigiZigBeeFactory:VirtualZigBeeFactory
+    public class DigiZigBeeFactory:VirtualDeviceFactory
     {
         public DigiZigBeeFactory()
         {
             this.internalFactoryType = Resources.Resources.DigiFactoryId;
         }
 
-        public override IZigBeeSource BuildNewSource()
+        public override IDeviceSource BuildNewSource()
         {
             return base.BuildNewSource();
         }
 
-        public override ZigBeeCoordinator BuildCoordinator()
+        public override Coordinator BuildCoordinator()
         {
             return new DigiZigBeeUSBCoordinator(this);
         }
 
-        public override async Task<ZigBeeNetwork> BuildNetworkFromDirectory(string pathToDirectory, IUpdatableResponseProvider<int, bool, string> updatableResponseProvider)
+        public override async Task<Network> BuildNetworkFromDirectory(string pathToDirectory, IUpdatableResponseProvider<int, bool, string> updatableResponseProvider)
         {
             if (pathToDirectory.Split('.').LastOrDefault() != this.GetVendorID())
             {
@@ -51,7 +51,7 @@ namespace NecBlik.Digi.Factories
             return network;
         }
 
-        public override IZigBeeSource BuildSourceFromJsonFile(string pathToFile)
+        public override IDeviceSource BuildSourceFromJsonFile(string pathToFile)
         {
             return null;
         }

@@ -55,7 +55,7 @@ namespace NecBlik.Digi.GUI.ViewModels.Wizard
         {
             var portInfoList = SerialPortHelper.GetSerialPorts();
             if (portInfoList.Count > 0)
-                this.SerialPortName = portInfoList.Where((o) => o.description.Contains(NecBlik.Digi.Resources.Resources.AutoDetectionFilterUSBSerialPort)).First().name;
+                this.SerialPortName = portInfoList.Where((o) => o.description.Contains(NecBlik.Digi.Resources.Resources.AutoDetectionFilterUSBSerialPort)).FirstOrDefault().name;
             else
                 this.SerialPortName = SerialPort.GetPortNames().FirstOrDefault("--");
             this.BuildCommands();

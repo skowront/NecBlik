@@ -8,7 +8,7 @@
         xmlns:lex="clr-namespace:WPFLocalizeExtension.Extensions;assembly=WPFLocalizeextension"
         xmlns:lexp="clr-namespace:WPFLocalizeExtension.Providers;assembly=WPFLocalizeextension"
         xmlns:diagrams="clr-namespace:DiagramDesigner;assembly=DiagramsExtension"
-        lexp:ResxLocalizationProvider.DefaultAssembly="ZigBee.Digi.GUI"
+        lexp:ResxLocalizationProvider.DefaultAssembly="NecBlik.Digi.GUI"
         lexp:ResxLocalizationProvider.DefaultDictionary="Strings.SR"
         mc:Ignorable="d"
         Title="DigiNetworkWizard" Height="450" Width="800"

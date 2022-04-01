@@ -16,7 +16,7 @@ namespace NecBlik.Core.GUI.Models
         public DiagramItemMetadata mapDiagramMetadata { get; set; } = new DiagramItemMetadata();
 
         [JsonProperty]
-        public Collection<DiagramZigBee> mapItemsMetadata { get; set; } = new Collection<DiagramZigBee>();
+        public Collection<DiagramDevice> mapItemsMetadata { get; set; } = new Collection<DiagramDevice>();
 
         public void Save(string projectFolder)
         {

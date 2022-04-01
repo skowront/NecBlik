@@ -16,7 +16,7 @@ namespace NecBlik.Digi.Models
 {
 
     [JsonObject(MemberSerialization.OptIn)]
-    public class DigiZigBeeUSBCoordinator : VirtualZigBeeCoordinator
+    public class DigiZigBeeUSBCoordinator : VirtualCoordinator
     {
         private ZigBeeDevice zigBee;
         private XBeeNetwork xBeeNetwork;
@@ -34,10 +34,10 @@ namespace NecBlik.Digi.Models
 
         private bool discoveryFinished = false;
 
-        public DigiZigBeeUSBCoordinator(IZigBeeFactory zigBeeFactory, DigiUSBConnectionData connectionData = null) : base(zigBeeFactory)
+        public DigiZigBeeUSBCoordinator(IDeviceFactory zigBeeFactory, DigiUSBConnectionData connectionData = null) : base(zigBeeFactory)
         {
-            this.zigBeeFactory = new DigiZigBeeFactory();
-            this.internalType = this.zigBeeFactory.GetVendorID();
+            this.deviceFactory = new DigiZigBeeFactory();
+            this.internalType = this.deviceFactory.GetVendorID();
             this.connectionData = connectionData ?? new() { port = string.Empty, baud = 9600 };
             this.Name = Resources.Resources.DefaultDigiCoordinatorName;
             this.zigBee = new ZigBeeDevice(new WinSerialPort(connectionData.port, connectionData.baud));
@@ -50,10 +50,10 @@ namespace NecBlik.Digi.Models
             this.OnDataRecieved(e.DataReceived.DataString, e.DataReceived.Device.GetAddressString());
         }
 
-        public override async Task<IEnumerable<IZigBeeSource>> GetDevices(IUpdatableResponseProvider<int, bool, string> progressResponseProvider = null)
+        public override async Task<IEnumerable<IDeviceSource>> GetDevices(IUpdatableResponseProvider<int, bool, string> progressResponseProvider = null)
         {
             if(!this.Open())
-                return new List<IZigBeeSource>();
+                return new List<IDeviceSource>();
             this.progressResponseProvider = progressResponseProvider;
             if (this.connectionData.port == string.Empty || this.connectionData.port == null)
             {
@@ -63,7 +63,7 @@ namespace NecBlik.Digi.Models
             await this.Discover();
             
             var nodes = this.xBeeNetwork.GetDevices();
-            List<IZigBeeSource> list = new();
+            List<IDeviceSource> list = new();
             foreach (var node in nodes)
             {
                 var ZigBeeSource = new DigiZigBeeSource(node);

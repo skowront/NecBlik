@@ -10,7 +10,7 @@ using NecBlik.Digi.Factories;
 
 namespace NecBlik.Digi.Models
 {
-    public class DigiZigBeeSource : ZigBeeSource
+    public class DigiZigBeeSource : Device
     {
         private RemoteXBeeDevice zigBeeDevice { get;set;}
         public DigiZigBeeSource(RemoteXBeeDevice zigBeeDevice)

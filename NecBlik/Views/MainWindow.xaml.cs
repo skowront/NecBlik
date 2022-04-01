@@ -27,7 +27,7 @@ namespace NecBlik.Views
     /// <summary>
     /// Interaction logic for MainWindow.xaml
     /// </summary>
-    public partial class MainWindow : Window, ISelectionSubscriber<ZigBeeViewModel>
+    public partial class MainWindow : Window, ISelectionSubscriber<DeviceViewModel>
     {
         private Point startPoint = new Point();
 
@@ -67,10 +67,10 @@ namespace NecBlik.Views
                 {
                     return;
                 }
-                if(lv.ItemContainerGenerator.ItemFromContainer(lvi) is ZigBeeViewModel)
+                if(lv.ItemContainerGenerator.ItemFromContainer(lvi) is DeviceViewModel)
                 {
-                    var vm = (ZigBeeViewModel)lv.ItemContainerGenerator.ItemFromContainer(lvi);
-                    var xaml = XamlWriter.Save(NecBlik.Core.GUI.Factories.ZigBeeGuiAnyFactory.Instance.GetZigBeeControl(vm));
+                    var vm = (DeviceViewModel)lv.ItemContainerGenerator.ItemFromContainer(lvi);
+                    var xaml = XamlWriter.Save(NecBlik.Core.GUI.Factories.DeviceGuiAnyFactory.Instance.GetDeviceControl(vm));
                     DragDrop.DoDragDrop(lvi, new DataObject(vm.GetType(), vm), DragDropEffects.Copy);
                 }
 
@@ -104,7 +104,7 @@ namespace NecBlik.Views
 
         private void BuildResponseProviders()
         {
-            this.ViewModel.NewZigBeeResponseProvider = new GenericResponseProvider<ZigBeeViewModel, ZigBeeViewModel>((o) =>
+            this.ViewModel.NewDeviceResponseProvider = new GenericResponseProvider<DeviceViewModel, DeviceViewModel>((o) =>
             {
                 bool result = false;
                 var window = new DeviceEditorWindow(o, new Action(() => result = true), new Action(() => result = false));
@@ -133,9 +133,9 @@ namespace NecBlik.Views
                 return openFileDialog.FileName;
             });
 
-            this.ViewModel.DiagramZigBeesProvider = new GenericResponseProvider<IEnumerable<DiagramZigBee>, object>((o) =>
+            this.ViewModel.DiagramDevicesProvider = new GenericResponseProvider<IEnumerable<DiagramDevice>, object>((o) =>
             {
-                return this.designerCanvas.GetDiagramZigBees();
+                return this.designerCanvas.GetDiagramDevices();
             });
 
             this.ViewModel.DiagramMapMetadataProvider = new GenericResponseProvider<DiagramItemMetadata, object>((o) =>
@@ -143,9 +143,9 @@ namespace NecBlik.Views
                 return this.designerCanvas.GetMapMetadata();
             });
 
-            this.ViewModel.DiagramZigBeesLoadProvider = new GenericResponseProvider<object,IEnumerable<DiagramZigBee>>((o) =>
+            this.ViewModel.DiagramDevicesLoadProvider = new GenericResponseProvider<object,IEnumerable<DiagramDevice>>((o) =>
             {
-                this.designerCanvas.LoadDiagramZigBees(o,this.ViewModel.AvailableZigBees);
+                this.designerCanvas.LoadDiagramDevicess(o,this.ViewModel.AvailableDevices);
                 return null;
             });
 
@@ -170,33 +170,33 @@ namespace NecBlik.Views
                 return null;
             });
 
-            this.ViewModel.ZigBeeSelectionSubscriber = this;
+            this.ViewModel.DeviceSelectionSubscriber = this;
 
             this.ViewModel.ListValueResponseProvider = new ListInputValuePicker();
 
             this.ViewModel.NewProjectLoadEnsureResponseProvider = new GenericResponseProvider<bool, object>((o) =>
             {
-                var popup = new SimpleYesNoPopup(Strings.SR.AreYouSure, "", Popups.ZigBeeIcons.WarningIcon, null, null);
+                var popup = new SimpleYesNoPopup(Strings.SR.AreYouSure, "", Popups.Icons.WarningIcon, null, null);
                 var rp = new YesNoPopupResponseProvider(popup);
                 return rp.ProvideResponse();
             });
 
             this.ViewModel.ActionEnsureResponseProvider = new GenericResponseProvider<bool, object>((o) =>
             {
-                var popup = new SimpleYesNoPopup(Strings.SR.AreYouSure, "", Popups.ZigBeeIcons.WarningIcon, null, null);
+                var popup = new SimpleYesNoPopup(Strings.SR.AreYouSure, "", Popups.Icons.WarningIcon, null, null);
                 var rp = new YesNoPopupResponseProvider(popup);
                 return rp.ProvideResponse();
             });
 
             this.ViewModel.SavingProgressBarResponseProvider = new GenericResponseProvider<YesNoProgressBarPopupResponseProvider, object>((o) =>
             {
-                var savepopup = new SimpleYesNoProgressBarPopup(Strings.SR.GPSaving+"...", "", Popups.ZigBeeIcons.InfoIcon, null, null, 0, 0, 0, false, false);
+                var savepopup = new SimpleYesNoProgressBarPopup(Strings.SR.GPSaving+"...", "", Popups.Icons.InfoIcon, null, null, 0, 0, 0, false, false);
                 return new YesNoProgressBarPopupResponseProvider(savepopup);
             });
 
             this.ViewModel.LoadingProgressBarResponseProvider = new GenericResponseProvider<YesNoProgressBarPopupResponseProvider, object>((o) =>
             {
-                var savepopup = new SimpleYesNoProgressBarPopup(Strings.SR.GPLoading+"...", "", Popups.ZigBeeIcons.InfoIcon, null, null, 0, 0, 0, false, false);
+                var savepopup = new SimpleYesNoProgressBarPopup(Strings.SR.GPLoading+"...", "", Popups.Icons.InfoIcon, null, null, 0, 0, 0, false, false);
                 return new YesNoProgressBarPopupResponseProvider(savepopup);
             });
 
@@ -208,26 +208,26 @@ namespace NecBlik.Views
                 return (await window.ProvideResponse(vm)).Model;
             });
 
-            this.ViewModel.NetworkRemovedResponseProvider = new GenericResponseProvider<bool, ZigBeeNetworkViewModel>((o) =>
+            this.ViewModel.NetworkRemovedResponseProvider = new GenericResponseProvider<bool, NetworkViewModel>((o) =>
             {
-                var vms = o.GetZigBeeViewModels();
+                var vms = o.GetDeviceViewModels();
                 foreach (var item in vms)
                 {
-                    this.designerCanvas.RemoveZigBee(item);
+                    this.designerCanvas.RemoveDevice(item);
                 }
-                this.designerCanvas.RemoveZigBee(o.ZigBeeCoordinator);
+                this.designerCanvas.RemoveDevice(o.Coordinator);
                 return true;
             });
         }
 
-        public void NotifySelected(ZigBeeViewModel obj)
+        public void NotifySelected(DeviceViewModel obj)
         {
-            this.designerCanvas.AddZigBee(obj,new Point(0,0));
+            this.designerCanvas.AddDevice(obj,new Point(0,0));
         }
 
-        public void NotifyUpdated(ZigBeeViewModel obj)
+        public void NotifyUpdated(DeviceViewModel obj)
         {
-            this.designerCanvas.UpdateZigBee(obj);
+            this.designerCanvas.UpdateDevice(obj);
         }
 
         private object LoadMap(string path, DiagramItemMetadata metadata)

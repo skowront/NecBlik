@@ -10,7 +10,7 @@ namespace NecBlik.Digi.GUI.ViewModels
 {
     public class DigiZigBeeCoordinatorViewModel:DigiZigBeeViewModel
     {
-        public DigiZigBeeCoordinatorViewModel(ZigBeeModel model = null, ZigBeeNetworkViewModel networkModel = null) : base(model, networkModel)
+        public DigiZigBeeCoordinatorViewModel(DeviceModel model = null, NetworkViewModel networkModel = null) : base(model, networkModel)
         {
 
         }
@@ -26,11 +26,11 @@ namespace NecBlik.Digi.GUI.ViewModels
                 var aaddr = this.GetAvailableDestinationAdresses();
                 foreach (var item in aaddr)
                 {
-                    this.Model.ZigBeeSource.Send(this.OutputBuffer, item);
+                    this.Model.DeviceSource.Send(this.OutputBuffer, item);
                     this.AddOutgoingHistoryBufferEntry(this.OutputBuffer, item);
                 }
             }
-            this.Model.ZigBeeSource.Send(this.OutputBuffer, this.SelectedDestinationAddress);
+            this.Model.DeviceSource.Send(this.OutputBuffer, this.SelectedDestinationAddress);
             this.AddOutgoingHistoryBufferEntry(this.OutputBuffer, this.SelectedDestinationAddress);
             this.OutputBuffer = string.Empty;
         }

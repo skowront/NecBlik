@@ -8,7 +8,7 @@
         xmlns:fa="http://schemas.fontawesome.io/icons/"
         xmlns:lexp="clr-namespace:WPFLocalizeExtension.Providers;assembly=WPFLocalizeextension"
         xmlns:lex="clr-namespace:WPFLocalizeExtension.Extensions;assembly=WPFLocalizeextension"
-        lexp:ResxLocalizationProvider.DefaultAssembly="ZigBee.Virtual.GUI"
+        lexp:ResxLocalizationProvider.DefaultAssembly="NecBlik.Virtual.GUI"
         lexp:ResxLocalizationProvider.DefaultDictionary="SR"
         mc:Ignorable="d"
         Title="VirtualNetworkWizard" Height="450" Width="800"
@@ -37,9 +37,9 @@
                     <ColumnDefinition></ColumnDefinition>
                     <ColumnDefinition></ColumnDefinition>
                 </Grid.ColumnDefinitions>
-                <TextBlock Grid.Column="0" Text="{lex:Loc GPVirtualZigBeesCount}"></TextBlock>
-                <TextBlock Grid.Column="1" Text="{Binding VirtualZigBees}"></TextBlock>
-                <Button Grid.Column="2" HorizontalAlignment="Right" HorizontalContentAlignment="Right" Command="{Binding PickVirtualZigBeesCommand}">
+                <TextBlock Grid.Column="0" Text="{lex:Loc GPVirtualDevicesCount}"></TextBlock>
+                <TextBlock Grid.Column="1" Text="{Binding VirtualDevices}"></TextBlock>
+                <Button Grid.Column="2" HorizontalAlignment="Right" HorizontalContentAlignment="Right" Command="{Binding PickVirtualDevicesCommand}">
                     <StackPanel Orientation="Horizontal">
                         <TextBlock Text="{lex:Loc GPSelect}" Margin="0 0 10 0"></TextBlock>
                         <fa:FontAwesome Icon="MousePointer"></fa:FontAwesome>

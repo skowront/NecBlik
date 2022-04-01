@@ -77,7 +77,7 @@ namespace NecBlik.Views.Controls
         protected override void OnDrop(DragEventArgs e)
         {
             base.OnDrop(e);
-            if (e.Data.GetData(typeof(ZigBeeViewModel)) is ZigBeeViewModel)
+            if (e.Data.GetData(typeof(DeviceViewModel)) is DeviceViewModel)
             {
 
             }

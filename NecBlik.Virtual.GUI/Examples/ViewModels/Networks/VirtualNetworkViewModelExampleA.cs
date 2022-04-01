@@ -9,13 +9,13 @@ using NecBlik.Virtual.GUI.ViewModels;
 
 namespace NecBlik.Virtual.GUI.Examples.Networks.ViewModels
 {
-    public class VirtualNetworkViewModelExampleA : VirtualZigBeeNetworkViewModel
+    public class VirtualNetworkViewModelExampleA : VirtualNetworkViewModel
     {
-        public VirtualNetworkViewModelExampleA(ZigBeeNetwork network) : base(network)
+        public VirtualNetworkViewModelExampleA(Network network) : base(network)
         {
             this.EditCommand = new Common.WpfExtensions.Base.RelayCommand((o) =>
             {
-                var window = new VirtualZigBeeNetworkExampleAWindow(this);
+                var window = new VirtualNetworkExampleAWindow(this);
                 window.Show();
             });
         }

@@ -144,8 +144,8 @@
   <data name="GPVersion" xml:space="preserve">
     <value>Wersja</value>
   </data>
-  <data name="GPVirtualZigBeesCount" xml:space="preserve">
-    <value>Liczba wirtualnych zigbee</value>
+  <data name="GPVirtualDevicesCount" xml:space="preserve">
+    <value>Liczba wirtualnych urządzeń</value>
   </data>
   <data name="GPNetworkPanId" xml:space="preserve">
     <value>PanId</value>

@@ -8,7 +8,7 @@
         xmlns:lex="clr-namespace:WPFLocalizeExtension.Extensions;assembly=WPFLocalizeextension"
         xmlns:lexp="clr-namespace:WPFLocalizeExtension.Providers;assembly=WPFLocalizeextension"
         xmlns:diagrams="clr-namespace:DiagramDesigner;assembly=DiagramsExtension"
-        lexp:ResxLocalizationProvider.DefaultAssembly="ZigBee.PyDigi.GUI"
+        lexp:ResxLocalizationProvider.DefaultAssembly="NecBlik.PyDigi.GUI"
         lexp:ResxLocalizationProvider.DefaultDictionary="Strings.SR"
         mc:Ignorable="d"
         Title="PyDigiNetworkWizard" Height="450" Width="800"

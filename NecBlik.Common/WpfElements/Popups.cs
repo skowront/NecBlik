@@ -39,7 +39,7 @@ namespace NecBlik.Common.WpfElements
         /// <summary>
         /// Contains instantiated default ZigBee icons.
         /// </summary>
-        public class ZigBeeIcons
+        public class Icons
         {
             public static readonly ZigBeeIcon InfoIcon = new ZigBeeIcon(IconCodes.Info,Brushes.Blue);
             public static readonly ZigBeeIcon WarningIcon = new ZigBeeIcon(IconCodes.Warning, Brushes.Yellow);

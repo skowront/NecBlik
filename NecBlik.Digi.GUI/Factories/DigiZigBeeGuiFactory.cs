@@ -15,21 +15,21 @@ using NecBlik.Digi.GUI.ViewModels.Wizard;
 
 namespace NecBlik.Digi.GUI.Factories
 {
-    public class DigiZigBeeGuiFactory:VirtualZigBeeGuiFactory
+    public class DigiZigBeeGuiFactory:VirtualDeviceGuiFactory
     {
         public DigiZigBeeGuiFactory()
         {
             this.internalFactoryType = NecBlik.Digi.Resources.Resources.DigiFactoryId;
         }
 
-        public override ZigBeeNetworkViewModel GetNetworkViewModel(ZigBeeNetwork zigBeeNetwork)
+        public override NetworkViewModel GetNetworkViewModel(Network zigBeeNetwork)
         {
             if (zigBeeNetwork.GetVendorID() != this.internalFactoryType)
                 return null;
             return new DigiZigBeeNetworkViewModel(zigBeeNetwork);
         }
 
-        public override DataTemplate GetNetworkDataTemplate(ZigBeeNetwork zigBeeNetwork)
+        public override DataTemplate GetNetworkDataTemplate(Network zigBeeNetwork)
         {
             if (zigBeeNetwork.GetVendorID() == this.GetVendorID())
             {
@@ -41,7 +41,7 @@ namespace NecBlik.Digi.GUI.Factories
             return null;
         }
 
-        public override DataTemplate GetNetworkBriefDataTemplate(ZigBeeNetwork zigBeeNetwork)
+        public override DataTemplate GetNetworkBriefDataTemplate(Network zigBeeNetwork)
         {
             if (zigBeeNetwork.GetVendorID() == this.GetVendorID())
             {
@@ -53,7 +53,7 @@ namespace NecBlik.Digi.GUI.Factories
             return null;
         }
 
-        public override async Task<ZigBeeNetworkViewModel> NetworkViewModelFromWizard(ZigBeeNetwork zigBeeNetwork)
+        public override async Task<NetworkViewModel> NetworkViewModelFromWizard(Network zigBeeNetwork)
         {
             var vm = new DigiNetworkWizardViewModel();
             var rp = new DigiNetworkWizard(vm);

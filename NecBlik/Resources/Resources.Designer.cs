@@ -61,29 +61,29 @@ namespace NecBlik.Resources {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Project.
+        ///   Looks up a localized string similar to UnknownDevice.
         /// </summary>
-        public static string ProjectModelPojectNameDefault {
+        public static string DeviceModelNameDefault {
             get {
-                return ResourceManager.GetString("ProjectModelPojectNameDefault", resourceCulture);
-            }
-        }
-        
-        /// <summary>
-        ///   Looks up a localized string similar to UnknownZigbee.
-        /// </summary>
-        public static string ZigBeeModelNameDefault {
-            get {
-                return ResourceManager.GetString("ZigBeeModelNameDefault", resourceCulture);
+                return ResourceManager.GetString("DeviceModelNameDefault", resourceCulture);
             }
         }
         
         /// <summary>
         ///   Looks up a localized string similar to Unknown version.
         /// </summary>
-        public static string ZigBeeVersionDefault {
+        public static string DeviceVersionDefault {
             get {
-                return ResourceManager.GetString("ZigBeeVersionDefault", resourceCulture);
+                return ResourceManager.GetString("DeviceVersionDefault", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Project.
+        /// </summary>
+        public static string ProjectModelPojectNameDefault {
+            get {
+                return ResourceManager.GetString("ProjectModelPojectNameDefault", resourceCulture);
             }
         }
     }

@@ -40,19 +40,19 @@ namespace NecBlik.ViewModels
             set { this.model.MapFile = value; this.OnPropertyChanged(); }
         }
 
-        public Collection<ZigBeeViewModel> AvailableZigBees 
+        public Collection<DeviceViewModel> AvailableDevices 
         {
             get
             {
-                var all = new Collection<ZigBeeViewModel>();
-                foreach (var net in this.ZigBeeNetworks)
+                var all = new Collection<DeviceViewModel>();
+                foreach (var net in this.Networks)
                 {
-                    var zbs = net.GetZigBeeViewModels();
+                    var zbs = net.GetDeviceViewModels();
                     foreach(var item in zbs)
                     {
                         all.Add(item);
                     }
-                    var coordinator = net.GetZigBeeCoordinatorViewModel();
+                    var coordinator = net.GetCoordinatorViewModel();
                     if(coordinator!=null)
                     {
                         all.Add(coordinator);
@@ -61,22 +61,23 @@ namespace NecBlik.ViewModels
                 return all;
             }
         }
-        public ObservableCollection<ZigBeeNetworkViewModel> ZigBeeNetworks { get; set; } = new ObservableCollection<ZigBeeNetworkViewModel>();
+
+        public ObservableCollection<NetworkViewModel> Networks { get; set; } = new ObservableCollection<NetworkViewModel>();
         #endregion
 
         #region ResponseProviders
-        public IResponseProvider<ZigBeeViewModel, ZigBeeViewModel> NewZigBeeResponseProvider { get; set; } = new GenericResponseProvider<ZigBeeViewModel, ZigBeeViewModel>(new ZigBeeViewModel());
+        public IResponseProvider<DeviceViewModel, DeviceViewModel> NewDeviceResponseProvider { get; set; } = new GenericResponseProvider<DeviceViewModel, DeviceViewModel>(new DeviceViewModel());
         public IResponseProvider<string, object> LoadProjectFilePathProvider { get; set; } = new GenericResponseProvider<string, object>(string.Empty);
         public IResponseProvider<string, object> SaveProjectFilePathProvider { get; set; } = new GenericResponseProvider<string, object>(string.Empty);
-        public IResponseProvider<object, IEnumerable<DiagramZigBee>> DiagramZigBeesLoadProvider { get; set; } = new GenericResponseProvider<object, IEnumerable<DiagramZigBee>>(null);
-        public IResponseProvider<IEnumerable<DiagramZigBee>, object> DiagramZigBeesProvider { get; set; } = new GenericResponseProvider<IEnumerable<DiagramZigBee>, object>();
+        public IResponseProvider<object, IEnumerable<DiagramDevice>> DiagramDevicesLoadProvider { get; set; } = new GenericResponseProvider<object, IEnumerable<DiagramDevice>>(null);
+        public IResponseProvider<IEnumerable<DiagramDevice>, object> DiagramDevicesProvider { get; set; } = new GenericResponseProvider<IEnumerable<DiagramDevice>, object>();
         public IResponseProvider<DiagramItemMetadata, object> DiagramMapMetadataProvider { get; set; } = new GenericResponseProvider<DiagramItemMetadata, object>(new DiagramItemMetadata());
         public IResponseProvider<string, object> ProjectMapPathProvider { get; set; } = new GenericResponseProvider<string, object>(string.Empty);
         public IResponseProvider<object, Tuple<string, DiagramItemMetadata>> ProjectMapLoadedProvider { get; set; } = new GenericResponseProvider<object, Tuple<string,DiagramItemMetadata>>();
         public IResponseProvider<object, object> NewProjectLoadedProvider { get; set; } = new GenericResponseProvider<object, object>();
         public IResponseProvider<bool, object> NewProjectLoadEnsureResponseProvider { get; set; } = new GenericResponseProvider<bool, object>(true);
         public IResponseProvider<bool, object> ActionEnsureResponseProvider { get; set; } = new GenericResponseProvider<bool, object>(true);
-        public IResponseProvider<bool, ZigBeeNetworkViewModel> NetworkRemovedResponseProvider { get; set; } = new GenericResponseProvider<bool, ZigBeeNetworkViewModel>(true);
+        public IResponseProvider<bool, NetworkViewModel> NetworkRemovedResponseProvider { get; set; } = new GenericResponseProvider<bool, NetworkViewModel>(true);
         
         public IResponseProvider<string, Tuple<string, IEnumerable<string>>> ListValueResponseProvider = new GenericResponseProvider<string, Tuple<string, IEnumerable<string>>>(string.Empty);
 
@@ -86,13 +87,12 @@ namespace NecBlik.ViewModels
 
         public IResponseProvider<Task<ApplicationSettings>, ApplicationSettings> ApplicationSettingsResponseProvider = new GenericResponseProvider<Task<ApplicationSettings>, ApplicationSettings>();
         #endregion
-        public ISelectionSubscriber<ZigBeeViewModel> ZigBeeSelectionSubscriber { get; set; }
+        public ISelectionSubscriber<DeviceViewModel> DeviceSelectionSubscriber { get; set; }
 
         #region Commands
         public RelayCommand NewProjectCommand { get; set; }
         public RelayCommand SaveProjectCommand { get; set; }
         public RelayCommand LoadProjectCommand { get; set; }
-        public RelayCommand AddNewZigBeeCommand { get; set; }
         public RelayCommand AddNetworkCommand { get; set; }
         public RelayCommand LoadProjectMapCommand { get; set; }
         public RelayCommand EditProjectCommand { get; set; }
@@ -101,9 +101,9 @@ namespace NecBlik.ViewModels
 
         #endregion
 
-        public MainWindowViewModel(ISelectionSubscriber<ZigBeeViewModel> zigBeeSelectionSubscriber)
+        public MainWindowViewModel(ISelectionSubscriber<DeviceViewModel> deviceSelectionSubscriber)
         {
-            this.ZigBeeSelectionSubscriber = zigBeeSelectionSubscriber; 
+            this.DeviceSelectionSubscriber = deviceSelectionSubscriber; 
             this.model = new ProjectModel();
             this.guiModel = new ProjectGuiModel();
             this.SyncFromModel();
@@ -127,31 +127,19 @@ namespace NecBlik.ViewModels
 
             this.AddNetworkCommand = new RelayCommand(async (o) =>
             {
-                var ip = this.ListValueResponseProvider.ProvideResponse(new Tuple<string, IEnumerable<string>>(Strings.SR.SelectLibrary, ZigBeeGuiAnyFactory.Instance.GetFactoryIds()));
+                var ip = this.ListValueResponseProvider.ProvideResponse(new Tuple<string, IEnumerable<string>>(Strings.SR.SelectLibrary, DeviceGuiAnyFactory.Instance.GetFactoryIds()));
                 if(ip != string.Empty)
                 {
-                    var vm = await ZigBeeGuiAnyFactory.Instance.NetworkViewModelFromWizard(null,ip);
+                    var vm = await DeviceGuiAnyFactory.Instance.NetworkViewModelFromWizard(null,ip);
                     if(vm!=null)
                     {
                         var network = vm;
                         if (network == null)
                             return;
-                        this.ZigBeeNetworks.Add(network);
+                        this.Networks.Add(network);
                         this.SyncToModel();
                         this.SyncFromModel();
                     }
-                }
-            });
-
-            this.AddNewZigBeeCommand = new RelayCommand(o =>
-            {
-                var response = this.NewZigBeeResponseProvider.ProvideResponse(new ZigBeeViewModel(this.model.ZigBeeTemplate.Duplicate()));
-                if (response == null)
-                {
-                    return;
-                }
-                else
-                {
                 }
             });
 
@@ -192,7 +180,7 @@ namespace NecBlik.ViewModels
                 }
             });
 
-            this.RemoveNetworkCommand = new RelayCommand(o => { var vm = o as ZigBeeNetworkViewModel; this.RemoveNetwork(o as ZigBeeNetworkViewModel); });
+            this.RemoveNetworkCommand = new RelayCommand(o => { var vm = o as NetworkViewModel; this.RemoveNetwork(o as NetworkViewModel); });
         }
 
         private void LoadProjectMap(string path)
@@ -332,14 +320,14 @@ namespace NecBlik.ViewModels
 
         private void SyncToModel()
         {
-            this.model.ZigBeeNetworks.Clear();
-            foreach(var item in this.ZigBeeNetworks)
+            this.model.Networks.Clear();
+            foreach(var item in this.Networks)
             {
-                this.model.ZigBeeNetworks.Add(item.Model);
+                this.model.Networks.Add(item.Model);
             }
             //this.model.DiagramZigBees = this.DiagramZigBeesProivider.ProvideResponse();
             this.guiModel.mapDiagramMetadata = this.DiagramMapMetadataProvider.ProvideResponse();
-            this.guiModel.mapItemsMetadata = new Collection<DiagramZigBee>(new List<DiagramZigBee>(this.DiagramZigBeesProvider?.ProvideResponse()));
+            this.guiModel.mapItemsMetadata = new Collection<DiagramDevice>(new List<DiagramDevice>(this.DiagramDevicesProvider?.ProvideResponse()));
             //this.model.AvailableZigBees.Clear();
             //foreach (var item in this.AvailableZigBees)
             //{
@@ -349,18 +337,18 @@ namespace NecBlik.ViewModels
 
         private void SyncFromModel()
         {
-            var zbn = this.model.ZigBeeNetworks;
-            this.ZigBeeNetworks.Clear();
+            var zbn = this.model.Networks;
+            this.Networks.Clear();
             foreach (var item in zbn)
             {
-                var nvm = ZigBeeGuiAnyFactory.Instance.GetNetworkViewModel(item);
-                nvm.ZigBeeSelectionSubscriber = this.ZigBeeSelectionSubscriber;
+                var nvm = DeviceGuiAnyFactory.Instance.GetNetworkViewModel(item);
+                nvm.DeviceSelectionSubscriber = this.DeviceSelectionSubscriber;
                 nvm.Sync();
-                this.ZigBeeNetworks.Add(nvm);
+                this.Networks.Add(nvm);
             }
             //TODO
             //this.ProjectMapLoadedProvider.ProvideResponse(new Tuple<string, DiagramItemMetadata>(this.MapFilePath, this.guiModel.mapDiagramMetadata));
-            this.DiagramZigBeesLoadProvider.ProvideResponse(this.guiModel.mapItemsMetadata);
+            this.DiagramDevicesLoadProvider.ProvideResponse(this.guiModel.mapItemsMetadata);
             //this.AvailableZigBees.Clear();
             //foreach (var item in this.model.AvailableZigBees)
             //{
@@ -371,7 +359,7 @@ namespace NecBlik.ViewModels
             this.Refresh();
         }
 
-        private void RemoveNetwork(ZigBeeNetworkViewModel networkViewModel)
+        private void RemoveNetwork(NetworkViewModel networkViewModel)
         {
             var resp = this.ActionEnsureResponseProvider?.ProvideResponse();
             if (resp == null)
@@ -379,7 +367,7 @@ namespace NecBlik.ViewModels
             if (resp == false)
                 return;
             this.NetworkRemovedResponseProvider?.ProvideResponse(networkViewModel);
-            this.ZigBeeNetworks.Remove(networkViewModel);
+            this.Networks.Remove(networkViewModel);
             this.Refresh();
         }
 

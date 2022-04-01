@@ -205,11 +205,11 @@ namespace NecBlik.Virtual.GUI.Strings {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Virtual ZigBees count.
+        ///   Looks up a localized string similar to Virtual devices count.
         /// </summary>
-        public static string GPVirtualZigBeesCount {
+        public static string GPVirtualDevicesCount {
             get {
-                return ResourceManager.GetString("GPVirtualZigBeesCount", resourceCulture);
+                return ResourceManager.GetString("GPVirtualDevicesCount", resourceCulture);
             }
         }
     }

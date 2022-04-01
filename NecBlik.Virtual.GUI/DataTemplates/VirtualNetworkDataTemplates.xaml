@@ -4,18 +4,18 @@
                     xmlns:lex="clr-namespace:WPFLocalizeExtension.Extensions;assembly=WPFLocalizeextension"
                     xmlns:lexp="clr-namespace:WPFLocalizeExtension.Providers;assembly=WPFLocalizeextension"
                     xmlns:resx="clr-namespace:NecBlik.Virtual.GUI.Strings">
-    <DataTemplate x:Key="VirtualNetworkBriefDataTemplate" DataType="{x:Type viewModels:VirtualZigBeeNetworkViewModel}">
+    <DataTemplate x:Key="VirtualNetworkBriefDataTemplate" DataType="{x:Type viewModels:VirtualNetworkViewModel}">
         <StackPanel>
             <TextBlock Text="{Binding Name}"></TextBlock>
-            <Button Command="{Binding EditCommand}" Style="{StaticResource BaseButton}" HorizontalAlignment="Left" Content="{lex:Loc ZigBee.Virtual.GUI:SR:GPOpen}"></Button>
+            <Button Command="{Binding EditCommand}" Style="{StaticResource BaseButton}" HorizontalAlignment="Left" Content="{lex:Loc NecBlik.Virtual.GUI:SR:GPOpen}"></Button>
         </StackPanel>
     </DataTemplate>
 
-    <DataTemplate x:Key="VirtualNetworkDataTemplate" DataType="{x:Type viewModels:VirtualZigBeeNetworkViewModel}">
+    <DataTemplate x:Key="VirtualNetworkDataTemplate" DataType="{x:Type viewModels:VirtualNetworkViewModel}">
         <StackPanel>
             <TextBlock Text="{Binding Name}"></TextBlock>
             <TextBlock Text="{Binding Guid}"></TextBlock>
-            <Button Command="{Binding EditCommand}" Style="{StaticResource BaseButton}" Content="{lex:Loc ZigBee.Virtual.GUI:SR:GPOpen}"></Button>
+            <Button Command="{Binding EditCommand}" Style="{StaticResource BaseButton}" Content="{lex:Loc NecBlik.Virtual.GUI:SR:GPOpen}"></Button>
         </StackPanel>
     </DataTemplate>
 </ResourceDictionary>

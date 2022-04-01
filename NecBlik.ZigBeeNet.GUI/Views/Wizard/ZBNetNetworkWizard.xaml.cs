@@ -53,7 +53,7 @@ namespace NecBlik.ZigBeeNet.GUI.Views.Wizard
 
             var coordinator = new ZBNetCoordinator(new ZBNetFactory(),
                 new ZBNetCoordinator.ZBNetConnectionData() { port = this.ViewModel.SerialPortName, baud = this.ViewModel.BaudRate });
-            var popup = new SimpleYesNoProgressBarPopup("Please wait...","",Popups.ZigBeeIcons.InfoIcon,null,null,0,0,0,false,false);
+            var popup = new SimpleYesNoProgressBarPopup("Please wait...","",Popups.Icons.InfoIcon,null,null,0,0,0,false,false);
             var network = new ZBNetNetwork(coordinator, new YesNoProgressBarPopupResponseProvider(popup));
             await network.Initialize(coordinator);
             var vm = new ZBNetNetworkViewModel(network);

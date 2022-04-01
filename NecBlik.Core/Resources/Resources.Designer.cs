@@ -88,6 +88,78 @@ namespace NecBlik.Core.Resources {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Unknown PanId.
+        /// </summary>
+        public static string DeviceCoordinatorPanIdDefault {
+            get {
+                return ResourceManager.GetString("DeviceCoordinatorPanIdDefault", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to UnknownDevice.
+        /// </summary>
+        public static string DeviceModelNameDefault {
+            get {
+                return ResourceManager.GetString("DeviceModelNameDefault", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to \Networks.
+        /// </summary>
+        public static string DeviceNetworksDirectory {
+            get {
+                return ResourceManager.GetString("DeviceNetworksDirectory", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to \Sources.
+        /// </summary>
+        public static string DeviceNetworkSourcesSubdirectory {
+            get {
+                return ResourceManager.GetString("DeviceNetworkSourcesSubdirectory", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Unable to retrieve address.
+        /// </summary>
+        public static string DeviceUnableToRetrieveAddress {
+            get {
+                return ResourceManager.GetString("DeviceUnableToRetrieveAddress", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Unknown version.
+        /// </summary>
+        public static string DeviceVersionDefault {
+            get {
+                return ResourceManager.GetString("DeviceVersionDefault", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Device.
+        /// </summary>
+        public static string GPDevice {
+            get {
+                return ResourceManager.GetString("GPDevice", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Device Coordinator.
+        /// </summary>
+        public static string GPDeviceCoordinator {
+            get {
+                return ResourceManager.GetString("GPDeviceCoordinator", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Network.
         /// </summary>
         public static string GPNetwork {
@@ -97,83 +169,11 @@ namespace NecBlik.Core.Resources {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to ZigBee.
-        /// </summary>
-        public static string GPZigBee {
-            get {
-                return ResourceManager.GetString("GPZigBee", resourceCulture);
-            }
-        }
-        
-        /// <summary>
-        ///   Looks up a localized string similar to ZigBee Coordinator.
-        /// </summary>
-        public static string GPZigBeeCoordinator {
-            get {
-                return ResourceManager.GetString("GPZigBeeCoordinator", resourceCulture);
-            }
-        }
-        
-        /// <summary>
         ///   Looks up a localized string similar to Project.
         /// </summary>
         public static string ProjectModelPojectNameDefault {
             get {
                 return ResourceManager.GetString("ProjectModelPojectNameDefault", resourceCulture);
-            }
-        }
-        
-        /// <summary>
-        ///   Looks up a localized string similar to Unknown PanId.
-        /// </summary>
-        public static string ZigBeeCoordinatorPanIdDefault {
-            get {
-                return ResourceManager.GetString("ZigBeeCoordinatorPanIdDefault", resourceCulture);
-            }
-        }
-        
-        /// <summary>
-        ///   Looks up a localized string similar to UnknownZigbee.
-        /// </summary>
-        public static string ZigBeeModelNameDefault {
-            get {
-                return ResourceManager.GetString("ZigBeeModelNameDefault", resourceCulture);
-            }
-        }
-        
-        /// <summary>
-        ///   Looks up a localized string similar to \Networks.
-        /// </summary>
-        public static string ZigBeeNetworksDirectory {
-            get {
-                return ResourceManager.GetString("ZigBeeNetworksDirectory", resourceCulture);
-            }
-        }
-        
-        /// <summary>
-        ///   Looks up a localized string similar to \Sources.
-        /// </summary>
-        public static string ZigBeeNetworkSourcesSubdirectory {
-            get {
-                return ResourceManager.GetString("ZigBeeNetworkSourcesSubdirectory", resourceCulture);
-            }
-        }
-        
-        /// <summary>
-        ///   Looks up a localized string similar to Unable to retrieve address.
-        /// </summary>
-        public static string ZigBeeUnableToRetrieveAddress {
-            get {
-                return ResourceManager.GetString("ZigBeeUnableToRetrieveAddress", resourceCulture);
-            }
-        }
-        
-        /// <summary>
-        ///   Looks up a localized string similar to Unknown version.
-        /// </summary>
-        public static string ZigBeeVersionDefault {
-            get {
-                return ResourceManager.GetString("ZigBeeVersionDefault", resourceCulture);
             }
         }
     }

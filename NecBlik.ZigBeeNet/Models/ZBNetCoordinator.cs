@@ -20,7 +20,7 @@ using ZigBeeNet.App.IasClient;
 namespace NecBlik.ZigBeeNet.Models
 {
     [JsonObject(MemberSerialization.OptIn)]
-    public class ZBNetCoordinator: VirtualZigBeeCoordinator
+    public class ZBNetCoordinator: VirtualCoordinator
     {
         private ZBNetConnectionData connectionData;
 
@@ -32,15 +32,15 @@ namespace NecBlik.ZigBeeNet.Models
 
         private const byte permitJoinDuration = 255;
 
-        public ZBNetCoordinator(IZigBeeFactory zigBeeFactory, ZBNetConnectionData connectionData) : base(zigBeeFactory)
+        public ZBNetCoordinator(IDeviceFactory zigBeeFactory, ZBNetConnectionData connectionData) : base(zigBeeFactory)
         {
             this.connectionData = connectionData;
-            this.zigBeeFactory = zigBeeFactory;
-            this.internalType = this.zigBeeFactory.GetVendorID();
+            this.deviceFactory = zigBeeFactory;
+            this.internalType = this.deviceFactory.GetVendorID();
             this.Name = "ZigBeeNet Coordinator";
         }
 
-        public override async Task<IEnumerable<IZigBeeSource>> GetDevices(IUpdatableResponseProvider<int, bool, string> progressResponseProvider = null)
+        public override async Task<IEnumerable<IDeviceSource>> GetDevices(IUpdatableResponseProvider<int, bool, string> progressResponseProvider = null)
         {
             throw new NotImplementedException();
             try

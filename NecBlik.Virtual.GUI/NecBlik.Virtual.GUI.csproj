@@ -18,13 +18,13 @@
   </ItemGroup>
 
   <ItemGroup>
-    <Compile Update="Examples\Views\Coordinators\VirtualZigBeeCoordinatorExampleAWindow.xaml.cs">
+    <Compile Update="Examples\Views\Coordinators\VirtualCoordinatorExampleAWindow.xaml.cs">
       <SubType>Code</SubType>
     </Compile>
-    <Compile Update="Examples\Views\Networks\VirtualZigBeeNetworkExampleAWindow.xaml.cs">
+    <Compile Update="Examples\Views\Networks\VirtualNetworkExampleAWindow.xaml.cs">
       <SubType>Code</SubType>
     </Compile>
-    <Compile Update="Examples\Views\Sources\VirtualZigBeeExampleAWindow.xaml.cs">
+    <Compile Update="Examples\Views\Sources\VirtualDeviceExampleAWindow.xaml.cs">
       <SubType>Code</SubType>
     </Compile>
     <Compile Update="Resources\Resources.Designer.cs">
@@ -57,15 +57,15 @@
   </ItemGroup>
 
   <ItemGroup>
-    <Page Update="Examples\Views\Coordinators\VirtualZigBeeCoordinatorExampleAWindow.xaml">
+    <Page Update="Examples\Views\Coordinators\VirtualCoordinatorExampleAWindow.xaml">
       <XamlRuntime>$(DefaultXamlRuntime)</XamlRuntime>
       <SubType>Designer</SubType>
     </Page>
-    <Page Update="Examples\Views\Networks\VirtualZigBeeNetworkExampleAWindow.xaml">
+    <Page Update="Examples\Views\Networks\VirtualNetworkExampleAWindow.xaml">
       <XamlRuntime>$(DefaultXamlRuntime)</XamlRuntime>
       <SubType>Designer</SubType>
     </Page>
-    <Page Update="Examples\Views\Sources\VirtualZigBeeExampleAWindow.xaml">
+    <Page Update="Examples\Views\Sources\VirtualDeviceExampleAWindow.xaml">
       <XamlRuntime>$(DefaultXamlRuntime)</XamlRuntime>
       <SubType>Designer</SubType>
     </Page>

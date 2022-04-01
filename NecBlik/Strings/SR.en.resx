@@ -130,7 +130,7 @@
     <value>Saving</value>
   </data>
   <data name="MainWindowExpanderTitle" xml:space="preserve">
-    <value>Available ZigBees</value>
+    <value>Available devices</value>
   </data>
   <data name="MainWindowManuHeaderProjectLoadMap" xml:space="preserve">
     <value>Load map</value>

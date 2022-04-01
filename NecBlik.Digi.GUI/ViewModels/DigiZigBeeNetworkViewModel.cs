@@ -9,52 +9,52 @@ using NecBlik.Virtual.GUI.ViewModels;
 
 namespace NecBlik.Digi.GUI.ViewModels
 {
-    public class DigiZigBeeNetworkViewModel : VirtualZigBeeNetworkViewModel
+    public class DigiZigBeeNetworkViewModel : VirtualNetworkViewModel
     {
-        public DigiZigBeeNetworkViewModel(ZigBeeNetwork network) : base(network)
+        public DigiZigBeeNetworkViewModel(Network network) : base(network)
         {
         }
 
-        public override ZigBeeViewModel GetZigBeeCoordinatorViewModel()
+        public override DeviceViewModel GetCoordinatorViewModel()
         {
-            if (this.zigBeeCoorinator == null)
+            if (this.coorinator == null)
             {
-                var zvm = new ZigBeeModel(this.Model.ZigBeeCoordinator);
-                this.zigBeeCoorinator = new DigiZigBeeCoordinatorViewModel(zvm, this);
-                this.zigBeeCoorinator.PullSelectionSubscriber = ZigBeeSelectionSubscriber;
-                this.ZigBeeSelectionSubscriber?.NotifyUpdated(this.zigBeeCoorinator);
+                var zvm = new DeviceModel(this.Model.Coordinator);
+                this.coorinator = new DigiZigBeeCoordinatorViewModel(zvm, this);
+                this.coorinator.PullSelectionSubscriber = DeviceSelectionSubscriber;
+                this.DeviceSelectionSubscriber?.NotifyUpdated(this.coorinator);
             }
-            return this.zigBeeCoorinator;
+            return this.coorinator;
         }
 
         public override void Close()
         {
-            this.zigBeeCoorinator.Model.ZigBeeSource.Close();
+            this.coorinator.Model.DeviceSource.Close();
         }
 
         public override bool Open()
         {
-            return this.zigBeeCoorinator.Model.ZigBeeSource.Open();
+            return this.coorinator.Model.DeviceSource.Open();
         }
 
         public override void SyncFromModel()
         {
-            this.ZigBees.Clear();
+            this.Devices.Clear();
 
-            foreach (var device in this.model.ZigBeeSources)
+            foreach (var device in this.model.DeviceSources)
             {
-                var vm = new DigiZigBeeViewModel(new ZigBeeModel(device), this);
-                vm.PullSelectionSubscriber = this.ZigBeeSelectionSubscriber;
-                this.ZigBeeSelectionSubscriber?.NotifyUpdated(vm);
-                this.ZigBees.Add(vm);
+                var vm = new DigiZigBeeViewModel(new DeviceModel(device), this);
+                vm.PullSelectionSubscriber = this.DeviceSelectionSubscriber;
+                this.DeviceSelectionSubscriber?.NotifyUpdated(vm);
+                this.Devices.Add(vm);
             }
 
             if(this.model.HasCoordinator)
             {
-                var zvm = new ZigBeeModel(this.Model.ZigBeeCoordinator);
-                this.zigBeeCoorinator = new DigiZigBeeCoordinatorViewModel(zvm, this);
-                this.zigBeeCoorinator.PullSelectionSubscriber = ZigBeeSelectionSubscriber;
-                this.ZigBeeSelectionSubscriber?.NotifyUpdated(this.zigBeeCoorinator);
+                var zvm = new DeviceModel(this.Model.Coordinator);
+                this.coorinator = new DigiZigBeeCoordinatorViewModel(zvm, this);
+                this.coorinator.PullSelectionSubscriber = DeviceSelectionSubscriber;
+                this.DeviceSelectionSubscriber?.NotifyUpdated(this.coorinator);
             }
         }
 

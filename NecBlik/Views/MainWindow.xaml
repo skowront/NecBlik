@@ -25,9 +25,9 @@
     <Window.Resources>
         <ContextMenu x:Key="DesignerCanvasContextMenu">
             <MenuItem Header="Paste" Command="{x:Static ApplicationCommands.Paste}" IsEnabled="True"/>
-            <MenuItem Header="Select All" Command="{x:Static controls:ZigBeeDesignerCanvas.SelectAll}" IsEnabled="True"/>
+            <MenuItem Header="Select All" Command="{x:Static controls:DeviceDesignerCanvas.SelectAll}" IsEnabled="True"/>
         </ContextMenu>
-        <dataSelectors:ZigBeeAnyDataBriefTemplateSelector x:Key="NetworkBriefDataTemplateSelector"></dataSelectors:ZigBeeAnyDataBriefTemplateSelector>
+        <dataSelectors:DeviceAnyDataTemplateSelector x:Key="NetworkBriefDataTemplateSelector"></dataSelectors:DeviceAnyDataTemplateSelector>
     </Window.Resources>
     <Grid>
         <Grid.RowDefinitions>
@@ -133,7 +133,7 @@
                     <Grid.LayoutTransform>
                         <ScaleTransform ScaleX="{Binding ElementName=sldZoom, Path=Value}" ScaleY="{Binding ElementName=sldZoom, Path=Value}" />
                     </Grid.LayoutTransform>
-                    <controls:ZigBeeDesignerCanvas x:Name="designerCanvas" 
+                    <controls:DeviceDesignerCanvas x:Name="designerCanvas" 
                                                AllowDrop="True" 
                                                Background="Transparent"
                                                IsHitTestVisible="True"

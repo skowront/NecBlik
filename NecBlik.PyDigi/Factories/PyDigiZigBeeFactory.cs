@@ -12,24 +12,24 @@ using NecBlik.Virtual.Factories;
 
 namespace NecBlik.PyDigi.Factories
 {
-    public class PyDigiZigBeeFactory:VirtualZigBeeFactory
+    public class PyDigiZigBeeFactory:VirtualDeviceFactory
     {
         public PyDigiZigBeeFactory()
         {
             this.internalFactoryType = Resources.Resources.PyDigiFactoryId;
         }
 
-        public override IZigBeeSource BuildNewSource()
+        public override IDeviceSource BuildNewSource()
         {
             return base.BuildNewSource();
         }
 
-        public override ZigBeeCoordinator BuildCoordinator()
+        public override Coordinator BuildCoordinator()
         {
             return new PyDigiZigBeeUSBCoordinator(this);
         }
 
-        public override async Task<ZigBeeNetwork> BuildNetworkFromDirectory(string pathToDirectory, IUpdatableResponseProvider<int, bool, string> updatableResponseProvider)
+        public override async Task<Network> BuildNetworkFromDirectory(string pathToDirectory, IUpdatableResponseProvider<int, bool, string> updatableResponseProvider)
         {
             if (pathToDirectory.Split('.').LastOrDefault() != this.GetVendorID())
             {
@@ -49,7 +49,7 @@ namespace NecBlik.PyDigi.Factories
             return network;
         }
 
-        public override IZigBeeSource BuildSourceFromJsonFile(string pathToFile)
+        public override IDeviceSource BuildSourceFromJsonFile(string pathToFile)
         {
             return null;
         }

@@ -20,7 +20,7 @@
     <Window.Resources>
         <ResourceDictionary>
             <ResourceDictionary.MergedDictionaries>
-                <ResourceDictionary Source="/ZigBee.Common;component/Styles/MergedDictionary.xaml"/>
+                <ResourceDictionary Source="/NecBlik.Common;component/Styles/MergedDictionary.xaml"/>
             </ResourceDictionary.MergedDictionaries>
         </ResourceDictionary>
     </Window.Resources>

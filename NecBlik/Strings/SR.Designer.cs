@@ -133,7 +133,7 @@ namespace NecBlik.Strings {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Available ZigBees.
+        ///   Looks up a localized string similar to Available devices.
         /// </summary>
         public static string MainWindowExpanderTitle {
             get {

@@ -8,9 +8,9 @@ using NecBlik.Virtual.GUI.ViewModels;
 
 namespace NecBlik.Virtual.GUI.Examples.Networks.ViewModels
 {
-    public class VirtualNetworkViewModelExampleB : VirtualZigBeeNetworkViewModel
+    public class VirtualNetworkViewModelExampleB : VirtualNetworkViewModel
     {
-        public VirtualNetworkViewModelExampleB (ZigBeeNetwork network) : base(network)
+        public VirtualNetworkViewModelExampleB (Network network) : base(network)
         {
 
         }

@@ -19,11 +19,11 @@ using NecBlik.ViewModels;
 namespace NecBlik.Views
 {
     /// <summary>
-    /// Interaction logic for ZigBeeEditorWindow.xaml
+    /// Interaction logic for DeviceEditorWindow.xaml
     /// </summary>
     public partial class DeviceEditorWindow : Window
     {
-        public ZigBeeViewModel ViewModel { get; set; }
+        public DeviceViewModel ViewModel { get; set; }
 
         public DeviceEditorWindow()
         {
@@ -36,11 +36,11 @@ namespace NecBlik.Views
         public RelayCommand OnConfirmCommand { get; set; }
         public RelayCommand OnCancelCommand { get; set; }
 
-        public DeviceEditorWindow(ZigBeeViewModel zigBeeViewModel, Action onConfirm = null, Action onCancel = null)
+        public DeviceEditorWindow(DeviceViewModel deviceViewModel, Action onConfirm = null, Action onCancel = null)
         {
             InitializeComponent();
             this.DataContext = this;
-            this.ViewModel = zigBeeViewModel;
+            this.ViewModel = deviceViewModel;
             this.OnConfirm = onConfirm;
             this.OnCancel = onCancel;
             this.BuildCommands();

@@ -7,7 +7,7 @@ using NecBlik.Core.Models;
 
 namespace NecBlik.PyDigi.Models
 {
-    public class PyDigiZigBeeSource: ZigBeeSource
+    public class PyDigiZigBeeSource: Device
     {
 
         private dynamic pyDevice = null;

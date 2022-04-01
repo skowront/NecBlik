@@ -117,11 +117,11 @@
   <resheader name="writer">
     <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </resheader>
-  <data name="DefaultVirtualZigBeeCoordinatorName" xml:space="preserve">
-    <value>Virtual ZigBee Coordinator</value>
+  <data name="DefaultVirtualDeviceCoordinatorName" xml:space="preserve">
+    <value>Virtual Device Coordinator</value>
   </data>
-  <data name="DefaultVirtualZigBeeName" xml:space="preserve">
-    <value>Virtual Zigbee</value>
+  <data name="DefaultVirtualDeviceName" xml:space="preserve">
+    <value>Virtual Device</value>
   </data>
   <data name="VirtualFactoryId" xml:space="preserve">
     <value>Virtual</value>
