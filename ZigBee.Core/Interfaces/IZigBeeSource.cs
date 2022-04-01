@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace ZigBee.Core.Interfaces
 {
-    public interface IZigBeeSource: IVendable, ICachable
+    public interface IZigBeeSource: IVendable, ISubVendable, ICachable
     {
         public string GetAddress();
         public string GetName();
@@ -19,5 +19,7 @@ namespace ZigBee.Core.Interfaces
         public void SubscribeToDataRecieved(ISubscriber<Tuple<string,string>> subscriber);
         public void UnsubscribeFromDataRecieved(ISubscriber<Tuple<string, string>> subscriber);
         public void Send(string data, string address);
+        public bool Open();
+        public void Close();
     }
 }

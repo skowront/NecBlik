@@ -37,6 +37,15 @@ namespace ZigBee.Core.Models
             updatableResponseProvider?.Update(progress);
             if (Directory.Exists(dir))
             {
+                Directory.Delete(dir, true);
+                if (!Directory.Exists(dir))
+                {
+                    Directory.CreateDirectory(dir);
+                }
+                if (!Directory.Exists(dir))
+                {
+                    return;
+                }
                 foreach (var ZigBeeNetwork in this.ZigBeeNetworks)
                 {
                     ZigBeeNetwork.Save(dir);

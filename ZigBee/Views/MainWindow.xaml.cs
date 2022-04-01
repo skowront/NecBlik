@@ -225,6 +225,11 @@ namespace ZigBee.Views
             this.designerCanvas.AddZigBee(obj,new Point(0,0));
         }
 
+        public void NotifyUpdated(ZigBeeViewModel obj)
+        {
+            this.designerCanvas.UpdateZigBee(obj);
+        }
+
         private object LoadMap(string path, DiagramItemMetadata metadata)
         {
             if (path == null)
@@ -300,5 +305,7 @@ namespace ZigBee.Views
             var window = new MapResizeWindow(vm);
             window.Show();
         }
+
+        
     }
 }

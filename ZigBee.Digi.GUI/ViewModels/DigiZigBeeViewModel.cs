@@ -30,22 +30,7 @@ namespace ZigBee.Digi.GUI.ViewModels
        
         public override void Send()
         {
-            if(this.SelectedDestinationAddress == this.Address)
-            {
-                this.OnDataRecieved(this.OutputBuffer, this.Address);
-            }
-            if(this.SelectedDestinationAddress == Core.GUI.Strings.SR.Broadcast)
-            {
-                var aaddr = this.GetAvailableDestinationAdresses();
-                foreach (var item in aaddr)
-                {
-                    this.Model.ZigBeeSource.Send(this.OutputBuffer, item);
-                    this.AddOutgoingHistoryBufferEntry(this.OutputBuffer, item);
-                }
-            }
-            this.Model.ZigBeeSource.Send(this.OutputBuffer, this.SelectedDestinationAddress);
-            this.AddOutgoingHistoryBufferEntry(this.OutputBuffer,this.SelectedDestinationAddress);
-            this.OutputBuffer = string.Empty;
+            this.AddHistoryBufferEntry(Strings.SR.CantSendFromRemoteDevices);
         }
     }
 }

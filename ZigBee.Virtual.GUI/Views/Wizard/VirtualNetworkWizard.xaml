@@ -18,6 +18,8 @@
             <Grid.RowDefinitions>
                 <RowDefinition Height="auto"></RowDefinition>
                 <RowDefinition Height="auto"></RowDefinition>
+                <RowDefinition Height="auto"></RowDefinition>
+                <RowDefinition Height="auto"></RowDefinition>
                 <RowDefinition Height="*"></RowDefinition>
             </Grid.RowDefinitions>
             <Grid Grid.Row="0">
@@ -44,7 +46,37 @@
                     </StackPanel>
                 </Button>
             </Grid>
-            <Grid Grid.Row="2">
+            <Grid Grid.Row="2" Margin="0 10 0 0">
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="*"></ColumnDefinition>
+                    <ColumnDefinition Width="*"></ColumnDefinition>
+                    <ColumnDefinition Width="*"></ColumnDefinition>
+                </Grid.ColumnDefinitions>
+                <TextBlock Grid.Column="0" Text="{lex:Loc GPNetworkType}"></TextBlock>
+                <TextBlock Grid.Column="1" Text="{Binding NetworkType}" TextWrapping="Wrap"></TextBlock>
+                <Button Grid.Column="2" HorizontalAlignment="Right" HorizontalContentAlignment="Right" Command="{Binding PickNetworkTypeCommand}">
+                    <StackPanel Orientation="Horizontal">
+                        <TextBlock Text="{lex:Loc GPSelect}" Margin="0 0 10 0"></TextBlock>
+                        <fa:FontAwesome Icon="MousePointer"></fa:FontAwesome>
+                    </StackPanel>
+                </Button>
+            </Grid>
+            <Grid Grid.Row="3" Margin="0 10 0 0">
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition></ColumnDefinition>
+                    <ColumnDefinition></ColumnDefinition>
+                    <ColumnDefinition></ColumnDefinition>
+                </Grid.ColumnDefinitions>
+                <TextBlock Grid.Column="0" Text="{lex:Loc GPCoordinatorType}"></TextBlock>
+                <TextBlock Grid.Column="1" Text="{Binding CoordinatorType}" TextWrapping="Wrap"></TextBlock>
+                <Button Grid.Column="2" HorizontalAlignment="Right" HorizontalContentAlignment="Right" Command="{Binding PickCoordinatorTypeCommand}">
+                    <StackPanel Orientation="Horizontal">
+                        <TextBlock Text="{lex:Loc GPSelect}" Margin="0 0 10 0"></TextBlock>
+                        <fa:FontAwesome Icon="MousePointer"></fa:FontAwesome>
+                    </StackPanel>
+                </Button>
+            </Grid>
+            <Grid Grid.Row="4">
                 <Grid.ColumnDefinitions>
                     <ColumnDefinition></ColumnDefinition>
                     <ColumnDefinition></ColumnDefinition>

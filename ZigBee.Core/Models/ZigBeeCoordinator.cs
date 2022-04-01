@@ -13,6 +13,7 @@ namespace ZigBee.Core.Models
     public class ZigBeeCoordinator: IZigBeeCoordinator
     {
         protected string internalType { get; set; } = Resources.Resources.DefaultFactoryId;
+        protected string internalSubType { get; set; } = string.Empty;
 
         [JsonProperty]
         public Guid Guid { get; set; } = Guid.NewGuid();
@@ -103,6 +104,11 @@ namespace ZigBee.Core.Models
             return this.Guid.ToString();
         }
 
+        public virtual async Task Discover()
+        {
+
+        }
+
         public virtual void OnDataRecieved(string data, string sourceAddress)
         {
             foreach (var item in this.DataRecievedSubscribers)
@@ -127,6 +133,26 @@ namespace ZigBee.Core.Models
         {
             if (this.DataRecievedSubscribers.Contains(subscriber))
                 this.DataRecievedSubscribers.Remove(subscriber);
+        }
+
+        public virtual bool Open()
+        {
+            return true ;
+        }
+
+        public virtual void Close()
+        {
+            return;
+        }
+
+        public string GetVendorSubType()
+        {
+            return this.internalSubType;
+        }
+
+        public void SetVendorSubType(string newType)
+        {
+            this.internalSubType = newType;
         }
     }
 }

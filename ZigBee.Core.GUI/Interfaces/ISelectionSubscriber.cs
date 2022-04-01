@@ -9,5 +9,6 @@ namespace ZigBee.Core.GUI.Interfaces
     public interface ISelectionSubscriber<T>
     {
         public void NotifySelected(T obj);
+        public void NotifyUpdated(T obj);
     }
 }

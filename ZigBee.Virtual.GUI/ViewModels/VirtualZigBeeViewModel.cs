@@ -15,7 +15,7 @@ namespace ZigBee.Virtual.GUI.ViewModels
 {
     public class VirtualZigBeeViewModel : ZigBeeViewModel
     {
-        public VirtualZigBeeViewModel(ZigBeeModel model = null, ZigBeeNetworkViewModel networkModel = null) : base(model, networkModel)
+        public VirtualZigBeeViewModel(ZigBeeModel model, ZigBeeNetworkViewModel networkModel) : base(model, networkModel)
         {
 
         }

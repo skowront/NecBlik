@@ -12,5 +12,7 @@ namespace ZigBee.Core.Interfaces
         public Task<IEnumerable<IZigBeeSource>> GetDevices(IUpdatableResponseProvider<int, bool, string> progressResponseProvider = null);
 
         public IEnumerable<Tuple<string, string>> GetConnections();
+
+        public Task Discover();
     }
 }

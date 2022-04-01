@@ -14,6 +14,7 @@ using System.Windows.Shapes;
 using ZigBee.Common.WpfExtensions.Interfaces;
 using ZigBee.Core.Interfaces;
 using ZigBee.Virtual.Factories;
+using ZigBee.Virtual.GUI.Factories;
 using ZigBee.Virtual.GUI.ViewModels;
 using ZigBee.Virtual.GUI.ViewModels.Wizard;
 using ZigBee.Virtual.Models;
@@ -23,7 +24,7 @@ namespace ZigBee.Virtual.GUI.Views.Wizard
     /// <summary>
     /// Interaction logic for VirtualNetworkWizard.xaml
     /// </summary>
-    public partial class VirtualNetworkWizard : Window, IResponseProvider<VirtualZigBeeNetworkViewModel, object>
+    public partial class VirtualNetworkWizard : Window, IResponseProvider<Task<VirtualZigBeeNetworkViewModel>, object>
     {
         VirtualNetworkWizardViewModel ViewModel { get; set; }
 
@@ -40,7 +41,7 @@ namespace ZigBee.Virtual.GUI.Views.Wizard
             this.DataContext = virtualNetworkWizardViewModel;
         }
         
-        public VirtualZigBeeNetworkViewModel ProvideResponse(object context = null)
+        public async Task<VirtualZigBeeNetworkViewModel> ProvideResponse(object context = null)
         {
             this.ShowDialog();
             if(this.ViewModel.Committed==false)
@@ -49,6 +50,7 @@ namespace ZigBee.Virtual.GUI.Views.Wizard
             }
             var network = new VirtualZigBeeNetwork();
             network.Name = this.ViewModel.NetworkName;
+            network.ZigBeeCoordinatorSubtypeFactoryRule= new Core.Factories.FactoryRule() { Value = this.ViewModel.CoordinatorType };
             var coordinator = new VirtualZigBeeCoordinator(new VirtualZigBeeFactory());
             List<IZigBeeSource> zigBeeSources = new List<IZigBeeSource>();
             for(int i = 0; i<this.ViewModel.VirtualZigBees; i++)
@@ -57,8 +59,9 @@ namespace ZigBee.Virtual.GUI.Views.Wizard
                 zigBeeSources.Add(source);
             }
             coordinator.SetDevices(zigBeeSources);
-            network.SetCoordinator(coordinator);
-            return new VirtualZigBeeNetworkViewModel(network);
+            await network.SetCoordinator(coordinator);
+            var factory = new VirtualZigBeeGuiFactory();
+            return factory.NetworkViewModelBySubType(network,this.ViewModel.NetworkType);
         }
     }
 }
