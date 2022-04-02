@@ -12,7 +12,7 @@ using NecBlik.Virtual.Models;
 
 namespace NecBlik.PyDigi.Models
 {
-    public class PyDigiZigBeeUSBCoordinator : VirtualZigBeeCoordinator
+    public class PyDigiZigBeeUSBCoordinator : VirtualCoordinator
     {
         private PyModule scope;
 
@@ -21,11 +21,11 @@ namespace NecBlik.PyDigi.Models
         [JsonProperty]
         public PyDigiUSBConnectionData connectionData { get; set; }
 
-        public PyDigiZigBeeUSBCoordinator(IZigBeeFactory zigBeeFactory, PyDigiUSBConnectionData connectionData = null) : base(zigBeeFactory)
+        public PyDigiZigBeeUSBCoordinator(IDeviceFactory zigBeeFactory, PyDigiUSBConnectionData connectionData = null) : base(zigBeeFactory)
         {
             this.connectionData = connectionData ?? new PyDigiUSBConnectionData() { port = "COM4", baud = 9600 };
-            this.zigBeeFactory = new PyDigiZigBeeFactory();
-            this.internalType = this.zigBeeFactory.GetVendorID();
+            this.deviceFactory = new PyDigiZigBeeFactory();
+            this.internalType = this.deviceFactory.GetVendorID();
             this.connectionData = connectionData ?? new() { port = string.Empty, baud = 9600 };
             this.Name = Resources.Resources.PyDefaultDigiCoordinatorName;
             try
@@ -44,7 +44,7 @@ namespace NecBlik.PyDigi.Models
             }
         }
 
-        public override async Task<IEnumerable<IZigBeeSource>> GetDevices(IUpdatableResponseProvider<int, bool, string> progressResponseProvider = null)
+        public override async Task<IEnumerable<IDeviceSource>> GetDevices(IUpdatableResponseProvider<int, bool, string> progressResponseProvider = null)
         {
             using (Py.GIL())
             {
@@ -52,7 +52,7 @@ namespace NecBlik.PyDigi.Models
                 pyCoordinator.Open();
                 dynamic devices = this.pyCoordinator.devices;
                 pyCoordinator.Close();
-                List<IZigBeeSource> sources = new();
+                List<IDeviceSource> sources = new();
                 foreach(var item in devices)
                 {
                     PyDigiZigBeeSource source = new PyDigiZigBeeSource(item);

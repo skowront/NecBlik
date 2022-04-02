@@ -12,7 +12,7 @@ using ZigBeeNet;
 
 namespace NecBlik.ZigBeeNet.Models
 {
-    public class ZBNetSource : ZigBeeSource
+    public class ZBNetSource : Device
     {
         ZigBeeNode zigBeeNode;
 

@@ -10,9 +10,9 @@ using NecBlik.Virtual.GUI.ViewModels;
 
 namespace NecBlik.Digi.GUI.ViewModels
 {
-    public class DigiZigBeeViewModel : VirtualZigBeeViewModel
+    public class DigiZigBeeViewModel : VirtualDeviceViewModel
     {
-        public DigiZigBeeViewModel(ZigBeeModel model = null, ZigBeeNetworkViewModel networkModel = null) : base(model, networkModel)
+        public DigiZigBeeViewModel(DeviceModel model = null, NetworkViewModel networkModel = null) : base(model, networkModel)
         {
 
         }

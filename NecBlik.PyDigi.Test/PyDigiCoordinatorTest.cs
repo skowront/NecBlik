@@ -14,7 +14,7 @@ namespace NecBlik.PyDigi.Test
         {
             var conData = new PyDigiZigBeeUSBCoordinator.PyDigiUSBConnectionData() { baud = 9600, port = "COM4" };
             var coordinator = new PyDigiZigBeeUSBCoordinator(new Factories.PyDigiZigBeeFactory(), conData);
-            var devices = new List<IZigBeeSource>(await coordinator.GetDevices());
+            var devices = new List<IDeviceSource>(await coordinator.GetDevices());
             Assert.AreEqual(devices.Count, 1);
 
         }

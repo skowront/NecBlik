@@ -53,7 +53,7 @@ namespace NecBlik.Digi.GUI.Views.Wizard
 
             var coordinator = new DigiZigBeeUSBCoordinator(new DigiZigBeeFactory(),
                 new DigiZigBeeUSBCoordinator.DigiUSBConnectionData() { baud = this.ViewModel.BaudRate, port = this.ViewModel.SerialPortName });
-            var popup = new SimpleYesNoProgressBarPopup(Strings.SR.GPPleaseWait+ "...","",Popups.ZigBeeIcons.InfoIcon,null,null,0,0,0,false,false);
+            var popup = new SimpleYesNoProgressBarPopup(Strings.SR.GPPleaseWait+ "...","",Popups.Icons.InfoIcon,null,null,0,0,0,false,false);
             var network = new DigiZigBeeNetwork(coordinator, new YesNoProgressBarPopupResponseProvider(popup));
             await network.Initialize(coordinator);
             var vm = new DigiZigBeeNetworkViewModel(network);

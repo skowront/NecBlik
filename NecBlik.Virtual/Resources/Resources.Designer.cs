@@ -61,20 +61,20 @@ namespace NecBlik.Virtual.Resources {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Virtual ZigBee Coordinator.
+        ///   Looks up a localized string similar to Virtual Device Coordinator.
         /// </summary>
-        public static string DefaultVirtualZigBeeCoordinatorName {
+        public static string DefaultVirtualDeviceCoordinatorName {
             get {
-                return ResourceManager.GetString("DefaultVirtualZigBeeCoordinatorName", resourceCulture);
+                return ResourceManager.GetString("DefaultVirtualDeviceCoordinatorName", resourceCulture);
             }
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Virtual Zigbee.
+        ///   Looks up a localized string similar to Virtual Device.
         /// </summary>
-        public static string DefaultVirtualZigBeeName {
+        public static string DefaultVirtualDeviceName {
             get {
-                return ResourceManager.GetString("DefaultVirtualZigBeeName", resourceCulture);
+                return ResourceManager.GetString("DefaultVirtualDeviceName", resourceCulture);
             }
         }
         

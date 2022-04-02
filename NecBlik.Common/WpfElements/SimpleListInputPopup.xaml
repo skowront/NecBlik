@@ -13,12 +13,12 @@
         Title="{Binding Title}" 
         Height="300"
         Width="500"
-        Template="{DynamicResource ZigBeeWindowControlTemplateHeaderless}" 
+        Template="{DynamicResource DarkWindowControlTemplateHeaderless}" 
         ResizeMode="CanResizeWithGrip">
     <Window.Resources>
         <ResourceDictionary>
             <ResourceDictionary.MergedDictionaries>
-                <ResourceDictionary Source="/ZigBee.Common;component/Styles/MergedDictionary.xaml"/>
+                <ResourceDictionary Source="/NecBlik.Common;component/Styles/MergedDictionary.xaml"/>
             </ResourceDictionary.MergedDictionaries>
         </ResourceDictionary>
     </Window.Resources>
@@ -30,14 +30,14 @@
             CornerRadius="0">
         </WindowChrome>
     </WindowChrome.WindowChrome>
-    <Grid>
+    <Grid Background="{StaticResource MaterialDesignDarkBackground}">
         <Grid.RowDefinitions>
             <RowDefinition Height="auto"></RowDefinition>
             <RowDefinition Height="*"></RowDefinition>
             <RowDefinition Height="*"></RowDefinition>
         </Grid.RowDefinitions>
-        <TextBlock Grid.Row="0" Text="{Binding Message}" FontSize="15"></TextBlock>
-        <ComboBox Grid.Row="1" VerticalAlignment="Bottom" ItemsSource="{Binding Values}" SelectedItem="{Binding Value}" FontSize="13"></ComboBox>
+        <TextBlock Grid.Row="0" Text="{Binding Message}" Foreground="{StaticResource MaterialDesignDarkForeground}" FontSize="15"></TextBlock>
+        <ComboBox Grid.Row="1" VerticalAlignment="Bottom" ItemsSource="{Binding Values}" Foreground="{StaticResource MaterialDesignDarkForeground}" SelectedItem="{Binding Value}" IsEditable="{Binding Editable}" FontSize="13"></ComboBox>
         <Grid Grid.Row="2">
             <Grid.ColumnDefinitions>
                 <ColumnDefinition></ColumnDefinition>

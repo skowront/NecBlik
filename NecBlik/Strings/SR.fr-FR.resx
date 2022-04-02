@@ -130,7 +130,7 @@
     <value>Sauvegardement</value>
   </data>
   <data name="MainWindowExpanderTitle" xml:space="preserve">
-    <value>Disponible ZigBees</value>
+    <value>Disponible appareils</value>
   </data>
   <data name="MainWindowManuHeaderProjectLoadMap" xml:space="preserve">
     <value>Charger la carte</value>

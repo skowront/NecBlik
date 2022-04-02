@@ -144,8 +144,8 @@
   <data name="GPVersion" xml:space="preserve">
     <value>Wersja</value>
   </data>
-  <data name="GPVirtualZigBeesCount" xml:space="preserve">
-    <value>Liczba wirtualnych zigbee</value>
+  <data name="GPVirtualDevicesCount" xml:space="preserve">
+    <value>Liczba wirtualnych urządzeń</value>
   </data>
   <data name="GPNetworkPanId" xml:space="preserve">
     <value>PanId</value>
@@ -167,5 +167,17 @@
   </data>
   <data name="GPFrom" xml:space="preserve">
     <value>Z</value>
+  </data>
+  <data name="EnterAddressOrLeaveEmpty" xml:space="preserve">
+    <value>Wprowadź adres nowego urządzenia lub zostaw puste by go wygenerować.</value>
+  </data>
+  <data name="GPNetworkType" xml:space="preserve">
+    <value>Typ sieci</value>
+  </data>
+  <data name="GPCoordinatorType" xml:space="preserve">
+    <value>Typ koordynatora</value>
+  </data>
+  <data name="GPStayOpen" xml:space="preserve">
+    <value>Trzymaj otwarte</value>
   </data>
 </root>

@@ -45,13 +45,13 @@ namespace NecBlik.Virtual.GUI.ViewModels.Wizard
             set { coordinatorType = value; this.OnPropertyChanged(); }
         }
 
-        private int virtualZigBees;
-        public int VirtualZigBees
+        private int virtualDevices;
+        public int VirtualDevices
         {
-            get { return virtualZigBees; }
-            set { virtualZigBees = value; this.OnPropertyChanged(); }
+            get { return virtualDevices; }
+            set { virtualDevices = value; this.OnPropertyChanged(); }
         }
-        public RelayCommand PickVirtualZigBeesCommand { get; set; }
+        public RelayCommand PickVirtualDevicesCommand { get; set; }
         public RelayCommand PickNetworkTypeCommand { get; set; }
         public RelayCommand PickCoordinatorTypeCommand { get; set; }
         public RelayCommand ConfirmCommand { get; set; }
@@ -65,16 +65,16 @@ namespace NecBlik.Virtual.GUI.ViewModels.Wizard
 
         private void BuildCommands()
         {
-            this.PickVirtualZigBeesCommand = new RelayCommand((o) =>
+            this.PickVirtualDevicesCommand = new RelayCommand((o) =>
             {
                 var vp = new NumericResponseProvider<int>(new NumericValuePicker());
-                this.VirtualZigBees = vp.ProvideResponse();
+                this.VirtualDevices = vp.ProvideResponse();
             });
 
             this.PickNetworkTypeCommand = new RelayCommand((o) =>
             {
                 var rp = new ListInputValuePicker();
-                var fac = new VirtualZigBeeGuiFactory();
+                var fac = new VirtualDeviceGuiFactory();
                 var availableTypes = fac.GetAvailableNetworkViewModels();
                 this.NetworkType = rp.ProvideResponse(new Tuple<string, IEnumerable<string>>(string.Empty,availableTypes));
             });
@@ -82,8 +82,8 @@ namespace NecBlik.Virtual.GUI.ViewModels.Wizard
             this.PickCoordinatorTypeCommand = new RelayCommand((o) =>
             {
                 var rp = new ListInputValuePicker();
-                var fac = new VirtualZigBeeGuiFactory();
-                var availableTypes = fac.GetAvailableZigBeeViewModels();
+                var fac = new VirtualDeviceGuiFactory();
+                var availableTypes = fac.GetAvailableDeviceViewModels();
                 this.CoordinatorType = rp.ProvideResponse(new Tuple<string, IEnumerable<string>>(string.Empty, availableTypes));
             });
 

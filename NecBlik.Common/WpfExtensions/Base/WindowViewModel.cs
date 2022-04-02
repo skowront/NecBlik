@@ -13,7 +13,8 @@ using Fasetto.Word;
 namespace NecBlik.Common.WpfExtensions.Base
 {
     /// <summary>
-    /// WindowViewModel based on some ytTurorial. It is pretty nice anyways.
+    /// Author: https://github.com/angelsix/fasetto-word/tree/69f144a73638b5c789d8df155cd023a6ad68f5e7
+    /// Some changes by: Tomasz Skowron https://github.com/skowront
     /// </summary>
     public class WindowViewModel:BaseViewModel
     {

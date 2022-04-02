@@ -9,22 +9,22 @@ using NecBlik.Virtual.GUI.ViewModels;
 
 namespace NecBlik.PyDigi.GUI.ViewModels
 {
-    public class PyDigiZigBeeNetworkViewModel:VirtualZigBeeNetworkViewModel
+    public class PyDigiZigBeeNetworkViewModel:VirtualNetworkViewModel
     {
-        public PyDigiZigBeeNetworkViewModel(ZigBeeNetwork network):base(network)
+        public PyDigiZigBeeNetworkViewModel(Network network):base(network)
         {
 
         }
 
-        public override ZigBeeViewModel GetZigBeeCoordinatorViewModel()
+        public override DeviceViewModel GetCoordinatorViewModel()
         {
-            if (this.zigBeeCoorinator == null)
+            if (this.coorinator == null)
             {
-                var zvm = new ZigBeeModel(this.Model.ZigBeeCoordinator);
-                this.zigBeeCoorinator = new PyDigiZigBeeViewModel(zvm, this);
-                this.zigBeeCoorinator.PullSelectionSubscriber = ZigBeeSelectionSubscriber;
+                var zvm = new DeviceModel(this.Model.Coordinator);
+                this.coorinator = new PyDigiZigBeeViewModel(zvm, this);
+                this.coorinator.PullSelectionSubscriber = DeviceSelectionSubscriber;
             }
-            return this.zigBeeCoorinator;
+            return this.coorinator;
         }
     }
 }

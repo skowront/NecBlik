@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace NecBlik.Core.Interfaces
 {
-    public interface ISubscriber<T>
+    public interface ISubscriber<T>: ICachable
     {
         public void NotifySubscriber(T updateInformation);
     }

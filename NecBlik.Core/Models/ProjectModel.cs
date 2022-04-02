@@ -19,17 +19,17 @@ namespace NecBlik.Core.Models
         [JsonProperty]
         public string ProjectName { get; set; } = Resources.Resources.ProjectModelPojectNameDefault;
         [JsonProperty]
-        public ZigBeeModel ZigBeeTemplate { get; set; } = new ZigBeeModel();
+        public DeviceModel ZigBeeTemplate { get; set; } = new DeviceModel();
         [JsonProperty]
         public string MapFile { get; set; }
 
-        public List<ZigBeeNetwork> ZigBeeNetworks { get; set; } = new List<ZigBeeNetwork>();
+        public List<Network> Networks { get; set; } = new List<Network>();
 
         public void Save(string projectFolder, IUpdatableResponseProvider<int, bool, string> updatableResponseProvider)
         {
-            updatableResponseProvider?.Init(0,1+this.ZigBeeNetworks.Count,0);
+            updatableResponseProvider?.Init(0,1+this.Networks.Count,0);
             var progress = 1;
-            var dir = projectFolder + Resources.Resources.ZigBeeNetworksDirectory;
+            var dir = projectFolder + Resources.Resources.DeviceNetworksDirectory;
             if (!Directory.Exists(dir))
             {
                 Directory.CreateDirectory(dir);
@@ -46,9 +46,9 @@ namespace NecBlik.Core.Models
                 {
                     return;
                 }
-                foreach (var ZigBeeNetwork in this.ZigBeeNetworks)
+                foreach (var network in this.Networks)
                 {
-                    ZigBeeNetwork.Save(dir);
+                    network.Save(dir);
                     progress++;
                     updatableResponseProvider?.Update(progress);
                 }
@@ -58,7 +58,7 @@ namespace NecBlik.Core.Models
 
         public async Task Load(string projectFolder, IUpdatableResponseProvider<int, bool, string> updatableResponseProvider)
         {
-            var dir = projectFolder + Resources.Resources.ZigBeeNetworksDirectory;
+            var dir = projectFolder + Resources.Resources.DeviceNetworksDirectory;
             if (!Directory.Exists(dir))
             {
                 return;
@@ -68,10 +68,10 @@ namespace NecBlik.Core.Models
                 var networkSubDirs = Directory.EnumerateDirectories(dir);
                 foreach(var networkSubDir in networkSubDirs)
                 {
-                    var network = await ZigBeeAnyFactory.Instance.BuildNetworkFromDirectory(networkSubDir,updatableResponseProvider);
+                    var network = await DeviceAnyFactory.Instance.BuildNetworkFromDirectory(networkSubDir,updatableResponseProvider);
                     if(network!=null)
                     {
-                        this.ZigBeeNetworks.Add(network);
+                        this.Networks.Add(network);
                     }
                 }
             }

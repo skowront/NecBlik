@@ -9,9 +9,9 @@ using NecBlik.Virtual.GUI.ViewModels;
 
 namespace NecBlik.PyDigi.GUI.ViewModels
 {
-    public class PyDigiZigBeeViewModel: VirtualZigBeeViewModel
+    public class PyDigiZigBeeViewModel: VirtualDeviceViewModel
     {
-        public PyDigiZigBeeViewModel(ZigBeeModel model = null, ZigBeeNetworkViewModel networkModel = null) : base(model, networkModel)
+        public PyDigiZigBeeViewModel(DeviceModel model = null, NetworkViewModel networkModel = null) : base(model, networkModel)
         {
             this.Model = model;
         }

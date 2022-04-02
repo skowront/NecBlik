@@ -130,7 +130,7 @@
     <value>Zapisywanie</value>
   </data>
   <data name="MainWindowExpanderTitle" xml:space="preserve">
-    <value>Dostępne ZigBee</value>
+    <value>Dostępne urządzenia</value>
   </data>
   <data name="MainWindowManuHeaderProjectLoadMap" xml:space="preserve">
     <value>Załaduj mapę projektu</value>

@@ -7,6 +7,7 @@ using System.Windows.Media;
 
 namespace Fasetto.Word
 {
+    ///Author: https://github.com/angelsix/fasetto-word/blob/69f144a73638b5c789d8df155cd023a6ad68f5e7/Source/Fasetto.Word/Window/WindowResizer.cs
     /// <summary>
     /// The dock position of the window
     /// </summary>

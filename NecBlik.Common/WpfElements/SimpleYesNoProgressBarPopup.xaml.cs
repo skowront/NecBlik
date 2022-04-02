@@ -137,7 +137,7 @@ namespace NecBlik.Common.WpfElements
                 set { this.canCloseAbort = value; this.OnPropertyChanged(); }
             }
 
-            public Popups.ZigBeeIcon Icon { get; set; } = Popups.ZigBeeIcons.InfoIcon;
+            public Popups.ZigBeeIcon Icon { get; set; } = Popups.Icons.InfoIcon;
 
             public RelayCommand ConfirmCommand { get; set; }
             public RelayCommand CancelCommand { get; set; }

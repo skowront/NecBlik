@@ -42,10 +42,10 @@ namespace NecBlik.Common.WpfElements
         /// <param name="title">Top title</param>
         /// <param name="OnConfirm">Action (callback) to be taken when confirmed</param>
         /// <param name="OnCancel">Action (callback) to be taken when canceled</param>
-        public SimpleListInputPopup(string message, string title, IEnumerable<string> availableValues , Action<string> OnConfirm, Action<string> OnCancel)
+        public SimpleListInputPopup(string message, string title, IEnumerable<string> availableValues , Action<string> OnConfirm, Action<string> OnCancel, bool isEditable=false)
         {
             InitializeComponent();
-            this.ViewModel = new SimpleListInputViewModel(this, message, title, availableValues,  OnConfirm, OnCancel);
+            this.ViewModel = new SimpleListInputViewModel(this, message, title, availableValues,  OnConfirm, OnCancel, isEditable);
             this.DataContext = this.ViewModel;
         }
 
@@ -80,6 +80,13 @@ namespace NecBlik.Common.WpfElements
                 set { this.title = value; this.OnPropertyChanged(); }
             }
 
+            private bool editable = false;
+            public bool Editable
+            {
+                get { return this.editable; }
+                set { this.editable = value; this.OnPropertyChanged(); }
+            }
+
             public RelayCommand ConfirmCommand { get; set; }
             public RelayCommand CancelCommand { get; set; }
 
@@ -95,12 +102,13 @@ namespace NecBlik.Common.WpfElements
             /// <param name="title">Top title</param>
             /// <param name="OnConfirm">Action (callback) to be taken when confirmed</param>
             /// <param name="OnCancel">Action (callback) to be taken when canceled</param>
-            public SimpleListInputViewModel(Window window, string message, string title, IEnumerable<string> availableValues, Action<string> OnConfirm, Action<string> OnCancel) : base(window)
+            public SimpleListInputViewModel(Window window, string message, string title, IEnumerable<string> availableValues, Action<string> OnConfirm, Action<string> OnCancel, bool isEditable=false) : base(window)
             {
                 this.Message = message;
                 this.Title = title;
                 this.OnConfirm = OnConfirm;
                 this.OnCancel = OnCancel;
+                this.Editable = isEditable;
                 foreach(var item in availableValues)
                 {
                     this.Values.Add(item);

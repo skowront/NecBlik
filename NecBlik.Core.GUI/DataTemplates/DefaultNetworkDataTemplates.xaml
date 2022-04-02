@@ -2,7 +2,7 @@
                     xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
                     xmlns:viewModels="clr-namespace:NecBlik.Core.GUI.ViewModels"
                     xmlns:lex="clr-namespace:WPFLocalizeExtension.Extensions;assembly=WPFLocalizeextension">
-    <DataTemplate x:Key="DefaultNetworkBriefDataTemplate" DataType="{x:Type viewModels:ZigBeeNetworkViewModel}">
+    <DataTemplate x:Key="DefaultNetworkBriefDataTemplate" DataType="{x:Type viewModels:NetworkViewModel}">
         <StackPanel>
             <TextBlock Text="{Binding Name}"></TextBlock>
             <TextBlock Text="{Binding PanId}"></TextBlock>
@@ -10,7 +10,7 @@
         </StackPanel>
     </DataTemplate>
 
-    <DataTemplate x:Key="DefaultNetworkDataTemplate" DataType="{x:Type viewModels:ZigBeeNetworkViewModel}">
+    <DataTemplate x:Key="DefaultNetworkDataTemplate" DataType="{x:Type viewModels:NetworkViewModel}">
         <StackPanel>
             <TextBlock Text="{Binding Name}"></TextBlock>
             <TextBlock Text="{Binding PanId}"></TextBlock>

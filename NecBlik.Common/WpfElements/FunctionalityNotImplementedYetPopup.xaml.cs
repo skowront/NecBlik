@@ -31,7 +31,7 @@ namespace NecBlik.Common.WpfElements
         /// </summary>
         public class FunctionalityNotImplementedYetPopupViewModel : WindowViewModel
         {
-            public Popups.ZigBeeIcon Icon { get; set; } = Popups.ZigBeeIcons.InfoIcon;
+            public Popups.ZigBeeIcon Icon { get; set; } = Popups.Icons.InfoIcon;
 
             public RelayCommand ConfirmCommand { get; set; }
 

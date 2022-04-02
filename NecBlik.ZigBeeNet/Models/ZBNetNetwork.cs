@@ -12,27 +12,27 @@ using Newtonsoft.Json;
 
 namespace NecBlik.ZigBeeNet.Models
 {
-    public class ZBNetNetwork:VirtualZigBeeNetwork
+    public class ZBNetNetwork:VirtualNetwork
     {
         public ZBNetNetwork():base()
         {
-            this.ZigBeeFactory = new ZBNetFactory();
-            this.internalNetworkType = this.ZigBeeFactory.GetVendorID();
+            this.DeviceFactory = new ZBNetFactory();
+            this.internalNetworkType = this.DeviceFactory.GetVendorID();
         }
 
-        public ZBNetNetwork(ZigBeeCoordinator coordinator, IUpdatableResponseProvider<int, bool, string> updatableResponseProvider = null):this()
+        public ZBNetNetwork(Coordinator coordinator, IUpdatableResponseProvider<int, bool, string> updatableResponseProvider = null):this()
         {
             this.ProgressResponseProvider = updatableResponseProvider;
-            this.ZigBeeFactory = new ZBNetFactory();
-            this.internalNetworkType = this.ZigBeeFactory.GetVendorID();
+            this.DeviceFactory = new ZBNetFactory();
+            this.internalNetworkType = this.DeviceFactory.GetVendorID();
         }
 
-        public async Task Initialize(ZigBeeCoordinator coordinator)
+        public async Task Initialize(Coordinator coordinator)
         {
             await this.SetCoordinator(coordinator);
         }
 
-        public override void AddSource(IZigBeeSource source)
+        public override void AddSource(IDeviceSource source)
         {
             return;
         }
@@ -46,7 +46,7 @@ namespace NecBlik.ZigBeeNet.Models
             }
             if (Directory.Exists(dir))
             {
-                this.ZigBeeCoordinator.Save(dir);
+                this.Coordinator.Save(dir);
                 File.WriteAllText(dir + "\\" + "Network.json", JsonConvert.SerializeObject(this, Formatting.Indented));
             }
         }

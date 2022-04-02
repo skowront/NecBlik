@@ -61,6 +61,15 @@ namespace NecBlik.Virtual.GUI.Strings {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Enter new device address or leave empty to generate one..
+        /// </summary>
+        public static string EnterAddressOrLeaveEmpty {
+            get {
+                return ResourceManager.GetString("EnterAddressOrLeaveEmpty", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Address.
         /// </summary>
         public static string GPAddress {
@@ -84,6 +93,15 @@ namespace NecBlik.Virtual.GUI.Strings {
         public static string GPCoordinator {
             get {
                 return ResourceManager.GetString("GPCoordinator", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Coordinator type.
+        /// </summary>
+        public static string GPCoordinatorType {
+            get {
+                return ResourceManager.GetString("GPCoordinatorType", resourceCulture);
             }
         }
         
@@ -160,6 +178,15 @@ namespace NecBlik.Virtual.GUI.Strings {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Network type.
+        /// </summary>
+        public static string GPNetworkType {
+            get {
+                return ResourceManager.GetString("GPNetworkType", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Open.
         /// </summary>
         public static string GPOpen {
@@ -196,6 +223,15 @@ namespace NecBlik.Virtual.GUI.Strings {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Stay open.
+        /// </summary>
+        public static string GPStayOpen {
+            get {
+                return ResourceManager.GetString("GPStayOpen", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Version.
         /// </summary>
         public static string GPVersion {
@@ -205,11 +241,11 @@ namespace NecBlik.Virtual.GUI.Strings {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Virtual ZigBees count.
+        ///   Looks up a localized string similar to Virtual devices count.
         /// </summary>
-        public static string GPVirtualZigBeesCount {
+        public static string GPVirtualDevicesCount {
             get {
-                return ResourceManager.GetString("GPVirtualZigBeesCount", resourceCulture);
+                return ResourceManager.GetString("GPVirtualDevicesCount", resourceCulture);
             }
         }
     }

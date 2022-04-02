@@ -14,21 +14,21 @@ using NecBlik.Virtual.GUI.Factories;
 
 namespace NecBlik.PyDigi.GUI.Factories
 {
-    public class PyDigiZigBeeGuiFactory:VirtualZigBeeGuiFactory
+    public class PyDigiZigBeeGuiFactory:VirtualDeviceGuiFactory
     {
         public PyDigiZigBeeGuiFactory()
         {
             this.internalFactoryType = PyDigi.Resources.Resources.PyDigiFactoryId;
         }
 
-        public override ZigBeeNetworkViewModel GetNetworkViewModel(ZigBeeNetwork zigBeeNetwork)
+        public override NetworkViewModel GetNetworkViewModel(Network zigBeeNetwork)
         {
             if (zigBeeNetwork.GetVendorID() != this.internalFactoryType)
                 return null;
             return new PyDigiZigBeeNetworkViewModel(zigBeeNetwork);
         }
 
-        public override DataTemplate GetNetworkDataTemplate(ZigBeeNetwork zigBeeNetwork)
+        public override DataTemplate GetNetworkDataTemplate(Network zigBeeNetwork)
         {
             if (zigBeeNetwork.GetVendorID() == this.GetVendorID())
             {
@@ -40,7 +40,7 @@ namespace NecBlik.PyDigi.GUI.Factories
             return null;
         }
 
-        public override DataTemplate GetNetworkBriefDataTemplate(ZigBeeNetwork zigBeeNetwork)
+        public override DataTemplate GetNetworkBriefDataTemplate(Network zigBeeNetwork)
         {
             if (zigBeeNetwork.GetVendorID() == this.GetVendorID())
             {
@@ -52,7 +52,7 @@ namespace NecBlik.PyDigi.GUI.Factories
             return null;
         }
 
-        public override async Task<ZigBeeNetworkViewModel> NetworkViewModelFromWizard(ZigBeeNetwork zigBeeNetwork)
+        public override async Task<NetworkViewModel> NetworkViewModelFromWizard(Network zigBeeNetwork)
         {
             var vm = new PyDigiNetworkWizardViewModel();
             var rp = new PyDigiNetworkWizard(vm);

@@ -4,18 +4,28 @@
                     xmlns:lex="clr-namespace:WPFLocalizeExtension.Extensions;assembly=WPFLocalizeextension"
                     xmlns:lexp="clr-namespace:WPFLocalizeExtension.Providers;assembly=WPFLocalizeextension"
                     xmlns:resx="clr-namespace:NecBlik.Virtual.GUI.Strings">
-    <DataTemplate x:Key="VirtualNetworkBriefDataTemplate" DataType="{x:Type viewModels:VirtualZigBeeNetworkViewModel}">
+    <DataTemplate x:Key="VirtualNetworkBriefDataTemplate" DataType="{x:Type viewModels:VirtualNetworkViewModel}">
         <StackPanel>
             <TextBlock Text="{Binding Name}"></TextBlock>
-            <Button Command="{Binding EditCommand}" Style="{StaticResource BaseButton}" HorizontalAlignment="Left" Content="{lex:Loc ZigBee.Virtual.GUI:SR:GPOpen}"></Button>
+            <Button Command="{Binding EditCommand}" Style="{StaticResource BaseButton}" HorizontalAlignment="Left" Content="{lex:Loc NecBlik.Virtual.GUI:SR:GPOpen}"></Button>
         </StackPanel>
     </DataTemplate>
 
-    <DataTemplate x:Key="VirtualNetworkDataTemplate" DataType="{x:Type viewModels:VirtualZigBeeNetworkViewModel}">
-        <StackPanel>
-            <TextBlock Text="{Binding Name}"></TextBlock>
-            <TextBlock Text="{Binding Guid}"></TextBlock>
-            <Button Command="{Binding EditCommand}" Style="{StaticResource BaseButton}" Content="{lex:Loc ZigBee.Virtual.GUI:SR:GPOpen}"></Button>
-        </StackPanel>
+    <DataTemplate x:Key="VirtualNetworkDataTemplate" DataType="{x:Type viewModels:VirtualNetworkViewModel}">
+        <Grid IsHitTestVisible="True">
+            <Grid.RowDefinitions>
+                <RowDefinition Height="1*"></RowDefinition>
+            </Grid.RowDefinitions>
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="5*"></ColumnDefinition>
+                <ColumnDefinition Width="*"></ColumnDefinition>
+            </Grid.ColumnDefinitions>
+            <TextBlock Grid.Row="0" Text="{Binding Name}" VerticalAlignment="Center"></TextBlock>
+            <Button Grid.Column="1" Grid.RowSpan="2" VerticalAlignment="Center" Command="{Binding EditCommand}" Style="{StaticResource BaseButton}" Content="{lex:Loc NecBlik.Virtual.GUI:SR:GPOpen}">
+            </Button>
+            <Grid.ToolTip>
+                <TextBlock Grid.Row="0" Text="{Binding Guid}"></TextBlock>
+            </Grid.ToolTip>
+        </Grid>
     </DataTemplate>
 </ResourceDictionary>

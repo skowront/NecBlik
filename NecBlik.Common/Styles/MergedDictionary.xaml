@@ -14,7 +14,7 @@
         <ResourceDictionary Source="/NecBlik.Common;component/Styles/ScrollViewers.xaml"></ResourceDictionary>
         <ResourceDictionary>
             <ResourceDictionary.MergedDictionaries>
-                <materialDesign:CustomColorTheme BaseTheme="Dark" PrimaryColor="LightSalmon" SecondaryColor="CornflowerBlue" />
+                <materialDesign:CustomColorTheme BaseTheme="Dark" PrimaryColor="#Ff4940" SecondaryColor="CornflowerBlue" />
                 <ResourceDictionary Source="pack://application:,,,/MaterialDesignThemes.Wpf;component/Themes/MaterialDesignTheme.Defaults.xaml" />
             </ResourceDictionary.MergedDictionaries>
         </ResourceDictionary>

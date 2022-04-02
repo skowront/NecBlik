@@ -12,24 +12,24 @@ using NecBlik.ZigBeeNet.Models;
 
 namespace NecBlik.ZigBeeNet.Factories
 {
-    public class ZBNetFactory:VirtualZigBeeFactory
+    public class ZBNetFactory:VirtualDeviceFactory
     {
         public ZBNetFactory()
         {
             this.internalFactoryType = "ZigBeeNet";
         }
 
-        public override IZigBeeSource BuildNewSource()
+        public override IDeviceSource BuildNewSource()
         {
             return base.BuildNewSource();
         }
 
-        public override ZigBeeCoordinator BuildCoordinator()
+        public override Coordinator BuildCoordinator()
         {
             return new ZBNetCoordinator(this,null);
         }
 
-        public override async Task<ZigBeeNetwork> BuildNetworkFromDirectory(string pathToDirectory, IUpdatableResponseProvider<int, bool, string> updatableResponseProvider)
+        public override async Task<Network> BuildNetworkFromDirectory(string pathToDirectory, IUpdatableResponseProvider<int, bool, string> updatableResponseProvider)
         {
             if (pathToDirectory.Split('.').LastOrDefault() != this.GetVendorID())
             {
@@ -49,7 +49,7 @@ namespace NecBlik.ZigBeeNet.Factories
             return network;
         }
 
-        public override IZigBeeSource BuildSourceFromJsonFile(string pathToFile)
+        public override IDeviceSource BuildSourceFromJsonFile(string pathToFile)
         {
             return null;
         }

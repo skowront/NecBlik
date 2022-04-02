@@ -1,0 +1,110 @@
+﻿<Window x:Class="NecBlik.Virtual.GUI.Views.VirtualNetworkWindow"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="clr-namespace:NecBlik.Virtual.GUI.Views"
+        xmlns:viewModels="clr-namespace:NecBlik.Virtual.GUI.ViewModels"
+        xmlns:lexp="clr-namespace:WPFLocalizeExtension.Providers;assembly=WPFLocalizeextension"
+        xmlns:lex="clr-namespace:WPFLocalizeExtension.Extensions;assembly=WPFLocalizeextension"
+        lexp:ResxLocalizationProvider.DefaultAssembly="NecBlik.Virtual.GUI"
+        lexp:ResxLocalizationProvider.DefaultDictionary="SR"
+        mc:Ignorable="d"
+        Title="VirtualDeviceNetworkWindow" Height="450" Width="800">
+    <Grid Background="{StaticResource MaterialDesignDarkBackground}">
+        <Grid Margin="10">
+            <Grid.RowDefinitions>
+                <RowDefinition Height="auto"></RowDefinition>
+                <RowDefinition Height="auto"></RowDefinition>
+                <RowDefinition Height="auto"></RowDefinition>
+                <RowDefinition Height="9*"></RowDefinition>
+            </Grid.RowDefinitions>
+            <StackPanel Grid.Row="0">
+                <TextBlock Text="{lex:Loc GPNetworkInformation}" HorizontalAlignment="Center" Foreground="{StaticResource MaterialDesignDarkForeground}"></TextBlock>
+                <TextBlock Text="{lex:Loc GPNetworkName}" Foreground="{StaticResource MaterialDesignDarkForeground}"></TextBlock>
+                <TextBox Text="{Binding ViewModel.Name,UpdateSourceTrigger=PropertyChanged}" Foreground="{StaticResource MaterialDesignDarkForeground}"></TextBox>
+                <TextBlock Text="{lex:Loc GPNetworkPanId}" Foreground="{StaticResource MaterialDesignDarkForeground}"></TextBlock>
+                <TextBlock Text="{Binding ViewModel.PanId,UpdateSourceTrigger=PropertyChanged}" Foreground="{StaticResource MaterialDesignDarkForeground}"></TextBlock>
+                <StackPanel Orientation="Horizontal">
+                    <TextBlock Text="{lex:Loc GPStayOpen}" Foreground="{StaticResource MaterialDesignDarkForeground}"></TextBlock>
+                    <CheckBox IsChecked="{Binding ViewModel.IsOpen,UpdateSourceTrigger=PropertyChanged}" Style="{StaticResource MaterialDesignCheckBox}" HorizontalAlignment="Left" Foreground="{StaticResource MaterialDesignDarkForeground}"></CheckBox>
+                </StackPanel>
+                <StackPanel Orientation="Horizontal">
+                    <Button Grid.Column="2" Grid.RowSpan="2" VerticalAlignment="Center" Style="{StaticResource BaseButton}" Command="{Binding ViewModel.DiscoverCommand}" HorizontalAlignment="Center" Margin="0" MaxWidth="50" MinWidth="50">
+                        <TextBlock Text="&#xf002;" FontFamily="{StaticResource FontAwesome}" VerticalAlignment="Center"></TextBlock>
+                    </Button>
+                    <Button Grid.Column="2" Grid.RowSpan="2" VerticalAlignment="Center" Style="{StaticResource BaseButton}" Command="{Binding ViewModel.RefreshCommand}" HorizontalAlignment="Center" Margin="0" MaxWidth="50" MinWidth="50">
+                        <TextBlock Text="&#xf021;" FontFamily="{StaticResource FontAwesome}" VerticalAlignment="Center"></TextBlock>
+                    </Button>
+                    <Button Grid.Column="2" Grid.RowSpan="2" VerticalAlignment="Center" Style="{StaticResource BaseButton}" Command="{Binding ViewModel.EditRulesCommand}" HorizontalAlignment="Center" Margin="0" MaxWidth="50" MinWidth="50">
+                        <TextBlock Text="&#xf02d;" FontFamily="{StaticResource FontAwesome}" VerticalAlignment="Center"></TextBlock>
+                    </Button>
+                </StackPanel>
+                <Separator Grid.Row="1"></Separator>
+            </StackPanel>
+            <StackPanel Grid.Row="1">
+                <TextBlock Text="{lex:Loc GPCoordinator}" Foreground="{StaticResource MaterialDesignDarkForeground}" HorizontalAlignment="Center"></TextBlock>
+            </StackPanel>
+            <ContentPresenter Grid.Row="2" Content="{Binding ViewModel.Coordinator}">
+                <ContentPresenter.ContentTemplate>
+                    <DataTemplate DataType="{x:Type viewModels:VirtualDeviceViewModel}">
+                        <StackPanel Orientation="Vertical">
+                            <TextBlock Text="{Binding InternalFactoryType}" Foreground="{StaticResource MaterialDesignDarkForeground}"></TextBlock>
+                            <TextBlock Text="{Binding Name, UpdateSourceTrigger=PropertyChanged}" Foreground="{StaticResource MaterialDesignDarkForeground}"></TextBlock>
+                            <TextBlock Text="{Binding Guid, UpdateSourceTrigger=PropertyChanged}" Foreground="{StaticResource MaterialDesignDarkForeground}"></TextBlock>
+                            <StackPanel Orientation="Horizontal">
+                                <Button Command="{Binding EditCommand}" Style="{StaticResource BaseButton}" Content="{lex:Loc GPOpen}"></Button>
+                                <Button Command="{Binding SelectCommand}" Style="{StaticResource BaseButton}" Content="{lex:Loc GPSendToMap}"></Button>
+                            </StackPanel>
+                            <Separator Grid.Row="1"></Separator>
+                        </StackPanel>
+                    </DataTemplate>
+                </ContentPresenter.ContentTemplate>
+            </ContentPresenter>
+            <Grid Grid.Row="3">
+                <Grid.RowDefinitions>
+                    <RowDefinition Height="auto"></RowDefinition>
+                    <RowDefinition Height="*"></RowDefinition>
+                </Grid.RowDefinitions>
+                <TextBlock Text="{lex:Loc GPDevices}" Foreground="{StaticResource MaterialDesignDarkForeground}" HorizontalAlignment="Center"></TextBlock>
+                <ScrollViewer Grid.Row="1" Style="{StaticResource ScrollViewer}">
+                    <ListView Background="{StaticResource MaterialDesignDarkBackground}" HorizontalContentAlignment="Stretch" ItemsSource="{Binding ViewModel.Devices}" d:ItemsSource="{d:SampleData ItemCount=5}">
+                        <ListView.Resources>
+                            <DataTemplate x:Key="VirtualDeviceDataTemplate" DataType="{x:Type viewModels:VirtualDeviceViewModel}">
+                                <StackPanel Orientation="Vertical">
+                                    <TextBlock Text="{Binding InternalFactoryType}"></TextBlock>
+                                    <TextBlock Text="{Binding Name, UpdateSourceTrigger=PropertyChanged}"></TextBlock>
+                                    <TextBlock Text="{Binding Guid, UpdateSourceTrigger=PropertyChanged}"></TextBlock>
+                                    <StackPanel Orientation="Horizontal">
+                                        <Button Command="{Binding EditCommand}" Style="{StaticResource BaseButton}" Content="{lex:Loc GPOpen}"></Button>
+                                        <Button Command="{Binding SelectCommand}" Style="{StaticResource BaseButton}" Content="{lex:Loc GPSendToMap}"></Button>
+                                    </StackPanel>
+                                </StackPanel>
+                            </DataTemplate>
+                        </ListView.Resources>
+                        <ListView.ItemTemplate>
+                            <DataTemplate>
+                                <Border BorderThickness="1 1 1 1">
+                                    <Grid Width="auto">
+                                        <Grid.ColumnDefinitions>
+                                            <ColumnDefinition Width="*"></ColumnDefinition>
+                                            <ColumnDefinition Width="auto"></ColumnDefinition>
+                                        </Grid.ColumnDefinitions>
+                                        <ContentPresenter Margin="10" Grid.Column="0" ContentTemplate="{StaticResource VirtualDeviceDataTemplate}" VerticalAlignment="Center" HorizontalAlignment="Stretch">
+                                        </ContentPresenter>
+                                        <Button Grid.Column="1" Command="{Binding RelativeSource={RelativeSource FindAncestor, AncestorType=ListView}, Path=DataContext.ViewModel.RemoveDeviceCommand}" 
+                                                CommandParameter="{Binding RelativeSource={RelativeSource Mode=FindAncestor, AncestorType={x:Type ListViewItem}},Path=DataContext}"
+                                                Style="{StaticResource BaseButton}"
+                                                HorizontalAlignment="Right" VerticalAlignment="Stretch">
+                                            <TextBlock Text="&#xf057;" FontFamily="{StaticResource FontAwesome}" VerticalAlignment="Center"></TextBlock>
+                                        </Button>
+                                    </Grid>
+                                </Border>
+                            </DataTemplate>
+                        </ListView.ItemTemplate>
+                    </ListView>
+                </ScrollViewer>
+            </Grid>
+        </Grid>
+    </Grid>
+</Window>

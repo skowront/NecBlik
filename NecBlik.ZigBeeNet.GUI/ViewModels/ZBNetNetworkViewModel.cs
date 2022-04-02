@@ -9,32 +9,32 @@ using NecBlik.Virtual.GUI.ViewModels;
 
 namespace NecBlik.ZigBeeNet.GUI.ViewModels
 {
-    public class ZBNetNetworkViewModel: VirtualZigBeeNetworkViewModel
+    public class ZBNetNetworkViewModel: VirtualNetworkViewModel
     {
-        public ZBNetNetworkViewModel(ZigBeeNetwork network) : base(network)
+        public ZBNetNetworkViewModel(Network network) : base(network)
         {
         }
 
-        public override ZigBeeViewModel GetZigBeeCoordinatorViewModel()
+        public override DeviceViewModel GetCoordinatorViewModel()
         {
-            if (this.zigBeeCoorinator == null)
+            if (this.coorinator == null)
             {
-                var zvm = new ZigBeeModel(this.Model.ZigBeeCoordinator);
-                this.zigBeeCoorinator = new ZBNetSourceViewModel(zvm, this);
-                this.zigBeeCoorinator.PullSelectionSubscriber = ZigBeeSelectionSubscriber;
+                var zvm = new DeviceModel(this.Model.Coordinator);
+                this.coorinator = new ZBNetSourceViewModel(zvm, this);
+                this.coorinator.PullSelectionSubscriber = DeviceSelectionSubscriber;
             }
-            return this.zigBeeCoorinator;
+            return this.coorinator;
         }
 
         public override void SyncFromModel()
         {
-            this.ZigBees.Clear();
+            this.Devices.Clear();
 
-            foreach (var device in this.model.ZigBeeSources)
+            foreach (var device in this.model.DeviceSources)
             {
-                var vm = new ZBNetSourceViewModel(new ZigBeeModel(device));
-                vm.PullSelectionSubscriber = this.ZigBeeSelectionSubscriber;
-                this.ZigBees.Add(vm);
+                var vm = new ZBNetSourceViewModel(new DeviceModel(device));
+                vm.PullSelectionSubscriber = this.DeviceSelectionSubscriber;
+                this.Devices.Add(vm);
             }
         }
     }

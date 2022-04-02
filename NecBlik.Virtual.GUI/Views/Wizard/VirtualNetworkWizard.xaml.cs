@@ -24,7 +24,7 @@ namespace NecBlik.Virtual.GUI.Views.Wizard
     /// <summary>
     /// Interaction logic for VirtualNetworkWizard.xaml
     /// </summary>
-    public partial class VirtualNetworkWizard : Window, IResponseProvider<Task<VirtualZigBeeNetworkViewModel>, object>
+    public partial class VirtualNetworkWizard : Window, IResponseProvider<Task<VirtualNetworkViewModel>, object>
     {
         VirtualNetworkWizardViewModel ViewModel { get; set; }
 
@@ -41,26 +41,28 @@ namespace NecBlik.Virtual.GUI.Views.Wizard
             this.DataContext = virtualNetworkWizardViewModel;
         }
         
-        public async Task<VirtualZigBeeNetworkViewModel> ProvideResponse(object context = null)
+        public async Task<VirtualNetworkViewModel> ProvideResponse(object context = null)
         {
             this.ShowDialog();
             if(this.ViewModel.Committed==false)
             {
                 return null;
             }
-            var network = new VirtualZigBeeNetwork();
+            var network = new VirtualNetwork();
             network.Name = this.ViewModel.NetworkName;
-            network.ZigBeeCoordinatorSubtypeFactoryRule= new Core.Factories.FactoryRule() { Value = this.ViewModel.CoordinatorType };
-            var coordinator = new VirtualZigBeeCoordinator(new VirtualZigBeeFactory());
-            List<IZigBeeSource> zigBeeSources = new List<IZigBeeSource>();
-            for(int i = 0; i<this.ViewModel.VirtualZigBees; i++)
+            var coordinator = new VirtualCoordinator(new VirtualDeviceFactory());
+            network.DeviceCoordinatorSubtypeFactoryRule= new Core.Factories.FactoryRule() { Value = this.ViewModel.CoordinatorType, 
+                CacheObjectId = coordinator.GetCacheId(), 
+                Property = VirtualDeviceGuiFactory.DeviceViewModelRuledProperties.ViewModel };
+            List<IDeviceSource> sources = new List<IDeviceSource>();
+            for(int i = 0; i<this.ViewModel.VirtualDevices; i++)
             {
-                var source = new VirtualZigBeeSource();
-                zigBeeSources.Add(source);
+                var source = new VirtualDevice();
+                sources.Add(source);
             }
-            coordinator.SetDevices(zigBeeSources);
+            coordinator.SetDevices(sources);
             await network.SetCoordinator(coordinator);
-            var factory = new VirtualZigBeeGuiFactory();
+            var factory = new VirtualDeviceGuiFactory();
             return factory.NetworkViewModelBySubType(network,this.ViewModel.NetworkType);
         }
     }

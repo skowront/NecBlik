@@ -9,9 +9,9 @@ using NecBlik.Virtual.GUI.ViewModels;
 
 namespace NecBlik.ZigBeeNet.GUI.ViewModels
 {
-    public class ZBNetSourceViewModel: VirtualZigBeeViewModel
+    public class ZBNetSourceViewModel: VirtualDeviceViewModel
     {
-        public ZBNetSourceViewModel(ZigBeeModel model = null,ZigBeeNetworkViewModel networkModel = null) : base(model,networkModel)
+        public ZBNetSourceViewModel(DeviceModel model = null,NetworkViewModel networkModel = null) : base(model,networkModel)
         {
         }
 

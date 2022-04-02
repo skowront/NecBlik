@@ -43,7 +43,7 @@ namespace NecBlik.Common.WpfElements.ResponseProviders
         {
             var old = this.Popup;
             var vm = this.Popup.ViewModel;
-            this.Popup = new SimpleListInputPopup(vm.Message, vm.Title, question.Item2, null, null);
+            this.Popup = new SimpleListInputPopup(vm.Message, vm.Title, question.Item2, null, null,vm.Editable);
             this.Popup.ViewModel.OnConfirm = (s) => { this.result = s; };
             this.Popup.ViewModel.OnCancel = (s) => { this.result = s; };
             old.Dispatcher.Invoke(() =>

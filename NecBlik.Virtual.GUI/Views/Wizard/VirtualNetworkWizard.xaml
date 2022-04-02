@@ -8,7 +8,7 @@
         xmlns:fa="http://schemas.fontawesome.io/icons/"
         xmlns:lexp="clr-namespace:WPFLocalizeExtension.Providers;assembly=WPFLocalizeextension"
         xmlns:lex="clr-namespace:WPFLocalizeExtension.Extensions;assembly=WPFLocalizeextension"
-        lexp:ResxLocalizationProvider.DefaultAssembly="ZigBee.Virtual.GUI"
+        lexp:ResxLocalizationProvider.DefaultAssembly="NecBlik.Virtual.GUI"
         lexp:ResxLocalizationProvider.DefaultDictionary="SR"
         mc:Ignorable="d"
         Title="VirtualNetworkWizard" Height="450" Width="800"
@@ -37,12 +37,12 @@
                     <ColumnDefinition></ColumnDefinition>
                     <ColumnDefinition></ColumnDefinition>
                 </Grid.ColumnDefinitions>
-                <TextBlock Grid.Column="0" Text="{lex:Loc GPVirtualZigBeesCount}"></TextBlock>
-                <TextBlock Grid.Column="1" Text="{Binding VirtualZigBees}"></TextBlock>
-                <Button Grid.Column="2" HorizontalAlignment="Right" HorizontalContentAlignment="Right" Command="{Binding PickVirtualZigBeesCommand}">
+                <TextBlock Grid.Column="0" Text="{lex:Loc GPVirtualDevicesCount}"></TextBlock>
+                <TextBlock Grid.Column="1" Text="{Binding VirtualDevices}"></TextBlock>
+                <Button Grid.Column="2" HorizontalAlignment="Right" HorizontalContentAlignment="Right" Style="{StaticResource BaseButton}" VerticalAlignment="Center" Command="{Binding PickVirtualDevicesCommand}">
                     <StackPanel Orientation="Horizontal">
                         <TextBlock Text="{lex:Loc GPSelect}" Margin="0 0 10 0"></TextBlock>
-                        <fa:FontAwesome Icon="MousePointer"></fa:FontAwesome>
+                        <fa:FontAwesome Icon="MousePointer" VerticalAlignment="Center"></fa:FontAwesome>
                     </StackPanel>
                 </Button>
             </Grid>
@@ -54,10 +54,10 @@
                 </Grid.ColumnDefinitions>
                 <TextBlock Grid.Column="0" Text="{lex:Loc GPNetworkType}"></TextBlock>
                 <TextBlock Grid.Column="1" Text="{Binding NetworkType}" TextWrapping="Wrap"></TextBlock>
-                <Button Grid.Column="2" HorizontalAlignment="Right" HorizontalContentAlignment="Right" Command="{Binding PickNetworkTypeCommand}">
+                <Button Grid.Column="2" HorizontalAlignment="Right" HorizontalContentAlignment="Right" Style="{StaticResource BaseButton}" VerticalAlignment="Center" Command="{Binding PickNetworkTypeCommand}">
                     <StackPanel Orientation="Horizontal">
                         <TextBlock Text="{lex:Loc GPSelect}" Margin="0 0 10 0"></TextBlock>
-                        <fa:FontAwesome Icon="MousePointer"></fa:FontAwesome>
+                        <fa:FontAwesome Icon="MousePointer" VerticalAlignment="Center"></fa:FontAwesome>
                     </StackPanel>
                 </Button>
             </Grid>
@@ -69,10 +69,10 @@
                 </Grid.ColumnDefinitions>
                 <TextBlock Grid.Column="0" Text="{lex:Loc GPCoordinatorType}"></TextBlock>
                 <TextBlock Grid.Column="1" Text="{Binding CoordinatorType}" TextWrapping="Wrap"></TextBlock>
-                <Button Grid.Column="2" HorizontalAlignment="Right" HorizontalContentAlignment="Right" Command="{Binding PickCoordinatorTypeCommand}">
+                <Button Grid.Column="2" HorizontalAlignment="Right" HorizontalContentAlignment="Right" Style="{StaticResource BaseButton}" VerticalAlignment="Center" Command="{Binding PickCoordinatorTypeCommand}">
                     <StackPanel Orientation="Horizontal">
                         <TextBlock Text="{lex:Loc GPSelect}" Margin="0 0 10 0"></TextBlock>
-                        <fa:FontAwesome Icon="MousePointer"></fa:FontAwesome>
+                        <fa:FontAwesome Icon="MousePointer" VerticalAlignment="Center"></fa:FontAwesome>
                     </StackPanel>
                 </Button>
             </Grid>
@@ -83,11 +83,11 @@
                     <ColumnDefinition></ColumnDefinition>
                     <ColumnDefinition></ColumnDefinition>
                 </Grid.ColumnDefinitions>
-                <Button Grid.Column="1" HorizontalAlignment="Center" Command="{Binding ConfirmCommand}">
-                    <fa:FontAwesome Icon="Check"></fa:FontAwesome>
+                <Button Grid.Column="1" HorizontalAlignment="Center" Style="{StaticResource BaseButton}" VerticalAlignment="Center" Command="{Binding ConfirmCommand}">
+                    <fa:FontAwesome Icon="Check" Margin="10"></fa:FontAwesome>
                 </Button>
-                <Button Grid.Column="2" HorizontalAlignment="Center" Command="{Binding AbortCommand}">
-                    <fa:FontAwesome Icon="Close"></fa:FontAwesome>
+                <Button Grid.Column="2" HorizontalAlignment="Center" Style="{StaticResource BaseButton}" VerticalAlignment="Center" Command="{Binding AbortCommand}">
+                    <fa:FontAwesome Icon="Close" Margin="10"></fa:FontAwesome>
                 </Button>
             </Grid>
         </Grid>

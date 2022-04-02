@@ -12,19 +12,19 @@ using NecBlik.ZigBeeNet.GUI.Views.Wizard;
 
 namespace NecBlik.ZigBeeNet.GUI.Factories
 {
-    public class ZBNetGuiFactory:VirtualZigBeeGuiFactory
+    public class ZBNetGuiFactory:VirtualDeviceGuiFactory
     {
         public ZBNetGuiFactory()
         {
             this.internalFactoryType = "ZigBeeNet";
         }
 
-        public override ZigBeeNetworkViewModel GetNetworkViewModel(ZigBeeNetwork zigBeeNetwork)
+        public override NetworkViewModel GetNetworkViewModel(Network zigBeeNetwork)
         {
             throw new NotImplementedException();
         }
 
-        public override DataTemplate GetNetworkDataTemplate(ZigBeeNetwork zigBeeNetwork)
+        public override DataTemplate GetNetworkDataTemplate(Network zigBeeNetwork)
         {
             if (zigBeeNetwork.GetVendorID() == this.GetVendorID())
             {
@@ -36,7 +36,7 @@ namespace NecBlik.ZigBeeNet.GUI.Factories
             return null;
         }
 
-        public override DataTemplate GetNetworkBriefDataTemplate(ZigBeeNetwork zigBeeNetwork)
+        public override DataTemplate GetNetworkBriefDataTemplate(Network zigBeeNetwork)
         {
             if (zigBeeNetwork.GetVendorID() == this.GetVendorID())
             {
@@ -48,7 +48,7 @@ namespace NecBlik.ZigBeeNet.GUI.Factories
             return null;
         }
 
-        public override async Task<ZigBeeNetworkViewModel> NetworkViewModelFromWizard(ZigBeeNetwork zigBeeNetwork)
+        public override async Task<NetworkViewModel> NetworkViewModelFromWizard(Network zigBeeNetwork)
         {
             var vm = new ZBNetNetworkWizardViewModel();
             var rp = new ZBNetNetworkWizard(vm);

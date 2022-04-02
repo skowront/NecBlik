@@ -14,7 +14,7 @@ public class Program
             ZigBeePyEnv.Initialize();
             var conData = new PyDigiZigBeeUSBCoordinator.PyDigiUSBConnectionData() { baud = 9600, port = "COM4" };
             var coordinator = new PyDigiZigBeeUSBCoordinator(new NecBlik.PyDigi.Factories.PyDigiZigBeeFactory(), conData);
-            var devices = new List<IZigBeeSource>(await coordinator.GetDevices());
+            var devices = new List<IDeviceSource>(await coordinator.GetDevices());
         }).Wait();
 
     }

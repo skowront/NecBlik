@@ -135,4 +135,28 @@
   <data name="GPFrom" xml:space="preserve">
     <value>Od</value>
   </data>
+  <data name="GPSelect" xml:space="preserve">
+    <value>Wybierz</value>
+  </data>
+  <data name="GPAddRuleCommand" xml:space="preserve">
+    <value>Dodaj regułę</value>
+  </data>
+  <data name="GPClearRulesCommand" xml:space="preserve">
+    <value>Usuń reguły</value>
+  </data>
+  <data name="GPProperty" xml:space="preserve">
+    <value>Właściwość</value>
+  </data>
+  <data name="GPValue" xml:space="preserve">
+    <value>Wartość</value>
+  </data>
+  <data name="GPCacheId" xml:space="preserve">
+    <value>Identyfikator podręczny</value>
+  </data>
+  <data name="GPClearFilters" xml:space="preserve">
+    <value>Wyczyść filtry</value>
+  </data>
+  <data name="GPFilters" xml:space="preserve">
+    <value>Filtry</value>
+  </data>
 </root>

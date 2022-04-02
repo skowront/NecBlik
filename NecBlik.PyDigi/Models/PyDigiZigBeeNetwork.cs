@@ -7,25 +7,25 @@ using NecBlik.Virtual.Models;
 
 namespace NecBlik.PyDigi.Models
 {
-    public class PyDigiZigBeeNetwork: VirtualZigBeeNetwork
+    public class PyDigiZigBeeNetwork: VirtualNetwork
     {
         public PyDigiZigBeeNetwork() : base()
         {
-            this.ZigBeeFactory = new PyDigiZigBeeFactory();
-            this.internalNetworkType = this.ZigBeeFactory.GetVendorID();
+            this.DeviceFactory = new PyDigiZigBeeFactory();
+            this.internalNetworkType = this.DeviceFactory.GetVendorID();
         }
 
-        public PyDigiZigBeeNetwork(ZigBeeCoordinator coordinator, IUpdatableResponseProvider<int, bool, string> updatableResponseProvider = null) : this()
+        public PyDigiZigBeeNetwork(Coordinator coordinator, IUpdatableResponseProvider<int, bool, string> updatableResponseProvider = null) : this()
         {
             this.ProgressResponseProvider = updatableResponseProvider;
         }
 
-        public async Task Initialize(ZigBeeCoordinator coordinator)
+        public async Task Initialize(Coordinator coordinator)
         {
             await this.SetCoordinator(coordinator);
         }
 
-        public override void AddSource(IZigBeeSource source)
+        public override void AddSource(IDeviceSource source)
         {
             return;
         }
@@ -39,7 +39,7 @@ namespace NecBlik.PyDigi.Models
             }
             if (Directory.Exists(dir))
             {
-                this.ZigBeeCoordinator.Save(dir);
+                this.Coordinator.Save(dir);
                 File.WriteAllText(dir + "\\" + Resources.Resources.NetworkFile, JsonConvert.SerializeObject(this, Formatting.Indented));
             }
         }
