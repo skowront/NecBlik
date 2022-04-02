@@ -138,4 +138,25 @@
   <data name="GPSelect" xml:space="preserve">
     <value>Choisissez</value>
   </data>
+  <data name="GPAddRuleCommand" xml:space="preserve">
+    <value>Ajouter une règle</value>
+  </data>
+  <data name="GPClearRulesCommand" xml:space="preserve">
+    <value>Dégager les règles</value>
+  </data>
+  <data name="GPCacheId" xml:space="preserve">
+    <value>Cache ID</value>
+  </data>
+  <data name="GPValue" xml:space="preserve">
+    <value>Valeur</value>
+  </data>
+  <data name="GPProperty" xml:space="preserve">
+    <value>Accessoire</value>
+  </data>
+  <data name="GPClearFilters" xml:space="preserve">
+    <value>Nettoyer les filtres</value>
+  </data>
+  <data name="GPFilters" xml:space="preserve">
+    <value>Filtres</value>
+  </data>
 </root>

@@ -12,6 +12,7 @@ using NecBlik.Core.GUI.Factories.ViewModels;
 using NecBlik.Core.GUI.Interfaces;
 using NecBlik.Core.Models;
 using NecBlik.Core.GUI.Views;
+using NecBlik.Core.Interfaces;
 
 namespace NecBlik.Core.GUI.ViewModels
 {
@@ -108,6 +109,7 @@ namespace NecBlik.Core.GUI.ViewModels
         public RelayCommand RefreshCommand { get; set; }
         public RelayCommand DiscoverCommand { get; set; }
         public RelayCommand EditRulesCommand { get; set; }
+        public RelayCommand RemoveDeviceCommand { get; set; }
         
         public IResponseProvider<string,NetworkViewModel> EditResponseProvider { get; set; }
 
@@ -153,6 +155,11 @@ namespace NecBlik.Core.GUI.ViewModels
             }
         }
 
+        public virtual void AddNewDevice(IDeviceSource device)
+        {
+
+        }
+
         public virtual async Task Discover()
         {
 
@@ -187,9 +194,19 @@ namespace NecBlik.Core.GUI.ViewModels
             this.EditRulesCommand = new RelayCommand((o) =>
             {
                 var rp = new GenericResponseProvider<ObservableCollection<FactoryRuleViewModel>, object>((o) => { return this.DevicesSubtypeFactoryRules; });
-                var window = new FactoryRulesEditor(rp, AvailableCacheObjectIDsProvider,AvailablePropertyProvider,AvailableValueProvider);
+                var window = new FactoryRulesEditor(rp, AvailableCacheObjectIDsProvider,AvailablePropertyProvider,AvailableValueProvider, new Action(() => { this.OnFactoryEditClosed(); }));
                 window.Show();
             });
+
+            this.RemoveDeviceCommand = new RelayCommand((o) =>
+            {
+                
+            });
+        }
+
+        public virtual void OnFactoryEditClosed()
+        {
+
         }
     }
 }

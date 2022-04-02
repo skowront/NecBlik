@@ -186,5 +186,15 @@ namespace NecBlik.Core.Factories
         {
             
         }
+
+        public bool IsLicensed()
+        {
+            return false;
+        }
+
+        public IEnumerable<string> GetLicensees()
+        {
+            return new List<string>();
+        }
     }
 }

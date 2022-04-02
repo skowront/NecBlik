@@ -67,21 +67,43 @@
                     <RowDefinition Height="*"></RowDefinition>
                 </Grid.RowDefinitions>
                 <TextBlock Text="{lex:Loc GPDevices}" Foreground="{StaticResource MaterialDesignDarkForeground}" HorizontalAlignment="Center"></TextBlock>
-                <ListView Grid.Row="1" ItemsSource="{Binding ViewModel.Devices}" ScrollViewer.VerticalScrollBarVisibility="Visible" Style="{StaticResource ZigBeeListViewHoverless}" d:ItemsSource="{d:SampleData ItemCount=5}">
-                    <ListView.ItemTemplate>
-                        <DataTemplate DataType="{x:Type viewModels:VirtualDeviceViewModel}">
-                            <StackPanel Orientation="Vertical">
-                                <TextBlock Text="{Binding InternalFactoryType}"></TextBlock>
-                                <TextBlock Text="{Binding Name, UpdateSourceTrigger=PropertyChanged}"></TextBlock>
-                                <TextBlock Text="{Binding Guid, UpdateSourceTrigger=PropertyChanged}"></TextBlock>
-                                <StackPanel Orientation="Horizontal">
-                                    <Button Command="{Binding EditCommand}" Style="{StaticResource BaseButton}" Content="{lex:Loc GPOpen}"></Button>
-                                    <Button Command="{Binding SelectCommand}" Style="{StaticResource BaseButton}" Content="{lex:Loc GPSendToMap}"></Button>
+                <ScrollViewer Grid.Row="1" Style="{StaticResource ScrollViewer}">
+                    <ListView Background="{StaticResource MaterialDesignDarkBackground}" HorizontalContentAlignment="Stretch" ItemsSource="{Binding ViewModel.Devices}" d:ItemsSource="{d:SampleData ItemCount=5}">
+                        <ListView.Resources>
+                            <DataTemplate x:Key="VirtualDeviceDataTemplate" DataType="{x:Type viewModels:VirtualDeviceViewModel}">
+                                <StackPanel Orientation="Vertical">
+                                    <TextBlock Text="{Binding InternalFactoryType}"></TextBlock>
+                                    <TextBlock Text="{Binding Name, UpdateSourceTrigger=PropertyChanged}"></TextBlock>
+                                    <TextBlock Text="{Binding Guid, UpdateSourceTrigger=PropertyChanged}"></TextBlock>
+                                    <StackPanel Orientation="Horizontal">
+                                        <Button Command="{Binding EditCommand}" Style="{StaticResource BaseButton}" Content="{lex:Loc GPOpen}"></Button>
+                                        <Button Command="{Binding SelectCommand}" Style="{StaticResource BaseButton}" Content="{lex:Loc GPSendToMap}"></Button>
+                                    </StackPanel>
                                 </StackPanel>
-                            </StackPanel>
-                        </DataTemplate>
-                    </ListView.ItemTemplate>
-                </ListView>
+                            </DataTemplate>
+                        </ListView.Resources>
+                        <ListView.ItemTemplate>
+                            <DataTemplate>
+                                <Border BorderThickness="1 1 1 1">
+                                    <Grid Width="auto">
+                                        <Grid.ColumnDefinitions>
+                                            <ColumnDefinition Width="*"></ColumnDefinition>
+                                            <ColumnDefinition Width="auto"></ColumnDefinition>
+                                        </Grid.ColumnDefinitions>
+                                        <ContentPresenter Margin="10" Grid.Column="0" ContentTemplate="{StaticResource VirtualDeviceDataTemplate}" VerticalAlignment="Center" HorizontalAlignment="Stretch">
+                                        </ContentPresenter>
+                                        <Button Grid.Column="1" Command="{Binding RelativeSource={RelativeSource FindAncestor, AncestorType=ListView}, Path=DataContext.ViewModel.RemoveDeviceCommand}" 
+                                                CommandParameter="{Binding RelativeSource={RelativeSource Mode=FindAncestor, AncestorType={x:Type ListViewItem}},Path=DataContext}"
+                                                Style="{StaticResource BaseButton}"
+                                                HorizontalAlignment="Right" VerticalAlignment="Stretch">
+                                            <TextBlock Text="&#xf057;" FontFamily="{StaticResource FontAwesome}" VerticalAlignment="Center"></TextBlock>
+                                        </Button>
+                                    </Grid>
+                                </Border>
+                            </DataTemplate>
+                        </ListView.ItemTemplate>
+                    </ListView>
+                </ScrollViewer>
             </Grid>
         </Grid>
     </Grid>

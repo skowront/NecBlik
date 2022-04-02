@@ -145,14 +145,14 @@ namespace NecBlik.Core.Models
             return;
         }
 
-        public string GetVendorSubType()
+        public bool IsLicensed()
         {
-            return this.internalSubType;
+            return false;
         }
 
-        public void SetVendorSubType(string newType)
+        public IEnumerable<string> GetLicensees()
         {
-            this.internalSubType = newType;
+            return new List<string>();
         }
     }
 }

@@ -21,13 +21,14 @@ using NecBlik.Core.GUI.ViewModels;
 using NecBlik.Models;
 using NecBlik.ViewModels;
 using NecBlik.Views.Controls;
+using MahApps.Metro.Controls;
 
 namespace NecBlik.Views
 {
     /// <summary>
     /// Interaction logic for MainWindow.xaml
     /// </summary>
-    public partial class MainWindow : Window, ISelectionSubscriber<DeviceViewModel>
+    public partial class MainWindow : MetroWindow, ISelectionSubscriber<DeviceViewModel>
     {
         private Point startPoint = new Point();
 

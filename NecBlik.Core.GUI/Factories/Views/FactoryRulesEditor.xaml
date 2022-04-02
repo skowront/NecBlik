@@ -19,18 +19,21 @@
             <Grid>
                 <Grid.ColumnDefinitions>
                     <ColumnDefinition Width="auto"></ColumnDefinition>
+                    <ColumnDefinition Width="auto"></ColumnDefinition>
                     <ColumnDefinition Width="*"></ColumnDefinition>
                     <ColumnDefinition Width="auto"></ColumnDefinition>
                 </Grid.ColumnDefinitions>
                 <Grid.RowDefinitions>
                     <RowDefinition Height="auto"></RowDefinition>
-                    <RowDefinition Height="auto"></RowDefinition>   
-                    <RowDefinition Height="auto"></RowDefinition>   
-                    <RowDefinition Height="auto"></RowDefinition>   
+                    <RowDefinition Height="auto"></RowDefinition>
+                    <RowDefinition Height="auto"></RowDefinition>
+                    <RowDefinition Height="auto"></RowDefinition>
                 </Grid.RowDefinitions>
                 <TextBlock Grid.Column="0" VerticalAlignment="Center" Margin="0 0 10 0" TextWrapping="Wrap"
+                           Text="{lex:Loc GPCacheId}"></TextBlock>
+                <TextBlock Grid.Column="1" VerticalAlignment="Center" Margin="0 0 10 0" TextWrapping="Wrap"
                            Text="{Binding CacheObjectId}"></TextBlock>
-                <Button Grid.Column="1" HorizontalAlignment="Right" HorizontalContentAlignment="Right" Style="{StaticResource BaseButton}" 
+                <Button Grid.Column="2" HorizontalAlignment="Right" HorizontalContentAlignment="Right" Style="{StaticResource BaseButton}" 
                         Command="{Binding SelectCacheObjectIDCommand}">
                     <StackPanel Orientation="Horizontal">
                         <TextBlock Text="{lex:Loc GPSelect}" Margin="0 0 10 0"></TextBlock>
@@ -38,17 +41,21 @@
                     </StackPanel>
                 </Button>
                 <TextBlock Grid.Row="1" Grid.Column="0" VerticalAlignment="Center" Margin="0 0 10 0" TextWrapping="Wrap"
+                           Text="{lex:Loc GPProperty}"></TextBlock>
+                <TextBlock Grid.Row="1" Grid.Column="1" VerticalAlignment="Center" Margin="0 0 10 0" TextWrapping="Wrap"
                            Text="{Binding Property}"></TextBlock>
-                <Button Grid.Row="1"  Grid.Column="1" HorizontalAlignment="Right" HorizontalContentAlignment="Right" Style="{StaticResource BaseButton}" 
+                <Button Grid.Row="1"  Grid.Column="2" HorizontalAlignment="Right" HorizontalContentAlignment="Right" Style="{StaticResource BaseButton}" 
                         Command="{Binding SelectPropertyCommand}">
                     <StackPanel Orientation="Horizontal">
                         <TextBlock Text="{lex:Loc GPSelect}" Margin="0 0 10 0"></TextBlock>
                         <fa:FontAwesome Icon="MousePointer" VerticalAlignment="Center"></fa:FontAwesome>
                     </StackPanel>
                 </Button>
-                <TextBlock Grid.Row="2" VerticalAlignment="Center" Margin="0 0 10 0" TextWrapping="Wrap"
+                <TextBlock Grid.Row="2" Grid.Column="0" VerticalAlignment="Center" Margin="0 0 10 0" TextWrapping="Wrap"
+                           Text="{lex:Loc GPValue}"></TextBlock>
+                <TextBlock Grid.Row="2" Grid.Column="1" VerticalAlignment="Center" Margin="0 0 10 0" TextWrapping="Wrap"
                            Text="{Binding Value}"></TextBlock>
-                <Button Grid.Row="2" Grid.Column="1" HorizontalAlignment="Right" HorizontalContentAlignment="Right" Style="{StaticResource BaseButton}"
+                <Button Grid.Row="2" Grid.Column="2" HorizontalAlignment="Right" HorizontalContentAlignment="Right" Style="{StaticResource BaseButton}"
                         Command="{Binding SelectValueCommand}">
                     <StackPanel Orientation="Horizontal">
                         <TextBlock Text="{lex:Loc GPSelect}" Margin="0 0 10 0"></TextBlock>
@@ -59,52 +66,80 @@
         </DataTemplate>
     </Window.Resources>
     <Grid Background="{StaticResource MaterialDesignDarkBackground}">
-        <Grid.RowDefinitions>
-            <RowDefinition Height="auto"></RowDefinition>
-            <RowDefinition Height="*"></RowDefinition>
-        </Grid.RowDefinitions>
-        <StackPanel Orientation="Horizontal">
-            <Button Margin="5" Grid.Column="0" HorizontalAlignment="Left" HorizontalContentAlignment="Right" Style="{StaticResource BaseButton}"
+        <Grid Margin="5">
+            <Grid.RowDefinitions>
+                <RowDefinition Height="auto"></RowDefinition>
+                <RowDefinition Height="auto"></RowDefinition>
+                <RowDefinition Height="*"></RowDefinition>
+            </Grid.RowDefinitions>
+            <StackPanel Orientation="Horizontal">
+                <Button Margin="5" Grid.Column="0" HorizontalAlignment="Left" HorizontalContentAlignment="Right" Style="{StaticResource BaseButton}"
                         Command="{Binding AddRuleCommand}">
-                <StackPanel Orientation="Horizontal">
-                    <TextBlock Text="{lex:Loc GPAddRuleCommand}" Margin="0 0 5 0" VerticalAlignment="Center"></TextBlock>
-                    <fa:FontAwesome Icon="Plus" VerticalAlignment="Center" Margin="0 0 5 0"></fa:FontAwesome>
-                </StackPanel>
-            </Button>
-            <Button Margin="5" Grid.Column="0" HorizontalAlignment="Left" HorizontalContentAlignment="Right" Style="{StaticResource BaseButton}"
+                    <StackPanel Orientation="Horizontal">
+                        <TextBlock Text="{lex:Loc GPAddRuleCommand}" Margin="0 0 5 0" VerticalAlignment="Center"></TextBlock>
+                        <fa:FontAwesome Icon="Plus" VerticalAlignment="Center" Margin="0 0 5 0"></fa:FontAwesome>
+                    </StackPanel>
+                </Button>
+                <Button Margin="5" Grid.Column="0" HorizontalAlignment="Left" HorizontalContentAlignment="Right" Style="{StaticResource BaseButton}"
                         Command="{Binding ClearRulesCommand}">
-                <StackPanel Orientation="Horizontal">
-                    <TextBlock Text="{lex:Loc GPClearRulesCommand}" Margin="0 0 5 0" VerticalAlignment="Center"></TextBlock>
-                    <fa:FontAwesome Icon="TrashOutline" VerticalAlignment="Center" Margin="0 0 5 0"></fa:FontAwesome>
-                </StackPanel>
-            </Button>
-        </StackPanel>
-        <ScrollViewer Grid.Row="1" Style="{StaticResource ScrollViewer}">
-            <ListView ItemsSource="{Binding FactoryRules}" 
-                          HorizontalAlignment="Stretch"
+                    <StackPanel Orientation="Horizontal">
+                        <TextBlock Text="{lex:Loc GPClearRulesCommand}" Margin="0 0 5 0" VerticalAlignment="Center"></TextBlock>
+                        <fa:FontAwesome Icon="TrashOutline" VerticalAlignment="Center" Margin="0 0 5 0"></fa:FontAwesome>
+                    </StackPanel>
+                </Button>
+            </StackPanel>
+            <Expander Grid.Row="1" IsExpanded="True" Style="{StaticResource MaterialDesignExpander}" Header="{lex:Loc GPFilters}" Foreground="{StaticResource MaterialDesignDarkForeground}">
+                <Grid Margin="10 0">
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition></ColumnDefinition>
+                        <ColumnDefinition></ColumnDefinition>
+                        <ColumnDefinition></ColumnDefinition>
+                        <ColumnDefinition Width="auto"></ColumnDefinition>
+                    </Grid.ColumnDefinitions>
+                    <Grid.RowDefinitions>
+                        <RowDefinition></RowDefinition>
+                        <RowDefinition></RowDefinition>
+                    </Grid.RowDefinitions>
+                    <TextBlock Grid.Column="0" Text="{lex:Loc GPCacheId}"></TextBlock>
+                    <TextBlock Grid.Column="1" Text="{lex:Loc GPProperty}"></TextBlock>
+                    <TextBlock Grid.Column="2" Text="{lex:Loc GPValue}"></TextBlock>
+                    <TextBox Grid.Row="1" Grid.Column="0" Text="{Binding CacheFilterString, UpdateSourceTrigger=PropertyChanged}" Margin="0 0 10 0"></TextBox>
+                    <TextBox Grid.Row="1" Grid.Column="1" Text="{Binding PropertyFilterString, UpdateSourceTrigger=PropertyChanged}" Margin="0 0 10 0"></TextBox>
+                    <TextBox Grid.Row="1" Grid.Column="2" Text="{Binding ValueFilterString, UpdateSourceTrigger=PropertyChanged}" Margin="0 0 10 0"></TextBox>
+                    <Button Grid.Column="3" Grid.RowSpan="2" Command="{Binding ClearFiltersCommand}" Style="{StaticResource BaseButton}" HorizontalAlignment="Center" VerticalAlignment="Center">
+                        <StackPanel Orientation="Horizontal">
+                            <TextBlock Text="{lex:Loc GPClearFilters}" VerticalAlignment="Center" Margin="0 0 5 0"></TextBlock>
+                            <TextBlock Text="&#xf057;" FontFamily="{StaticResource FontAwesome}" VerticalAlignment="Center"></TextBlock>
+                        </StackPanel>
+                    </Button>
+                </Grid>
+            </Expander>
+            <ScrollViewer Grid.Row="2" Style="{StaticResource ScrollViewer}">
+                <ListView ItemsSource="{Binding FactoryRulesView}"
                           HorizontalContentAlignment="Stretch"
                           d:ItemsSource="{d:SampleData ItemCount=10}">
-                <ListView.ItemTemplate>
-                    <DataTemplate>
-                        <Border BorderThickness="1 1 1 1">
-                            <Grid Width="auto">
-                                <Grid.ColumnDefinitions>
-                                    <ColumnDefinition Width="*"></ColumnDefinition>
-                                    <ColumnDefinition Width="auto"></ColumnDefinition>
-                                </Grid.ColumnDefinitions>
-                                <ContentPresenter Grid.Column="0" ContentTemplate="{StaticResource FactoryRuleDataTemplate}" VerticalAlignment="Center" HorizontalAlignment="Stretch">
-                                </ContentPresenter>
-                                <Button Grid.Column="1" Command="{Binding RelativeSource={RelativeSource FindAncestor, AncestorType=ListView}, Path=DataContext.RemoveRuleCommand}" 
+                    <ListView.ItemTemplate>
+                        <DataTemplate>
+                            <Border BorderThickness="1 1 1 1">
+                                <Grid Width="auto">
+                                    <Grid.ColumnDefinitions>
+                                        <ColumnDefinition Width="*"></ColumnDefinition>
+                                        <ColumnDefinition Width="auto"></ColumnDefinition>
+                                    </Grid.ColumnDefinitions>
+                                    <ContentPresenter Grid.Column="0" ContentTemplate="{StaticResource FactoryRuleDataTemplate}" VerticalAlignment="Center" HorizontalAlignment="Stretch">
+                                    </ContentPresenter>
+                                    <Button Grid.Column="1" Command="{Binding RelativeSource={RelativeSource FindAncestor, AncestorType=ListView}, Path=DataContext.RemoveRuleCommand}" 
                                                 CommandParameter="{Binding RelativeSource={RelativeSource Mode=FindAncestor, AncestorType={x:Type ListViewItem}},Path=DataContext}"
                                                 Style="{StaticResource BaseButton}"
                                                 HorizontalAlignment="Right" VerticalAlignment="Stretch">
-                                    <TextBlock Text="&#xf057;" FontFamily="{StaticResource FontAwesome}" VerticalAlignment="Center"></TextBlock>
-                                </Button>
-                            </Grid>
-                        </Border>
-                    </DataTemplate>
-                </ListView.ItemTemplate>
-            </ListView>
-        </ScrollViewer>
+                                        <fa:FontAwesome Icon="TrashOutline" VerticalAlignment="Center"></fa:FontAwesome>
+                                    </Button>
+                                </Grid>
+                            </Border>
+                        </DataTemplate>
+                    </ListView.ItemTemplate>
+                </ListView>
+            </ScrollViewer>
+        </Grid>
     </Grid>
 </Window>

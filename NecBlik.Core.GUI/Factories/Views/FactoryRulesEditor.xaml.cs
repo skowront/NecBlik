@@ -6,6 +6,7 @@ using NecBlik.Core.GUI.ViewModels;
 using System;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
+using System.ComponentModel;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -27,6 +28,8 @@ namespace NecBlik.Core.GUI.Views
     {
         public NetworkViewModel ViewModel = null;
 
+        Action OnClose = null;
+
         public FactoryRulesEditor()
         {
             InitializeComponent();
@@ -35,15 +38,22 @@ namespace NecBlik.Core.GUI.Views
         public FactoryRulesEditor(IResponseProvider<ObservableCollection<FactoryRuleViewModel>, object> responseProvider,
             IResponseProvider<List<string>, FactoryRule> AvailableCacheObjectIDsProvider = null,
             IResponseProvider<List<string>, FactoryRule> AvailablePropertyProvider = null,
-            IResponseProvider<List<string>, FactoryRule> AvailableValueProvider = null)
+            IResponseProvider<List<string>, FactoryRule> AvailableValueProvider = null,
+            Action OnClose = null)
         {
             InitializeComponent();
             var vm = new FactoryRulesEditorViewModel(responseProvider);
             vm.AvailablePropertyProvider = AvailablePropertyProvider;
             vm.AvailableValueProvider = AvailableValueProvider;
             vm.AvailableCacheObjectIDsProvider = AvailableCacheObjectIDsProvider;
-
+            this.OnClose = OnClose;
             this.DataContext = vm;
+        }
+
+        protected override void OnClosing(CancelEventArgs e)
+        {
+            base.OnClosing(e);
+            this.OnClose?.Invoke();
         }
     }
 }

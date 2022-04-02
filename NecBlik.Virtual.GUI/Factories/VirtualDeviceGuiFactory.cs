@@ -7,6 +7,7 @@ using System.Windows;
 using NecBlik.Core.Factories;
 using NecBlik.Core.GUI;
 using NecBlik.Core.GUI.Factories;
+using NecBlik.Core.GUI.Interfaces;
 using NecBlik.Core.GUI.ViewModels;
 using NecBlik.Core.Models;
 using NecBlik.Virtual.GUI.ViewModels;
@@ -60,6 +61,7 @@ namespace NecBlik.Virtual.GUI.Factories
         {
             if (deviceViewModel?.Model?.DeviceSource is Virtual.Models.VirtualCoordinator)
             {
+                //todo find and use custom types
                 return new VirtualCoordinatorUserControl(deviceViewModel);
             }
             
@@ -85,6 +87,20 @@ namespace NecBlik.Virtual.GUI.Factories
                 }
             }
             return new VirtualNetworkViewModel(network);
+        }
+
+        public List<string> GetAvailableControls()
+        {
+            var ret = new List<string>();
+            var assembly = Assembly.GetAssembly(typeof(VirtualDeviceGuiFactory));
+            foreach (var type in assembly.GetExportedTypes())
+            {
+                if (typeof(IDeviceControl).IsAssignableFrom(type) && !type.IsAbstract)
+                {
+                    ret.Add(type.FullName);
+                }
+            }
+            return ret;
         }
 
         public List<string> GetAvailableNetworkViewModels()
@@ -115,7 +131,7 @@ namespace NecBlik.Virtual.GUI.Factories
             return ret;
         }
 
-        public VirtualDeviceViewModel DeviceViewModelFromRule(DeviceModel model, NetworkViewModel network ,FactoryRule rule)
+        public VirtualDeviceViewModel DeviceViewModelFromRule(DeviceModel model, NetworkViewModel network, FactoryRule rule)
         {
             var assembly = Assembly.GetAssembly(typeof(VirtualDeviceGuiFactory));
             foreach (var type in assembly.GetExportedTypes())
@@ -132,7 +148,7 @@ namespace NecBlik.Virtual.GUI.Factories
         public VirtualDeviceViewModel DeviceViewModelFromRules(DeviceModel model, NetworkViewModel network, List<FactoryRule> rules)
         {
             var assembly = Assembly.GetAssembly(typeof(VirtualDeviceGuiFactory));
-            FactoryRule rule = null;
+            FactoryRule rule = rules.Find((f) => { return f.Property == VirtualDeviceGuiFactory.DeviceViewModelRuledProperties.ViewModel && f.CacheObjectId == model.CacheId; });
             foreach(var item in rules)
             {
                 if(item.CacheObjectId == model.CacheId)
@@ -157,6 +173,12 @@ namespace NecBlik.Virtual.GUI.Factories
             base.Initalize(args);
 
             
+        }
+
+        public class DeviceViewModelRuledProperties
+        {
+            public const string ViewModel = nameof(ViewModel);
+            public const string MapControl = nameof(MapControl);
         }
     }
 }

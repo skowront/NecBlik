@@ -189,10 +189,10 @@ namespace NecBlik.Core.GUI.Factories
         {
             foreach (var item in this.Factories)
             {
-                //if (deviceViewModel.ViewFactoriesWhitelist.Count > 0 && !deviceViewModel.ViewFactoriesWhitelist.Contains(item.GetVendorID()))
-                //{
-                //    continue;
-                //}
+                if (deviceViewModel.Model.IsLicensed() && !deviceViewModel.Model.GetLicensees().Contains(item.GetVendorID()))
+                {
+                    continue;
+                }
                 var r = item.GetDeviceControl(deviceViewModel);
                 if (r != null)
                 {
@@ -205,6 +205,16 @@ namespace NecBlik.Core.GUI.Factories
         public void Initalize(object args = null)
         {
             
+        }
+
+        public bool IsLicensed()
+        {
+            return true;
+        }
+
+        public IEnumerable<string> GetLicensees()
+        {
+            return new List<string>();
         }
     }
 }

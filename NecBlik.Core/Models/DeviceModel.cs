@@ -38,9 +38,6 @@ namespace NecBlik.Core.Models
         [JsonProperty]
         public string InternalFactoryType { get; set; }
 
-        [JsonProperty]
-        public string InternalFactorySubType { get; set; }
-
         private string addressName { get; set; } = null;
         [JsonProperty]
         public string AddressName 
@@ -111,6 +108,16 @@ namespace NecBlik.Core.Models
         public DeviceModel Duplicate()
         {
             return new DeviceModel() { Guid = Guid.NewGuid(), Name = this.Name, Version = this.Version, addressName = this.AddressName };
+        }
+
+        public bool IsLicensed()
+        {
+            return this.DeviceSource.IsLicensed();
+        }
+
+        public IEnumerable<string> GetLicensees()
+        {
+            return this.DeviceSource.GetLicensees();
         }
     }
 }

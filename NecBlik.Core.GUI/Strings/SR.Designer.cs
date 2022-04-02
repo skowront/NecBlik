@@ -70,6 +70,51 @@ namespace NecBlik.Core.GUI.Strings {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Add rule.
+        /// </summary>
+        public static string GPAddRuleCommand {
+            get {
+                return ResourceManager.GetString("GPAddRuleCommand", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Cache ID.
+        /// </summary>
+        public static string GPCacheId {
+            get {
+                return ResourceManager.GetString("GPCacheId", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Clear filters.
+        /// </summary>
+        public static string GPClearFilters {
+            get {
+                return ResourceManager.GetString("GPClearFilters", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Clear rules.
+        /// </summary>
+        public static string GPClearRulesCommand {
+            get {
+                return ResourceManager.GetString("GPClearRulesCommand", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Filters.
+        /// </summary>
+        public static string GPFilters {
+            get {
+                return ResourceManager.GetString("GPFilters", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to From.
         /// </summary>
         public static string GPFrom {
@@ -84,6 +129,15 @@ namespace NecBlik.Core.GUI.Strings {
         public static string GPOpen {
             get {
                 return ResourceManager.GetString("GPOpen", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Property.
+        /// </summary>
+        public static string GPProperty {
+            get {
+                return ResourceManager.GetString("GPProperty", resourceCulture);
             }
         }
         
@@ -120,6 +174,15 @@ namespace NecBlik.Core.GUI.Strings {
         public static string GPTo {
             get {
                 return ResourceManager.GetString("GPTo", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Value.
+        /// </summary>
+        public static string GPValue {
+            get {
+                return ResourceManager.GetString("GPValue", resourceCulture);
             }
         }
     }

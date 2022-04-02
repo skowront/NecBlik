@@ -127,10 +127,10 @@
     <value>Nom</value>
   </data>
   <data name="GPNetworkInformation" xml:space="preserve">
-    <value>Information de réseau</value>
+    <value>Information du réseau</value>
   </data>
   <data name="GPNetworkName" xml:space="preserve">
-    <value>Nom de réseau</value>
+    <value>Nom du réseau</value>
   </data>
   <data name="GPOpen" xml:space="preserve">
     <value>Ouvrir</value>
@@ -167,5 +167,18 @@
   </data>
   <data name="GPFrom" xml:space="preserve">
     <value>De</value>
+  </data>
+  <data name="EnterAddressOrLeaveEmpty" xml:space="preserve">
+    <value>Entrez adresse de nouveau appareil ou laissez vide pour le 
+générer.</value>
+  </data>
+  <data name="GPCoordinatorType" xml:space="preserve">
+    <value>Type de coordinateur</value>
+  </data>
+  <data name="GPNetworkType" xml:space="preserve">
+    <value>Type du réseau</value>
+  </data>
+  <data name="GPStayOpen" xml:space="preserve">
+    <value>Rester ouvert</value>
   </data>
 </root>

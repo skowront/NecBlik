@@ -45,7 +45,7 @@ namespace NecBlik.Common.WpfElements
         public SimpleListInputPopup(string message, string title, IEnumerable<string> availableValues , Action<string> OnConfirm, Action<string> OnCancel, bool isEditable=false)
         {
             InitializeComponent();
-            this.ViewModel = new SimpleListInputViewModel(this, message, title, availableValues,  OnConfirm, OnCancel,isEditable);
+            this.ViewModel = new SimpleListInputViewModel(this, message, title, availableValues,  OnConfirm, OnCancel, isEditable);
             this.DataContext = this.ViewModel;
         }
 

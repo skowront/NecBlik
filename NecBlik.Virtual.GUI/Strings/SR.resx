@@ -168,4 +168,16 @@
   <data name="GPFrom" xml:space="preserve">
     <value>From</value>
   </data>
+  <data name="EnterAddressOrLeaveEmpty" xml:space="preserve">
+    <value>Enter new device address or leave empty to generate one.</value>
+  </data>
+  <data name="GPNetworkType" xml:space="preserve">
+    <value>Network type</value>
+  </data>
+  <data name="GPCoordinatorType" xml:space="preserve">
+    <value>Coordinator type</value>
+  </data>
+  <data name="GPStayOpen" xml:space="preserve">
+    <value>Stay open</value>
+  </data>
 </root>

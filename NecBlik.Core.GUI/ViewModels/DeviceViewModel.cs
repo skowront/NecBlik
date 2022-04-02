@@ -207,5 +207,15 @@ namespace NecBlik.Core.GUI
         {
             this.OnDataRecieved(updateInformation.Item1, updateInformation.Item2);
         }
+
+        public virtual bool IsLicensed()
+        {
+            return this.Model.IsLicensed();
+        }
+
+        public virtual IEnumerable<string> GetLicensees()
+        {
+            return this.Model.GetLicensees();
+        }
     }
 }

@@ -50,8 +50,10 @@ namespace NecBlik.Virtual.GUI.Views.Wizard
             }
             var network = new VirtualNetwork();
             network.Name = this.ViewModel.NetworkName;
-            network.DeviceCoordinatorSubtypeFactoryRule= new Core.Factories.FactoryRule() { Value = this.ViewModel.CoordinatorType };
             var coordinator = new VirtualCoordinator(new VirtualDeviceFactory());
+            network.DeviceCoordinatorSubtypeFactoryRule= new Core.Factories.FactoryRule() { Value = this.ViewModel.CoordinatorType, 
+                CacheObjectId = coordinator.GetCacheId(), 
+                Property = VirtualDeviceGuiFactory.DeviceViewModelRuledProperties.ViewModel };
             List<IDeviceSource> sources = new List<IDeviceSource>();
             for(int i = 0; i<this.ViewModel.VirtualDevices; i++)
             {

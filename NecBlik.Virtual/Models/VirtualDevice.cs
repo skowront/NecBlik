@@ -23,7 +23,7 @@ namespace NecBlik.Virtual.Models
         [JsonProperty]
         public string Name { get; set; } = Resources.Resources.DefaultVirtualDeviceName;
         
-        private string cachedAddress = string.Empty;
+        public string cachedAddress = string.Empty;
 
         public override string GetAddress()
         {
@@ -73,6 +73,17 @@ namespace NecBlik.Virtual.Models
         public override void Send(string data, string address)
         {
             
+        }
+
+        public override bool IsLicensed()
+        {
+            return true;
+        }
+
+        public override IEnumerable<string> GetLicensees()
+        {
+            VirtualDeviceFactory f = new VirtualDeviceFactory();
+            return new List<string>() { f.GetVendorID() };
         }
     }
 }

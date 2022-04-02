@@ -132,5 +132,15 @@ namespace NecBlik.Core.Models
         {
             return this.internalNetworkType;
         }
+
+        public bool IsLicensed()
+        {
+            return false;
+        }
+
+        public IEnumerable<string> GetLicensees()
+        {
+            return new List<string>();
+        }
     }
 }

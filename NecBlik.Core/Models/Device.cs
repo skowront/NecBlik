@@ -14,7 +14,6 @@ namespace NecBlik.Core.Models
         [JsonProperty]
         public Guid Guid { get; set; } = Guid.NewGuid();
         protected string internalType { get; set; } = Resources.Resources.DefaultFactoryId;
-        protected string internalSubType { get; set; } = string.Empty;
 
         protected string version { get; set; }
 
@@ -81,14 +80,22 @@ namespace NecBlik.Core.Models
 
         public virtual void SubscribeToDataRecieved(ISubscriber<Tuple<string, string>> subscriber)
         {
-            if(!this.DataRecievedSubscribers.Contains(subscriber))
+            if(!this.DataRecievedSubscribers.Contains(subscriber) && this.DataRecievedSubscribers.Any((s) => { return s.GetCacheId() == subscriber.GetCacheId(); }))
                 this.DataRecievedSubscribers.Add(subscriber);
         }
 
         public virtual void UnsubscribeFromDataRecieved(ISubscriber<Tuple<string, string>> subscriber)
         {
-            if (this.DataRecievedSubscribers.Contains(subscriber))
-                this.DataRecievedSubscribers.Remove(subscriber);
+            var toRemove = new List<ISubscriber<Tuple<string, string>>>();
+            for(int i = 0; i<this.DataRecievedSubscribers.Count; i++)
+            {
+                if (this.DataRecievedSubscribers[i] == subscriber || this.DataRecievedSubscribers[i].GetCacheId() == subscriber.GetCacheId())
+                    toRemove.Add(this.DataRecievedSubscribers[i]);
+            }
+            foreach(var item in this.DataRecievedSubscribers)
+            {
+                this.DataRecievedSubscribers.Remove(item);
+            }
         }
 
         public virtual bool Open()
@@ -101,14 +108,14 @@ namespace NecBlik.Core.Models
             return;
         }
 
-        public string GetVendorSubType()
+        public virtual bool IsLicensed()
         {
-            return this.internalSubType;   
+            return false;
         }
 
-        public void SetVendorSubType(string newType)
+        public virtual IEnumerable<string> GetLicensees()
         {
-            this.internalSubType = newType;
+            return new List<string>();
         }
     }
 }

@@ -20,7 +20,7 @@ namespace NecBlik.Virtual.GUI.Views.Controls
     /// <summary>
     /// Interaction logic for VirtualCoordinatorUserControl.xaml
     /// </summary>
-    public partial class VirtualCoordinatorUserControl : UserControl,IDevicePresenter
+    public partial class VirtualCoordinatorUserControl : UserControl, IDeviceControl
     {
         public VirtualCoordinatorUserControl()
         {
