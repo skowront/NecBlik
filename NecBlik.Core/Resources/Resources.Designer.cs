@@ -169,6 +169,24 @@ namespace NecBlik.Core.Resources {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Libraries\{0}.
+        /// </summary>
+        public static string LibraryFolderFormattableString {
+            get {
+                return ResourceManager.GetString("LibraryFolderFormattableString", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Libraries.
+        /// </summary>
+        public static string MainFolderForLibraries {
+            get {
+                return ResourceManager.GetString("MainFolderForLibraries", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Project.
         /// </summary>
         public static string ProjectModelPojectNameDefault {

@@ -153,6 +153,14 @@
   <data name="GPNetwork" xml:space="preserve">
     <value>Network</value>
   </data>
+  <data name="LibraryFolderFormattableString" xml:space="preserve">
+    <value>Libraries\{0}</value>
+    <comment>Arg 0 is for Library name.</comment>
+  </data>
+  <data name="MainFolderForLibraries" xml:space="preserve">
+    <value>Libraries</value>
+    <comment>This is where the libraries may place their configuration or add subfolders for sublibraries</comment>
+  </data>
   <data name="ProjectModelPojectNameDefault" xml:space="preserve">
     <value>Project</value>
   </data>
