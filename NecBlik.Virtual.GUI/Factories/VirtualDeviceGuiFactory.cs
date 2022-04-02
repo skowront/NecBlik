@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Linq;
 using System.Collections.ObjectModel;
 using System.Reflection;
 using System.Threading.Tasks;
@@ -7,12 +8,14 @@ using System.Windows;
 using NecBlik.Core.Factories;
 using NecBlik.Core.GUI;
 using NecBlik.Core.GUI.Factories;
+using NecBlik.Core.GUI.Factories.ViewModels;
 using NecBlik.Core.GUI.Interfaces;
 using NecBlik.Core.GUI.ViewModels;
 using NecBlik.Core.Models;
 using NecBlik.Virtual.GUI.ViewModels;
 using NecBlik.Virtual.GUI.Views.Controls;
 using NecBlik.Virtual.GUI.Views.Wizard;
+using System.Windows.Controls;
 
 namespace NecBlik.Virtual.GUI.Factories
 {
@@ -49,7 +52,7 @@ namespace NecBlik.Virtual.GUI.Factories
 
         public override NetworkViewModel GetNetworkViewModel(Network network)
         {
-            return this.NetworkViewModelBySubType(network,network.InternalSubType);
+            return this.NetworkViewModelBySubType(network, network.InternalSubType);
         }
 
         public override string GetVendorID()
@@ -59,12 +62,30 @@ namespace NecBlik.Virtual.GUI.Factories
 
         public override UIElement GetDeviceControl(DeviceViewModel deviceViewModel)
         {
+            var assembly = Assembly.GetAssembly(typeof(VirtualDeviceGuiFactory));
+            var rule = deviceViewModel.Network.FactoryRules.Where((r) => { return r.CacheObjectId == deviceViewModel.GetCacheId() && r.Property == VirtualDeviceGuiFactory.DeviceViewModelRuledProperties.MapControl; }).FirstOrDefault();
             if (deviceViewModel?.Model?.DeviceSource is Virtual.Models.VirtualCoordinator)
             {
-                //todo find and use custom types
+                if (rule != null)
+                    foreach (var type in assembly.GetExportedTypes())
+                    {
+                        if (typeof(IDeviceControl).IsAssignableFrom(type) && !type.IsAbstract)
+                        {
+                            return Activator.CreateInstance(type, deviceViewModel) as UserControl;
+                        }
+                    }
                 return new VirtualCoordinatorUserControl(deviceViewModel);
             }
-            
+
+            if (rule != null)
+                foreach (var type in assembly.GetExportedTypes())
+                {
+                    if (typeof(IDeviceControl).IsAssignableFrom(type) && !type.IsAbstract)
+                    {
+                        return Activator.CreateInstance(type, deviceViewModel) as UIElement;
+                    }
+                }
+
             var zbc = base.GetDeviceControl(deviceViewModel);
             return zbc;
         }
@@ -83,7 +104,7 @@ namespace NecBlik.Virtual.GUI.Factories
                 if (type.FullName == subType)
                 {
                     network.InternalSubType = subType;
-                    return Activator.CreateInstance(type,network) as VirtualNetworkViewModel;
+                    return Activator.CreateInstance(type, network) as VirtualNetworkViewModel;
                 }
             }
             return new VirtualNetworkViewModel(network);
@@ -139,32 +160,32 @@ namespace NecBlik.Virtual.GUI.Factories
                 if (type.FullName == rule.Value)
                 {
                     network.Model.DeviceCoordinatorSubtypeFactoryRule = rule;
-                    return Activator.CreateInstance(type,model, network) as VirtualDeviceViewModel;
+                    return Activator.CreateInstance(type, model, network) as VirtualDeviceViewModel;
                 }
             }
-            return new VirtualDeviceViewModel(model,network);
+            return new VirtualDeviceViewModel(model, network);
         }
 
         public VirtualDeviceViewModel DeviceViewModelFromRules(DeviceModel model, NetworkViewModel network, List<FactoryRule> rules)
         {
             var assembly = Assembly.GetAssembly(typeof(VirtualDeviceGuiFactory));
             FactoryRule rule = rules.Find((f) => { return f.Property == VirtualDeviceGuiFactory.DeviceViewModelRuledProperties.ViewModel && f.CacheObjectId == model.CacheId; });
-            foreach(var item in rules)
+            foreach (var item in rules)
             {
-                if(item.CacheObjectId == model.CacheId)
+                if (item.CacheObjectId == model.CacheId)
                 {
                     rule = item;
                     break;
                 }
             }
-            if(rule!=null)
-            foreach (var type in assembly.GetExportedTypes())
-            {
-                if (type.FullName == rule.Value)
+            if (rule != null)
+                foreach (var type in assembly.GetExportedTypes())
                 {
-                     return Activator.CreateInstance(type, model, network) as VirtualDeviceViewModel;
+                    if (type.FullName == rule.Value)
+                    {
+                        return Activator.CreateInstance(type, model, network) as VirtualDeviceViewModel;
+                    }
                 }
-            }
             return new VirtualDeviceViewModel(model, network);
         }
 
@@ -172,7 +193,7 @@ namespace NecBlik.Virtual.GUI.Factories
         {
             base.Initalize(args);
 
-            
+
         }
 
         public class DeviceViewModelRuledProperties

@@ -92,7 +92,7 @@ namespace NecBlik.Core.GUI.ViewModels
                     return null;
                 });
 
-        public ObservableCollection<FactoryRuleViewModel> DevicesSubtypeFactoryRules = new ObservableCollection<FactoryRuleViewModel>();
+        public ObservableCollection<FactoryRuleViewModel> FactoryRules = new ObservableCollection<FactoryRuleViewModel>();
 
         protected DeviceViewModel coorinator = null;
         public DeviceViewModel Coordinator
@@ -123,7 +123,7 @@ namespace NecBlik.Core.GUI.ViewModels
 
             foreach(var item in this.model.DeviceSubtypeFactoryRules)
             {
-                this.DevicesSubtypeFactoryRules.Add(new FactoryRuleViewModel(item));
+                this.FactoryRules.Add(new FactoryRuleViewModel(item));
             }
 
             this.BuildCommands();
@@ -149,7 +149,7 @@ namespace NecBlik.Core.GUI.ViewModels
         public virtual void Sync()
         {
             this.model.DeviceSubtypeFactoryRules.Clear();
-            foreach (var item in this.DevicesSubtypeFactoryRules)
+            foreach (var item in this.FactoryRules)
             {
                 this.model.DeviceSubtypeFactoryRules.Add(item.Model);
             }
@@ -193,7 +193,7 @@ namespace NecBlik.Core.GUI.ViewModels
 
             this.EditRulesCommand = new RelayCommand((o) =>
             {
-                var rp = new GenericResponseProvider<ObservableCollection<FactoryRuleViewModel>, object>((o) => { return this.DevicesSubtypeFactoryRules; });
+                var rp = new GenericResponseProvider<ObservableCollection<FactoryRuleViewModel>, object>((o) => { return this.FactoryRules; });
                 var window = new FactoryRulesEditor(rp, AvailableCacheObjectIDsProvider,AvailablePropertyProvider,AvailableValueProvider, new Action(() => { this.OnFactoryEditClosed(); }));
                 window.Show();
             });
