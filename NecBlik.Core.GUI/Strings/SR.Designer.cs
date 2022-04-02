@@ -115,6 +115,15 @@ namespace NecBlik.Core.GUI.Strings {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Device unavailable.
+        /// </summary>
+        public static string GPDeviceUnavailable {
+            get {
+                return ResourceManager.GetString("GPDeviceUnavailable", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Factory.
         /// </summary>
         public static string GPFactory {

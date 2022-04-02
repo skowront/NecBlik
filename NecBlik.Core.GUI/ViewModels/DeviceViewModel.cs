@@ -104,6 +104,12 @@ namespace NecBlik.Core.GUI
             this.BuildCommands();
         }
 
+        ~DeviceViewModel()
+        {
+            this.Model.DeviceSource?.UnsubscribeFromDataRecieved(this);
+            this.Network.Coordinator?.Model.DeviceSource.UnsubscribeFromDataRecieved(this);
+        }
+
         public DeviceViewModel Duplicate()
         {
             var zb = new DeviceViewModel(this.Model.Duplicate(),this.Network);
@@ -145,6 +151,11 @@ namespace NecBlik.Core.GUI
             return ret;
         }
 
+        public void NetworkChanged()
+        {
+            this.OnPropertyChanged(nameof(this.AvailableDestinationAddresses));
+        }
+
         public virtual void OnDataRecieved(string data, string sourceAddress)
         {
             this.AddIncomingHistoryBufferEntry(data, sourceAddress);
@@ -158,10 +169,10 @@ namespace NecBlik.Core.GUI
             {
                 foreach (var source in sources)
                 {
-                    source.Model.DeviceSource.OnDataRecieved(this.OutputBuffer,this.Address);
                     this.AddOutgoingHistoryBufferEntry(this.outputBuffer, source.Address);
+                    source.Model.DeviceSource.OnDataRecieved(this.OutputBuffer,this.Address);
                 }
-                this.Network.Coordinator.OnDataRecieved(this.outputBuffer, this.Address);
+                this.Network.Coordinator?.OnDataRecieved(this.outputBuffer, this.Address);
             }
             else
             {
@@ -170,8 +181,8 @@ namespace NecBlik.Core.GUI
                 {
                     if (source.Address == this.SelectedDestinationAddress)
                     {
-                        source.Model.DeviceSource.OnDataRecieved(this.OutputBuffer, this.Address);
                         this.AddOutgoingHistoryBufferEntry(this.outputBuffer, source.Address);
+                        source.Model.DeviceSource.OnDataRecieved(this.OutputBuffer, this.Address);
                         sent = true;
                         break;
                     }
@@ -180,9 +191,14 @@ namespace NecBlik.Core.GUI
                 {
                     if(this.Network.Model.Coordinator.GetAddress()==this.SelectedDestinationAddress)
                     {
-                        this.Network.Coordinator.Model.DeviceSource.OnDataRecieved(this.OutputBuffer, this.Address);
                         this.AddOutgoingHistoryBufferEntry(this.outputBuffer, this.Address);
+                        this.Network.Coordinator?.Model?.DeviceSource?.OnDataRecieved(this.OutputBuffer, this.Address);
+                        sent = true;
                     }
+                }
+                if(!sent)
+                {
+                    this.AddHistoryBufferEntry(Strings.SR.GPDeviceUnavailable);
                 }
             }
             this.OutputBuffer = string.Empty;

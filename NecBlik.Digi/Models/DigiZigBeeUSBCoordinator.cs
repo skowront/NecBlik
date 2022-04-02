@@ -45,6 +45,11 @@ namespace NecBlik.Digi.Models
             this.zigBee.DataReceived += ZigBeeDataReceived;
         }
 
+        ~DigiZigBeeUSBCoordinator()
+        {
+            this.zigBee?.Close();
+        }
+
         private void ZigBeeDataReceived(object? sender, XBeeLibrary.Core.Events.DataReceivedEventArgs e)
         {
             this.OnDataRecieved(e.DataReceived.DataString, e.DataReceived.Device.GetAddressString());

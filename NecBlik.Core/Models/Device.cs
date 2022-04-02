@@ -80,7 +80,7 @@ namespace NecBlik.Core.Models
 
         public virtual void SubscribeToDataRecieved(ISubscriber<Tuple<string, string>> subscriber)
         {
-            if(!this.DataRecievedSubscribers.Contains(subscriber) && this.DataRecievedSubscribers.Any((s) => { return s.GetCacheId() == subscriber.GetCacheId(); }))
+            if(!this.DataRecievedSubscribers.Contains(subscriber) && !this.DataRecievedSubscribers.Any((s) => { return s.GetCacheId() == subscriber.GetCacheId(); }))
                 this.DataRecievedSubscribers.Add(subscriber);
         }
 
@@ -92,10 +92,8 @@ namespace NecBlik.Core.Models
                 if (this.DataRecievedSubscribers[i] == subscriber || this.DataRecievedSubscribers[i].GetCacheId() == subscriber.GetCacheId())
                     toRemove.Add(this.DataRecievedSubscribers[i]);
             }
-            foreach(var item in this.DataRecievedSubscribers)
-            {
-                this.DataRecievedSubscribers.Remove(item);
-            }
+            while(toRemove.Count()>0)
+                this.DataRecievedSubscribers.Remove(toRemove.First());
         }
 
         public virtual bool Open()

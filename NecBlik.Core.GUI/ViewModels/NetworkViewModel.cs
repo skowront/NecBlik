@@ -155,9 +155,9 @@ namespace NecBlik.Core.GUI.ViewModels
             }
         }
 
-        public virtual void AddNewDevice(IDeviceSource device)
+        public virtual bool AddNewDevice(IDeviceSource device)
         {
-
+            return false;
         }
 
         public virtual async Task Discover()

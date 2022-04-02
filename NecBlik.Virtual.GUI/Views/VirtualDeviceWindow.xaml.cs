@@ -29,5 +29,10 @@ namespace NecBlik.Virtual.GUI.Views
         {
             this.DataContext = virtualDeviceViewModel;
         }
+
+        private void ComboBox_MouseDown(object sender, MouseButtonEventArgs e)
+        {
+            this.AvComboBox.ItemsSource = (this.DataContext as VirtualDeviceViewModel).AvailableDestinationAddresses;
+        }
     }
 }

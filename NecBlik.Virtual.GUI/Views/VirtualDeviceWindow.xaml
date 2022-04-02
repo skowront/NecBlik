@@ -50,7 +50,7 @@
                             <TextBlock Text="&#xf0e0;" FontFamily="{StaticResource FontAwesome}" VerticalAlignment="Center"></TextBlock>
                         </Button>
                         <TextBlock Grid.Row="1" VerticalAlignment="Center" Text="{lex:Loc GPDestinationAddress}"></TextBlock>
-                        <ComboBox Grid.Row="1" Grid.Column="1" VerticalAlignment="Center" ItemsSource="{Binding AvailableDestinationAddresses}" SelectedValue="{Binding SelectedDestinationAddress}"></ComboBox>
+                        <ComboBox x:Name="AvComboBox" Grid.Row="1" Grid.Column="1" VerticalAlignment="Center" ItemsSource="{Binding AvailableDestinationAddresses}" MouseDown="ComboBox_MouseDown" IsEditable="True" SelectedValue="{Binding SelectedDestinationAddress}"></ComboBox>
                     </Grid>
                 </Grid>
             </Expander>

@@ -168,4 +168,7 @@
   <data name="GPGuid" xml:space="preserve">
     <value>Guid</value>
   </data>
+  <data name="GPDeviceUnavailable" xml:space="preserve">
+    <value>Device unavailable</value>
+  </data>
 </root>

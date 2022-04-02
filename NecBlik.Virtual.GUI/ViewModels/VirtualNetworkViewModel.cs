@@ -50,17 +50,41 @@ namespace NecBlik.Virtual.GUI.ViewModels
                 var rp = new InputResponseProvider(popup);
                 var result = rp.ProvideResponse();
                 if (result == string.Empty)
-                    this.AddNewDevice((new VirtualDevice(true)));
-                else if(result == null)
+                {
+                    var dev = (new VirtualDevice(true));
+                    this.AddNewDevice(dev);
+                }
+                else if (result == null)
                     return;
                 else
-                    this.AddNewDevice((new VirtualDevice(false) {  Address = result }));;
+                {
+                    var dev = (new VirtualDevice(false) { Address = result });
+                    this.AddNewDevice(dev);
+                }
             });
 
             this.RemoveDeviceCommand = new RelayCommand((o) =>
             {
+                if (this.model.DeviceSources.Contains((o as VirtualDeviceViewModel).Model.DeviceSource))
+                {
+                    this.model.DeviceSources.Remove((o as VirtualDeviceViewModel).Model.DeviceSource);
+                }
                 this.Devices.Remove(o as VirtualDeviceViewModel);
+                this.NotifyDevicesNetworkChanged(o as VirtualDeviceViewModel);
             });
+        }
+
+        protected void NotifyDevicesNetworkChanged(VirtualDeviceViewModel changedDevice)
+        {
+            foreach(var item in this.Devices)
+            {
+                item.NetworkChanged();
+            }
+            this.Coordinator?.NetworkChanged();
+            if(changedDevice != null)
+            {
+                changedDevice.NetworkChanged();
+            }
         }
 
         private void BuildResponseProviders()
@@ -107,7 +131,7 @@ namespace NecBlik.Virtual.GUI.ViewModels
 
         public virtual void SyncFromModel()
         {
-            this.Devices.Clear();
+            //this.Devices.Clear();
            
             foreach (var device in this.model.DeviceSources)
             {
@@ -118,17 +142,25 @@ namespace NecBlik.Virtual.GUI.ViewModels
             this.OnPropertyChanged();
         }
 
-        public override void AddNewDevice(IDeviceSource device)
+        public override bool AddNewDevice(IDeviceSource device)
         {
             var factory = new VirtualDeviceGuiFactory();
             var vm = factory.DeviceViewModelFromRules(new DeviceModel(device), this, this.model.DeviceSubtypeFactoryRules.ToList());
+            if (vm == null)
+                return false;   
             vm.PullSelectionSubscriber = this.DeviceSelectionSubscriber;
             if(!this.model.DeviceSources.Contains(device))
             {
                 this.model.DeviceSources.Add(device);
             }
-            this.Devices.Add(vm);
-            this.DeviceSelectionSubscriber?.NotifyUpdated(vm);
+            if (!this.Devices.Any((v) => { return v.GetCacheId() == device.GetCacheId(); }))
+            {
+                this.Devices.Add(vm);
+                this.DeviceSelectionSubscriber?.NotifyUpdated(vm);
+                this.NotifyDevicesNetworkChanged(vm);
+            }
+           
+            return true;
         }
 
         public override DeviceViewModel GetCoordinatorViewModel()

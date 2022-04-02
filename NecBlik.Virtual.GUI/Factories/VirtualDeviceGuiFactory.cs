@@ -160,7 +160,7 @@ namespace NecBlik.Virtual.GUI.Factories
             }
             return ret;
         }
-        public VirtualNetworkViewModel NetworkViewModelBySubType(Network network, string subType)
+        public virtual VirtualNetworkViewModel NetworkViewModelBySubType(Network network, string subType)
         {
             var types = this.GetTypesTInOtherSubAssemblies<VirtualNetworkViewModel>();
             foreach (var type in types)
@@ -183,7 +183,7 @@ namespace NecBlik.Virtual.GUI.Factories
             }
             return new VirtualNetworkViewModel(network);
         }
-        public VirtualDeviceViewModel DeviceViewModelFromRule(DeviceModel model, NetworkViewModel network, FactoryRule rule)
+        public virtual VirtualDeviceViewModel DeviceViewModelFromRule(DeviceModel model, NetworkViewModel network, FactoryRule rule)
         {
             var types = this.GetTypesTInOtherSubAssemblies<VirtualDeviceViewModel>();
             foreach (var type in types)
@@ -205,7 +205,7 @@ namespace NecBlik.Virtual.GUI.Factories
             }
             return new VirtualDeviceViewModel(model, network);
         }
-        public VirtualDeviceViewModel DeviceViewModelFromRules(DeviceModel model, NetworkViewModel network, List<FactoryRule> rules)
+        public virtual VirtualDeviceViewModel DeviceViewModelFromRules(DeviceModel model, NetworkViewModel network, List<FactoryRule> rules)
         {
             var assembly = Assembly.GetAssembly(typeof(VirtualDeviceGuiFactory));
             FactoryRule rule = rules.Find((f) => { return f.Property == VirtualDeviceGuiFactory.DeviceViewModelRuledProperties.ViewModel && f.CacheObjectId == model.CacheId; });
