@@ -4,6 +4,8 @@
              xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
              xmlns:local="clr-namespace:NecBlik.Core.GUI.Views.Controls"
+             xmlns:lex="clr-namespace:WPFLocalizeExtension.Extensions;assembly=WPFLocalizeextension"
+             xmlns:lexp="clr-namespace:WPFLocalizeExtension.Providers;assembly=WPFLocalizeextension"
              xmlns:fa="http://schemas.fontawesome.io/icons/"
              mc:Ignorable="d" 
              d:DesignHeight="450" d:DesignWidth="800">
@@ -15,23 +17,32 @@
                     <RowDefinition></RowDefinition>
                     <RowDefinition></RowDefinition>
                 </Grid.RowDefinitions>
-                <!--<TextBlock VerticalAlignment="Center" HorizontalAlignment="Center" Text="{Binding Name}"></TextBlock>-->
                 <Button Style="{StaticResource MaterialDesignFlatButton}" Command="{Binding EditCommand}"></Button>
                 <TextBlock Grid.Row="0" VerticalAlignment="Center" HorizontalAlignment="Center" IsHitTestVisible="False">
                     <fa:FontAwesome Icon="Desktop"></fa:FontAwesome>
                 </TextBlock>
                 <TextBlock Grid.Row="1" VerticalAlignment="Center" HorizontalAlignment="Center" Text="{Binding Name, FallbackValue='Device'}" FontSize="3"></TextBlock>
-                <TextBlock Grid.Row="2" VerticalAlignment="Center" HorizontalAlignment="Center" Text="{Binding InternalFactoryType, FallbackValue='???'}" FontSize="3"></TextBlock>
+                <TextBlock Grid.Row="2" VerticalAlignment="Center" HorizontalAlignment="Center" Text="{Binding Address, FallbackValue='???'}" FontSize="3"></TextBlock>
                 <Grid.ToolTip>
                     <Grid>
+                        <Grid.ColumnDefinitions>
+                            <ColumnDefinition Width="auto"></ColumnDefinition>
+                            <ColumnDefinition Width="*"></ColumnDefinition>
+                        </Grid.ColumnDefinitions>
                         <Grid.RowDefinitions>
                             <RowDefinition></RowDefinition>
                             <RowDefinition></RowDefinition>
                             <RowDefinition></RowDefinition>
+                            <RowDefinition></RowDefinition>
                         </Grid.RowDefinitions>
-                        <TextBlock Grid.Row="0" VerticalAlignment="Center" HorizontalAlignment="Center" Text="{Binding Name, FallbackValue='???'}"></TextBlock>
-                        <TextBlock Grid.Row="1" VerticalAlignment="Center" HorizontalAlignment="Center" Text="{Binding Guid, FallbackValue='???'}"></TextBlock>
-                        <TextBlock Grid.Row="2" VerticalAlignment="Center" HorizontalAlignment="Center" Text="{Binding Address, FallbackValue='???'}"></TextBlock>
+                        <TextBlock Grid.Row="0" Grid.Column="0" VerticalAlignment="Center" HorizontalAlignment="Left" Text="{lex:Loc GPName}"></TextBlock>
+                        <TextBlock Grid.Row="0" Grid.Column="1" VerticalAlignment="Center" HorizontalAlignment="Left" Margin="0 0 5 0" Text="{Binding Name, FallbackValue='???'}"></TextBlock>
+                        <TextBlock Grid.Row="1" Grid.Column="0" VerticalAlignment="Center" HorizontalAlignment="Left" Text="{lex:Loc GPGuid}"></TextBlock>
+                        <TextBlock Grid.Row="1" Grid.Column="1" VerticalAlignment="Center" HorizontalAlignment="Left" Margin="0 0 5 0" Text="{Binding Guid, FallbackValue='???'}"></TextBlock>
+                        <TextBlock Grid.Row="2" Grid.Column="0" VerticalAlignment="Center" HorizontalAlignment="Left" Text="{lex:Loc GPAddress}"></TextBlock>
+                        <TextBlock Grid.Row="2" Grid.Column="1" VerticalAlignment="Center" HorizontalAlignment="Left" Margin="0 0 5 0" Text="{Binding Address, FallbackValue='???'}"></TextBlock>
+                        <TextBlock Grid.Row="3" Grid.Column="0" VerticalAlignment="Center" HorizontalAlignment="Left" Text="{lex:Loc GPFactory}"></TextBlock>
+                        <TextBlock Grid.Row="3" Grid.Column="1" VerticalAlignment="Center" HorizontalAlignment="Left" Margin="0 0 5 0" Text="{Binding InternalFactoryType, FallbackValue='???'}"></TextBlock>
                     </Grid>
                 </Grid.ToolTip>
             </Grid>

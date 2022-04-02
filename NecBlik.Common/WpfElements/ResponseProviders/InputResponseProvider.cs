@@ -40,7 +40,7 @@ namespace NecBlik.Common.WpfElements.ResponseProviders
             var vm = this.Popup.ViewModel;
             this.Popup = new SimpleInputPopup(vm.Message, vm.Title, null, null);
             this.Popup.ViewModel.OnConfirm = (s) => { this.result = s; };
-            this.Popup.ViewModel.OnCancel = (s) => { this.result = s; };
+            this.Popup.ViewModel.OnCancel = (s) => { this.result = null; };
             old.Dispatcher.Invoke(() =>
             {
                 if (question != null)

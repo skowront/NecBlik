@@ -18,7 +18,7 @@ namespace NecBlik.Virtual.GUI.Views
     /// <summary>
     /// Interaction logic for VirtualZigBeeWindow.xaml
     /// </summary>
-    public partial class VirtualDeviceWindow : Window
+    public partial class VirtualDeviceWindow
     {
         public VirtualDeviceWindow()
         {

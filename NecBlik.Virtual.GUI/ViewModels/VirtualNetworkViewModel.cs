@@ -48,7 +48,11 @@ namespace NecBlik.Virtual.GUI.ViewModels
             {
                 var popup = new SimpleInputPopup(Strings.SR.EnterAddressOrLeaveEmpty, string.Empty , null,null);
                 var rp = new InputResponseProvider(popup);
-                this.AddNewDevice((new VirtualDevice() { cachedAddress = rp.ProvideResponse() }));
+                var result = rp.ProvideResponse();
+                if (result == string.Empty)
+                    this.AddNewDevice((new VirtualDevice() { cachedAddress = null }));
+                else
+                    return;
             });
 
             this.RemoveDeviceCommand = new RelayCommand((o) =>

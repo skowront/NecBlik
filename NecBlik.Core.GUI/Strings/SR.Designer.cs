@@ -70,6 +70,15 @@ namespace NecBlik.Core.GUI.Strings {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Address.
+        /// </summary>
+        public static string GPAddress {
+            get {
+                return ResourceManager.GetString("GPAddress", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Add rule.
         /// </summary>
         public static string GPAddRuleCommand {
@@ -106,6 +115,15 @@ namespace NecBlik.Core.GUI.Strings {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Factory.
+        /// </summary>
+        public static string GPFactory {
+            get {
+                return ResourceManager.GetString("GPFactory", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Filters.
         /// </summary>
         public static string GPFilters {
@@ -120,6 +138,15 @@ namespace NecBlik.Core.GUI.Strings {
         public static string GPFrom {
             get {
                 return ResourceManager.GetString("GPFrom", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Guid.
+        /// </summary>
+        public static string GPGuid {
+            get {
+                return ResourceManager.GetString("GPGuid", resourceCulture);
             }
         }
         

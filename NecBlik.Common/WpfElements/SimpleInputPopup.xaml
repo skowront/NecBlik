@@ -13,7 +13,7 @@
         Title="{Binding Title}" 
         Height="300"
         Width="500"
-        Template="{DynamicResource ZigBeeWindowControlTemplateHeaderless}" 
+        Template="{DynamicResource DarkWindowControlTemplateHeaderless}" 
         ResizeMode="CanResizeWithGrip">
     <Window.Resources>
         <ResourceDictionary>
@@ -32,19 +32,19 @@
     </WindowChrome.WindowChrome>
     <Grid>
         <Grid.RowDefinitions>
-            <RowDefinition></RowDefinition>
-            <RowDefinition></RowDefinition>
-            <RowDefinition></RowDefinition>
+            <RowDefinition Height="auto"></RowDefinition>
+            <RowDefinition Height="*"></RowDefinition>
+            <RowDefinition Height="auto"></RowDefinition>
         </Grid.RowDefinitions>
-        <TextBlock Grid.Row="0" Text="{Binding Message}" FontSize="15"></TextBlock>
-        <TextBox Grid.Row="1" Text="{Binding Value}" FontSize="13"></TextBox>
+        <TextBlock Grid.Row="0" Text="{Binding Message}" Foreground="{StaticResource MaterialDesignDarkForeground}" FontSize="15"></TextBlock>
+        <TextBox Grid.Row="1" Text="{Binding Value}" Foreground="{StaticResource MaterialDesignDarkForeground}" VerticalAlignment="Bottom" FontSize="13" TextWrapping="Wrap"></TextBox>
         <Grid Grid.Row="2">
             <Grid.ColumnDefinitions>
                 <ColumnDefinition></ColumnDefinition>
                 <ColumnDefinition></ColumnDefinition>
             </Grid.ColumnDefinitions>
             <Grid.RowDefinitions>
-                <RowDefinition Height="30"></RowDefinition>
+                <RowDefinition Height="10"></RowDefinition>
                 <RowDefinition Height="1*"></RowDefinition>
                 <RowDefinition Height="50"></RowDefinition>
             </Grid.RowDefinitions>

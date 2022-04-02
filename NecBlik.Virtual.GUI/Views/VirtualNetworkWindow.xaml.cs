@@ -23,7 +23,7 @@ namespace NecBlik.Virtual.GUI.Views
     /// <summary>
     /// Interaction logic for VirtualNetworkWindow.xaml
     /// </summary>
-    public partial class VirtualNetworkWindow : Window
+    public partial class VirtualNetworkWindow
     {
         public VirtualNetworkViewModel ViewModel { get; set; }
 

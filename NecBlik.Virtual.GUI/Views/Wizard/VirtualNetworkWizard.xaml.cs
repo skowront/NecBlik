@@ -11,6 +11,7 @@ using System.Windows.Input;
 using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using System.Windows.Shapes;
+using MahApps.Metro.Controls;
 using NecBlik.Common.WpfExtensions.Interfaces;
 using NecBlik.Core.Interfaces;
 using NecBlik.Virtual.Factories;
@@ -24,7 +25,7 @@ namespace NecBlik.Virtual.GUI.Views.Wizard
     /// <summary>
     /// Interaction logic for VirtualNetworkWizard.xaml
     /// </summary>
-    public partial class VirtualNetworkWizard : Window, IResponseProvider<Task<VirtualNetworkViewModel>, object>
+    public partial class VirtualNetworkWizard: IResponseProvider<Task<VirtualNetworkViewModel>, object>
     {
         VirtualNetworkWizardViewModel ViewModel { get; set; }
 

@@ -37,7 +37,7 @@
             <RowDefinition Height="*"></RowDefinition>
         </Grid.RowDefinitions>
         <TextBlock Grid.Row="0" Text="{Binding Message}" Foreground="{StaticResource MaterialDesignDarkForeground}" FontSize="15"></TextBlock>
-        <ComboBox Grid.Row="1" VerticalAlignment="Bottom" ItemsSource="{Binding Values}" Foreground="{StaticResource MaterialDesignDarkForeground}" SelectedItem="{Binding Value}" IsEditable="{Binding Editable}" FontSize="13"></ComboBox>
+        <ComboBox Grid.Row="1" Style="{StaticResource MaterialDesignComboBox}" VerticalContentAlignment="Bottom" VerticalAlignment="Stretch" ItemsSource="{Binding Values}" Foreground="{StaticResource MaterialDesignDarkForeground}" SelectedItem="{Binding Value}" IsEditable="{Binding Editable}" FontSize="13"></ComboBox>
         <Grid Grid.Row="2">
             <Grid.ColumnDefinitions>
                 <ColumnDefinition></ColumnDefinition>

@@ -181,4 +181,16 @@ générer.</value>
   <data name="GPStayOpen" xml:space="preserve">
     <value>Rester ouvert</value>
   </data>
+  <data name="GPConfirm" xml:space="preserve">
+    <value>Confirmer</value>
+  </data>
+  <data name="GPCancel" xml:space="preserve">
+    <value>Annuler</value>
+  </data>
+  <data name="GPGuid" xml:space="preserve">
+    <value>Guid</value>
+  </data>
+  <data name="GPFactory" xml:space="preserve">
+    <value>Usine</value>
+  </data>
 </root>
