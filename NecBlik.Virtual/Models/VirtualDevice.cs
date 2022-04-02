@@ -23,7 +23,7 @@ namespace NecBlik.Virtual.Models
         [JsonProperty]
         public string Name { get; set; } = Resources.Resources.DefaultVirtualDeviceName;
         
-        public string cachedAddress = string.Empty;
+        public string cachedAddress { get; protected set; } = string.Empty;
 
         public override string GetAddress()
         {
@@ -68,6 +68,16 @@ namespace NecBlik.Virtual.Models
         {
             this.Name = Resources.Resources.DefaultVirtualDeviceName;
             this.internalType = (new VirtualDeviceFactory()).GetVendorID();
+        }
+
+        public VirtualDevice(bool generateAddress)
+        {
+            this.Name = Resources.Resources.DefaultVirtualDeviceName;
+            this.internalType = (new VirtualDeviceFactory()).GetVendorID();
+            if(generateAddress)
+            {
+                this.cachedAddress = string.Empty;
+            }
         }
 
         public override void Send(string data, string address)

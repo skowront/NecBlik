@@ -11,7 +11,7 @@
         lexp:ResxLocalizationProvider.DefaultAssembly="NecBlik.Virtual.GUI"
         lexp:ResxLocalizationProvider.DefaultDictionary="SR"
         mc:Ignorable="d"
-        Title="VirtualDeviceNetworkWindow" Height="450" Width="800">
+        Title="Virtual Network Window" Height="450" Width="800">
     <Grid Background="{StaticResource MaterialDesignDarkBackground}">
         <Grid Margin="10">
             <Grid.RowDefinitions>

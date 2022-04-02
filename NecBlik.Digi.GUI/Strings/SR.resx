@@ -150,4 +150,10 @@
   <data name="CantSendFromRemoteDevices" xml:space="preserve">
     <value>Cant't send from remote device.</value>
   </data>
+  <data name="GPConfirm" xml:space="preserve">
+    <value>Confirm</value>
+  </data>
+  <data name="GPCancel" xml:space="preserve">
+    <value>Cancel</value>
+  </data>
 </root>

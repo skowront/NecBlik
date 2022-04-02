@@ -50,9 +50,11 @@ namespace NecBlik.Virtual.GUI.ViewModels
                 var rp = new InputResponseProvider(popup);
                 var result = rp.ProvideResponse();
                 if (result == string.Empty)
-                    this.AddNewDevice((new VirtualDevice() { cachedAddress = null }));
-                else
+                    this.AddNewDevice((new VirtualDevice(true)));
+                else if(result == null)
                     return;
+                else
+                    this.AddNewDevice((new VirtualDevice(false) {  Address = result }));;
             });
 
             this.RemoveDeviceCommand = new RelayCommand((o) =>
