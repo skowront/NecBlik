@@ -19,7 +19,9 @@ namespace NecBlik.Digi.GUI.ViewModels
         {
             if (this.SelectedDestinationAddress == this.Address)
             {
+                this.AddOutgoingHistoryBufferEntry(this.OutputBuffer, this.Address);
                 this.OnDataRecieved(this.OutputBuffer, this.Address);
+                return;
             }
             if (this.SelectedDestinationAddress == Core.GUI.Strings.SR.Broadcast)
             {
