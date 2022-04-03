@@ -168,4 +168,10 @@
   <data name="GPGuid" xml:space="preserve">
     <value>Guid</value>
   </data>
+  <data name="GPName" xml:space="preserve">
+    <value>Nom</value>
+  </data>
+  <data name="GPDeviceUnavailable" xml:space="preserve">
+    <value>Appareil indisponible</value>
+  </data>
 </root>

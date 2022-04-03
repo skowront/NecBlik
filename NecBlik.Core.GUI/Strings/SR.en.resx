@@ -171,4 +171,7 @@
   <data name="GPDeviceUnavailable" xml:space="preserve">
     <value>Device unavailable</value>
   </data>
+  <data name="GPName" xml:space="preserve">
+    <value>Name</value>
+  </data>
 </root>

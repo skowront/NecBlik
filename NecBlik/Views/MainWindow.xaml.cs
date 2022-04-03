@@ -135,7 +135,7 @@ namespace NecBlik.Views
 
             this.ViewModel.DiagramDevicesLoadProvider = new GenericResponseProvider<object,IEnumerable<DiagramDevice>>((o) =>
             {
-                this.designerCanvas.LoadDiagramDevicess(o,this.ViewModel.AvailableDevices);
+                this.designerCanvas.LoadDiagramDevices(o,this.ViewModel.AvailableDevices);
                 return null;
             });
 
@@ -204,6 +204,10 @@ namespace NecBlik.Views
                 foreach (var item in vms)
                 {
                     this.designerCanvas.RemoveDevice(item);
+                }
+                foreach(var item in o.GetSources())
+                {
+                    this.designerCanvas.RemoveDevice(item.GetCacheId());
                 }
                 this.designerCanvas.RemoveDevice(o.Coordinator);
                 return true;

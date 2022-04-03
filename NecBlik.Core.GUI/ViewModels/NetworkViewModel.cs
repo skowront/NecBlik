@@ -146,6 +146,11 @@ namespace NecBlik.Core.GUI.ViewModels
             return new List<DeviceViewModel>();
         }
 
+        public virtual IEnumerable<IDeviceSource> GetSources()
+        {
+            return new List<GhostDevice>();
+        }
+
         public virtual void Sync()
         {
             this.model.DeviceSubtypeFactoryRules.Clear();

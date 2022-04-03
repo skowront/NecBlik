@@ -119,6 +119,11 @@ namespace NecBlik.ViewModels
                     return;
                 }
 
+                foreach(var nwk in this.Networks)
+                {
+                    nwk.Dispose();
+                }
+
                 this.model = new ProjectModel();
                 this.guiModel = new ProjectGuiModel();
                 this.SyncFromModel();
@@ -138,7 +143,7 @@ namespace NecBlik.ViewModels
                             return;
                         this.Networks.Add(network);
                         this.SyncToModel();
-                        this.SyncFromModel();
+                        //this.SyncFromModel();
                     }
                 }
             });

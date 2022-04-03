@@ -160,6 +160,15 @@ namespace NecBlik.Core.GUI.Strings {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Name.
+        /// </summary>
+        public static string GPName {
+            get {
+                return ResourceManager.GetString("GPName", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Open.
         /// </summary>
         public static string GPOpen {

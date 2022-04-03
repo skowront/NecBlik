@@ -139,7 +139,7 @@ namespace NecBlik.Digi.Models
 
         public override string GetCacheId()
         {
-            return Resources.Resources.CoordinatorCachePrefix + this.zigBee?.GetAddressString();
+            return this.zigBee?.GetAddressString();
         }
 
         public override void Send(string data, string address)

@@ -201,6 +201,11 @@ namespace NecBlik.Virtual.GUI.ViewModels
             return this.Devices;
         }
 
+        public override IEnumerable<Core.Interfaces.IDeviceSource> GetSources()
+        {
+            return this.model.DeviceSources;
+        }
+
         public override void Sync()
         {
             base.Sync();

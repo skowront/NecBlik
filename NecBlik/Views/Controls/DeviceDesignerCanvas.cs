@@ -12,6 +12,8 @@ using NecBlik.Core.GUI.Models;
 using NecBlik.Core.GUI.Interfaces;
 using NecBlik.ViewModels;
 using NecBlik.Core.GUI.Factories;
+using NecBlik.Core.GUI.Views.Controls;
+using NecBlik.Core.Models;
 
 namespace NecBlik.Views.Controls
 {
@@ -119,7 +121,7 @@ namespace NecBlik.Views.Controls
             return diagramdevices;
         }
 
-        public void LoadDiagramDevicess(IEnumerable<DiagramDevice> diagramDevices, IEnumerable<DeviceViewModel> availableDevices)
+        public void LoadDiagramDevices(IEnumerable<DiagramDevice> diagramDevices, IEnumerable<DeviceViewModel> availableDevices)
         {
             this.Children.Clear();
             foreach(var item in diagramDevices)
@@ -133,7 +135,16 @@ namespace NecBlik.Views.Controls
                         deviceViewModel = device;
                     }
                 }
-                designerItem.Content = DeviceGuiAnyFactory.Instance.GetDeviceControl(deviceViewModel);
+                if(deviceViewModel==null)
+                {
+                    designerItem.Content = new GhostControl(new DeviceViewModel());
+                    designerItem.Payload = new DeviceViewModel(new Core.Models.DeviceModel(new GhostDevice(item.CachedObjectId)));
+                }
+                else
+                {
+                    designerItem.Content = DeviceGuiAnyFactory.Instance.GetDeviceControl(deviceViewModel);
+                    designerItem.Payload = deviceViewModel;
+                }
                 DesignerCanvas.SetLeft(designerItem, item.Point.X);
                 DesignerCanvas.SetTop(designerItem, item.Point.Y);
                 designerItem.Width = item.Size.Width;
@@ -165,6 +176,34 @@ namespace NecBlik.Views.Controls
                 }
             }
             if(toRemove!=null)
+            {
+                this.Children.Remove(toRemove);
+            }
+        }
+
+        public void RemoveDevice(string cacheId)
+        {
+            if (cacheId == null || cacheId == string.Empty)
+            {
+                return;
+            }
+            UIElement toRemove = null;
+            foreach (var item in this.Children)
+            {
+                if (item is DesignerItem)
+                {
+                    if (((DesignerItem)item).Payload is DeviceViewModel)
+                    {
+                        var itemvm = ((DeviceViewModel)((DesignerItem)item).Payload);
+                        if (itemvm.GetCacheId() == cacheId)
+                        {
+                            toRemove = (DesignerItem)item;
+                            break;
+                        }
+                    }
+                }
+            }
+            if (toRemove != null)
             {
                 this.Children.Remove(toRemove);
             }

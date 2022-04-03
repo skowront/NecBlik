@@ -80,7 +80,7 @@ namespace NecBlik.Core.Models
             if(this.Coordinator!=null)
             {
                 this.CoordinatorChanged?.Invoke();
-                await this.SyncCoordinator();
+                //await this.SyncCoordinator();
                 this.HasCoordinator = true;
             }
             else
