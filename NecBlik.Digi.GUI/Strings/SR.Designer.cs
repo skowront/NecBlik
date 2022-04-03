@@ -70,6 +70,15 @@ namespace NecBlik.Digi.GUI.Strings {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Add.
+        /// </summary>
+        public static string GPAdd {
+            get {
+                return ResourceManager.GetString("GPAdd", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Baud rate.
         /// </summary>
         public static string GPBaudRate {

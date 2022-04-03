@@ -69,6 +69,7 @@ namespace NecBlik.Virtual.GUI.ViewModels
                 {
                     this.model.DeviceSources.Remove((o as VirtualDeviceViewModel).Model.DeviceSource);
                 }
+                (o as VirtualDeviceViewModel).Dispose();
                 this.Devices.Remove(o as VirtualDeviceViewModel);
                 this.NotifyDevicesNetworkChanged(o as VirtualDeviceViewModel);
             });
@@ -159,6 +160,18 @@ namespace NecBlik.Virtual.GUI.ViewModels
                 this.DeviceSelectionSubscriber?.NotifyUpdated(vm);
                 this.NotifyDevicesNetworkChanged(vm);
             }
+            else
+            {
+                var existingViewModel = this.Devices.Where((x) => { return x.GetCacheId() == device.GetCacheId(); }).First();
+                if(existingViewModel.GetType()!=vm.GetType())
+                {
+                    existingViewModel.Dispose();
+                    this.Devices.Remove(existingViewModel);
+                    this.Devices.Add(vm);
+                    this.DeviceSelectionSubscriber?.NotifyUpdated(vm);
+                    this.NotifyDevicesNetworkChanged(vm);
+                }
+            }
            
             return true;
         }
@@ -192,6 +205,15 @@ namespace NecBlik.Virtual.GUI.ViewModels
         {
             base.Sync();
             this.SyncFromModel();
+        }
+
+        public override void Dispose()
+        {
+            base.Dispose();
+            foreach (var device in this.Devices)
+            {
+                device.Dispose();
+            }
         }
     }
 }

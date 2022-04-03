@@ -16,7 +16,7 @@ using NecBlik.Core.Interfaces;
 
 namespace NecBlik.Core.GUI.ViewModels
 {
-    public class NetworkViewModel : BaseViewModel
+    public class NetworkViewModel : BaseViewModel, IDisposable
     {
         protected Network model { get; set; }
 
@@ -207,6 +207,11 @@ namespace NecBlik.Core.GUI.ViewModels
         public virtual void OnFactoryEditClosed()
         {
 
+        }
+
+        public virtual void Dispose()
+        {
+            this.Coordinator?.Dispose();
         }
     }
 }

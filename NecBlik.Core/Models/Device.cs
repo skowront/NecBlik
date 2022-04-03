@@ -115,5 +115,10 @@ namespace NecBlik.Core.Models
         {
             return new List<string>();
         }
+
+        public virtual void Dispose()
+        {
+
+        }
     }
 }

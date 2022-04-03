@@ -119,5 +119,10 @@ namespace NecBlik.Core.Models
         {
             return this.DeviceSource.GetLicensees();
         }
+
+        public void Dispose()
+        {
+            this.DeviceSource?.Dispose();
+        }
     }
 }

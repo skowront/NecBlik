@@ -180,7 +180,12 @@ namespace NecBlik.ViewModels
                 }
             });
 
-            this.RemoveNetworkCommand = new RelayCommand(o => { var vm = o as NetworkViewModel; this.RemoveNetwork(o as NetworkViewModel); });
+            this.RemoveNetworkCommand = new RelayCommand(o => 
+            {   
+                var vm = o as NetworkViewModel;
+                vm.Dispose();
+                this.RemoveNetwork(o as NetworkViewModel); 
+            });
         }
 
         private void LoadProjectMap(string path)

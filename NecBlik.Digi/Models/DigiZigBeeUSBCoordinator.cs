@@ -182,6 +182,11 @@ namespace NecBlik.Digi.Models
                 this.zigBee.Close();
         }
 
+        public override void Dispose()
+        {
+            this.Close();
+        }
+
         [JsonObject(MemberSerialization.OptIn)]
         public class DigiUSBConnectionData
         {

@@ -13,7 +13,7 @@ using NecBlik.Core.Interfaces;
 namespace NecBlik.Core.Models
 {
     [JsonObject(MemberSerialization.OptIn)]
-    public class Network : IVendable
+    public class Network : IVendable, IDisposable
     {
         [JsonProperty]
         public string Name { get; set; } = Resources.Resources.GPNetwork;
@@ -141,6 +141,11 @@ namespace NecBlik.Core.Models
         public IEnumerable<string> GetLicensees()
         {
             return new List<string>();
+        }
+
+        public virtual void Dispose()
+        {
+
         }
     }
 }

@@ -3,17 +3,33 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using NecBlik.Common.WpfExtensions.Base;
 using NecBlik.Core.GUI;
 using NecBlik.Core.Models;
 using NecBlik.Digi.GUI.Factories;
+using NecBlik.Digi.GUI.Views;
 using NecBlik.Virtual.GUI.ViewModels;
 
 namespace NecBlik.Digi.GUI.ViewModels
 {
     public class DigiZigBeeNetworkViewModel : VirtualNetworkViewModel
     {
+        public RelayCommand AddCommand { get; set; }
+
         public DigiZigBeeNetworkViewModel(Network network) : base(network)
         {
+            this.EditCommand = new RelayCommand((o) =>
+            {
+                var window = new DigiNetworkWindow(this);
+                window.Show();
+            });
+
+            this.AddCommand = this.DiscoverCommand;
+            this.DiscoverCommand = new RelayCommand(async (o) =>
+            {
+                await this.Discover();
+            });
+
         }
 
         public override DeviceViewModel GetCoordinatorViewModel()
@@ -71,6 +87,19 @@ namespace NecBlik.Digi.GUI.ViewModels
                 this.DeviceSelectionSubscriber?.NotifyUpdated(vm);
                 this.NotifyDevicesNetworkChanged(vm);
             }
+            else
+            {
+                var existingViewModel = this.Devices.Where((x) => { return x.GetCacheId() == device.GetCacheId(); }).First();
+                if (existingViewModel.GetType() != vm.GetType())
+                {
+                    existingViewModel.Dispose();
+                    this.Devices.Remove(existingViewModel);
+                    this.Devices.Add(vm);
+                    this.DeviceSelectionSubscriber?.NotifyUpdated(vm);
+                    this.NotifyDevicesNetworkChanged(vm);
+                }
+            }
+
             return true;
         }
 

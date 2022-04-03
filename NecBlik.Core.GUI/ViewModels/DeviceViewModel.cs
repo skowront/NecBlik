@@ -13,7 +13,7 @@ using NecBlik.Core.Models;
 
 namespace NecBlik.Core.GUI
 {
-    public class DeviceViewModel:BaseViewModel,IDuplicable<DeviceViewModel>,ICachable,IVendable, ISubscriber<Tuple<string, string>>
+    public class DeviceViewModel:BaseViewModel,IDuplicable<DeviceViewModel>,ICachable,IVendable, ISubscriber<Tuple<string, string>>, IDisposable
     {
         public DeviceModel Model;
 
@@ -132,7 +132,7 @@ namespace NecBlik.Core.GUI
 
         public virtual string GetCacheId()
         {
-            return this.Guid.ToString();
+            return this.Model.DeviceSource.GetCacheId();
         }
 
         public virtual string GetVendorID()
@@ -232,6 +232,11 @@ namespace NecBlik.Core.GUI
         public virtual IEnumerable<string> GetLicensees()
         {
             return this.Model.GetLicensees();
+        }
+
+        public virtual void Dispose()
+        {
+            this.Model?.Dispose();
         }
     }
 }

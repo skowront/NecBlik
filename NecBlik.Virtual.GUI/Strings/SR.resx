@@ -192,4 +192,13 @@
   <data name="GPFactory" xml:space="preserve">
     <value>Factory</value>
   </data>
+  <data name="GPDiscover" xml:space="preserve">
+    <value>Discover</value>
+  </data>
+  <data name="GPSync" xml:space="preserve">
+    <value>Synchronize</value>
+  </data>
+  <data name="GPRules" xml:space="preserve">
+    <value>Rules</value>
+  </data>
 </root>

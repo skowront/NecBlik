@@ -1,17 +1,17 @@
-﻿<mah:MetroWindow x:Class="NecBlik.Virtual.GUI.Views.VirtualNetworkWindow"
+﻿<mah:MetroWindow x:Class="NecBlik.Digi.GUI.Views.DigiNetworkWindow"
         xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
         xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
         xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:mah="http://metro.mahapps.com/winfx/xaml/controls"
-        xmlns:local="clr-namespace:NecBlik.Virtual.GUI.Views"
-        xmlns:viewModels="clr-namespace:NecBlik.Virtual.GUI.ViewModels"
+        xmlns:local="clr-namespace:NecBlik.Digi.GUI.Views"
+        xmlns:viewModels="clr-namespace:NecBlik.Digi.GUI.ViewModels"
         xmlns:lexp="clr-namespace:WPFLocalizeExtension.Providers;assembly=WPFLocalizeextension"
         xmlns:lex="clr-namespace:WPFLocalizeExtension.Extensions;assembly=WPFLocalizeextension"
         lexp:ResxLocalizationProvider.DefaultAssembly="NecBlik.Virtual.GUI"
         lexp:ResxLocalizationProvider.DefaultDictionary="SR"
         mc:Ignorable="d"
-        Title="Virtual Network Window" Height="450" Width="800">
+        Title="Digi Network Window" Height="450" Width="800">
     <Grid Background="{StaticResource MaterialDesignDarkBackground}">
         <Grid Margin="10">
             <Grid.RowDefinitions>
@@ -37,6 +37,12 @@
                             <TextBlock Text="{lex:Loc GPDiscover}" VerticalAlignment="Center"></TextBlock>
                         </Button.ToolTip>
                     </Button>
+                    <Button Grid.Column="2" Grid.RowSpan="2" VerticalAlignment="Center" Style="{StaticResource BaseButton}" Command="{Binding ViewModel.AddCommand}" HorizontalAlignment="Center" Margin="0" MaxWidth="50" MinWidth="50">
+                        <TextBlock Text="&#xf067;" FontFamily="{StaticResource FontAwesome}" VerticalAlignment="Center"></TextBlock>
+                        <Button.ToolTip>
+                            <TextBlock Text="{lex:Loc GPAdd}" VerticalAlignment="Center"></TextBlock>
+                        </Button.ToolTip>
+                    </Button>
                     <Button Grid.Column="2" Grid.RowSpan="2" VerticalAlignment="Center" Style="{StaticResource BaseButton}" Command="{Binding ViewModel.RefreshCommand}" HorizontalAlignment="Center" Margin="0" MaxWidth="50" MinWidth="50">
                         <TextBlock Text="&#xf021;" FontFamily="{StaticResource FontAwesome}" VerticalAlignment="Center"></TextBlock>
                         <Button.ToolTip>
@@ -57,7 +63,7 @@
             </StackPanel>
             <ContentPresenter Grid.Row="2" Content="{Binding ViewModel.Coordinator}">
                 <ContentPresenter.ContentTemplate>
-                    <DataTemplate DataType="{x:Type viewModels:VirtualDeviceViewModel}">
+                    <DataTemplate DataType="{x:Type viewModels:DigiZigBeeCoordinatorViewModel}">
                         <StackPanel Orientation="Vertical">
                             <TextBlock Text="{Binding InternalFactoryType}" Foreground="{StaticResource MaterialDesignDarkForeground}"></TextBlock>
                             <TextBlock Text="{Binding Name, UpdateSourceTrigger=PropertyChanged}" Foreground="{StaticResource MaterialDesignDarkForeground}"></TextBlock>
@@ -80,7 +86,7 @@
                 <ScrollViewer Grid.Row="1" Style="{StaticResource ScrollViewer}">
                     <ListView Background="{StaticResource MaterialDesignDarkBackground}" HorizontalContentAlignment="Stretch" ItemsSource="{Binding ViewModel.Devices}" d:ItemsSource="{d:SampleData ItemCount=5}">
                         <ListView.Resources>
-                            <DataTemplate x:Key="VirtualDeviceDataTemplate" DataType="{x:Type viewModels:VirtualDeviceViewModel}">
+                            <DataTemplate x:Key="VirtualDeviceDataTemplate" DataType="{x:Type viewModels:DigiZigBeeViewModel}">
                                 <StackPanel Orientation="Vertical">
                                     <TextBlock Text="{Binding InternalFactoryType}"></TextBlock>
                                     <TextBlock Text="{Binding Name, UpdateSourceTrigger=PropertyChanged}"></TextBlock>

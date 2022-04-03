@@ -121,7 +121,7 @@ namespace NecBlik.Digi.GUI.Factories
                 return base.DeviceViewModelFromRules(model, network, rules);
 
             var assembly = Assembly.GetAssembly(typeof(VirtualDeviceGuiFactory));
-            FactoryRule rule = rules.Find((f) => { return f.Property == VirtualDeviceGuiFactory.DeviceViewModelRuledProperties.ViewModel && f.CacheObjectId == model.CacheId; });
+            FactoryRule rule = rules.Find((f) => { return f.Property == VirtualDeviceGuiFactory.DeviceViewModelRuledProperties.ViewModel && f.CacheObjectId == model.DeviceSource.GetCacheId(); });
             foreach (var item in rules)
             {
                 if (item.CacheObjectId == model.CacheId)

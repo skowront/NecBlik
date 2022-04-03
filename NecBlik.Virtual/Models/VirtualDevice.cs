@@ -90,6 +90,11 @@ namespace NecBlik.Virtual.Models
             return true;
         }
 
+        public override string GetCacheId()
+        {
+            return this.Address;
+        }
+
         public override IEnumerable<string> GetLicensees()
         {
             VirtualDeviceFactory f = new VirtualDeviceFactory();

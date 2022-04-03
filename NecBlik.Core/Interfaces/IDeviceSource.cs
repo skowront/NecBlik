@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace NecBlik.Core.Interfaces
 {
-    public interface IDeviceSource: IVendable, ICachable
+    public interface IDeviceSource: IVendable, ICachable, IDisposable
     {
         public string GetAddress();
         public string GetName();

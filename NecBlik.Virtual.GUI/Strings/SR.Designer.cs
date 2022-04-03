@@ -142,6 +142,15 @@ namespace NecBlik.Virtual.GUI.Strings {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Discover.
+        /// </summary>
+        public static string GPDiscover {
+            get {
+                return ResourceManager.GetString("GPDiscover", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Factory.
         /// </summary>
         public static string GPFactory {
@@ -241,6 +250,15 @@ namespace NecBlik.Virtual.GUI.Strings {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Rules.
+        /// </summary>
+        public static string GPRules {
+            get {
+                return ResourceManager.GetString("GPRules", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Select.
         /// </summary>
         public static string GPSelect {
@@ -264,6 +282,15 @@ namespace NecBlik.Virtual.GUI.Strings {
         public static string GPStayOpen {
             get {
                 return ResourceManager.GetString("GPStayOpen", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Synchronize.
+        /// </summary>
+        public static string GPSync {
+            get {
+                return ResourceManager.GetString("GPSync", resourceCulture);
             }
         }
         
