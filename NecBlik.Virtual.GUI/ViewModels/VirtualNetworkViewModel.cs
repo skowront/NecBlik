@@ -48,13 +48,44 @@ namespace NecBlik.Virtual.GUI.ViewModels
             {
                 var popup = new SimpleInputPopup(Strings.SR.EnterAddressOrLeaveEmpty, string.Empty , null,null);
                 var rp = new InputResponseProvider(popup);
-                this.AddNewDevice((new VirtualDevice() { cachedAddress = rp.ProvideResponse() }));
+                var result = rp.ProvideResponse();
+                if (result == string.Empty)
+                {
+                    var dev = (new VirtualDevice(true));
+                    this.AddNewDevice(dev);
+                }
+                else if (result == null)
+                    return;
+                else
+                {
+                    var dev = (new VirtualDevice(false) { Address = result });
+                    this.AddNewDevice(dev);
+                }
             });
 
             this.RemoveDeviceCommand = new RelayCommand((o) =>
             {
+                if (this.model.DeviceSources.Contains((o as VirtualDeviceViewModel).Model.DeviceSource))
+                {
+                    this.model.DeviceSources.Remove((o as VirtualDeviceViewModel).Model.DeviceSource);
+                }
+                (o as VirtualDeviceViewModel).Dispose();
                 this.Devices.Remove(o as VirtualDeviceViewModel);
+                this.NotifyDevicesNetworkChanged(o as VirtualDeviceViewModel);
             });
+        }
+
+        protected void NotifyDevicesNetworkChanged(VirtualDeviceViewModel changedDevice)
+        {
+            foreach(var item in this.Devices)
+            {
+                item.NetworkChanged();
+            }
+            this.Coordinator?.NetworkChanged();
+            if(changedDevice != null)
+            {
+                changedDevice.NetworkChanged();
+            }
         }
 
         private void BuildResponseProviders()
@@ -101,7 +132,7 @@ namespace NecBlik.Virtual.GUI.ViewModels
 
         public virtual void SyncFromModel()
         {
-            this.Devices.Clear();
+            //this.Devices.Clear();
            
             foreach (var device in this.model.DeviceSources)
             {
@@ -112,17 +143,37 @@ namespace NecBlik.Virtual.GUI.ViewModels
             this.OnPropertyChanged();
         }
 
-        public override void AddNewDevice(IDeviceSource device)
+        public override bool AddNewDevice(IDeviceSource device)
         {
             var factory = new VirtualDeviceGuiFactory();
             var vm = factory.DeviceViewModelFromRules(new DeviceModel(device), this, this.model.DeviceSubtypeFactoryRules.ToList());
+            if (vm == null)
+                return false;   
             vm.PullSelectionSubscriber = this.DeviceSelectionSubscriber;
             if(!this.model.DeviceSources.Contains(device))
             {
                 this.model.DeviceSources.Add(device);
             }
-            this.Devices.Add(vm);
-            this.DeviceSelectionSubscriber?.NotifyUpdated(vm);
+            if (!this.Devices.Any((v) => { return v.GetCacheId() == device.GetCacheId(); }))
+            {
+                this.Devices.Add(vm);
+                this.DeviceSelectionSubscriber?.NotifyUpdated(vm);
+                this.NotifyDevicesNetworkChanged(vm);
+            }
+            else
+            {
+                var existingViewModel = this.Devices.Where((x) => { return x.GetCacheId() == device.GetCacheId(); }).First();
+                if(existingViewModel.GetType()!=vm.GetType())
+                {
+                    existingViewModel.Dispose();
+                    this.Devices.Remove(existingViewModel);
+                    this.Devices.Add(vm);
+                    this.DeviceSelectionSubscriber?.NotifyUpdated(vm);
+                    this.NotifyDevicesNetworkChanged(vm);
+                }
+            }
+           
+            return true;
         }
 
         public override DeviceViewModel GetCoordinatorViewModel()
@@ -150,10 +201,24 @@ namespace NecBlik.Virtual.GUI.ViewModels
             return this.Devices;
         }
 
+        public override IEnumerable<Core.Interfaces.IDeviceSource> GetSources()
+        {
+            return this.model.DeviceSources;
+        }
+
         public override void Sync()
         {
             base.Sync();
             this.SyncFromModel();
+        }
+
+        public override void Dispose()
+        {
+            base.Dispose();
+            foreach (var device in this.Devices)
+            {
+                device.Dispose();
+            }
         }
     }
 }

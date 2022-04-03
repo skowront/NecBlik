@@ -18,7 +18,7 @@ namespace NecBlik.Virtual.GUI.Views
     /// <summary>
     /// Interaction logic for VirtualZigBeeWindow.xaml
     /// </summary>
-    public partial class VirtualDeviceWindow : Window
+    public partial class VirtualDeviceWindow
     {
         public VirtualDeviceWindow()
         {
@@ -28,6 +28,11 @@ namespace NecBlik.Virtual.GUI.Views
         public VirtualDeviceWindow(VirtualDeviceViewModel virtualDeviceViewModel) : this()
         {
             this.DataContext = virtualDeviceViewModel;
+        }
+
+        private void ComboBox_MouseDown(object sender, MouseButtonEventArgs e)
+        {
+            this.AvComboBox.ItemsSource = (this.DataContext as VirtualDeviceViewModel).AvailableDestinationAddresses;
         }
     }
 }

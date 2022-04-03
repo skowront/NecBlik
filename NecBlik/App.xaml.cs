@@ -45,8 +45,17 @@ namespace NecBlik
                 this.ApplicationSettings = JsonConvert.DeserializeObject<ApplicationSettings>(File.ReadAllText(SettingsFile));
             }
 
+            this.InitializeAppFolder();
+
             WPFLocalizeExtension.Engine.LocalizeDictionary.Instance.SetCurrentThreadCulture = true;
             WPFLocalizeExtension.Engine.LocalizeDictionary.Instance.Culture = System.Globalization.CultureInfo.CreateSpecificCulture(this.applicationSettings.Language);
+        }
+
+        private void InitializeAppFolder()
+        {
+            if(!Directory.Exists(NecBlik.Core.Resources.Resources.MainFolderForLibraries))
+                Directory.CreateDirectory(NecBlik.Core.Resources.Resources.MainFolderForLibraries);
+            var path = Path.GetFullPath(NecBlik.Core.Resources.Resources.MainFolderForLibraries);
         }
 
         private void OnSettingsChanged()

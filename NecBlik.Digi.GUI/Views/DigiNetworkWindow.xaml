@@ -1,17 +1,17 @@
-﻿<mah:MetroWindow x:Class="NecBlik.Virtual.GUI.Views.VirtualNetworkWindow"
+﻿<mah:MetroWindow x:Class="NecBlik.Digi.GUI.Views.DigiNetworkWindow"
         xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
         xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
         xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:mah="http://metro.mahapps.com/winfx/xaml/controls"
-        xmlns:local="clr-namespace:NecBlik.Virtual.GUI.Views"
-        xmlns:viewModels="clr-namespace:NecBlik.Virtual.GUI.ViewModels"
+        xmlns:local="clr-namespace:NecBlik.Digi.GUI.Views"
+        xmlns:viewModels="clr-namespace:NecBlik.Virtual.GUI.ViewModels;assembly=NecBlik.Virtual.GUI"
         xmlns:lexp="clr-namespace:WPFLocalizeExtension.Providers;assembly=WPFLocalizeextension"
         xmlns:lex="clr-namespace:WPFLocalizeExtension.Extensions;assembly=WPFLocalizeextension"
         lexp:ResxLocalizationProvider.DefaultAssembly="NecBlik.Virtual.GUI"
         lexp:ResxLocalizationProvider.DefaultDictionary="SR"
         mc:Ignorable="d"
-        Title="Virtual Network Window" Height="450" Width="800">
+        Title="Digi Network Window" Height="450" Width="800">
     <Grid Background="{StaticResource MaterialDesignDarkBackground}">
         <Grid Margin="10">
             <Grid.RowDefinitions>
@@ -41,6 +41,12 @@
                         <StackPanel Orientation="Horizontal">
                             <TextBlock Text="{lex:Loc GPDiscover}" Margin="0 0 5 0" VerticalAlignment="Center"></TextBlock>
                             <TextBlock Text="&#xf002;" FontFamily="{StaticResource FontAwesome}"  VerticalAlignment="Center"></TextBlock>
+                        </StackPanel>
+                    </Button>
+                    <Button Grid.Column="1" VerticalAlignment="Center" Style="{StaticResource BaseButton}" Command="{Binding ViewModel.AddCommand}" HorizontalAlignment="Center" Margin="0" MinWidth="50">
+                        <StackPanel Orientation="Horizontal">
+                            <TextBlock Text="{lex:Loc NecBlik.Digi.GUI:SR:GPAdd}" Margin="0 0 5 0" VerticalAlignment="Center"></TextBlock>
+                            <TextBlock Text="&#xf067;" FontFamily="{StaticResource FontAwesome}" VerticalAlignment="Center"></TextBlock>
                         </StackPanel>
                     </Button>
                     <Button Grid.Column="2" VerticalAlignment="Center" Style="{StaticResource BaseButton}" Command="{Binding ViewModel.RefreshCommand}" HorizontalAlignment="Center" Margin="0" MinWidth="50">

@@ -54,6 +54,7 @@ namespace NecBlik.Common.WpfElements.ResponseProviders
                 }
                 this.Popup?.ShowDialog();
             });
+            old.Close();
             return result;
         }
     }

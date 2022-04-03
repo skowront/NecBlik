@@ -1,4 +1,4 @@
-﻿using DiagramDesigner;
+﻿using NecBlik.Digi.GUI.ViewModels;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -9,30 +9,25 @@ using System.Windows.Controls;
 using System.Windows.Data;
 using System.Windows.Documents;
 using System.Windows.Input;
-using System.Windows.Markup;
 using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using System.Windows.Shapes;
-using NecBlik.Core.GUI;
-using NecBlik.Virtual.GUI.ViewModels;
-using NecBlik.Common.WpfElements.ResponseProviders;
-using NecBlik.Common.WpfExtensions.Interfaces;
 
-namespace NecBlik.Virtual.GUI.Views
+namespace NecBlik.Digi.GUI.Views
 {
     /// <summary>
-    /// Interaction logic for VirtualNetworkWindow.xaml
+    /// Interaction logic for DigiNetworkWindow.xaml
     /// </summary>
-    public partial class VirtualNetworkWindow
+    public partial class DigiNetworkWindow
     {
-        public VirtualNetworkViewModel ViewModel { get; set; }
+        public DigiZigBeeNetworkViewModel ViewModel { get; set; }
 
-        public VirtualNetworkWindow()
+        public DigiNetworkWindow()
         {
             InitializeComponent();
         }
 
-        public VirtualNetworkWindow(VirtualNetworkViewModel vm):this()
+        public DigiNetworkWindow(DigiZigBeeNetworkViewModel vm) : this()
         {
             this.ViewModel = vm;
             this.DataContext = this;

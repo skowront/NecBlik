@@ -159,4 +159,19 @@
   <data name="GPFilters" xml:space="preserve">
     <value>Filtry</value>
   </data>
+  <data name="GPFactory" xml:space="preserve">
+    <value>Fabryka</value>
+  </data>
+  <data name="GPAddress" xml:space="preserve">
+    <value>Adres</value>
+  </data>
+  <data name="GPGuid" xml:space="preserve">
+    <value>Guid</value>
+  </data>
+  <data name="GPName" xml:space="preserve">
+    <value>Nom</value>
+  </data>
+  <data name="GPDeviceUnavailable" xml:space="preserve">
+    <value>Urządzenie niedostępne</value>
+  </data>
 </root>

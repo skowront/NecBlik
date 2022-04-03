@@ -150,4 +150,13 @@
   <data name="CantSendFromRemoteDevices" xml:space="preserve">
     <value>Nie można wysyłać ze zdalnego urządzenia.</value>
   </data>
+  <data name="GPConfirm" xml:space="preserve">
+    <value>Potwierdź</value>
+  </data>
+  <data name="GPCancel" xml:space="preserve">
+    <value>Anuluj</value>
+  </data>
+  <data name="GPAdd" xml:space="preserve">
+    <value>Dodaj</value>
+  </data>
 </root>

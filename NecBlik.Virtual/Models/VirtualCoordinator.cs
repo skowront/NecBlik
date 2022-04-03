@@ -83,6 +83,12 @@ namespace NecBlik.Virtual.Models
             return this.connections;
         }
 
+        public override string GetCacheId()
+        {
+            return this.Address;
+        }
+
+
         public override void Save(string folderPath)
         {
             var json = JsonConvert.SerializeObject(this, Formatting.Indented);

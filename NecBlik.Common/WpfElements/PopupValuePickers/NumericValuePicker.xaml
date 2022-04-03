@@ -12,7 +12,7 @@
         MinWidth="500" 
         Height="300"
         Width="500"
-        Template="{DynamicResource ZigBeeWindowControlTemplateHeaderless}" 
+        Template="{DynamicResource DarkWindowControlTemplateHeaderless}" 
         ResizeMode="CanResizeWithGrip">
     <Window.Resources>
         <ResourceDictionary>
@@ -36,10 +36,11 @@
             <ColumnDefinition></ColumnDefinition>
         </Grid.ColumnDefinitions>
         <Grid.RowDefinitions>
-            <RowDefinition Height="1*"></RowDefinition>
+            <RowDefinition Height="*"></RowDefinition>
+            <RowDefinition Height="auto"></RowDefinition>
             <RowDefinition Height="50"></RowDefinition>
         </Grid.RowDefinitions>
-        <TextBox HorizontalAlignment="Stretch" Grid.Row="0" Grid.ColumnSpan="2" Text="{Binding Value}" FontSize="13"></TextBox>
+        <TextBox HorizontalAlignment="Stretch" Grid.Row="0" Grid.ColumnSpan="2" Margin="0 0 0 10" Text="{Binding Value}" Foreground="{StaticResource MaterialDesignDarkForeground}" FontSize="13"></TextBox>
         <Button Grid.Column="0" Grid.Row="2" Style="{StaticResource BaseButton}" Command="{Binding ConfirmCommand}">
             <TextBlock FontFamily="{StaticResource FontAwesome}" Text="&#xf00c;"></TextBlock>
         </Button>

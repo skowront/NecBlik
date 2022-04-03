@@ -180,4 +180,25 @@
   <data name="GPStayOpen" xml:space="preserve">
     <value>Stay open</value>
   </data>
+  <data name="GPConfirm" xml:space="preserve">
+    <value>Confirm</value>
+  </data>
+  <data name="GPCancel" xml:space="preserve">
+    <value>Cancel</value>
+  </data>
+  <data name="GPGuid" xml:space="preserve">
+    <value>Guid</value>
+  </data>
+  <data name="GPFactory" xml:space="preserve">
+    <value>Factory</value>
+  </data>
+  <data name="GPDiscover" xml:space="preserve">
+    <value>Discover</value>
+  </data>
+  <data name="GPSynchronize" xml:space="preserve">
+    <value>Synchronize</value>
+  </data>
+  <data name="GPRules" xml:space="preserve">
+    <value>Rules</value>
+  </data>
 </root>

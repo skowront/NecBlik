@@ -45,6 +45,11 @@ namespace NecBlik.Digi.Models
             this.zigBee.DataReceived += ZigBeeDataReceived;
         }
 
+        ~DigiZigBeeUSBCoordinator()
+        {
+            this.zigBee?.Close();
+        }
+
         private void ZigBeeDataReceived(object? sender, XBeeLibrary.Core.Events.DataReceivedEventArgs e)
         {
             this.OnDataRecieved(e.DataReceived.DataString, e.DataReceived.Device.GetAddressString());
@@ -134,7 +139,7 @@ namespace NecBlik.Digi.Models
 
         public override string GetCacheId()
         {
-            return Resources.Resources.CoordinatorCachePrefix + this.zigBee?.GetAddressString();
+            return this.zigBee?.GetAddressString();
         }
 
         public override void Send(string data, string address)
@@ -175,6 +180,19 @@ namespace NecBlik.Digi.Models
         {
             if(this.zigBee.IsOpen)
                 this.zigBee.Close();
+        }
+
+        public override void Dispose()
+        {
+            this.Close();
+        }
+
+        public override void OnDataSent(string data, string sourceAddress)
+        {
+            if(sourceAddress == this.Address)
+            {
+                this.OnDataRecieved(data,sourceAddress);
+            }
         }
 
         [JsonObject(MemberSerialization.OptIn)]

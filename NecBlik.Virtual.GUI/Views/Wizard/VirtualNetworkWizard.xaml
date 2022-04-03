@@ -1,4 +1,4 @@
-﻿<Window x:Class="NecBlik.Virtual.GUI.Views.Wizard.VirtualNetworkWizard"
+﻿<mah:MetroWindow x:Class="NecBlik.Virtual.GUI.Views.Wizard.VirtualNetworkWizard"
         xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
         xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
         xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
@@ -10,10 +10,11 @@
         xmlns:lex="clr-namespace:WPFLocalizeExtension.Extensions;assembly=WPFLocalizeextension"
         lexp:ResxLocalizationProvider.DefaultAssembly="NecBlik.Virtual.GUI"
         lexp:ResxLocalizationProvider.DefaultDictionary="SR"
+        xmlns:mah="http://metro.mahapps.com/winfx/xaml/controls"
         mc:Ignorable="d"
-        Title="VirtualNetworkWizard" Height="450" Width="800"
+        Title="Virtual Network Wizard" Height="250" Width="800"
         d:DataContext="{d:DesignInstance {x:Type dtvm:VirtualNetworkWizardViewModel}}">
-    <Grid>
+    <Grid Background="{StaticResource MaterialDesignDarkBackground}">
         <Grid Margin="10">
             <Grid.RowDefinitions>
                 <RowDefinition Height="auto"></RowDefinition>
@@ -24,57 +25,71 @@
             </Grid.RowDefinitions>
             <Grid Grid.Row="0">
                 <Grid.ColumnDefinitions>
-                    <ColumnDefinition></ColumnDefinition>
-                    <ColumnDefinition></ColumnDefinition>
-                    <ColumnDefinition></ColumnDefinition>
+                    <ColumnDefinition Width="*"></ColumnDefinition>
+                    <ColumnDefinition Width="3*"></ColumnDefinition>
                 </Grid.ColumnDefinitions>
-                <TextBlock Grid.Column="0" Text="{lex:Loc GPNetworkName}"></TextBlock>
-                <TextBox Grid.Column="1" Grid.ColumnSpan="2" Text="{Binding NetworkName}" VerticalAlignment="Stretch"></TextBox>
+                <TextBlock Grid.Column="0" Text="{lex:Loc GPNetworkName}" Foreground="{StaticResource MaterialDesignDarkForeground}"></TextBlock>
+                <TextBox Grid.Column="1" Grid.ColumnSpan="2" Text="{Binding NetworkName}" Foreground="{StaticResource MaterialDesignDarkForeground}" TextWrapping="Wrap" VerticalAlignment="Stretch"></TextBox>
             </Grid>
             <Grid Grid.Row="1" Margin="0 10 0 0">
                 <Grid.ColumnDefinitions>
-                    <ColumnDefinition></ColumnDefinition>
-                    <ColumnDefinition></ColumnDefinition>
-                    <ColumnDefinition></ColumnDefinition>
+                    <ColumnDefinition Width="*"></ColumnDefinition>
+                    <ColumnDefinition Width="3*"></ColumnDefinition>
                 </Grid.ColumnDefinitions>
-                <TextBlock Grid.Column="0" Text="{lex:Loc GPVirtualDevicesCount}"></TextBlock>
-                <TextBlock Grid.Column="1" Text="{Binding VirtualDevices}"></TextBlock>
-                <Button Grid.Column="2" HorizontalAlignment="Right" HorizontalContentAlignment="Right" Style="{StaticResource BaseButton}" VerticalAlignment="Center" Command="{Binding PickVirtualDevicesCommand}">
-                    <StackPanel Orientation="Horizontal">
-                        <TextBlock Text="{lex:Loc GPSelect}" Margin="0 0 10 0"></TextBlock>
-                        <fa:FontAwesome Icon="MousePointer" VerticalAlignment="Center"></fa:FontAwesome>
-                    </StackPanel>
-                </Button>
+                <TextBlock Grid.Column="0" Text="{lex:Loc GPVirtualDevicesCount}" Foreground="{StaticResource MaterialDesignDarkForeground}"></TextBlock>
+                <Grid Grid.Column="1">
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition></ColumnDefinition>
+                        <ColumnDefinition Width="auto"></ColumnDefinition>
+                    </Grid.ColumnDefinitions>
+                    <TextBlock Grid.Column="0" Text="{Binding VirtualDevices}" Foreground="{StaticResource MaterialDesignDarkForeground}"></TextBlock>
+                    <Button Grid.Column="1" HorizontalAlignment="Right" HorizontalContentAlignment="Right" Style="{StaticResource BaseButton}" VerticalAlignment="Center" Command="{Binding PickVirtualDevicesCommand}">
+                        <StackPanel Orientation="Horizontal">
+                            <TextBlock Text="{lex:Loc GPSelect}" Foreground="{StaticResource MaterialDesignDarkForeground}" Margin="0 0 10 0"></TextBlock>
+                            <fa:FontAwesome Icon="MousePointer" VerticalAlignment="Center"></fa:FontAwesome>
+                        </StackPanel>
+                    </Button>
+                </Grid>
             </Grid>
             <Grid Grid.Row="2" Margin="0 10 0 0">
                 <Grid.ColumnDefinitions>
                     <ColumnDefinition Width="*"></ColumnDefinition>
-                    <ColumnDefinition Width="*"></ColumnDefinition>
-                    <ColumnDefinition Width="*"></ColumnDefinition>
+                    <ColumnDefinition Width="3*"></ColumnDefinition>
                 </Grid.ColumnDefinitions>
-                <TextBlock Grid.Column="0" Text="{lex:Loc GPNetworkType}"></TextBlock>
-                <TextBlock Grid.Column="1" Text="{Binding NetworkType}" TextWrapping="Wrap"></TextBlock>
-                <Button Grid.Column="2" HorizontalAlignment="Right" HorizontalContentAlignment="Right" Style="{StaticResource BaseButton}" VerticalAlignment="Center" Command="{Binding PickNetworkTypeCommand}">
-                    <StackPanel Orientation="Horizontal">
-                        <TextBlock Text="{lex:Loc GPSelect}" Margin="0 0 10 0"></TextBlock>
-                        <fa:FontAwesome Icon="MousePointer" VerticalAlignment="Center"></fa:FontAwesome>
-                    </StackPanel>
-                </Button>
+                <TextBlock Grid.Column="0" Text="{lex:Loc GPNetworkType}" Foreground="{StaticResource MaterialDesignDarkForeground}"></TextBlock>
+                <Grid Grid.Column="1">
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition></ColumnDefinition>
+                        <ColumnDefinition Width="auto"></ColumnDefinition>
+                    </Grid.ColumnDefinitions>
+                    <TextBlock Text="{Binding NetworkType}" Foreground="{StaticResource MaterialDesignDarkForeground}" TextWrapping="Wrap"></TextBlock>
+                    <Button Grid.Column="1" HorizontalAlignment="Right" HorizontalContentAlignment="Right" Style="{StaticResource BaseButton}" VerticalAlignment="Center" Command="{Binding PickNetworkTypeCommand}">
+                        <StackPanel Orientation="Horizontal">
+                            <TextBlock Text="{lex:Loc GPSelect}" Margin="0 0 10 0"></TextBlock>
+                            <fa:FontAwesome Icon="MousePointer" VerticalAlignment="Center"></fa:FontAwesome>
+                        </StackPanel>
+                    </Button>
+                </Grid>
             </Grid>
             <Grid Grid.Row="3" Margin="0 10 0 0">
                 <Grid.ColumnDefinitions>
-                    <ColumnDefinition></ColumnDefinition>
-                    <ColumnDefinition></ColumnDefinition>
-                    <ColumnDefinition></ColumnDefinition>
+                    <ColumnDefinition Width="*"></ColumnDefinition>
+                    <ColumnDefinition Width="3*"></ColumnDefinition>
                 </Grid.ColumnDefinitions>
-                <TextBlock Grid.Column="0" Text="{lex:Loc GPCoordinatorType}"></TextBlock>
-                <TextBlock Grid.Column="1" Text="{Binding CoordinatorType}" TextWrapping="Wrap"></TextBlock>
-                <Button Grid.Column="2" HorizontalAlignment="Right" HorizontalContentAlignment="Right" Style="{StaticResource BaseButton}" VerticalAlignment="Center" Command="{Binding PickCoordinatorTypeCommand}">
-                    <StackPanel Orientation="Horizontal">
-                        <TextBlock Text="{lex:Loc GPSelect}" Margin="0 0 10 0"></TextBlock>
-                        <fa:FontAwesome Icon="MousePointer" VerticalAlignment="Center"></fa:FontAwesome>
-                    </StackPanel>
-                </Button>
+                <TextBlock Grid.Column="0" Text="{lex:Loc GPCoordinatorType}" Foreground="{StaticResource MaterialDesignDarkForeground}"></TextBlock>
+                <Grid Grid.Column="1">
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition></ColumnDefinition>
+                        <ColumnDefinition Width="auto"></ColumnDefinition>
+                    </Grid.ColumnDefinitions>
+                    <TextBlock Text="{Binding CoordinatorType}" Foreground="{StaticResource MaterialDesignDarkForeground}" TextWrapping="Wrap"></TextBlock>
+                    <Button Grid.Column="1" HorizontalAlignment="Right" HorizontalContentAlignment="Right" Style="{StaticResource BaseButton}" VerticalAlignment="Center" Command="{Binding PickCoordinatorTypeCommand}">
+                        <StackPanel Orientation="Horizontal">
+                            <TextBlock Text="{lex:Loc GPSelect}" Margin="0 0 10 0"></TextBlock>
+                            <fa:FontAwesome Icon="MousePointer" VerticalAlignment="Center"></fa:FontAwesome>
+                        </StackPanel>
+                    </Button>
+                </Grid>
             </Grid>
             <Grid Grid.Row="4">
                 <Grid.ColumnDefinitions>
@@ -84,12 +99,18 @@
                     <ColumnDefinition></ColumnDefinition>
                 </Grid.ColumnDefinitions>
                 <Button Grid.Column="1" HorizontalAlignment="Center" Style="{StaticResource BaseButton}" VerticalAlignment="Center" Command="{Binding ConfirmCommand}">
-                    <fa:FontAwesome Icon="Check" Margin="10"></fa:FontAwesome>
+                    <StackPanel Orientation="Horizontal">
+                        <TextBlock Text="{lex:Loc GPConfirm}" Margin="0 0 10 0"></TextBlock>
+                        <fa:FontAwesome Icon="Check" VerticalAlignment="Center"></fa:FontAwesome>
+                    </StackPanel>
                 </Button>
                 <Button Grid.Column="2" HorizontalAlignment="Center" Style="{StaticResource BaseButton}" VerticalAlignment="Center" Command="{Binding AbortCommand}">
-                    <fa:FontAwesome Icon="Close" Margin="10"></fa:FontAwesome>
+                    <StackPanel Orientation="Horizontal">
+                        <TextBlock Text="{lex:Loc GPCancel}" Margin="0 0 10 0"></TextBlock>
+                        <fa:FontAwesome Icon="Close" VerticalAlignment="Center"></fa:FontAwesome>
+                    </StackPanel>
                 </Button>
             </Grid>
         </Grid>
     </Grid>
-</Window>
+</mah:MetroWindow>

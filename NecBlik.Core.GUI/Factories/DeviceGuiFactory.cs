@@ -1,6 +1,8 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.IO;
 using System.Linq;
+using System.Reflection;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows;
@@ -13,7 +15,9 @@ namespace NecBlik.Core.GUI.Factories
 {
     public abstract class DeviceGuiFactory : IDeviceGuiFactory
     {
-        private List<IDeviceGuiFactory> otherFactories;
+        protected List<IDeviceGuiFactory> otherFactories;
+
+        protected List<IDeviceGuiFactory> subFactories;
 
         protected string internalFactoryType { get; set; } = "Abstract";
 
@@ -59,8 +63,11 @@ namespace NecBlik.Core.GUI.Factories
 
         public virtual void Initalize(object args = null)
         {
-            
+            var dir = string.Format(NecBlik.Core.Resources.Resources.LibraryFolderFormattableString, this.internalFactoryType);
+            if (!Directory.Exists(dir))
+                Directory.CreateDirectory(dir);
         }
+
 
         public bool IsLicensed()
         {

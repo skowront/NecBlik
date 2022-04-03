@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace NecBlik.Core.Interfaces
 {
-    public interface IDeviceSource: IVendable, ICachable
+    public interface IDeviceSource: IVendable, ICachable, IDisposable
     {
         public string GetAddress();
         public string GetName();
@@ -16,6 +16,7 @@ namespace NecBlik.Core.Interfaces
         public void SetGuid(Guid guid);
         public string GetVersion();
         public void OnDataRecieved(string data, string sourceAddress);
+        public void OnDataSent(string data, string sourceAddress);
         public void SubscribeToDataRecieved(ISubscriber<Tuple<string,string>> subscriber);
         public void UnsubscribeFromDataRecieved(ISubscriber<Tuple<string, string>> subscriber);
         public void Send(string data, string address);

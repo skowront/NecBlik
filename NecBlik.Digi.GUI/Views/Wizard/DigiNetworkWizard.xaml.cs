@@ -26,7 +26,7 @@ namespace NecBlik.Digi.GUI.Views.Wizard
     /// <summary>
     /// Interaction logic for VirtualNetworkWizard.xaml
     /// </summary>
-    public partial class DigiNetworkWizard : Window, IAsyncResponseProvider<DigiZigBeeNetworkViewModel, object>
+    public partial class DigiNetworkWizard: IAsyncResponseProvider<DigiZigBeeNetworkViewModel, object>
     {
         DigiNetworkWizardViewModel ViewModel { get; set; }
 

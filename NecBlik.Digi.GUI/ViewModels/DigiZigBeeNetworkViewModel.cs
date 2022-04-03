@@ -3,16 +3,33 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using NecBlik.Common.WpfExtensions.Base;
 using NecBlik.Core.GUI;
 using NecBlik.Core.Models;
+using NecBlik.Digi.GUI.Factories;
+using NecBlik.Digi.GUI.Views;
 using NecBlik.Virtual.GUI.ViewModels;
 
 namespace NecBlik.Digi.GUI.ViewModels
 {
     public class DigiZigBeeNetworkViewModel : VirtualNetworkViewModel
     {
+        public RelayCommand AddCommand { get; set; }
+
         public DigiZigBeeNetworkViewModel(Network network) : base(network)
         {
+            this.EditCommand = new RelayCommand((o) =>
+            {
+                var window = new DigiNetworkWindow(this);
+                window.Show();
+            });
+
+            this.AddCommand = this.DiscoverCommand;
+            this.DiscoverCommand = new RelayCommand(async (o) =>
+            {
+                await this.Discover();
+            });
+
         }
 
         public override DeviceViewModel GetCoordinatorViewModel()
@@ -20,10 +37,11 @@ namespace NecBlik.Digi.GUI.ViewModels
             if (this.coorinator == null)
             {
                 var zvm = new DeviceModel(this.Model.Coordinator);
-                this.coorinator = new DigiZigBeeCoordinatorViewModel(zvm, this);
-                this.coorinator.PullSelectionSubscriber = DeviceSelectionSubscriber;
-                this.DeviceSelectionSubscriber?.NotifyUpdated(this.coorinator);
+                var factory = new DigiZigBeeGuiFactory();
+                this.coorinator = factory.DeviceViewModelFromRule(zvm, this, this.model.DeviceCoordinatorSubtypeFactoryRule);
             }
+            this.coorinator.PullSelectionSubscriber = DeviceSelectionSubscriber;
+            this.DeviceSelectionSubscriber?.NotifyUpdated(this.coorinator);
             return this.coorinator;
         }
 
@@ -39,23 +57,51 @@ namespace NecBlik.Digi.GUI.ViewModels
 
         public override void SyncFromModel()
         {
-            this.Devices.Clear();
-
             foreach (var device in this.model.DeviceSources)
             {
-                var vm = new DigiZigBeeViewModel(new DeviceModel(device), this);
-                vm.PullSelectionSubscriber = this.DeviceSelectionSubscriber;
-                this.DeviceSelectionSubscriber?.NotifyUpdated(vm);
-                this.Devices.Add(vm);
+                this.AddNewDevice(device);
             }
 
-            if(this.model.HasCoordinator)
+            foreach(var device in this.Devices)
+                if (device.PullSelectionSubscriber == null)
+                    device.PullSelectionSubscriber = this.DeviceSelectionSubscriber;
+
+            this.GetCoordinatorViewModel();
+
+            this.OnPropertyChanged();
+        }
+
+        public override bool AddNewDevice(Core.Interfaces.IDeviceSource device)
+        {
+            var factory = new DigiZigBeeGuiFactory();
+            var vm = factory.DeviceViewModelFromRules(new DeviceModel(device), this, this.model.DeviceSubtypeFactoryRules.ToList());
+            if (vm == null)
+                return base.AddNewDevice(device); ;
+            vm.PullSelectionSubscriber = this.DeviceSelectionSubscriber;
+            if (!this.model.DeviceSources.Contains(device))
             {
-                var zvm = new DeviceModel(this.Model.Coordinator);
-                this.coorinator = new DigiZigBeeCoordinatorViewModel(zvm, this);
-                this.coorinator.PullSelectionSubscriber = DeviceSelectionSubscriber;
-                this.DeviceSelectionSubscriber?.NotifyUpdated(this.coorinator);
+                this.model.DeviceSources.Add(device);
             }
+            if (!this.Devices.Any((v) => { return v.GetCacheId() == device.GetCacheId(); }))
+            {
+                this.Devices.Add(vm);
+                this.DeviceSelectionSubscriber?.NotifyUpdated(vm);
+                this.NotifyDevicesNetworkChanged(vm);
+            }
+            else
+            {
+                var existingViewModel = this.Devices.Where((x) => { return x.GetCacheId() == device.GetCacheId(); }).First();
+                if (existingViewModel.GetType() != vm.GetType())
+                {
+                    existingViewModel.Dispose();
+                    this.Devices.Remove(existingViewModel);
+                    this.Devices.Add(vm);
+                    this.DeviceSelectionSubscriber?.NotifyUpdated(vm);
+                    this.NotifyDevicesNetworkChanged(vm);
+                }
+            }
+
+            return true;
         }
 
         public override async Task Discover()

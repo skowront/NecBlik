@@ -17,5 +17,7 @@
     <Style TargetType="{x:Type TextBox}" BasedOn="{StaticResource BaseStyle}"></Style>
     <Style TargetType="{x:Type TextBlock}" BasedOn="{StaticResource BaseTextBlockStyle}"></Style>
     <Style TargetType="{x:Type ListView}" BasedOn="{StaticResource BaseStyle}"></Style>
-    
+    <Style TargetType="{x:Type Window}">
+        <Setter Property="FontFamily" Value="{StaticResource RubikLight}"></Setter>
+    </Style>
 </ResourceDictionary>

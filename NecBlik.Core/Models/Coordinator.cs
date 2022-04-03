@@ -137,7 +137,7 @@ namespace NecBlik.Core.Models
 
         public virtual bool Open()
         {
-            return true ;
+            return true;
         }
 
         public virtual void Close()
@@ -153,6 +153,16 @@ namespace NecBlik.Core.Models
         public IEnumerable<string> GetLicensees()
         {
             return new List<string>();
+        }
+
+        public virtual void Dispose()
+        {
+
+        }
+
+        public virtual void OnDataSent(string data, string sourceAddress)
+        {
+            this.OnDataRecieved(data, sourceAddress);
         }
     }
 }

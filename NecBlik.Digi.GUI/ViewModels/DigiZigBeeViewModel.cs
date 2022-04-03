@@ -27,7 +27,11 @@ namespace NecBlik.Digi.GUI.ViewModels
             this.AddIncomingHistoryBufferEntry(data, sourceAddress);
         }
 
-       
+        public override void OnDataSent(string data, string sourceAddress)
+        {
+            //Maybe poll for sent items?
+        }
+
         public override void Send()
         {
             this.AddHistoryBufferEntry(Strings.SR.CantSendFromRemoteDevices);

@@ -1,15 +1,16 @@
-﻿<Window x:Class="NecBlik.Virtual.GUI.Views.VirtualDeviceWindow"
+﻿<mah:MetroWindow x:Class="NecBlik.Virtual.GUI.Views.VirtualDeviceWindow"
         xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
         xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
         xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:mah="http://metro.mahapps.com/winfx/xaml/controls"
         xmlns:local="clr-namespace:NecBlik.Virtual.GUI.Views"
         xmlns:lexp="clr-namespace:WPFLocalizeExtension.Providers;assembly=WPFLocalizeextension"
         xmlns:lex="clr-namespace:WPFLocalizeExtension.Extensions;assembly=WPFLocalizeextension"
         lexp:ResxLocalizationProvider.DefaultAssembly="NecBlik.Virtual.GUI"
         lexp:ResxLocalizationProvider.DefaultDictionary="SR"
         mc:Ignorable="d"
-        Title="VirtualZigBeeWindow" MinHeight="200" MinWidth="200" Width="500" Height="250">
+        Title="Virtual Device Window" MinHeight="200" MinWidth="200" Width="500" Height="250">
     <Grid Background="{StaticResource MaterialDesignDarkBackground}">
         <Grid Margin="10" MinHeight="200">
             <Grid.RowDefinitions>
@@ -49,10 +50,10 @@
                             <TextBlock Text="&#xf0e0;" FontFamily="{StaticResource FontAwesome}" VerticalAlignment="Center"></TextBlock>
                         </Button>
                         <TextBlock Grid.Row="1" VerticalAlignment="Center" Text="{lex:Loc GPDestinationAddress}"></TextBlock>
-                        <ComboBox Grid.Row="1" Grid.Column="1" VerticalAlignment="Center" ItemsSource="{Binding AvailableDestinationAddresses}" SelectedValue="{Binding SelectedDestinationAddress}"></ComboBox>
+                        <ComboBox x:Name="AvComboBox" Grid.Row="1" Grid.Column="1" VerticalAlignment="Center" ItemsSource="{Binding AvailableDestinationAddresses}" MouseDown="ComboBox_MouseDown" IsEditable="True" SelectedValue="{Binding SelectedDestinationAddress}"></ComboBox>
                     </Grid>
                 </Grid>
             </Expander>
         </Grid>
     </Grid>
-</Window>
+</mah:MetroWindow>
