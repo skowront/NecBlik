@@ -9,6 +9,7 @@ using NecBlik.Common.WpfElements.PopupValuePickers;
 using NecBlik.Common.WpfElements.PopupValuePickers.ResponseProviders;
 using Microsoft.Win32;
 using NecBlik.Core.Helpers;
+using NecBlik.Digi.GUI.Factories;
 
 namespace NecBlik.Digi.GUI.ViewModels.Wizard
 {
@@ -46,13 +47,30 @@ namespace NecBlik.Digi.GUI.ViewModels.Wizard
             set { baudRate = value; this.OnPropertyChanged(); }
         }
 
+        private string networkType;
+        public string NetworkType
+        {
+            get { return networkType; }
+            set { networkType = value; this.OnPropertyChanged(); }
+        }
+
+        private string coordinatorType;
+        public string CoordinatorType
+        {
+            get { return coordinatorType; }
+            set { coordinatorType = value; this.OnPropertyChanged(); }
+        }
+
+        public RelayCommand PickNetworkTypeCommand { get; set; }
+        public RelayCommand PickCoordinatorTypeCommand { get; set; }
         public RelayCommand PickSerialPortCommand { get; set; }
         public RelayCommand PickBaudRateCommand { get; set; }
         public RelayCommand ConfirmCommand { get; set; }
         public RelayCommand AbortCommand { get; set; }
 
-        public DigiNetworkWizardViewModel()
+        public DigiNetworkWizardViewModel(Window window=null)
         {
+            this.window = window;
             var portInfoList = SerialPortHelper.GetSerialPorts();
             if (portInfoList.Count > 0)
                 this.SerialPortName = portInfoList.Where((o) => o.description.Contains(NecBlik.Digi.Resources.Resources.AutoDetectionFilterUSBSerialPort)).FirstOrDefault().name;
@@ -87,6 +105,22 @@ namespace NecBlik.Digi.GUI.ViewModels.Wizard
             {
                 var vp = new NumericResponseProvider<int>(new NumericValuePicker());
                 this.BaudRate = vp.ProvideResponse();
+            });
+
+            this.PickNetworkTypeCommand = new RelayCommand((o) =>
+            {
+                var rp = new ListInputValuePicker();
+                var fac = new DigiZigBeeGuiFactory();
+                var availableTypes = fac.GetAvailableNetworkViewModels();
+                this.NetworkType = rp.ProvideResponse(new Tuple<string, IEnumerable<string>>(string.Empty, availableTypes));
+            });
+
+            this.PickCoordinatorTypeCommand = new RelayCommand((o) =>
+            {
+                var rp = new ListInputValuePicker();
+                var fac = new DigiZigBeeGuiFactory();
+                var availableTypes = fac.GetAvailableDeviceViewModels();
+                this.CoordinatorType = rp.ProvideResponse(new Tuple<string, IEnumerable<string>>(string.Empty, availableTypes));
             });
 
             this.ConfirmCommand = new RelayCommand((o) =>

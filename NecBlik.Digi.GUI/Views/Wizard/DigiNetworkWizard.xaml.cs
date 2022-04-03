@@ -15,9 +15,11 @@ using NecBlik.Common.WpfElements;
 using NecBlik.Common.WpfElements.ResponseProviders;
 using NecBlik.Common.WpfExtensions.Interfaces;
 using NecBlik.Digi.Factories;
+using NecBlik.Digi.GUI.Factories;
 using NecBlik.Digi.GUI.ViewModels;
 using NecBlik.Digi.GUI.ViewModels.Wizard;
 using NecBlik.Digi.Models;
+using NecBlik.Virtual.GUI.Factories;
 using NecBlik.Virtual.GUI.ViewModels;
 using NecBlik.Virtual.GUI.ViewModels.Wizard;
 
@@ -26,7 +28,7 @@ namespace NecBlik.Digi.GUI.Views.Wizard
     /// <summary>
     /// Interaction logic for VirtualNetworkWizard.xaml
     /// </summary>
-    public partial class DigiNetworkWizard: IAsyncResponseProvider<DigiZigBeeNetworkViewModel, object>
+    public partial class DigiNetworkWizard: IAsyncResponseProvider<VirtualNetworkViewModel, object>
     {
         DigiNetworkWizardViewModel ViewModel { get; set; }
 
@@ -43,7 +45,7 @@ namespace NecBlik.Digi.GUI.Views.Wizard
             this.DataContext = digiNetworkWizardViewModel;
         }
         
-        public async Task<DigiZigBeeNetworkViewModel> ProvideResponseAsync(object context = null)
+        public async Task<VirtualNetworkViewModel> ProvideResponseAsync(object context = null)
         {
             this.ShowDialog();
             if(this.ViewModel.Committed == false)
@@ -55,8 +57,12 @@ namespace NecBlik.Digi.GUI.Views.Wizard
                 new DigiZigBeeUSBCoordinator.DigiUSBConnectionData() { baud = this.ViewModel.BaudRate, port = this.ViewModel.SerialPortName });
             var popup = new SimpleYesNoProgressBarPopup(Strings.SR.GPPleaseWait+ "...","",Popups.Icons.InfoIcon,null,null,0,0,0,false,false);
             var network = new DigiZigBeeNetwork(coordinator, new YesNoProgressBarPopupResponseProvider(popup));
+            network.DeviceCoordinatorSubtypeFactoryRule = new Core.Factories.FactoryRule() { Value = this.ViewModel.CoordinatorType, 
+                CacheObjectId = coordinator.GetCacheId(),
+                Property = VirtualDeviceGuiFactory.DeviceViewModelRuledProperties.ViewModel };
             await network.Initialize(coordinator);
-            var vm = new DigiZigBeeNetworkViewModel(network);
+            var factory = new DigiZigBeeGuiFactory();
+            var vm = factory.NetworkViewModelBySubType(network, this.ViewModel.NetworkType);
             return vm;
         }
     }

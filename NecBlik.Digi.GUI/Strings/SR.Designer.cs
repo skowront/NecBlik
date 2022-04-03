@@ -106,6 +106,15 @@ namespace NecBlik.Digi.GUI.Strings {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Coordinator type.
+        /// </summary>
+        public static string GPCoordinatorType {
+            get {
+                return ResourceManager.GetString("GPCoordinatorType", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Description.
         /// </summary>
         public static string GPDescription {
@@ -129,6 +138,15 @@ namespace NecBlik.Digi.GUI.Strings {
         public static string GPNetworkName {
             get {
                 return ResourceManager.GetString("GPNetworkName", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Network type.
+        /// </summary>
+        public static string GPNetworkType {
+            get {
+                return ResourceManager.GetString("GPNetworkType", resourceCulture);
             }
         }
         

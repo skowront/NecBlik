@@ -101,7 +101,8 @@ namespace NecBlik.Virtual.GUI.Factories
             var zbc = base.GetDeviceControl(deviceViewModel);
             return zbc;
         }
-        public List<string> GetAvailableControls()
+
+        public virtual List<string> GetAvailableControls()
         {
             var ret = new List<string>();
 
@@ -122,7 +123,8 @@ namespace NecBlik.Virtual.GUI.Factories
 
             return ret;
         }
-        public List<string> GetAvailableNetworkViewModels()
+
+        public virtual List<string> GetAvailableNetworkViewModels()
         {
             var ret = new List<string>();
             var types = this.GetTypesTInOtherSubAssemblies<VirtualNetworkViewModel>();
@@ -140,7 +142,8 @@ namespace NecBlik.Virtual.GUI.Factories
             }
             return ret;
         }
-        public List<string> GetAvailableDeviceViewModels()
+
+        public virtual List<string> GetAvailableDeviceViewModels()
         {
             var ret = new List<string>();
 
@@ -160,6 +163,7 @@ namespace NecBlik.Virtual.GUI.Factories
             }
             return ret;
         }
+
         public virtual VirtualNetworkViewModel NetworkViewModelBySubType(Network network, string subType)
         {
             var types = this.GetTypesTInOtherSubAssemblies<VirtualNetworkViewModel>();

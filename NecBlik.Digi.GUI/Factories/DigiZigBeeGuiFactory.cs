@@ -15,6 +15,7 @@ using NecBlik.Digi.GUI.ViewModels.Wizard;
 using System.Reflection;
 using NecBlik.Core.Factories;
 using NecBlik.Virtual.GUI.ViewModels;
+using NecBlik.Core.GUI.Interfaces;
 
 namespace NecBlik.Digi.GUI.Factories
 {
@@ -78,7 +79,7 @@ namespace NecBlik.Digi.GUI.Factories
                 }
             }
 
-            var assembly = Assembly.GetAssembly(typeof(VirtualDeviceGuiFactory));
+            var assembly = Assembly.GetAssembly(typeof(DigiZigBeeGuiFactory));
             foreach (var type in assembly.GetExportedTypes())
             {
                 if (type.FullName == subType)
@@ -88,17 +89,14 @@ namespace NecBlik.Digi.GUI.Factories
                 }
             }
 
+            var fromBase = base.NetworkViewModelBySubType(network, subType);
+            if (fromBase != null)
+                return fromBase;
+
             return new DigiZigBeeNetworkViewModel(network);
         }
         public override VirtualDeviceViewModel DeviceViewModelFromRule(DeviceModel model, NetworkViewModel network, FactoryRule rule)
         {
-            if (model.DeviceSource.GetVendorID() != this.GetVendorID())
-                return base.DeviceViewModelFromRule(model, network,rule);
-
-            //TODO remove this if after rules are properly assigned from dropdown menu.h
-            if (model.DeviceSource is DigiZigBeeUSBCoordinator)
-                return new DigiZigBeeCoordinatorViewModel(model, network);
-
             var types = this.GetTypesTInOtherSubAssemblies<DigiZigBeeViewModel>();
             foreach (var type in types)
             {
@@ -108,7 +106,7 @@ namespace NecBlik.Digi.GUI.Factories
                     return Activator.CreateInstance(type, model, network) as DigiZigBeeViewModel;
                 }
             }
-            var assembly = Assembly.GetAssembly(typeof(VirtualDeviceGuiFactory));
+            var assembly = Assembly.GetAssembly(typeof(DigiZigBeeGuiFactory));
             foreach (var type in assembly.GetExportedTypes())
             {
                 if (type.FullName == rule.Value)
@@ -117,6 +115,12 @@ namespace NecBlik.Digi.GUI.Factories
                     return Activator.CreateInstance(type, model, network) as DigiZigBeeViewModel;
                 }
             }
+            var fromBase = base.DeviceViewModelFromRule(model, network, rule);
+            if (fromBase != null)
+                return fromBase;
+
+            if (model.DeviceSource is DigiZigBeeUSBCoordinator)
+                return new DigiZigBeeCoordinatorViewModel(model, network);
             return new DigiZigBeeViewModel(model, network);
         }
         public override VirtualDeviceViewModel DeviceViewModelFromRules(DeviceModel model, NetworkViewModel network, List<FactoryRule> rules)
@@ -124,7 +128,7 @@ namespace NecBlik.Digi.GUI.Factories
             if (model.DeviceSource.GetVendorID() != this.GetVendorID())
                 return base.DeviceViewModelFromRules(model, network, rules);
 
-            var assembly = Assembly.GetAssembly(typeof(VirtualDeviceGuiFactory));
+            var assembly = Assembly.GetAssembly(typeof(DigiZigBeeGuiFactory));
             FactoryRule rule = rules.Find((f) => { return f.Property == VirtualDeviceGuiFactory.DeviceViewModelRuledProperties.ViewModel && f.CacheObjectId == model.DeviceSource.GetCacheId(); });
             foreach (var item in rules)
             {
@@ -154,6 +158,81 @@ namespace NecBlik.Digi.GUI.Factories
                 }
             }
             return new DigiZigBeeViewModel(model, network);
+        }
+
+        public override List<string> GetAvailableControls()
+        {
+            var fromBase = base.GetAvailableControls();
+            var ret = new List<string>();
+            if (fromBase != null)
+                foreach (var fromBaseItem in fromBase)
+                    ret.Add(fromBaseItem);
+
+            var types = this.GetTypesTInOtherSubAssemblies<IDeviceControl>();
+            foreach (var type in types)
+            {
+                ret.Add(type.FullName);
+            }
+
+            var assembly = Assembly.GetAssembly(typeof(DigiZigBeeGuiFactory));
+            foreach (var type in assembly.GetExportedTypes())
+            {
+                if (typeof(IDeviceControl).IsAssignableFrom(type) && !type.IsAbstract)
+                {
+                    ret.Add(type.FullName);
+                }
+            }
+
+            return ret;
+        }
+
+        public override List<string> GetAvailableNetworkViewModels()
+        {
+            var fromBase = base.GetAvailableNetworkViewModels();
+            var ret = new List<string>();
+            if (fromBase != null)
+                foreach (var fromBaseItem in fromBase)
+                    ret.Add(fromBaseItem);
+
+            var types = this.GetTypesTInOtherSubAssemblies<VirtualNetworkViewModel>();
+            foreach (var type in types)
+            {
+                ret.Add(type.FullName);
+            }
+            var assembly = Assembly.GetAssembly(typeof(DigiZigBeeGuiFactory));
+            foreach (var type in assembly.GetExportedTypes())
+            {
+                if (typeof(VirtualNetworkViewModel).IsAssignableFrom(type) && !type.IsAbstract)
+                {
+                    ret.Add(type.FullName);
+                }
+            }
+            return ret;
+        }
+
+        public override List<string> GetAvailableDeviceViewModels()
+        {
+            var fromBase = base.GetAvailableDeviceViewModels();
+            var ret = new List<string>();
+            if (fromBase != null)
+                foreach (var fromBaseItem in fromBase)
+                    ret.Add(fromBaseItem);
+
+            var types = this.GetTypesTInOtherSubAssemblies<DigiZigBeeViewModel>();
+            foreach (var type in types)
+            {
+                ret.Add(type.FullName);
+            }
+
+            var assembly = Assembly.GetAssembly(typeof(DigiZigBeeGuiFactory));
+            foreach (var type in assembly.GetExportedTypes())
+            {
+                if (typeof(DigiZigBeeViewModel).IsAssignableFrom(type) && !type.IsAbstract)
+                {
+                    ret.Add(type.FullName);
+                }
+            }
+            return ret;
         }
     }
 }

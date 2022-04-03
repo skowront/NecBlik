@@ -39,6 +39,8 @@ namespace NecBlik.Digi.GUI.ViewModels
                 var zvm = new DeviceModel(this.Model.Coordinator);
                 var factory = new DigiZigBeeGuiFactory();
                 this.coorinator = factory.DeviceViewModelFromRule(zvm, this, this.model.DeviceCoordinatorSubtypeFactoryRule);
+                if (this.coorinator == null)
+                    base.GetCoordinatorViewModel();
             }
             this.coorinator.PullSelectionSubscriber = DeviceSelectionSubscriber;
             this.DeviceSelectionSubscriber?.NotifyUpdated(this.coorinator);
