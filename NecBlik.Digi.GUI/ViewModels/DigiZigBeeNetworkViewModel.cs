@@ -37,10 +37,11 @@ namespace NecBlik.Digi.GUI.ViewModels
             if (this.coorinator == null)
             {
                 var zvm = new DeviceModel(this.Model.Coordinator);
-                this.coorinator = new DigiZigBeeCoordinatorViewModel(zvm, this);
-                this.coorinator.PullSelectionSubscriber = DeviceSelectionSubscriber;
-                this.DeviceSelectionSubscriber?.NotifyUpdated(this.coorinator);
+                var factory = new DigiZigBeeGuiFactory();
+                this.coorinator = factory.DeviceViewModelFromRule(zvm, this, this.model.DeviceCoordinatorSubtypeFactoryRule);
             }
+            this.coorinator.PullSelectionSubscriber = DeviceSelectionSubscriber;
+            this.DeviceSelectionSubscriber?.NotifyUpdated(this.coorinator);
             return this.coorinator;
         }
 
@@ -61,13 +62,13 @@ namespace NecBlik.Digi.GUI.ViewModels
                 this.AddNewDevice(device);
             }
 
-            if(this.model.HasCoordinator && this.coorinator == null)
-            {
-                var zvm = new DeviceModel(this.Model.Coordinator);
-                this.coorinator = new DigiZigBeeCoordinatorViewModel(zvm, this);
-                this.coorinator.PullSelectionSubscriber = DeviceSelectionSubscriber;
-                this.DeviceSelectionSubscriber?.NotifyUpdated(this.coorinator);
-            }
+            foreach(var device in this.Devices)
+                if (device.PullSelectionSubscriber == null)
+                    device.PullSelectionSubscriber = this.DeviceSelectionSubscriber;
+
+            this.GetCoordinatorViewModel();
+
+            this.OnPropertyChanged();
         }
 
         public override bool AddNewDevice(Core.Interfaces.IDeviceSource device)

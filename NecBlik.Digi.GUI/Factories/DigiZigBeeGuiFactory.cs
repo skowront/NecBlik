@@ -95,6 +95,10 @@ namespace NecBlik.Digi.GUI.Factories
             if (model.DeviceSource.GetVendorID() != this.GetVendorID())
                 return base.DeviceViewModelFromRule(model, network,rule);
 
+            //TODO remove this if after rules are properly assigned from dropdown menu.h
+            if (model.DeviceSource is DigiZigBeeUSBCoordinator)
+                return new DigiZigBeeCoordinatorViewModel(model, network);
+
             var types = this.GetTypesTInOtherSubAssemblies<DigiZigBeeViewModel>();
             foreach (var type in types)
             {

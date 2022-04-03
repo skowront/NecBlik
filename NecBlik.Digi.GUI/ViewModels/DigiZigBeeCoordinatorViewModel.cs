@@ -29,10 +29,28 @@ namespace NecBlik.Digi.GUI.ViewModels
                     this.Model.DeviceSource.Send(this.OutputBuffer, item);
                     this.AddOutgoingHistoryBufferEntry(this.OutputBuffer, item);
                 }
+                var sources = this.Network?.GetDeviceViewModels();
+                if(sources!=null)
+                {
+                    foreach(var source in sources)
+                    {
+                        source.OnDataSent(this.OutputBuffer,this.Address);
+                    }
+                }
             }
             this.Model.DeviceSource.Send(this.OutputBuffer, this.SelectedDestinationAddress);
+            var vm = this.Network?.GetDeviceViewModels().Where((x) => { return x.Address == this.SelectedDestinationAddress; }).FirstOrDefault();
             this.AddOutgoingHistoryBufferEntry(this.OutputBuffer, this.SelectedDestinationAddress);
+            if (vm != null)
+                vm.OnDataSent(this.OutputBuffer, this.Address);
+            else
+                this.AddOutgoingHistoryBufferEntry(NecBlik.Core.GUI.Strings.SR.GPDeviceUnavailable,this.SelectedDestinationAddress);
             this.OutputBuffer = string.Empty;
+        }
+
+        public override void OnDataSent(string data, string sourceAddress)
+        {
+            this.OnDataRecieved(data,sourceAddress);
         }
     }
 }

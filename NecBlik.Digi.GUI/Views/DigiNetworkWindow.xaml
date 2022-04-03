@@ -5,7 +5,7 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:mah="http://metro.mahapps.com/winfx/xaml/controls"
         xmlns:local="clr-namespace:NecBlik.Digi.GUI.Views"
-        xmlns:viewModels="clr-namespace:NecBlik.Digi.GUI.ViewModels"
+        xmlns:viewModels="clr-namespace:NecBlik.Virtual.GUI.ViewModels;assembly=NecBlik.Virtual.GUI"
         xmlns:lexp="clr-namespace:WPFLocalizeExtension.Providers;assembly=WPFLocalizeextension"
         xmlns:lex="clr-namespace:WPFLocalizeExtension.Extensions;assembly=WPFLocalizeextension"
         lexp:ResxLocalizationProvider.DefaultAssembly="NecBlik.Virtual.GUI"
@@ -30,32 +30,38 @@
                     <TextBlock Text="{lex:Loc GPStayOpen}" Foreground="{StaticResource MaterialDesignDarkForeground}"></TextBlock>
                     <CheckBox IsChecked="{Binding ViewModel.IsOpen,UpdateSourceTrigger=PropertyChanged}" Style="{StaticResource MaterialDesignCheckBox}" HorizontalAlignment="Left" Foreground="{StaticResource MaterialDesignDarkForeground}"></CheckBox>
                 </StackPanel>-->
-                <StackPanel Orientation="Horizontal">
-                    <Button Grid.Column="2" Grid.RowSpan="2" VerticalAlignment="Center" Style="{StaticResource BaseButton}" Command="{Binding ViewModel.DiscoverCommand}" HorizontalAlignment="Center" Margin="0" MaxWidth="50" MinWidth="50">
-                        <TextBlock Text="&#xf002;" FontFamily="{StaticResource FontAwesome}" VerticalAlignment="Center"></TextBlock>
-                        <Button.ToolTip>
-                            <TextBlock Text="{lex:Loc GPDiscover}" VerticalAlignment="Center"></TextBlock>
-                        </Button.ToolTip>
+                <Grid>
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition Width="auto"></ColumnDefinition>
+                        <ColumnDefinition Width="auto"></ColumnDefinition>
+                        <ColumnDefinition Width="auto"></ColumnDefinition>
+                        <ColumnDefinition Width="auto"></ColumnDefinition>
+                    </Grid.ColumnDefinitions>
+                    <Button Grid.Column="0" VerticalAlignment="Center" Style="{StaticResource BaseButton}" Command="{Binding ViewModel.DiscoverCommand}" HorizontalAlignment="Center" Margin="0" MinWidth="50">
+                        <StackPanel Orientation="Horizontal">
+                            <TextBlock Text="{lex:Loc GPDiscover}" Margin="0 0 5 0" VerticalAlignment="Center"></TextBlock>
+                            <TextBlock Text="&#xf002;" FontFamily="{StaticResource FontAwesome}"  VerticalAlignment="Center"></TextBlock>
+                        </StackPanel>
                     </Button>
-                    <Button Grid.Column="2" Grid.RowSpan="2" VerticalAlignment="Center" Style="{StaticResource BaseButton}" Command="{Binding ViewModel.AddCommand}" HorizontalAlignment="Center" Margin="0" MaxWidth="50" MinWidth="50">
-                        <TextBlock Text="&#xf067;" FontFamily="{StaticResource FontAwesome}" VerticalAlignment="Center"></TextBlock>
-                        <Button.ToolTip>
-                            <TextBlock Text="{lex:Loc GPAdd}" VerticalAlignment="Center"></TextBlock>
-                        </Button.ToolTip>
+                    <Button Grid.Column="1" VerticalAlignment="Center" Style="{StaticResource BaseButton}" Command="{Binding ViewModel.AddCommand}" HorizontalAlignment="Center" Margin="0" MinWidth="50">
+                        <StackPanel Orientation="Horizontal">
+                            <TextBlock Text="{lex:Loc NecBlik.Digi.GUI:SR:GPAdd}" Margin="0 0 5 0" VerticalAlignment="Center"></TextBlock>
+                            <TextBlock Text="&#xf067;" FontFamily="{StaticResource FontAwesome}" VerticalAlignment="Center"></TextBlock>
+                        </StackPanel>
                     </Button>
-                    <Button Grid.Column="2" Grid.RowSpan="2" VerticalAlignment="Center" Style="{StaticResource BaseButton}" Command="{Binding ViewModel.RefreshCommand}" HorizontalAlignment="Center" Margin="0" MaxWidth="50" MinWidth="50">
-                        <TextBlock Text="&#xf021;" FontFamily="{StaticResource FontAwesome}" VerticalAlignment="Center"></TextBlock>
-                        <Button.ToolTip>
-                            <TextBlock Text="{lex:Loc GPSynchronize}" VerticalAlignment="Center"></TextBlock>
-                        </Button.ToolTip>
+                    <Button Grid.Column="2" VerticalAlignment="Center" Style="{StaticResource BaseButton}" Command="{Binding ViewModel.RefreshCommand}" HorizontalAlignment="Center" Margin="0" MinWidth="50">
+                        <StackPanel Orientation="Horizontal">
+                            <TextBlock Text="{lex:Loc GPSynchronize}" Margin="0 0 5 0" VerticalAlignment="Center"></TextBlock>
+                            <TextBlock Text="&#xf021;" FontFamily="{StaticResource FontAwesome}" VerticalAlignment="Center"></TextBlock>
+                        </StackPanel>
                     </Button>
-                    <Button Grid.Column="2" Grid.RowSpan="2" VerticalAlignment="Center" Style="{StaticResource BaseButton}" Command="{Binding ViewModel.EditRulesCommand}" HorizontalAlignment="Center" Margin="0" MaxWidth="50" MinWidth="50">
-                        <TextBlock Text="&#xf02d;" FontFamily="{StaticResource FontAwesome}" VerticalAlignment="Center"></TextBlock>
-                        <Button.ToolTip>
-                            <TextBlock Text="{lex:Loc GPRules}" VerticalAlignment="Center"></TextBlock>
-                        </Button.ToolTip>
+                    <Button Grid.Column="3" VerticalAlignment="Center" Style="{StaticResource BaseButton}" Command="{Binding ViewModel.EditRulesCommand}" HorizontalAlignment="Center" Margin="0" MinWidth="50">
+                        <StackPanel Orientation="Horizontal">
+                            <TextBlock Text="{lex:Loc GPRules}" Margin="0 0 5 0" VerticalAlignment="Center"></TextBlock>
+                            <TextBlock Text="&#xf02d;" FontFamily="{StaticResource FontAwesome}" VerticalAlignment="Center"></TextBlock>
+                        </StackPanel>
                     </Button>
-                </StackPanel>
+                </Grid>
                 <Separator Grid.Row="1"></Separator>
             </StackPanel>
             <StackPanel Grid.Row="1">
@@ -63,7 +69,7 @@
             </StackPanel>
             <ContentPresenter Grid.Row="2" Content="{Binding ViewModel.Coordinator}">
                 <ContentPresenter.ContentTemplate>
-                    <DataTemplate DataType="{x:Type viewModels:DigiZigBeeCoordinatorViewModel}">
+                    <DataTemplate DataType="{x:Type viewModels:VirtualDeviceViewModel}">
                         <StackPanel Orientation="Vertical">
                             <TextBlock Text="{Binding InternalFactoryType}" Foreground="{StaticResource MaterialDesignDarkForeground}"></TextBlock>
                             <TextBlock Text="{Binding Name, UpdateSourceTrigger=PropertyChanged}" Foreground="{StaticResource MaterialDesignDarkForeground}"></TextBlock>
@@ -86,7 +92,7 @@
                 <ScrollViewer Grid.Row="1" Style="{StaticResource ScrollViewer}">
                     <ListView Background="{StaticResource MaterialDesignDarkBackground}" HorizontalContentAlignment="Stretch" ItemsSource="{Binding ViewModel.Devices}" d:ItemsSource="{d:SampleData ItemCount=5}">
                         <ListView.Resources>
-                            <DataTemplate x:Key="VirtualDeviceDataTemplate" DataType="{x:Type viewModels:DigiZigBeeViewModel}">
+                            <DataTemplate x:Key="VirtualDeviceDataTemplate" DataType="{x:Type viewModels:VirtualDeviceViewModel}">
                                 <StackPanel Orientation="Vertical">
                                     <TextBlock Text="{Binding InternalFactoryType}"></TextBlock>
                                     <TextBlock Text="{Binding Name, UpdateSourceTrigger=PropertyChanged}"></TextBlock>

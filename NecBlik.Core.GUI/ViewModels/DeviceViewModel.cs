@@ -161,6 +161,11 @@ namespace NecBlik.Core.GUI
             this.AddIncomingHistoryBufferEntry(data, sourceAddress);
         }
 
+        public virtual void OnDataSent(string data, string sourceAddress)
+        {
+            this.OnDataRecieved(data, sourceAddress);
+        }
+
         public virtual void Send()
         {
             

@@ -156,4 +156,7 @@
   <data name="GPCancel" xml:space="preserve">
     <value>Anuluj</value>
   </data>
+  <data name="GPAdd" xml:space="preserve">
+    <value>Dodaj</value>
+  </data>
 </root>

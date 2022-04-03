@@ -43,5 +43,10 @@ namespace NecBlik.Digi.Models
         {
 
         }
+
+        public override void OnDataSent(string data, string sourceAddress)
+        {
+            //Maybe check for possible response?
+        }
     }
 }

@@ -187,6 +187,14 @@ namespace NecBlik.Digi.Models
             this.Close();
         }
 
+        public override void OnDataSent(string data, string sourceAddress)
+        {
+            if(sourceAddress == this.Address)
+            {
+                this.OnDataRecieved(data,sourceAddress);
+            }
+        }
+
         [JsonObject(MemberSerialization.OptIn)]
         public class DigiUSBConnectionData
         {

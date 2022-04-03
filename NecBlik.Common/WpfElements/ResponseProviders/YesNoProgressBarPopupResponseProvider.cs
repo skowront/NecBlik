@@ -53,8 +53,8 @@ namespace NecBlik.Common.WpfElements.ResponseProviders
                     this.Popup.ViewModel.Message = question;
                 }
                 this.Popup?.Show();
-
             });
+            old.Close();
             return result;
         }
 

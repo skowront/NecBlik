@@ -195,7 +195,7 @@
   <data name="GPDiscover" xml:space="preserve">
     <value>Discover</value>
   </data>
-  <data name="GPSync" xml:space="preserve">
+  <data name="GPSynchronize" xml:space="preserve">
     <value>Synchronize</value>
   </data>
   <data name="GPRules" xml:space="preserve">

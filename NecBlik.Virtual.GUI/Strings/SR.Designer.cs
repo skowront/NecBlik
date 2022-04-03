@@ -288,9 +288,9 @@ namespace NecBlik.Virtual.GUI.Strings {
         /// <summary>
         ///   Looks up a localized string similar to Synchronize.
         /// </summary>
-        public static string GPSync {
+        public static string GPSynchronize {
             get {
-                return ResourceManager.GetString("GPSync", resourceCulture);
+                return ResourceManager.GetString("GPSynchronize", resourceCulture);
             }
         }
         

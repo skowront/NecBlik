@@ -159,5 +159,10 @@ namespace NecBlik.Core.Models
         {
 
         }
+
+        public virtual void OnDataSent(string data, string sourceAddress)
+        {
+            this.OnDataRecieved(data, sourceAddress);
+        }
     }
 }
