@@ -41,5 +41,10 @@ namespace NecBlik.PyDigi.Models
         {
             
         }
+
+        public override void OnDataSent(string data, string sourceAddress)
+        {
+            
+        }
     }
 }

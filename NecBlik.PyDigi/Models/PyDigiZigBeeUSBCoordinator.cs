@@ -36,6 +36,10 @@ namespace NecBlik.PyDigi.Models
                     this.scope.Exec(File.ReadAllText(Resources.Resources.PyDigiScriptsLocation + "/" + Resources.Resources.ScriptZigBeeCoordinator_py));
                     this.scope.Exec($"coordinator = Coordinator(\"{this.connectionData.port}\",\"{this.connectionData.baud}\");");
                     this.pyCoordinator = this.scope.Get<dynamic>("coordinator");
+                    this.pyCoordinator.add_expl_data_received_callback(new Action<object,object>((self,args)=>
+                    {
+                        this.ZigBeeDataRecieved(self, args);
+                    }));
                 }
             }
             catch (Exception ex)
@@ -44,14 +48,33 @@ namespace NecBlik.PyDigi.Models
             }
         }
 
+        ~PyDigiZigBeeUSBCoordinator()
+        {
+            this.pyCoordinator.Close();
+        }
+
+        private void ZigBeeDataRecieved(object? sender, object arg)
+        {
+            using (Py.GIL())
+            {
+                var scope = ZigBeePyEnv.NewInitializedScope();
+                scope.Set("data", (arg as dynamic).data);
+                scope.Set("data_str", string.Empty);
+                scope.Exec("data_str = bytes(data)");
+                var dataString = scope.Get<string>("data_str");
+                string senderAddress = (arg as dynamic).remote_node.get_64bit_addr().ToString();
+                this.OnDataRecieved(dataString, senderAddress);
+                scope.Dispose();
+            }
+        }
+
         public override async Task<IEnumerable<IDeviceSource>> GetDevices(IUpdatableResponseProvider<int, bool, string> progressResponseProvider = null)
         {
             using (Py.GIL())
             {
-                this.scope.Exec("coordinator.DiscoverDevices();");
                 pyCoordinator.Open();
+                await this.Discover();
                 dynamic devices = this.pyCoordinator.devices;
-                pyCoordinator.Close();
                 List<IDeviceSource> sources = new();
                 foreach(var item in devices)
                 {
@@ -62,7 +85,18 @@ namespace NecBlik.PyDigi.Models
             }
         }
 
-
+        public override async Task Discover()
+        {
+            using (Py.GIL())
+            {
+                var t = Task.Run(() =>
+                {
+                    this.scope.Exec("coordinator.DiscoverDevices();");
+                });
+                await t;
+            }
+            return;
+        }
         public override void Save(string folderPath)
         {
             File.WriteAllText(folderPath + "\\" + Resources.Resources.CoordinatorFile, JsonConvert.SerializeObject(this.connectionData, Formatting.Indented));
@@ -85,7 +119,6 @@ namespace NecBlik.PyDigi.Models
             {
                 pyCoordinator.Open();
                 dynamic version = this.pyCoordinator.xbee.get_firmware_version();
-                pyCoordinator.Close();
                 return version.ToString();
             }
         }
@@ -100,9 +133,25 @@ namespace NecBlik.PyDigi.Models
             {
                 pyCoordinator.Open();
                 dynamic version = this.pyCoordinator.xbee.get_pan_id().hex();
-                pyCoordinator.Close();
                 return version.ToString();
             }
+        }
+
+        public override void Close()
+        {
+            this.pyCoordinator.Close();
+        }
+
+        public override bool Open()
+        {
+            this.pyCoordinator.Open();
+            return true;
+        }
+
+        public override void Dispose()
+        {
+            base.Dispose();
+            this.Close();
         }
 
         [JsonObject(MemberSerialization.OptIn)]
