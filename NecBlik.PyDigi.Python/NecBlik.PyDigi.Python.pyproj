@@ -22,6 +22,9 @@
     <EnableUnmanagedDebugging>false</EnableUnmanagedDebugging>
   </PropertyGroup>
   <ItemGroup>
+    <Compile Include="dafuq.py" />
+    <Compile Include="test.py" />
+    <Compile Include="test2.py" />
     <Compile Include="VirtualEnvInit.py" />
     <Compile Include="ZigBeeCoordinator.py" />
     <Compile Include="ZigBeeCoordinatorSharp.py" />

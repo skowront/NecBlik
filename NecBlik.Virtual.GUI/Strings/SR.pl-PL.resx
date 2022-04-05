@@ -192,4 +192,13 @@
   <data name="GPFactory" xml:space="preserve">
     <value>Fabryka</value>
   </data>
+  <data name="GPDiscover" xml:space="preserve">
+    <value>Odkryj</value>
+  </data>
+  <data name="GPRules" xml:space="preserve">
+    <value>Zasady</value>
+  </data>
+  <data name="GPSynchronize" xml:space="preserve">
+    <value>Synchornizuj</value>
+  </data>
 </root>

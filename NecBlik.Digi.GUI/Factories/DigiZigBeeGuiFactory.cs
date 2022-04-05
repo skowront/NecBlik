@@ -91,7 +91,8 @@ namespace NecBlik.Digi.GUI.Factories
 
             var fromBase = base.NetworkViewModelBySubType(network, subType);
             if (fromBase != null)
-                return fromBase;
+                if (network.GetVendorID() != this.GetVendorID())
+                    return fromBase;
 
             return new DigiZigBeeNetworkViewModel(network);
         }
@@ -117,7 +118,8 @@ namespace NecBlik.Digi.GUI.Factories
             }
             var fromBase = base.DeviceViewModelFromRule(model, network, rule);
             if (fromBase != null)
-                return fromBase;
+                if (model.DeviceSource.GetVendorID() != this.GetVendorID())
+                    return fromBase;
 
             if (model.DeviceSource is DigiZigBeeUSBCoordinator)
                 return new DigiZigBeeCoordinatorViewModel(model, network);

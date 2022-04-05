@@ -90,7 +90,8 @@ namespace NecBlik.PyDigi.GUI.Factories
 
             var fromBase = base.NetworkViewModelBySubType(network, subType);
             if (fromBase != null)
-                return fromBase;
+                if (network.GetVendorID() != this.GetVendorID())
+                    return fromBase;
 
             return new PyDigiZigBeeNetworkViewModel(network);
         }
@@ -117,7 +118,8 @@ namespace NecBlik.PyDigi.GUI.Factories
             }
             var fromBase = base.DeviceViewModelFromRule(model, network, rule);
             if (fromBase != null)
-                return fromBase;
+                if (model.DeviceSource.GetVendorID() != this.GetVendorID())
+                    return fromBase;
 
             if (model.DeviceSource is PyDigiZigBeeUSBCoordinator)
                 return new PyDigiZigBeeCoordinatorViewModel(model, network);

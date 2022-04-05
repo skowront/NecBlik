@@ -150,4 +150,7 @@
   <data name="GPPleaseWait" xml:space="preserve">
     <value>Attendez s'il vous plait</value>
   </data>
+  <data name="CantSendFromRemoteDevices" xml:space="preserve">
+    <value>On ne peut pas envoyer d'un appareil éloigné.</value>
+  </data>
 </root>

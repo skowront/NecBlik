@@ -1,9 +1,4 @@
 ﻿using Newtonsoft.Json;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using Python.Runtime;
 using NecBlik.Common.WpfExtensions.Interfaces;
 using NecBlik.Core.Interfaces;
@@ -20,6 +15,7 @@ namespace NecBlik.PyDigi.Models
 
         [JsonProperty]
         public PyDigiUSBConnectionData connectionData { get; set; }
+        public delegate void Callback(object arg);
 
         public PyDigiZigBeeUSBCoordinator(IDeviceFactory zigBeeFactory, PyDigiUSBConnectionData connectionData = null) : base(zigBeeFactory)
         {
@@ -30,16 +26,32 @@ namespace NecBlik.PyDigi.Models
             this.Name = Resources.Resources.PyDefaultDigiCoordinatorName;
             try
             {
+                object a = 10;
                 using (Py.GIL())
                 {
                     this.scope = ZigBeePyEnv.NewInitializedScope();
                     this.scope.Exec(File.ReadAllText(Resources.Resources.PyDigiScriptsLocation + "/" + Resources.Resources.ScriptZigBeeCoordinator_py));
-                    this.scope.Exec($"coordinator = Coordinator(\"{this.connectionData.port}\",\"{this.connectionData.baud}\");");
+                    this.scope.Exec($"coordinator = Coordinator(\"{this.connectionData.port}\",\"{this.connectionData.baud}\")");
+                    //this.scope.Exec("coordinator.DiscoverDevices()");
                     this.pyCoordinator = this.scope.Get<dynamic>("coordinator");
-                    this.pyCoordinator.add_expl_data_received_callback(new Action<object,object>((self,args)=>
-                    {
-                        this.ZigBeeDataRecieved(self, args);
+                    this.pyCoordinator.Open();
+                    //test
+                    this.scope.Set("action", new Action<string,string>((data,address) => {
+                        Console.WriteLine("Works!");
+                        this.OnDataRecieved(data, address);
                     }));
+                    this.scope.Exec("dataReceivedActionHolder = ActionHolder(action)");
+                    this.scope.Exec("def my_data_received_callback(xbee_message):\n" +
+                                    "\t a = str(xbee_message.remote_device.get_64bit_addr())\n" +
+                                    "\t dataReceivedActionHolder.callback.Invoke(bytes(xbee_message.data).decode(encoding=\"UTF-8\"),a); \n");
+                    //this.scope.Exec("coordinator.xbee.add_data_received_callback(EmptyFunction)");
+                    this.scope.Exec("coordinator.xbee.add_data_received_callback(my_data_received_callback)");
+                    //this.scope.Exec("coordinator.Send(\"GetValue\",\"0013A20040A739ED\")");
+                    //this.scope.Exec("my_data_received_callback(10)");
+                    //this.scope.Exec("dataReceivedActionHolder.callback.Invoke(10)");
+                    //this.scope.Exec("coordinator.DiscoverDevices()");
+                    //this.pyCoordinator.add_expl_data_received_callback((delegate)((arg) => { }));
+                    Console.WriteLine("Initialization fine.");
                 }
             }
             catch (Exception ex)
@@ -73,7 +85,14 @@ namespace NecBlik.PyDigi.Models
             using (Py.GIL())
             {
                 pyCoordinator.Open();
-                await this.Discover();
+
+                var func = new Action(() => {
+                    Console.WriteLine("");
+                });
+                //scope.Set("func", func);
+                //scope.Set("timeout", 0);
+                scope.Exec("coordinator.DiscoverDevices()");
+
                 dynamic devices = this.pyCoordinator.devices;
                 List<IDeviceSource> sources = new();
                 foreach(var item in devices)
@@ -89,11 +108,10 @@ namespace NecBlik.PyDigi.Models
         {
             using (Py.GIL())
             {
-                var t = Task.Run(() =>
+                Task.Run(() =>
                 {
-                    this.scope.Exec("coordinator.DiscoverDevices();");
-                });
-                await t;
+                    scope.Exec("coordinator.DiscoverDevices()");
+                }).Wait();
             }
             return;
         }
@@ -106,10 +124,10 @@ namespace NecBlik.PyDigi.Models
         {
             using (Py.GIL())
             {
-                pyCoordinator.Open();
-                dynamic version = this.pyCoordinator.xbee.get_firmware_version();
-                pyCoordinator.Close();
-                return version.ToString();
+                //pyCoordinator.Open();
+                //dynamic version = this.pyCoordinator.xbee.get_firmware_version();
+                //return version.ToString();
+                return String.Empty;
             }
         }
 
@@ -118,8 +136,8 @@ namespace NecBlik.PyDigi.Models
             using (Py.GIL())
             {
                 pyCoordinator.Open();
-                dynamic version = this.pyCoordinator.xbee.get_firmware_version();
-                return version.ToString();
+                dynamic address = this.pyCoordinator.GetAddress();
+                return address.ToString();
             }
         }
         public override string GetCacheId()
@@ -132,9 +150,27 @@ namespace NecBlik.PyDigi.Models
             using (Py.GIL())
             {
                 pyCoordinator.Open();
-                dynamic version = this.pyCoordinator.xbee.get_pan_id().hex();
+                dynamic version = this.pyCoordinator.GetVersion();
                 return version.ToString();
             }
+        }
+
+        public override void Send(string data, string address)
+        {
+            using(Py.GIL())
+            {
+                this.pyCoordinator.Send(data,address);
+
+                //this.Discover();
+
+                //this.scope.Exec("LittleWhile();");
+                //while (true)
+                //{
+                   // this.scope.Exec("time.sleep(0.5);");
+                //}
+                //this.pyCoordinator.Send(data, address);
+            }
+            
         }
 
         public override void Close()

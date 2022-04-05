@@ -4,6 +4,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using NecBlik.Core.Models;
+using NecBlik.PyDigi.Factories;
 
 namespace NecBlik.PyDigi.Models
 {
@@ -14,12 +15,14 @@ namespace NecBlik.PyDigi.Models
 
         public PyDigiZigBeeSource(dynamic device)
         {
-            this.pyDevice = device; 
+            this.pyDevice = device;
+            this.internalType = (new PyDigiZigBeeFactory()).GetVendorID();
         }
 
         public override string GetAddress()
         {
-            return this.pyDevice.get_64bit_addr().ToString();
+            using (Python.Runtime.Py.GIL())
+                return this.pyDevice.get_64bit_addr().ToString();
         }
 
         public override string GetName()
@@ -29,7 +32,8 @@ namespace NecBlik.PyDigi.Models
 
         public override string GetVersion()
         {
-            return this.pyDevice.get_firmware_version();
+            using (Python.Runtime.Py.GIL())
+                return this.pyDevice.get_hardware_version().description;
         }
 
         public override string GetCacheId()

@@ -9,6 +9,7 @@ using NecBlik.Common.WpfElements.PopupValuePickers;
 using NecBlik.Common.WpfElements.PopupValuePickers.ResponseProviders;
 using Microsoft.Win32;
 using NecBlik.Core.Helpers;
+using NecBlik.PyDigi.GUI.Factories;
 
 namespace NecBlik.PyDigi.GUI.ViewModels.Wizard
 {
@@ -46,6 +47,22 @@ namespace NecBlik.PyDigi.GUI.ViewModels.Wizard
             set { baudRate = value; this.OnPropertyChanged(); }
         }
 
+        private string networkType;
+        public string NetworkType
+        {
+            get { return networkType; }
+            set { networkType = value; this.OnPropertyChanged(); }
+        }
+
+        private string coordinatorType;
+        public string CoordinatorType
+        {
+            get { return coordinatorType; }
+            set { coordinatorType = value; this.OnPropertyChanged(); }
+        }
+
+        public RelayCommand PickNetworkTypeCommand { get; set; }
+        public RelayCommand PickCoordinatorTypeCommand { get; set; }
         public RelayCommand PickSerialPortCommand { get; set; }
         public RelayCommand PickBaudRateCommand { get; set; }
         public RelayCommand ConfirmCommand { get; set; }
@@ -81,6 +98,22 @@ namespace NecBlik.PyDigi.GUI.ViewModels.Wizard
                 if (result == string.Empty || result == null || portNames.Contains(result) == false)
                     return;
                 this.SerialPortName = dict[result];
+            });
+
+            this.PickNetworkTypeCommand = new RelayCommand((o) =>
+            {
+                var rp = new ListInputValuePicker();
+                var fac = new PyDigiZigBeeGuiFactory();
+                var availableTypes = fac.GetAvailableNetworkViewModels();
+                this.NetworkType = rp.ProvideResponse(new Tuple<string, IEnumerable<string>>(string.Empty, availableTypes));
+            });
+
+            this.PickCoordinatorTypeCommand = new RelayCommand((o) =>
+            {
+                var rp = new ListInputValuePicker();
+                var fac = new PyDigiZigBeeGuiFactory();
+                var availableTypes = fac.GetAvailableDeviceViewModels();
+                this.CoordinatorType = rp.ProvideResponse(new Tuple<string, IEnumerable<string>>(string.Empty, availableTypes));
             });
 
             this.PickBaudRateCommand = new RelayCommand((o) =>
