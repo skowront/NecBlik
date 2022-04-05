@@ -1,9 +1,4 @@
 ﻿using Newtonsoft.Json;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using Python.Runtime;
 using NecBlik.Common.WpfExtensions.Interfaces;
 using NecBlik.Core.Interfaces;
@@ -41,13 +36,14 @@ namespace NecBlik.PyDigi.Models
                     this.pyCoordinator = this.scope.Get<dynamic>("coordinator");
                     this.pyCoordinator.Open();
                     //test
-                    this.scope.Set("action", new Action<Object>((input) => {
+                    this.scope.Set("action", new Action<string,string>((data,address) => {
                         Console.WriteLine("Works!");
-                        
+                        this.OnDataRecieved(data, address);
                     }));
                     this.scope.Exec("dataReceivedActionHolder = ActionHolder(action)");
                     this.scope.Exec("def my_data_received_callback(xbee_message):\n" +
-                                    "\t dataReceivedActionHolder.callback.Invoke(xbee_message) \n");
+                                    "\t a = str(xbee_message.remote_device.get_64bit_addr())\n" +
+                                    "\t dataReceivedActionHolder.callback.Invoke(bytes(xbee_message.data).decode(encoding=\"UTF-8\"),a); \n");
                     //this.scope.Exec("coordinator.xbee.add_data_received_callback(EmptyFunction)");
                     this.scope.Exec("coordinator.xbee.add_data_received_callback(my_data_received_callback)");
                     //this.scope.Exec("coordinator.Send(\"GetValue\",\"0013A20040A739ED\")");
