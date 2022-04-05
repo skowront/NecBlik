@@ -20,5 +20,20 @@ namespace NecBlik.PyDigi.GUI.ViewModels
         {
             return this.Model.CacheId;
         }
+
+        public override void OnDataRecieved(string data, string sourceAddress)
+        {
+            this.AddIncomingHistoryBufferEntry(data, sourceAddress);
+        }
+
+        public override void OnDataSent(string data, string sourceAddress)
+        {
+            //Maybe poll for sent items?
+        }
+
+        public override void Send()
+        {
+            this.AddHistoryBufferEntry(Strings.SR.CantSendFromRemoteDevices);
+        }
     }
 }

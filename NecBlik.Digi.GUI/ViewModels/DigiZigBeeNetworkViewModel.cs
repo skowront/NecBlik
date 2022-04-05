@@ -42,7 +42,8 @@ namespace NecBlik.Digi.GUI.ViewModels
                 if (this.coorinator == null)
                     base.GetCoordinatorViewModel();
             }
-            this.coorinator.PullSelectionSubscriber = DeviceSelectionSubscriber;
+            else
+                this.coorinator.PullSelectionSubscriber = DeviceSelectionSubscriber;
             this.DeviceSelectionSubscriber?.NotifyUpdated(this.coorinator);
             return this.coorinator;
         }

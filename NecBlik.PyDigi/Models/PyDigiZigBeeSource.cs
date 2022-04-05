@@ -4,6 +4,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using NecBlik.Core.Models;
+using NecBlik.PyDigi.Factories;
 
 namespace NecBlik.PyDigi.Models
 {
@@ -14,7 +15,8 @@ namespace NecBlik.PyDigi.Models
 
         public PyDigiZigBeeSource(dynamic device)
         {
-            this.pyDevice = device; 
+            this.pyDevice = device;
+            this.internalType = (new PyDigiZigBeeFactory()).GetVendorID();
         }
 
         public override string GetAddress()

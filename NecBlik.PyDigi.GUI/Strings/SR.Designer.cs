@@ -61,6 +61,15 @@ namespace NecBlik.PyDigi.GUI.Strings {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Cant&apos;t send from remote device..
+        /// </summary>
+        public static string CantSendFromRemoteDevices {
+            get {
+                return ResourceManager.GetString("CantSendFromRemoteDevices", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Baud rate.
         /// </summary>
         public static string GPBaudRate {

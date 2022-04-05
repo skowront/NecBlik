@@ -22,8 +22,14 @@ class Coordinator:
         self.devices = self.xnet.get_devices();
         self.xbee.close();
 
+    def add_expl_data_received_callback(self,action):
+        self.xbee.add_expl_data_received_callback(action);
+        return;
+
     def Open(self):
-        self.xbee.open();
+        if(not self.xbee.is_open()):
+            self.xbee.open();
 
     def Close(self):
-        self.xbee.close();
+        if(self.xbee.is_open()):
+            self.xbee.close();

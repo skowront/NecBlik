@@ -36,6 +36,7 @@ namespace NecBlik.PyDigi.Models
                     this.scope.Exec(File.ReadAllText(Resources.Resources.PyDigiScriptsLocation + "/" + Resources.Resources.ScriptZigBeeCoordinator_py));
                     this.scope.Exec($"coordinator = Coordinator(\"{this.connectionData.port}\",\"{this.connectionData.baud}\");");
                     this.pyCoordinator = this.scope.Get<dynamic>("coordinator");
+                    this.pyCoordinator.Open();
                     this.pyCoordinator.add_expl_data_received_callback(new Action<object,object>((self,args)=>
                     {
                         this.ZigBeeDataRecieved(self, args);
@@ -108,7 +109,6 @@ namespace NecBlik.PyDigi.Models
             {
                 pyCoordinator.Open();
                 dynamic version = this.pyCoordinator.xbee.get_firmware_version();
-                pyCoordinator.Close();
                 return version.ToString();
             }
         }
