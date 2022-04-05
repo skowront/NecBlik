@@ -13,6 +13,14 @@ namespace NecBlik.PyDigi.Models
 
         private dynamic pyCoordinator;
 
+        private const int sleepTime = 500;
+
+        private const long timeout = 25000L;
+
+        private const int maxProgress = (int)timeout / sleepTime;
+
+        private IUpdatableResponseProvider<int, bool, string> progressResponseProvider = null;
+
         [JsonProperty]
         public PyDigiUSBConnectionData connectionData { get; set; }
         public delegate void Callback(object arg);
@@ -43,6 +51,7 @@ namespace NecBlik.PyDigi.Models
                                     "\t a = str(xbee_message.remote_device.get_64bit_addr())\n" +
                                     "\t dataReceivedActionHolder.callback.Invoke(bytes(xbee_message.data).decode(encoding=\"UTF-8\"),a); \n");
                     this.scope.Exec("coordinator.xbee.add_data_received_callback(my_data_received_callback)");
+
                     Console.WriteLine("Initialization fine.");
                 }
             }
@@ -74,6 +83,7 @@ namespace NecBlik.PyDigi.Models
 
         public override async Task<IEnumerable<IDeviceSource>> GetDevices(IUpdatableResponseProvider<int, bool, string> progressResponseProvider = null)
         {
+            this.progressResponseProvider = progressResponseProvider;
             using (Py.GIL())
             {
                 pyCoordinator.Open();
@@ -81,7 +91,7 @@ namespace NecBlik.PyDigi.Models
                 var func = new Action(() => {
                     Console.WriteLine("");
                 });
-                scope.Exec("coordinator.DiscoverDevices()");
+                await this.Discover();
 
                 dynamic devices = this.pyCoordinator.devices;
                 List<IDeviceSource> sources = new();
@@ -96,13 +106,25 @@ namespace NecBlik.PyDigi.Models
 
         public override async Task Discover()
         {
+            progressResponseProvider?.Init(0, PyDigiZigBeeUSBCoordinator.maxProgress, 0);
+            var progress = 0;
             using (Py.GIL())
             {
-                Task.Run(() =>
+                
+                this.pyCoordinator.AddDiscoveryUpdateCallback(new Action<int>((input) =>
+                {
+                    progress = input;
+                    this.progressResponseProvider?.Update(input);
+                }));
+                var task = Task.Run(() =>
                 {
                     scope.Exec("coordinator.DiscoverDevices()");
-                }).Wait();
+                });
+                await task;
+                
             }
+            this.progressResponseProvider?.Update(PyDigiZigBeeUSBCoordinator.maxProgress);
+            progressResponseProvider?.SealUpdates();
             return;
         }
         public override void Save(string folderPath)
@@ -155,12 +177,18 @@ namespace NecBlik.PyDigi.Models
 
         public override void Close()
         {
-            this.pyCoordinator.Close();
+            using (Py.GIL())
+            {
+                this.pyCoordinator.Close();
+            }
         }
 
         public override bool Open()
         {
-            this.pyCoordinator.Open();
+            using (Py.GIL())
+            {
+                this.pyCoordinator.Open();
+            }
             return true;
         }
 

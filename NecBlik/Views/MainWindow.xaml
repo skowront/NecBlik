@@ -90,7 +90,7 @@
                 </Grid>
                 <Grid Grid.Column="1" Grid.Row="1" Grid.RowSpan="2">
                     <ScrollViewer Style="{StaticResource ScrollViewer}">
-                        <Expander ExpandDirection="Down" Style="{StaticResource MaterialDesignExpander}" 
+                        <Expander ExpandDirection="Down" Style="{StaticResource MaterialDesignExpander}" IsExpanded="True"
                           Foreground="{StaticResource ForegroundLightBrush}"
                           Header="">
                             <ListView ItemsSource="{Binding Networks}" 

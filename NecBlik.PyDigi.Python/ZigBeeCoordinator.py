@@ -80,6 +80,7 @@ class Coordinator:
         self.baudRate = baudRate
         self.devices = np.empty(0)
         self.xbee: XBeeDevice = XBeeDevice(self.port, self.baudRate)
+        self.discoveryUpdateCallback:Action[int] = None;
         self.Open()
         print("Initializing")
 
@@ -87,9 +88,17 @@ class Coordinator:
         self.Open();
         self.xnet = self.xbee.get_network()
         self.xnet.start_discovery_process()
+        counter = 0;
         while self.xnet.is_discovery_running():
             time.sleep(0.5);
+            counter = counter + 1;
+            if self.discoveryUpdateCallback != None:
+                self.discoveryUpdateCallback.Invoke(counter);
+        self.discoveryUpdateCallback = None;
         self.devices = self.xnet.get_devices()
+
+    def AddDiscoveryUpdateCallback(self,action:Action[int]):
+        self.discoveryUpdateCallback=action;
 
     def Open(self):
         if(not self.xbee.is_open()):
