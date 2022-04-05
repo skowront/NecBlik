@@ -18,5 +18,11 @@ namespace NecBlik.PyDigi.Test
             Assert.AreEqual(devices.Count, 1);
 
         }
+
+        [TestMethod]
+        public async Task SendRecieve()
+        {
+            
+        }
     }
 }

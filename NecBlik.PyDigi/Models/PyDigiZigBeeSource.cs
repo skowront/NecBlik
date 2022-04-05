@@ -21,7 +21,8 @@ namespace NecBlik.PyDigi.Models
 
         public override string GetAddress()
         {
-            return this.pyDevice.get_64bit_addr().ToString();
+            using (Python.Runtime.Py.GIL())
+                return this.pyDevice.get_64bit_addr().ToString();
         }
 
         public override string GetName()
@@ -31,7 +32,8 @@ namespace NecBlik.PyDigi.Models
 
         public override string GetVersion()
         {
-            return this.pyDevice.get_firmware_version();
+            using (Python.Runtime.Py.GIL())
+                return this.pyDevice.get_hardware_version().description;
         }
 
         public override string GetCacheId()

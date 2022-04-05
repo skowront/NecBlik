@@ -36,6 +36,7 @@ namespace NecBlik.PyDigi.Models
             Environment.SetEnvironmentVariable("PYTHONHOME", pathToVirtualEnv, EnvironmentVariableTarget.Process);
             Runtime.PythonDLL = pathToVirtualEnv + Resources.Resources.PythonDLLSubpath;
             PythonEngine.Initialize();
+            //PythonEngine.BeginAllowThreads();
         }
 
         ~ZigBeePyEnv()

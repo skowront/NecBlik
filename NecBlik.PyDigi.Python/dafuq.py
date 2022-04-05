@@ -1,3 +1,4 @@
+
 from digi.xbee import devices
 from digi.xbee.devices import XBeeDevice;
 from digi.xbee.models.protocol import IPProtocol;
@@ -20,19 +21,18 @@ class ActionHolder:
     def __init__(self, callback):
         self.callback = callback;
 
-def EmptyFunction(xbee_message):
+def EmptyFunction(arg):
     print("None");
     return;
 
-#action = Action[Object](EmptyFunction);
-#dataReceivedActionHolder = None;
+action = Action[Object](EmptyFunction);
+dataReceivedActionHolder = None;
 
-#def my_data_received_callback(xbee_message):
-#    if dataReceivedActionHolder == None:
-#        print("Data recieved");
-#    else:
-#        dataReceivedActionHolder.callback.Invoke(xbee_message);
-    
+def my_data_received_callback(xbee_message):
+    if dataReceivedActionHolder == None:
+        print("Data recieved");
+    else:
+        dataReceivedActionHolder.callback.Invoke(xbee_message);
     #address = xbee_message.remote_device.get_64bit_addr()
     #data = xbee_message.data.decode("utf8")
     #print("Received data from %s: %s" % (address, data))
@@ -89,16 +89,13 @@ class Coordinator:
             self.xbee.send_data(device,b)
             print("Data sent.")
 
-#coordinator = Coordinator("COM4",9600)
-#coordinator.DiscoverDevices()
+coordinator = Coordinator("COM4",9600)
+coordinator.DiscoverDevices()
+coordinator.xbee.add_data_received_callback(my_data_received_callback)
+#coordinator.xbee.add_expl_data_received_callback(EmptyFunction)
+coordinator.Send("GetValue","0013A20040A739ED")
+
 #coordinator.xbee.add_data_received_callback(my_data_received_callback)
-#coordinator.xbee.add_data_received_callback(EmptyFunction)
-#coordinator.Send("GetValue","0013A20040A739ED")
-
-
-
-
-
 
 #address = "0013A20040A739ED";
 #b = bytes("GetValue"+"\0",encoding="utf-8");
