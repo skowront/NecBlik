@@ -87,7 +87,6 @@ class Coordinator:
             if(device == None):
                 return;
             self.xbee.send_data(device,b)
-            print("Data sent.")
 
 #coordinator = Coordinator("COM4",9600)
 #coordinator.DiscoverDevices()

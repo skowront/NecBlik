@@ -43,6 +43,7 @@ namespace NecBlik.PyDigi.Models
                     //test
                     this.scope.Set("action", new Action<Object>((input) => {
                         Console.WriteLine("Works!");
+                        
                     }));
                     this.scope.Exec("dataReceivedActionHolder = ActionHolder(action)");
                     this.scope.Exec("def my_data_received_callback(xbee_message):\n" +
@@ -54,6 +55,7 @@ namespace NecBlik.PyDigi.Models
                     //this.scope.Exec("dataReceivedActionHolder.callback.Invoke(10)");
                     //this.scope.Exec("coordinator.DiscoverDevices()");
                     //this.pyCoordinator.add_expl_data_received_callback((delegate)((arg) => { }));
+                    Console.WriteLine("Initialization fine.");
                 }
             }
             catch (Exception ex)
