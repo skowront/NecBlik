@@ -85,7 +85,7 @@ namespace NecBlik.Digi.Models
             var options = new HashSet<XBeeLibrary.Core.Models.DiscoveryOptions>();
             options.Add(XBeeLibrary.Core.Models.DiscoveryOptions.APPEND_DD);
             this.xBeeNetwork.SetDiscoveryOptions(options);
-            this.xBeeNetwork.SetDiscoveryTimeout(25000L);
+            //this.xBeeNetwork.SetDiscoveryTimeout(25000L);
             this.xBeeNetwork.DiscoveryFinished += Network_DiscoveryFinished;
             this.xBeeNetwork.DeviceDiscovered += Network_DeviceDiscovered;
             this.xBeeNetwork.StartNodeDiscoveryProcess();

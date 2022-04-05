@@ -27,21 +27,23 @@ namespace NecBlik.PyDigi.Models
 
         public override void AddSource(IDeviceSource source)
         {
+            this.DeviceSources.Add(source);
             return;
         }
 
         public override void Save(string folderName)
         {
-            var dir = folderName + "\\" + this.Guid + "." + this.internalNetworkType;
-            if (!Directory.Exists(dir))
-            {
-                Directory.CreateDirectory(dir);
-            }
-            if (Directory.Exists(dir))
-            {
-                this.Coordinator.Save(dir);
-                File.WriteAllText(dir + "\\" + Resources.Resources.NetworkFile, JsonConvert.SerializeObject(this, Formatting.Indented));
-            }
+            base.Save(folderName);
+        //    var dir = folderName + "\\" + this.Guid + "." + this.internalNetworkType;
+        //    if (!Directory.Exists(dir))
+        //    {
+        //        Directory.CreateDirectory(dir);
+        //    }
+        //    if (Directory.Exists(dir))
+        //    {
+        //        this.Coordinator.Save(dir);
+        //        File.WriteAllText(dir + "\\" + Resources.Resources.NetworkFile, JsonConvert.SerializeObject(this, Formatting.Indented));
+        //    }
         }
     }
 }

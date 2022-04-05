@@ -1,23 +1,23 @@
-﻿using System;
+﻿using NecBlik.Core.GUI.ViewModels;
+using NecBlik.Core.Models;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
-using NecBlik.Core.GUI.ViewModels;
-using NecBlik.Core.Models;
 
-namespace NecBlik.Digi.GUI.ViewModels
+namespace NecBlik.PyDigi.GUI.ViewModels
 {
-    public class DigiZigBeeCoordinatorViewModel:DigiZigBeeViewModel
+    public class PyDigiZigBeeCoordinatorViewModel:PyDigiZigBeeViewModel
     {
-        public DigiZigBeeCoordinatorViewModel(DeviceModel model = null, NetworkViewModel networkModel = null) : base(model, networkModel)
+        public PyDigiZigBeeCoordinatorViewModel(DeviceModel model = null, NetworkViewModel networkModel = null):base(model,networkModel)
         {
 
         }
 
         public override void Send()
         {
-            if (this.SelectedDestinationAddress == this.Address)
+            if(this.SelectedDestinationAddress == this.Address)
             {
                 this.AddOutgoingHistoryBufferEntry(this.OutputBuffer, this.Address);
                 this.OnDataRecieved(this.OutputBuffer, this.Address);
@@ -32,11 +32,11 @@ namespace NecBlik.Digi.GUI.ViewModels
                     this.AddOutgoingHistoryBufferEntry(this.OutputBuffer, item);
                 }
                 var sources = this.Network?.GetDeviceViewModels();
-                if(sources!=null)
+                if (sources != null)
                 {
-                    foreach(var source in sources)
+                    foreach (var source in sources)
                     {
-                        source.OnDataSent(this.OutputBuffer,this.Address);
+                        source.OnDataSent(this.OutputBuffer, this.Address);
                     }
                 }
                 return;
@@ -47,13 +47,13 @@ namespace NecBlik.Digi.GUI.ViewModels
             if (vm != null)
                 vm.OnDataSent(this.OutputBuffer, this.Address);
             else
-                this.AddOutgoingHistoryBufferEntry(NecBlik.Core.GUI.Strings.SR.GPDeviceUnavailable,this.SelectedDestinationAddress);
+                this.AddOutgoingHistoryBufferEntry(NecBlik.Core.GUI.Strings.SR.GPDeviceUnavailable, this.SelectedDestinationAddress);
             this.OutputBuffer = string.Empty;
         }
 
         public override void OnDataSent(string data, string sourceAddress)
         {
-            this.OnDataRecieved(data,sourceAddress);
+            base.OnDataRecieved(data, sourceAddress);
         }
     }
 }

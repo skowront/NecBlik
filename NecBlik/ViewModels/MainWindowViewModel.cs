@@ -136,11 +136,13 @@ namespace NecBlik.ViewModels
                 if(ip != string.Empty)
                 {
                     var vm = await DeviceGuiAnyFactory.Instance.NetworkViewModelFromWizard(null,ip);
+                    
                     if(vm!=null)
                     {
                         var network = vm;
                         if (network == null)
                             return;
+                        vm.DeviceSelectionSubscriber = this.DeviceSelectionSubscriber;
                         this.Networks.Add(network);
                         this.SyncToModel();
                         //this.SyncFromModel();

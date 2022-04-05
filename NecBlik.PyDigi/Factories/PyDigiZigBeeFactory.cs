@@ -44,6 +44,25 @@ namespace NecBlik.PyDigi.Factories
             {
                 return null;
             }
+
+            foreach (var file in Directory.EnumerateFiles(pathToDirectory + "\\Sources"))
+            {
+                IDeviceSource source = this.BuildSourceFromJsonFile(file);
+                if (source == null)
+                {
+                    foreach (var factory in this.OtherFactories)
+                    {
+                        source = factory.BuildSourceFromJsonFile(file);
+                        if (source != null)
+                            break;
+                    }
+                }
+                if (source != null)
+                {
+                    network.AddSource(source);
+                }
+            }
+
             network.ProgressResponseProvider = updatableResponseProvider;
             await network.Initialize(new PyDigiZigBeeUSBCoordinator(this, connectionData));
             return network;

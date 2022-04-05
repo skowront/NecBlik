@@ -24,7 +24,7 @@ namespace NecBlik.Core.GUI.Views
     /// <summary>
     /// Interaction logic for NetworkFactoryRulesEditor.xaml
     /// </summary>
-    public partial class FactoryRulesEditor : Window
+    public partial class FactoryRulesEditor
     {
         public NetworkViewModel ViewModel = null;
 

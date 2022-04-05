@@ -159,4 +159,10 @@
   <data name="GPAdd" xml:space="preserve">
     <value>Add</value>
   </data>
+  <data name="GPNetworkType" xml:space="preserve">
+    <value>Network type</value>
+  </data>
+  <data name="GPCoordinatorType" xml:space="preserve">
+    <value>Coordinator type</value>
+  </data>
 </root>
