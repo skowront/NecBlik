@@ -8,13 +8,50 @@ from digi.xbee.packets.common import _encode_at_cmd
 from digi.xbee.reader import DataReceived;
 import numpy as np;
 import time
-from numpy.core import function_base
 
 import clr
 from System import Action
 from System import Object
 
 from serial.serialutil import Timeout;
+
+def BytesToString(data):
+    out = str();
+    for d in data:
+        copy = d
+        leftSide = (copy >> 4) << 4;
+        print(leftSide);
+        if leftSide >> 4 <10:
+            out += str(leftSide >> 4)
+        elif leftSide >> 4 == 10:
+            out += 'A'
+        elif leftSide >> 4 == 11:
+            out += 'B'
+        elif leftSide >> 4 == 12:
+            out += 'C'
+        elif leftSide >> 4 == 13:
+            out += 'D'
+        elif leftSide >> 4 == 14:
+            out += 'E'
+        elif leftSide >> 4 == 15:
+            out += 'F'
+        rightSide = d - leftSide;
+        print(rightSide);
+        if rightSide < 10:
+            out += str(rightSide >> 4) 
+        elif rightSide == 10:
+            out += 'A'
+        elif rightSide == 11:
+            out += 'B'
+        elif rightSide == 12:
+            out += 'C'
+        elif rightSide == 13:
+            out += 'D'
+        elif rightSide == 14:
+            out += 'E'
+        elif rightSide == 15:
+            out += 'F'
+    return out;
 
 class ActionHolder:
     def __init__(self, callback):
@@ -66,6 +103,10 @@ class Coordinator:
         self.Open()
         return self.xbee.get_64bit_addr()
 
+    def GetPanId(self):
+        self.Open()
+        return BytesToString(self.xbee.get_pan_id())
+
     def GetVersion(self):
         self.Open()
         return self.xbee.get_hardware_version().description
@@ -107,3 +148,5 @@ class Coordinator:
 #    if(str(dev.get_64bit_addr()) == address):
 #        rdevice = dev
 #coordinator.xbee.send_data(rdevice,b)
+
+

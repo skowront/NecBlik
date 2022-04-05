@@ -32,10 +32,8 @@ namespace NecBlik.PyDigi.Models
                     this.scope = ZigBeePyEnv.NewInitializedScope();
                     this.scope.Exec(File.ReadAllText(Resources.Resources.PyDigiScriptsLocation + "/" + Resources.Resources.ScriptZigBeeCoordinator_py));
                     this.scope.Exec($"coordinator = Coordinator(\"{this.connectionData.port}\",\"{this.connectionData.baud}\")");
-                    //this.scope.Exec("coordinator.DiscoverDevices()");
                     this.pyCoordinator = this.scope.Get<dynamic>("coordinator");
                     this.pyCoordinator.Open();
-                    //test
                     this.scope.Set("action", new Action<string,string>((data,address) => {
                         Console.WriteLine("Works!");
                         this.OnDataRecieved(data, address);
@@ -44,13 +42,7 @@ namespace NecBlik.PyDigi.Models
                     this.scope.Exec("def my_data_received_callback(xbee_message):\n" +
                                     "\t a = str(xbee_message.remote_device.get_64bit_addr())\n" +
                                     "\t dataReceivedActionHolder.callback.Invoke(bytes(xbee_message.data).decode(encoding=\"UTF-8\"),a); \n");
-                    //this.scope.Exec("coordinator.xbee.add_data_received_callback(EmptyFunction)");
                     this.scope.Exec("coordinator.xbee.add_data_received_callback(my_data_received_callback)");
-                    //this.scope.Exec("coordinator.Send(\"GetValue\",\"0013A20040A739ED\")");
-                    //this.scope.Exec("my_data_received_callback(10)");
-                    //this.scope.Exec("dataReceivedActionHolder.callback.Invoke(10)");
-                    //this.scope.Exec("coordinator.DiscoverDevices()");
-                    //this.pyCoordinator.add_expl_data_received_callback((delegate)((arg) => { }));
                     Console.WriteLine("Initialization fine.");
                 }
             }
@@ -89,8 +81,6 @@ namespace NecBlik.PyDigi.Models
                 var func = new Action(() => {
                     Console.WriteLine("");
                 });
-                //scope.Set("func", func);
-                //scope.Set("timeout", 0);
                 scope.Exec("coordinator.DiscoverDevices()");
 
                 dynamic devices = this.pyCoordinator.devices;
@@ -124,10 +114,9 @@ namespace NecBlik.PyDigi.Models
         {
             using (Py.GIL())
             {
-                //pyCoordinator.Open();
-                //dynamic version = this.pyCoordinator.xbee.get_firmware_version();
-                //return version.ToString();
-                return String.Empty;
+                pyCoordinator.Open();
+                dynamic version = this.pyCoordinator.get_hardware_version().description;
+                return version.ToString();
             }
         }
 
@@ -150,8 +139,8 @@ namespace NecBlik.PyDigi.Models
             using (Py.GIL())
             {
                 pyCoordinator.Open();
-                dynamic version = this.pyCoordinator.GetVersion();
-                return version.ToString();
+                dynamic panId = this.pyCoordinator.GetPanId();
+                return panId;
             }
         }
 
@@ -160,15 +149,6 @@ namespace NecBlik.PyDigi.Models
             using(Py.GIL())
             {
                 this.pyCoordinator.Send(data,address);
-
-                //this.Discover();
-
-                //this.scope.Exec("LittleWhile();");
-                //while (true)
-                //{
-                   // this.scope.Exec("time.sleep(0.5);");
-                //}
-                //this.pyCoordinator.Send(data, address);
             }
             
         }

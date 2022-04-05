@@ -39,6 +39,7 @@ namespace NecBlik.Digi.GUI.ViewModels
                         source.OnDataSent(this.OutputBuffer,this.Address);
                     }
                 }
+                return;
             }
             this.Model.DeviceSource.Send(this.OutputBuffer, this.SelectedDestinationAddress);
             var vm = this.Network?.GetDeviceViewModels().Where((x) => { return x.Address == this.SelectedDestinationAddress; }).FirstOrDefault();
