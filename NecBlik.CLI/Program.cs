@@ -16,6 +16,7 @@ public class Program
             var coordinator = new PyDigiZigBeeUSBCoordinator(new NecBlik.PyDigi.Factories.PyDigiZigBeeFactory(), conData);
             coordinator.Discover().Wait();
             coordinator.Send("GetValue", "0013A20040A739ED");
+            coordinator.Discover().Wait();
 
             while (true)
             {

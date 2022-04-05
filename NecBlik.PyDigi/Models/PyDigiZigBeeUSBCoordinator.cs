@@ -37,19 +37,19 @@ namespace NecBlik.PyDigi.Models
                     this.scope = ZigBeePyEnv.NewInitializedScope();
                     this.scope.Exec(File.ReadAllText(Resources.Resources.PyDigiScriptsLocation + "/" + Resources.Resources.ScriptZigBeeCoordinator_py));
                     this.scope.Exec($"coordinator = Coordinator(\"{this.connectionData.port}\",\"{this.connectionData.baud}\")");
-                    this.scope.Exec("coordinator.DiscoverDevices()");
+                    //this.scope.Exec("coordinator.DiscoverDevices()");
                     this.pyCoordinator = this.scope.Get<dynamic>("coordinator");
                     this.pyCoordinator.Open();
                     //test
                     this.scope.Set("action", new Action<Object>((input) => {
-                        Console.WriteLine("aa");
+                        Console.WriteLine("Works!");
                     }));
                     this.scope.Exec("dataReceivedActionHolder = ActionHolder(action)");
                     this.scope.Exec("def my_data_received_callback(xbee_message):\n" +
-                                    "\t print(\"Data recieved\")\n");
+                                    "\t dataReceivedActionHolder.callback.Invoke(xbee_message) \n");
                     //this.scope.Exec("coordinator.xbee.add_data_received_callback(EmptyFunction)");
                     this.scope.Exec("coordinator.xbee.add_data_received_callback(my_data_received_callback)");
-                    this.scope.Exec("coordinator.Send(\"GetValue\",\"0013A20040A739ED\")");
+                    //this.scope.Exec("coordinator.Send(\"GetValue\",\"0013A20040A739ED\")");
                     //this.scope.Exec("my_data_received_callback(10)");
                     //this.scope.Exec("dataReceivedActionHolder.callback.Invoke(10)");
                     //this.scope.Exec("coordinator.DiscoverDevices()");
@@ -163,7 +163,7 @@ namespace NecBlik.PyDigi.Models
             {
                 this.pyCoordinator.Send(data,address);
 
-                this.Discover();
+                //this.Discover();
 
                 //this.scope.Exec("LittleWhile();");
                 //while (true)
