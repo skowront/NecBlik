@@ -1,0 +1,41 @@
+﻿<mah:MetroWindow x:Class="NecBlik.Views.AboutWindow"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="clr-namespace:NecBlik.Views"
+        xmlns:lexp="clr-namespace:WPFLocalizeExtension.Providers;assembly=WPFLocalizeextension"
+        xmlns:lex="clr-namespace:WPFLocalizeExtension.Extensions;assembly=WPFLocalizeextension"
+        xmlns:mah="http://metro.mahapps.com/winfx/xaml/controls"
+        mc:Ignorable="d"
+        Title="About" Height="200" Width="400" ResizeMode="NoResize">
+    <Window.Resources>
+        <Style TargetType="{x:Type TextBlock}">
+            <Setter Property="Foreground" Value="{StaticResource MaterialDesignDarkForeground}"></Setter>
+        </Style>
+    </Window.Resources>
+    <Grid Background="{StaticResource MaterialDesignDarkBackground}">
+        <Grid Margin="10">
+            <Grid.RowDefinitions>
+                <RowDefinition Height="auto"></RowDefinition>
+                <RowDefinition></RowDefinition>
+                <RowDefinition></RowDefinition>
+                <RowDefinition></RowDefinition>
+                <RowDefinition></RowDefinition>
+            </Grid.RowDefinitions>
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition></ColumnDefinition>
+                <ColumnDefinition></ColumnDefinition>
+            </Grid.ColumnDefinitions>
+            <TextBlock Grid.Row="0" Margin="0 0 0 20" Grid.ColumnSpan="2" HorizontalAlignment="Center" FontSize="30" Text="NecBlik"></TextBlock>
+            <TextBlock Grid.Row="1" HorizontalAlignment="Left" Text="{lex:Loc GPAuthor}"></TextBlock>
+            <TextBlock Grid.Row="2" HorizontalAlignment="Left" Text="{lex:Loc GPLicense}"></TextBlock>
+            <TextBlock Grid.Row="3" HorizontalAlignment="Left" Text="{lex:Loc GPVersion}"></TextBlock>
+            <TextBlock Grid.Row="4" HorizontalAlignment="Left" Text="{lex:Loc GPEmail}"></TextBlock>
+            <TextBlock Grid.Row="1" Grid.Column="1" HorizontalAlignment="Left" Text="Tomasz Skowron"></TextBlock>
+            <TextBlock Grid.Row="2" Grid.Column="1" HorizontalAlignment="Left" Text="No license yet."></TextBlock>
+            <TextBlock Grid.Row="3" Grid.Column="1" HorizontalAlignment="Left" Text="{Binding Version}"></TextBlock>
+            <TextBlock Grid.Row="4" Grid.Column="1" HorizontalAlignment="Left" Text="tomasko647@student.polsl.pl"></TextBlock>
+        </Grid>
+    </Grid>
+</mah:MetroWindow>

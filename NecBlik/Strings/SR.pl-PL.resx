@@ -133,7 +133,7 @@
     <value>Dostępne urządzenia</value>
   </data>
   <data name="MainWindowManuHeaderProjectLoadMap" xml:space="preserve">
-    <value>Załaduj mapę projektu</value>
+    <value>Załaduj</value>
   </data>
   <data name="MainWindowMenuAbout" xml:space="preserve">
     <value>O aplikacji</value>
@@ -191,5 +191,23 @@
   </data>
   <data name="MainWindowMenuHeaderProjectRename" xml:space="preserve">
     <value>Zmień nazwę</value>
+  </data>
+  <data name="MainWindowMenuHeaderMap" xml:space="preserve">
+    <value>Mapa</value>
+  </data>
+  <data name="MainWindowManuHeaderProjectRemoveMap" xml:space="preserve">
+    <value>Usuń</value>
+  </data>
+  <data name="GPAuthor" xml:space="preserve">
+    <value>Autor</value>
+  </data>
+  <data name="GPLicense" xml:space="preserve">
+    <value>Licencja</value>
+  </data>
+  <data name="GPVersion" xml:space="preserve">
+    <value>Wersja</value>
+  </data>
+  <data name="GPContact" xml:space="preserve">
+    <value>Kontakt</value>
   </data>
 </root>

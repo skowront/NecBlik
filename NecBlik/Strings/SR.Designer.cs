@@ -70,6 +70,24 @@ namespace NecBlik.Strings {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Author.
+        /// </summary>
+        public static string GPAuthor {
+            get {
+                return ResourceManager.GetString("GPAuthor", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Contact.
+        /// </summary>
+        public static string GPContact {
+            get {
+                return ResourceManager.GetString("GPContact", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Height.
         /// </summary>
         public static string GPHeight {
@@ -84,6 +102,15 @@ namespace NecBlik.Strings {
         public static string GPLanguage {
             get {
                 return ResourceManager.GetString("GPLanguage", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to License.
+        /// </summary>
+        public static string GPLicense {
+            get {
+                return ResourceManager.GetString("GPLicense", resourceCulture);
             }
         }
         
@@ -115,6 +142,15 @@ namespace NecBlik.Strings {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Version.
+        /// </summary>
+        public static string GPVersion {
+            get {
+                return ResourceManager.GetString("GPVersion", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Width.
         /// </summary>
         public static string GPWidth {
@@ -142,11 +178,20 @@ namespace NecBlik.Strings {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Load map.
+        ///   Looks up a localized string similar to Load.
         /// </summary>
         public static string MainWindowManuHeaderProjectLoadMap {
             get {
                 return ResourceManager.GetString("MainWindowManuHeaderProjectLoadMap", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Remove.
+        /// </summary>
+        public static string MainWindowManuHeaderProjectRemoveMap {
+            get {
+                return ResourceManager.GetString("MainWindowManuHeaderProjectRemoveMap", resourceCulture);
             }
         }
         
@@ -165,6 +210,15 @@ namespace NecBlik.Strings {
         public static string MainWindowMenuHeaderAddZigBeeNetworkManager {
             get {
                 return ResourceManager.GetString("MainWindowMenuHeaderAddZigBeeNetworkManager", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Map.
+        /// </summary>
+        public static string MainWindowMenuHeaderMap {
+            get {
+                return ResourceManager.GetString("MainWindowMenuHeaderMap", resourceCulture);
             }
         }
         

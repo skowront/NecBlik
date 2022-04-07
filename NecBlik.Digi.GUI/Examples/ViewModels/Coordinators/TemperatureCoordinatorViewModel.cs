@@ -7,7 +7,7 @@ using System.Linq;
 
 namespace NecBlik.Digi.GUI.Examples.ViewModels.Coordinators
 {
-    public class TemperatureCoordinatorViewModel: DigiZigBeeViewModel
+    public class TemperatureCoordinatorViewModel: DigiZigBeeCoordinatorViewModel
     {
         public TemperatureCoordinatorViewModel(DeviceModel model, NetworkViewModel networkModel) : base(model, networkModel)
         {

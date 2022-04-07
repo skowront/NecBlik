@@ -133,7 +133,7 @@
     <value>Disponible appareils</value>
   </data>
   <data name="MainWindowManuHeaderProjectLoadMap" xml:space="preserve">
-    <value>Charger la carte</value>
+    <value>Charger</value>
   </data>
   <data name="MainWindowMenuAbout" xml:space="preserve">
     <value>Sur</value>
@@ -191,5 +191,23 @@
   </data>
   <data name="MainWindowMenuHeaderProjectRename" xml:space="preserve">
     <value>Renommer</value>
+  </data>
+  <data name="MainWindowMenuHeaderMap" xml:space="preserve">
+    <value>Carte</value>
+  </data>
+  <data name="MainWindowManuHeaderProjectRemoveMap" xml:space="preserve">
+    <value>Supprimer</value>
+  </data>
+  <data name="GPAuthor" xml:space="preserve">
+    <value>Auteur</value>
+  </data>
+  <data name="GPLicense" xml:space="preserve">
+    <value>License</value>
+  </data>
+  <data name="GPVersion" xml:space="preserve">
+    <value>Version</value>
+  </data>
+  <data name="GPContact" xml:space="preserve">
+    <value>Contact</value>
   </data>
 </root>

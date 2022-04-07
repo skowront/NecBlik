@@ -18,6 +18,7 @@ using NecBlik.Core.GUI.Views;
 using System.Threading;
 using NecBlik.Models;
 using System.Threading.Tasks;
+using NecBlik.Views;
 
 namespace NecBlik.ViewModels
 {
@@ -74,6 +75,7 @@ namespace NecBlik.ViewModels
         public IResponseProvider<DiagramItemMetadata, object> DiagramMapMetadataProvider { get; set; } = new GenericResponseProvider<DiagramItemMetadata, object>(new DiagramItemMetadata());
         public IResponseProvider<string, object> ProjectMapPathProvider { get; set; } = new GenericResponseProvider<string, object>(string.Empty);
         public IResponseProvider<object, Tuple<string, DiagramItemMetadata>> ProjectMapLoadedProvider { get; set; } = new GenericResponseProvider<object, Tuple<string,DiagramItemMetadata>>();
+        public IResponseProvider<object, object> ProjectMapRemoveProvider { get; set; } = new GenericResponseProvider<object, object>();
         public IResponseProvider<object, object> NewProjectLoadedProvider { get; set; } = new GenericResponseProvider<object, object>();
         public IResponseProvider<bool, object> NewProjectLoadEnsureResponseProvider { get; set; } = new GenericResponseProvider<bool, object>(true);
         public IResponseProvider<bool, object> ActionEnsureResponseProvider { get; set; } = new GenericResponseProvider<bool, object>(true);
@@ -95,9 +97,11 @@ namespace NecBlik.ViewModels
         public RelayCommand LoadProjectCommand { get; set; }
         public RelayCommand AddNetworkCommand { get; set; }
         public RelayCommand LoadProjectMapCommand { get; set; }
+        public RelayCommand RemoveProjectMapCommand { get; set; }
         public RelayCommand EditProjectCommand { get; set; }
         public RelayCommand ApplicationSettingsCommand { get; set; }
         public RelayCommand RemoveNetworkCommand { get; set; }
+        public RelayCommand AboutCommand { get; set; }
 
         #endregion
 
@@ -170,6 +174,11 @@ namespace NecBlik.ViewModels
                 this.LoadProjectMap(path);
             });
 
+            this.RemoveProjectMapCommand = new RelayCommand((o) =>
+            {
+
+            });
+
             this.EditProjectCommand = new RelayCommand(o =>
             {
                 var vm = new ProjectViewModel(this.model);
@@ -193,6 +202,12 @@ namespace NecBlik.ViewModels
                 vm.Dispose();
                 this.RemoveNetwork(o as NetworkViewModel); 
             });
+
+            this.AboutCommand = new RelayCommand((o) =>
+            {
+                var window = new AboutWindow();
+                window.Show();
+            });
         }
 
         private void LoadProjectMap(string path)
@@ -207,6 +222,11 @@ namespace NecBlik.ViewModels
             }
             this.MapFilePath = path;
             this.ProjectMapLoadedProvider.ProvideResponse(new Tuple<string, DiagramItemMetadata>(this.MapFilePath, this.guiModel.mapDiagramMetadata));
+        }
+
+        private void RemoveProjectMap()
+        {
+            this.ProjectMapRemoveProvider.ProvideResponse();
         }
 
         private async void LoadProject()

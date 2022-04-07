@@ -153,6 +153,12 @@ namespace NecBlik.Views
                 return this.LoadMap(o.Item1,o.Item2);
             });
 
+            this.ViewModel.ProjectMapRemoveProvider = new GenericResponseProvider<object, object>(o =>
+            {
+                this.RemoveMap();
+                return null;
+            });
+
             this.ViewModel.NewProjectLoadedProvider = new GenericResponseProvider<object, object>((o) =>
             {
                 this.designerCanvas.ClearCanvas();
@@ -225,6 +231,12 @@ namespace NecBlik.Views
             {
                 this.designerCanvas.UpdateDevice(obj);
             });
+        }
+
+        private object RemoveMap()
+        {
+            this.designerCanvas.RemoveBackground();
+            return null;
         }
 
         private object LoadMap(string path, DiagramItemMetadata metadata)

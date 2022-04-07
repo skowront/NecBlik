@@ -233,6 +233,15 @@ namespace NecBlik.Views.Controls
             di.Height = backgroundMeta.Size.Height;
         }
 
+        public void RemoveBackground()
+        {
+            if (this.background!=null)
+            {
+                this.Children.Remove(this.background);
+                this.background = null;
+            }
+        }
+
         public FrameworkElement GetBackground()
         {
             return this.background;
@@ -270,6 +279,7 @@ namespace NecBlik.Views.Controls
         public void ClearCanvas()
         {
             this.Children.Clear();
+            this.background = null;
         }
 
         public void DeleteSelection()
