@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 using XBeeLibrary.Core;
 using NecBlik.Core.Models;
 using NecBlik.Digi.Factories;
-
+using NecBlik.Core.Enums;
 
 namespace NecBlik.Digi.Models
 {

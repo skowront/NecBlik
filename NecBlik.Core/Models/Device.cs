@@ -6,6 +6,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using NecBlik.Core.Interfaces;
+using NecBlik.Core.Enums;
 
 namespace NecBlik.Core.Models
 {

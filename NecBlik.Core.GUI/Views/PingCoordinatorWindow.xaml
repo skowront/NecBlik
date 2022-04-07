@@ -1,0 +1,68 @@
+﻿<mah:MetroWindow x:Class="NecBlik.Core.GUI.Views.PingCoordinatorWindow"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:mah="http://metro.mahapps.com/winfx/xaml/controls" 
+        xmlns:lexp="clr-namespace:WPFLocalizeExtension.Providers;assembly=WPFLocalizeextension"
+        xmlns:lex="clr-namespace:WPFLocalizeExtension.Extensions;assembly=WPFLocalizeextension"
+        lexp:ResxLocalizationProvider.DefaultAssembly="NecBlik.Core.GUI"
+        lexp:ResxLocalizationProvider.DefaultDictionary="SR"
+        xmlns:vm="clr-namespace:NecBlik.Core.GUI.ViewModels"
+        xmlns:local="clr-namespace:NecBlik.Core.GUI.Views"
+        mc:Ignorable="d"
+        d:DataContext="{d:DesignInstance {x:Type vm:PingViewModel}}"
+        Title="Ping" Height="450" Width="800">
+    <Grid Background="{StaticResource MaterialDesignDarkBackground}">
+        <Grid Margin="10">
+            <Grid.RowDefinitions>
+                <RowDefinition></RowDefinition>
+                <RowDefinition></RowDefinition>
+            </Grid.RowDefinitions>
+            <Grid Grid.Row="0">
+                <Grid.RowDefinitions>
+                    <RowDefinition></RowDefinition>
+                    <RowDefinition></RowDefinition>
+                    <RowDefinition></RowDefinition>
+                    <RowDefinition></RowDefinition>
+                    <RowDefinition></RowDefinition>
+                    <RowDefinition Height="auto"></RowDefinition>
+                </Grid.RowDefinitions>
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition></ColumnDefinition>
+                    <ColumnDefinition></ColumnDefinition>
+                </Grid.ColumnDefinitions>
+                <TextBlock Grid.Row="0" VerticalAlignment="Center" Text="{lex:Loc GPTimeout}" Foreground="{StaticResource MaterialDesignDarkForeground}"></TextBlock>
+                <TextBlock Grid.Row="1" VerticalAlignment="Center" Text="{lex:Loc GPPayload}" Foreground="{StaticResource MaterialDesignDarkForeground}"></TextBlock>
+                <TextBlock Grid.Row="2" VerticalAlignment="Center" Text="{lex:Loc GPPayloadSize}" Foreground="{StaticResource MaterialDesignDarkForeground}"></TextBlock>
+                <TextBlock Grid.Row="3" VerticalAlignment="Center" Text="{lex:Loc GPSelectedRemoteAddress}" Foreground="{StaticResource MaterialDesignDarkForeground}"></TextBlock>
+                <TextBox Grid.Row="0" VerticalAlignment="Center" Grid.Column="1" Text="{Binding Timeout}" Foreground="{StaticResource MaterialDesignDarkForeground}"></TextBox>
+                <TextBox Grid.Row="1" VerticalAlignment="Center" Grid.Column="1" Text="{Binding Payload}" Foreground="{StaticResource MaterialDesignDarkForeground}"></TextBox>
+                <TextBox Grid.Row="2" VerticalAlignment="Center" Grid.Column="1" Text="{Binding PayloadSize}" Foreground="{StaticResource MaterialDesignDarkForeground}"></TextBox>
+                <ComboBox Grid.Row="3" VerticalAlignment="Center" Grid.Column="1" ItemsSource="{Binding AvailableAdresses}" SelectedItem="{Binding SelectedRemoteAddresss}" Foreground="{StaticResource MaterialDesignDarkForeground}"></ComboBox>
+                <Button Grid.Row="4" Grid.ColumnSpan="2" VerticalAlignment="Center" HorizontalAlignment="Center" Command="{Binding RunCommand}" Style="{StaticResource BaseButton}" Content="{lex:Loc GPRun}"></Button>
+                <Separator Grid.Row="5" Grid.ColumnSpan="2" Style="{StaticResource MaterialDesignLightSeparator}"></Separator>
+            </Grid>
+            <Grid Grid.Row="1">
+                <Grid.RowDefinitions>
+                    <RowDefinition></RowDefinition>
+                    <RowDefinition></RowDefinition>
+                    <RowDefinition></RowDefinition>
+                    <RowDefinition></RowDefinition>
+                </Grid.RowDefinitions>
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition></ColumnDefinition>
+                    <ColumnDefinition></ColumnDefinition>
+                </Grid.ColumnDefinitions>
+                <TextBlock Grid.Row="0" VerticalAlignment="Center" Text="{lex:Loc GPResponseTime}" Foreground="{StaticResource MaterialDesignDarkForeground}"></TextBlock>
+                <TextBlock Grid.Row="1" VerticalAlignment="Center" Text="{lex:Loc GPResult}" Foreground="{StaticResource MaterialDesignDarkForeground}"></TextBlock>
+                <TextBlock Grid.Row="2" VerticalAlignment="Center" Text="{lex:Loc GPPayload}" Foreground="{StaticResource MaterialDesignDarkForeground}"></TextBlock>
+                <TextBlock Grid.Row="3" VerticalAlignment="Center" Text="{lex:Loc GPMessage}" Foreground="{StaticResource MaterialDesignDarkForeground}"></TextBlock>
+                <TextBlock Grid.Row="0" VerticalAlignment="Center" Grid.Column="1" Text="{Binding ResponseTime}" Foreground="{StaticResource MaterialDesignDarkForeground}"></TextBlock>
+                <TextBlock Grid.Row="1" VerticalAlignment="Center" Grid.Column="1" Text="{Binding Result}" Foreground="{StaticResource MaterialDesignDarkForeground}"></TextBlock>
+                <TextBlock Grid.Row="2" VerticalAlignment="Center" Grid.Column="1" Text="{Binding ReturnedPayload}" TextWrapping="Wrap"  Foreground="{StaticResource MaterialDesignDarkForeground}"></TextBlock>
+                <TextBlock Grid.Row="3" VerticalAlignment="Center" Grid.Column="1" Text="{Binding Message}" Foreground="{StaticResource MaterialDesignDarkForeground}"></TextBlock>
+            </Grid>
+        </Grid>
+    </Grid>
+</mah:MetroWindow>

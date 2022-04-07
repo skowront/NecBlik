@@ -8,6 +8,7 @@ using NecBlik.Common.WpfExtensions.Base;
 using NecBlik.Common.WpfExtensions.Interfaces;
 using NecBlik.Core.GUI.Interfaces;
 using NecBlik.Core.GUI.ViewModels;
+using NecBlik.Core.GUI.Views;
 using NecBlik.Core.Interfaces;
 using NecBlik.Core.Models;
 
@@ -128,6 +129,7 @@ namespace NecBlik.Core.GUI
             this.SendCommand = new RelayCommand((o) => { 
                 this.Send(); 
             });
+            
         }
 
         public virtual string GetCacheId()

@@ -1,4 +1,5 @@
-﻿using NecBlik.Core.Models;
+﻿using NecBlik.Core.Enums;
+using NecBlik.Core.Models;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -23,5 +24,6 @@ namespace NecBlik.Core.Interfaces
         public void Send(string data, string address);
         public bool Open();
         public void Close();
+        
     }
 }

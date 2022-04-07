@@ -4,6 +4,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using NecBlik.Common.WpfExtensions.Interfaces;
+using NecBlik.Core.Enums;
 
 namespace NecBlik.Core.Interfaces
 {
@@ -14,5 +15,7 @@ namespace NecBlik.Core.Interfaces
         public IEnumerable<Tuple<string, string>> GetConnections();
 
         public Task Discover();
+
+        public Task<PingModel> Ping(long timeout = 0, string payload = "", string remoteAddress = "");
     }
 }

@@ -11,6 +11,8 @@ using NecBlik.Core.Interfaces;
 using NecBlik.Digi.USB;
 using Newtonsoft.Json;
 using NecBlik.Common.WpfExtensions.Interfaces;
+using NecBlik.Core.Enums;
+using XBeeLibrary.Core.Models;
 
 namespace NecBlik.Digi.Models
 {
@@ -193,6 +195,43 @@ namespace NecBlik.Digi.Models
             {
                 this.OnDataRecieved(data,sourceAddress);
             }
+        }
+
+        public override async Task<PingModel> Ping(long timeout = 0, string payload = "", string remoteAddress="")
+        {
+            var result = new PingModel();
+            try
+            {
+                if(remoteAddress==string.Empty)
+                {
+                    return new PingModel(0,PingModel.PingResult.Ok, payload);
+                }
+                XBeeMessage msg = null;
+                var sendingTime = DateTime.Now;
+                this.Send("Echo"+payload,remoteAddress);
+                msg = this.zigBee.ReadData((int)timeout);
+                if(msg == null)
+                {
+                    result.Result = PingModel.PingResult.NotOk;
+                    result.ResponseTime = (DateTime.Now - sendingTime).TotalMilliseconds;
+                    return result;
+                }
+                else
+                {
+                    result.Result = PingModel.PingResult.Ok;
+                    result.ResponseTime = (DateTime.Now - sendingTime).TotalMilliseconds;
+                    result.Payload = msg.DataString;
+                    return result;
+                }
+            }
+            catch(Exception ex)
+            {
+                result.Result = PingModel.PingResult.NotOk;
+                result.ResponseTime = double.PositiveInfinity;
+                result.Message = ex.Message;
+                return result;
+            }
+            return result;
         }
 
         [JsonObject(MemberSerialization.OptIn)]

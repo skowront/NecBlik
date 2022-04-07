@@ -7,6 +7,7 @@ using System.Text;
 using System.Threading.Tasks;
 using NecBlik.Common.WpfExtensions.Interfaces;
 using NecBlik.Core.Interfaces;
+using NecBlik.Core.Enums;
 
 namespace NecBlik.Core.Models
 {
@@ -163,6 +164,11 @@ namespace NecBlik.Core.Models
         public virtual void OnDataSent(string data, string sourceAddress)
         {
             this.OnDataRecieved(data, sourceAddress);
+        }
+
+        public virtual async Task<PingModel> Ping(long timeout = 0, string payload = "", string remoteAddress="")
+        {
+            return new PingModel(0.0d, PingModel.PingResult.Ok, payload);
         }
     }
 }

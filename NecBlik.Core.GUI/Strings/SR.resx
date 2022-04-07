@@ -174,4 +174,34 @@
   <data name="GPName" xml:space="preserve">
     <value>Name</value>
   </data>
+  <data name="GPResponseTime" xml:space="preserve">
+    <value>Response time</value>
+  </data>
+  <data name="GPResult" xml:space="preserve">
+    <value>Result</value>
+  </data>
+  <data name="GPReturned" xml:space="preserve">
+    <value>Returned</value>
+  </data>
+  <data name="GPMessage" xml:space="preserve">
+    <value>Message</value>
+  </data>
+  <data name="GPTimeout" xml:space="preserve">
+    <value>Timeout</value>
+  </data>
+  <data name="GPPayloadSize" xml:space="preserve">
+    <value>Payload size</value>
+  </data>
+  <data name="GPPayload" xml:space="preserve">
+    <value>Payload</value>
+  </data>
+  <data name="GPSelectedRemoteAddress" xml:space="preserve">
+    <value>Remote address</value>
+  </data>
+  <data name="GPPing" xml:space="preserve">
+    <value>Ping</value>
+  </data>
+  <data name="GPRun" xml:space="preserve">
+    <value>Run</value>
+  </data>
 </root>

@@ -21,13 +21,16 @@ int statusLed = 13;
 int errorLed = 13;
 
 const char SetValueCommand [] = "SetValue";
+const char EchoCommand [] = "Echo";
+const char HoldCommand [] = "Hold";
 const char GetValueCommand [] = "GetValue";
 const char GetChangingValueCommand [] = "GetCValue";
 
+bool hold = false;
 double StoredChangingValue = 0.0;
 double degrees = 0;
 unsigned long lastDataSent = 0;
-int dataSendingInterval = 1; //in Seconds
+int dataSendingInterval = 5; //in Seconds
 double Amplitude = 10;
 
 double GetStoredChangingValue()
@@ -40,9 +43,21 @@ void SetStoredChangingValue(double newValue)
 	StoredChangingValue = newValue;
 }
 
+void ToggleHold()
+{
+	if (hold == true)
+	{
+		hold = false;
+	}
+	else
+	{
+		hold = true;
+	}
+}
+
 void OnTickChangeStoredChangingValue()
 {
-	if (abs(millis() - lastDataSent) > dataSendingInterval * 1000)
+	if (abs(millis() - lastDataSent) > dataSendingInterval * 1000 && hold == false)
 	{
 		double radians = degrees * 1000 / 57296;
 		SetStoredChangingValue((sin(radians)) * Amplitude);
@@ -134,12 +149,12 @@ RecievedData RecieveValue(int timeout = 500)
 
 void HandleRemoteCommunication()
 {
-	const int rxBufferSize = 32;
+	const int rxBufferSize = 2048;
 	char rxBuffer[rxBufferSize];
 	RecievedData recieved = RecieveValue();
 	if (recieved.recieved == true)
 	{
-		Serial.print("Analyzing recieved packet.");
+		Serial.println("Analyzing recieved packet.");
 		recieved.payload.toCharArray(rxBuffer, rxBufferSize);
 		if (strcmp(rxBuffer, GetValueCommand) == 0)
 		{
@@ -152,6 +167,13 @@ void HandleRemoteCommunication()
 			Serial.println("GetCValue command recieved");
 			Serial.println("Sending stored changing value");
 			SendValue("ChangingValue:" + String(GetStoredChangingValue()));
+		}
+		else if (strcmp(rxBuffer, HoldCommand) == 0)
+		{
+			Serial.println("Hold command recieved");
+			Serial.print("Toggling hold. Current value -> ");
+			Serial.println(hold);
+			ToggleHold();
 		}
 		else
 		{
@@ -174,9 +196,20 @@ void HandleRemoteCommunication()
 			}
 			else
 			{
-				Serial.println("Unknown command recieved");
-				Serial.print("RxBuffer contains:");
-				Serial.println(rxBuffer);
+				recieved.payload.substring(0, strlen(EchoCommand)).toCharArray(rxBuffer, rxBufferSize);
+				if (strcmp(rxBuffer, EchoCommand) == 0)
+				{
+					Serial.println("Echo command recieved");
+					Serial.print("Echoing message of length:");
+					Serial.println(recieved.payload.length());
+					SendValue(recieved.payload);
+				}
+				else
+				{
+					Serial.println("Unknown command recieved");
+					Serial.print("RxBuffer contains:");
+					Serial.println(rxBuffer);
+				}
 			}
 		}
 	}
