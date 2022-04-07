@@ -165,4 +165,7 @@
   <data name="GPNetworkType" xml:space="preserve">
     <value>Typ sieci</value>
   </data>
+  <data name="GPTemperature" xml:space="preserve">
+    <value>Temperatura</value>
+  </data>
 </root>

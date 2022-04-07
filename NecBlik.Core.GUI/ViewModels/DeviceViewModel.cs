@@ -13,7 +13,7 @@ using NecBlik.Core.Models;
 
 namespace NecBlik.Core.GUI
 {
-    public class DeviceViewModel:BaseViewModel,IDuplicable<DeviceViewModel>,ICachable,IVendable, ISubscriber<Tuple<string, string>>, IDisposable
+    public class DeviceViewModel:BaseViewModel,IDuplicable<DeviceViewModel>,ICachable,IVendable, ISubscriber<RecievedData>, IDisposable
     {
         public DeviceModel Model;
 
@@ -161,6 +161,11 @@ namespace NecBlik.Core.GUI
             this.AddIncomingHistoryBufferEntry(data, sourceAddress);
         }
 
+        public virtual void OnRecievedDataSentFromSourceDevice(string data, string sourceAddress)
+        {
+
+        }
+
         public virtual void OnDataSent(string data, string sourceAddress)
         {
             this.OnDataRecieved(data, sourceAddress);
@@ -224,9 +229,9 @@ namespace NecBlik.Core.GUI
             this.IOHistoryBuffer += entry+"\n";
         }
 
-        public virtual void NotifySubscriber(Tuple<string, string> updateInformation)
+        public virtual void NotifySubscriber(RecievedData updateInformation)
         {
-            this.OnDataRecieved(updateInformation.Item1, updateInformation.Item2);
+            this.OnDataRecieved(updateInformation.Data,updateInformation.SourceAddress);
         }
 
         public virtual bool IsLicensed()

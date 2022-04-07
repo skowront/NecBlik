@@ -18,7 +18,7 @@
   </ItemGroup>
 
   <ItemGroup>
-    <Compile Update="Examples\Views\Coordinators\VirtualCoordinatorExampleAWindow.xaml.cs">
+    <Compile Update="Examples\Views\Coordinators\TemperatureCoordinator.xaml.cs">
       <SubType>Code</SubType>
     </Compile>
     <Compile Update="Examples\Views\Networks\VirtualNetworkExampleAWindow.xaml.cs">
@@ -57,7 +57,7 @@
   </ItemGroup>
 
   <ItemGroup>
-    <Page Update="Examples\Views\Coordinators\VirtualCoordinatorExampleAWindow.xaml">
+    <Page Update="Examples\Views\Coordinators\TemperatureCoordinator.xaml">
       <XamlRuntime>$(DefaultXamlRuntime)</XamlRuntime>
       <SubType>Designer</SubType>
     </Page>

@@ -88,7 +88,7 @@ namespace NecBlik.Virtual.GUI.ViewModels
             }
         }
 
-        private void BuildResponseProviders()
+        protected virtual void BuildResponseProviders()
         {
             this.AvailableCacheObjectIDsProvider = new GenericResponseProvider<List<string>, FactoryRule>((rule) =>
             {

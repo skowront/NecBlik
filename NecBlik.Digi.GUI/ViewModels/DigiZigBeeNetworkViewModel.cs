@@ -4,10 +4,12 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using NecBlik.Common.WpfExtensions.Base;
+using NecBlik.Core.Factories;
 using NecBlik.Core.GUI;
 using NecBlik.Core.Models;
 using NecBlik.Digi.GUI.Factories;
 using NecBlik.Digi.GUI.Views;
+using NecBlik.Virtual.GUI.Factories;
 using NecBlik.Virtual.GUI.ViewModels;
 
 namespace NecBlik.Digi.GUI.ViewModels
@@ -30,6 +32,27 @@ namespace NecBlik.Digi.GUI.ViewModels
                 await this.Discover();
             });
 
+        }
+
+        protected override void BuildResponseProviders()
+        {
+            base.BuildResponseProviders();
+            this.AvailableValueProvider = new GenericResponseProvider<List<string>, FactoryRule>((rule) =>
+            {
+                var factory = new DigiZigBeeGuiFactory();
+                if (rule.Property == VirtualDeviceGuiFactory.DeviceViewModelRuledProperties.ViewModel)
+                {
+                    return factory.GetAvailableDeviceViewModels();
+                }
+                else if (rule.Property == VirtualDeviceGuiFactory.DeviceViewModelRuledProperties.MapControl)
+                {
+                    return factory.GetAvailableControls();
+                }
+                else
+                {
+                    return null;
+                }
+            });
         }
 
         public override DeviceViewModel GetCoordinatorViewModel()

@@ -196,6 +196,15 @@ namespace NecBlik.Digi.GUI.Strings {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Temperature.
+        /// </summary>
+        public static string GPTemperature {
+            get {
+                return ResourceManager.GetString("GPTemperature", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to VID.
         /// </summary>
         public static string GPVID {

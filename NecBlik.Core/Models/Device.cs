@@ -17,7 +17,7 @@ namespace NecBlik.Core.Models
 
         protected string version { get; set; }
 
-        public Collection<ISubscriber<Tuple<string, string>>> DataRecievedSubscribers = new Collection<ISubscriber<Tuple<string, string>>>();
+        public Collection<ISubscriber<RecievedData>> DataRecievedSubscribers = new Collection<ISubscriber<RecievedData>>();
 
         public virtual string GetVendorID()
         {
@@ -68,7 +68,7 @@ namespace NecBlik.Core.Models
         {
             foreach(var item in this.DataRecievedSubscribers)
             {
-                item.NotifySubscriber(new Tuple<string,string>(data,sourceAddress));
+                item.NotifySubscriber(new RecievedData() { Data = data, SourceAddress = sourceAddress });
             }
             return;
         }
@@ -78,15 +78,15 @@ namespace NecBlik.Core.Models
             throw new NotImplementedException();
         }
 
-        public virtual void SubscribeToDataRecieved(ISubscriber<Tuple<string, string>> subscriber)
+        public virtual void SubscribeToDataRecieved(ISubscriber<RecievedData> subscriber)
         {
             if(!this.DataRecievedSubscribers.Contains(subscriber) && !this.DataRecievedSubscribers.Any((s) => { return s.GetCacheId() == subscriber.GetCacheId(); }))
                 this.DataRecievedSubscribers.Add(subscriber);
         }
 
-        public virtual void UnsubscribeFromDataRecieved(ISubscriber<Tuple<string, string>> subscriber)
+        public virtual void UnsubscribeFromDataRecieved(ISubscriber<RecievedData> subscriber)
         {
-            var toRemove = new List<ISubscriber<Tuple<string, string>>>();
+            var toRemove = new List<ISubscriber<RecievedData>>();
             for(int i = 0; i<this.DataRecievedSubscribers.Count; i++)
             {
                 if (this.DataRecievedSubscribers[i] == subscriber || this.DataRecievedSubscribers[i].GetCacheId() == subscriber.GetCacheId())

@@ -18,6 +18,9 @@
   </ItemGroup>
 
   <ItemGroup>
+    <Compile Update="Examples\Views\Sources\TemperatureDeviceWindow.xaml.cs">
+      <SubType>Code</SubType>
+    </Compile>
     <Compile Update="Resources\Resources.Designer.cs">
       <DesignTime>True</DesignTime>
       <AutoGen>True</AutoGen>
@@ -47,6 +50,10 @@
   <ItemGroup>
     <Page Update="DataTemplates\DigiNetworkDataTemplates.xaml">
       <XamlRuntime>$(DefaultXamlRuntime)</XamlRuntime>
+    </Page>
+    <Page Update="Examples\Views\Sources\TemperatureDeviceWindow.xaml">
+      <XamlRuntime>$(DefaultXamlRuntime)</XamlRuntime>
+      <SubType>Designer</SubType>
     </Page>
     <Page Update="Styles\MergedDictionaries.xaml">
       <XamlRuntime>$(DefaultXamlRuntime)</XamlRuntime>

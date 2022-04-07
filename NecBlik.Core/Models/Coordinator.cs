@@ -29,7 +29,7 @@ namespace NecBlik.Core.Models
             set { this.panId = value; }
         }
 
-        public Collection<ISubscriber<Tuple<string, string>>> DataRecievedSubscribers = new Collection<ISubscriber<Tuple<string, string>>>();
+        public Collection<ISubscriber<RecievedData>> DataRecievedSubscribers = new Collection<ISubscriber<RecievedData>>();
 
         protected IDeviceSource DeviceSource { get; set; }
 
@@ -113,7 +113,7 @@ namespace NecBlik.Core.Models
         {
             foreach (var item in this.DataRecievedSubscribers)
             {
-                item.NotifySubscriber(new Tuple<string, string>(data, sourceAddress));
+                item.NotifySubscriber(new RecievedData() { Data = data, SourceAddress = sourceAddress});
             }
             return;
         }
@@ -123,13 +123,13 @@ namespace NecBlik.Core.Models
             this.DeviceSource.Send(data, address);
         }
 
-        public virtual void SubscribeToDataRecieved(ISubscriber<Tuple<string, string>> subscriber)
+        public virtual void SubscribeToDataRecieved(ISubscriber<RecievedData> subscriber)
         {
             if (!this.DataRecievedSubscribers.Contains(subscriber))
                 this.DataRecievedSubscribers.Add(subscriber);
         }
 
-        public virtual void UnsubscribeFromDataRecieved(ISubscriber<Tuple<string, string>> subscriber)
+        public virtual void UnsubscribeFromDataRecieved(ISubscriber<RecievedData> subscriber)
         {
             if (this.DataRecievedSubscribers.Contains(subscriber))
                 this.DataRecievedSubscribers.Remove(subscriber);

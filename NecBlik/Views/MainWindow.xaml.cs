@@ -221,7 +221,10 @@ namespace NecBlik.Views
 
         public void NotifyUpdated(DeviceViewModel obj)
         {
-            this.designerCanvas.UpdateDevice(obj);
+            this.Dispatcher.Invoke(() =>
+            {
+                this.designerCanvas.UpdateDevice(obj);
+            });
         }
 
         private object LoadMap(string path, DiagramItemMetadata metadata)

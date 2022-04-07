@@ -34,7 +34,6 @@ namespace NecBlik.PyDigi.Models
             this.Name = Resources.Resources.PyDefaultDigiCoordinatorName;
             try
             {
-                object a = 10;
                 using (Py.GIL())
                 {
                     this.scope = ZigBeePyEnv.NewInitializedScope();

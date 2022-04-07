@@ -165,4 +165,7 @@
   <data name="GPCoordinatorType" xml:space="preserve">
     <value>Coordinator type</value>
   </data>
+  <data name="GPTemperature" xml:space="preserve">
+    <value>Temperature</value>
+  </data>
 </root>
