@@ -117,6 +117,9 @@ namespace NecBlik.Core.GUI
             zb.SelectCommand = this.SelectCommand = new RelayCommand((o) => {
                 this.PullSelectionSubscriber?.NotifySelected(zb);
             });
+            zb.SendCommand = new RelayCommand((o) => {
+                zb.Send();
+            });
             return zb;
         }
 

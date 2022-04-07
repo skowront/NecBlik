@@ -30,8 +30,9 @@ bool hold = false;
 double StoredChangingValue = 0.0;
 double degrees = 0;
 unsigned long lastDataSent = 0;
-int dataSendingInterval = 5; //in Seconds
+int dataSendingInterval = 1; //in Seconds
 double Amplitude = 10;
+double DegreeIncrement = 1;
 
 double GetStoredChangingValue()
 {
@@ -66,7 +67,7 @@ void OnTickChangeStoredChangingValue()
 		Serial.print("StoredChangingValue:");
 		Serial.println(GetStoredChangingValue());
 	}
-	degrees++;
+	degrees+=DegreeIncrement;
 }
 
 int StoredValue = 31337;
