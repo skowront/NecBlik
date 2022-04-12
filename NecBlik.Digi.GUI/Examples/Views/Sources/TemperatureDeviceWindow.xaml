@@ -30,7 +30,7 @@
                 <TextBlock Text="{Binding Address,UpdateSourceTrigger=PropertyChanged}" HorizontalAlignment="Center" Foreground="{StaticResource MaterialDesignDarkForeground}"></TextBlock>
                 <StackPanel Grid.Row="1" HorizontalAlignment="Center" Orientation="Horizontal" Margin="0 10 0 0">
                     <TextBlock Text="{lex:Loc NecBlik.Digi.Gui:SR:GPTemperature}" Foreground="{StaticResource MaterialDesignDarkForeground}"></TextBlock>
-                    <TextBlock Text="{Binding Temperature}"  Margin="10 0 0 0"  Foreground="{StaticResource MaterialDesignDarkForeground}"></TextBlock>
+                    <TextBlock Text="{Binding Temperature, FallbackValue='?'}"  Margin="10 0 0 0"  Foreground="{StaticResource MaterialDesignDarkForeground}"></TextBlock>
                 </StackPanel>
                 
             </Grid>

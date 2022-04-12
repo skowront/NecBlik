@@ -1,10 +1,14 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
+using System.ComponentModel;
 using System.Linq;
 using System.Text;
+using System.Threading;
 using System.Threading.Tasks;
+using System.Windows;
 using NecBlik.Common.WpfExtensions.Base;
+using NecBlik.Common.WpfExtensions.Collections;
 using NecBlik.Common.WpfExtensions.Interfaces;
 using NecBlik.Core.GUI.Interfaces;
 using NecBlik.Core.GUI.ViewModels;
@@ -67,12 +71,7 @@ namespace NecBlik.Core.GUI
             set { this.outputBuffer = value; this.OnPropertyChanged(); }
         }
 
-        private string ioHistoryBuffer;
-        public string IOHistoryBuffer
-        {
-            get { return this.ioHistoryBuffer; }
-            set { this.ioHistoryBuffer = value; this.OnPropertyChanged(); }
-        }
+        public ThreadSafeCollection<string> IOHistoryBuffer { get; set; } = new ThreadSafeCollection<string>();
 
         private string selectedDestinationAddress=string.Empty;
         public string SelectedDestinationAddress
@@ -107,8 +106,8 @@ namespace NecBlik.Core.GUI
 
         ~DeviceViewModel()
         {
-            this.Model.DeviceSource?.UnsubscribeFromDataRecieved(this);
-            this.Network.Coordinator?.Model.DeviceSource.UnsubscribeFromDataRecieved(this);
+            this.Model?.DeviceSource?.UnsubscribeFromDataRecieved(this);
+            this.Network?.Coordinator?.Model?.DeviceSource?.UnsubscribeFromDataRecieved(this);
         }
 
         public DeviceViewModel Duplicate()
@@ -221,17 +220,17 @@ namespace NecBlik.Core.GUI
 
         protected virtual void AddIncomingHistoryBufferEntry(string dataRecieved, string sourceAddress)
         {
-            this.IOHistoryBuffer += Strings.SR.GPFrom + ": " + sourceAddress + " " + Strings.SR.GPRecieved + ":" + dataRecieved + "\n";
+            this.IOHistoryBuffer.Insert(0,Strings.SR.GPFrom + ": " + sourceAddress + " " + Strings.SR.GPRecieved + ":" + dataRecieved + "\n");
         }
 
         protected virtual void AddOutgoingHistoryBufferEntry(string dataSent, string destinationAddress)
         {
-            this.IOHistoryBuffer += Strings.SR.GPTo + ": " + destinationAddress + " " + Strings.SR.GPSent + ":" + dataSent + "\n";
+            this.IOHistoryBuffer.Insert(0, Strings.SR.GPTo + ": " + destinationAddress + " " + Strings.SR.GPSent + ":" + dataSent + "\n");
         }
 
         protected virtual void AddHistoryBufferEntry(string entry)
         {
-            this.IOHistoryBuffer += entry+"\n";
+            this.IOHistoryBuffer.Insert(0, entry+"\n");
         }
 
         public virtual void NotifySubscriber(RecievedData updateInformation)

@@ -214,6 +214,15 @@ namespace NecBlik.Core.GUI.Strings {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Ping packet.
+        /// </summary>
+        public static string GPPingPacket {
+            get {
+                return ResourceManager.GetString("GPPingPacket", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Property.
         /// </summary>
         public static string GPProperty {

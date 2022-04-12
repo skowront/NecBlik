@@ -40,7 +40,10 @@
                 <TextBox Grid.Row="1" VerticalAlignment="Center" Grid.Column="1" Text="{Binding Payload}" Foreground="{StaticResource MaterialDesignDarkForeground}"></TextBox>
                 <TextBox Grid.Row="2" VerticalAlignment="Center" Grid.Column="1" Text="{Binding PayloadSize}" Foreground="{StaticResource MaterialDesignDarkForeground}"></TextBox>
                 <ComboBox Grid.Row="3" VerticalAlignment="Center" Grid.Column="1" ItemsSource="{Binding AvailableAdresses}" SelectedItem="{Binding SelectedRemoteAddresss}" Foreground="{StaticResource MaterialDesignDarkForeground}"></ComboBox>
-                <Button Grid.Row="4" Grid.ColumnSpan="2" VerticalAlignment="Center" HorizontalAlignment="Center" Command="{Binding RunCommand}" Style="{StaticResource BaseButton}" Content="{lex:Loc GPRun}"></Button>
+                <StackPanel  Grid.Row="4" Grid.ColumnSpan="2" VerticalAlignment="Center" HorizontalAlignment="Center" Orientation="Horizontal">
+                    <Button Command="{Binding RunCommand}" Style="{StaticResource BaseButton}" Content="{lex:Loc GPPing}"></Button>
+                    <Button Command="{Binding RunPacketCommand}" Style="{StaticResource BaseButton}" Content="{lex:Loc GPPingPacket}"></Button>
+                </StackPanel>
                 <Separator Grid.Row="5" Grid.ColumnSpan="2" Style="{StaticResource MaterialDesignLightSeparator}"></Separator>
             </Grid>
             <Grid Grid.Row="1">

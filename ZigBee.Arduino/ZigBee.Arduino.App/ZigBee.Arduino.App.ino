@@ -26,7 +26,7 @@ const char HoldCommand [] = "Hold";
 const char GetValueCommand [] = "GetValue";
 const char GetChangingValueCommand [] = "GetCValue";
 
-bool hold = false;
+bool hold = true;
 double StoredChangingValue = 0.0;
 double degrees = 0;
 unsigned long lastDataSent = 0;
@@ -150,7 +150,7 @@ RecievedData RecieveValue(int timeout = 500)
 
 void HandleRemoteCommunication()
 {
-	const int rxBufferSize = 2048;
+	const int rxBufferSize = 512;
 	char rxBuffer[rxBufferSize];
 	RecievedData recieved = RecieveValue();
 	if (recieved.recieved == true)
@@ -214,6 +214,7 @@ void HandleRemoteCommunication()
 			}
 		}
 	}
+	//delete rxBuffer;
 }
 
 void setup() {

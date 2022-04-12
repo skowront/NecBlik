@@ -18,8 +18,8 @@ namespace NecBlik.Digi.GUI.Examples.ViewModels.Sources
         private double maxRecordedTemperature = 0;
         private double minRecordedTemperature = 0;
 
-        private double temperature;
-        public double Temperature
+        private double? temperature = null;
+        public double? Temperature
         {
             get
             {
@@ -29,14 +29,14 @@ namespace NecBlik.Digi.GUI.Examples.ViewModels.Sources
             {
                 if(value>this.maxRecordedTemperature)
                 {
-                    this.maxRecordedTemperature = value;
+                    this.maxRecordedTemperature = value ?? this.maxRecordedTemperature;
                 }
                 if(value<this.minRecordedTemperature)
                 {
-                    this.minRecordedTemperature = value;
+                    this.minRecordedTemperature = value ?? this.minRecordedTemperature;
                 }
                 this.temperature = value;
-                this.TemperatureColor = TemperatureDeviceViewModel.TemperatureToColor(this.temperature, this.minRecordedTemperature, this.maxRecordedTemperature);
+                this.TemperatureColor = TemperatureDeviceViewModel.TemperatureToColor(this.temperature ?? 0, this.minRecordedTemperature, this.maxRecordedTemperature);
                 this.OnPropertyChanged();
             }
         }

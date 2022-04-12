@@ -13,6 +13,9 @@ using Newtonsoft.Json;
 using NecBlik.Common.WpfExtensions.Interfaces;
 using NecBlik.Core.Enums;
 using XBeeLibrary.Core.Models;
+using XBeeLibrary.Core.Packet;
+using XBeeLibrary.Core.Packet.Common;
+using NecBlik.Digi.Packets;
 
 namespace NecBlik.Digi.Models
 {
@@ -45,6 +48,12 @@ namespace NecBlik.Digi.Models
             this.zigBee = new ZigBeeDevice(new WinSerialPort(connectionData.port, connectionData.baud));
             this.Open();
             this.zigBee.DataReceived += ZigBeeDataReceived;
+            this.zigBee.PacketReceived += ZigBee_PacketReceived;
+        }
+
+        private void ZigBee_PacketReceived(object? sender, XBeeLibrary.Core.Events.PacketReceivedEventArgs e)
+        {
+            
         }
 
         ~DigiZigBeeUSBCoordinator()
@@ -59,7 +68,7 @@ namespace NecBlik.Digi.Models
 
         public override async Task<IEnumerable<IDeviceSource>> GetDevices(IUpdatableResponseProvider<int, bool, string> progressResponseProvider = null)
         {
-            if(!this.Open())
+            if (!this.Open())
                 return new List<IDeviceSource>();
             this.progressResponseProvider = progressResponseProvider;
             if (this.connectionData.port == string.Empty || this.connectionData.port == null)
@@ -68,7 +77,7 @@ namespace NecBlik.Digi.Models
             }
 
             await this.Discover();
-            
+
             var nodes = this.xBeeNetwork.GetDevices();
             List<IDeviceSource> list = new();
             foreach (var node in nodes)
@@ -77,7 +86,8 @@ namespace NecBlik.Digi.Models
                 list.Add(ZigBeeSource);
             }
             return list;
-        }        
+            
+        }
 
         public async override Task Discover()
         {
@@ -146,7 +156,7 @@ namespace NecBlik.Digi.Models
 
         public override void Send(string data, string address)
         {
-            byte[] bytes = Encoding.ASCII.GetBytes(data+"\0");
+            byte[] bytes = Encoding.ASCII.GetBytes(data + "\0");
             if (address == string.Empty)
             {
                 this.zigBee.SendBroadcastData(bytes);
@@ -175,12 +185,12 @@ namespace NecBlik.Digi.Models
             }
             if (this.zigBee.IsOpen)
                 return true;
-            return false;   
+            return false;
         }
 
         public override void Close()
         {
-            if(this.zigBee.IsOpen)
+            if (this.zigBee.IsOpen)
                 this.zigBee.Close();
         }
 
@@ -191,26 +201,26 @@ namespace NecBlik.Digi.Models
 
         public override void OnDataSent(string data, string sourceAddress)
         {
-            if(sourceAddress == this.Address)
+            if (sourceAddress == this.Address)
             {
-                this.OnDataRecieved(data,sourceAddress);
+                this.OnDataRecieved(data, sourceAddress);
             }
         }
 
-        public override async Task<PingModel> Ping(long timeout = 0, string payload = "", string remoteAddress="")
+        public override async Task<PingModel> Ping(long timeout = 0, string payload = "", string remoteAddress = "")
         {
             var result = new PingModel();
             try
             {
-                if(remoteAddress==string.Empty)
+                if (remoteAddress == string.Empty)
                 {
-                    return new PingModel(0,PingModel.PingResult.Ok, payload);
+                    return new PingModel(0, PingModel.PingResult.Ok, payload);
                 }
                 XBeeMessage msg = null;
                 var sendingTime = DateTime.Now;
-                this.Send("Echo"+payload,remoteAddress);
+                this.Send("Echo" + payload, remoteAddress);
                 msg = this.zigBee.ReadData((int)timeout);
-                if(msg == null)
+                if (msg == null)
                 {
                     result.Result = PingModel.PingResult.NotOk;
                     result.ResponseTime = (DateTime.Now - sendingTime).TotalMilliseconds;
@@ -224,7 +234,55 @@ namespace NecBlik.Digi.Models
                     return result;
                 }
             }
-            catch(Exception ex)
+            catch (Exception ex)
+            {
+                result.Result = PingModel.PingResult.NotOk;
+                result.ResponseTime = double.PositiveInfinity;
+                result.Message = ex.Message;
+                return result;
+            }
+            return result;
+        }
+
+        public override async Task<PingModel> PingPacket(long timeout = 0, string payload = "", string remoteAddress = "")
+        {
+            var result = new PingModel();
+            try
+            {
+                if (remoteAddress == string.Empty)
+                {
+                    return new PingModel(0, PingModel.PingResult.Ok, payload);
+                }
+                //var packet = new TxRequest64Bit(remoteAddress,this.zigBee.OperatingMode);
+                if(payload.Length<1 || payload == String.Empty)
+                {
+                    payload = "\0";
+                }
+                if(payload[payload.Length-1]!='\0')
+                {
+                    payload += '\0';
+                }
+                var rawPayload = Encoding.ASCII.GetBytes(payload);
+                var packet = new TransmitPacket(1,new XBee64BitAddress(remoteAddress),new XBee16BitAddress("FFFE"),0,0, rawPayload);
+                var sendingTime = DateTime.Now;
+                XBeePacket rpacket = null;
+                rpacket = this.zigBee.SendPacket(packet);
+
+                if (rpacket == null)
+                {
+                    result.Result = PingModel.PingResult.NotOk;
+                    result.ResponseTime = (DateTime.Now - sendingTime).TotalMilliseconds;
+                    return result;
+                }
+                else
+                {
+                    result.Result = PingModel.PingResult.Ok;
+                    result.ResponseTime = (DateTime.Now - sendingTime).TotalMilliseconds;
+                    //result.Message = rpacket.TransmitStatus.ToString();
+                    return result;
+                }
+            }
+            catch (Exception ex)
             {
                 result.Result = PingModel.PingResult.NotOk;
                 result.ResponseTime = double.PositiveInfinity;

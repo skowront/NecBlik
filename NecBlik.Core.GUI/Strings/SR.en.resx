@@ -204,4 +204,7 @@
   <data name="GPRun" xml:space="preserve">
     <value>Run</value>
   </data>
+  <data name="GPPingPacket" xml:space="preserve">
+    <value>Ping packet</value>
+  </data>
 </root>

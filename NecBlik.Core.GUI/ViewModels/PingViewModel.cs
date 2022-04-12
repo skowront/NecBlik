@@ -65,6 +65,7 @@ namespace NecBlik.Core.GUI.ViewModels
         public ObservableCollection<string> AvailableAdresses { get; set; } = new ObservableCollection<string>();
 
         public RelayCommand RunCommand { get; set; }
+        public RelayCommand RunPacketCommand { get; set; }
 
         public PingViewModel(IDeviceCoordinator coordinator, List<string> availableAddresses, PingModel model=null)
         {
@@ -91,6 +92,23 @@ namespace NecBlik.Core.GUI.ViewModels
                 else
                 {
                     result = await coordinator.Ping(this.timeout, this.Payload, this.SelectedRemoteAddresss);
+                }
+                this.ReturnedPayload = result.Payload;
+                this.Message = result.Message;
+                this.ResponseTime = result.ResponseTime;
+                this.Result = result.Result;
+            });
+
+            this.RunPacketCommand = new RelayCommand(async (o) =>
+            {
+                PingModel result;
+                if (this.PayloadSize > 0)
+                {
+                    result = await coordinator.PingPacket(this.timeout, RandomString(this.payloadSize), this.SelectedRemoteAddresss);
+                }
+                else
+                {
+                    result = await coordinator.PingPacket(this.timeout, this.Payload, this.SelectedRemoteAddresss);
                 }
                 this.ReturnedPayload = result.Payload;
                 this.Message = result.Message;

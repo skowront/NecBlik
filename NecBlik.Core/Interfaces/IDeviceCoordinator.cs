@@ -17,5 +17,7 @@ namespace NecBlik.Core.Interfaces
         public Task Discover();
 
         public Task<PingModel> Ping(long timeout = 0, string payload = "", string remoteAddress = "");
+
+        public Task<PingModel> PingPacket(long timeout = 0, string payload = "", string remoteAddress = "");
     }
 }
