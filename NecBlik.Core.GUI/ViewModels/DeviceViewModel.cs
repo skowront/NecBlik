@@ -10,6 +10,7 @@ using System.Windows;
 using NecBlik.Common.WpfExtensions.Base;
 using NecBlik.Common.WpfExtensions.Collections;
 using NecBlik.Common.WpfExtensions.Interfaces;
+using NecBlik.Core.Enums;
 using NecBlik.Core.GUI.Interfaces;
 using NecBlik.Core.GUI.ViewModels;
 using NecBlik.Core.GUI.Views;
@@ -18,13 +19,15 @@ using NecBlik.Core.Models;
 
 namespace NecBlik.Core.GUI
 {
-    public class DeviceViewModel:BaseViewModel,IDuplicable<DeviceViewModel>,ICachable,IVendable, ISubscriber<RecievedData>, IDisposable
+    public class DeviceViewModel : BaseViewModel, IDuplicable<DeviceViewModel>, ICachable, IVendable, ISubscriber<RecievedData>, IDisposable
     {
         public DeviceModel Model;
 
         public NetworkViewModel Network;
 
-        public List<string> ViewFactoriesWhitelist = new List<string>(); 
+        public List<string> ViewFactoriesWhitelist = new List<string>();
+
+        
 
         public Guid Guid
         {
@@ -78,6 +81,13 @@ namespace NecBlik.Core.GUI
         {
             get { return this.selectedDestinationAddress; }
             set { this.selectedDestinationAddress = value; this.OnPropertyChanged(); }
+        }
+
+        private string status = NecBlik.Core.Resources.Statuses.Unknown;
+        public string Status
+        {
+            get { return this.status; }
+            set { this.status = value; this.OnPropertyChanged(); }
         }
 
         public IEnumerable<string> AvailableDestinationAddresses

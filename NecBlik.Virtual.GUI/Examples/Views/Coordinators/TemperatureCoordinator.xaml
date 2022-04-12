@@ -23,6 +23,8 @@
                 <TextBlock Text="{Binding Version,UpdateSourceTrigger=PropertyChanged}" Foreground="{StaticResource MaterialDesignDarkForeground}"></TextBlock>
                 <TextBlock Text="{lex:Loc GPAddress}" Foreground="{StaticResource MaterialDesignDarkForeground}"></TextBlock>
                 <TextBlock Text="{Binding Address,UpdateSourceTrigger=PropertyChanged}" Foreground="{StaticResource MaterialDesignDarkForeground}"></TextBlock>
+                <TextBlock Text="{lex:Loc GPStatus}" Foreground="{StaticResource MaterialDesignDarkForeground}"></TextBlock>
+                <TextBlock Text="{Binding Status}" Foreground="{StaticResource MaterialDesignDarkForeground}"></TextBlock>
             </StackPanel>
         </Grid>
     </Grid>

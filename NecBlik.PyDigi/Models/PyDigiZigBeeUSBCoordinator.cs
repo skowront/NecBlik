@@ -4,6 +4,7 @@ using NecBlik.Common.WpfExtensions.Interfaces;
 using NecBlik.Core.Interfaces;
 using NecBlik.PyDigi.Factories;
 using NecBlik.Virtual.Models;
+using NecBlik.Core.Enums;
 
 namespace NecBlik.PyDigi.Models
 {
@@ -195,6 +196,15 @@ namespace NecBlik.PyDigi.Models
         {
             base.Dispose();
             this.Close();
+        }
+        public override async Task<string> GetStatusOf(string remoteAddress)
+        {
+            if (remoteAddress == this.Address)
+            {
+                return this.Open() ? NecBlik.Core.Resources.Statuses.Connected
+                    : NecBlik.Core.Resources.Statuses.Disconnected;
+            }
+            return NecBlik.Core.Resources.Statuses.Unknown;
         }
 
         [JsonObject(MemberSerialization.OptIn)]

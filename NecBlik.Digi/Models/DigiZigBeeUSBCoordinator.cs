@@ -91,29 +91,38 @@ namespace NecBlik.Digi.Models
 
         public async override Task Discover()
         {
-            progressResponseProvider?.Init(0, DigiZigBeeUSBCoordinator.maxProgress, 0);
-            var progress = 0;
-            this.xBeeNetwork = this.zigBee.GetNetwork();
-            var options = new HashSet<XBeeLibrary.Core.Models.DiscoveryOptions>();
-            options.Add(XBeeLibrary.Core.Models.DiscoveryOptions.APPEND_DD);
-            this.xBeeNetwork.SetDiscoveryOptions(options);
-            //this.xBeeNetwork.SetDiscoveryTimeout(25000L);
-            this.xBeeNetwork.DiscoveryFinished += Network_DiscoveryFinished;
-            this.xBeeNetwork.DeviceDiscovered += Network_DeviceDiscovered;
-            this.xBeeNetwork.StartNodeDiscoveryProcess();
-            var task = Task.Run(() =>
+            try
             {
-                while (this.xBeeNetwork.IsDiscoveryRunning && this.discoveryFinished == false)
+                if (!this.Open())
+                    return;
+                progressResponseProvider?.Init(0, DigiZigBeeUSBCoordinator.maxProgress, 0);
+                var progress = 0;
+                this.xBeeNetwork = this.zigBee.GetNetwork();
+                var options = new HashSet<XBeeLibrary.Core.Models.DiscoveryOptions>();
+                options.Add(XBeeLibrary.Core.Models.DiscoveryOptions.APPEND_DD);
+                this.xBeeNetwork.SetDiscoveryOptions(options);
+                //this.xBeeNetwork.SetDiscoveryTimeout(25000L);
+                this.xBeeNetwork.DiscoveryFinished += Network_DiscoveryFinished;
+                this.xBeeNetwork.DeviceDiscovered += Network_DeviceDiscovered;
+                this.xBeeNetwork.StartNodeDiscoveryProcess();
+                var task = Task.Run(() =>
                 {
-                    Thread.Sleep(sleepTime);
-                    progress++;
-                    progressResponseProvider?.Update(progress);
-                }
-                this.discoveryFinished = false;
-            });
-            await task;
-            this.progressResponseProvider?.Update(DigiZigBeeUSBCoordinator.maxProgress);
-            progressResponseProvider?.SealUpdates();
+                    while (this.xBeeNetwork.IsDiscoveryRunning && this.discoveryFinished == false)
+                    {
+                        Thread.Sleep(sleepTime);
+                        progress++;
+                        progressResponseProvider?.Update(progress);
+                    }
+                    this.discoveryFinished = false;
+                });
+                await task;
+                this.progressResponseProvider?.Update(DigiZigBeeUSBCoordinator.maxProgress);
+                progressResponseProvider?.SealUpdates();
+            }
+            catch (Exception ex)
+            {
+
+            }
         }
 
         private void Network_DeviceDiscovered(object sender, XBeeLibrary.Core.Events.DeviceDiscoveredEventArgs e)
@@ -290,6 +299,27 @@ namespace NecBlik.Digi.Models
                 return result;
             }
             return result;
+        }
+
+        public override async Task<string> GetStatusOf(string remoteAddress)
+        {
+            if (remoteAddress == this.Address)
+            {
+                return this.Open() ?  NecBlik.Core.Resources.Statuses.Connected:
+                     NecBlik.Core.Resources.Statuses.Disconnected;
+            }
+            else
+            {
+                var res = await this.Ping(10000, string.Empty, remoteAddress);
+                if(res.Result == PingModel.PingResult.Ok)
+                {
+                    return NecBlik.Core.Resources.Statuses.Connected;
+                }
+                else
+                {
+                    return NecBlik.Core.Resources.Statuses.Disconnected;
+                }
+            }
         }
 
         [JsonObject(MemberSerialization.OptIn)]

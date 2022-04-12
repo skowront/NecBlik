@@ -53,6 +53,7 @@
                             <RowDefinition></RowDefinition>
                             <RowDefinition></RowDefinition>
                             <RowDefinition></RowDefinition>
+                            <RowDefinition></RowDefinition>
                         </Grid.RowDefinitions>
                         <TextBlock Grid.Row="0" Grid.Column="0" VerticalAlignment="Center" HorizontalAlignment="Left" Text="{lex:Loc NecBlik.Core.GUI:SR:GPGuid}"></TextBlock>
                         <TextBlock Grid.Row="0" Grid.Column="1" VerticalAlignment="Center" HorizontalAlignment="Left" Margin="0 0 5 0" Text="{Binding Name, FallbackValue='???'}"></TextBlock>
@@ -63,6 +64,8 @@
                         <TextBlock Grid.Row="3" Grid.Column="0" VerticalAlignment="Center" HorizontalAlignment="Left" Text="{lex:Loc NecBlik.Core.GUI:SR:GPFactory}"></TextBlock>
                         <TextBlock Grid.Row="3" Grid.Column="1" VerticalAlignment="Center" HorizontalAlignment="Left" Margin="0 0 5 0" Text="{Binding InternalFactoryType, FallbackValue='???'}"></TextBlock>
                         <TextBlock Grid.Row="4" VerticalAlignment="Top" HorizontalAlignment="Left" Text="{Binding Temperature, StringFormat='{}{0}°C'}"></TextBlock>
+                        <TextBlock Grid.Row="5" Grid.Column="0" VerticalAlignment="Center" HorizontalAlignment="Left" Text="{lex:Loc NecBlik.Core.GUI:SR:GPStatus}"></TextBlock>
+                        <TextBlock Grid.Row="5" Grid.Column="1" VerticalAlignment="Center" HorizontalAlignment="Left" Margin="0 0 5 0" Text="{Binding Status}"></TextBlock>
                     </Grid>
                 </Grid.ToolTip>
             </Grid>

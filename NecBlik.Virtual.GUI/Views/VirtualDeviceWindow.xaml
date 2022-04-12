@@ -7,6 +7,7 @@
         xmlns:local="clr-namespace:NecBlik.Virtual.GUI.Views"
         xmlns:lexp="clr-namespace:WPFLocalizeExtension.Providers;assembly=WPFLocalizeextension"
         xmlns:lex="clr-namespace:WPFLocalizeExtension.Extensions;assembly=WPFLocalizeextension"
+        xmlns:ext="clr-namespace:NecBlik.Common.WpfExtensions.UI;assembly=NecBlik.Common"
         lexp:ResxLocalizationProvider.DefaultAssembly="NecBlik.Virtual.GUI"
         lexp:ResxLocalizationProvider.DefaultDictionary="SR"
         mc:Ignorable="d"
@@ -24,6 +25,8 @@
                 <TextBlock Text="{Binding Version,UpdateSourceTrigger=PropertyChanged}" Foreground="{StaticResource MaterialDesignDarkForeground}"></TextBlock>
                 <TextBlock Text="{lex:Loc GPAddress}" Foreground="{StaticResource MaterialDesignDarkForeground}"></TextBlock>
                 <TextBlock Text="{Binding Address,UpdateSourceTrigger=PropertyChanged}" Foreground="{StaticResource MaterialDesignDarkForeground}"></TextBlock>
+                <TextBlock Text="{lex:Loc GPStatus}" Foreground="{StaticResource MaterialDesignDarkForeground}"></TextBlock>
+                <TextBlock Text="{Binding Status}" Foreground="{StaticResource MaterialDesignDarkForeground}"></TextBlock>
             </StackPanel>
             <Expander Header="{lex:Loc GPAdvanced}" Grid.Row="1" Style="{StaticResource MaterialDesignExpander}" IsExpanded="False" Foreground="{StaticResource MaterialDesignDarkForeground}">
                 <Grid>

@@ -207,4 +207,7 @@
   <data name="GPPingPacket" xml:space="preserve">
     <value>Ping packet</value>
   </data>
+  <data name="GPStatus" xml:space="preserve">
+    <value>Status</value>
+  </data>
 </root>

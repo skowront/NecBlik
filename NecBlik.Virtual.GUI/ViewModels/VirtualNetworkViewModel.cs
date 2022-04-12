@@ -18,6 +18,8 @@ using NecBlik.Core.Factories;
 using NecBlik.Common.WpfElements;
 using NecBlik.Common.WpfElements.ResponseProviders;
 using NecBlik.Core.Interfaces;
+using System.ComponentModel;
+using System.Threading;
 
 namespace NecBlik.Virtual.GUI.ViewModels
 {
@@ -28,8 +30,20 @@ namespace NecBlik.Virtual.GUI.ViewModels
         public static readonly List<string> CustomizableDeviceProperties = new List<string> { VirtualDeviceGuiFactory.DeviceViewModelRuledProperties.ViewModel,
                                                                                               VirtualDeviceGuiFactory.DeviceViewModelRuledProperties.MapControl};
 
+        public int PollingInterval
+        {
+            get { return this.model.PollingInterval; }
+            set { this.model.PollingInterval = value < 100 ? 100 : value ; this.OnPropertyChanged(); }
+        }
+
+        protected bool cancelPolling = false;
+
+        protected BackgroundWorker statusPollingWorker = new BackgroundWorker();
+
         public VirtualNetworkViewModel(Network network) : base(network)
         {
+            this.statusPollingWorker.DoWork += StatusPollingWorker_DoWork;
+            this.statusPollingWorker.RunWorkerAsync();
 
             this.EditResponseProvider = new GenericResponseProvider<string, NetworkViewModel>((q) => {
                 Window window = new VirtualNetworkWindow(this);
@@ -40,6 +54,38 @@ namespace NecBlik.Virtual.GUI.ViewModels
             this.SyncFromModel();
             this.buildCommands();
             this.BuildResponseProviders();
+        }
+
+        ~VirtualNetworkViewModel()
+        {
+            this.cancelPolling = true; 
+        }
+
+        private async void StatusPollingWorker_DoWork(object sender, DoWorkEventArgs e)
+        {
+            while(!this.cancelPolling)
+            {
+                foreach(var item in this.Devices)
+                {
+                    Application.Current?.Dispatcher.Invoke(async () =>
+                    {
+                        var coord = this.Coordinator?.Model?.DeviceSource as IDeviceCoordinator;
+                        if (coord != null)
+                        {
+                            item.Status = await coord.GetStatusOf(item.Address);
+                        }
+                    });
+                }
+                Application.Current?.Dispatcher.Invoke(async () =>
+                {
+                    var coord = this.Coordinator?.Model?.DeviceSource as IDeviceCoordinator;
+                    if (coord != null)
+                    {
+                        this.coorinator.Status = await coord.GetStatusOf(this.Coordinator.Address);
+                    }
+                });
+                Thread.Sleep(this.model.PollingInterval);
+            }
         }
 
         private void buildCommands()

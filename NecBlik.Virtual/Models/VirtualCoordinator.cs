@@ -8,6 +8,7 @@ using System.Threading.Tasks;
 using NecBlik.Common.WpfExtensions.Interfaces;
 using NecBlik.Core.Interfaces;
 using NecBlik.Core.Models;
+using NecBlik.Core.Enums;
 
 namespace NecBlik.Virtual.Models
 {
@@ -101,6 +102,11 @@ namespace NecBlik.Virtual.Models
             {
                 File.AppendAllText(folderPath + "\\" + file, json);
             }
+        }
+
+        public override async Task<string> GetStatusOf(string remoteAddress)
+        {
+            return NecBlik.Core.Resources.Statuses.Connected;
         }
     }
 }

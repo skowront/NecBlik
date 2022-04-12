@@ -241,6 +241,15 @@ namespace NecBlik.Virtual.GUI.Strings {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Polling interval.
+        /// </summary>
+        public static string GPPollingInterval {
+            get {
+                return ResourceManager.GetString("GPPollingInterval", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Recieved.
         /// </summary>
         public static string GPRecieved {
@@ -273,6 +282,15 @@ namespace NecBlik.Virtual.GUI.Strings {
         public static string GPSendToMap {
             get {
                 return ResourceManager.GetString("GPSendToMap", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Status.
+        /// </summary>
+        public static string GPStatus {
+            get {
+                return ResourceManager.GetString("GPStatus", resourceCulture);
             }
         }
         

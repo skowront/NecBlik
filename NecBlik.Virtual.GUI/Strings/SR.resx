@@ -201,4 +201,10 @@
   <data name="GPRules" xml:space="preserve">
     <value>Rules</value>
   </data>
+  <data name="GPStatus" xml:space="preserve">
+    <value>Status</value>
+  </data>
+  <data name="GPPollingInterval" xml:space="preserve">
+    <value>Polling interval</value>
+  </data>
 </root>

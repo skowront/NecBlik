@@ -8,6 +8,9 @@ using System.Threading.Tasks;
 
 namespace NecBlik.Common.WpfExtensions.Converters
 {
+    /// <summary>
+    /// Author: https://github.com/brianlagunas/BindingEnumsInWpf/tree/master/BindingEnums
+    /// </summary>
     public class EnumDescriptionTypeConverter : EnumConverter
     {
         public EnumDescriptionTypeConverter(Type type) : base(type)

@@ -36,6 +36,7 @@
                             <RowDefinition></RowDefinition>
                             <RowDefinition></RowDefinition>
                             <RowDefinition></RowDefinition>
+                            <RowDefinition></RowDefinition>
                         </Grid.RowDefinitions>
                         <TextBlock Grid.Row="0" Grid.Column="0" VerticalAlignment="Center" HorizontalAlignment="Left" Text="{lex:Loc GPName}"></TextBlock>
                         <TextBlock Grid.Row="0" Grid.Column="1" VerticalAlignment="Center" HorizontalAlignment="Left" Margin="0 0 5 0" Text="{Binding Name, FallbackValue='???'}"></TextBlock>
@@ -45,6 +46,8 @@
                         <TextBlock Grid.Row="2" Grid.Column="1" VerticalAlignment="Center" HorizontalAlignment="Left" Margin="0 0 5 0" Text="{Binding Address, FallbackValue='???'}"></TextBlock>
                         <TextBlock Grid.Row="3" Grid.Column="0" VerticalAlignment="Center" HorizontalAlignment="Left" Text="{lex:Loc GPFactory}"></TextBlock>
                         <TextBlock Grid.Row="3" Grid.Column="1" VerticalAlignment="Center" HorizontalAlignment="Left" Margin="0 0 5 0" Text="{Binding InternalFactoryType, FallbackValue='???'}"></TextBlock>
+                        <TextBlock Grid.Row="4" Grid.Column="0" VerticalAlignment="Center" HorizontalAlignment="Left" Text="{lex:Loc GPStatus}"></TextBlock>
+                        <TextBlock Grid.Row="4" Grid.Column="1" VerticalAlignment="Center" HorizontalAlignment="Left" Text="{Binding Status}"></TextBlock>
                     </Grid>
                 </Grid.ToolTip>
             </Grid>

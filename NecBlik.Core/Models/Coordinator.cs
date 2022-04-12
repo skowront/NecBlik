@@ -175,5 +175,9 @@ namespace NecBlik.Core.Models
         {
             return new PingModel(0.0d, PingModel.PingResult.Ok, payload);
         }
+        public virtual async Task<string> GetStatusOf(string remoteAddress)
+        {
+            return NecBlik.Core.Resources.Statuses.Unknown;
+        }
     }
 }

@@ -43,9 +43,12 @@ namespace NecBlik.Core.Models
         [JsonProperty]
         public string InternalSubType { get; set; } = string.Empty;
         [JsonProperty]
-        public Collection<FactoryRule> DeviceSubtypeFactoryRules {get;set;} = new Collection<FactoryRule>();
+        public Collection<FactoryRule> DeviceSubtypeFactoryRules { get; set; } = new Collection<FactoryRule>();
         [JsonProperty]
         public FactoryRule DeviceCoordinatorSubtypeFactoryRule { get; set; } = new FactoryRule();
+
+        [JsonProperty]
+        public int PollingInterval { get; set; } = 1000;
 
         public Action CoordinatorChanged { get; set; } = null;
 

@@ -26,6 +26,8 @@
                 <TextBox Text="{Binding ViewModel.Name,UpdateSourceTrigger=PropertyChanged}" Foreground="{StaticResource MaterialDesignDarkForeground}"></TextBox>
                 <TextBlock Text="{lex:Loc GPNetworkPanId}" Foreground="{StaticResource MaterialDesignDarkForeground}"></TextBlock>
                 <TextBlock Text="{Binding ViewModel.PanId,UpdateSourceTrigger=PropertyChanged}" Foreground="{StaticResource MaterialDesignDarkForeground}"></TextBlock>
+                <TextBlock Text="{lex:Loc NecBlik.Virtual.GUI:SR:GPPollingInterval}" Foreground="{StaticResource MaterialDesignDarkForeground}"></TextBlock>
+                <TextBox Text="{Binding ViewModel.PollingInterval, UpdateSourceTrigger=PropertyChanged}" Foreground="{StaticResource MaterialDesignDarkForeground}"></TextBox>
                 <!--<StackPanel Orientation="Horizontal">
                     <TextBlock Text="{lex:Loc GPStayOpen}" Foreground="{StaticResource MaterialDesignDarkForeground}"></TextBlock>
                     <CheckBox IsChecked="{Binding ViewModel.IsOpen,UpdateSourceTrigger=PropertyChanged}" Style="{StaticResource MaterialDesignCheckBox}" HorizontalAlignment="Left" Foreground="{StaticResource MaterialDesignDarkForeground}"></CheckBox>

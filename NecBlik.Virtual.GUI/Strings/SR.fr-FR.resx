@@ -202,4 +202,7 @@ générer.</value>
   <data name="GPSynchronize" xml:space="preserve">
     <value>Synchroniser</value>
   </data>
+  <data name="GPStatus" xml:space="preserve">
+    <value>Status</value>
+  </data>
 </root>

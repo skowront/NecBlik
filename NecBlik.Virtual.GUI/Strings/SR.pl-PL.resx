@@ -201,4 +201,10 @@
   <data name="GPSynchronize" xml:space="preserve">
     <value>Synchornizuj</value>
   </data>
+  <data name="GPStatus" xml:space="preserve">
+    <value>Status</value>
+  </data>
+  <data name="GPPollingInterval" xml:space="preserve">
+    <value>Międzyczas sondowania</value>
+  </data>
 </root>

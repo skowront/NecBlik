@@ -117,97 +117,22 @@
   <resheader name="writer">
     <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </resheader>
-  <data name="GPOpen" xml:space="preserve">
-    <value>Open</value>
+  <data name="Connected" xml:space="preserve">
+    <value>Connected</value>
   </data>
-  <data name="Broadcast" xml:space="preserve">
-    <value>00000000 (Broadcast)</value>
+  <data name="Disconnected" xml:space="preserve">
+    <value>Disconnected</value>
   </data>
-  <data name="GPSent" xml:space="preserve">
-    <value>Sent</value>
+  <data name="Idle" xml:space="preserve">
+    <value>Idle</value>
   </data>
-  <data name="GPTo" xml:space="preserve">
-    <value>To</value>
+  <data name="Other" xml:space="preserve">
+    <value>Other</value>
   </data>
-  <data name="GPRecieved" xml:space="preserve">
-    <value>Recieved</value>
+  <data name="Running" xml:space="preserve">
+    <value>Running</value>
   </data>
-  <data name="GPFrom" xml:space="preserve">
-    <value>From</value>
-  </data>
-  <data name="GPSelect" xml:space="preserve">
-    <value>Select</value>
-  </data>
-  <data name="GPAddRuleCommand" xml:space="preserve">
-    <value>Add rule</value>
-  </data>
-  <data name="GPClearRulesCommand" xml:space="preserve">
-    <value>Clear rules</value>
-  </data>
-  <data name="GPProperty" xml:space="preserve">
-    <value>Property</value>
-  </data>
-  <data name="GPCacheId" xml:space="preserve">
-    <value>Cache ID</value>
-  </data>
-  <data name="GPValue" xml:space="preserve">
-    <value>Value</value>
-  </data>
-  <data name="GPClearFilters" xml:space="preserve">
-    <value>Clear filters</value>
-  </data>
-  <data name="GPFilters" xml:space="preserve">
-    <value>Filters</value>
-  </data>
-  <data name="GPFactory" xml:space="preserve">
-    <value>Factory</value>
-  </data>
-  <data name="GPAddress" xml:space="preserve">
-    <value>Address</value>
-  </data>
-  <data name="GPGuid" xml:space="preserve">
-    <value>Guid</value>
-  </data>
-  <data name="GPDeviceUnavailable" xml:space="preserve">
-    <value>Device unavailable</value>
-  </data>
-  <data name="GPName" xml:space="preserve">
-    <value>Name</value>
-  </data>
-  <data name="GPResponseTime" xml:space="preserve">
-    <value>Response time</value>
-  </data>
-  <data name="GPResult" xml:space="preserve">
-    <value>Result</value>
-  </data>
-  <data name="GPReturned" xml:space="preserve">
-    <value>Returned</value>
-  </data>
-  <data name="GPMessage" xml:space="preserve">
-    <value>Message</value>
-  </data>
-  <data name="GPTimeout" xml:space="preserve">
-    <value>Timeout</value>
-  </data>
-  <data name="GPPayloadSize" xml:space="preserve">
-    <value>Payload size</value>
-  </data>
-  <data name="GPPayload" xml:space="preserve">
-    <value>Payload</value>
-  </data>
-  <data name="GPSelectedRemoteAddress" xml:space="preserve">
-    <value>Remote address</value>
-  </data>
-  <data name="GPPing" xml:space="preserve">
-    <value>Ping</value>
-  </data>
-  <data name="GPRun" xml:space="preserve">
-    <value>Run</value>
-  </data>
-  <data name="GPPingPacket" xml:space="preserve">
-    <value>Ping packet</value>
-  </data>
-  <data name="GPStatus" xml:space="preserve">
-    <value>Status</value>
+  <data name="Unknown" xml:space="preserve">
+    <value>Unknown</value>
   </data>
 </root>
