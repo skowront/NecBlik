@@ -4,6 +4,7 @@
         <ResourceDictionary Source="/NecBlik.Common;component/Styles/Fonts.xaml"/>
         <ResourceDictionary Source="/NecBlik.Common;component/Styles/Colors.xaml"/>
         <ResourceDictionary Source="pack://application:,,,/MaterialDesignThemes.Wpf;component/Themes/MaterialDesignTheme.ScrollBar.xaml" />
+        <ResourceDictionary Source="pack://application:,,,/MaterialDesignThemes.Wpf;component/Themes/MaterialDesignTheme.Defaults.xaml" />
     </ResourceDictionary.MergedDictionaries>
     <!--Based on: https://docs.microsoft.com/en-us/dotnet/desktop/wpf/controls/scrollviewer-styles-and-templates?view=netframeworkdesktop-4.8-->
     <Style x:Key="ScrollViewer"
