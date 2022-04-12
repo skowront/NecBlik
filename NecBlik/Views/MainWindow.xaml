@@ -129,8 +129,8 @@
             <ScrollViewer Grid.Column="0" Grid.Row="0" Grid.RowSpan="3" HorizontalScrollBarVisibility="Visible" Style="{StaticResource ScrollViewer}">
                 <Grid>
                     <Grid.ColumnDefinitions>
-                        <ColumnDefinition Width="100*"/>
-                        <ColumnDefinition Width="500*"/>
+                        <ColumnDefinition Width="1*"/>
+                        <ColumnDefinition Width="5*"/>
                     </Grid.ColumnDefinitions>
                     <Grid.LayoutTransform>
                         <ScaleTransform ScaleX="{Binding ElementName=sldZoom, Path=Value}" ScaleY="{Binding ElementName=sldZoom, Path=Value}" />

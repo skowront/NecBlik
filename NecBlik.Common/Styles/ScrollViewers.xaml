@@ -22,7 +22,7 @@
                             <RowDefinition />
                             <RowDefinition Height="Auto" />
                         </Grid.RowDefinitions>
-                        <Border Grid.Column="0" BorderThickness="0,1,1,1">
+                        <Border Grid.Column="0"  BorderThickness="0,1,1,1">
                             <Border.BorderBrush>
                                 <SolidColorBrush Color="{DynamicResource BorderMediumColor}" />
                             </Border.BorderBrush>
@@ -33,16 +33,18 @@
                                 Maximum="{TemplateBinding ScrollableHeight}"
                                 ViewportSize="{TemplateBinding ViewportHeight}"
                                 Visibility="{TemplateBinding ComputedVerticalScrollBarVisibility}"
-                                Style="{StaticResource MaterialDesignScrollBar}"/>
+                                Style="{StaticResource MaterialDesignScrollBar}"
+                                Background="{StaticResource MaterialDesignDarkBackground}"/>
                         <ScrollBar x:Name="PART_HorizontalScrollBar"
                                 Orientation="Horizontal"
                                 Grid.Row="1"
-                                Grid.Column="1"
+                                Grid.Column="0"
                                 Value="{TemplateBinding HorizontalOffset}"
                                 Maximum="{TemplateBinding ScrollableWidth}"
                                 ViewportSize="{TemplateBinding ViewportWidth}"
                                 Visibility="{TemplateBinding ComputedHorizontalScrollBarVisibility}"
-                                Style="{StaticResource MaterialDesignScrollBar}"/>
+                                Style="{StaticResource MaterialDesignScrollBar}"
+                                Background="{StaticResource MaterialDesignDarkBackground}"/>
                     </Grid>
                 </ControlTemplate>
             </Setter.Value>

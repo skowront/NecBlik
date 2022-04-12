@@ -13,28 +13,34 @@
         <Grid Background="Transparent" Width="auto" Height="auto" Margin="0">
             <Grid Background="Transparent" Width="auto" Height="auto" Margin="3">
                 <Grid.RowDefinitions>
-                    <RowDefinition Height="*"></RowDefinition>
+                    <RowDefinition Height="auto"></RowDefinition>
                     <RowDefinition Height="*"></RowDefinition>
                     <RowDefinition Height="auto"></RowDefinition>
                 </Grid.RowDefinitions>
-                <Button Grid.RowSpan="3" Margin="-3" Style="{StaticResource BaseButton}" HorizontalAlignment="Stretch" VerticalAlignment="Stretch" Command="{Binding EditCommand}">
+                <Button Grid.Row="0" Grid.RowSpan="3" Margin="0" Style="{StaticResource MaterialDesignFlatButton}" HorizontalAlignment="Center" VerticalAlignment="Stretch" Command="{Binding EditCommand}">
                     <Grid>
                         <Grid.RowDefinitions>
-                            <RowDefinition Height="*"></RowDefinition>
-                            <RowDefinition Height="*"></RowDefinition>
+                            <RowDefinition Height="auto"></RowDefinition>
+                            <RowDefinition Height="auto"></RowDefinition>
                             <RowDefinition Height="auto"></RowDefinition>
                         </Grid.RowDefinitions>
-                        <TextBlock Grid.Row="0" VerticalAlignment="Center" HorizontalAlignment="Center" IsHitTestVisible="False">
-                        <fa:FontAwesome Icon="ThermometerHalf" >
-                            <fa:FontAwesome.Foreground>
-                                <SolidColorBrush Color="{Binding TemperatureColor}"></SolidColorBrush>
-                            </fa:FontAwesome.Foreground>
-                        </fa:FontAwesome>
+                        <TextBlock Grid.Row="0" VerticalAlignment="Stretch" HorizontalAlignment="Center" IsHitTestVisible="False">
+                            <Border CornerRadius="7" BorderThickness="1"
+                                    Background="{StaticResource MaterialDesignShadowBrush}"
+                                    RenderOptions.EdgeMode="Unspecified"
+                                    SnapsToDevicePixels="True">
+                                <fa:FontAwesome Icon="ThermometerHalf" Margin="2">
+                                    <fa:FontAwesome.Foreground>
+                                        <SolidColorBrush Color="{Binding TemperatureColor}"></SolidColorBrush>
+                                    </fa:FontAwesome.Foreground>
+                                </fa:FontAwesome>
+                            </Border>
                         </TextBlock>
-                        <TextBlock Grid.Row="1" VerticalAlignment="Top" HorizontalAlignment="Center" Text="{Binding Temperature, StringFormat='{}{0}°C'}" Foreground="{StaticResource ForegroundLightBrush}" FontSize="5"></TextBlock>
-                        <TextBlock Grid.Row="2" VerticalAlignment="Top" HorizontalAlignment="Center" Text="{Binding Name, FallbackValue='Device'}" Foreground="{StaticResource ForegroundLightBrush}" FontSize="3"></TextBlock>
+                        
                     </Grid>
                 </Button>
+                <TextBlock Grid.Row="1" VerticalAlignment="Top" HorizontalAlignment="Center" Text="{Binding Temperature, StringFormat='{}{0}°C'}" Foreground="{StaticResource ForegroundMainBrush}" FontSize="5"></TextBlock>
+                <TextBlock Grid.Row="2" VerticalAlignment="Top" HorizontalAlignment="Center" Text="{Binding Name, FallbackValue='Device'}" Foreground="{StaticResource ForegroundMainBrush}" FontSize="3"></TextBlock>
                 <Grid.ToolTip>
                     <Grid>
                         <Grid.ColumnDefinitions>
