@@ -1,0 +1,470 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<ClassDiagram MajorVersion="1" MinorVersion="1">
+  <Class Name="NecBlik.Common.Strings.SR" Collapsed="true">
+    <Position X="14.25" Y="4.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAQEAAIAIAAAAAABMAAAAQAAAAIAAAAAAAAAAIA=</HashCode>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="NecBlik.Common.WpfElements.PopupValuePickers.ResponseProviders.DateTimeResponseProvider" Collapsed="true" BaseTypeListCollapsed="true">
+    <Position X="10.75" Y="0.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>RAAAAAAAAAAAAAAABAAAAAAAAAAAAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>WpfElements\PopupValuePickers\ResponseProviders\DateTimeResponseProvider.cs</FileName>
+    </TypeIdentifier>
+    <Lollipop Position="0.2" Collapsed="true" />
+  </Class>
+  <Class Name="NecBlik.Common.WpfElements.PopupValuePickers.ResponseProviders.FloatResponseProvider" Collapsed="true" BaseTypeListCollapsed="true">
+    <Position X="17.75" Y="0.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>RAAAAAAAAAAAAAAABAAAAAAAAAAAAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>WpfElements\PopupValuePickers\ResponseProviders\FloatResponseProvider.cs</FileName>
+    </TypeIdentifier>
+    <Lollipop Position="0.2" Collapsed="true" />
+  </Class>
+  <Class Name="NecBlik.Common.WpfElements.PopupValuePickers.ResponseProviders.NumericResponseProvider&lt;T&gt;" Collapsed="true" BaseTypeListCollapsed="true">
+    <Position X="14.25" Y="2.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>RAAAAAAAAAAAAAAABAAAAAAAAAAAAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>WpfElements\PopupValuePickers\ResponseProviders\NumericResponseProvider.cs</FileName>
+    </TypeIdentifier>
+    <Lollipop Position="0.2" Collapsed="true" />
+  </Class>
+  <Class Name="NecBlik.Common.WpfElements.PopupValuePickers.ResponseProviders.StringResponseProvider" Collapsed="true" BaseTypeListCollapsed="true">
+    <Position X="16" Y="4.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>RAAAAAAAAAAAAAAABAAAAAAAAAAAAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>WpfElements\PopupValuePickers\ResponseProviders\StringResponseProvider.cs</FileName>
+    </TypeIdentifier>
+    <Lollipop Position="0.2" Collapsed="true" />
+  </Class>
+  <Class Name="NecBlik.Common.WpfElements.PopupValuePickers.DateTimeValuePicker" Collapsed="true" BaseTypeListCollapsed="true">
+    <Position X="12.5" Y="0.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAAAAAAAAAAAEAAAAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>WpfElements\PopupValuePickers\DateTimeValuePicker.xaml.cs</FileName>
+    </TypeIdentifier>
+    <Lollipop Position="0.2" Collapsed="true" />
+  </Class>
+  <Class Name="NecBlik.Common.WpfElements.PopupValuePickers.FloatValuePicker" Collapsed="true" BaseTypeListCollapsed="true">
+    <Position X="7.25" Y="1.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>WpfElements\PopupValuePickers\FloatValuePicker.xaml.cs</FileName>
+    </TypeIdentifier>
+    <Lollipop Position="0.2" Collapsed="true" />
+  </Class>
+  <Class Name="NecBlik.Common.WpfElements.PopupValuePickers.GenericValuePicker&lt;T&gt;" Collapsed="true">
+    <Position X="1.75" Y="3.25" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>QAAAgCAAAAgAAAAAAAAAAAAAAAAAACAAAAAgAAAAAAA=</HashCode>
+      <FileName>WpfElements\PopupValuePickers\GenericPickerViewModel.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="NecBlik.Common.WpfElements.PopupValuePickers.ListInputValuePicker" Collapsed="true" BaseTypeListCollapsed="true">
+    <Position X="17.75" Y="1.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>QAAAAAAAAAAAAAAAAAAAAAAAACAAAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>WpfElements\PopupValuePickers\ListInputValuePicker.cs</FileName>
+    </TypeIdentifier>
+    <Lollipop Position="0.2" Collapsed="true" />
+  </Class>
+  <Class Name="NecBlik.Common.WpfElements.PopupValuePickers.NumericValuePicker" Collapsed="true" BaseTypeListCollapsed="true">
+    <Position X="16" Y="2.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAQAAAAAAAAAAAAAAAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>WpfElements\PopupValuePickers\NumericValuePicker.xaml.cs</FileName>
+    </TypeIdentifier>
+    <Lollipop Position="0.2" Collapsed="true" />
+  </Class>
+  <Class Name="NecBlik.Common.WpfElements.PopupValuePickers.StringValuePicker" Collapsed="true" BaseTypeListCollapsed="true">
+    <Position X="17.75" Y="4.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>WpfElements\PopupValuePickers\StringValuePicker.xaml.cs</FileName>
+    </TypeIdentifier>
+    <Lollipop Position="0.2" Collapsed="true" />
+  </Class>
+  <Class Name="NecBlik.Common.WpfElements.ResponseProviders.InputResponseProvider" Collapsed="true" BaseTypeListCollapsed="true">
+    <Position X="14.25" Y="1.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>RAAAAAAAAAAAAAAABAAAAAAAAAAAAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>WpfElements\ResponseProviders\InputResponseProvider.cs</FileName>
+    </TypeIdentifier>
+    <Lollipop Position="0.2" Collapsed="true" />
+  </Class>
+  <Class Name="NecBlik.Common.WpfElements.ResponseProviders.ListInputResponseProvider" Collapsed="true" BaseTypeListCollapsed="true">
+    <Position X="16" Y="1.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>RAAAAAAAAAAAAAAABAAAAAAAAAAAAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>WpfElements\ResponseProviders\ListInputResponseProvider.cs</FileName>
+    </TypeIdentifier>
+    <Lollipop Position="0.2" Collapsed="true" />
+  </Class>
+  <Class Name="NecBlik.Common.WpfElements.ResponseProviders.PasswordInputResponseProvider" Collapsed="true" BaseTypeListCollapsed="true">
+    <Position X="7.25" Y="3.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>RAAAAAAAAAAAAAAABAAAAAAAAAAAAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>WpfElements\ResponseProviders\PasswordInputResponseProvider.cs</FileName>
+    </TypeIdentifier>
+    <Lollipop Position="0.2" Collapsed="true" />
+  </Class>
+  <Class Name="NecBlik.Common.WpfElements.ResponseProviders.YesNoPopupResponseProvider" Collapsed="true" BaseTypeListCollapsed="true">
+    <Position X="14.25" Y="5.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>RAAAAAAAAAAAAAAABAAAAAAAAAAAAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>WpfElements\ResponseProviders\YesNoPopupResponseProvider.cs</FileName>
+    </TypeIdentifier>
+    <Lollipop Position="0.2" Collapsed="true" />
+  </Class>
+  <Class Name="NecBlik.Common.WpfElements.ResponseProviders.YesNoProgressBarPopupResponseProvider" Collapsed="true" BaseTypeListCollapsed="true">
+    <Position X="16" Y="5.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>RAQAEAAAAEAAAAAABAAAAAAAAAAAAAAAAAACAAAAAAA=</HashCode>
+      <FileName>WpfElements\ResponseProviders\YesNoProgressBarPopupResponseProvider.cs</FileName>
+    </TypeIdentifier>
+    <Lollipop Position="0.2" Collapsed="true" />
+  </Class>
+  <Class Name="NecBlik.Common.WpfElements.ResponseProviders.YesPopupResponseProvider" Collapsed="true" BaseTypeListCollapsed="true">
+    <Position X="17.75" Y="5.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>RAAAAAAAAAAAAAAABAAAAAAAAAAAAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>WpfElements\ResponseProviders\YesPopupResponseProvider.cs</FileName>
+    </TypeIdentifier>
+    <Lollipop Position="0.2" Collapsed="true" />
+  </Class>
+  <Class Name="NecBlik.Common.WpfElements.FunctionalityNotImplementedYetPopup" Collapsed="true" BaseTypeListCollapsed="true">
+    <Position X="9" Y="1.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>WpfElements\FunctionalityNotImplementedYetPopup.xaml.cs</FileName>
+    </TypeIdentifier>
+    <Lollipop Position="0.2" Collapsed="true" />
+  </Class>
+  <Class Name="NecBlik.Common.WpfElements.Popups" Collapsed="true">
+    <Position X="9" Y="3.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>WpfElements\Popups.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="NecBlik.Common.WpfElements.SimpleInpuPasswordPopup" Collapsed="true" BaseTypeListCollapsed="true">
+    <Position X="14.25" Y="3.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAAAAAAAAAAAEAAAAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>WpfElements\SimpleInputPasswordPopup.xaml.cs</FileName>
+    </TypeIdentifier>
+    <Lollipop Position="0.2" Collapsed="true" />
+  </Class>
+  <Class Name="NecBlik.Common.WpfElements.SimpleInputPopup" Collapsed="true" BaseTypeListCollapsed="true">
+    <Position X="16" Y="3.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAAAAAAAAAAAEAAAAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>WpfElements\SimpleInputPopup.xaml.cs</FileName>
+    </TypeIdentifier>
+    <Lollipop Position="0.2" Collapsed="true" />
+  </Class>
+  <Class Name="NecBlik.Common.WpfElements.SimpleListInputPopup" Collapsed="true" BaseTypeListCollapsed="true">
+    <Position X="17.75" Y="3.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAAAAAAAAAAAEAAAAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>WpfElements\SimpleListInputPopup.xaml.cs</FileName>
+    </TypeIdentifier>
+    <Lollipop Position="0.2" Collapsed="true" />
+  </Class>
+  <Class Name="NecBlik.Common.WpfElements.SimpleYesNoPopup" Collapsed="true" BaseTypeListCollapsed="true">
+    <Position X="9" Y="4.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAAAAAAAAAAAEAAAAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>WpfElements\SimpleYesNoPopup.xaml.cs</FileName>
+    </TypeIdentifier>
+    <Lollipop Position="0.2" Collapsed="true" />
+  </Class>
+  <Class Name="NecBlik.Common.WpfElements.SimpleYesNoProgressBarPopup" Collapsed="true" BaseTypeListCollapsed="true">
+    <Position X="10.75" Y="4.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAIAAACAAAACEAAAAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>WpfElements\SimpleYesNoProgressBarPopup.xaml.cs</FileName>
+    </TypeIdentifier>
+    <Lollipop Position="0.2" Collapsed="true" />
+  </Class>
+  <Class Name="NecBlik.Common.WpfElements.SimpleYesPopup" Collapsed="true" BaseTypeListCollapsed="true">
+    <Position X="12.5" Y="4.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAAAAAAAAAAAEAAAAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>WpfElements\SimpleYesPopup.xaml.cs</FileName>
+    </TypeIdentifier>
+    <Lollipop Position="0.2" Collapsed="true" />
+  </Class>
+  <Class Name="FunctionalFun.UI.PasswordBoxAssistant" Collapsed="true">
+    <Position X="17.75" Y="2.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>EBABAAAAAAAAAAEAAAAAAACoABAgAAAAAAAAAICAAAg=</HashCode>
+      <FileName>WpfElements\PasswordBoxAssistant.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="NecBlik.Common.WpfExtensions.Base.BaseViewModel" Collapsed="true">
+    <Position X="1.75" Y="0.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAAAIAAAAAAAgAAAAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>WpfExtensions\Base\BaseViewModel.cs</FileName>
+    </TypeIdentifier>
+    <Lollipop Position="0.2" />
+  </Class>
+  <Class Name="NecBlik.Common.WpfExtensions.Base.RelayCommand" Collapsed="true" BaseTypeListCollapsed="true">
+    <Position X="10.75" Y="3.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAACAAQAAEAEIABAAAAAAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>WpfExtensions\Base\RelayCommand.cs</FileName>
+    </TypeIdentifier>
+    <Lollipop Position="0.2" Collapsed="true" />
+  </Class>
+  <Class Name="NecBlik.Common.WpfExtensions.Base.GenericResponseProvider&lt;R, Q&gt;" Collapsed="true" BaseTypeListCollapsed="true">
+    <Position X="12.5" Y="1.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>QQAAAEAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>WpfExtensions\Base\ResponseProviders.cs</FileName>
+    </TypeIdentifier>
+    <Lollipop Position="0.2" Collapsed="true" />
+  </Class>
+  <Class Name="NecBlik.Common.WpfExtensions.Base.GenericInterruptibleResponseProvider&lt;R, Q&gt;" Collapsed="true" BaseTypeListCollapsed="true">
+    <Position X="10.75" Y="1.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>QQAAAEAAAAAAAAgAAAAAAAAAAAAAAAAAAAAAAABCAAA=</HashCode>
+      <FileName>WpfExtensions\Base\ResponseProviders.cs</FileName>
+    </TypeIdentifier>
+    <Lollipop Position="0.2" Collapsed="true" />
+  </Class>
+  <Class Name="NecBlik.Common.WpfExtensions.Base.SimpleTypeResponseProvider&lt;R, Q&gt;" Collapsed="true" BaseTypeListCollapsed="true">
+    <Position X="7.25" Y="4.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>QQAAAEAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>WpfExtensions\Base\ResponseProviders.cs</FileName>
+    </TypeIdentifier>
+    <Lollipop Position="0.2" Collapsed="true" />
+  </Class>
+  <Class Name="NecBlik.Common.WpfExtensions.Base.YesStringResponseProvider" Collapsed="true" BaseTypeListCollapsed="true">
+    <Position X="7.25" Y="6.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>QAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>WpfExtensions\Base\ResponseProviders.cs</FileName>
+    </TypeIdentifier>
+    <Lollipop Position="0.2" Collapsed="true" />
+  </Class>
+  <Class Name="NecBlik.Common.WpfExtensions.Base.NoStringResponseProvider" Collapsed="true" BaseTypeListCollapsed="true">
+    <Position X="12.5" Y="2.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>QAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>WpfExtensions\Base\ResponseProviders.cs</FileName>
+    </TypeIdentifier>
+    <Lollipop Position="0.2" Collapsed="true" />
+  </Class>
+  <Class Name="NecBlik.Common.WpfExtensions.Base.WindowViewModel" Collapsed="true">
+    <Position X="1.75" Y="1.75" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AwAgCAECEAgAAAAAgAEAQAEAIEAACAgMAAAAJIAEAAA=</HashCode>
+      <FileName>WpfExtensions\Base\WindowViewModel.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="NecBlik.Common.WpfExtensions.Collections.ThreadSafeCollection&lt;T&gt;" Collapsed="true">
+    <Position X="7.25" Y="5.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAAAAgAAAAAAAAAAAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>WpfExtensions\Collections\ThreadSafeCollection.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="NecBlik.Common.WpfExtensions.Converters.BoolToVisibilityConverter" Collapsed="true" BaseTypeListCollapsed="true">
+    <Position X="7.25" Y="0.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAAAAIAAAAAAAAgAAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>WpfExtensions\Converters\BoolToVisibilityConverter.cs</FileName>
+    </TypeIdentifier>
+    <Lollipop Position="0.2" Collapsed="true" />
+  </Class>
+  <Class Name="NecBlik.Common.WpfExtensions.Converters.BoolToVisibilityInvertedConverter" Collapsed="true" BaseTypeListCollapsed="true">
+    <Position X="9" Y="0.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAAAAIAAAAAAAAgAAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>WpfExtensions\Converters\BoolToVisibilityInvertedConverter.cs</FileName>
+    </TypeIdentifier>
+    <Lollipop Position="0.2" Collapsed="true" />
+  </Class>
+  <Class Name="NecBlik.Common.WpfExtensions.Converters.EnumDescriptionTypeConverter" Collapsed="true">
+    <Position X="16" Y="0.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAAAAAAAAAAAAAAAACAAAAAAAAAAAAA=</HashCode>
+      <FileName>WpfExtensions\Converters\EnumDescriptionTypeConverter.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="NecBlik.Common.WpfExtensions.Factories.GuiValuePickerFactory" Collapsed="true">
+    <Position X="4.75" Y="4.75" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAAAAACAAAAAAAAAAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>WpfExtensions\Factories\GuiValuePickerFactory.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="NecBlik.Common.WpfExtensions.Factories.ValuePickerFactory" Collapsed="true">
+    <Position X="4.75" Y="3.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>ACAAAAAAAAAAAAAAAACAQAAAAIAAAAAAAAABAAAAAAA=</HashCode>
+      <FileName>WpfExtensions\Factories\ValuePickerFactory.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="NecBlik.Common.WpfExtensions.Resources.ResourceLocalizationProvider" Collapsed="true" BaseTypeListCollapsed="true">
+    <Position X="12.5" Y="3.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>QAAAAAAAAAAAAAAAAAAAAAAAABAAAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>WpfExtensions\Resources\ResourceLocalizationProvider.cs</FileName>
+    </TypeIdentifier>
+    <Lollipop Position="0.2" Collapsed="true" />
+  </Class>
+  <Class Name="NecBlik.Common.WpfExtensions.UI.EnumBindingSourceExtension" Collapsed="true">
+    <Position X="14.25" Y="0.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAACAAAAAAAAAAAgAAAAAAAAAAAAAAAAgAAAAAAAAA=</HashCode>
+      <FileName>WpfExtensions\UI\EnumBindingSourceExtension.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="NecBlik.Common.WpfExtensions.UI.LocalizedDescriptionAttribute" Collapsed="true">
+    <Position X="7.25" Y="2.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAQAAgAAAAAAAAAAAAAAAAAAAAAAAAAEAAAAA=</HashCode>
+      <FileName>WpfExtensions\UI\LocalizedDescriptionAttirubute.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="NecBlik.Common.WpfExtensions.UI.TranslationSource" Collapsed="true" BaseTypeListCollapsed="true">
+    <Position X="10.75" Y="5.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAgAAAABAAAAAACAAAAAAAgAAAAAAAQAAABAAAAIA=</HashCode>
+      <FileName>WpfExtensions\UI\TranslationSource.cs</FileName>
+    </TypeIdentifier>
+    <Lollipop Position="0.2" Collapsed="true" />
+  </Class>
+  <Class Name="NecBlik.Common.WpfExtensions.UI.Translation" Collapsed="true">
+    <Position X="9" Y="5.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAAAAAAAAAAAAAAAQAAQAAABAAAAAAA=</HashCode>
+      <FileName>WpfExtensions\UI\TranslationSource.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="NecBlik.Common.WpfExtensions.UI.LocExtension" Collapsed="true">
+    <Position X="9" Y="2.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAACAAAAAAAAAAAAAAAAAAAAAAAAEAAAAABAAAAAAA=</HashCode>
+      <FileName>WpfExtensions\UI\TranslationSource.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="Fasetto.Word.WindowResizer" Collapsed="true">
+    <Position X="12.5" Y="5.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AgAAAIQEAAAAQAACAIBAIEAEAAIACAAAACAIAAAAAAA=</HashCode>
+      <FileName>WpfExtensions\UI\WindowResizer.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="Fasetto.Word.MONITORINFO" Collapsed="true">
+    <Position X="10.75" Y="2.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAEAEAAAAAAAAAAAAAAAAAAAAAAAAgAAAAAACAAAA=</HashCode>
+      <FileName>WpfExtensions\UI\WindowResizer.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Struct Name="Fasetto.Word.Rectangle" Collapsed="true">
+    <Position X="10.75" Y="7.75" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAAAAAAQAAAAAAAIAAAACACAAAAAAAA=</HashCode>
+      <FileName>WpfExtensions\UI\WindowResizer.cs</FileName>
+    </TypeIdentifier>
+  </Struct>
+  <Struct Name="Fasetto.Word.MINMAXINFO" Collapsed="true">
+    <Position X="7.25" Y="7.75" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAQBAAAAAAACAAAIAAAAAAAAAAAQAAAAAAAAA=</HashCode>
+      <FileName>WpfExtensions\UI\WindowResizer.cs</FileName>
+    </TypeIdentifier>
+  </Struct>
+  <Struct Name="Fasetto.Word.POINT" Collapsed="true">
+    <Position X="9" Y="7.75" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAYAA=</HashCode>
+      <FileName>WpfExtensions\UI\WindowResizer.cs</FileName>
+    </TypeIdentifier>
+  </Struct>
+  <Interface Name="NecBlik.Common.WpfExtensions.Interfaces.IAsyncResponseProvider&lt;R, Q&gt;" Collapsed="true">
+    <Position X="7.25" Y="9" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAACAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>WpfExtensions\Interfaces\IAsyncResponseProvider.cs</FileName>
+    </TypeIdentifier>
+  </Interface>
+  <Interface Name="NecBlik.Common.WpfExtensions.Interfaces.ISimpleTypeAsyncResponseProvider&lt;R, Q&gt;" Collapsed="true">
+    <Position X="16" Y="9" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>QAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>WpfExtensions\Interfaces\IAsyncResponseProvider.cs</FileName>
+    </TypeIdentifier>
+  </Interface>
+  <Interface Name="NecBlik.Common.WpfExtensions.Interfaces.IInterruptibleAsyncResponseProvider&lt;R, Q&gt;" Collapsed="true">
+    <Position X="12.5" Y="9" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>QAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAACAAA=</HashCode>
+      <FileName>WpfExtensions\Interfaces\IAsyncResponseProvider.cs</FileName>
+    </TypeIdentifier>
+  </Interface>
+  <Interface Name="NecBlik.Common.WpfExtensions.Interfaces.IDuplicable&lt;T&gt;" Collapsed="true">
+    <Position X="9" Y="9" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAAAAAAAAAAAAAAAIAAAAAAAAAAAAAA=</HashCode>
+      <FileName>WpfExtensions\Interfaces\IDuplicable.cs</FileName>
+    </TypeIdentifier>
+  </Interface>
+  <Interface Name="NecBlik.Common.WpfExtensions.Interfaces.IFeaturesExtensibleWindow" Collapsed="true">
+    <Position X="10.75" Y="9" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAACAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>WpfExtensions\Interfaces\IFeaturesExtensibleWindow.cs</FileName>
+    </TypeIdentifier>
+  </Interface>
+  <Interface Name="NecBlik.Common.WpfExtensions.Interfaces.IResponseProvider&lt;R, Q&gt;" Collapsed="true">
+    <Position X="4.75" Y="0.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>QAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>WpfExtensions\Interfaces\IResponseProvider.cs</FileName>
+    </TypeIdentifier>
+  </Interface>
+  <Interface Name="NecBlik.Common.WpfExtensions.Interfaces.ISimpleTypeResponseProvider&lt;R, Q&gt;" Collapsed="true">
+    <Position X="17.75" Y="9" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>QAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>WpfExtensions\Interfaces\IResponseProvider.cs</FileName>
+    </TypeIdentifier>
+  </Interface>
+  <Interface Name="NecBlik.Common.WpfExtensions.Interfaces.IInterruptibleResponseProvider&lt;R, Q&gt;" Collapsed="true">
+    <Position X="14.25" Y="9" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>QAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAACAAA=</HashCode>
+      <FileName>WpfExtensions\Interfaces\IResponseProvider.cs</FileName>
+    </TypeIdentifier>
+  </Interface>
+  <Interface Name="NecBlik.Common.WpfExtensions.Interfaces.IUpdatableResponseProvider&lt;U, R, Q&gt;" Collapsed="true">
+    <Position X="4.75" Y="1.75" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAQAEAAAAEAAAAAAAAAAAAAAAAAAAAAAAAACAAAAAAA=</HashCode>
+      <FileName>WpfExtensions\Interfaces\IUpdatableResponseProvider.cs</FileName>
+    </TypeIdentifier>
+  </Interface>
+  <Enum Name="Fasetto.Word.WindowDockPosition" Collapsed="true">
+    <Position X="9" Y="10" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAAAAABAAAAAAAAAAAAACACAAAAAAAA=</HashCode>
+      <FileName>WpfExtensions\UI\WindowResizer.cs</FileName>
+    </TypeIdentifier>
+  </Enum>
+  <Enum Name="Fasetto.Word.MonitorOptions" Collapsed="true">
+    <Position X="7.25" Y="10" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAAAAgAAAAAAAAAAAAAAIAQAAAAAAAA=</HashCode>
+      <FileName>WpfExtensions\UI\WindowResizer.cs</FileName>
+    </TypeIdentifier>
+  </Enum>
+  <Font Name="Segoe UI" Size="9" />
+</ClassDiagram>

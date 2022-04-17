@@ -1,0 +1,38 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<ClassDiagram MajorVersion="1" MinorVersion="1">
+  <Class Name="NecBlik.Virtual.Factories.VirtualDeviceFactory" Collapsed="true">
+    <Position X="8" Y="4" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAgAgAAAAAAAAQAAAAAAAAAAAAAAIAAAAAAAAAAIg=</HashCode>
+      <FileName>Factories\VirtualDeviceFactory.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="NecBlik.Virtual.Models.VirtualCoordinator" Collapsed="true">
+    <Position X="9.75" Y="3" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAJAAAAQAQAAAAAAIADAAAABQAAACIAAAgAAAAAA=</HashCode>
+      <FileName>Models\VirtualCoordinator.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="NecBlik.Virtual.Models.VirtualDevice" Collapsed="true">
+    <Position X="11.5" Y="3" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAIAAAAAAQAAAAEAAAAQAAAAAAAACAAAAwAAADIE=</HashCode>
+      <FileName>Models\VirtualDevice.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="NecBlik.Virtual.Models.VirtualNetwork" Collapsed="true">
+    <Position X="9.75" Y="4" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AABAAEAAAAAAAAAAAAAAAAAQAAAAAAAAAAAAAAAgAAA=</HashCode>
+      <FileName>Models\VirtualNetwork.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="NecBlik.Virtual.Resources.Resources" Collapsed="true">
+    <Position X="8" Y="3" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAIAAQAAAAAAAAAAAAABEgAAAQAAAAAAAAAAAAAAAIA=</HashCode>
+    </TypeIdentifier>
+  </Class>
+  <Font Name="Segoe UI" Size="9" />
+</ClassDiagram>

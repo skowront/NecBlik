@@ -1,0 +1,193 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<ClassDiagram MajorVersion="1" MinorVersion="1">
+  <Class Name="NecBlik.Core.GUI.DataTemplateSelectors.DeviceAnyDataBriefTemplateSelector" Collapsed="true">
+    <Position X="10" Y="0.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAAAAAAAAAAAAAAAQAAAAAAAAAAAAAA=</HashCode>
+      <FileName>DataTemplateSelectors\DeviceAnyBriefDataTemplate.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="NecBlik.Core.GUI.DataTemplateSelectors.DeviceAnyDataTemplateSelector" Collapsed="true">
+    <Position X="11.75" Y="0.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAAAAAAAAAAAAAAAQAAAAAAAAAAAAAA=</HashCode>
+      <FileName>DataTemplateSelectors\DeviceAnyDataTemplateSelector.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="NecBlik.Core.GUI.Factories.ViewModels.FactoryRulesEditorViewModel" Collapsed="true">
+    <Position X="15.25" Y="1.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>hCAAQAAAAAABEAAAQABAAgAAAAGABAIACAAAAAAAAAA=</HashCode>
+      <FileName>Factories\ViewModels\FactoryRulesEditorViewModel.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="NecBlik.Core.GUI.Factories.ViewModels.FactoryRuleViewModel" Collapsed="true">
+    <Position X="17" Y="1.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAGAEAAAAABAgAAAAAAAAAAACAAAAIACAggAQAAAAA=</HashCode>
+      <FileName>Factories\ViewModels\FactoryRuleViewModel.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="NecBlik.Core.GUI.Views.FactoryRulesEditor" Collapsed="true" BaseTypeListCollapsed="true">
+    <Position X="13.5" Y="1.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAAAAAAAgAAAEAAAAAAAAAIAAAAAAAA=</HashCode>
+      <FileName>Factories\Views\FactoryRulesEditor.xaml.cs</FileName>
+    </TypeIdentifier>
+    <Lollipop Position="0.2" Collapsed="true" />
+  </Class>
+  <Class Name="NecBlik.Core.GUI.Views.PingCoordinatorWindow" Collapsed="true" BaseTypeListCollapsed="true">
+    <Position X="13.5" Y="2.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>Views\PingCoordinatorWindow.xaml.cs</FileName>
+    </TypeIdentifier>
+    <Lollipop Position="0.2" Collapsed="true" />
+  </Class>
+  <Class Name="NecBlik.Core.GUI.Views.ProjectWindow" Collapsed="true" BaseTypeListCollapsed="true">
+    <Position X="13.5" Y="3.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>Views\ProjectWindow.xaml.cs</FileName>
+    </TypeIdentifier>
+    <Lollipop Position="0.2" Collapsed="true" />
+  </Class>
+  <Class Name="NecBlik.Core.GUI.Factories.DeviceGuiAnyFactory" Collapsed="true" BaseTypeListCollapsed="true">
+    <Position X="15.25" Y="0.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAgAAABAAIAAEAAAgAGAAABgAAAAUEAAkAAACIk=</HashCode>
+      <FileName>Factories\DeviceGuiAnyFactory.cs</FileName>
+    </TypeIdentifier>
+    <Lollipop Position="0.2" Collapsed="true" />
+  </Class>
+  <Class Name="NecBlik.Core.GUI.Factories.DeviceGuiDefaultFactory" Collapsed="true">
+    <Position X="7.5" Y="1.75" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAIAAAAIAgAEAAAAgAAAAEEAAAAAAAIA=</HashCode>
+      <FileName>Factories\DeviceGuiDefaultFactory.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="NecBlik.Core.GUI.Factories.DeviceGuiFactory" Collapsed="true">
+    <Position X="7.5" Y="0.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAIAAAAIAgAEAAAAgAAAAEEAAgQAAGIE=</HashCode>
+      <FileName>Factories\DeviceGuiFactory.cs</FileName>
+    </TypeIdentifier>
+    <Lollipop Position="0.2" />
+  </Class>
+  <Class Name="NecBlik.Core.GUI.Models.DiagramDevice" Collapsed="true">
+    <Position X="10" Y="1.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAgAAAAAAAAAAAAIAAAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>Models\DiagramDevice.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="NecBlik.Core.GUI.Models.DiagramItemMetadata" Collapsed="true">
+    <Position X="11.75" Y="1.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAgAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>Models\DiagramItemMedatata.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="NecBlik.Core.GUI.Models.Point&lt;T&gt;" Collapsed="true">
+    <Position X="17" Y="2.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAYAA=</HashCode>
+      <FileName>Models\Point.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="NecBlik.Core.GUI.Models.ProjectGuiModel" Collapsed="true">
+    <Position X="10" Y="3.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAgIAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAEAEAAA=</HashCode>
+      <FileName>Models\ProjectGuiModel.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="NecBlik.Core.GUI.Resources.Resources" Collapsed="true">
+    <Position X="15.25" Y="3.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAAAAAABEAAAAQAAAAAAAAAAAAAAAIA=</HashCode>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="NecBlik.Core.GUI.Strings.SR" Collapsed="true">
+    <Position X="17" Y="3.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>LEAQCgEAgACgQARQIAghEAAAIYBIgAAACAEADABgSIA=</HashCode>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="NecBlik.Core.GUI.DeviceViewModel" Collapsed="true" BaseTypeListCollapsed="true">
+    <Position X="17" Y="0.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>IAQCQAAEACEAQAAEAEMABCSAAAAApAACCAhAkgRArIM=</HashCode>
+      <FileName>ViewModels\DeviceViewModel.cs</FileName>
+    </TypeIdentifier>
+    <Lollipop Position="0.2" Collapsed="true" />
+  </Class>
+  <Class Name="NecBlik.Core.GUI.ViewModels.NetworkViewModel" Collapsed="true" BaseTypeListCollapsed="true">
+    <Position X="11.75" Y="2.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>YAAAAIAIBiCJdICAgAIAEBQAAAAABAIAWAgAECCIAEA=</HashCode>
+      <FileName>ViewModels\NetworkViewModel.cs</FileName>
+    </TypeIdentifier>
+    <Lollipop Position="0.2" Collapsed="true" />
+  </Class>
+  <Class Name="NecBlik.Core.GUI.ViewModels.PingViewModel" Collapsed="true">
+    <Position X="15.25" Y="2.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AIEAAAEAAAAAABAAAAEQAAQgAAAAAAIAACQCIEAJAMA=</HashCode>
+      <FileName>ViewModels\PingViewModel.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="NecBlik.Core.GUI.ViewModels.ProjectViewModel" Collapsed="true">
+    <Position X="11.75" Y="3.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAAAAAAAAAQAAAAAAAAAAAAAAAAIAAA=</HashCode>
+      <FileName>ViewModels\ProjectViewModel.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="NecBlik.Core.GUI.Views.Controls.DeviceControl" Collapsed="true" BaseTypeListCollapsed="true">
+    <Position X="13.5" Y="0.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAAAAAAAAAAgAAAAAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>Views\Controls\DeviceControl.xaml.cs</FileName>
+    </TypeIdentifier>
+    <Lollipop Position="0.2" Collapsed="true" />
+  </Class>
+  <Class Name="NecBlik.Core.GUI.Views.Controls.GhostControl" Collapsed="true" BaseTypeListCollapsed="true">
+    <Position X="10" Y="2.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAAAAAAAAAAgAAAAAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>Views\Controls\GhostControl.xaml.cs</FileName>
+    </TypeIdentifier>
+    <Lollipop Position="0.2" Collapsed="true" />
+  </Class>
+  <Interface Name="NecBlik.Core.GUI.Interfaces.IDeviceControl" Collapsed="true">
+    <Position X="4.5" Y="1.75" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>Interfaces\IDeviceControl.cs</FileName>
+    </TypeIdentifier>
+  </Interface>
+  <Interface Name="NecBlik.Core.GUI.Interfaces.IDeviceGuiFactory" Collapsed="true">
+    <Position X="10" Y="4.75" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAIAAAAAAgAEAAAAgAAAAEEAAAAAAAAA=</HashCode>
+      <FileName>Interfaces\IDeviceGuiFactory.cs</FileName>
+    </TypeIdentifier>
+  </Interface>
+  <Interface Name="NecBlik.Core.GUI.Interfaces.IDevicePresenter" Collapsed="true">
+    <Position X="4.5" Y="0.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAAAAAAAAAAgAAAAAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>Interfaces\IDevicePresenter.cs</FileName>
+    </TypeIdentifier>
+  </Interface>
+  <Interface Name="NecBlik.Core.GUI.Interfaces.ISelectionSubscriber&lt;T&gt;" Collapsed="true">
+    <Position X="11.75" Y="4.75" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAgAAAAAAAAAAAAAAAAABAAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>Interfaces\ISelectionSubscriber.cs</FileName>
+    </TypeIdentifier>
+  </Interface>
+  <Font Name="Segoe UI" Size="9" />
+</ClassDiagram>
