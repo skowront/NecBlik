@@ -168,4 +168,13 @@
   <data name="GPTemperature" xml:space="preserve">
     <value>Temperatura</value>
   </data>
+  <data name="GPDiagnostics" xml:space="preserve">
+    <value>Diagnostyka</value>
+  </data>
+  <data name="GPThroughput" xml:space="preserve">
+    <value>Przepustowość</value>
+  </data>
+  <data name="GPRange" xml:space="preserve">
+    <value>Zasięg</value>
+  </data>
 </root>

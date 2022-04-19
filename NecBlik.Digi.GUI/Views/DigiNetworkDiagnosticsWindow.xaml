@@ -1,0 +1,45 @@
+﻿<mah:MetroWindow x:Class="NecBlik.Digi.GUI.Views.DigiNetworkDiagnosticsWindow"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:mah="http://metro.mahapps.com/winfx/xaml/controls"
+        xmlns:local="clr-namespace:NecBlik.Digi.GUI.Views"
+        xmlns:viewModels="clr-namespace:NecBlik.Digi.GUI.ViewModels;assembly=NecBlik.Digi.GUI"
+        xmlns:lexp="clr-namespace:WPFLocalizeExtension.Providers;assembly=WPFLocalizeextension"
+        xmlns:lex="clr-namespace:WPFLocalizeExtension.Extensions;assembly=WPFLocalizeextension"
+        lexp:ResxLocalizationProvider.DefaultAssembly="NecBlik.Digi.GUI"
+        lexp:ResxLocalizationProvider.DefaultDictionary="SR"
+        mc:Ignorable="d"
+        d:DataContext="{d:DesignInstance {x:Type viewModels:DigiNetworkDiagnosticsViewModel}}"
+        Title="Digi Network Diagnostics Window" Height="450" Width="800">
+    <Grid Background="{StaticResource MaterialDesignDarkBackground}">
+        <Grid.RowDefinitions>
+            <RowDefinition Height="auto"></RowDefinition>
+            <RowDefinition Height="*"></RowDefinition>
+        </Grid.RowDefinitions>
+        <StackPanel Grid.Row="0" Orientation="Horizontal">
+            <Button Grid.Column="0" VerticalAlignment="Center" Style="{StaticResource BaseButton}" Click="ThroughputClick" HorizontalAlignment="Center" Margin="0" MinWidth="50">
+                <StackPanel Orientation="Horizontal">
+                    <TextBlock Text="{lex:Loc GPThroughput}" Margin="0 0 5 0" VerticalAlignment="Center"></TextBlock>
+                    <TextBlock Text="&#xf337;" FontFamily="{StaticResource FontAwesome}"  VerticalAlignment="Center"></TextBlock>
+                </StackPanel>
+            </Button>
+            <Button Grid.Column="0" VerticalAlignment="Center" Style="{StaticResource BaseButton}" Click="RangeClick" HorizontalAlignment="Center" Margin="0" MinWidth="50">
+                <StackPanel Orientation="Horizontal">
+                    <TextBlock Text="{lex:Loc GPRange}" Margin="0 0 5 0" VerticalAlignment="Center"></TextBlock>
+                    <TextBlock Text="&#xf1eb;" FontFamily="{StaticResource FontAwesome}"  VerticalAlignment="Center"></TextBlock>
+                </StackPanel>
+            </Button>
+        </StackPanel>
+        <Grid Grid.Row="1">
+            <Frame x:Name="frame">
+                <Frame.Template>
+                    <ControlTemplate TargetType="Frame">
+                        <ContentPresenter Margin="5"/>
+                    </ControlTemplate>
+                </Frame.Template>
+            </Frame>
+        </Grid>
+    </Grid>
+</mah:MetroWindow>

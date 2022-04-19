@@ -21,7 +21,7 @@
         WindowStartupLocation="CenterScreen"
         WindowState="Maximized"
         mc:Ignorable="d"
-        Title="Device Map" Height="450" Width="800">
+        Title="Nec Blik" Height="450" Width="800">
     <mah:MetroWindow.Resources>
         <ContextMenu x:Key="DesignerCanvasContextMenu">
             <MenuItem Header="Paste" Command="{x:Static ApplicationCommands.Paste}" IsEnabled="True"/>

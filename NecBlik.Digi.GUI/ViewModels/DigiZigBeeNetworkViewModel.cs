@@ -17,6 +17,7 @@ namespace NecBlik.Digi.GUI.ViewModels
     public class DigiZigBeeNetworkViewModel : VirtualNetworkViewModel
     {
         public RelayCommand AddCommand { get; set; }
+        public RelayCommand DiagnosticsCommand { get; set; }
 
         public DigiZigBeeNetworkViewModel(Network network) : base(network)
         {
@@ -25,11 +26,17 @@ namespace NecBlik.Digi.GUI.ViewModels
                 var window = new DigiNetworkWindow(this);
                 window.Show();
             });
-
+            
             this.AddCommand = this.DiscoverCommand;
             this.DiscoverCommand = new RelayCommand(async (o) =>
             {
                 await this.Discover();
+            });
+
+            this.DiagnosticsCommand = new RelayCommand((o) =>
+            {
+                var window = new DigiNetworkDiagnosticsWindow(new DigiNetworkDiagnosticsViewModel());
+                window.Show();
             });
 
         }

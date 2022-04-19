@@ -124,6 +124,15 @@ namespace NecBlik.Digi.GUI.Strings {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Diagnostics.
+        /// </summary>
+        public static string GPDiagnostics {
+            get {
+                return ResourceManager.GetString("GPDiagnostics", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Name.
         /// </summary>
         public static string GPName {
@@ -169,6 +178,15 @@ namespace NecBlik.Digi.GUI.Strings {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Range.
+        /// </summary>
+        public static string GPRange {
+            get {
+                return ResourceManager.GetString("GPRange", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Select.
         /// </summary>
         public static string GPSelect {
@@ -201,6 +219,15 @@ namespace NecBlik.Digi.GUI.Strings {
         public static string GPTemperature {
             get {
                 return ResourceManager.GetString("GPTemperature", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Throughput.
+        /// </summary>
+        public static string GPThroughput {
+            get {
+                return ResourceManager.GetString("GPThroughput", resourceCulture);
             }
         }
         
