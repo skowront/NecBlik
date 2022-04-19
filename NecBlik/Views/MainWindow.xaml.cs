@@ -216,6 +216,7 @@ namespace NecBlik.Views
                     this.designerCanvas.RemoveDevice(item.GetCacheId());
                 }
                 this.designerCanvas.RemoveDevice(o.Coordinator);
+                this.designerCanvas.RemoveNetworkGhostDevices(o.Guid);
                 return true;
             });
         }

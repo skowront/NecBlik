@@ -27,8 +27,6 @@ namespace NecBlik.Core.GUI
 
         public List<string> ViewFactoriesWhitelist = new List<string>();
 
-        
-
         public Guid Guid
         {
             get { return this.Model.Guid; }

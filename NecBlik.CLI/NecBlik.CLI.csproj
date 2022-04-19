@@ -8,6 +8,7 @@
   </PropertyGroup>
 
   <ItemGroup>
+    <ProjectReference Include="..\NecBlik.Digi\NecBlik.Digi.csproj" />
     <ProjectReference Include="..\NecBlik.PyDigi\NecBlik.PyDigi.csproj" />
   </ItemGroup>
 

@@ -261,6 +261,7 @@ namespace NecBlik.Virtual.GUI.ViewModels
         public override void Dispose()
         {
             base.Dispose();
+            this.cancelPolling = true;
             foreach (var device in this.Devices)
             {
                 device.Dispose();

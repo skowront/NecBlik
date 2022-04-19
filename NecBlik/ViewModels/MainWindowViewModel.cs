@@ -198,8 +198,6 @@ namespace NecBlik.ViewModels
 
             this.RemoveNetworkCommand = new RelayCommand(o => 
             {   
-                var vm = o as NetworkViewModel;
-                vm.Dispose();
                 this.RemoveNetwork(o as NetworkViewModel); 
             });
 
@@ -399,6 +397,7 @@ namespace NecBlik.ViewModels
             if (resp == false)
                 return;
             this.NetworkRemovedResponseProvider?.ProvideResponse(networkViewModel);
+            networkViewModel.Dispose();
             this.Networks.Remove(networkViewModel);
             this.Refresh();
         }

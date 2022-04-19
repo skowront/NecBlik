@@ -114,7 +114,9 @@ namespace NecBlik.Views.Controls
                     var devicePresenter = (IDevicePresenter)item.Content;
                     var viewModel = devicePresenter.GetDeviceViewModel();
 
-                    var diagramDevice = new DiagramDevice() { CachedObjectId = viewModel.GetCacheId(), Point = new Point<double>(DesignerCanvas.GetLeft(item), DesignerCanvas.GetTop(item)), Size = new Size(item.ActualWidth, item.ActualHeight) };
+                    var diagramDevice = new DiagramDevice() { CachedObjectId = viewModel.GetCacheId(), 
+                        Point = new Point<double>(DesignerCanvas.GetLeft(item), DesignerCanvas.GetTop(item)), Size = new Size(item.ActualWidth, item.ActualHeight),
+                        ParentCachedGuid = viewModel?.Network?.Model?.Guid ?? new Guid() };
                     diagramdevices.Add(diagramDevice);
                 }
             }
@@ -137,8 +139,10 @@ namespace NecBlik.Views.Controls
                 }
                 if(deviceViewModel==null)
                 {
-                    designerItem.Content = new GhostControl(new DeviceViewModel());
-                    designerItem.Payload = new DeviceViewModel(new Core.Models.DeviceModel(new GhostDevice(item.CachedObjectId)));
+                    var vm = new DeviceViewModel(new Core.Models.DeviceModel(new GhostDevice(item.CachedObjectId)),
+                        new Core.GUI.ViewModels.NetworkViewModel(new GhostNetwork(item.ParentCachedGuid)));
+                    designerItem.Content = new GhostControl(vm);
+                    designerItem.Payload = vm;
                 }
                 else
                 {
@@ -206,6 +210,29 @@ namespace NecBlik.Views.Controls
             if (toRemove != null)
             {
                 this.Children.Remove(toRemove);
+            }
+        }
+
+        public void RemoveNetworkGhostDevices(Guid networkGuid)
+        {
+            List<UIElement> toRemove = new List<UIElement>(); 
+            foreach (var item in this.Children)
+            {
+                if (item is DesignerItem)
+                {
+                    if (((DesignerItem)item).Payload is DeviceViewModel)
+                    {
+                        var itemvm = ((DeviceViewModel)((DesignerItem)item).Payload);
+                        if(itemvm.Network?.Model?.Guid == networkGuid)
+                        {
+                            toRemove.Add((DesignerItem)item);
+                        }
+                    }
+                }
+            }
+            foreach(var item in toRemove)
+            {
+                this.Children.Remove(item);
             }
         }
 

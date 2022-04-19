@@ -12,7 +12,7 @@ namespace NecBlik.Digi.USB
 	/// <summary>
 	/// Class that provides common functionality to work with serial ports.
 	/// </summary>
-	public class WinSerialPort : IConnectionInterface
+	public class WinSerialPort : IConnectionInterface, IDisposable
 	{
 		// Constants.
 		/// <summary>
@@ -278,5 +278,12 @@ namespace NecBlik.Digi.USB
 			else
 				return string.Format("[{0} - {1}/8/N/1/N] ", port, baudRate);
 		}
-	}
+
+        public void Dispose()
+        {
+			if (this.serialPort.IsOpen)
+				this.serialPort.Close();
+			this.serialPort.Dispose();
+        }
+    }
 }

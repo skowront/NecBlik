@@ -25,6 +25,7 @@ namespace NecBlik.Digi.Models
     {
         private ZigBeeDevice zigBee;
         private XBeeNetwork xBeeNetwork;
+        private bool disposed = false;  
 
         [JsonProperty]
         public DigiUSBConnectionData connectionData { get; set; }
@@ -39,13 +40,16 @@ namespace NecBlik.Digi.Models
 
         private bool discoveryFinished = false;
 
+        private WinSerialPort winSerialPort = null;
+
         public DigiZigBeeUSBCoordinator(IDeviceFactory zigBeeFactory, DigiUSBConnectionData connectionData = null) : base(zigBeeFactory)
         {
             this.deviceFactory = new DigiZigBeeFactory();
             this.internalType = this.deviceFactory.GetVendorID();
             this.connectionData = connectionData ?? new() { port = string.Empty, baud = 9600 };
             this.Name = Resources.Resources.DefaultDigiCoordinatorName;
-            this.zigBee = new ZigBeeDevice(new WinSerialPort(connectionData.port, connectionData.baud));
+            this.winSerialPort = new WinSerialPort(connectionData.port, connectionData.baud);
+            this.zigBee = new ZigBeeDevice(winSerialPort);
             this.Open();
             this.zigBee.DataReceived += ZigBeeDataReceived;
             this.zigBee.PacketReceived += ZigBee_PacketReceived;
@@ -183,6 +187,8 @@ namespace NecBlik.Digi.Models
 
         public override bool Open()
         {
+            if (this.disposed == true)
+                return false;
             try
             {
                 if (!this.zigBee.IsOpen)
@@ -201,11 +207,14 @@ namespace NecBlik.Digi.Models
         {
             if (this.zigBee.IsOpen)
                 this.zigBee.Close();
+            this.zigBee.Close();
         }
 
         public override void Dispose()
         {
+            this.disposed = true;
             this.Close();
+            this.winSerialPort.Dispose();
         }
 
         public override void OnDataSent(string data, string sourceAddress)

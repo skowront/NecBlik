@@ -93,7 +93,7 @@ namespace NecBlik.Core.Models
                 if (this.DataRecievedSubscribers[i] == subscriber || this.DataRecievedSubscribers[i].GetCacheId() == subscriber.GetCacheId())
                     toRemove.Add(this.DataRecievedSubscribers[i]);
             }
-            while(toRemove.Count()>0)
+            while(DataRecievedSubscribers.Count()>0)
                 this.DataRecievedSubscribers.Remove(toRemove.First());
         }
 
