@@ -37,6 +37,7 @@ namespace NecBlik.Virtual.GUI.ViewModels
         }
 
         protected bool cancelPolling = false;
+        protected bool holdPolling = false;
 
         protected BackgroundWorker statusPollingWorker = new BackgroundWorker();
 
@@ -65,26 +66,29 @@ namespace NecBlik.Virtual.GUI.ViewModels
         {
             while(!this.cancelPolling)
             {
-                foreach(var item in this.Devices)
+                if(!holdPolling)
                 {
+                    foreach (var item in this.Devices)
+                    {
+                        Application.Current?.Dispatcher.Invoke(async () =>
+                        {
+                            var coord = this.Coordinator?.Model?.DeviceSource as IDeviceCoordinator;
+                            if (coord != null)
+                            {
+                                item.Status = await coord.GetStatusOf(item.Address);
+                            }
+                        });
+                    }
                     Application.Current?.Dispatcher.Invoke(async () =>
                     {
                         var coord = this.Coordinator?.Model?.DeviceSource as IDeviceCoordinator;
                         if (coord != null)
                         {
-                            item.Status = await coord.GetStatusOf(item.Address);
+                            this.coorinator.Status = await coord.GetStatusOf(this.Coordinator.Address);
                         }
                     });
+                    Thread.Sleep(this.model.PollingInterval);
                 }
-                Application.Current?.Dispatcher.Invoke(async () =>
-                {
-                    var coord = this.Coordinator?.Model?.DeviceSource as IDeviceCoordinator;
-                    if (coord != null)
-                    {
-                        this.coorinator.Status = await coord.GetStatusOf(this.Coordinator.Address);
-                    }
-                });
-                Thread.Sleep(this.model.PollingInterval);
             }
         }
 
@@ -266,6 +270,16 @@ namespace NecBlik.Virtual.GUI.ViewModels
             {
                 device.Dispose();
             }
+        }
+
+        public virtual void Hold()
+        {
+            this.holdPolling = true;
+        }
+
+        public virtual void Unhold()
+        {
+            this.holdPolling = false;   
         }
     }
 }

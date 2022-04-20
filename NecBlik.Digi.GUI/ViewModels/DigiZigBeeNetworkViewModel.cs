@@ -35,7 +35,7 @@ namespace NecBlik.Digi.GUI.ViewModels
 
             this.DiagnosticsCommand = new RelayCommand((o) =>
             {
-                var window = new DigiNetworkDiagnosticsWindow(new DigiNetworkDiagnosticsViewModel());
+                var window = new DigiNetworkDiagnosticsWindow(new DigiNetworkDiagnosticsViewModel(this));
                 window.Show();
             });
 

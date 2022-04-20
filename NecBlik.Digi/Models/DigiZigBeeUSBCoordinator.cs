@@ -285,7 +285,6 @@ namespace NecBlik.Digi.Models
                 var sendingTime = DateTime.Now;
                 XBeePacket rpacket = null;
                 rpacket = this.zigBee.SendPacket(packet);
-
                 if (rpacket == null)
                 {
                     result.Result = PingModel.PingResult.NotOk;

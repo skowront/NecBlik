@@ -43,7 +43,6 @@ namespace NecBlik.Digi.GUI.Views
                 this.rangePage = new RangePage(this.ViewModel);
             this.frame.Navigate(this.rangePage);
         }
-        
 
         private void ThroughputClick(object sender, RoutedEventArgs e)
         {

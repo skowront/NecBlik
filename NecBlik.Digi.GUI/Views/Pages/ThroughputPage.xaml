@@ -8,6 +8,28 @@
       d:DesignHeight="450" d:DesignWidth="800"
       Title="ThroughputPage">
     <Grid>
-        <TextBlock Text="ThrougputPage" Foreground="{StaticResource MaterialDesignDarkForeground}"></TextBlock>
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition></ColumnDefinition>
+            <ColumnDefinition></ColumnDefinition>
+        </Grid.ColumnDefinitions>
+        <Grid.RowDefinitions>
+            <RowDefinition Height="auto"></RowDefinition>
+            <RowDefinition Height="auto"></RowDefinition>
+            <RowDefinition Height="auto"></RowDefinition>
+            <RowDefinition Height="auto"></RowDefinition>
+            <RowDefinition Height="auto"></RowDefinition>
+        </Grid.RowDefinitions>
+        <StackPanel Orientation="Horizontal">
+            <TextBlock Text="{Binding ThroughputVM.ThroughputValue}" Foreground="{StaticResource ForegroundLightBrush}"></TextBlock>
+            <TextBlock Text="{Binding ThroughputVM.Unit}" Foreground="{StaticResource ForegroundLightBrush}"></TextBlock>
+        </StackPanel>
+        <TextBlock Grid.Row="1" Grid.Column="0" Text="Remote address" Foreground="{StaticResource ForegroundLightBrush}"></TextBlock>
+        <ComboBox Grid.Row="1" Grid.Column="1" ItemsSource="{Binding AvailableDevices}" SelectedItem="{Binding ThroughputVM.DeviceAddress}" Foreground="{StaticResource ForegroundLightBrush}"></ComboBox>
+        <TextBlock Grid.Row="2" Grid.Column="0" Text="Payload size (7:94)" Foreground="{StaticResource ForegroundLightBrush}"></TextBlock>
+        <Slider Grid.Row="2" Grid.Column="1" Minimum="{Binding ThroughputVM.MinPayloadSize}" 
+                Maximum="{Binding ThroughputVM.MaxPayloadSize}" 
+                Value="{Binding ThroughputVM.PayloadDesiredSize}"></Slider>
+        <Button Grid.Row="4" Grid.Column="0" Content="Start" Command="{Binding ThroughputVM.StartCommand}" Style="{StaticResource BaseButton}" ></Button>
+        <Button Grid.Row="5" Grid.Column="1" Content="Stop" Command="{Binding ThroughputVM.StopCommand}" Style="{StaticResource BaseButton}" ></Button>
     </Grid>
 </Page>
