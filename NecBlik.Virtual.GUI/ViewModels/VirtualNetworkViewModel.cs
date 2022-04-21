@@ -69,25 +69,18 @@ namespace NecBlik.Virtual.GUI.ViewModels
             {
                 if(!holdPolling)
                 {
+                    var coord = this.Coordinator?.Model?.DeviceSource as IDeviceCoordinator;
                     foreach (var item in this.Devices)
                     {
-                        Application.Current?.Dispatcher.Invoke(async () =>
-                        {
-                            var coord = this.Coordinator?.Model?.DeviceSource as IDeviceCoordinator;
-                            if (coord != null)
-                            {
-                                item.Status = await coord.GetStatusOf(item.Address);
-                            }
-                        });
-                    }
-                    Application.Current?.Dispatcher.Invoke(async () =>
-                    {
-                        var coord = this.Coordinator?.Model?.DeviceSource as IDeviceCoordinator;
                         if (coord != null)
                         {
-                            this.coorinator.Status = await coord.GetStatusOf(this.Coordinator.Address);
+                            item.Status = await coord.GetStatusOf(item.Address);
                         }
-                    });
+                    }
+                    if (coord != null)
+                    {
+                        this.coorinator.Status = await coord.GetStatusOf(this.Coordinator.Address);
+                    }
                     Thread.Sleep(this.model.PollingInterval);
                 }
             }
