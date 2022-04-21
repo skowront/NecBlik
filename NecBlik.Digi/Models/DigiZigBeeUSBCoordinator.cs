@@ -55,6 +55,17 @@ namespace NecBlik.Digi.Models
             this.zigBee.PacketReceived += ZigBee_PacketReceived;
         }
 
+        public void SetNewConnectionData(DigiUSBConnectionData connectionData)
+        {
+            this.connectionData = connectionData ?? new() { port = string.Empty, baud = 9600 };
+            this.zigBee.Close();
+            this.Close();
+            this.zigBee = new ZigBeeDevice(winSerialPort);
+            this.Open();
+            this.zigBee.DataReceived += ZigBeeDataReceived;
+            this.zigBee.PacketReceived += ZigBee_PacketReceived;
+        }
+
         private void ZigBee_PacketReceived(object? sender, XBeeLibrary.Core.Events.PacketReceivedEventArgs e)
         {
             
