@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using NecBlik.Common.WpfElements.PopupValuePickers;
 using NecBlik.Common.WpfExtensions.Base;
 using NecBlik.Core.Factories;
 using NecBlik.Core.GUI;
@@ -39,6 +40,20 @@ namespace NecBlik.Digi.GUI.ViewModels
                 window.Show();
             });
 
+            this.EditCoordinatorRuleCommand = new RelayCommand((o) =>
+            {
+                var rp = new ListInputValuePicker();
+                var result = rp.ProvideResponse(new Tuple<string, IEnumerable<string>>(NecBlik.Digi.GUI.Factories.DigiZigBeeGuiFactory.DeviceViewModelRuledProperties.ViewModel, this.AvailableValueProvider.ProvideResponse(this.model.DeviceCoordinatorSubtypeFactoryRule)));
+                if (result == string.Empty || result == null)
+                    return;
+                if (result != this.model.DeviceCoordinatorSubtypeFactoryRule.Value)
+                {
+                    this.model.DeviceCoordinatorSubtypeFactoryRule.Value = result;
+                    this.coorinator = null;
+                    this.Coordinator = this.GetCoordinatorViewModel();
+                }
+                this.OnFactoryEditClosed();
+            });
         }
 
         protected override void BuildResponseProviders()

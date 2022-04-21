@@ -20,6 +20,7 @@ using NecBlik.Common.WpfElements.ResponseProviders;
 using NecBlik.Core.Interfaces;
 using System.ComponentModel;
 using System.Threading;
+using NecBlik.Common.WpfElements.PopupValuePickers;
 
 namespace NecBlik.Virtual.GUI.ViewModels
 {
@@ -122,6 +123,21 @@ namespace NecBlik.Virtual.GUI.ViewModels
                 (o as VirtualDeviceViewModel).Dispose();
                 this.Devices.Remove(o as VirtualDeviceViewModel);
                 this.NotifyDevicesNetworkChanged(o as VirtualDeviceViewModel);
+            });
+
+            this.EditCoordinatorRuleCommand = new RelayCommand((o) =>
+            {
+                var rp = new ListInputValuePicker();
+                var result = rp.ProvideResponse(new Tuple<string, IEnumerable<string>>(NecBlik.Virtual.GUI.Factories.VirtualDeviceGuiFactory.DeviceViewModelRuledProperties.ViewModel, this.AvailableValueProvider.ProvideResponse(this.model.DeviceCoordinatorSubtypeFactoryRule)));
+                if (result == string.Empty || result == null)
+                    return;
+                if (result != this.model.DeviceCoordinatorSubtypeFactoryRule.Value)
+                {
+                    this.model.DeviceCoordinatorSubtypeFactoryRule.Value = result;
+                    this.coorinator = null;
+                    this.Coordinator = this.GetCoordinatorViewModel();
+                }
+                this.OnFactoryEditClosed();
             });
         }
 

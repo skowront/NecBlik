@@ -13,6 +13,7 @@ using NecBlik.Core.GUI.Interfaces;
 using NecBlik.Core.Models;
 using NecBlik.Core.GUI.Views;
 using NecBlik.Core.Interfaces;
+using NecBlik.Common.WpfElements.PopupValuePickers;
 
 namespace NecBlik.Core.GUI.ViewModels
 {
@@ -104,6 +105,10 @@ namespace NecBlik.Core.GUI.ViewModels
             {
                 return this.GetCoordinatorViewModel();
             }
+            set
+            {
+                this.coorinator = value; this.OnPropertyChanged();
+            }
         }
 
         public ISelectionSubscriber<DeviceViewModel> DeviceSelectionSubscriber { get; set; }
@@ -112,6 +117,7 @@ namespace NecBlik.Core.GUI.ViewModels
         public RelayCommand RefreshCommand { get; set; }
         public RelayCommand DiscoverCommand { get; set; }
         public RelayCommand EditRulesCommand { get; set; }
+        public RelayCommand EditCoordinatorRuleCommand { get; set; }
         public RelayCommand RemoveDeviceCommand { get; set; }
         public RelayCommand PingCommand { get; set; }
 
@@ -198,7 +204,7 @@ namespace NecBlik.Core.GUI.ViewModels
 
             this.DiscoverCommand = new RelayCommand(async (o) =>
             {
-                this.Discover();
+                await this.Discover();
             });
 
             this.EditRulesCommand = new RelayCommand((o) =>
@@ -206,6 +212,11 @@ namespace NecBlik.Core.GUI.ViewModels
                 var rp = new GenericResponseProvider<ObservableCollection<FactoryRuleViewModel>, object>((o) => { return this.FactoryRules; });
                 var window = new FactoryRulesEditor(rp, AvailableCacheObjectIDsProvider, AvailablePropertyProvider, AvailableValueProvider, new Action(() => { this.OnFactoryEditClosed(); }));
                 window.Show();
+            });
+
+            this.EditCoordinatorRuleCommand = new RelayCommand((o) =>
+            {
+                
             });
 
             this.RemoveDeviceCommand = new RelayCommand((o) =>

@@ -83,22 +83,33 @@
             <StackPanel Grid.Row="1">
                 <TextBlock Text="{lex:Loc GPCoordinator}" Foreground="{StaticResource MaterialDesignDarkForeground}" HorizontalAlignment="Center"></TextBlock>
             </StackPanel>
-            <ContentPresenter Grid.Row="2" Content="{Binding ViewModel.Coordinator}">
-                <ContentPresenter.ContentTemplate>
-                    <DataTemplate DataType="{x:Type viewModels:VirtualDeviceViewModel}">
-                        <StackPanel Orientation="Vertical">
-                            <TextBlock Text="{Binding InternalFactoryType}" Foreground="{StaticResource MaterialDesignDarkForeground}"></TextBlock>
-                            <TextBlock Text="{Binding Name, UpdateSourceTrigger=PropertyChanged}" Foreground="{StaticResource MaterialDesignDarkForeground}"></TextBlock>
-                            <TextBlock Text="{Binding Guid, UpdateSourceTrigger=PropertyChanged}" Foreground="{StaticResource MaterialDesignDarkForeground}"></TextBlock>
-                            <StackPanel Orientation="Horizontal">
-                                <Button Command="{Binding EditCommand}" Style="{StaticResource BaseButton}" Content="{lex:Loc GPOpen}"></Button>
-                                <Button Command="{Binding SelectCommand}" Style="{StaticResource BaseButton}" Content="{lex:Loc GPSendToMap}"></Button>
+            <Grid Grid.Row="2">
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="*"></ColumnDefinition>
+                    <ColumnDefinition Width="auto"></ColumnDefinition>
+                </Grid.ColumnDefinitions>
+                <ContentPresenter Content="{Binding ViewModel.Coordinator}">
+                    <ContentPresenter.ContentTemplate>
+                        <DataTemplate DataType="{x:Type viewModels:VirtualDeviceViewModel}">
+                            <StackPanel Orientation="Vertical">
+                                <TextBlock Text="{Binding InternalFactoryType}" Foreground="{StaticResource MaterialDesignDarkForeground}"></TextBlock>
+                                <TextBlock Text="{Binding Name, UpdateSourceTrigger=PropertyChanged}" Foreground="{StaticResource MaterialDesignDarkForeground}"></TextBlock>
+                                <TextBlock Text="{Binding Guid, UpdateSourceTrigger=PropertyChanged}" Foreground="{StaticResource MaterialDesignDarkForeground}"></TextBlock>
+                                <StackPanel Orientation="Horizontal">
+                                    <Button Command="{Binding EditCommand}" Style="{StaticResource BaseButton}" Content="{lex:Loc GPOpen}"></Button>
+                                    <Button Command="{Binding SelectCommand}" Style="{StaticResource BaseButton}" Content="{lex:Loc GPSendToMap}"></Button>
+                                </StackPanel>
                             </StackPanel>
-                            <Separator Grid.Row="1"></Separator>
-                        </StackPanel>
-                    </DataTemplate>
-                </ContentPresenter.ContentTemplate>
-            </ContentPresenter>
+                        </DataTemplate>
+                    </ContentPresenter.ContentTemplate>
+                </ContentPresenter>
+                <Button Grid.Column="1" VerticalAlignment="Bottom" Style="{StaticResource BaseButton}" Command="{Binding ViewModel.EditCoordinatorRuleCommand}" HorizontalAlignment="Right" Margin="0" MinWidth="0">
+                    <StackPanel Orientation="Horizontal">
+                        <TextBlock Text="{lex:Loc GPRules}" Margin="0 0 5 0" VerticalAlignment="Center"></TextBlock>
+                        <TextBlock Text="&#xf02d;" FontFamily="{StaticResource FontAwesome}" VerticalAlignment="Center"></TextBlock>
+                    </StackPanel>
+                </Button>
+            </Grid>
             <Grid Grid.Row="3">
                 <Grid.RowDefinitions>
                     <RowDefinition Height="auto"></RowDefinition>
