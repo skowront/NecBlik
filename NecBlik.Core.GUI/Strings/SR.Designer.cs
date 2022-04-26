@@ -169,6 +169,15 @@ namespace NecBlik.Core.GUI.Strings {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to ms.
+        /// </summary>
+        public static string GPms {
+            get {
+                return ResourceManager.GetString("GPms", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Name.
         /// </summary>
         public static string GPName {

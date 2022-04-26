@@ -60,7 +60,8 @@ namespace NecBlik.Digi.Models
             this.connectionData = connectionData ?? new() { port = string.Empty, baud = 9600 };
             this.zigBee.Close();
             this.Close();
-            this.zigBee = new ZigBeeDevice(winSerialPort);
+            this.winSerialPort = new WinSerialPort(connectionData.port, connectionData.baud);
+            this.zigBee = new ZigBeeDevice(this.winSerialPort);
             this.Open();
             this.zigBee.DataReceived += ZigBeeDataReceived;
             this.zigBee.PacketReceived += ZigBee_PacketReceived;

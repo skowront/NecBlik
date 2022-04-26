@@ -114,7 +114,7 @@ namespace NecBlik.Core.Models
         {
             foreach (var item in this.DataRecievedSubscribers)
             {
-                item.NotifySubscriber(new RecievedData() { Data = data, SourceAddress = sourceAddress});
+                item?.NotifySubscriber(new RecievedData() { Data = data, SourceAddress = sourceAddress});
             }
             return;
         }

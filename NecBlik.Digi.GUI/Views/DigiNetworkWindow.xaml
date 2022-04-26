@@ -27,7 +27,12 @@
                 <TextBox Text="{Binding ViewModel.Name,UpdateSourceTrigger=PropertyChanged}" Foreground="{StaticResource MaterialDesignDarkForeground}"></TextBox>
                 <TextBlock Text="{lex:Loc GPNetworkPanId}" Foreground="{StaticResource MaterialDesignDarkForeground}"></TextBlock>
                 <TextBlock Text="{Binding ViewModel.PanId,UpdateSourceTrigger=PropertyChanged}" Foreground="{StaticResource MaterialDesignDarkForeground}"></TextBlock>
-                <TextBlock Text="{lex:Loc NecBlik.Virtual.GUI:SR:GPPollingInterval}" Foreground="{StaticResource MaterialDesignDarkForeground}"></TextBlock>
+                <StackPanel Orientation="Horizontal">
+                    <TextBlock Text="{lex:Loc NecBlik.Virtual.GUI:SR:GPPollingInterval}" Foreground="{StaticResource MaterialDesignDarkForeground}"></TextBlock>
+                    <TextBlock Text="[" Margin="5 0 0 0"  Foreground="{StaticResource MaterialDesignDarkForeground}"></TextBlock>
+                    <TextBlock Text="{lex:Loc NecBlik.Core.GUI:SR:GPms}" Foreground="{StaticResource MaterialDesignDarkForeground}"></TextBlock>
+                    <TextBlock Text="]" Foreground="{StaticResource MaterialDesignDarkForeground}"></TextBlock>
+                </StackPanel>
                 <TextBox Text="{Binding ViewModel.PollingInterval, UpdateSourceTrigger=PropertyChanged}" Foreground="{StaticResource MaterialDesignDarkForeground}"></TextBox>
                 <!--<StackPanel Orientation="Horizontal">
                     <TextBlock Text="{lex:Loc GPStayOpen}" Foreground="{StaticResource MaterialDesignDarkForeground}"></TextBlock>
@@ -54,9 +59,9 @@
                             <TextBlock Text="&#xf067;" FontFamily="{StaticResource FontAwesome}" VerticalAlignment="Center"></TextBlock>
                         </StackPanel>
                     </Button>
-                    <Button Grid.Column="2" VerticalAlignment="Center" Style="{StaticResource BaseButton}" Command="{Binding ViewModel.RefreshCommand}" HorizontalAlignment="Center" Margin="0" MinWidth="50">
+                    <Button Grid.Column="2" VerticalAlignment="Center" Style="{StaticResource BaseButton}" Command="{Binding ViewModel.PollDevicesCommand}" HorizontalAlignment="Center" Margin="0" MinWidth="50">
                         <StackPanel Orientation="Horizontal">
-                            <TextBlock Text="{lex:Loc GPSynchronize}" Margin="0 0 5 0" VerticalAlignment="Center"></TextBlock>
+                            <TextBlock Text="{lex:Loc NecBlik.Virtual.GUI:SR:GPPollDevices}" Margin="0 0 5 0" VerticalAlignment="Center"></TextBlock>
                             <TextBlock Text="&#xf021;" FontFamily="{StaticResource FontAwesome}" VerticalAlignment="Center"></TextBlock>
                         </StackPanel>
                     </Button>
@@ -117,11 +122,20 @@
                                                 <ColumnDefinition Width="*"></ColumnDefinition>
                                                 <ColumnDefinition Width="3*"></ColumnDefinition>
                                             </Grid.ColumnDefinitions>
-                                            <TextBlock Grid.Column="0" Text="{lex:Loc NecBlik.Digi.GUI:SR:GPBaudRate}" Foreground="{StaticResource MaterialDesignDarkForeground}"></TextBlock>
-                                            <TextBlock Grid.Column="1" Text="{Binding BaudRate}" VerticalAlignment="Stretch" Foreground="{StaticResource MaterialDesignDarkForeground}"></TextBlock>
+                                            <StackPanel Grid.Column="0" Orientation="Horizontal">
+                                                <fa:FontAwesome Icon="InfoCircle" Margin="0 0 5 0" VerticalAlignment="Center" Foreground="{StaticResource AccentBrush}">
+                                                    <fa:FontAwesome.ToolTip>
+                                                        <TextBlock Text="{lex:Loc NecBlik.Digi.GUI:SR:TTSerialPortBaudRate}"></TextBlock>
+                                                    </fa:FontAwesome.ToolTip>
+                                                </fa:FontAwesome>
+                                                <TextBlock Text="{lex:Loc NecBlik.Digi.GUI:SR:GPBaudRate}" VerticalAlignment="Center" Foreground="{StaticResource MaterialDesignDarkForeground}">
+                                                </TextBlock>
+                                            </StackPanel>
+                                            <TextBlock Grid.Column="1" Text="{Binding BaudRate}" VerticalAlignment="Center" Foreground="{StaticResource MaterialDesignDarkForeground}">
+                                            </TextBlock>
                                             <Button Grid.Column="2" HorizontalAlignment="Right" HorizontalContentAlignment="Right" Style="{StaticResource BaseButton}" Command="{Binding PickBaudRateCommand}">
                                                 <StackPanel Orientation="Horizontal">
-                                                    <TextBlock Text="{lex:Loc GPSelect}"  Margin="0 0 10 0"></TextBlock>
+                                                    <TextBlock Text="{lex:Loc GPSelect}" Margin="0 0 10 0"></TextBlock>
                                                     <fa:FontAwesome Icon="MousePointer" VerticalAlignment="Center"></fa:FontAwesome>
                                                 </StackPanel>
                                             </Button>

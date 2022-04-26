@@ -63,6 +63,11 @@ namespace NecBlik.Common.WpfElements.ResponseProviders
             this.Popup.Dispatcher.Invoke(() => { this.Popup.SetProgressValue(newValue); });
         }
 
+        public void UpdateDelta(int delta)
+        {
+            this.Popup.Dispatcher.Invoke(() => { this.Popup.SetProgressValueDelta(delta); });
+        }
+
         public void SealUpdates()
         {
             this.Popup.Dispatcher.Invoke(() => { this.Popup.SetClosureEnabled(true); });

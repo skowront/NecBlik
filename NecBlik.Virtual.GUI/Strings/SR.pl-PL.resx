@@ -175,7 +175,7 @@
     <value>Typ sieci</value>
   </data>
   <data name="GPCoordinatorType" xml:space="preserve">
-    <value>Typ koordynatora</value>
+    <value>Klasa koordynatora</value>
   </data>
   <data name="GPStayOpen" xml:space="preserve">
     <value>Trzymaj otwarte</value>
@@ -206,5 +206,11 @@
   </data>
   <data name="GPPollingInterval" xml:space="preserve">
     <value>Międzyczas sondowania</value>
+  </data>
+  <data name="GPPollDevices" xml:space="preserve">
+    <value>Sprawdź urządzenia</value>
+  </data>
+  <data name="GPPolling" xml:space="preserve">
+    <value>Sprawdzanie</value>
   </data>
 </root>

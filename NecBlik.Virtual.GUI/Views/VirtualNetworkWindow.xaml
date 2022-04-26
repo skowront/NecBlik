@@ -26,7 +26,12 @@
                 <TextBox Text="{Binding ViewModel.Name,UpdateSourceTrigger=PropertyChanged}" Foreground="{StaticResource MaterialDesignDarkForeground}"></TextBox>
                 <TextBlock Text="{lex:Loc GPNetworkPanId}" Foreground="{StaticResource MaterialDesignDarkForeground}"></TextBlock>
                 <TextBlock Text="{Binding ViewModel.PanId,UpdateSourceTrigger=PropertyChanged}" Foreground="{StaticResource MaterialDesignDarkForeground}"></TextBlock>
-                <TextBlock Text="{lex:Loc GPPollingInterval}" Foreground="{StaticResource MaterialDesignDarkForeground}"></TextBlock>
+                <StackPanel Orientation="Horizontal">
+                    <TextBlock Text="{lex:Loc GPPollingInterval}" Foreground="{StaticResource MaterialDesignDarkForeground}"></TextBlock>
+                    <TextBlock Text="[" Margin="5 0 0 0"  Foreground="{StaticResource MaterialDesignDarkForeground}"></TextBlock>
+                    <TextBlock Text="{lex:Loc NecBlik.Core.GUI:SR:GPms}" Foreground="{StaticResource MaterialDesignDarkForeground}"></TextBlock>
+                    <TextBlock Text="]" Foreground="{StaticResource MaterialDesignDarkForeground}"></TextBlock>
+                </StackPanel>
                 <TextBox Text="{Binding ViewModel.PollingInterval, UpdateSourceTrigger=PropertyChanged}" Foreground="{StaticResource MaterialDesignDarkForeground}"></TextBox>
                 <!--<StackPanel Orientation="Horizontal">
                     <TextBlock Text="{lex:Loc GPStayOpen}" Foreground="{StaticResource MaterialDesignDarkForeground}"></TextBlock>
@@ -46,9 +51,9 @@
                             <TextBlock Text="&#xf002;" FontFamily="{StaticResource FontAwesome}"  VerticalAlignment="Center"></TextBlock>
                         </StackPanel>
                     </Button>
-                    <Button Grid.Column="2" VerticalAlignment="Center" Style="{StaticResource BaseButton}" Command="{Binding ViewModel.RefreshCommand}" HorizontalAlignment="Center" Margin="0" MinWidth="50">
+                    <Button Grid.Column="2" VerticalAlignment="Center" Style="{StaticResource BaseButton}" Command="{Binding ViewModel.PollDevicesCommand}" HorizontalAlignment="Center" Margin="0" MinWidth="50">
                         <StackPanel Orientation="Horizontal">
-                            <TextBlock Text="{lex:Loc GPSynchronize}" Margin="0 0 5 0" VerticalAlignment="Center"></TextBlock>
+                            <TextBlock Text="{lex:Loc GPPollDevices}" Margin="0 0 5 0" VerticalAlignment="Center"></TextBlock>
                             <TextBlock Text="&#xf021;" FontFamily="{StaticResource FontAwesome}" VerticalAlignment="Center"></TextBlock>
                         </StackPanel>
                     </Button>

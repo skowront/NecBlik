@@ -34,7 +34,7 @@ namespace NecBlik.Virtual.GUI.ViewModels
         public int PollingInterval
         {
             get { return this.model.PollingInterval; }
-            set { this.model.PollingInterval = value < 100 ? 100 : value ; this.OnPropertyChanged(); }
+            set { this.model.PollingInterval = value ; this.OnPropertyChanged(); }
         }
 
         protected bool cancelPolling = false;
@@ -69,6 +69,10 @@ namespace NecBlik.Virtual.GUI.ViewModels
             {
                 if(!holdPolling)
                 {
+                    if (this.PollingInterval <= 0)
+                    {
+                        Thread.Sleep(10000);
+                    }
                     var coord = this.Coordinator?.Model?.DeviceSource as IDeviceCoordinator;
                     foreach (var item in this.Devices)
                     {
@@ -81,7 +85,7 @@ namespace NecBlik.Virtual.GUI.ViewModels
                     {
                         this.coorinator.Status = await coord.GetStatusOf(this.Coordinator.Address);
                     }
-                    Thread.Sleep(this.model.PollingInterval);
+                    Thread.Sleep(this.model.PollingInterval<100?100:this.model.PollingInterval);
                 }
             }
         }
@@ -131,6 +135,30 @@ namespace NecBlik.Virtual.GUI.ViewModels
                     this.Coordinator = this.GetCoordinatorViewModel();
                 }
                 this.OnFactoryEditClosed();
+            });
+
+            this.PollDevicesCommand = new RelayCommand(async (o) =>
+            {
+                var p = new SimpleYesNoProgressBarPopup(string.Empty,string.Empty,Popups.Icons.InfoIcon,null,null,0,0,0,false,false);
+                p.Show();
+                var irp = new YesNoProgressBarPopupResponseProvider(p);
+                irp.Init(0,(this.coorinator!=null?1:0)+this.Devices.Count,0);
+
+                var coord = this.Coordinator?.Model?.DeviceSource as IDeviceCoordinator;
+                if (coord != null)
+                {
+                    this.coorinator.Status = await coord.GetStatusOf(this.Coordinator.Address);
+                    irp.UpdateDelta(1);
+                }
+                foreach (var item in this.Devices)
+                {
+                    if (coord != null)
+                    {
+                        item.Status = await coord.GetStatusOf(item.Address);
+                    }
+                    irp.UpdateDelta(1);
+                }
+                irp.SealUpdates();
             });
         }
 

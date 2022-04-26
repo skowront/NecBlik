@@ -174,4 +174,7 @@
   <data name="GPDeviceUnavailable" xml:space="preserve">
     <value>Urządzenie niedostępne</value>
   </data>
+  <data name="GPms" xml:space="preserve">
+    <value>ms</value>
+  </data>
 </root>

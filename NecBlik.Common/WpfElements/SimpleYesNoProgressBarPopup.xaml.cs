@@ -66,6 +66,15 @@ namespace NecBlik.Common.WpfElements
         }
 
         /// <summary>
+        /// Safe function that can set a new progressbar value.
+        /// </summary>
+        /// <param name="value"></param>
+        public void SetProgressValueDelta(int value)
+        {
+            (this.DataContext as SimpleYesNoProgressBarPopupViewModel).Value += value;
+        }
+
+        /// <summary>
         /// Safe function that enables window closure on ok click.
         /// </summary>
         /// <param name="value">New value of click bool</param>

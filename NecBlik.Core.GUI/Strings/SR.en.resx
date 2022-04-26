@@ -210,4 +210,7 @@
   <data name="GPStatus" xml:space="preserve">
     <value>Status</value>
   </data>
+  <data name="GPms" xml:space="preserve">
+    <value>ms</value>
+  </data>
 </root>

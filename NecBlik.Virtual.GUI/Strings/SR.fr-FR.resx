@@ -173,7 +173,7 @@
 générer.</value>
   </data>
   <data name="GPCoordinatorType" xml:space="preserve">
-    <value>Type de coordinateur</value>
+    <value>Class de coordinateur</value>
   </data>
   <data name="GPNetworkType" xml:space="preserve">
     <value>Type du réseau</value>

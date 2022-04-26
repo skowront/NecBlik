@@ -115,7 +115,7 @@ namespace NecBlik.Virtual.GUI.Strings {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Coordinator type.
+        ///   Looks up a localized string similar to Coordinator class.
         /// </summary>
         public static string GPCoordinatorType {
             get {
@@ -237,6 +237,24 @@ namespace NecBlik.Virtual.GUI.Strings {
         public static string GPOpen {
             get {
                 return ResourceManager.GetString("GPOpen", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Poll devices.
+        /// </summary>
+        public static string GPPollDevices {
+            get {
+                return ResourceManager.GetString("GPPollDevices", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Polling.
+        /// </summary>
+        public static string GPPolling {
+            get {
+                return ResourceManager.GetString("GPPolling", resourceCulture);
             }
         }
         

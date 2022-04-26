@@ -160,10 +160,10 @@
     <value>Dodaj</value>
   </data>
   <data name="GPCoordinatorType" xml:space="preserve">
-    <value>Typ koordynatora</value>
+    <value>Klasa koordynatora</value>
   </data>
   <data name="GPNetworkType" xml:space="preserve">
-    <value>Typ sieci</value>
+    <value>Klasa sieci</value>
   </data>
   <data name="GPTemperature" xml:space="preserve">
     <value>Temperatura</value>

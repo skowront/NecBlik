@@ -51,7 +51,14 @@
                     <ColumnDefinition Width="*"></ColumnDefinition>
                     <ColumnDefinition Width="3*"></ColumnDefinition>
                 </Grid.ColumnDefinitions>
-                <TextBlock Grid.Column="0" Text="{lex:Loc GPBaudRate}"></TextBlock>
+                <StackPanel Grid.Column="0" Orientation="Horizontal">
+                    <TextBlock Text="{lex:Loc NecBlik.Digi.GUI:SR:GPBaudRate}" VerticalAlignment="Stretch"></TextBlock>
+                    <fa:FontAwesome Icon="InfoCircle" Margin="5 3 0 0" VerticalAlignment="Stretch" Foreground="{StaticResource PrimaryBrush}">
+                        <fa:FontAwesome.ToolTip>
+                            <TextBlock Text="{lex:Loc NecBlik.Digi.GUI:SR:TTSerialPortBaudRate}"></TextBlock>
+                        </fa:FontAwesome.ToolTip>
+                    </fa:FontAwesome>
+                </StackPanel>
                 <TextBlock Grid.Column="1" Text="{Binding BaudRate}" VerticalAlignment="Stretch"></TextBlock>
                 <Button Grid.Column="2" HorizontalAlignment="Right" HorizontalContentAlignment="Right" Style="{StaticResource BaseButton}" Command="{Binding PickBaudRateCommand}">
                     <StackPanel Orientation="Horizontal">
@@ -65,7 +72,14 @@
                     <ColumnDefinition Width="*"></ColumnDefinition>
                     <ColumnDefinition Width="3*"></ColumnDefinition>
                 </Grid.ColumnDefinitions>
-                <TextBlock Grid.Column="0" Text="{lex:Loc GPNetworkType}" ></TextBlock>
+                <StackPanel Grid.Column="0" Orientation="Horizontal">
+                    <TextBlock Text="{lex:Loc GPNetworkType}" VerticalAlignment="Stretch"></TextBlock>
+                    <fa:FontAwesome Icon="InfoCircle" Margin="5 3 0 0" VerticalAlignment="Stretch" Foreground="{StaticResource PrimaryBrush}">
+                        <fa:FontAwesome.ToolTip>
+                            <TextBlock Text="{lex:Loc NecBlik.Digi.GUI:SR:TTNetworkClass}"></TextBlock>
+                        </fa:FontAwesome.ToolTip>
+                    </fa:FontAwesome>
+                </StackPanel>
                 <Grid Grid.Column="1">
                     <Grid.ColumnDefinitions>
                         <ColumnDefinition></ColumnDefinition>
@@ -85,7 +99,14 @@
                     <ColumnDefinition Width="*"></ColumnDefinition>
                     <ColumnDefinition Width="3*"></ColumnDefinition>
                 </Grid.ColumnDefinitions>
-                <TextBlock Grid.Column="0" Text="{lex:Loc GPCoordinatorType}" ></TextBlock>
+                <StackPanel Grid.Column="0" Orientation="Horizontal">
+                    <TextBlock Text="{lex:Loc GPCoordinatorType}" VerticalAlignment="Stretch"></TextBlock>
+                    <fa:FontAwesome Icon="InfoCircle" Margin="5 3 0 0" VerticalAlignment="Stretch" Foreground="{StaticResource PrimaryBrush}">
+                        <fa:FontAwesome.ToolTip>
+                            <TextBlock Text="{lex:Loc NecBlik.Digi.GUI:SR:TTCoordinatorClass}"></TextBlock>
+                        </fa:FontAwesome.ToolTip>
+                    </fa:FontAwesome>
+                </StackPanel>
                 <Grid Grid.Column="1">
                     <Grid.ColumnDefinitions>
                         <ColumnDefinition></ColumnDefinition>

@@ -175,7 +175,7 @@
     <value>Network type</value>
   </data>
   <data name="GPCoordinatorType" xml:space="preserve">
-    <value>Coordinator type</value>
+    <value>Coordinator class</value>
   </data>
   <data name="GPStayOpen" xml:space="preserve">
     <value>Stay open</value>
@@ -206,5 +206,11 @@
   </data>
   <data name="GPPollingInterval" xml:space="preserve">
     <value>Polling interval</value>
+  </data>
+  <data name="GPPollDevices" xml:space="preserve">
+    <value>Poll devices</value>
+  </data>
+  <data name="GPPolling" xml:space="preserve">
+    <value>Polling</value>
   </data>
 </root>

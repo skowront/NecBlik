@@ -34,6 +34,7 @@ namespace NecBlik.Digi.GUI.ViewModels
                     c.connectionData.baud = value;
                     c.SetNewConnectionData(c.connectionData);
                 }
+                this.OnPropertyChanged();
             }
         }
 
@@ -56,6 +57,7 @@ namespace NecBlik.Digi.GUI.ViewModels
                     c.connectionData.port = value;
                     c.SetNewConnectionData(c.connectionData);
                 }
+                this.OnPropertyChanged();
             }
         }
 

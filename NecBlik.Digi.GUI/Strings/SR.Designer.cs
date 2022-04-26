@@ -106,7 +106,7 @@ namespace NecBlik.Digi.GUI.Strings {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Coordinator type.
+        ///   Looks up a localized string similar to Coordinator class.
         /// </summary>
         public static string GPCoordinatorType {
             get {
@@ -151,7 +151,7 @@ namespace NecBlik.Digi.GUI.Strings {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Network type.
+        ///   Looks up a localized string similar to Network class.
         /// </summary>
         public static string GPNetworkType {
             get {
@@ -237,6 +237,33 @@ namespace NecBlik.Digi.GUI.Strings {
         public static string GPVID {
             get {
                 return ResourceManager.GetString("GPVID", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Select a custom view model for your coordinator. Leave empty if you do not have one..
+        /// </summary>
+        public static string TTCoordinatorClass {
+            get {
+                return ResourceManager.GetString("TTCoordinatorClass", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Select a custom view model for your network. Leave empty if you do not have one..
+        /// </summary>
+        public static string TTNetworkClass {
+            get {
+                return ResourceManager.GetString("TTNetworkClass", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Baud rate between serial port controller and your coordinator device..
+        /// </summary>
+        public static string TTSerialPortBaudRate {
+            get {
+                return ResourceManager.GetString("TTSerialPortBaudRate", resourceCulture);
             }
         }
     }

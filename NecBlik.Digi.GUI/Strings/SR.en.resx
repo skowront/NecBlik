@@ -160,10 +160,10 @@
     <value>Add</value>
   </data>
   <data name="GPCoordinatorType" xml:space="preserve">
-    <value>Coordinator type</value>
+    <value>Coordinator class</value>
   </data>
   <data name="GPNetworkType" xml:space="preserve">
-    <value>Network type</value>
+    <value>Network class</value>
   </data>
   <data name="GPTemperature" xml:space="preserve">
     <value>Temperature</value>
@@ -176,5 +176,14 @@
   </data>
   <data name="GPRange" xml:space="preserve">
     <value>Range</value>
+  </data>
+  <data name="TTSerialPortBaudRate" xml:space="preserve">
+    <value>Baud rate between serial port controller and your coordinator device.</value>
+  </data>
+  <data name="TTNetworkClass" xml:space="preserve">
+    <value>Select a custom view model for your network. Leave empty if you do not have one.</value>
+  </data>
+  <data name="TTCoordinatorClass" xml:space="preserve">
+    <value>Select a custom view model for your coordinator. Leave empty if you do not have one.</value>
   </data>
 </root>

@@ -120,6 +120,7 @@ namespace NecBlik.Core.GUI.ViewModels
         public RelayCommand EditCoordinatorRuleCommand { get; set; }
         public RelayCommand RemoveDeviceCommand { get; set; }
         public RelayCommand PingCommand { get; set; }
+        public RelayCommand PollDevicesCommand { get; set; }
 
         public IResponseProvider<string, NetworkViewModel> EditResponseProvider { get; set; }
 
@@ -235,6 +236,11 @@ namespace NecBlik.Core.GUI.ViewModels
                     var window = new PingCoordinatorWindow(new PingViewModel(this.coorinator.Model.DeviceSource as IDeviceCoordinator, this.GetDeviceViewModels().Select((o) => { return o.Address; }).ToList()));
                     window.Show();
                 }
+            });
+
+            this.PollDevicesCommand = new RelayCommand((o) =>
+            {
+
             });
         }
 

@@ -14,7 +14,7 @@ namespace NecBlik.Digi.GUI.ViewModels
     {
         public DigiZigBeeViewModel(DeviceModel model = null, NetworkViewModel networkModel = null) : base(model, networkModel)
         {
-
+            this.Icon = FontAwesome.WPF.FontAwesomeIcon.Desktop;
         }
 
         public override string GetCacheId()

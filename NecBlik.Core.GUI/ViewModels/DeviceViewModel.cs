@@ -44,6 +44,11 @@ namespace NecBlik.Core.GUI
             set { this.Model.Version = value; this.OnPropertyChanged(); }
         }
 
+        public FontAwesome.WPF.FontAwesomeIcon Icon
+        {
+            get; set;
+        } = FontAwesome.WPF.FontAwesomeIcon.Desktop;
+
         public string InternalFactoryType
         {
             get 
