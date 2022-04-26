@@ -161,7 +161,15 @@ namespace NecBlik.Digi.GUI.ViewModels
 
         public override async Task Discover()
         {
+            var temp = this.model.DeviceSources;
             await this.model.SyncCoordinator();
+            foreach(var item in temp)
+            {
+                if(item is Virtual.Models.VirtualDevice)
+                {
+                    this.model.DeviceSources.Add(item);
+                }
+            }
             this.SyncFromModel();
         }
     }
