@@ -79,6 +79,15 @@ namespace NecBlik.Digi.GUI.Strings {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to AT Commands.
+        /// </summary>
+        public static string GPATCommands {
+            get {
+                return ResourceManager.GetString("GPATCommands", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Baud rate.
         /// </summary>
         public static string GPBaudRate {
@@ -93,6 +102,15 @@ namespace NecBlik.Digi.GUI.Strings {
         public static string GPCancel {
             get {
                 return ResourceManager.GetString("GPCancel", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Command.
+        /// </summary>
+        public static string GPCommand {
+            get {
+                return ResourceManager.GetString("GPCommand", resourceCulture);
             }
         }
         
@@ -156,6 +174,15 @@ namespace NecBlik.Digi.GUI.Strings {
         public static string GPNetworkType {
             get {
                 return ResourceManager.GetString("GPNetworkType", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Parameter.
+        /// </summary>
+        public static string GPParameter {
+            get {
+                return ResourceManager.GetString("GPParameter", resourceCulture);
             }
         }
         

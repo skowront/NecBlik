@@ -93,7 +93,7 @@ namespace NecBlik.Common.WpfExtensions.Base
         /// <returns>Response from user</returns>
         public async Task<R> ProvideResponse(Q questionContext = null)
         {
-             task =  Task<R>.Run( async ()=> {
+             task =  Task<R>.Run( async () => {
                 if (this.ProviderFunction != null)
                 {
                     return this.ProviderFunction.Invoke(questionContext);

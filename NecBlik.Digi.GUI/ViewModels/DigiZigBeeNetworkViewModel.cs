@@ -19,6 +19,7 @@ namespace NecBlik.Digi.GUI.ViewModels
     {
         public RelayCommand AddCommand { get; set; }
         public RelayCommand DiagnosticsCommand { get; set; }
+        public RelayCommand ATCommandsCommand { get; set; }
 
         public DigiZigBeeNetworkViewModel(Network network) : base(network)
         {
@@ -53,6 +54,12 @@ namespace NecBlik.Digi.GUI.ViewModels
                     this.Coordinator = this.GetCoordinatorViewModel();
                 }
                 this.OnFactoryEditClosed();
+            });
+
+            this.ATCommandsCommand = new RelayCommand((o) =>
+            {
+                var w = new ATCommandWindow(this);
+                w.Show();
             });
         }
 

@@ -42,6 +42,17 @@ namespace NecBlik.Digi.Models
 
         private WinSerialPort winSerialPort = null;
 
+        protected byte frameId = 1;
+
+        protected void IncrementFrameId()
+        {
+            this.frameId = this.frameId++;
+            if(this.frameId == 0)
+            {
+                this.frameId = 1;
+            }
+        }
+
         public DigiZigBeeUSBCoordinator(IDeviceFactory zigBeeFactory, DigiUSBConnectionData connectionData = null) : base(zigBeeFactory)
         {
             this.deviceFactory = new DigiZigBeeFactory();
@@ -197,6 +208,34 @@ namespace NecBlik.Digi.Models
             }
         }
 
+        public string SendATCommandPacket(string address, string command, string parameter)
+        {
+            try
+            {
+                var device = this.zigBee.GetNetwork().GetDevices().Where((x) => { return x.GetAddressString() == address; }).FirstOrDefault();
+                if (device == null)
+                    return string.Empty;
+                XBeePacket resp;
+                if (address == this.Address)
+                {
+                    ATCommandPacket aTCommandPacket = new(this.frameId, command, parameter);
+                    this.IncrementFrameId();
+                    resp = this.zigBee.SendPacket(aTCommandPacket);
+                }
+                else
+                {
+                    RemoteATCommandPacket aTCommandPacket = new(this.frameId, device.XBee64BitAddr, device.XBee16BitAddr, 2, command, parameter);
+                    this.IncrementFrameId();
+                    resp = this.zigBee.SendPacket(aTCommandPacket);
+                }
+                return resp.ToPrettyString();
+            }
+            catch (Exception ex)
+            {
+                return ex.Message;
+            }
+        }
+
         public override bool Open()
         {
             if (this.disposed == true)
@@ -293,7 +332,8 @@ namespace NecBlik.Digi.Models
                     payload += '\0';
                 }
                 var rawPayload = Encoding.ASCII.GetBytes(payload);
-                var packet = new TransmitPacket(1,new XBee64BitAddress(remoteAddress),new XBee16BitAddress("FFFE"),0,0, rawPayload);
+                var packet = new TransmitPacket(this.frameId,new XBee64BitAddress(remoteAddress),new XBee16BitAddress("FFFE"),0,0, rawPayload);
+                this.IncrementFrameId();
                 var sendingTime = DateTime.Now;
                 XBeePacket rpacket = null;
                 rpacket = this.zigBee.SendPacket(packet);

@@ -129,6 +129,16 @@ namespace NecBlik.Digi.GUI.ViewModels
             this.OutputBuffer = string.Empty;
         }
 
+        public string SendAtCommand(DigiATCommandViewModel atCommand)
+        {
+            if(this.Model.DeviceSource is DigiZigBeeUSBCoordinator)
+            {
+                return (this.Model.DeviceSource as DigiZigBeeUSBCoordinator)?.SendATCommandPacket(atCommand.Address,atCommand.Command,atCommand.Parameter) ?? string.Empty;
+            }
+            return string.Empty;
+        }
+
+
         public override void OnDataSent(string data, string sourceAddress)
         {
             this.OnDataRecieved(data,sourceAddress);

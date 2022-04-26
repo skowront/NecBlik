@@ -177,4 +177,7 @@
   <data name="GPRange" xml:space="preserve">
     <value>Zasięg</value>
   </data>
+  <data name="GPSend" xml:space="preserve">
+    <value>Wyślij</value>
+  </data>
 </root>

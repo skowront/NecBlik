@@ -186,4 +186,16 @@
   <data name="TTCoordinatorClass" xml:space="preserve">
     <value>Select a custom view model for your coordinator. Leave empty if you do not have one.</value>
   </data>
+  <data name="GPParameter" xml:space="preserve">
+    <value>Parameter</value>
+  </data>
+  <data name="GPCommand" xml:space="preserve">
+    <value>Command</value>
+  </data>
+  <data name="GPATCommands" xml:space="preserve">
+    <value>AT Commands</value>
+  </data>
+  <data name="GPSend" xml:space="preserve">
+    <value>Send</value>
+  </data>
 </root>

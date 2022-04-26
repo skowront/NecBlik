@@ -48,7 +48,7 @@ namespace NecBlik.Core.Models
         public FactoryRule DeviceCoordinatorSubtypeFactoryRule { get; set; } = new FactoryRule();
 
         [JsonProperty]
-        public int PollingInterval { get; set; } = 10000;
+        public int PollingInterval { get; set; } = -1;
 
         public Action CoordinatorChanged { get; set; } = null;
 

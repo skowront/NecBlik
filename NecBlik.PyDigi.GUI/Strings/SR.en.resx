@@ -153,4 +153,7 @@
   <data name="CantSendFromRemoteDevices" xml:space="preserve">
     <value>Cant send from remote device.</value>
   </data>
+  <data name="GPATCommands" xml:space="preserve">
+    <value>ATCommands</value>
+  </data>
 </root>

@@ -168,4 +168,7 @@
   <data name="GPTemperature" xml:space="preserve">
     <value>Temperature</value>
   </data>
+  <data name="GPSend" xml:space="preserve">
+    <value>Envoyer</value>
+  </data>
 </root>
