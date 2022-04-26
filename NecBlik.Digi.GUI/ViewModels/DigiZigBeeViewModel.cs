@@ -34,7 +34,13 @@ namespace NecBlik.Digi.GUI.ViewModels
 
         public override void Send()
         {
-            this.AddHistoryBufferEntry(Strings.SR.CantSendFromRemoteDevices);
+            if (this.Network?.Model?.Coordinator != null)
+            {
+                this.AddOutgoingHistoryBufferEntry(this.OutputBuffer, this.Address);
+                this.Network?.Model?.Coordinator?.Send(this.OutputBuffer, this.Address);
+            }
+            else
+                this.AddHistoryBufferEntry(Strings.SR.CantSendFromRemoteDevices);
         }
     }
 }

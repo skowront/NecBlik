@@ -20,8 +20,6 @@ namespace NecBlik.Core.Models
         public string ProjectName { get; set; } = Resources.Resources.ProjectModelPojectNameDefault;
         [JsonProperty]
         public DeviceModel ZigBeeTemplate { get; set; } = new DeviceModel();
-        [JsonProperty]
-        public string MapFile { get; set; }
 
         public List<Network> Networks { get; set; } = new List<Network>();
 

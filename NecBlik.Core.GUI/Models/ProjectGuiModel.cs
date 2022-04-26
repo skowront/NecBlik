@@ -14,6 +14,8 @@ namespace NecBlik.Core.GUI.Models
     {
         [JsonProperty]
         public DiagramItemMetadata mapDiagramMetadata { get; set; } = new DiagramItemMetadata();
+        [JsonProperty]
+        public string MapFile { get;set; }
 
         [JsonProperty]
         public Collection<DiagramDevice> mapItemsMetadata { get; set; } = new Collection<DiagramDevice>();

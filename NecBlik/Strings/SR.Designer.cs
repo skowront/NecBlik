@@ -295,6 +295,15 @@ namespace NecBlik.Strings {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Save project as.
+        /// </summary>
+        public static string MainWindowMenuHeaderProjectSaveAs {
+            get {
+                return ResourceManager.GetString("MainWindowMenuHeaderProjectSaveAs", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Resize map.
         /// </summary>
         public static string MainWindowMenuHeaderResizeMap {

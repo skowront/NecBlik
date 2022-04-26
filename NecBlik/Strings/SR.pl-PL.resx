@@ -210,4 +210,7 @@
   <data name="GPContact" xml:space="preserve">
     <value>Kontakt</value>
   </data>
+  <data name="MainWindowMenuHeaderProjectSaveAs" xml:space="preserve">
+    <value>Zapisz projekt jako</value>
+  </data>
 </root>

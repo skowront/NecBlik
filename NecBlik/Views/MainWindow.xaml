@@ -48,8 +48,8 @@
                     <MenuItem Header="{lex:Loc MainWindowMenuHeaderNew}" Command="{Binding NewProjectCommand}"/>
                     <MenuItem Header="{lex:Loc MainWindowMenuHeaderProjectLoad}" Command="{Binding LoadProjectCommand}"/>
                     <MenuItem Header="{lex:Loc MainWindowMenuHeaderProjectSave}" Command="{Binding SaveProjectCommand}"/>
+                    <MenuItem Header="{lex:Loc MainWindowMenuHeaderProjectSaveAs}" Command="{Binding SaveProjectAsCommand}"/>
                     <MenuItem Header="{lex:Loc MainWindowMenuHeaderProjectRename}" Command="{Binding EditProjectCommand}"/>
-                    
                     <MenuItem Header="{lex:Loc MainWindowMenuHeaderProjectAddNetwork}" Command="{Binding AddNetworkCommand}"/>
                 </MenuItem>
                 <MenuItem Header="{lex:Loc MainWindowMenuHeaderMap}" Margin="4">
