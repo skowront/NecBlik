@@ -212,9 +212,7 @@ namespace NecBlik.Digi.Models
         {
             try
             {
-                var device = this.zigBee.GetNetwork().GetDevices().Where((x) => { return x.GetAddressString() == address; }).FirstOrDefault();
-                if (device == null)
-                    return string.Empty;
+                
                 XBeePacket resp;
                 if (address == this.Address)
                 {
@@ -224,6 +222,9 @@ namespace NecBlik.Digi.Models
                 }
                 else
                 {
+                    var device = this.zigBee.GetNetwork().GetDevices().Where((x) => { return x.GetAddressString() == address; }).FirstOrDefault();
+                    if (device == null)
+                        return string.Empty;
                     RemoteATCommandPacket aTCommandPacket = new(this.frameId, device.XBee64BitAddr, device.XBee16BitAddr, 2, command, parameter);
                     this.IncrementFrameId();
                     resp = this.zigBee.SendPacket(aTCommandPacket);

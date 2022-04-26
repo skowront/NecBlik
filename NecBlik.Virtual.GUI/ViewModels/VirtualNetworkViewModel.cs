@@ -72,6 +72,7 @@ namespace NecBlik.Virtual.GUI.ViewModels
                     if (this.PollingInterval <= 0)
                     {
                         Thread.Sleep(10000);
+                        continue;
                     }
                     var coord = this.Coordinator?.Model?.DeviceSource as IDeviceCoordinator;
                     foreach (var item in this.Devices)

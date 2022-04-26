@@ -14,7 +14,7 @@
         mc:Ignorable="d"
         xmlns:vm ="clr-namespace:NecBlik.Digi.GUI.ViewModels;assembly=NecBlik.Digi.GUI"
         d:DataContext="{d:DesignInstance {x:Type vm:DigiATCommandsViewModel}}"
-        Title="ATCommandWindow" Height="450" Width="800">
+        Title="AT Commands" Height="450" Width="800">
     <Grid Background="{StaticResource MaterialDesignDarkBackground}">
         <Grid Margin="10">
             <Grid.RowDefinitions>
@@ -41,7 +41,7 @@
                 </StackPanel>
             </Button>
             <ScrollViewer Grid.Row="4" Grid.ColumnSpan="2" Style="{StaticResource ScrollViewer}">
-                <ListView ItemsSource="{Binding IOHistory}" VerticalAlignment="Stretch" HorizontalAlignment="Stretch"></ListView>
+                <ListView ItemsSource="{Binding IOHistory}" VerticalAlignment="Stretch" HorizontalAlignment="Stretch" VirtualizingPanel.IsVirtualizing="True"></ListView>
             </ScrollViewer>
         </Grid>
     </Grid>
