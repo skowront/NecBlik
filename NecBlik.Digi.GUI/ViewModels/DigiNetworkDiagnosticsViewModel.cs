@@ -138,8 +138,9 @@ namespace NecBlik.Digi.GUI.ViewModels
                 {
                     if (SendingIterator >= this.ToSend.Count)
                         this.PrepareTest();
-                    this.networkViewModel.Model.Coordinator?.Send(this.ToSend[SendingIterator], this.deviceAddress);
+                    this.networkViewModel.Model.Coordinator?.PingPacket(0,this.ToSend[SendingIterator], this.deviceAddress, false);
                     this.Sent.Add(this.ToSend[SendingIterator]);
+                    this.NotifySubscriber(new RecievedData() { Data = this.ToSend[SendingIterator], SourceAddress = this.DeviceAddress });
                     SendingIterator++;
                 }
             }

@@ -32,6 +32,8 @@ namespace NecBlik.Digi.Models
 
         IUpdatableResponseProvider<int, bool, string> progressResponseProvider = null;
 
+        public PacketLogger PacketLogger;
+
         private const int sleepTime = 500;
 
         private const long timeout = 25000L;
@@ -204,6 +206,7 @@ namespace NecBlik.Digi.Models
                 {
                     this.Open();
                     this.zigBee.SendData(remote.First(), bytes);
+                    this.PacketLogger.AddEntry(DateTime.Now, data, "SEND_DATA", nameof(this.zigBee.SendData));
                 }
             }
         }
@@ -314,8 +317,10 @@ namespace NecBlik.Digi.Models
             return result;
         }
 
-        public override async Task<PingModel> PingPacket(long timeout = 0, string payload = "", string remoteAddress = "")
+        public override async Task<PingModel> PingPacket(long timeout = 0, string payload = "", string remoteAddress = "", bool awaitConfirmation = true)
         {
+            //Considering andrew-rapp library and the fact that we expetct a \0 at the end of the message.
+            const int maxPayload = 239;
             var result = new PingModel();
             try
             {
@@ -330,14 +335,25 @@ namespace NecBlik.Digi.Models
                 }
                 if(payload[payload.Length-1]!='\0')
                 {
+                    payload.Remove(payload.Length - 1);
                     payload += '\0';
                 }
                 var rawPayload = Encoding.ASCII.GetBytes(payload);
-                var packet = new TransmitPacket(this.frameId,new XBee64BitAddress(remoteAddress),new XBee16BitAddress("FFFE"),0,0, rawPayload);
+                TransmitPacket packet = awaitConfirmation ? new TransmitPacket(this.frameId, new XBee64BitAddress(remoteAddress), new XBee16BitAddress("FFFE"), 0, 0, rawPayload) :
+                    new TransmitPacket(0, new XBee64BitAddress(remoteAddress), new XBee16BitAddress("FFFE"), 0, 0, rawPayload);
+                var api2 = packet.GenerateByteArrayEscaped();
+                var br = ByteArrayToString(api2);
                 this.IncrementFrameId();
                 var sendingTime = DateTime.Now;
                 XBeePacket rpacket = null;
+                if (!awaitConfirmation)
+                {
+                    this.zigBee.SendPacketAsync(packet);
+                    this.PacketLogger.AddEntry(DateTime.Now, payload, "NO_ACK", nameof(TransmitPacket));
+                    return new PingModel() { ResponseTime = double.NaN };
+                }
                 rpacket = this.zigBee.SendPacket(packet);
+                this.PacketLogger.AddEntry(DateTime.Now, payload, "ACK", nameof(TransmitPacket));
                 if (rpacket == null)
                 {
                     result.Result = PingModel.PingResult.NotOk;
@@ -381,6 +397,14 @@ namespace NecBlik.Digi.Models
                     return NecBlik.Core.Resources.Statuses.Disconnected;
                 }
             }
+        }
+
+        public static string ByteArrayToString(byte[] ba)
+        {
+            StringBuilder hex = new StringBuilder(ba.Length * 2);
+            foreach (byte b in ba)
+                hex.AppendFormat("{0:x2}", b);
+            return hex.ToString();
         }
 
         [JsonObject(MemberSerialization.OptIn)]

@@ -171,7 +171,7 @@ namespace NecBlik.Core.Models
             return new PingModel(0.0d, PingModel.PingResult.Ok, payload);
         }
 
-        public virtual async Task<PingModel> PingPacket(long timeout = 0, string payload = "", string remoteAddress = "")
+        public virtual async Task<PingModel> PingPacket(long timeout = 0, string payload = "", string remoteAddress = "", bool awaitConfirmation = true)
         {
             return new PingModel(0.0d, PingModel.PingResult.Ok, payload);
         }

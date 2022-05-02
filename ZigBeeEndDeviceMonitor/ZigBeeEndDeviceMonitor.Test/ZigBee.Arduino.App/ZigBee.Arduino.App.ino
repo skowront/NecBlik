@@ -1,9 +1,12 @@
+
+
+
+
 #include "Printers.h"
-
 //Xbee library defines max packet size = 110 bytes (100 bytes + overhead)-> #define MAX_FRAME_DATA_SIZE 110
+//Therefore a fork of this library was attached with max sending value equal to 255. 
 //https://github.com/andrewrapp/xbee-arduino/blob/wiki/DevelopersGuide.md
-#include "XBee.h"
-
+//#include "XBee.h"
 struct RecievedData
 {
 	String payload;
@@ -156,7 +159,6 @@ void HandleRemoteCommunication()
 	const int rxBufferSize = 512;
 	char rxBuffer[rxBufferSize];
 	unsigned long serviceStartTime = millis();
-  unsigned long serviceEndTime = millis();
 	RecievedData recieved = RecieveValue();
 	if (recieved.recieved == true)
 	{
@@ -164,9 +166,9 @@ void HandleRemoteCommunication()
 		recieved.payload.toCharArray(rxBuffer, rxBufferSize);
 		if (strcmp(rxBuffer, GetValueCommand) == 0)
 		{
-			SendValue("Value:"+String(GetStoredValue()));
 			Serial.println("GetValue command recieved");
 			Serial.println("Sending stored value");
+			SendValue("Value:"+String(GetStoredValue()));
 		}
 		else if (strcmp(rxBuffer, GetChangingValueCommand) == 0)
 		{
@@ -218,8 +220,8 @@ void HandleRemoteCommunication()
 				}
 			}
 		}
-		serviceEndTime = millis();
-		Serial.print("ServiceTime:");
+		unsigned long serviceEndTime = millis();
+		Serial.print("ServiceTime[ms]:");
 		Serial.println(serviceEndTime-serviceStartTime);
 	}
 	//delete rxBuffer;

@@ -24,7 +24,7 @@ public class Program
         coordinator.Open();
 
         conData = new DigiZigBeeUSBCoordinator.DigiUSBConnectionData() { baud = 9600, port = "COM4" };
-        coordinator = new DigiZigBeeUSBCoordinator(new NecBlik.PyDigi.Factories.PyDigiZigBeeFactory(), conData);
+        coordinator = new DigiZigBeeUSBCoordinator(new NecBlik.Digi.Factories.DigiZigBeeFactory(), conData);
 
         coordinator.Open();
     }
