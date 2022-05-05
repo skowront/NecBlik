@@ -19,17 +19,34 @@
             <RowDefinition Height="auto"></RowDefinition>
             <RowDefinition Height="auto"></RowDefinition>
         </Grid.RowDefinitions>
-        <StackPanel Orientation="Horizontal">
-            <TextBlock Text="{Binding ThroughputVM.ThroughputValue}" Foreground="{StaticResource ForegroundLightBrush}"></TextBlock>
-            <TextBlock Text="{Binding ThroughputVM.Unit}" Foreground="{StaticResource ForegroundLightBrush}"></TextBlock>
+        <StackPanel Orientation="Vertical" Margin="0 10" Grid.ColumnSpan="2" >
+            <StackPanel Orientation="Horizontal" HorizontalAlignment="Center" VerticalAlignment="Center">
+                <TextBlock Text="Current value: " Foreground="{StaticResource ForegroundLightBrush}"></TextBlock>
+                <TextBlock Text="{Binding ThroughputVM.ThroughputValue}" Foreground="{StaticResource ForegroundLightBrush}"></TextBlock>
+                <TextBlock Text=" " Foreground="{StaticResource ForegroundLightBrush}"></TextBlock>
+                <TextBlock Text="{Binding ThroughputVM.Unit}" Foreground="{StaticResource ForegroundLightBrush}"></TextBlock>
+            </StackPanel>
+            <StackPanel Orientation="Horizontal" HorizontalAlignment="Center" VerticalAlignment="Center">
+                <TextBlock Text="Mean value: " Foreground="{StaticResource ForegroundLightBrush}"></TextBlock>
+                <TextBlock Text="{Binding ThroughputVM.Mean}" Foreground="{StaticResource ForegroundLightBrush}"></TextBlock>
+                <TextBlock Text=" " Foreground="{StaticResource ForegroundLightBrush}"></TextBlock>
+                <TextBlock Text="{Binding ThroughputVM.Unit}" Foreground="{StaticResource ForegroundLightBrush}"></TextBlock>
+            </StackPanel>
         </StackPanel>
-        <TextBlock Grid.Row="1" Grid.Column="0" Text="Remote address" Foreground="{StaticResource ForegroundLightBrush}"></TextBlock>
-        <ComboBox Grid.Row="1" Grid.Column="1" ItemsSource="{Binding AvailableDevices}" SelectedItem="{Binding ThroughputVM.DeviceAddress}" Foreground="{StaticResource ForegroundLightBrush}"></ComboBox>
-        <TextBlock Grid.Row="2" Grid.Column="0" Text="Payload size (7:94)" Foreground="{StaticResource ForegroundLightBrush}"></TextBlock>
+        <TextBlock Grid.Row="1" Grid.Column="0" Text="Remote address" Margin="0 10" Foreground="{StaticResource ForegroundLightBrush}"></TextBlock>
+        <ComboBox Grid.Row="1" Grid.Column="1" ItemsSource="{Binding AvailableDevices}" SelectedItem="{Binding ThroughputVM.DeviceAddress}" Margin="0 10" Foreground="{StaticResource ForegroundLightBrush}"></ComboBox>
+        <TextBlock Grid.Row="2" Grid.Column="0" Text="Payload size (7:94)" Margin="0 10" Foreground="{StaticResource ForegroundLightBrush}"></TextBlock>
         <Slider Grid.Row="2" Grid.Column="1" Minimum="{Binding ThroughputVM.MinPayloadSize}" 
                 Maximum="{Binding ThroughputVM.MaxPayloadSize}" 
-                Value="{Binding ThroughputVM.PayloadDesiredSize}"></Slider>
-        <Button Grid.Row="4" Grid.Column="0" Content="Start" Command="{Binding ThroughputVM.StartCommand}" Style="{StaticResource BaseButton}" ></Button>
-        <Button Grid.Row="5" Grid.Column="1" Content="Stop" Command="{Binding ThroughputVM.StopCommand}" Style="{StaticResource BaseButton}" ></Button>
+                Value="{Binding ThroughputVM.PayloadDesiredSize}"
+                Margin="0 10">
+            <Slider.ToolTip>
+                <ToolTip>
+                    <TextBlock Text="{Binding ThroughputVM.PayloadDesiredSize}" Foreground="{StaticResource BackgroundDarkBrush}"></TextBlock>
+                </ToolTip>
+            </Slider.ToolTip>
+        </Slider>
+        <Button Grid.Row="4" Grid.Column="0" Content="Start" Command="{Binding ThroughputVM.StartCommand}" Margin="0 10" Style="{StaticResource BaseButton}" ></Button>
+        <Button Grid.Row="5" Grid.Column="1" Content="Stop" Command="{Binding ThroughputVM.StopCommand}" Margin="0 10" Style="{StaticResource BaseButton}" ></Button>
     </Grid>
 </Page>

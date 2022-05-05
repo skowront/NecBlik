@@ -206,7 +206,7 @@ namespace NecBlik.Digi.Models
                 {
                     this.Open();
                     this.zigBee.SendData(remote.First(), bytes);
-                    this.PacketLogger.AddEntry(DateTime.Now, data, "SEND_DATA", nameof(this.zigBee.SendData));
+                    this.PacketLogger?.AddEntry(DateTime.Now, data, "SEND_DATA", nameof(this.zigBee.SendData));
                 }
             }
         }
@@ -349,11 +349,11 @@ namespace NecBlik.Digi.Models
                 if (!awaitConfirmation)
                 {
                     this.zigBee.SendPacketAsync(packet);
-                    this.PacketLogger.AddEntry(DateTime.Now, payload, "NO_ACK", nameof(TransmitPacket));
+                    this.PacketLogger?.AddEntry(DateTime.Now, payload, "NO_ACK", nameof(TransmitPacket));
                     return new PingModel() { ResponseTime = double.NaN };
                 }
                 rpacket = this.zigBee.SendPacket(packet);
-                this.PacketLogger.AddEntry(DateTime.Now, payload, "ACK", nameof(TransmitPacket));
+                this.PacketLogger?.AddEntry(DateTime.Now, payload, "ACK", nameof(TransmitPacket));
                 if (rpacket == null)
                 {
                     result.Result = PingModel.PingResult.NotOk;

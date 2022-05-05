@@ -34,28 +34,42 @@ namespace NecBlik.Digi.GUI.ViewModels
             this.ThroughputVM = new ThroughputViewModel(networkViewModel);
         }
 
-        public class ThroughputViewModel : BaseViewModel, ISubscriber<NecBlik.Core.Models.RecievedData>
+        public class ThroughputViewModel : BaseViewModel, ISubscriber<RecievedData>, IDisposable
         {
             DigiZigBeeNetworkViewModel networkViewModel;
 
-            public int MinPayloadSize {get;set;} = 7;
-            public int MaxPayloadSize {get;set;} = 94;
+            public int MinPayloadSize {get;set;} = 0;
+            public int MaxPayloadSize {get;set;} = 255;
 
             private int payloadDesiredSize;
             public int PayloadDesiredSize
             {
                 get { return payloadDesiredSize;}
-                set { payloadDesiredSize = value; this.OnPropertyChanged(); }
+                set { payloadDesiredSize = value; this.PrepareTest(); this.OnPropertyChanged(); }
             }
 
             private double throughputValue = 0.0;
             public double ThroughputValue
             {
                 get { return throughputValue; }
-                set { throughputValue = value; this.OnPropertyChanged(); }
+                set 
+                {
+                    throughputValue = value; 
+                    this.throughputHistory.Add(value);
+                    this.Mean = this.throughputHistory.Sum() / (this.throughputHistory.Count == 0 ? 1 : this.throughputHistory.Count);
+                    this.OnPropertyChanged(); 
+                }
             }
 
-            private string unit = "kbps";
+            private List<double> throughputHistory = new List<double>();
+            private double mean = 0.0;
+            public double Mean
+            {
+                get { return Math.Round(this.mean,2); }
+                set { mean = value; this.OnPropertyChanged(); }
+            }
+
+            private string unit = "bps";
             public string Unit
             {
                 get { return unit; }
@@ -79,12 +93,11 @@ namespace NecBlik.Digi.GUI.ViewModels
 
             private DateTime PreparationTime;
             private DateTime? LastUpdateTime = null;
-            private const int PreparedPackets = 1000;
+            private const int PreparedPackets = 100;
             private int SendingIterator = 0;
             private bool cancellationRequested = false;
             public List<string> ToSend = new List<string>();
             public List<string> Sent = new List<string>();
-            public List<string> Recieved = new List<string>();
 
             public ThroughputViewModel(DigiZigBeeNetworkViewModel networkViewModel)
             {
@@ -104,25 +117,29 @@ namespace NecBlik.Digi.GUI.ViewModels
                 {
                     this.cancellationRequested = true;
                     backgroundWorker.CancelAsync();
+                    this.throughputHistory.Clear();
                     this.networkViewModel.Model.Coordinator?.UnsubscribeFromDataRecieved(this);
                     this.networkViewModel.Unhold();
                 });
             }
 
+            ~ThroughputViewModel()
+            {
+                this.Dispose();
+            }
+
             private void PrepareTest()
             {
-                const int XBeeMaxPayload = 94;
                 this.ToSend.Clear();
                 this.Sent.Clear();
-                this.Recieved.Clear();
                 this.SendingIterator = 0;
                 for (int i = 0; i < PreparedPackets; i++)
                 {
-                    var s = "Echo";
+                    var s = "";
                     s += i.ToString();
-                    for(int j = 0; j<XBeeMaxPayload-i.ToString().Length-"Echo".Length;j++)
+                    for(int j = 0; j<MaxPayloadSize-i.ToString().Length;j++)
                     {
-                        s += ':';
+                        s += 'x';
                     }
                     this.ToSend.Add(s);
                 }
@@ -132,13 +149,13 @@ namespace NecBlik.Digi.GUI.ViewModels
                 this.cancellationRequested = false;   
             }
 
-            public void DoWork(object sender, DoWorkEventArgs e)
+            public async void DoWork(object sender, DoWorkEventArgs e)
             {
                 while(!cancellationRequested)
                 {
                     if (SendingIterator >= this.ToSend.Count)
                         this.PrepareTest();
-                    this.networkViewModel.Model.Coordinator?.PingPacket(0,this.ToSend[SendingIterator], this.deviceAddress, false);
+                    var pm = await this.networkViewModel.Model.Coordinator.PingPacket(0, this.ToSend[SendingIterator], this.deviceAddress, true);
                     this.Sent.Add(this.ToSend[SendingIterator]);
                     this.NotifySubscriber(new RecievedData() { Data = this.ToSend[SendingIterator], SourceAddress = this.DeviceAddress });
                     SendingIterator++;
@@ -148,7 +165,6 @@ namespace NecBlik.Digi.GUI.ViewModels
             public void NotifySubscriber(RecievedData updateInformation)
             {
                 const int interval = 1000;
-                this.Recieved.Add(updateInformation.Data);
                 Application.Current.Dispatcher.Invoke(() =>
                 {
                     if(LastUpdateTime == null)
@@ -158,15 +174,12 @@ namespace NecBlik.Digi.GUI.ViewModels
                     if(LastUpdateTime == null||(DateTime.Now) > (LastUpdateTime.Value.AddMilliseconds(interval)))
                     {
                         var dataRecieved = 0;
-                        foreach(var item in this.Recieved)
+                        foreach(var item in this.Sent)
                         {
-                            if(this.Sent.Contains(item))
-                            {
-                                dataRecieved += item.Length;
-                            }
+                            dataRecieved += item.Length;
                         }
-                        this.ThroughputValue = dataRecieved/1000;
-                        this.Recieved.Clear();
+                        this.ThroughputValue = dataRecieved;
+                        this.Sent.Clear();
                         LastUpdateTime = DateTime.Now;
                     }
                 });
@@ -175,6 +188,11 @@ namespace NecBlik.Digi.GUI.ViewModels
             public string GetCacheId()
             {
                 return this.CacheId.ToString();   
+            }
+
+            public void Dispose()
+            {
+                this.cancellationRequested = true;
             }
         }
     }
