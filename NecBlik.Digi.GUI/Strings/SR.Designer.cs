@@ -133,6 +133,15 @@ namespace NecBlik.Digi.GUI.Strings {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Current value.
+        /// </summary>
+        public static string GPCurrentValue {
+            get {
+                return ResourceManager.GetString("GPCurrentValue", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Description.
         /// </summary>
         public static string GPDescription {
@@ -147,6 +156,33 @@ namespace NecBlik.Digi.GUI.Strings {
         public static string GPDiagnostics {
             get {
                 return ResourceManager.GetString("GPDiagnostics", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Last poll.
+        /// </summary>
+        public static string GPLastPoll {
+            get {
+                return ResourceManager.GetString("GPLastPoll", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Local range.
+        /// </summary>
+        public static string GPLocalRange {
+            get {
+                return ResourceManager.GetString("GPLocalRange", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Mean.
+        /// </summary>
+        public static string GPMean {
+            get {
+                return ResourceManager.GetString("GPMean", resourceCulture);
             }
         }
         
@@ -187,6 +223,15 @@ namespace NecBlik.Digi.GUI.Strings {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Payload size.
+        /// </summary>
+        public static string GPPayloadSize {
+            get {
+                return ResourceManager.GetString("GPPayloadSize", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to PID.
         /// </summary>
         public static string GPPID {
@@ -214,6 +259,24 @@ namespace NecBlik.Digi.GUI.Strings {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Remote address.
+        /// </summary>
+        public static string GPRemoteAddress {
+            get {
+                return ResourceManager.GetString("GPRemoteAddress", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Remote range.
+        /// </summary>
+        public static string GPRemoteRange {
+            get {
+                return ResourceManager.GetString("GPRemoteRange", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Select.
         /// </summary>
         public static string GPSelect {
@@ -232,11 +295,38 @@ namespace NecBlik.Digi.GUI.Strings {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Send.
+        /// </summary>
+        public static string GPSend {
+            get {
+                return ResourceManager.GetString("GPSend", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Serial port.
         /// </summary>
         public static string GPSerialPort {
             get {
                 return ResourceManager.GetString("GPSerialPort", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Start.
+        /// </summary>
+        public static string GPStart {
+            get {
+                return ResourceManager.GetString("GPStart", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Stop.
+        /// </summary>
+        public static string GPStop {
+            get {
+                return ResourceManager.GetString("GPStop", resourceCulture);
             }
         }
         

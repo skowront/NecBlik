@@ -31,6 +31,7 @@ namespace NecBlik.Virtual.GUI.ViewModels
         public static readonly List<string> CustomizableDeviceProperties = new List<string> { VirtualDeviceGuiFactory.DeviceViewModelRuledProperties.ViewModel,
                                                                                               VirtualDeviceGuiFactory.DeviceViewModelRuledProperties.MapControl};
 
+        private List<Guid?> Holders { get; set; } = new List<Guid?>();
         public int PollingInterval
         {
             get { return this.model.PollingInterval; }
@@ -140,26 +141,35 @@ namespace NecBlik.Virtual.GUI.ViewModels
 
             this.PollDevicesCommand = new RelayCommand(async (o) =>
             {
-                var p = new SimpleYesNoProgressBarPopup(string.Empty,string.Empty,Popups.Icons.InfoIcon,null,null,0,0,0,false,false);
+                var p = new SimpleYesNoProgressBarPopup(string.Empty, string.Empty, Popups.Icons.InfoIcon, null, null, 0, 0, 0, false, false);
                 p.Show();
                 var irp = new YesNoProgressBarPopupResponseProvider(p);
-                irp.Init(0,(this.coorinator!=null?1:0)+this.Devices.Count,0);
+                var records =string.Empty;
+                await Task.Run(async () =>
+                {
+                    irp.Init(0, (this.coorinator != null ? 1 : 0) + this.Devices.Count, 0);
 
-                var coord = this.Coordinator?.Model?.DeviceSource as IDeviceCoordinator;
-                if (coord != null)
-                {
-                    this.coorinator.Status = await coord.GetStatusOf(this.Coordinator.Address);
-                    irp.UpdateDelta(1);
-                }
-                foreach (var item in this.Devices)
-                {
+                    var coord = this.Coordinator?.Model?.DeviceSource as IDeviceCoordinator;
                     if (coord != null)
                     {
-                        item.Status = await coord.GetStatusOf(item.Address);
+                        this.coorinator.Status = await coord.GetStatusOf(this.Coordinator.Address);
+                        records+=this.coorinator.Name + ": " + this.coorinator.Status+'\n';
+                        irp.UpdateDelta(1);
                     }
-                    irp.UpdateDelta(1);
-                }
-                irp.SealUpdates();
+                    foreach (var item in this.Devices)
+                    {
+                        if (coord != null)
+                        {
+                            item.Status = await coord.GetStatusOf(item.Address);
+                            records+=item.Name + ": " + item.Status+'\n';
+                        }
+                        irp.UpdateDelta(1);
+                    }
+                    irp.SealUpdates();
+                });
+                var reportPopup = new SimpleYesPopup(records, string.Empty, Popups.Icons.InfoIcon,null);
+                var rp = new YesPopupResponseProvider(reportPopup);
+                rp.ProvideResponse();
             });
         }
 
@@ -310,14 +320,19 @@ namespace NecBlik.Virtual.GUI.ViewModels
             }
         }
 
-        public virtual void Hold()
+        public virtual void Hold(Guid? Holder=null)
         {
+            if (Holder != null)
+                this.Holders.Add(Holder);
             this.holdPolling = true;
         }
 
-        public virtual void Unhold()
+        public virtual void Unhold(Guid? Holder=null)
         {
-            this.holdPolling = false;   
+            if (Holders.Contains(Holder))
+                Holders.Remove(Holder);
+            if (Holders.Count == 0)
+                this.holdPolling = false;   
         }
     }
 }

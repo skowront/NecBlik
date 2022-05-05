@@ -211,7 +211,7 @@ namespace NecBlik.Digi.Models
             }
         }
 
-        public string SendATCommandPacket(string address, string command, string parameter)
+        public XBeePacket SendATCommandPacket(string address, string command, string parameter)
         {
             try
             {
@@ -227,16 +227,16 @@ namespace NecBlik.Digi.Models
                 {
                     var device = this.zigBee.GetNetwork().GetDevices().Where((x) => { return x.GetAddressString() == address; }).FirstOrDefault();
                     if (device == null)
-                        return string.Empty;
+                        return null;
                     RemoteATCommandPacket aTCommandPacket = new(this.frameId, device.XBee64BitAddr, device.XBee16BitAddr, 2, command, parameter);
                     this.IncrementFrameId();
                     resp = this.zigBee.SendPacket(aTCommandPacket);
                 }
-                return resp.ToPrettyString();
+                return resp;
             }
             catch (Exception ex)
             {
-                return ex.Message;
+                return null;
             }
         }
 
@@ -397,6 +397,21 @@ namespace NecBlik.Digi.Models
                     return NecBlik.Core.Resources.Statuses.Disconnected;
                 }
             }
+        }
+
+        public override async Task<(double localStrength, double remoteStrength)> GetSignalStrength(string remoteAddress)
+        {
+            var r = this.SendATCommandPacket(remoteAddress, "DB", string.Empty);
+            var l = this.SendATCommandPacket(this.Address, "DB", string.Empty);
+            double local = 0.0f;
+            double remote = 0.0f;
+            if (r != null)
+                if(r is RemoteATCommandResponsePacket)
+                    remote = (r as RemoteATCommandResponsePacket).CommandValue[0]*(-1);
+            if (l != null)
+                if (l is ATCommandResponsePacket)
+                    local = (l as ATCommandResponsePacket).CommandValue[0] * (-1);
+            return (local,remote);
         }
 
         public static string ByteArrayToString(byte[] ba)

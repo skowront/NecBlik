@@ -133,7 +133,7 @@ namespace NecBlik.Digi.GUI.ViewModels
         {
             if(this.Model.DeviceSource is DigiZigBeeUSBCoordinator)
             {
-                return (this.Model.DeviceSource as DigiZigBeeUSBCoordinator)?.SendATCommandPacket(atCommand.Address,atCommand.Command,atCommand.Parameter) ?? string.Empty;
+                return (this.Model.DeviceSource as DigiZigBeeUSBCoordinator)?.SendATCommandPacket(atCommand.Address,atCommand.Command,atCommand.Parameter)?.ToPrettyString() ?? string.Empty;
             }
             return string.Empty;
         }
