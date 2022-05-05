@@ -21,7 +21,7 @@ namespace NecBlik.Common.WpfElements
     /// Interaction logic for SimpleInputPopup.xaml
     /// Universal popup class
     /// </summary>
-    public partial class SimpleYesNoPopup : Window
+    public partial class SimpleYesNoPopup
     {
         public SimpleYesNoPopupViewModel ViewModel { get; }
 

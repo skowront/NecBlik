@@ -10,6 +10,7 @@ using NecBlik.Core.GUI;
 using NecBlik.Core.Models;
 using NecBlik.Digi.GUI.Factories;
 using NecBlik.Digi.GUI.Views;
+using NecBlik.Digi.Models;
 using NecBlik.Virtual.GUI.Factories;
 using NecBlik.Virtual.GUI.ViewModels;
 
@@ -20,6 +21,7 @@ namespace NecBlik.Digi.GUI.ViewModels
         public RelayCommand AddCommand { get; set; }
         public RelayCommand DiagnosticsCommand { get; set; }
         public RelayCommand ATCommandsCommand { get; set; }
+        public RelayCommand SyncCommand { get; set; }
 
         public DigiZigBeeNetworkViewModel(Network network) : base(network)
         {
@@ -60,6 +62,20 @@ namespace NecBlik.Digi.GUI.ViewModels
             {
                 var w = new ATCommandWindow(this);
                 w.Show();
+            });
+
+            this.SyncCommand = new RelayCommand((o) =>
+            {
+                this.Coordinator?.Model?.DeviceSource?.Close();
+                this.Coordinator?.Model?.DeviceSource?.Open();
+                if(this.Coordinator?.Model?.DeviceSource != null)
+                {
+                    if(this.Coordinator.Model.DeviceSource is DigiZigBeeUSBCoordinator)
+                    {
+                        var c = this.Coordinator.Model.DeviceSource as DigiZigBeeUSBCoordinator;
+                        c.ResetCoordinatorSoftware();
+                    }
+                }
             });
         }
 

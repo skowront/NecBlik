@@ -47,6 +47,7 @@
                         <ColumnDefinition Width="auto"></ColumnDefinition>
                         <ColumnDefinition Width="auto"></ColumnDefinition>
                         <ColumnDefinition Width="auto"></ColumnDefinition>
+                        <ColumnDefinition Width="auto"></ColumnDefinition>
                     </Grid.ColumnDefinitions>
                     <Button Grid.Column="0" VerticalAlignment="Center" Style="{StaticResource BaseButton}" Command="{Binding ViewModel.DiscoverCommand}" HorizontalAlignment="Center" Margin="0" MinWidth="50">
                         <StackPanel Orientation="Horizontal">
@@ -88,6 +89,12 @@
                         <StackPanel Orientation="Horizontal">
                             <TextBlock Text="{lex:Loc NecBlik.Digi.GUI:SR:GPATCommands}" Margin="0 0 5 0" VerticalAlignment="Center"></TextBlock>
                             <TextBlock Text="&#xf02d;" FontFamily="{StaticResource FontAwesome}" VerticalAlignment="Center"></TextBlock>
+                        </StackPanel>
+                    </Button>
+                    <Button Grid.Column="7" VerticalAlignment="Center" Style="{StaticResource BaseButton}" Command="{Binding ViewModel.SyncCommand}" HorizontalAlignment="Center" Margin="0" MinWidth="50">
+                        <StackPanel Orientation="Horizontal">
+                            <TextBlock Text="{lex:Loc NecBlik.Virtual.GUI:SR:GPSynchronize}" Margin="0 0 5 0" VerticalAlignment="Center"></TextBlock>
+                            <TextBlock Text="&#xf1b8;" FontFamily="{StaticResource FontAwesome}" VerticalAlignment="Center"></TextBlock>
                         </StackPanel>
                     </Button>
                 </Grid>

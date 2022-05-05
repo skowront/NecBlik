@@ -80,6 +80,17 @@ namespace NecBlik.Digi.Models
             this.zigBee.PacketReceived += ZigBee_PacketReceived;
         }
 
+        public void ResetCoordinatorSoftware()
+        {
+            this.Close();
+            this.Close();
+            this.winSerialPort = new WinSerialPort(this.connectionData.port, this.connectionData.baud);
+            this.zigBee = new ZigBeeDevice(this.winSerialPort);
+            this.Open();
+            this.zigBee.DataReceived += ZigBeeDataReceived;
+            this.zigBee.PacketReceived += ZigBee_PacketReceived;
+        }
+
         private void ZigBee_PacketReceived(object? sender, XBeeLibrary.Core.Events.PacketReceivedEventArgs e)
         {
             
@@ -150,7 +161,16 @@ namespace NecBlik.Digi.Models
             }
             catch (Exception ex)
             {
+                try
+                {
+                    this.Close();
+                    this.Open();
+                    
+                }
+                catch(Exception ex2)
+                {
 
+                }
             }
         }
 
@@ -201,12 +221,19 @@ namespace NecBlik.Digi.Models
             }
             else
             {
-                var remote = this.zigBee.GetNetwork().GetDevices().Where((dev) => { return dev.GetAddressString() == address; });
-                if (remote.Count() >= 1)
+                try
                 {
-                    this.Open();
-                    this.zigBee.SendData(remote.First(), bytes);
-                    this.PacketLogger?.AddEntry(DateTime.Now, data, "SEND_DATA", nameof(this.zigBee.SendData));
+                    var remote = this.zigBee.GetNetwork().GetDevices().Where((dev) => { return dev.GetAddressString() == address; });
+                    if (remote.Count() >= 1)
+                    {
+                        this.Open();
+                        this.zigBee.SendData(remote.First(), bytes);
+                        this.PacketLogger?.AddEntry(DateTime.Now, data, "SEND_DATA", nameof(this.zigBee.SendData));
+                    }
+                }
+                catch(Exception ex)
+                {
+
                 }
             }
         }

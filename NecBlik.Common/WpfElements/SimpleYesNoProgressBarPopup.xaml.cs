@@ -21,7 +21,7 @@ namespace NecBlik.Common.WpfElements
     /// Interaction logic for SimpleInputPopup.xaml
     /// Universal popup class that represents a progress bar
     /// </summary>
-    public partial class SimpleYesNoProgressBarPopup : Window
+    public partial class SimpleYesNoProgressBarPopup
     {
         public SimpleYesNoProgressBarPopupViewModel ViewModel { get; }
 
