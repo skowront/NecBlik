@@ -2,6 +2,7 @@
 using NecBlik.PyDigi.Models;
 using NecBlik.Digi.Models;
 using NecBlik.Performance.CLI;
+using System.Linq;
 using Python.Runtime;
 
 public class Program
@@ -49,10 +50,11 @@ public class Program
             dt = DateTime.Now;
             coordinator.Send("GetValue", "0013A20040A739ED");
             while (!gotMessage) { }
-            gotMessage = false;
             pm.RoundTripTimes.Add(DateTime.Now - dt);
+            gotMessage = false;
             Console.WriteLine($"Round trip time:{pm.RoundTripTimes.Last()} Test number: {i}");
         }
+        Console.WriteLine($"Mean round trip time:{pm.RoundTripTimes.Average((x) => { return x.Milliseconds; })}");
 
         coordinator.Dispose();
         return pm;
@@ -64,6 +66,7 @@ public class Program
         var pm = new PerformanceMeasurement();
         var dt = DateTime.Now;
         ZigBeePyEnv.Initialize();
+        pm.EnvironmentInitializationTime = DateTime.Now - dt;
         Console.WriteLine($"Environment initialization time:{pm.EnvironmentInitializationTime}");
 
         var coordinator = new PyDigiZigBeeUSBCoordinator(new NecBlik.PyDigi.Factories.PyDigiZigBeeFactory(),
@@ -76,19 +79,13 @@ public class Program
         pm.GetCoordinatorAddressTime = DateTime.Now - dt;
         Console.WriteLine($"Coordinator address getter time:{pm.GetCoordinatorAddressTime}");
 
-        //dt = DateTime.Now;
-        //Thread thread = new Thread(() => {
-        //    Task.Run(async () =>
-        //    {
-        //            await coordinator.Discover();
-        //    }).Wait();
-        //});
-        //thread.SetApartmentState(ApartmentState.MTA);
-        //thread.Start();
-        //thread.Join();
-
-        //pm.DiscoveryTime = DateTime.Now - dt;
-        //Console.WriteLine($"Discovery time:{pm.DiscoveryTime}");
+        dt = DateTime.Now;
+        Task.Run(async () =>
+        {
+            await coordinator.Discover();
+        }).Wait();
+        pm.DiscoveryTime = DateTime.Now - dt;
+        Console.WriteLine($"Discovery time:{pm.DiscoveryTime}");
 
         bool gotMessage = false;
         coordinator.SubscribeToDataRecieved(new DataRecievedListener((s) => { gotMessage = true; }));
@@ -97,10 +94,11 @@ public class Program
             dt = DateTime.Now;
             coordinator.Send("GetValue", "0013A20040A739ED");
             while (!gotMessage) { }
-            gotMessage = false;
             pm.RoundTripTimes.Add(DateTime.Now - dt);
+            gotMessage = false;
             Console.WriteLine($"Round trip time:{pm.RoundTripTimes.Last()} Test number: {i}");
         }
+        Console.WriteLine($"Mean round trip time:{pm.RoundTripTimes.Average((x) => { return x.Milliseconds; })}");
 
         coordinator.Dispose();
         return pm;

@@ -114,17 +114,19 @@ namespace NecBlik.PyDigi.Models
                     progress = input;
                     this.progressResponseProvider?.Update(input);
                 }));
-                var task = Task.Run(() =>
+                //var task = Task.Run(() =>
                 {
                     scope.Exec("coordinator.DiscoverDevices()");
-                });
-                await task;
+                }
+                //);
+                //await task;
                 
             }
             this.progressResponseProvider?.Update(PyDigiZigBeeUSBCoordinator.maxProgress);
             progressResponseProvider?.SealUpdates();
             return;
         }
+
         public override void Save(string folderPath)
         {
             File.WriteAllText(folderPath + "\\" + Resources.Resources.CoordinatorFile, JsonConvert.SerializeObject(this.connectionData, Formatting.Indented));
