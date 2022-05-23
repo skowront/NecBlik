@@ -29,8 +29,8 @@
                 <RowDefinition Height="*"></RowDefinition>
                 <RowDefinition Height="auto"></RowDefinition>
             </Grid.RowDefinitions>
-            <TextBlock Grid.Row="0" Text="{Binding Message}" Foreground="{StaticResource MaterialDesignDarkForeground}" FontSize="15"></TextBlock>
-            <TextBox Grid.Row="1" Text="{Binding Value}" Foreground="{StaticResource MaterialDesignDarkForeground}" VerticalAlignment="Bottom" FontSize="13" TextWrapping="Wrap"></TextBox>
+            <TextBlock Grid.Row="0" Text="{Binding Message}" FontSize="15"></TextBlock>
+            <TextBox Grid.Row="1" Text="{Binding Value}" VerticalAlignment="Bottom" FontSize="13" TextWrapping="Wrap"></TextBox>
             <Grid Grid.Row="2">
                 <Grid.ColumnDefinitions>
                     <ColumnDefinition></ColumnDefinition>
