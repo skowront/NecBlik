@@ -43,7 +43,6 @@ namespace NecBlik.PyDigi.Models
                     this.pyCoordinator = this.scope.Get<dynamic>("coordinator");
                     this.pyCoordinator.Open();
                     this.scope.Set("action", new Action<string,string>((data,address) => {
-                        Console.WriteLine("Works!");
                         this.OnDataRecieved(data, address);
                     }));
                     this.scope.Exec("dataReceivedActionHolder = ActionHolder(action)");
@@ -52,7 +51,6 @@ namespace NecBlik.PyDigi.Models
                                     "\t dataReceivedActionHolder.callback.Invoke(bytes(xbee_message.data).decode(encoding=\"UTF-8\"),a); \n");
                     this.scope.Exec("coordinator.xbee.add_data_received_callback(my_data_received_callback)");
 
-                    Console.WriteLine("Initialization fine.");
                 }
             }
             catch (Exception ex)

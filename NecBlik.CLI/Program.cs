@@ -2,6 +2,7 @@
 using NecBlik.PyDigi.Models;
 using NecBlik.Digi.Models;
 
+
 public class Program
 {
     /// <summary>
@@ -10,7 +11,8 @@ public class Program
     /// <param name="args"></param>
     public static void Main(string[] args)
     {
-        Digi();
+        //Digi();
+        PyDigi();
 
     }
 
@@ -28,7 +30,7 @@ public class Program
 
         coordinator.Open();
     }
-
+    
     public static void PyDigi()
     {
         Task.Run(async () =>
@@ -40,7 +42,6 @@ public class Program
             coordinator.Discover().Wait();
             coordinator.Send("GetValue", "0013A20040A739ED");
             //coordinator.Discover().Wait();
-
 
         });
         while (true)
