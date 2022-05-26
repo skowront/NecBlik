@@ -124,7 +124,7 @@ namespace NecBlik.PyDigi.Resources {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to ../../../../NecBlik.PyDigi.Python.
+        ///   Looks up a localized string similar to Environments/Python.
         /// </summary>
         public static string PyDigiScriptsLocation {
             get {
@@ -142,7 +142,7 @@ namespace NecBlik.PyDigi.Resources {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to ../../.
+        ///   Looks up a localized string similar to Environments/Python.
         /// </summary>
         public static string PythonScriptsSearchPath {
             get {
@@ -151,7 +151,7 @@ namespace NecBlik.PyDigi.Resources {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to ../../../../NecBlik.PyDigi.Python/virtualPythonEnvironment/.
+        ///   Looks up a localized string similar to Environments/Python/virtualPythonEnvironment/.
         /// </summary>
         public static string PythonVirtualEnvPath {
             get {
