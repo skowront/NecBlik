@@ -139,16 +139,16 @@
     <value>PyDigi</value>
   </data>
   <data name="PyDigiScriptsLocation" xml:space="preserve">
-    <value>Environments/Python</value>
+    <value>Environments/NecBlik.PyDigi.Python</value>
   </data>
   <data name="PythonDLLSubpath" xml:space="preserve">
     <value>DLL/python39.dll</value>
   </data>
   <data name="PythonScriptsSearchPath" xml:space="preserve">
-    <value>Environments/Python</value>
+    <value>Environments/NecBlik.PyDigi.Python</value>
   </data>
   <data name="PythonVirtualEnvPath" xml:space="preserve">
-    <value>Environments/Python/virtualPythonEnvironment/</value>
+    <value>Environments/NecBlik.PyDigi.Python/virtualPythonEnvironment/</value>
   </data>
   <data name="ScriptInitialize_py" xml:space="preserve">
     <value>VirtualEnvInit.py</value>

@@ -59,4 +59,8 @@
     </EmbeddedResource>
   </ItemGroup>
 
+  <Target Name="PostBuild" AfterTargets="PostBuildEvent">
+    <Exec Command="xcopy &quot;$(SolutionDir)NecBlik.PyDigi.Python&quot; &quot;$(SolutionDir)NecBlik\bin\Debug\net6.0-windows\Environments&quot; /Y /I /E&#xD;&#xA;xcopy &quot;$(SolutionDir)NecBlik.PyDigi.Python&quot; &quot;$(SolutionDir)NecBlik\bin\Release\net6.0-windows\Environments&quot; /Y /I /E" />
+  </Target>
+
 </Project>
