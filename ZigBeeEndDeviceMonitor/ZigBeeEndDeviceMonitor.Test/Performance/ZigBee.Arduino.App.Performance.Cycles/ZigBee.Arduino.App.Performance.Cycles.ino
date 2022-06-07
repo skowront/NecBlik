@@ -1,4 +1,5 @@
 #include "Printers.h"
+#include "stdio.h"
 //Xbee library defines max packet size = 110 bytes (100 bytes + overhead)-> #define MAX_FRAME_DATA_SIZE 110
 //Therefore a fork of this library was attached with max sending value equal to 255. 
 //https://github.com/andrewrapp/xbee-arduino/blob/wiki/DevelopersGuide.md
@@ -8,6 +9,9 @@ struct RecievedData
 	String payload;
 	bool recieved = false;
 };
+
+const int perfBufferSize = 40;
+char perfBuffer[perfBufferSize];
 
 //create the XBee object
 XBee xbee = XBee();
@@ -60,6 +64,10 @@ void ToggleHold()
 
 void OnTickChangeStoredChangingValue()
 {
+  TCCR1A = 0;
+  TCCR1B = bit(CS10);
+  TCNT1 = 0;
+
 	if (abs(millis() - lastDataSent) > dataSendingInterval * 1000 && hold == false)
 	{
 		double radians = degrees * 1000 / 57296;
@@ -70,6 +78,11 @@ void OnTickChangeStoredChangingValue()
 		Serial.println(GetStoredChangingValue());
 	}
 	degrees+=DegreeIncrement;
+
+  unsigned int cycles = TCNT1;
+  sprintf(perfBuffer, "C#TD:Changing value simulation time:%d", cycles);
+	Serial.println(perfBuffer);
+	clearPerfBuffer();
 }
 
 int StoredValue = 31337;
@@ -155,7 +168,9 @@ void HandleRemoteCommunication()
 	const int rxBufferSize = 512;
 	char rxBuffer[rxBufferSize];
 	unsigned long serviceStartTime = millis();
+
 	RecievedData recieved = RecieveValue();
+
 	if (recieved.recieved == true)
 	{
 		Serial.println("Analyzing recieved packet.");
@@ -224,6 +239,9 @@ void HandleRemoteCommunication()
 }
 
 void setup() {
+	TCCR1A = 0;
+  TCCR1B = bit(CS10);
+  TCNT1 = 0;
 	pinMode(statusLed, OUTPUT);
 	pinMode(errorLed, OUTPUT);
 
@@ -232,11 +250,27 @@ void setup() {
 	Serial1.begin(9600);
 	Serial.println("Serial Xbee communication initialized.");
 
+
 	xbee.setSerial(Serial1);
+
+  unsigned int cycles = TCNT1;
+  float cyclesF = (float)(cycles - 1) / 16;
+  sprintf(perfBuffer, "C#TD:Initialization time:%f", cyclesF);
+	Serial.println(perfBuffer);
+	clearPerfBuffer();
 }
 
 void loop() {
-
+  
 	HandleRemoteCommunication();
 	OnTickChangeStoredChangingValue();
+
+}
+
+void clearPerfBuffer()
+{
+	for (int i = 0; i < perfBufferSize; i++)
+	{
+		perfBuffer[i] = 0;
+	}
 }

@@ -4,9 +4,13 @@ using NecBlik.Digi.Models;
 using NecBlik.Performance.CLI;
 using System.Linq;
 using Python.Runtime;
+using CsvHelper;
+using System.Globalization;
 
 public class Program
 {
+    public static string Port = "COM4" ;
+
     /// <summary>
     /// Mostly for testing purposes
     /// </summary>
@@ -15,8 +19,36 @@ public class Program
     {
         var digiPerformance = Digi();
         var pyDigiPerformance = PyDigi();
-
-        var x = 10;
+        using (var writer = new StreamWriter("digi.csv"))
+        using (var csv = new CsvWriter(writer, CultureInfo.InvariantCulture))
+        {
+            csv.WriteRecord<int>(digiPerformance.EnvironmentInitializationTime.Milliseconds);
+            csv.NextRecord();
+            csv.WriteRecord<int>(digiPerformance.CoordinatorCreationTime.Milliseconds);
+            csv.NextRecord();
+            csv.WriteRecord<int>(digiPerformance.GetCoordinatorAddressTime.Milliseconds);
+            csv.NextRecord();
+            foreach (var item in digiPerformance.RoundTripTimes)
+            {
+                csv.WriteRecord<int>(item.Milliseconds);
+                csv.NextRecord();
+            }
+        }
+        using (var writer = new StreamWriter("pydigi.csv"))
+        using (var csv = new CsvWriter(writer, CultureInfo.InvariantCulture))
+        {
+            csv.WriteRecord<int>(pyDigiPerformance.EnvironmentInitializationTime.Milliseconds);
+            csv.NextRecord();
+            csv.WriteRecord<int>(pyDigiPerformance.CoordinatorCreationTime.Milliseconds);
+            csv.NextRecord();
+            csv.WriteRecord<int>(pyDigiPerformance.GetCoordinatorAddressTime.Milliseconds);
+            csv.NextRecord();
+            foreach (var item in pyDigiPerformance.RoundTripTimes)
+            {
+                csv.WriteRecord<int>(item.Milliseconds);
+                csv.NextRecord();
+            }
+        }
     }
 
     public static PerformanceMeasurement Digi()
@@ -29,7 +61,7 @@ public class Program
         Console.WriteLine($"Environment initialization time:{pm.EnvironmentInitializationTime}");
 
         var coordinator = new DigiZigBeeUSBCoordinator(new NecBlik.Digi.Factories.DigiZigBeeFactory(),
-            new DigiZigBeeUSBCoordinator.DigiUSBConnectionData() { baud = 9600, port = "COM4" });
+            new DigiZigBeeUSBCoordinator.DigiUSBConnectionData() { baud = 9600, port = Port });
         pm.CoordinatorCreationTime = DateTime.Now - dt;
         Console.WriteLine($"Coordinator initialization time:{pm.CoordinatorCreationTime}");
 
@@ -70,7 +102,7 @@ public class Program
         Console.WriteLine($"Environment initialization time:{pm.EnvironmentInitializationTime}");
 
         var coordinator = new PyDigiZigBeeUSBCoordinator(new NecBlik.PyDigi.Factories.PyDigiZigBeeFactory(),
-            new PyDigiZigBeeUSBCoordinator.PyDigiUSBConnectionData() { baud = 9600, port = "COM4" });
+            new PyDigiZigBeeUSBCoordinator.PyDigiUSBConnectionData() { baud = 9600, port = Port });
         pm.CoordinatorCreationTime = DateTime.Now - dt;
         Console.WriteLine($"Coordinator initialization time:{pm.CoordinatorCreationTime}");
 

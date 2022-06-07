@@ -213,4 +213,7 @@
   <data name="GPms" xml:space="preserve">
     <value>ms</value>
   </data>
+  <data name="GPSendingTime" xml:space="preserve">
+    <value>Sending time</value>
+  </data>
 </root>

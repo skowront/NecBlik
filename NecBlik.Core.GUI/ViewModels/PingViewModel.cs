@@ -14,6 +14,13 @@ namespace NecBlik.Core.GUI.ViewModels
     {
         private PingModel model;
 
+        private DateTime sendingTime = DateTime.MinValue;
+        public DateTime SendingTime
+        {
+            get {  return this.sendingTime; }
+            set { this.sendingTime = value; this.OnPropertyChanged(); }
+        }
+
         public double ResponseTime
         {
             get { return model.ResponseTime; }
@@ -84,6 +91,7 @@ namespace NecBlik.Core.GUI.ViewModels
 
             this.RunCommand = new RelayCommand(async (o) =>
             {
+                this.SendingTime = DateTime.Now;
                 PingModel result;
                 if (this.PayloadSize > 0)
                 {
@@ -101,6 +109,7 @@ namespace NecBlik.Core.GUI.ViewModels
 
             this.RunPacketCommand = new RelayCommand(async (o) =>
             {
+                this.SendingTime = DateTime.Now;
                 PingModel result;
                 if (this.PayloadSize > 0)
                 {

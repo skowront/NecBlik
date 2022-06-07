@@ -304,6 +304,15 @@ namespace NecBlik.Core.GUI.Strings {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Sending time.
+        /// </summary>
+        public static string GPSendingTime {
+            get {
+                return ResourceManager.GetString("GPSendingTime", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Sent.
         /// </summary>
         public static string GPSent {
