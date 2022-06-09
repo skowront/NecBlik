@@ -10,7 +10,8 @@ struct RecievedData
 	bool recieved = false;
 };
 
-const int perfBufferSize = 40;
+unsigned long perfTime=0;
+const int perfBufferSize = 60;
 char perfBuffer[perfBufferSize];
 
 //create the XBee object
@@ -78,7 +79,7 @@ void OnTickChangeStoredChangingValue()
 	degrees+=DegreeIncrement;
 
   perfTime=millis()-perfTime;
-  sprintf(perfBuffer, "C#TD:Changing value simulation time:%ul", perfTime);
+  sprintf(perfBuffer, "C#TD:Changing value simulation time:%d", perfTime);
 	Serial.println(perfBuffer);
 	clearPerfBuffer();
 }
@@ -238,7 +239,7 @@ void HandleRemoteCommunication()
 	//delete rxBuffer;
 
   perfTime=millis()-perfTime;
-  sprintf(perfBuffer, "C#TD:Service time:%ul", perfTime);
+  sprintf(perfBuffer, "C#TD:Service time:%d", perfTime);
 	Serial.println(perfBuffer);
 	clearPerfBuffer();
 }
@@ -256,7 +257,7 @@ void setup() {
 
 	xbee.setSerial(Serial1);
 	perfTime = millis() - perfTime;
-	sprintf(perfBuffer, "C#TD:Initialization time:%ul", perfTime);
+	sprintf(perfBuffer, "C#TD:Initialization time:%d", perfTime);
 	Serial.println(perfBuffer);
 	clearPerfBuffer();
 }
@@ -268,7 +269,7 @@ void loop() {
 	OnTickChangeStoredChangingValue();
 
   loopTime = millis()-loopTime;
-  sprintf(perfBuffer, "C#TD:Loop time:%ul", loopTime);
+  sprintf(perfBuffer, "C#TD:Loop time:%d", loopTime);
 	Serial.println(perfBuffer);
 	clearPerfBuffer();
 }

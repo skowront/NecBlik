@@ -98,7 +98,7 @@
                                                ContextMenu="{StaticResource DesignerCanvasContextMenu}" Grid.ColumnSpan="2"/>
                 </Grid>
             </ScrollViewer>
-            <Slider Grid.Row="0" Grid.Column="3" Grid.RowSpan="2" Minimum="1" Maximum="10" x:Name="sldZoom" Margin="10" Orientation="Vertical"/>
+            <Slider Grid.Row="0" Grid.Column="2" Grid.RowSpan="2" Minimum="1" Maximum="10" x:Name="sldZoom" Margin="10" HorizontalAlignment="Right" Orientation="Vertical"/>
 
             <Expander Opacity="1" ExpandDirection="Left" Grid.Column="0" Grid.ColumnSpan="4" Grid.RowSpan="3"
                       HorizontalAlignment="Right" MaxWidth="500"

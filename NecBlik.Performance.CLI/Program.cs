@@ -10,6 +10,7 @@ using System.Globalization;
 public class Program
 {
     public static string Port = "COM4" ;
+    public static int iterations = 500;
 
     /// <summary>
     /// Mostly for testing purposes
@@ -19,14 +20,30 @@ public class Program
     {
         var digiPerformance = Digi();
         var pyDigiPerformance = PyDigi();
-        using (var writer = new StreamWriter("digi.csv"))
+#if RELEASE
+        using (var writer = new StreamWriter("release-digi.csv"))
+#else
+        using (var writer = new StreamWriter("debug-digi.csv"))
+#endif
         using (var csv = new CsvWriter(writer, CultureInfo.InvariantCulture))
         {
-            csv.WriteRecord<int>(digiPerformance.EnvironmentInitializationTime.Milliseconds);
+            csv.WriteField<string>(nameof(PerformanceMeasurement.EnvironmentInitializationTime));
             csv.NextRecord();
-            csv.WriteRecord<int>(digiPerformance.CoordinatorCreationTime.Milliseconds);
+            csv.WriteField<string>(digiPerformance.EnvironmentInitializationTime.Seconds.ToString()+":"+digiPerformance.EnvironmentInitializationTime.Milliseconds.ToString());
+            csv.NextRecord();
+            csv.WriteField<string>(nameof(PerformanceMeasurement.CoordinatorCreationTime));
+            csv.NextRecord();
+            csv.WriteField<string>(digiPerformance.CoordinatorCreationTime.Seconds.ToString() + ":" + digiPerformance.CoordinatorCreationTime.Milliseconds.ToString());
+            csv.NextRecord();
+            csv.WriteField<string>(nameof(PerformanceMeasurement.GetCoordinatorAddressTime));
             csv.NextRecord();
             csv.WriteRecord<int>(digiPerformance.GetCoordinatorAddressTime.Milliseconds);
+            csv.NextRecord();
+            csv.WriteField<string>(nameof(PerformanceMeasurement.DiscoveryTime));
+            csv.NextRecord();
+            csv.WriteField<string>(digiPerformance.DiscoveryTime.Seconds.ToString() + ":" + digiPerformance.DiscoveryTime.Milliseconds.ToString());
+            csv.NextRecord();
+            csv.WriteField<string>(nameof(PerformanceMeasurement.RoundTripTimes));
             csv.NextRecord();
             foreach (var item in digiPerformance.RoundTripTimes)
             {
@@ -34,14 +51,30 @@ public class Program
                 csv.NextRecord();
             }
         }
-        using (var writer = new StreamWriter("pydigi.csv"))
+#if RELEASE
+        using (var writer = new StreamWriter("release-pydigi.csv"))
+#else
+        using (var writer = new StreamWriter("debug-pydigi.csv"))
+#endif
         using (var csv = new CsvWriter(writer, CultureInfo.InvariantCulture))
         {
-            csv.WriteRecord<int>(pyDigiPerformance.EnvironmentInitializationTime.Milliseconds);
+            csv.WriteField<string>(nameof(PerformanceMeasurement.EnvironmentInitializationTime));
             csv.NextRecord();
-            csv.WriteRecord<int>(pyDigiPerformance.CoordinatorCreationTime.Milliseconds);
+            csv.WriteField<string>(pyDigiPerformance.EnvironmentInitializationTime.Seconds.ToString() + ":" + pyDigiPerformance.EnvironmentInitializationTime.Milliseconds.ToString());
+            csv.NextRecord();
+            csv.WriteField<string>(nameof(PerformanceMeasurement.CoordinatorCreationTime));
+            csv.NextRecord();
+            csv.WriteField<string>(pyDigiPerformance.CoordinatorCreationTime.Seconds.ToString() + ":" + pyDigiPerformance.CoordinatorCreationTime.Milliseconds.ToString());
+            csv.NextRecord();
+            csv.WriteField<string>(nameof(PerformanceMeasurement.GetCoordinatorAddressTime));
             csv.NextRecord();
             csv.WriteRecord<int>(pyDigiPerformance.GetCoordinatorAddressTime.Milliseconds);
+            csv.NextRecord();
+            csv.WriteField<string>(nameof(PerformanceMeasurement.DiscoveryTime));
+            csv.NextRecord();
+            csv.WriteField<string>(pyDigiPerformance.DiscoveryTime.Seconds.ToString() + ":" + pyDigiPerformance.DiscoveryTime.Milliseconds.ToString());
+            csv.NextRecord();
+            csv.WriteField<string>(nameof(PerformanceMeasurement.RoundTripTimes));
             csv.NextRecord();
             foreach (var item in pyDigiPerformance.RoundTripTimes)
             {
@@ -76,11 +109,16 @@ public class Program
         Console.WriteLine($"Discovery time:{pm.DiscoveryTime}");
 
         bool gotMessage = false;
-        coordinator.SubscribeToDataRecieved(new DataRecievedListener((s) => { gotMessage = true; }));
-        for (int i = 0; i < 50; i++)
+        coordinator.SubscribeToDataRecieved(new DataRecievedListener(
+            (s) => { gotMessage = true; })
+            );
+        for (int i = 0; i < iterations; i++)
         {
             dt = DateTime.Now;
             coordinator.Send("GetValue", "0013A20040A739ED");
+#if RELEASE
+            Task.Delay(200).Wait();
+#endif
             while (!gotMessage) { }
             pm.RoundTripTimes.Add(DateTime.Now - dt);
             gotMessage = false;
@@ -121,10 +159,13 @@ public class Program
 
         bool gotMessage = false;
         coordinator.SubscribeToDataRecieved(new DataRecievedListener((s) => { gotMessage = true; }));
-        for (int i = 0; i < 50; i++)
+        for (int i = 0; i < iterations; i++)
         {
             dt = DateTime.Now;
             coordinator.Send("GetValue", "0013A20040A739ED");
+#if RELEASE
+            Task.Delay(200).Wait();
+#endif
             while (!gotMessage) { }
             pm.RoundTripTimes.Add(DateTime.Now - dt);
             gotMessage = false;
