@@ -107,7 +107,7 @@ As noted earlier, NecBlik is an application made mainly for ZigBee network with 
 - change GUI language.
 
 To make any use of the application we must attach specific .dll files with NecBlik name in them. If you want to compile the project yourself, then just add/remove references in "NecBlik" project.
-![](C:\Users\tomek\AppData\Roaming\marktext\images\2022-06-14-17-05-54-image.png)
+![](https://github.com/skowront/NecBlik/blob/virtual/Manual/Images/2022-06-14-17-05-54-image.png)
 
 You may also want to remove post-build events.
 
@@ -115,7 +115,7 @@ In case you want to use a release package, just unpack the main zip and paste pa
 
 As soon as we get this done we can run NecBlik.exe and see something like this:
 
-![](C:\Users\tomek\AppData\Roaming\marktext\images\2022-06-14-17-21-07-image.png)
+![](https://github.com/skowront/NecBlik/blob/virtual/Manual/Images/2022-06-14-17-21-07-image.png)
 
 Here you can try some basic functionalities. 
 
@@ -133,7 +133,7 @@ First of all we want to rename the project.
 
 After closing you will see that the project name has changed:
 
-![](C:\Users\tomek\AppData\Roaming\marktext\images\2022-06-14-17-25-41-image.png)
+![](https://github.com/skowront/NecBlik/blob/virtual/Manual/Images/2022-06-14-17-25-41-image.png)
 
 #### Project background (map)
 
@@ -169,17 +169,17 @@ Let's say we have plugged our network coordinator into our pc's serial port and 
 
 3. Further steps may differ depending on module.
 
-4. ![](C:\Users\tomek\AppData\Roaming\marktext\images\2022-06-14-17-40-32-image.png)
+4. ![](https://github.com/skowront/NecBlik/blob/virtual/Manual/Images/2022-06-14-17-40-32-image.png)
 
 5. Enter desided parameters.
 
-6. ![](C:\Users\tomek\AppData\Roaming\marktext\images\2022-06-14-17-41-16-image.png)
+6. ![](https://github.com/skowront/NecBlik/blob/virtual/Manual/Images/2022-06-14-17-41-16-image.png)
 
 7. In 6. we select NetworkViewModel and CoordinatorViewModel embedded in module or taken from a submodules (NecBlik will detect them).
 
 8. After clicking confirm, open the expander on the right side of application. Your network will be there. You can open it to see:
 
-9. ![](C:\Users\tomek\AppData\Roaming\marktext\images\2022-06-14-18-10-06-image.png)
+9. ![](https://github.com/skowront/NecBlik/blob/virtual/Manual/Images/2022-06-14-17-43-05-image.png)
 
 10. Now you can either open the devices or send them to map and adjust their scale/position.
 
@@ -187,7 +187,7 @@ Let's say we have plugged our network coordinator into our pc's serial port and 
 
 Now let's suppose we choose default NetworkViewModel. Then the window would look like this:
 
-![](C:\Users\tomek\AppData\Roaming\marktext\images\2022-06-14-18-11-59-image.png)
+![](https://github.com/skowront/NecBlik/blob/virtual/Manual/Images/2022-06-14-18-11-59-image.png)
 
 As you can see we get some additonal (however default) options. Digi module has even more functionalities. 
 
