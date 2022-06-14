@@ -1,6 +1,6 @@
 # NecBlik
 
-NecBlik is an open-source, C#, application for monitoring and controlling networks. It was created for ZigBee network using XBee devices but can be easily extended to support any network.
+NecBlik is an open-source, C#, application for monitoring and controlling networks. It was created for ZigBee network using XBee devices but can be easily extended to support any network. NecBlik is a name taken from silesian language, where Nec can be translated as Network and Blik can be translated as a glimpse, because the application allows us to take a glimpse on our network :).
 
 ## Overview
 
@@ -8,9 +8,7 @@ NecBlik is an open-source, C#, application for monitoring and controlling networ
 
 ## Features
 
-- 
-
-## Requirements
+- ## Requirements
 
 - Windows,
 
@@ -29,6 +27,16 @@ If you want to compile this project on your own please keep in mind that by defa
 ## Architecture
 
 Necblik applicaton is composed of few projects that are together made into an application in NecBlik project.  
+
+### Packages/Modules/Libraries(Submodules)
+
+Here we define some concepts that should explain the modular architecture of NecBlik.
+
+Packages - are projects that are packed as "unpack them into particular folder to attach them to NecBlik" or NecBlik itself. (Release files are composed of packages).
+
+Modules - are projects that implement a network type functionality  (as ZigBee, Wifi, etc.) 
+
+Libraries(Submodules) - are projects  that inherit from a module and implement specific ViewModels and Controls of a module.
 
 ### Core projects
 
@@ -86,12 +94,139 @@ NecBlik was made as a part of Master's Thesis project and contains some projects
 
 - NecBlik.Performance.CLI - a console application for researchers to compare C# and Python modules.
 
+## Other solutions (not important)
+
+This repo contains two helper solutions. One for monitoring a ZigBeeDevice and one with code for Arduino Romeo with an XBee module. They are located in ZigBee.Arduino and ZigBeeEndDeviceMonitor folders.
+
+## Usage
+
+As noted earlier, NecBlik is an application made mainly for ZigBee network with Xbee deivces. Therefore without extension it works only with this devices. NecBlik itself (without attached dlls) provides:
+
+- possibility to add a map (an image in .svg or .png format),
+
+- change GUI language.
+
+To make any use of the application we must attach specific .dll files with NecBlik name in them. If you want to compile the project yourself, then just add/remove references in "NecBlik" project.
+![](C:\Users\tomek\AppData\Roaming\marktext\images\2022-06-14-17-05-54-image.png)
+
+You may also want to remove post-build events.
+
+In case you want to use a release package, just unpack the main zip and paste particular package releases into that zip. Keep in mid that you must paste modules into main NecBlik folder, and any submodules into Libraries/[modulename]/ folder. 
+
+As soon as we get this done we can run NecBlik.exe and see something like this:
+
+![](C:\Users\tomek\AppData\Roaming\marktext\images\2022-06-14-17-21-07-image.png)
+
+Here you can try some basic functionalities. 
+
+### Scenarios of usage
+
+Now, let's talk about scenarios of usage.
+
+#### Project renaming
+
+First of all we want to rename the project. 
+
+1. Goto project, rename.
+
+2. A window will open, just type a new name and close the window.
+
+After closing you will see that the project name has changed:
+
+![](C:\Users\tomek\AppData\Roaming\marktext\images\2022-06-14-17-25-41-image.png)
+
+#### Project background (map)
+
+Now, let's add a background map to our project (it can be any .svg or .png).
+
+1. Goto Map, Load, 
+
+2. Select a file and open it (the map will be stored in cache for now),
+
+3. Optional - you can use Map, Resize to adjust map scale to make it bigger/smaller.
+
+#### Saving a project
+
+Perfect, now that we have a map we can save our basic project. 
+
+1. Goto Project, Save.
+
+2. Select where will be the project saved (a folder of name of the project will be created, but keep in mind that if such a folder already exists the NecBlik will purge it).
+
+3. Done.
+
+#### Loading a project
+
+To load a project simply goto Project, Load and open a .json file in project's save folder.
+
+#### Attaching a network
+
+Let's say we have plugged our network coordinator into our pc's serial port and we want to add our network to NecBlik. Due to NecBlik initial purpose we will use Virtual network as an example.
+
+1. Goto Project, Add network,
+
+2. Select your module (we will select Virtual),
+
+3. Further steps may differ depending on module.
+
+4. ![](C:\Users\tomek\AppData\Roaming\marktext\images\2022-06-14-17-40-32-image.png)
+
+5. Enter desided parameters.
+
+6. ![](C:\Users\tomek\AppData\Roaming\marktext\images\2022-06-14-17-41-16-image.png)
+
+7. In 6. we select NetworkViewModel and CoordinatorViewModel embedded in module or taken from a submodules (NecBlik will detect them).
+
+8. After clicking confirm, open the expander on the right side of application. Your network will be there. You can open it to see:
+
+9. ![](C:\Users\tomek\AppData\Roaming\marktext\images\2022-06-14-18-10-06-image.png)
+
+10. Now you can either open the devices or send them to map and adjust their scale/position.
+
+11. When finished simply save your project (select directory where project directory is located).
+
+Now let's suppose we choose default NetworkViewModel. Then the window would look like this:
+
+![](C:\Users\tomek\AppData\Roaming\marktext\images\2022-06-14-18-11-59-image.png)
+
+As you can see we get some additonal (however default) options. Digi module has even more functionalities. 
+
+Poll devices will simply chech if devices are living or not. 
+
+Rules allows us to customize viewmodel/control rules of our Network (we can change behavior of devices that correspond physical/virtual ones). We can also send pings to our devices.
+
+#### Rules
+
+Rules is a mechanism for runtime customization of application viewmodels and classes. Every physical/virtual device consitst of uneditable functionality class (model) and a viewmodel that can differently react to incoming/outgoing messages. Rules can be entered manually in runtime, or applied in constructor of a NetworkViewModel class (it is especially handy when you hardcode a new NetworkViewModel as a submodule for a module).
+
+There are two main types of rules.
+
+1. ViewModel Rules, that define the behavior/class of a physical/virtual device in NecBlik,
+
+2. Control Rules, that define how a physical/virtual device will be shown on the map in NecBlik.
+
+Other rules can be specified on a Module level (that can inherit from an existing module).
+
+## Supported languages
+
+NecBlik supports:
+
+- English (default),
+
+- French,
+
+- Polish.
+
+
+
 ## Extending application
 
 There are many ways to extend NecBlik. With NecBlik it is possible to do any of the following:
 
 - add your own module factory that allows cooperation with new network type (MQTT, WiFi, RFID, etc...),
 
-- add your own submodule (for existing module)
+- add your own submodule (for existing module or your own module),
+
+- simply hardcode whatever you want into the application.
 
 

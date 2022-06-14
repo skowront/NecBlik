@@ -40,11 +40,11 @@
                 <ColumnDefinition Width="auto"></ColumnDefinition>
             </Grid.ColumnDefinitions>
             <Grid.RowDefinitions>
-                <RowDefinition Height="1*"></RowDefinition>
+                <RowDefinition Height="auto"></RowDefinition>
                 <RowDefinition Height="2"></RowDefinition>
             </Grid.RowDefinitions>
             <Menu Style="{StaticResource MahApps.Styles.Menu}" Background="{StaticResource MaterialDesignDarkBackground}" Foreground="{StaticResource MaterialDesignDarkForeground}" Grid.Row="0" VerticalAlignment="Top" Height="auto" VerticalContentAlignment="Bottom">
-                <MenuItem Header="{lex:Loc MainWindowMenuHeaderProject }" Margin="4">
+                <MenuItem Header="{lex:Loc MainWindowMenuHeaderProject }">
                     <MenuItem Header="{lex:Loc MainWindowMenuHeaderNew}" Command="{Binding NewProjectCommand}"/>
                     <MenuItem Header="{lex:Loc MainWindowMenuHeaderProjectLoad}" Command="{Binding LoadProjectCommand}"/>
                     <MenuItem Header="{lex:Loc MainWindowMenuHeaderProjectSave}" Command="{Binding SaveProjectCommand}"/>
@@ -52,14 +52,14 @@
                     <MenuItem Header="{lex:Loc MainWindowMenuHeaderProjectRename}" Command="{Binding EditProjectCommand}"/>
                     <MenuItem Header="{lex:Loc MainWindowMenuHeaderProjectAddNetwork}" Command="{Binding AddNetworkCommand}"/>
                 </MenuItem>
-                <MenuItem Header="{lex:Loc MainWindowMenuHeaderMap}" Margin="4">
+                <MenuItem Header="{lex:Loc MainWindowMenuHeaderMap}">
                     <MenuItem Header="{lex:Loc MainWindowManuHeaderProjectLoadMap}" Command="{Binding LoadProjectMapCommand}"/>
                     <MenuItem Header="{lex:Loc MainWindowManuHeaderProjectRemoveMap}" Command="{Binding RemoveProjectMapCommand}"/>
                     <MenuItem Header="{lex:Loc MainWindowMenuHeaderResizeMap}" Click="ResizeMapMenuItemClick"/>
                 </MenuItem>
-                <MenuItem Header="{lex:Loc MainWindowMenuSettings}" Command="{Binding ApplicationSettingsCommand}" Margin="4">
+                <MenuItem Header="{lex:Loc MainWindowMenuSettings}" Command="{Binding ApplicationSettingsCommand}">
                 </MenuItem>
-                <MenuItem Header="{lex:Loc MainWindowMenuAbout}" Command="{Binding AboutCommand}" Margin="4">
+                <MenuItem Header="{lex:Loc MainWindowMenuAbout}" Command="{Binding AboutCommand}">
                 </MenuItem>
             </Menu>
             <TextBlock Grid.Row="0" 

@@ -30,8 +30,6 @@
     <ProjectReference Include="..\NecBlik.PyDigi\NecBlik.PyDigi.csproj" />
     <ProjectReference Include="..\NecBlik.Virtual.GUI\NecBlik.Virtual.GUI.csproj" />
     <ProjectReference Include="..\NecBlik.Virtual\NecBlik.Virtual.csproj" />
-    <ProjectReference Include="..\NecBlik.ZigBeeNet.GUI\NecBlik.ZigBeeNet.GUI.csproj" />
-    <ProjectReference Include="..\NecBlik.ZigBeeNet\NecBlik.ZigBeeNet.csproj" />
     <ProjectReference Include="..\WPFLocalizeextension\WPFLocalizeextension.csproj" />
   </ItemGroup>
 
