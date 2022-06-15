@@ -24,10 +24,6 @@
     <ProjectReference Include="..\NecBlik.Common\NecBlik.Common.csproj" />
     <ProjectReference Include="..\NecBlik.Core.GUI\NecBlik.Core.GUI.csproj" />
     <ProjectReference Include="..\NecBlik.Core\NecBlik.Core.csproj" />
-    <ProjectReference Include="..\NecBlik.Digi.GUI\NecBlik.Digi.GUI.csproj" />
-    <ProjectReference Include="..\NecBlik.Digi\NecBlik.Digi.csproj" />
-    <ProjectReference Include="..\NecBlik.PyDigi.GUI\NecBlik.PyDigi.GUI.csproj" />
-    <ProjectReference Include="..\NecBlik.PyDigi\NecBlik.PyDigi.csproj" />
     <ProjectReference Include="..\NecBlik.Virtual.GUI\NecBlik.Virtual.GUI.csproj" />
     <ProjectReference Include="..\NecBlik.Virtual\NecBlik.Virtual.csproj" />
     <ProjectReference Include="..\WPFLocalizeextension\WPFLocalizeextension.csproj" />
@@ -56,9 +52,5 @@
       <LastGenOutput>SR.Designer.cs</LastGenOutput>
     </EmbeddedResource>
   </ItemGroup>
-
-  <Target Name="PostBuild" AfterTargets="PostBuildEvent">
-    <Exec Command="xcopy &quot;$(SolutionDir)NecBlik.PyDigi.Python&quot; &quot;$(SolutionDir)NecBlik\bin\Debug\net6.0-windows\Environments&quot; /Y /I /E&#xD;&#xA;xcopy &quot;$(SolutionDir)NecBlik.PyDigi.Python&quot; &quot;$(SolutionDir)NecBlik\bin\Release\net6.0-windows\Environments&quot; /Y /I /E" />
-  </Target>
 
 </Project>
