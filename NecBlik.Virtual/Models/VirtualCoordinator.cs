@@ -19,7 +19,7 @@ namespace NecBlik.Virtual.Models
         public string Address
         {
             get { return this.GetAddress(); }
-            set { this.cachedAddress = Address; }
+            set { this.cachedAddress = value; }
         }
 
         private string cachedAddress = string.Empty;

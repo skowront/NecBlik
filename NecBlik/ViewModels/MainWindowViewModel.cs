@@ -155,7 +155,7 @@ namespace NecBlik.ViewModels
                         vm.DeviceSelectionSubscriber = this.DeviceSelectionSubscriber;
                         this.Networks.Add(network);
                         this.SyncToModel();
-                        //this.SyncFromModel();
+                        this.SyncFromModel();
                     }
                 }
             });
