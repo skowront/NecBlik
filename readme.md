@@ -207,6 +207,8 @@ There are two main types of rules.
 
 Other rules can be specified on a Module level (that can inherit from an existing module).
 
+REMARK! Remember to use Sync() or a Synchronize button after changing factory rules.
+
 ## Supported languages
 
 NecBlik supports:
@@ -217,8 +219,6 @@ NecBlik supports:
 
 - Polish.
 
-
-
 ## Extending application
 
 There are many ways to extend NecBlik. With NecBlik it is possible to do any of the following:
@@ -227,6 +227,439 @@ There are many ways to extend NecBlik. With NecBlik it is possible to do any of 
 
 - add your own submodule (for existing module or your own module),
 
-- simply hardcode whatever you want into the application.
+- simply hardcode whatever you want into the application. 
+
+Extendind the app may define either behaviour (of network, coordinator or device), presentation (of network, coordinator, device) or both.
+
+We will cover extending the application from the least to the most complicated.
+
+### General exntension remarks
+
+Any extension of the application will inherit classes from NecBlik.Core and NecBlik.Core.GUI Interfaces or Models either directly or indirectly. 
+
+Keep in mind that the application uses MahApps metro windows and therefore created windows should not inherit from window, and should be changed to MahApps.MetroWindow control in xaml.
+
+Note that EVERY object has a unique CacheId for a Network and each network must have a unique CacheId in whole application or you may expect the app to be unstable or crash.
+
+#### Translation and localization
+
+NecBlik uses localization extension. To add a localization extension just add this code to your xaml.
+
+```xml
+xmlns:lexp="clr-namespace:WPFLocalizeExtension.Providers;assembly=WPFLocalizeextension"
+xmlns:lex="clr-namespace:WPFLocalizeExtension.Extensions;assembly=WPFLocalizeextension"
+lexp:ResxLocalizationProvider.DefaultAssembly="NecBlik.xxx.GUI"
+lexp:ResxLocalizationProvider.DefaultDictionary="SR"
+```
+
+Create a SR.resx in Strings directory and you can use the translations for example.
+
+```xml
+Text="{lex:Loc NecBlik.Digi.Gui:SR:GPTemperature}"
+```
+
+### Hardcoded extension
+
+If you intend to never update NecBlik, you can simply take the code and adjust it in any way you want. That is however not the case we will cover in this section. We will cover here adding classes so they become embedded with the output binaries, but does not interfere with existing code (and therefore can be still updated with new repository versions).
+
+We will use a simple scenario.
+
+Let's say we have a remote device that every X seconds sends us current value of temperature sensor. We want our ViewModel to store that value, and we want to see this device as a "termometer" on our map. We also want to see a bar with color of the temperature when we click on the device on map. 
+
+For hardcoded extension we will need our NecBlik.Digi.GUI project that has a folder Examples where we can put our code.
+
+REMARK!!! The same can be done for NecBlik.Virtual.GUI
+
+#### Presentation
+
+Let's start with adding presentation (Windows) for our particular purpose. 
+
+##### Device
+
+###### Window
+
+Full example code is available in the code on this repository. 
+
+In Examples/Views/Sources we create a new window, called "TemperatureDeviceWindow". We change the window type to "mah:MetroWindow" and add "xmlns:mah="http://metro.mahapps.com/winfx/xaml/controls"" to our code.
+
+Remark: remember to remove inheritance in TemperatureDeviceWindow.xaml.cs.
+
+Now let's add a temperature value indicator.
+
+```xml
+<StackPanel Grid.Row="1" HorizontalAlignment="Center" Orientation="Horizontal" Margin="0 10 0 0">
+           <TextBlock Text="{lex:Loc NecBlik.Digi.Gui:SR:GPTemperature}" Foreground="{StaticResource MaterialDesignDarkForeground}"></TextBlock>
+           <TextBlock Text="{Binding Temperature, FallbackValue='?'}"  Margin="10 0 0 0"  Foreground="{StaticResource MaterialDesignDarkForeground}"></TextBlock>
+</StackPanel>
+```
+
+Then we add a status indicator.
+
+```xml
+<StackPanel Grid.Row="2" Orientation="Horizontal" HorizontalAlignment="Center">
+           <TextBlock Text="{lex:Loc NecBlik.Core.Gui:SR:GPStatus}" Foreground="{StaticResource MaterialDesignDarkForeground}"></TextBlock>
+           <TextBlock Text="{Binding Status, FallbackValue='?'}" Margin="10 0 0 0" Foreground="{StaticResource MaterialDesignDarkForeground}"></TextBlock>
+</StackPanel>
+```
+
+And let's add a bar.
+
+```xml
+<Rectangle Grid.Row="1" Height="20">
+                <Rectangle.Fill>
+                    <SolidColorBrush Color="{Binding TemperatureColor}" />
+                </Rectangle.Fill>
+</Rectangle>
+```
+
+Note how we can just bind to properties of our ViewModels (that we will create later).
+
+Note how we can use translation with lex:Loc.
+
+REMARK!!! Window will be attached in behavior. 
+
+```csharp
+public TemperatureDeviceViewModel(DeviceModel model, NetworkViewModel networkModel) : base(model, networkModel)
+        {
+            this.EditCommand = new RelayCommand((o) =>
+            {
+                var window = new TemperatureDeviceWindow(this);
+                window.Show();
+            });
+        }
+```
+
+###### Control
+
+In Examples/Views/Controls we create a new UserControl, called "TemperatureControl.xaml". A full example is available in code, so for simplicity we can just show that it is possible to bind to properties of viewmodel (and everything that it inherited):
+
+```xml
+<Grid.ToolTip>
+                    <Grid>
+                        <Grid.ColumnDefinitions>
+                            <ColumnDefinition Width="auto"></ColumnDefinition>
+                            <ColumnDefinition Width="*"></ColumnDefinition>
+                        </Grid.ColumnDefinitions>
+                        <Grid.RowDefinitions>
+                            <RowDefinition></RowDefinition>
+                            <RowDefinition></RowDefinition>
+                            <RowDefinition></RowDefinition>
+                            <RowDefinition></RowDefinition>
+                            <RowDefinition></RowDefinition>
+                            <RowDefinition></RowDefinition>
+                        </Grid.RowDefinitions>
+                        <TextBlock Grid.Row="0" Grid.Column="0" VerticalAlignment="Center" HorizontalAlignment="Left" Text="{lex:Loc NecBlik.Core.GUI:SR:GPGuid}"></TextBlock>
+                        <TextBlock Grid.Row="0" Grid.Column="1" VerticalAlignment="Center" HorizontalAlignment="Left" Margin="0 0 5 0" Text="{Binding Name, FallbackValue='???'}"></TextBlock>
+                        <TextBlock Grid.Row="1" Grid.Column="0" VerticalAlignment="Center" HorizontalAlignment="Left" Text="{lex:Loc NecBlik.Core.GUI:SR:GPGuid}"></TextBlock>
+                        <TextBlock Grid.Row="1" Grid.Column="1" VerticalAlignment="Center" HorizontalAlignment="Left" Margin="0 0 5 0" Text="{Binding Guid, FallbackValue='???'}"></TextBlock>
+                        <TextBlock Grid.Row="2" Grid.Column="0" VerticalAlignment="Center" HorizontalAlignment="Left" Text="{lex:Loc NecBlik.Core.GUI:SR:GPAddress}"></TextBlock>
+                        <TextBlock Grid.Row="2" Grid.Column="1" VerticalAlignment="Center" HorizontalAlignment="Left" Margin="0 0 5 0" Text="{Binding Address, FallbackValue='???'}"></TextBlock>
+                        <TextBlock Grid.Row="3" Grid.Column="0" VerticalAlignment="Center" HorizontalAlignment="Left" Text="{lex:Loc NecBlik.Core.GUI:SR:GPFactory}"></TextBlock>
+                        <TextBlock Grid.Row="3" Grid.Column="1" VerticalAlignment="Center" HorizontalAlignment="Left" Margin="0 0 5 0" Text="{Binding InternalFactoryType, FallbackValue='???'}"></TextBlock>
+                        <TextBlock Grid.Row="4" VerticalAlignment="Top" HorizontalAlignment="Left" Text="{Binding Temperature, StringFormat='{}{0}°C'}"></TextBlock>
+                        <TextBlock Grid.Row="5" Grid.Column="0" VerticalAlignment="Center" HorizontalAlignment="Left" Text="{lex:Loc NecBlik.Core.GUI:SR:GPStatus}"></TextBlock>
+                        <TextBlock Grid.Row="5" Grid.Column="1" VerticalAlignment="Center" HorizontalAlignment="Left" Margin="0 0 5 0" Text="{Binding Status}"></TextBlock>
+                    </Grid>
+</Grid.ToolTip>
+```
+
+REMARK!!! The control must implement IDeviceControl to be found by the assembly. 
+
+##### Coordinator
+
+Coordinator and Devices both have the same ContorolType (IDeviceControl) so if you want to change window/control of the coordinator just do the same as you would do if it was a device.
+
+##### Network
+
+Network Window can be customized with ViewModel (Behaviour).
+
+```csharp
+namespace NecBlik.Digi.GUI.Examples.ViewModels.Networks
+{
+    public class DigiNetworkExampleViewModel : Digi.GUI.ViewModels.DigiZigBeeNetworkViewModel
+    {
+        public DigiNetworkExampleViewModel(Network network) : base(network)
+        {
+            this.EditCommand = new Common.WpfExtensions.Base.RelayCommand((o) =>
+            {
+                var window = new Digi.GUI.Views.DigiNetworkWindow(this);
+                window.Show();
+            });
+        }
+    }
+}
+```
+
+Here you can just change what window is being created. A network window should have a constructor that takes a NetworkViewModel (or inherited one) as a parameter and attach it as a data context just like:
+
+```csharp
+public partial class DigiNetworkWindow
+    {
+        public DigiZigBeeNetworkViewModel ViewModel { get; set; }
+
+        public DigiNetworkWindow()
+        {
+            InitializeComponent();
+        }
+
+        public DigiNetworkWindow(DigiZigBeeNetworkViewModel vm) : this()
+        {
+            this.ViewModel = vm;
+            this.DataContext = this;
+        }
+    }
+```
+
+#### Behaviour
+
+##### Device
+
+Keeping in mind our scenario we will now add a backend for our Device.
+
+We create a class in Examples/ViewModels/Sources and we inherit from our main Module Device class (here DigiZigBeeViewModel)
+
+```csharp
+public class TemperatureDeviceViewModel : DigiZigBeeViewModel
+```
+
+Then we add desired properties:
+
+```csharp
+private double? temperature = null;
+        public double? Temperature
+        {
+            get
+            {
+                return temperature;
+            }
+            set
+            {
+                if(value>this.maxRecordedTemperature)
+                {
+                    this.maxRecordedTemperature = value ?? this.maxRecordedTemperature;
+                }
+                if(value<this.minRecordedTemperature)
+                {
+                    this.minRecordedTemperature = value ?? this.minRecordedTemperature;
+                }
+                this.temperature = value;
+                this.TemperatureColor = TemperatureDeviceViewModel.TemperatureToColor(this.temperature ?? 0, this.minRecordedTemperature, this.maxRecordedTemperature);
+                this.OnPropertyChanged();
+            }
+        }
+
+        private Color temperatureColor = Colors.White;
+        public Color TemperatureColor {
+            get 
+            { 
+                return this.temperatureColor; 
+            }
+            set { 
+                this.temperatureColor = value; this.OnPropertyChanged(); 
+            }
+        } 
+```
+
+We then override OnRecievedDataSentFromSourceDevice so that when an incoming message comes we convert it to a double value and set our props.
+
+```csharp
+public override void OnRecievedDataSentFromSourceDevice(string data, string sourceAddress)
+        {
+            var splitData = data.Split(':');
+            var parsed = 0.0d;
+            if (splitData.Count() > 1)
+                if(double.TryParse(splitData[1],out parsed))
+                    this.Temperature = parsed;
+            else if (double.TryParse(data, out parsed))
+                    this.Temperature = parsed;
+        }
+```
+
+Done.
+
+Now either you will add a rule to this device during runtime so that it uses this particular viewmodel or you can hardcode it in network behavior.
+
+For example you can do something like this:
+
+```csharp
+namespace NecBlik.Digi.GUI.Examples.ViewModels.Networks
+{
+    public class DigiNetworkExampleViewModel : Digi.GUI.ViewModels.DigiZigBeeNetworkViewModel
+    {
+        public DigiNetworkExampleViewModel(Network network) : base(network)
+        {
+            this.FactoryRules.Add(new Core.GUI.Factories.ViewModels.FactoryRuleViewModel(new Core.Factories.FactoryRule() { CacheObjectId="DeviceAddress", Property=Digi.GUI.Factories.DigiZigBeeGuiFactory.DeviceViewModelRuledProperties.ViewModel, Value=typeof(Digi.GUI.Examples.ViewModels.Sources.TemperatureDeviceViewModel).FullName}));
+            this.Sync();//Remember to use sync so that the rules are added to model and saved to a file later
+        }
+    }
+}
+```
+
+##### Coordinator
+
+Extending coordinator is done in the same way as extending a Device. So we can simply add a new class in Examples/ViewModels/Coordinators and inherit from main coordinator in our Module.
+
+```csharp
+namespace NecBlik.Digi.GUI.Examples.ViewModels.Coordinators
+{
+    public class TemperatureCoordinatorViewModel: DigiZigBeeCoordinatorViewModel
+    {
+        public TemperatureCoordinatorViewModel(DeviceModel model, NetworkViewModel networkModel) : base(model, networkModel)
+        {
+
+        }
+
+        
+    }
+}
+```
+
+Then we simply override a method NotifySubscriber that is called whenever an information comes to our Coordinator.
+
+```csharp
+
+namespace NecBlik.Digi.GUI.Examples.ViewModels.Coordinators
+{
+    public class TemperatureCoordinatorViewModel: DigiZigBeeCoordinatorViewModel
+    {
+        public TemperatureCoordinatorViewModel(DeviceModel model, NetworkViewModel networkModel) : base(model, networkModel)
+        {
+
+        }
+
+        public override void NotifySubscriber(RecievedData updateInformation)
+        {
+            base.NotifySubscriber(updateInformation);
+
+            var sourceVms = this.Network.GetDeviceViewModels().Where((d) => { return d.Address == updateInformation.SourceAddress; });
+            if(sourceVms!=null)
+            {
+                if(sourceVms.Any())
+                {
+                    var sourceVm = sourceVms.First();
+                    sourceVm?.OnRecievedDataSentFromSourceDevice(updateInformation.Data,updateInformation.SourceAddress);
+                }
+            }
+        }
+    }
+```
+
+By calling 
+
+```csharp
+base.NotifySubscriber(updateInformation);
+```
+
+we are calling a function that will add the RecievedData to incoming buffer entries.
+
+##### Network
+
+Changing the behavior of the network is quite simple. As mentioned in Presentation/Network section we can write a .cs class:
+
+```csharp
+namespace NecBlik.Digi.GUI.Examples.ViewModels.Networks
+{
+    public class DigiNetworkExampleViewModel : Digi.GUI.ViewModels.DigiZigBeeNetworkViewModel
+    {
+        public DigiNetworkExampleViewModel(Network network) : base(network)
+        {
+            this.EditCommand = new Common.WpfExtensions.Base.RelayCommand((o) =>
+            {
+                var window = new Digi.GUI.Views.DigiNetworkWindow(this);
+                window.Show();
+            });
+        }
+    }
+}
+
+```
+
+In constructor we have access to most parent features and we can edit them. For example we can edit button commands or add our own (and use them in our custom network window). 
+
+REMARK!!! Keep in mind that after adding a network in NecBlik you cant change it from the user's side, you may change coordinator class and control, you may change device viewmodels and controls but you cant change network viewmodel.
+
+### Submodule extension
+
+#### Presentation
+
+##### Device
+
+##### Coordinator
+
+##### Network
+
+#### Behaviour
+
+##### Device
+
+##### Coordinator
+
+##### Network
+
+### Module extension
+
+#### Presentation
+
+##### Device
+
+##### Coordinator
+
+##### Network
+
+#### Behaviour
+
+##### Device
+
+##### Coordinator
+
+##### Network
+
+### General remarks concerning Xbee application layer adjustments for NecBlik
+
+It is worth noting that NecBlik uses some default commands and sends them in application layer data. The only command that is not dependent on extension of NecBlik is "ECHO". If an "ECHO" is sent to a remote XBee, then the XBee must reply with everything what was sent after the "ECHO" or some functionalities may not work or NecBlik may wrongly interpret device statuses.
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 
