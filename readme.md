@@ -2,9 +2,9 @@
 
 NecBlik is an open-source, C#, application for monitoring and controlling networks. It was created for ZigBee network using XBee devices but can be easily extended to support any network. NecBlik is a name taken from silesian language, where Nec can be translated as Network and Blik can be translated as a glimpse, because the application allows us to take a glimpse on our network :).
 
-## Overview
+## Questions
 
-//TODO add photo of the application
+Please feel free to post questions in issues section as this application is indeed quite complex, and contains many projects and solutions, i will try to answer them asap.
 
 ## Features
 
@@ -509,7 +509,7 @@ namespace NecBlik.Digi.GUI.Examples.ViewModels.Coordinators
 
         }
 
-        
+
     }
 }
 ```
@@ -517,7 +517,6 @@ namespace NecBlik.Digi.GUI.Examples.ViewModels.Coordinators
 Then we simply override a method NotifySubscriber that is called whenever an information comes to our Coordinator.
 
 ```csharp
-
 namespace NecBlik.Digi.GUI.Examples.ViewModels.Coordinators
 {
     public class TemperatureCoordinatorViewModel: DigiZigBeeCoordinatorViewModel
@@ -571,7 +570,6 @@ namespace NecBlik.Digi.GUI.Examples.ViewModels.Networks
         }
     }
 }
-
 ```
 
 In constructor we have access to most parent features and we can edit them. For example we can edit button commands or add our own (and use them in our custom network window). 
@@ -693,8 +691,6 @@ namespace NecBlik.Digi.Example.ViewModels.Sources
         }
     }
 }
-
-
 ```
 
 This process can be repeated for Coordinator/Device/Network ViewModels (Behaviour) and Coordinator/Device/Network UserControls (Presentation). When you create all your vms, and ucs simply run NecBlik and configure your Network to use them in runtime or if done earlier in backend network constructor.
@@ -923,12 +919,6 @@ if (model.DeviceSource.GetVendorID() != this.GetVendorID())
 
 or similar code, depending on the function.
 
-
-
-
-
-
-
 #### General remarks concerning modules extensions
 
 All modules are being loaded by DeviceGuiAnyFactory and DeviceAnyFactory.
@@ -938,49 +928,3 @@ All modules are being loaded by DeviceGuiAnyFactory and DeviceAnyFactory.
 ### General remarks concerning Xbee application layer adjustments for NecBlik
 
 It is worth noting that NecBlik uses some default commands and sends them in application layer data. The only command that is not dependent on extension of NecBlik is "ECHO". If an "ECHO" is sent to a remote XBee, then the XBee must reply with everything what was sent after the "ECHO" or some functionalities may not work or NecBlik may wrongly interpret device statuses.
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
