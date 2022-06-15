@@ -1,0 +1,61 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<ClassDiagram MajorVersion="1" MinorVersion="1">
+  <Class Name="NecBlik.Digi.Factories.DigiZigBeeFactory" Collapsed="true">
+    <Position X="6" Y="2.75" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAgAAAAAAAAAAQAAAAAAAAAAAAAAIAAAAAAAAAAAg=</HashCode>
+      <FileName>Factories\DigiZigBeeFactory.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="NecBlik.Digi.Models.DigiZigBeeNetwork" Collapsed="true">
+    <Position X="7.75" Y="2.75" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAMAAAAAAAQAAAAAAAAAAAAAAAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>Models\DigiZigBeeNetwork.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="NecBlik.Digi.Models.DigiZigBeeSource" Collapsed="true">
+    <Position X="9.5" Y="2.75" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAgAAAAAIEAAAAAAAAAAAAACAAAAgAAABAA=</HashCode>
+      <FileName>Models\DigiZigBeeSource.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="NecBlik.Digi.Models.DigiZigBeeUSBCoordinator" Collapsed="true">
+    <Position X="6" Y="3.75" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AQAAAIQBACCAIAAAIEAIAAC5AIBAAAACAABCkACABAA=</HashCode>
+      <FileName>Models\DigiZigBeeUSBCoordinator.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="NecBlik.Digi.Packets.TxRequest64Bit" Collapsed="true">
+    <Position X="6" Y="4.75" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAEAAAAAAAAAACAAAAgIAAAAAAAAAAAAAAAAAAAAQA=</HashCode>
+      <FileName>Packets\TxRequest64Bit.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="NecBlik.Digi.Resources.Resources" Collapsed="true">
+    <Position X="7.75" Y="3.75" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAASAAAAAAAAIAAAAQABEAAAIQAAAAAEAAAAAAACAIA=</HashCode>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="NecBlik.Digi.USB.SerialPortParameters" Collapsed="true" BaseTypeListCollapsed="true">
+    <Position X="9.5" Y="3.75" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAACAAAAABAAEgAAAAAgAAAAAAIAAAAAEAAAUAAA=</HashCode>
+      <FileName>USB\SerialPortParameters.cs</FileName>
+    </TypeIdentifier>
+    <Lollipop Position="0.2" Collapsed="true" />
+  </Class>
+  <Class Name="NecBlik.Digi.USB.WinSerialPort" Collapsed="true" BaseTypeListCollapsed="true">
+    <Position X="7.75" Y="4.75" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>IBQAAAAAAAAJIAAEAiIAAAGAIAAoAAgQSoAAAACAAAA=</HashCode>
+      <FileName>USB\WinSerialPort.cs</FileName>
+    </TypeIdentifier>
+    <Lollipop Position="0.2" Collapsed="true" />
+  </Class>
+  <Font Name="Segoe UI" Size="9" />
+</ClassDiagram>

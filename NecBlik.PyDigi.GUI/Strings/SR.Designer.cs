@@ -70,6 +70,15 @@ namespace NecBlik.PyDigi.GUI.Strings {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to ATCommands.
+        /// </summary>
+        public static string GPATCommands {
+            get {
+                return ResourceManager.GetString("GPATCommands", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Baud rate.
         /// </summary>
         public static string GPBaudRate {

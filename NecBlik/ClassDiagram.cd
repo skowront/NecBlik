@@ -1,0 +1,106 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<ClassDiagram MajorVersion="1" MinorVersion="1">
+  <Class Name="NecBlik.Models.ApplicationSettings" Collapsed="true">
+    <Position X="12" Y="1.25" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAACAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>Models\ApplicationSettings.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="NecBlik.Resources.Resources" Collapsed="true">
+    <Position X="8.5" Y="4.25" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAAAAAABEAAAAQACAAAAAgAAAIAAAIA=</HashCode>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="NecBlik.Strings.SR" Collapsed="true">
+    <Position X="10.25" Y="4.25" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AggAAACJoAABBAISARehECQAEQAAAIAAQAAEAAAgCIo=</HashCode>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="NecBlik.ViewModels.ApplicationSettingsViewModel" Collapsed="true">
+    <Position X="13.75" Y="1.25" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAACAAAAAAAAAAAAAAAAAAAAAAAAAgAAAABAAA=</HashCode>
+      <FileName>ViewModels\ApplicationSettingsViewModel.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="NecBlik.ViewModels.MainWindowViewModel" Collapsed="true">
+    <Position X="8.5" Y="3.25" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>RAAIAAACAEBUAhIDiAyCCBsABAIAwAAkAAGgAQAJAFY=</HashCode>
+      <FileName>ViewModels\MainWindowViewModel.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="NecBlik.ViewModels.MapResizeViewModel" Collapsed="true">
+    <Position X="12" Y="3.25" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAQAAAABAQAAAAAIACAAEAAgAAAAAAAAAAAEAAIEhA=</HashCode>
+      <FileName>ViewModels\MapResizeViewModel.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="NecBlik.Views.Controls.DeviceDesignerCanvas" Collapsed="true">
+    <Position X="10.25" Y="2.25" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>EAAYAAYAAACAAQAAABAAACAgAAgCAAAAAAEQAAAAYAA=</HashCode>
+      <FileName>Views\Controls\DeviceDesignerCanvas.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="NecBlik.Views.Controls.MapControl" Collapsed="true" BaseTypeListCollapsed="true">
+    <Position X="10.25" Y="3.25" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAACAAAAAKAAAACAAgAKAAAAAAAAQACAAAAA=</HashCode>
+      <FileName>Views\Controls\MapControl.xaml.cs</FileName>
+    </TypeIdentifier>
+    <Lollipop Position="0.2" Collapsed="true" />
+  </Class>
+  <Class Name="NecBlik.Views.AboutWindow" Collapsed="true" BaseTypeListCollapsed="true">
+    <Position X="8.5" Y="1.25" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>Views\AboutWindow.xaml.cs</FileName>
+    </TypeIdentifier>
+    <Lollipop Position="0.2" Collapsed="true" />
+  </Class>
+  <Class Name="NecBlik.Views.AppSettingsWindow" Collapsed="true" BaseTypeListCollapsed="true">
+    <Position X="8.5" Y="2.25" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>QAAAAAAAAAAAAAAAAAAAAAAAEAAAAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>Views\AppSettingsWindow.xaml.cs</FileName>
+    </TypeIdentifier>
+    <Lollipop Position="0.2" Collapsed="true" />
+  </Class>
+  <Class Name="NecBlik.Views.DeviceEditorWindow" Collapsed="true" BaseTypeListCollapsed="true">
+    <Position X="12" Y="2.25" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AEAAgCAAAAAAAAAAAAIAAAAAEAAIAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>Views\DeviceEditorWindow.xaml.cs</FileName>
+    </TypeIdentifier>
+    <Lollipop Position="0.2" Collapsed="true" />
+  </Class>
+  <Class Name="NecBlik.Views.MainWindow" Collapsed="true" BaseTypeListCollapsed="true">
+    <Position X="13.75" Y="2.25" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAWAAAgAAAAAAAAAAIAAEAEAJACARBAAAAAAAAAAE=</HashCode>
+      <FileName>Views\MainWindow.xaml.cs</FileName>
+    </TypeIdentifier>
+    <Lollipop Position="0.2" Collapsed="true" />
+  </Class>
+  <Class Name="NecBlik.Views.MapResizeWindow" Collapsed="true" BaseTypeListCollapsed="true">
+    <Position X="13.75" Y="3.25" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>Views\MapResizeWindow.xaml.cs</FileName>
+    </TypeIdentifier>
+    <Lollipop Position="0.2" Collapsed="true" />
+  </Class>
+  <Class Name="NecBlik.App" Collapsed="true">
+    <Position X="10.25" Y="1.25" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>IAAAAgAAAAAAAAAAAAIAAAAAAAQQAAAAAAAAACAAAAA=</HashCode>
+      <FileName>App.xaml.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Font Name="Segoe UI" Size="9" />
+</ClassDiagram>

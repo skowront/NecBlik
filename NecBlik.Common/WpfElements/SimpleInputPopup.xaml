@@ -3,6 +3,7 @@
         xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
         xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:mah="http://metro.mahapps.com/winfx/xaml/controls"
         xmlns:local="clr-namespace:NecBlik.Common.WpfElements"
         mc:Ignorable="d"
         WindowStyle="None"
@@ -13,7 +14,6 @@
         Title="{Binding Title}" 
         Height="300"
         Width="500"
-        Template="{DynamicResource DarkWindowControlTemplateHeaderless}" 
         ResizeMode="CanResizeWithGrip">
     <Window.Resources>
         <ResourceDictionary>
@@ -22,38 +22,32 @@
             </ResourceDictionary.MergedDictionaries>
         </ResourceDictionary>
     </Window.Resources>
-    <WindowChrome.WindowChrome>
-        <WindowChrome
-            ResizeBorderThickness="{Binding ResizeBorderThickness,FallbackValue=6}"
-            CaptionHeight="{Binding TitleHeight,FallbackValue=42}"
-            GlassFrameThickness="0"
-            CornerRadius="0">
-        </WindowChrome>
-    </WindowChrome.WindowChrome>
     <Grid>
-        <Grid.RowDefinitions>
-            <RowDefinition Height="auto"></RowDefinition>
-            <RowDefinition Height="*"></RowDefinition>
-            <RowDefinition Height="auto"></RowDefinition>
-        </Grid.RowDefinitions>
-        <TextBlock Grid.Row="0" Text="{Binding Message}" Foreground="{StaticResource MaterialDesignDarkForeground}" FontSize="15"></TextBlock>
-        <TextBox Grid.Row="1" Text="{Binding Value}" Foreground="{StaticResource MaterialDesignDarkForeground}" VerticalAlignment="Bottom" FontSize="13" TextWrapping="Wrap"></TextBox>
-        <Grid Grid.Row="2">
-            <Grid.ColumnDefinitions>
-                <ColumnDefinition></ColumnDefinition>
-                <ColumnDefinition></ColumnDefinition>
-            </Grid.ColumnDefinitions>
+        <Grid Margin="5">
             <Grid.RowDefinitions>
-                <RowDefinition Height="10"></RowDefinition>
-                <RowDefinition Height="1*"></RowDefinition>
-                <RowDefinition Height="50"></RowDefinition>
+                <RowDefinition Height="auto"></RowDefinition>
+                <RowDefinition Height="*"></RowDefinition>
+                <RowDefinition Height="auto"></RowDefinition>
             </Grid.RowDefinitions>
-            <Button Grid.Column="0" Grid.Row="2" Style="{StaticResource BaseButton}" Command="{Binding ConfirmCommand}">
-                <TextBlock FontFamily="{StaticResource FontAwesome}" Text="&#xf00c;"></TextBlock>
-            </Button>
-            <Button Grid.Column="1" Grid.Row="2" Style="{StaticResource BaseButton}" Command="{Binding CancelCommand}">
-                <TextBlock FontFamily="{StaticResource FontAwesome}" Text="&#xf00d;"></TextBlock>
-            </Button>
+            <TextBlock Grid.Row="0" Text="{Binding Message}" FontSize="15"></TextBlock>
+            <TextBox Grid.Row="1" Text="{Binding Value}" VerticalAlignment="Bottom" FontSize="13" TextWrapping="Wrap"></TextBox>
+            <Grid Grid.Row="2">
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition></ColumnDefinition>
+                    <ColumnDefinition></ColumnDefinition>
+                </Grid.ColumnDefinitions>
+                <Grid.RowDefinitions>
+                    <RowDefinition Height="10"></RowDefinition>
+                    <RowDefinition Height="1*"></RowDefinition>
+                    <RowDefinition Height="50"></RowDefinition>
+                </Grid.RowDefinitions>
+                <Button Grid.Column="0" Grid.Row="2" Style="{StaticResource BaseButton}" Command="{Binding ConfirmCommand}">
+                    <TextBlock FontFamily="{StaticResource FontAwesome}" Text="&#xf00c;"></TextBlock>
+                </Button>
+                <Button Grid.Column="1" Grid.Row="2" Style="{StaticResource BaseButton}" Command="{Binding CancelCommand}">
+                    <TextBlock FontFamily="{StaticResource FontAwesome}" Text="&#xf00d;"></TextBlock>
+                </Button>
+            </Grid>
         </Grid>
     </Grid>
 </Window>

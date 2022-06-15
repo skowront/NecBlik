@@ -160,6 +160,24 @@ namespace NecBlik.Core.GUI.Strings {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Message.
+        /// </summary>
+        public static string GPMessage {
+            get {
+                return ResourceManager.GetString("GPMessage", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to ms.
+        /// </summary>
+        public static string GPms {
+            get {
+                return ResourceManager.GetString("GPms", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Name.
         /// </summary>
         public static string GPName {
@@ -174,6 +192,42 @@ namespace NecBlik.Core.GUI.Strings {
         public static string GPOpen {
             get {
                 return ResourceManager.GetString("GPOpen", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Payload.
+        /// </summary>
+        public static string GPPayload {
+            get {
+                return ResourceManager.GetString("GPPayload", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Payload size.
+        /// </summary>
+        public static string GPPayloadSize {
+            get {
+                return ResourceManager.GetString("GPPayloadSize", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Ping.
+        /// </summary>
+        public static string GPPing {
+            get {
+                return ResourceManager.GetString("GPPing", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Ping packet.
+        /// </summary>
+        public static string GPPingPacket {
+            get {
+                return ResourceManager.GetString("GPPingPacket", resourceCulture);
             }
         }
         
@@ -196,6 +250,42 @@ namespace NecBlik.Core.GUI.Strings {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Response time.
+        /// </summary>
+        public static string GPResponseTime {
+            get {
+                return ResourceManager.GetString("GPResponseTime", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Result.
+        /// </summary>
+        public static string GPResult {
+            get {
+                return ResourceManager.GetString("GPResult", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Returned.
+        /// </summary>
+        public static string GPReturned {
+            get {
+                return ResourceManager.GetString("GPReturned", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Run.
+        /// </summary>
+        public static string GPRun {
+            get {
+                return ResourceManager.GetString("GPRun", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Select.
         /// </summary>
         public static string GPSelect {
@@ -205,11 +295,47 @@ namespace NecBlik.Core.GUI.Strings {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Remote address.
+        /// </summary>
+        public static string GPSelectedRemoteAddress {
+            get {
+                return ResourceManager.GetString("GPSelectedRemoteAddress", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Sending time.
+        /// </summary>
+        public static string GPSendingTime {
+            get {
+                return ResourceManager.GetString("GPSendingTime", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Sent.
         /// </summary>
         public static string GPSent {
             get {
                 return ResourceManager.GetString("GPSent", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Status.
+        /// </summary>
+        public static string GPStatus {
+            get {
+                return ResourceManager.GetString("GPStatus", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Timeout.
+        /// </summary>
+        public static string GPTimeout {
+            get {
+                return ResourceManager.GetString("GPTimeout", resourceCulture);
             }
         }
         

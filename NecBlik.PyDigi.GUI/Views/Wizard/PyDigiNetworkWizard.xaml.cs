@@ -48,7 +48,8 @@ namespace NecBlik.PyDigi.GUI.Views.Wizard
         public async Task<VirtualNetworkViewModel> ProvideResponseAsync(object context = null)
         {
             this.ShowDialog();
-            if(this.ViewModel.Committed == false)
+
+            if (this.ViewModel.Committed == false)
             {
                 return null;
             }

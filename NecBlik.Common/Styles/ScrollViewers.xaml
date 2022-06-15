@@ -4,6 +4,7 @@
         <ResourceDictionary Source="/NecBlik.Common;component/Styles/Fonts.xaml"/>
         <ResourceDictionary Source="/NecBlik.Common;component/Styles/Colors.xaml"/>
         <ResourceDictionary Source="pack://application:,,,/MaterialDesignThemes.Wpf;component/Themes/MaterialDesignTheme.ScrollBar.xaml" />
+        <ResourceDictionary Source="pack://application:,,,/MaterialDesignThemes.Wpf;component/Themes/MaterialDesignTheme.Defaults.xaml" />
     </ResourceDictionary.MergedDictionaries>
     <!--Based on: https://docs.microsoft.com/en-us/dotnet/desktop/wpf/controls/scrollviewer-styles-and-templates?view=netframeworkdesktop-4.8-->
     <Style x:Key="ScrollViewer"
@@ -22,7 +23,7 @@
                             <RowDefinition />
                             <RowDefinition Height="Auto" />
                         </Grid.RowDefinitions>
-                        <Border Grid.Column="0" BorderThickness="0,1,1,1">
+                        <Border Grid.Column="0"  BorderThickness="0,1,1,1">
                             <Border.BorderBrush>
                                 <SolidColorBrush Color="{DynamicResource BorderMediumColor}" />
                             </Border.BorderBrush>
@@ -33,19 +34,67 @@
                                 Maximum="{TemplateBinding ScrollableHeight}"
                                 ViewportSize="{TemplateBinding ViewportHeight}"
                                 Visibility="{TemplateBinding ComputedVerticalScrollBarVisibility}"
-                                Style="{StaticResource MaterialDesignScrollBar}"/>
+                                Style="{StaticResource MaterialDesignScrollBar}"
+                                Background="{StaticResource MaterialDesignDarkBackground}"/>
                         <ScrollBar x:Name="PART_HorizontalScrollBar"
                                 Orientation="Horizontal"
                                 Grid.Row="1"
-                                Grid.Column="1"
+                                Grid.Column="0"
                                 Value="{TemplateBinding HorizontalOffset}"
                                 Maximum="{TemplateBinding ScrollableWidth}"
                                 ViewportSize="{TemplateBinding ViewportWidth}"
                                 Visibility="{TemplateBinding ComputedHorizontalScrollBarVisibility}"
-                                Style="{StaticResource MaterialDesignScrollBar}"/>
+                                Style="{StaticResource MaterialDesignScrollBar}"
+                                Background="{StaticResource MaterialDesignDarkBackground}"/>
                     </Grid>
                 </ControlTemplate>
             </Setter.Value>
         </Setter>
     </Style>
+    <Style x:Key="ScrollViewerLeft"
+       TargetType="{x:Type ScrollViewer}">
+        <Setter Property="OverridesDefaultStyle"
+          Value="True" />
+        <Setter Property="Template">
+            <Setter.Value>
+                <ControlTemplate TargetType="{x:Type ScrollViewer}">
+                    <Grid>
+                        <Grid.ColumnDefinitions>
+                            <ColumnDefinition/>
+                            <ColumnDefinition Width="auto"/>
+                        </Grid.ColumnDefinitions>
+                        <Grid.RowDefinitions>
+                            <RowDefinition />
+                            <RowDefinition Height="Auto" />
+                        </Grid.RowDefinitions>
+                        <Border Grid.Column="0"  BorderThickness="0,1,1,1">
+                            <Border.BorderBrush>
+                                <SolidColorBrush Color="{DynamicResource BorderMediumColor}" />
+                            </Border.BorderBrush>
+                            <ScrollContentPresenter CanContentScroll="{TemplateBinding CanContentScroll}" />
+                        </Border>
+                        <ScrollBar Grid.Column="0" x:Name="PART_VerticalScrollBar" Margin="0 0 0 0"
+                                Value="{TemplateBinding VerticalOffset}"
+                                Maximum="{TemplateBinding ScrollableHeight}"
+                                ViewportSize="{TemplateBinding ViewportHeight}"
+                                Visibility="{TemplateBinding ComputedVerticalScrollBarVisibility}"
+                                Style="{StaticResource MaterialDesignScrollBar}"
+                                Background="{StaticResource MaterialDesignDarkBackground}"
+                                HorizontalAlignment="Left"/>
+                        <ScrollBar x:Name="PART_HorizontalScrollBar"
+                                Orientation="Horizontal"
+                                Grid.Row="1"
+                                Grid.Column="0"
+                                Value="{TemplateBinding HorizontalOffset}"
+                                Maximum="{TemplateBinding ScrollableWidth}"
+                                ViewportSize="{TemplateBinding ViewportWidth}"
+                                Visibility="{TemplateBinding ComputedHorizontalScrollBarVisibility}"
+                                Style="{StaticResource MaterialDesignScrollBar}"
+                                Background="{StaticResource MaterialDesignDarkBackground}"/>
+                    </Grid>
+                </ControlTemplate>
+            </Setter.Value>
+        </Setter>
+    </Style>
+
 </ResourceDictionary>

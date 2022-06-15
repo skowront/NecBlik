@@ -1,0 +1,61 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<ClassDiagram MajorVersion="1" MinorVersion="1">
+  <Class Name="NecBlik.PyDigi.GUI.Factories.PyDigiZigBeeGuiFactory" Collapsed="true">
+    <Position X="10.25" Y="3.75" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAgAAAAAAAAAAIAAACAEgIEAAAAAAAAAEAAAgAABAAA=</HashCode>
+      <FileName>Factories\PyDigiZigBeeGuiFactory.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="NecBlik.PyDigi.GUI.Strings.SR" Collapsed="true">
+    <Position X="13.75" Y="3.75" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>FAAACEkAAAQgAAACAAABEAAAAQAAAAAAAAEAAAAgAIA=</HashCode>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="NecBlik.PyDigi.GUI.ViewModels.Wizard.PyDigiNetworkWizardViewModel" Collapsed="true">
+    <Position X="13.75" Y="2.75" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>CEQAAQgAAAgAAAMAACIAAAAAAAAAAIoIAAAACABMAAA=</HashCode>
+      <FileName>ViewModels\Wizard\PyDigiNetworkWizardViewModel.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="NecBlik.PyDigi.GUI.ViewModels.PyDigiZigBeeCoordinatorViewModel" Collapsed="true">
+    <Position X="7.75" Y="4.25" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAAAAEAAAAAAAAAAAAAAAAAAAAAABAA=</HashCode>
+      <FileName>ViewModels\PyDigiZigBeeCoordinatorViewModel.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="NecBlik.PyDigi.GUI.ViewModels.PyDigiZigBeeNetworkViewModel" Collapsed="true">
+    <Position X="12" Y="3.75" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAIIACAAAAAAAAAAAAAAIAAAAAEACBAAA=</HashCode>
+      <FileName>ViewModels\PyDigiZigBeeNetworkViewModel.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="NecBlik.PyDigi.GUI.ViewModels.PyDigiZigBeeViewModel" Collapsed="true">
+    <Position X="7.75" Y="2.75" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAAAAEAAAAAAAAAAAAAAAAAAkAAABAA=</HashCode>
+      <FileName>ViewModels\PyDigiZigBeeViewModel.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="NecBlik.PyDigi.GUI.Views.Wizard.PyDigiNetworkWizard" Collapsed="true" BaseTypeListCollapsed="true">
+    <Position X="12" Y="2.75" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAACAAAAAAAAAAAAAAAAAEAAAAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>Views\Wizard\PyDigiNetworkWizard.xaml.cs</FileName>
+    </TypeIdentifier>
+    <Lollipop Position="0.2" Collapsed="true" />
+  </Class>
+  <Class Name="NecBlik.Digi.GUI.Views.PyDigiNetworkWindow" Collapsed="true" BaseTypeListCollapsed="true">
+    <Position X="10.25" Y="2.75" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAAAAAAAAAAAEAAAAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>Views\PyDigiNetworkWindow.xaml.cs</FileName>
+    </TypeIdentifier>
+    <Lollipop Position="0.2" Collapsed="true" />
+  </Class>
+  <Font Name="Segoe UI" Size="9" />
+</ClassDiagram>

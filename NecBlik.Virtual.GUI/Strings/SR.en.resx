@@ -172,7 +172,7 @@
     <value>Enter new device address or leave empty to generate one.</value>
   </data>
   <data name="GPCoordinatorType" xml:space="preserve">
-    <value>Coordinator type</value>
+    <value>Coordinator class</value>
   </data>
   <data name="GPNetworkType" xml:space="preserve">
     <value>Network type</value>
@@ -200,5 +200,17 @@
   </data>
   <data name="GPSynchronize" xml:space="preserve">
     <value>Synchronize</value>
+  </data>
+  <data name="GPStatus" xml:space="preserve">
+    <value>Status</value>
+  </data>
+  <data name="GPPollingInterval" xml:space="preserve">
+    <value>Polling interval</value>
+  </data>
+  <data name="GPPollDevices" xml:space="preserve">
+    <value>Poll devices</value>
+  </data>
+  <data name="GPPolling" xml:space="preserve">
+    <value>Polling</value>
   </data>
 </root>

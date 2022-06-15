@@ -17,5 +17,7 @@ namespace NecBlik.Core.GUI.Models
         public Point<double> Point { get; set; } = new Point<double>(0, 0);
         [JsonProperty]
         public string CachedObjectId { get; set; } = string.Empty;
+        [JsonProperty]
+        public Guid ParentCachedGuid { get; set; } = new Guid();
     }
 }

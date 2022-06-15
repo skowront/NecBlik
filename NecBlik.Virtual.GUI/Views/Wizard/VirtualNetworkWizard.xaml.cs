@@ -50,7 +50,7 @@ namespace NecBlik.Virtual.GUI.Views.Wizard
                 sources.Add(source);
             }
             coordinator.SetDevices(sources);
-            await network.SetCoordinator(coordinator);
+            network.DeviceSources = new System.Collections.ObjectModel.Collection<IDeviceSource>(sources);
             var factory = new VirtualDeviceGuiFactory();
             return factory.NetworkViewModelBySubType(network,this.ViewModel.NetworkType);
         }

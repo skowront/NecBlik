@@ -18,6 +18,9 @@ using NecBlik.Core.Factories;
 using NecBlik.Common.WpfElements;
 using NecBlik.Common.WpfElements.ResponseProviders;
 using NecBlik.Core.Interfaces;
+using System.ComponentModel;
+using System.Threading;
+using NecBlik.Common.WpfElements.PopupValuePickers;
 
 namespace NecBlik.Virtual.GUI.ViewModels
 {
@@ -28,8 +31,22 @@ namespace NecBlik.Virtual.GUI.ViewModels
         public static readonly List<string> CustomizableDeviceProperties = new List<string> { VirtualDeviceGuiFactory.DeviceViewModelRuledProperties.ViewModel,
                                                                                               VirtualDeviceGuiFactory.DeviceViewModelRuledProperties.MapControl};
 
+        private List<Guid?> Holders { get; set; } = new List<Guid?>();
+        public int PollingInterval
+        {
+            get { return this.model.PollingInterval; }
+            set { this.model.PollingInterval = value ; this.OnPropertyChanged(); }
+        }
+
+        protected bool cancelPolling = false;
+        protected bool holdPolling = false;
+
+        protected BackgroundWorker statusPollingWorker = new BackgroundWorker();
+
         public VirtualNetworkViewModel(Network network) : base(network)
         {
+            this.statusPollingWorker.DoWork += StatusPollingWorker_DoWork;
+            this.statusPollingWorker.RunWorkerAsync();
 
             this.EditResponseProvider = new GenericResponseProvider<string, NetworkViewModel>((q) => {
                 Window window = new VirtualNetworkWindow(this);
@@ -40,6 +57,39 @@ namespace NecBlik.Virtual.GUI.ViewModels
             this.SyncFromModel();
             this.buildCommands();
             this.BuildResponseProviders();
+        }
+
+        ~VirtualNetworkViewModel()
+        {
+            this.cancelPolling = true; 
+        }
+
+        private async void StatusPollingWorker_DoWork(object sender, DoWorkEventArgs e)
+        {
+            while(!this.cancelPolling)
+            {
+                if(!holdPolling)
+                {
+                    if (this.PollingInterval <= 0)
+                    {
+                        Thread.Sleep(10000);
+                        continue;
+                    }
+                    var coord = this.Coordinator?.Model?.DeviceSource as IDeviceCoordinator;
+                    foreach (var item in this.Devices)
+                    {
+                        if (coord != null)
+                        {
+                            item.Status = await coord.GetStatusOf(item.Address);
+                        }
+                    }
+                    if (coord != null)
+                    {
+                        this.coorinator.Status = await coord.GetStatusOf(this.Coordinator.Address);
+                    }
+                    Thread.Sleep(this.model.PollingInterval<100?100:this.model.PollingInterval);
+                }
+            }
         }
 
         private void buildCommands()
@@ -73,6 +123,54 @@ namespace NecBlik.Virtual.GUI.ViewModels
                 this.Devices.Remove(o as VirtualDeviceViewModel);
                 this.NotifyDevicesNetworkChanged(o as VirtualDeviceViewModel);
             });
+
+            this.EditCoordinatorRuleCommand = new RelayCommand((o) =>
+            {
+                var rp = new ListInputValuePicker();
+                var result = rp.ProvideResponse(new Tuple<string, IEnumerable<string>>(NecBlik.Virtual.GUI.Factories.VirtualDeviceGuiFactory.DeviceViewModelRuledProperties.ViewModel, this.AvailableValueProvider.ProvideResponse(this.model.DeviceCoordinatorSubtypeFactoryRule)));
+                if (result == string.Empty || result == null)
+                    return;
+                if (result != this.model.DeviceCoordinatorSubtypeFactoryRule.Value)
+                {
+                    this.model.DeviceCoordinatorSubtypeFactoryRule.Value = result;
+                    this.coorinator = null;
+                    this.Coordinator = this.GetCoordinatorViewModel();
+                }
+                this.OnFactoryEditClosed();
+            });
+
+            this.PollDevicesCommand = new RelayCommand(async (o) =>
+            {
+                var p = new SimpleYesNoProgressBarPopup(string.Empty, string.Empty, Popups.Icons.InfoIcon, null, null, 0, 0, 0, false, false);
+                p.Show();
+                var irp = new YesNoProgressBarPopupResponseProvider(p);
+                var records =string.Empty;
+                await Task.Run(async () =>
+                {
+                    irp.Init(0, (this.coorinator != null ? 1 : 0) + this.Devices.Count, 0);
+
+                    var coord = this.Coordinator?.Model?.DeviceSource as IDeviceCoordinator;
+                    if (coord != null)
+                    {
+                        this.coorinator.Status = await coord.GetStatusOf(this.Coordinator.Address);
+                        records+=this.coorinator.Name + ": " + this.coorinator.Status+'\n';
+                        irp.UpdateDelta(1);
+                    }
+                    foreach (var item in this.Devices)
+                    {
+                        if (coord != null)
+                        {
+                            item.Status = await coord.GetStatusOf(item.Address);
+                            records+=item.Name + ": " + item.Status+'\n';
+                        }
+                        irp.UpdateDelta(1);
+                    }
+                    irp.SealUpdates();
+                });
+                var reportPopup = new SimpleYesPopup(records, string.Empty, Popups.Icons.InfoIcon,null);
+                var rp = new YesPopupResponseProvider(reportPopup);
+                rp.ProvideResponse();
+            });
         }
 
         protected void NotifyDevicesNetworkChanged(VirtualDeviceViewModel changedDevice)
@@ -88,7 +186,7 @@ namespace NecBlik.Virtual.GUI.ViewModels
             }
         }
 
-        private void BuildResponseProviders()
+        protected virtual void BuildResponseProviders()
         {
             this.AvailableCacheObjectIDsProvider = new GenericResponseProvider<List<string>, FactoryRule>((rule) =>
             {
@@ -215,10 +313,26 @@ namespace NecBlik.Virtual.GUI.ViewModels
         public override void Dispose()
         {
             base.Dispose();
+            this.cancelPolling = true;
             foreach (var device in this.Devices)
             {
                 device.Dispose();
             }
+        }
+
+        public virtual void Hold(Guid? Holder=null)
+        {
+            if (Holder != null)
+                this.Holders.Add(Holder);
+            this.holdPolling = true;
+        }
+
+        public virtual void Unhold(Guid? Holder=null)
+        {
+            if (Holders.Contains(Holder))
+                Holders.Remove(Holder);
+            if (Holders.Count == 0)
+                this.holdPolling = false;   
         }
     }
 }

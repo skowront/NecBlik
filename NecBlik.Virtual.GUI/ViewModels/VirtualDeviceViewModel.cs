@@ -19,7 +19,7 @@ namespace NecBlik.Virtual.GUI.ViewModels
 
         public VirtualDeviceViewModel(DeviceModel model, NetworkViewModel networkModel) : base(model, networkModel)
         {
-
+            this.Icon = FontAwesome.WPF.FontAwesomeIcon.Circle;
         }
 
         protected override void BuildCommands()

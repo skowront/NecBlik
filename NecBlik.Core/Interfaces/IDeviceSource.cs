@@ -1,4 +1,6 @@
-﻿using System;
+﻿using NecBlik.Core.Enums;
+using NecBlik.Core.Models;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -17,10 +19,11 @@ namespace NecBlik.Core.Interfaces
         public string GetVersion();
         public void OnDataRecieved(string data, string sourceAddress);
         public void OnDataSent(string data, string sourceAddress);
-        public void SubscribeToDataRecieved(ISubscriber<Tuple<string,string>> subscriber);
-        public void UnsubscribeFromDataRecieved(ISubscriber<Tuple<string, string>> subscriber);
+        public void SubscribeToDataRecieved(ISubscriber<RecievedData> subscriber);
+        public void UnsubscribeFromDataRecieved(ISubscriber<RecievedData> subscriber);
         public void Send(string data, string address);
         public bool Open();
         public void Close();
+        
     }
 }

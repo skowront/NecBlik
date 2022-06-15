@@ -21,7 +21,7 @@ namespace NecBlik.Common.WpfElements
     /// Interaction logic for SimpleInputPopup.xaml
     /// Universal popup class that represents a progress bar
     /// </summary>
-    public partial class SimpleYesNoProgressBarPopup : Window
+    public partial class SimpleYesNoProgressBarPopup
     {
         public SimpleYesNoProgressBarPopupViewModel ViewModel { get; }
 
@@ -63,6 +63,15 @@ namespace NecBlik.Common.WpfElements
         public void SetProgressValue(int value)
         {
             (this.DataContext as SimpleYesNoProgressBarPopupViewModel).Value = value;
+        }
+
+        /// <summary>
+        /// Safe function that can set a new progressbar value.
+        /// </summary>
+        /// <param name="value"></param>
+        public void SetProgressValueDelta(int value)
+        {
+            (this.DataContext as SimpleYesNoProgressBarPopupViewModel).Value += value;
         }
 
         /// <summary>

@@ -7,7 +7,7 @@ namespace NecBlik.Common.WpfElements.PopupValuePickers
     /// <summary>
     /// Interaction logic for FloatValuePicker.xaml
     /// </summary>
-    public partial class FloatValuePicker : Window
+    public partial class FloatValuePicker
     {
         public FloatValuePicker(Action<float> onConfirm, Action<float> onCancel)
         {

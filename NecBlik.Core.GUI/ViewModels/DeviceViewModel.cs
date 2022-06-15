@@ -1,25 +1,31 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
+using System.ComponentModel;
 using System.Linq;
 using System.Text;
+using System.Threading;
 using System.Threading.Tasks;
+using System.Windows;
 using NecBlik.Common.WpfExtensions.Base;
+using NecBlik.Common.WpfExtensions.Collections;
 using NecBlik.Common.WpfExtensions.Interfaces;
+using NecBlik.Core.Enums;
 using NecBlik.Core.GUI.Interfaces;
 using NecBlik.Core.GUI.ViewModels;
+using NecBlik.Core.GUI.Views;
 using NecBlik.Core.Interfaces;
 using NecBlik.Core.Models;
 
 namespace NecBlik.Core.GUI
 {
-    public class DeviceViewModel:BaseViewModel,IDuplicable<DeviceViewModel>,ICachable,IVendable, ISubscriber<Tuple<string, string>>, IDisposable
+    public class DeviceViewModel : BaseViewModel, IDuplicable<DeviceViewModel>, ICachable, IVendable, ISubscriber<RecievedData>, IDisposable
     {
         public DeviceModel Model;
 
         public NetworkViewModel Network;
 
-        public List<string> ViewFactoriesWhitelist = new List<string>(); 
+        public List<string> ViewFactoriesWhitelist = new List<string>();
 
         public Guid Guid
         {
@@ -37,6 +43,11 @@ namespace NecBlik.Core.GUI
             get { return this.Model.Version; }
             set { this.Model.Version = value; this.OnPropertyChanged(); }
         }
+
+        public FontAwesome.WPF.FontAwesomeIcon Icon
+        {
+            get; set;
+        } = FontAwesome.WPF.FontAwesomeIcon.Desktop;
 
         public string InternalFactoryType
         {
@@ -66,18 +77,20 @@ namespace NecBlik.Core.GUI
             set { this.outputBuffer = value; this.OnPropertyChanged(); }
         }
 
-        private string ioHistoryBuffer;
-        public string IOHistoryBuffer
-        {
-            get { return this.ioHistoryBuffer; }
-            set { this.ioHistoryBuffer = value; this.OnPropertyChanged(); }
-        }
+        public ThreadSafeCollection<string> IOHistoryBuffer { get; set; } = new ThreadSafeCollection<string>();
 
         private string selectedDestinationAddress=string.Empty;
         public string SelectedDestinationAddress
         {
             get { return this.selectedDestinationAddress; }
             set { this.selectedDestinationAddress = value; this.OnPropertyChanged(); }
+        }
+
+        private string status = NecBlik.Core.Resources.Statuses.Unknown;
+        public string Status
+        {
+            get { return this.status; }
+            set { this.status = value; this.OnPropertyChanged(); }
         }
 
         public IEnumerable<string> AvailableDestinationAddresses
@@ -106,8 +119,8 @@ namespace NecBlik.Core.GUI
 
         ~DeviceViewModel()
         {
-            this.Model.DeviceSource?.UnsubscribeFromDataRecieved(this);
-            this.Network.Coordinator?.Model.DeviceSource.UnsubscribeFromDataRecieved(this);
+            this.Model?.DeviceSource?.UnsubscribeFromDataRecieved(this);
+            this.Network?.Coordinator?.Model?.DeviceSource?.UnsubscribeFromDataRecieved(this);
         }
 
         public DeviceViewModel Duplicate()
@@ -115,6 +128,9 @@ namespace NecBlik.Core.GUI
             var zb = new DeviceViewModel(this.Model.Duplicate(),this.Network);
             zb.SelectCommand = this.SelectCommand = new RelayCommand((o) => {
                 this.PullSelectionSubscriber?.NotifySelected(zb);
+            });
+            zb.SendCommand = new RelayCommand((o) => {
+                zb.Send();
             });
             return zb;
         }
@@ -128,6 +144,7 @@ namespace NecBlik.Core.GUI
             this.SendCommand = new RelayCommand((o) => { 
                 this.Send(); 
             });
+            
         }
 
         public virtual string GetCacheId()
@@ -159,6 +176,11 @@ namespace NecBlik.Core.GUI
         public virtual void OnDataRecieved(string data, string sourceAddress)
         {
             this.AddIncomingHistoryBufferEntry(data, sourceAddress);
+        }
+
+        public virtual void OnRecievedDataSentFromSourceDevice(string data, string sourceAddress)
+        {
+
         }
 
         public virtual void OnDataSent(string data, string sourceAddress)
@@ -211,22 +233,22 @@ namespace NecBlik.Core.GUI
 
         protected virtual void AddIncomingHistoryBufferEntry(string dataRecieved, string sourceAddress)
         {
-            this.IOHistoryBuffer += Strings.SR.GPFrom + ": " + sourceAddress + " " + Strings.SR.GPRecieved + ":" + dataRecieved + "\n";
+            this.IOHistoryBuffer.Insert(0,Strings.SR.GPFrom + ": " + sourceAddress + " " + Strings.SR.GPRecieved + ":" + dataRecieved + "\n");
         }
 
         protected virtual void AddOutgoingHistoryBufferEntry(string dataSent, string destinationAddress)
         {
-            this.IOHistoryBuffer += Strings.SR.GPTo + ": " + destinationAddress + " " + Strings.SR.GPSent + ":" + dataSent + "\n";
+            this.IOHistoryBuffer.Insert(0, Strings.SR.GPTo + ": " + destinationAddress + " " + Strings.SR.GPSent + ":" + dataSent + "\n");
         }
 
         protected virtual void AddHistoryBufferEntry(string entry)
         {
-            this.IOHistoryBuffer += entry+"\n";
+            this.IOHistoryBuffer.Insert(0, entry+"\n");
         }
 
-        public virtual void NotifySubscriber(Tuple<string, string> updateInformation)
+        public virtual void NotifySubscriber(RecievedData updateInformation)
         {
-            this.OnDataRecieved(updateInformation.Item1, updateInformation.Item2);
+            this.OnDataRecieved(updateInformation.Data,updateInformation.SourceAddress);
         }
 
         public virtual bool IsLicensed()

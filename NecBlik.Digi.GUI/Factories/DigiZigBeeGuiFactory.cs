@@ -16,6 +16,9 @@ using System.Reflection;
 using NecBlik.Core.Factories;
 using NecBlik.Virtual.GUI.ViewModels;
 using NecBlik.Core.GUI.Interfaces;
+using NecBlik.Core.GUI;
+using System.Windows.Controls;
+using NecBlik.Virtual.GUI.Views.Controls;
 
 namespace NecBlik.Digi.GUI.Factories
 {
@@ -160,6 +163,45 @@ namespace NecBlik.Digi.GUI.Factories
                 }
             }
             return new DigiZigBeeViewModel(model, network);
+        }
+
+        public override UIElement GetDeviceControl(DeviceViewModel deviceViewModel)
+        {
+            if (deviceViewModel.Model.DeviceSource.GetVendorID() != this.GetVendorID())
+                return base.GetDeviceControl(deviceViewModel);
+
+            var rule = deviceViewModel.Network.FactoryRules.Where((r) => { return r.CacheObjectId == deviceViewModel.GetCacheId() && r.Property == VirtualDeviceGuiFactory.DeviceViewModelRuledProperties.MapControl; }).FirstOrDefault();
+            if (deviceViewModel?.Model?.DeviceSource is Virtual.Models.VirtualCoordinator)
+            {
+                if (rule == null)
+                {
+                    return new VirtualCoordinatorUserControl(deviceViewModel);
+                }
+            }
+
+            if (rule != null)
+            {
+                var types = this.GetTypesTInOtherSubAssemblies<IDeviceControl>();
+                foreach (var type in types)
+                {
+                    if (typeof(IDeviceControl).IsAssignableFrom(type) && !type.IsAbstract && type.FullName == rule.Value)
+                    {
+                        return Activator.CreateInstance(type, deviceViewModel) as UserControl;
+                    }
+                }
+                var currentAssembly = Assembly.GetAssembly(typeof(DigiZigBeeGuiFactory));
+                foreach (var type in currentAssembly.GetExportedTypes())
+                {
+                    if (typeof(IDeviceControl).IsAssignableFrom(type) && !type.IsAbstract && type.FullName == rule.Value)
+                    {
+                        return Activator.CreateInstance(type, deviceViewModel) as UserControl;
+                    }
+                }
+            }
+
+
+            var zbc = base.GetDeviceControl(deviceViewModel);
+            return zbc;
         }
 
         public override List<string> GetAvailableControls()

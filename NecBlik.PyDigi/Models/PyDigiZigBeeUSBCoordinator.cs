@@ -4,6 +4,7 @@ using NecBlik.Common.WpfExtensions.Interfaces;
 using NecBlik.Core.Interfaces;
 using NecBlik.PyDigi.Factories;
 using NecBlik.Virtual.Models;
+using NecBlik.Core.Enums;
 
 namespace NecBlik.PyDigi.Models
 {
@@ -34,7 +35,6 @@ namespace NecBlik.PyDigi.Models
             this.Name = Resources.Resources.PyDefaultDigiCoordinatorName;
             try
             {
-                object a = 10;
                 using (Py.GIL())
                 {
                     this.scope = ZigBeePyEnv.NewInitializedScope();
@@ -43,7 +43,6 @@ namespace NecBlik.PyDigi.Models
                     this.pyCoordinator = this.scope.Get<dynamic>("coordinator");
                     this.pyCoordinator.Open();
                     this.scope.Set("action", new Action<string,string>((data,address) => {
-                        Console.WriteLine("Works!");
                         this.OnDataRecieved(data, address);
                     }));
                     this.scope.Exec("dataReceivedActionHolder = ActionHolder(action)");
@@ -52,7 +51,6 @@ namespace NecBlik.PyDigi.Models
                                     "\t dataReceivedActionHolder.callback.Invoke(bytes(xbee_message.data).decode(encoding=\"UTF-8\"),a); \n");
                     this.scope.Exec("coordinator.xbee.add_data_received_callback(my_data_received_callback)");
 
-                    Console.WriteLine("Initialization fine.");
                 }
             }
             catch (Exception ex)
@@ -116,17 +114,19 @@ namespace NecBlik.PyDigi.Models
                     progress = input;
                     this.progressResponseProvider?.Update(input);
                 }));
-                var task = Task.Run(() =>
+                //var task = Task.Run(() =>
                 {
                     scope.Exec("coordinator.DiscoverDevices()");
-                });
-                await task;
+                }
+                //);
+                //await task;
                 
             }
             this.progressResponseProvider?.Update(PyDigiZigBeeUSBCoordinator.maxProgress);
             progressResponseProvider?.SealUpdates();
             return;
         }
+
         public override void Save(string folderPath)
         {
             File.WriteAllText(folderPath + "\\" + Resources.Resources.CoordinatorFile, JsonConvert.SerializeObject(this.connectionData, Formatting.Indented));
@@ -196,6 +196,15 @@ namespace NecBlik.PyDigi.Models
         {
             base.Dispose();
             this.Close();
+        }
+        public override async Task<string> GetStatusOf(string remoteAddress)
+        {
+            if (remoteAddress == this.Address)
+            {
+                return this.Open() ? NecBlik.Core.Resources.Statuses.Connected
+                    : NecBlik.Core.Resources.Statuses.Disconnected;
+            }
+            return NecBlik.Core.Resources.Statuses.Unknown;
         }
 
         [JsonObject(MemberSerialization.OptIn)]

@@ -136,7 +136,7 @@
     <value>Available devices</value>
   </data>
   <data name="MainWindowManuHeaderProjectLoadMap" xml:space="preserve">
-    <value>Load map</value>
+    <value>Load</value>
   </data>
   <data name="MainWindowMenuAbout" xml:space="preserve">
     <value>About</value>
@@ -191,5 +191,26 @@
   </data>
   <data name="MainWindowMenuHeaderProjectRename" xml:space="preserve">
     <value>Rename</value>
+  </data>
+  <data name="MainWindowMenuHeaderMap" xml:space="preserve">
+    <value>Map</value>
+  </data>
+  <data name="MainWindowManuHeaderProjectRemoveMap" xml:space="preserve">
+    <value>Remove</value>
+  </data>
+  <data name="GPAuthor" xml:space="preserve">
+    <value>Author</value>
+  </data>
+  <data name="GPLicense" xml:space="preserve">
+    <value>License</value>
+  </data>
+  <data name="GPVersion" xml:space="preserve">
+    <value>Version</value>
+  </data>
+  <data name="GPContact" xml:space="preserve">
+    <value>Contact</value>
+  </data>
+  <data name="MainWindowMenuHeaderProjectSaveAs" xml:space="preserve">
+    <value>Save project as</value>
   </data>
 </root>

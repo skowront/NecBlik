@@ -4,6 +4,7 @@
         xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:mah="http://metro.mahapps.com/winfx/xaml/controls"
+        xmlns:fa="http://schemas.fontawesome.io/icons/"
         xmlns:local="clr-namespace:NecBlik.Digi.GUI.Views"
         xmlns:viewModels="clr-namespace:NecBlik.Virtual.GUI.ViewModels;assembly=NecBlik.Virtual.GUI"
         xmlns:lexp="clr-namespace:WPFLocalizeExtension.Providers;assembly=WPFLocalizeextension"
@@ -26,12 +27,23 @@
                 <TextBox Text="{Binding ViewModel.Name,UpdateSourceTrigger=PropertyChanged}" Foreground="{StaticResource MaterialDesignDarkForeground}"></TextBox>
                 <TextBlock Text="{lex:Loc GPNetworkPanId}" Foreground="{StaticResource MaterialDesignDarkForeground}"></TextBlock>
                 <TextBlock Text="{Binding ViewModel.PanId,UpdateSourceTrigger=PropertyChanged}" Foreground="{StaticResource MaterialDesignDarkForeground}"></TextBlock>
+                <StackPanel Orientation="Horizontal">
+                    <TextBlock Text="{lex:Loc NecBlik.Virtual.GUI:SR:GPPollingInterval}" Foreground="{StaticResource MaterialDesignDarkForeground}"></TextBlock>
+                    <TextBlock Text="[" Margin="5 0 0 0"  Foreground="{StaticResource MaterialDesignDarkForeground}"></TextBlock>
+                    <TextBlock Text="{lex:Loc NecBlik.Core.GUI:SR:GPms}" Foreground="{StaticResource MaterialDesignDarkForeground}"></TextBlock>
+                    <TextBlock Text="]" Foreground="{StaticResource MaterialDesignDarkForeground}"></TextBlock>
+                </StackPanel>
+                <TextBox Text="{Binding ViewModel.PollingInterval, UpdateSourceTrigger=PropertyChanged}" Foreground="{StaticResource MaterialDesignDarkForeground}"></TextBox>
                 <!--<StackPanel Orientation="Horizontal">
                     <TextBlock Text="{lex:Loc GPStayOpen}" Foreground="{StaticResource MaterialDesignDarkForeground}"></TextBlock>
                     <CheckBox IsChecked="{Binding ViewModel.IsOpen,UpdateSourceTrigger=PropertyChanged}" Style="{StaticResource MaterialDesignCheckBox}" HorizontalAlignment="Left" Foreground="{StaticResource MaterialDesignDarkForeground}"></CheckBox>
                 </StackPanel>-->
                 <Grid>
                     <Grid.ColumnDefinitions>
+                        <ColumnDefinition Width="auto"></ColumnDefinition>
+                        <ColumnDefinition Width="auto"></ColumnDefinition>
+                        <ColumnDefinition Width="auto"></ColumnDefinition>
+                        <ColumnDefinition Width="auto"></ColumnDefinition>
                         <ColumnDefinition Width="auto"></ColumnDefinition>
                         <ColumnDefinition Width="auto"></ColumnDefinition>
                         <ColumnDefinition Width="auto"></ColumnDefinition>
@@ -49,9 +61,9 @@
                             <TextBlock Text="&#xf067;" FontFamily="{StaticResource FontAwesome}" VerticalAlignment="Center"></TextBlock>
                         </StackPanel>
                     </Button>
-                    <Button Grid.Column="2" VerticalAlignment="Center" Style="{StaticResource BaseButton}" Command="{Binding ViewModel.RefreshCommand}" HorizontalAlignment="Center" Margin="0" MinWidth="50">
+                    <Button Grid.Column="2" VerticalAlignment="Center" Style="{StaticResource BaseButton}" Command="{Binding ViewModel.PollDevicesCommand}" HorizontalAlignment="Center" Margin="0" MinWidth="50">
                         <StackPanel Orientation="Horizontal">
-                            <TextBlock Text="{lex:Loc GPSynchronize}" Margin="0 0 5 0" VerticalAlignment="Center"></TextBlock>
+                            <TextBlock Text="{lex:Loc NecBlik.Virtual.GUI:SR:GPPollDevices}" Margin="0 0 5 0" VerticalAlignment="Center"></TextBlock>
                             <TextBlock Text="&#xf021;" FontFamily="{StaticResource FontAwesome}" VerticalAlignment="Center"></TextBlock>
                         </StackPanel>
                     </Button>
@@ -61,28 +73,104 @@
                             <TextBlock Text="&#xf02d;" FontFamily="{StaticResource FontAwesome}" VerticalAlignment="Center"></TextBlock>
                         </StackPanel>
                     </Button>
+                    <Button Grid.Column="4" VerticalAlignment="Center" Style="{StaticResource BaseButton}" Command="{Binding ViewModel.PingCommand}" HorizontalAlignment="Center" Margin="0" MinWidth="50">
+                        <StackPanel Orientation="Horizontal">
+                            <TextBlock Text="{lex:Loc NecBlik.Core.GUI:SR:GPPing}" Margin="0 0 5 0" VerticalAlignment="Center"></TextBlock>
+                            <TextBlock Text="&#xf1ce;" FontFamily="{StaticResource FontAwesome}" VerticalAlignment="Center"></TextBlock>
+                        </StackPanel>
+                    </Button>
+                    <Button Grid.Column="5" VerticalAlignment="Center" Style="{StaticResource BaseButton}" Command="{Binding ViewModel.DiagnosticsCommand}" HorizontalAlignment="Center" Margin="0" MinWidth="50">
+                        <StackPanel Orientation="Horizontal">
+                            <TextBlock Text="{lex:Loc NecBlik.Digi.GUI:SR:GPDiagnostics}" Margin="0 0 5 0" VerticalAlignment="Center"></TextBlock>
+                            <TextBlock Text="&#xf552;" FontFamily="{StaticResource FontAwesome}" VerticalAlignment="Center"></TextBlock>
+                        </StackPanel>
+                    </Button>
+                    <Button Grid.Column="6" VerticalAlignment="Center" Style="{StaticResource BaseButton}" Command="{Binding ViewModel.ATCommandsCommand}" HorizontalAlignment="Center" Margin="0" MinWidth="50">
+                        <StackPanel Orientation="Horizontal">
+                            <TextBlock Text="{lex:Loc NecBlik.Digi.GUI:SR:GPATCommands}" Margin="0 0 5 0" VerticalAlignment="Center"></TextBlock>
+                            <TextBlock Text="&#xf02d;" FontFamily="{StaticResource FontAwesome}" VerticalAlignment="Center"></TextBlock>
+                        </StackPanel>
+                    </Button>
+                    <Button Grid.Column="7" VerticalAlignment="Center" Style="{StaticResource BaseButton}" Command="{Binding ViewModel.SyncCommand}" HorizontalAlignment="Center" Margin="0" MinWidth="50">
+                        <StackPanel Orientation="Horizontal">
+                            <TextBlock Text="{lex:Loc NecBlik.Virtual.GUI:SR:GPSynchronize}" Margin="0 0 5 0" VerticalAlignment="Center"></TextBlock>
+                            <TextBlock Text="&#xf1b8;" FontFamily="{StaticResource FontAwesome}" VerticalAlignment="Center"></TextBlock>
+                        </StackPanel>
+                    </Button>
                 </Grid>
                 <Separator Grid.Row="1"></Separator>
             </StackPanel>
             <StackPanel Grid.Row="1">
                 <TextBlock Text="{lex:Loc GPCoordinator}" Foreground="{StaticResource MaterialDesignDarkForeground}" HorizontalAlignment="Center"></TextBlock>
             </StackPanel>
-            <ContentPresenter Grid.Row="2" Content="{Binding ViewModel.Coordinator}">
-                <ContentPresenter.ContentTemplate>
-                    <DataTemplate DataType="{x:Type viewModels:VirtualDeviceViewModel}">
-                        <StackPanel Orientation="Vertical">
-                            <TextBlock Text="{Binding InternalFactoryType}" Foreground="{StaticResource MaterialDesignDarkForeground}"></TextBlock>
-                            <TextBlock Text="{Binding Name, UpdateSourceTrigger=PropertyChanged}" Foreground="{StaticResource MaterialDesignDarkForeground}"></TextBlock>
-                            <TextBlock Text="{Binding Guid, UpdateSourceTrigger=PropertyChanged}" Foreground="{StaticResource MaterialDesignDarkForeground}"></TextBlock>
-                            <StackPanel Orientation="Horizontal">
-                                <Button Command="{Binding EditCommand}" Style="{StaticResource BaseButton}" Content="{lex:Loc GPOpen}"></Button>
-                                <Button Command="{Binding SelectCommand}" Style="{StaticResource BaseButton}" Content="{lex:Loc GPSendToMap}"></Button>
+            <Grid Grid.Row="2">
+                <Grid.RowDefinitions>
+                    <RowDefinition Height="*"></RowDefinition>
+                    <RowDefinition Height="auto"></RowDefinition>
+                </Grid.RowDefinitions>
+                <ContentPresenter Content="{Binding ViewModel.Coordinator}">
+                    <ContentPresenter.ContentTemplate>
+                        <DataTemplate DataType="{x:Type viewModels:VirtualDeviceViewModel}">
+                            <StackPanel Orientation="Vertical">
+                                <TextBlock Text="{Binding InternalFactoryType}" Foreground="{StaticResource MaterialDesignDarkForeground}"></TextBlock>
+                                <TextBlock Text="{Binding Name, UpdateSourceTrigger=PropertyChanged}" Foreground="{StaticResource MaterialDesignDarkForeground}"></TextBlock>
+                                <TextBlock Text="{Binding Guid, UpdateSourceTrigger=PropertyChanged}" Foreground="{StaticResource MaterialDesignDarkForeground}"></TextBlock>
+                                <Expander Style="{StaticResource MaterialDesignExpander}" HorizontalAlignment="Stretch" Foreground="{StaticResource MaterialDesignDarkForeground}">
+                                    <StackPanel>
+                                        <Grid>
+                                            <Grid.ColumnDefinitions>
+                                                <ColumnDefinition Width="*"></ColumnDefinition>
+                                                <ColumnDefinition Width="3*"></ColumnDefinition>
+                                            </Grid.ColumnDefinitions>
+                                            <TextBlock Grid.Column="0" Text="{lex:Loc NecBlik.Digi.GUI:SR:GPSerialPort}" Foreground="{StaticResource MaterialDesignDarkForeground}"></TextBlock>
+                                            <TextBlock Grid.Column="1" Text="{Binding SerialPort}"></TextBlock>
+                                            <Button Grid.Column="2" HorizontalAlignment="Right" HorizontalContentAlignment="Right" Style="{StaticResource BaseButton}" Command="{Binding PickSerialPortCommand}">
+                                                <StackPanel Orientation="Horizontal">
+                                                    <TextBlock Text="{lex:Loc GPSelect}" VerticalAlignment="Center" Margin="0 0 10 0" Foreground="{StaticResource MaterialDesignDarkForeground}"></TextBlock>
+                                                    <fa:FontAwesome Icon="MousePointer"></fa:FontAwesome>
+                                                </StackPanel>
+                                            </Button>
+                                        </Grid>
+                                        <Grid>
+                                            <Grid.ColumnDefinitions>
+                                                <ColumnDefinition Width="*"></ColumnDefinition>
+                                                <ColumnDefinition Width="3*"></ColumnDefinition>
+                                            </Grid.ColumnDefinitions>
+                                            <StackPanel Grid.Column="0" Orientation="Horizontal">
+                                                <fa:FontAwesome Icon="InfoCircle" Margin="0 0 5 0" VerticalAlignment="Center" Foreground="{StaticResource AccentBrush}">
+                                                    <fa:FontAwesome.ToolTip>
+                                                        <TextBlock Text="{lex:Loc NecBlik.Digi.GUI:SR:TTSerialPortBaudRate}"></TextBlock>
+                                                    </fa:FontAwesome.ToolTip>
+                                                </fa:FontAwesome>
+                                                <TextBlock Text="{lex:Loc NecBlik.Digi.GUI:SR:GPBaudRate}" VerticalAlignment="Center" Foreground="{StaticResource MaterialDesignDarkForeground}">
+                                                </TextBlock>
+                                            </StackPanel>
+                                            <TextBlock Grid.Column="1" Text="{Binding BaudRate}" VerticalAlignment="Center" Foreground="{StaticResource MaterialDesignDarkForeground}">
+                                            </TextBlock>
+                                            <Button Grid.Column="2" HorizontalAlignment="Right" HorizontalContentAlignment="Right" Style="{StaticResource BaseButton}" Command="{Binding PickBaudRateCommand}">
+                                                <StackPanel Orientation="Horizontal">
+                                                    <TextBlock Text="{lex:Loc GPSelect}" Margin="0 0 10 0"></TextBlock>
+                                                    <fa:FontAwesome Icon="MousePointer" VerticalAlignment="Center"></fa:FontAwesome>
+                                                </StackPanel>
+                                            </Button>
+                                        </Grid>
+                                    </StackPanel>
+                                </Expander>
+                                <StackPanel Orientation="Horizontal">
+                                    <Button Command="{Binding EditCommand}" Style="{StaticResource BaseButton}" Content="{lex:Loc GPOpen}"></Button>
+                                    <Button Command="{Binding SelectCommand}" Style="{StaticResource BaseButton}" Content="{lex:Loc GPSendToMap}"></Button>
+                                </StackPanel>
                             </StackPanel>
-                            <Separator Grid.Row="1"></Separator>
-                        </StackPanel>
-                    </DataTemplate>
-                </ContentPresenter.ContentTemplate>
-            </ContentPresenter>
+                        </DataTemplate>
+                    </ContentPresenter.ContentTemplate>
+                </ContentPresenter>
+                <Button Grid.Row="1" VerticalAlignment="Bottom" Style="{StaticResource BaseButton}" Command="{Binding ViewModel.EditCoordinatorRuleCommand}" HorizontalAlignment="Left" Margin="0" MinWidth="0">
+                    <StackPanel Orientation="Horizontal">
+                        <TextBlock Text="{lex:Loc GPCoordinatorType}" Margin="0 0 5 0" VerticalAlignment="Center"></TextBlock>
+                        <TextBlock Text="&#xf02d;" FontFamily="{StaticResource FontAwesome}" VerticalAlignment="Center"></TextBlock>
+                    </StackPanel>
+                </Button>
+            </Grid>
             <Grid Grid.Row="3">
                 <Grid.RowDefinitions>
                     <RowDefinition Height="auto"></RowDefinition>

@@ -20,17 +20,35 @@
   </ItemGroup>
 
   <ItemGroup>
+    <Compile Update="Resources\EnumResources.Designer.cs">
+      <DesignTime>True</DesignTime>
+      <AutoGen>True</AutoGen>
+      <DependentUpon>EnumResources.resx</DependentUpon>
+    </Compile>
     <Compile Update="Resources\Resources.Designer.cs">
       <DependentUpon>Resources.resx</DependentUpon>
       <DesignTime>True</DesignTime>
       <AutoGen>True</AutoGen>
     </Compile>
+    <Compile Update="Resources\Statuses.Designer.cs">
+      <DesignTime>True</DesignTime>
+      <AutoGen>True</AutoGen>
+      <DependentUpon>Statuses.resx</DependentUpon>
+    </Compile>
   </ItemGroup>
 
   <ItemGroup>
+    <EmbeddedResource Update="Resources\EnumResources.resx">
+      <Generator>ResXFileCodeGenerator</Generator>
+      <LastGenOutput>EnumResources.Designer.cs</LastGenOutput>
+    </EmbeddedResource>
     <EmbeddedResource Update="Resources\Resources.resx">
       <LastGenOutput>Resources.Designer.cs</LastGenOutput>
       <Generator>PublicResXFileCodeGenerator</Generator>
+    </EmbeddedResource>
+    <EmbeddedResource Update="Resources\Statuses.resx">
+      <Generator>PublicResXFileCodeGenerator</Generator>
+      <LastGenOutput>Statuses.Designer.cs</LastGenOutput>
     </EmbeddedResource>
   </ItemGroup>
 

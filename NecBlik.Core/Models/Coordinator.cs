@@ -7,6 +7,7 @@ using System.Text;
 using System.Threading.Tasks;
 using NecBlik.Common.WpfExtensions.Interfaces;
 using NecBlik.Core.Interfaces;
+using NecBlik.Core.Enums;
 
 namespace NecBlik.Core.Models
 {
@@ -29,7 +30,7 @@ namespace NecBlik.Core.Models
             set { this.panId = value; }
         }
 
-        public Collection<ISubscriber<Tuple<string, string>>> DataRecievedSubscribers = new Collection<ISubscriber<Tuple<string, string>>>();
+        public Collection<ISubscriber<RecievedData>> DataRecievedSubscribers = new Collection<ISubscriber<RecievedData>>();
 
         protected IDeviceSource DeviceSource { get; set; }
 
@@ -113,7 +114,7 @@ namespace NecBlik.Core.Models
         {
             foreach (var item in this.DataRecievedSubscribers)
             {
-                item.NotifySubscriber(new Tuple<string, string>(data, sourceAddress));
+                item?.NotifySubscriber(new RecievedData() { Data = data, SourceAddress = sourceAddress});
             }
             return;
         }
@@ -123,13 +124,13 @@ namespace NecBlik.Core.Models
             this.DeviceSource.Send(data, address);
         }
 
-        public virtual void SubscribeToDataRecieved(ISubscriber<Tuple<string, string>> subscriber)
+        public virtual void SubscribeToDataRecieved(ISubscriber<RecievedData> subscriber)
         {
             if (!this.DataRecievedSubscribers.Contains(subscriber))
                 this.DataRecievedSubscribers.Add(subscriber);
         }
 
-        public virtual void UnsubscribeFromDataRecieved(ISubscriber<Tuple<string, string>> subscriber)
+        public virtual void UnsubscribeFromDataRecieved(ISubscriber<RecievedData> subscriber)
         {
             if (this.DataRecievedSubscribers.Contains(subscriber))
                 this.DataRecievedSubscribers.Remove(subscriber);
@@ -163,6 +164,27 @@ namespace NecBlik.Core.Models
         public virtual void OnDataSent(string data, string sourceAddress)
         {
             this.OnDataRecieved(data, sourceAddress);
+        }
+
+        public virtual async Task<PingModel> Ping(long timeout = 0, string payload = "", string remoteAddress="")
+        {
+            return new PingModel(0.0d, PingModel.PingResult.Ok, payload);
+        }
+
+        public virtual async Task<PingModel> PingPacket(long timeout = 0, string payload = "", string remoteAddress = "", bool awaitConfirmation = true)
+        {
+            return new PingModel(0.0d, PingModel.PingResult.Ok, payload);
+        }
+
+        public virtual async Task<string> GetStatusOf(string remoteAddress)
+        {
+            return NecBlik.Core.Resources.Statuses.Unknown;
+        }
+
+        public virtual async Task<(double localStrength, double remoteStrength)> GetSignalStrength(string remoteAddress)
+        {
+            double l = double.PositiveInfinity, r = double.PositiveInfinity;
+            return (l, r);
         }
     }
 }

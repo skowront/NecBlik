@@ -1,0 +1,45 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<ClassDiagram MajorVersion="1" MinorVersion="1">
+  <Class Name="NecBlik.PyDigi.Factories.PyDigiZigBeeFactory" Collapsed="true">
+    <Position X="8" Y="3.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAgAAAAAAAAAAQAAAAAAAAAAAAAAIAAAAAgAAAAAg=</HashCode>
+      <FileName>Factories\PyDigiZigBeeFactory.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="NecBlik.PyDigi.Models.PyDigiZigBeeNetwork" Collapsed="true">
+    <Position X="9.75" Y="3.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAMAAAAAAAQAAAAAAAAAAAAAAAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>Models\PyDigiZigBeeNetwork.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="NecBlik.PyDigi.Models.PyDigiZigBeeSource" Collapsed="true">
+    <Position X="11.5" Y="3.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAABAIEAAAAAAAAAAAAACAAAAgAAABAA=</HashCode>
+      <FileName>Models\PyDigiZigBeeSource.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="NecBlik.PyDigi.Models.PyDigiZigBeeUSBCoordinator" Collapsed="true">
+    <Position X="8" Y="4.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAIQAACAAIAAAIEAoACA4AIBAAAACAAAKkACAAAA=</HashCode>
+      <FileName>Models\PyDigiZigBeeUSBCoordinator.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="NecBlik.PyDigi.Models.ZigBeePyEnv" Collapsed="true">
+    <Position X="11.5" Y="4.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAQAEAAAAAAAAAABAAAAAQAAAAEBAAAA=</HashCode>
+      <FileName>Models\ZigBeePyEnv.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="NecBlik.PyDigi.Resources.Resources" Collapsed="true">
+    <Position X="9.75" Y="4.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>CAISIAAAAAQAAAAAAAAFEAAAIQAAgAAEAAAAAAACIIA=</HashCode>
+    </TypeIdentifier>
+  </Class>
+  <Font Name="Segoe UI" Size="9" />
+</ClassDiagram>

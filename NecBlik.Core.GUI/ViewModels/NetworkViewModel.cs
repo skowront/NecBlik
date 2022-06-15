@@ -13,6 +13,7 @@ using NecBlik.Core.GUI.Interfaces;
 using NecBlik.Core.Models;
 using NecBlik.Core.GUI.Views;
 using NecBlik.Core.Interfaces;
+using NecBlik.Common.WpfElements.PopupValuePickers;
 
 namespace NecBlik.Core.GUI.ViewModels
 {
@@ -37,13 +38,15 @@ namespace NecBlik.Core.GUI.ViewModels
             get { return this.model.Guid; }
         }
 
-        public string PanId 
+        public string PanId
         {
-            get { 
-                return this.model.PanId; 
+            get
+            {
+                return this.model.PanId;
             }
-            set { 
-                this.model.PanId = value; this.OnPropertyChanged(); 
+            set
+            {
+                this.model.PanId = value; this.OnPropertyChanged();
             }
         }
 
@@ -57,20 +60,21 @@ namespace NecBlik.Core.GUI.ViewModels
         public bool IsOpen
         {
             get { return this.isOpen; }
-            set {
-                this.isOpen = value; 
-                if(isOpen == true)
+            set
+            {
+                this.isOpen = value;
+                if (isOpen == true)
                 {
                     if (!this.Open())
                         this.isOpen = false;
                     else
-                        this.isOpen = true; 
+                        this.isOpen = true;
                 }
                 else
                 {
                     this.Close();
                 }
-                this.OnPropertyChanged(); 
+                this.OnPropertyChanged();
             }
         }
 
@@ -97,9 +101,13 @@ namespace NecBlik.Core.GUI.ViewModels
         protected DeviceViewModel coorinator = null;
         public DeviceViewModel Coordinator
         {
-            get 
+            get
             {
                 return this.GetCoordinatorViewModel();
+            }
+            set
+            {
+                this.coorinator = value; this.OnPropertyChanged();
             }
         }
 
@@ -109,9 +117,12 @@ namespace NecBlik.Core.GUI.ViewModels
         public RelayCommand RefreshCommand { get; set; }
         public RelayCommand DiscoverCommand { get; set; }
         public RelayCommand EditRulesCommand { get; set; }
+        public RelayCommand EditCoordinatorRuleCommand { get; set; }
         public RelayCommand RemoveDeviceCommand { get; set; }
-        
-        public IResponseProvider<string,NetworkViewModel> EditResponseProvider { get; set; }
+        public RelayCommand PingCommand { get; set; }
+        public RelayCommand PollDevicesCommand { get; set; }
+
+        public IResponseProvider<string, NetworkViewModel> EditResponseProvider { get; set; }
 
         public NetworkViewModel(Network network)
         {
@@ -121,7 +132,7 @@ namespace NecBlik.Core.GUI.ViewModels
                 this.GetCoordinatorViewModel();
             });
 
-            foreach(var item in this.model.DeviceSubtypeFactoryRules)
+            foreach (var item in this.model.DeviceSubtypeFactoryRules)
             {
                 this.FactoryRules.Add(new FactoryRuleViewModel(item));
             }
@@ -131,7 +142,7 @@ namespace NecBlik.Core.GUI.ViewModels
 
         public virtual DeviceViewModel GetCoordinatorViewModel()
         {
-            if(this.coorinator==null)
+            if (this.coorinator == null)
             {
                 var zvm = new DeviceModel(this.Model.Coordinator);
                 this.coorinator = new DeviceViewModel(zvm, this);
@@ -182,7 +193,8 @@ namespace NecBlik.Core.GUI.ViewModels
 
         private void BuildCommands()
         {
-            this.EditCommand = new RelayCommand((o) => {
+            this.EditCommand = new RelayCommand((o) =>
+            {
                 this.EditResponseProvider?.ProvideResponse(this);
             });
 
@@ -193,19 +205,42 @@ namespace NecBlik.Core.GUI.ViewModels
 
             this.DiscoverCommand = new RelayCommand(async (o) =>
             {
-                this.Discover();
+                await this.Discover();
             });
 
             this.EditRulesCommand = new RelayCommand((o) =>
             {
                 var rp = new GenericResponseProvider<ObservableCollection<FactoryRuleViewModel>, object>((o) => { return this.FactoryRules; });
-                var window = new FactoryRulesEditor(rp, AvailableCacheObjectIDsProvider,AvailablePropertyProvider,AvailableValueProvider, new Action(() => { this.OnFactoryEditClosed(); }));
+                var window = new FactoryRulesEditor(rp, AvailableCacheObjectIDsProvider, AvailablePropertyProvider, AvailableValueProvider, new Action(() => { this.OnFactoryEditClosed(); }));
                 window.Show();
+            });
+
+            this.EditCoordinatorRuleCommand = new RelayCommand((o) =>
+            {
+                
             });
 
             this.RemoveDeviceCommand = new RelayCommand((o) =>
             {
-                
+
+            });
+
+            this.PingCommand = new RelayCommand((o) =>
+            {
+                if (this.coorinator == null)
+                    return;
+                if (this.coorinator.Model == null)
+                    return;
+                if (this.coorinator.Model.DeviceSource is IDeviceCoordinator)
+                {
+                    var window = new PingCoordinatorWindow(new PingViewModel(this.coorinator.Model.DeviceSource as IDeviceCoordinator, this.GetDeviceViewModels().Select((o) => { return o.Address; }).ToList()));
+                    window.Show();
+                }
+            });
+
+            this.PollDevicesCommand = new RelayCommand((o) =>
+            {
+
             });
         }
 

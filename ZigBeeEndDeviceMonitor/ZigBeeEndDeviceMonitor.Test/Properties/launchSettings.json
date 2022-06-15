@@ -1,0 +1,8 @@
+{
+  "profiles": {
+    "ZigBeeEndDeviceMonitor.Test": {
+      "commandName": "Project",
+      "commandLineArgs": "COM5 9600"
+    }
+  }
+}

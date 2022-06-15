@@ -18,7 +18,7 @@ namespace NecBlik.Views
     /// <summary>
     /// Interaction logic for MapResizeWindow.xaml
     /// </summary>
-    public partial class MapResizeWindow : Window
+    public partial class MapResizeWindow
     {
         public MapResizeWindow()
         {

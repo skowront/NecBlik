@@ -4,7 +4,12 @@
     <OutputType>WinExe</OutputType>
     <TargetFramework>net6.0-windows</TargetFramework>
     <UseWPF>true</UseWPF>
+    <ApplicationIcon>logo.ico</ApplicationIcon>
   </PropertyGroup>
+
+  <ItemGroup>
+    <Content Include="logo.ico" />
+  </ItemGroup>
 
   <ItemGroup>
     <PackageReference Include="FamFamFam.Flags.Wpf" Version="1.2.1" />
@@ -25,8 +30,6 @@
     <ProjectReference Include="..\NecBlik.PyDigi\NecBlik.PyDigi.csproj" />
     <ProjectReference Include="..\NecBlik.Virtual.GUI\NecBlik.Virtual.GUI.csproj" />
     <ProjectReference Include="..\NecBlik.Virtual\NecBlik.Virtual.csproj" />
-    <ProjectReference Include="..\NecBlik.ZigBeeNet.GUI\NecBlik.ZigBeeNet.GUI.csproj" />
-    <ProjectReference Include="..\NecBlik.ZigBeeNet\NecBlik.ZigBeeNet.csproj" />
     <ProjectReference Include="..\WPFLocalizeextension\WPFLocalizeextension.csproj" />
   </ItemGroup>
 
@@ -53,5 +56,9 @@
       <LastGenOutput>SR.Designer.cs</LastGenOutput>
     </EmbeddedResource>
   </ItemGroup>
+
+  <Target Name="PostBuild" AfterTargets="PostBuildEvent">
+    <Exec Command="xcopy &quot;$(SolutionDir)NecBlik.PyDigi.Python&quot; &quot;$(SolutionDir)NecBlik\bin\Debug\net6.0-windows\Environments&quot; /Y /I /E&#xD;&#xA;xcopy &quot;$(SolutionDir)NecBlik.PyDigi.Python&quot; &quot;$(SolutionDir)NecBlik\bin\Release\net6.0-windows\Environments&quot; /Y /I /E" />
+  </Target>
 
 </Project>

@@ -18,7 +18,7 @@ namespace NecBlik.Core.GUI.Views
     /// <summary>
     /// Interaction logic for ProjectWindow.xaml
     /// </summary>
-    public partial class ProjectWindow : Window
+    public partial class ProjectWindow
     {
         public ProjectWindow()
         {

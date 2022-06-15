@@ -1,0 +1,48 @@
+﻿<mah:MetroWindow x:Class="NecBlik.Digi.GUI.Views.ATCommandWindow"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:mah="http://metro.mahapps.com/winfx/xaml/controls"
+        xmlns:fa="http://schemas.fontawesome.io/icons/"
+        xmlns:local="clr-namespace:NecBlik.Digi.GUI.Views"
+        xmlns:viewModels="clr-namespace:NecBlik.Virtual.GUI.ViewModels;assembly=NecBlik.Virtual.GUI"
+        xmlns:lexp="clr-namespace:WPFLocalizeExtension.Providers;assembly=WPFLocalizeextension"
+        xmlns:lex="clr-namespace:WPFLocalizeExtension.Extensions;assembly=WPFLocalizeextension"
+        lexp:ResxLocalizationProvider.DefaultAssembly="NecBlik.Digi.GUI"
+        lexp:ResxLocalizationProvider.DefaultDictionary="SR"
+        mc:Ignorable="d"
+        xmlns:vm ="clr-namespace:NecBlik.Digi.GUI.ViewModels;assembly=NecBlik.Digi.GUI"
+        d:DataContext="{d:DesignInstance {x:Type vm:DigiATCommandsViewModel}}"
+        Title="AT Commands" Height="450" Width="800">
+    <Grid Background="{StaticResource MaterialDesignDarkBackground}">
+        <Grid Margin="10">
+            <Grid.RowDefinitions>
+                <RowDefinition Height="auto"></RowDefinition>
+                <RowDefinition Height="auto"></RowDefinition>
+                <RowDefinition Height="auto"></RowDefinition>
+                <RowDefinition Height="auto"></RowDefinition>
+                <RowDefinition Height="*"></RowDefinition>
+            </Grid.RowDefinitions>
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition></ColumnDefinition>
+                <ColumnDefinition></ColumnDefinition>
+            </Grid.ColumnDefinitions>
+            <TextBlock Grid.Row="0" Grid.Column="0" Text="{lex:Loc NecBlik.Virtual.GUI:SR:GPAddress}" Foreground="{StaticResource MaterialDesignDarkForeground}"></TextBlock>
+            <ComboBox Grid.Row="0" Grid.Column="1" ItemsSource="{Binding AvailableAddresses}" SelectedItem="{Binding Address, UpdateSourceTrigger=PropertyChanged}" Foreground="{StaticResource MaterialDesignDarkForeground}"></ComboBox>
+            <TextBlock Grid.Row="1" Grid.Column="0" Text="{lex:Loc NecBlik.Digi.GUI:SR:GPCommand}" Foreground="{StaticResource MaterialDesignDarkForeground}"></TextBlock>
+            <TextBox Grid.Row="1" Grid.Column="1" Text="{Binding Command, UpdateSourceTrigger=PropertyChanged}" Foreground="{StaticResource MaterialDesignDarkForeground}"></TextBox>
+            <TextBlock Grid.Row="2" Grid.Column="0" Text="{lex:Loc NecBlik.Digi.GUI:SR:GPParameter}" Foreground="{StaticResource MaterialDesignDarkForeground}"></TextBlock>
+            <TextBox Grid.Row="2" Grid.Column="1" Text="{Binding Parameter, UpdateSourceTrigger=PropertyChanged}" Foreground="{StaticResource MaterialDesignDarkForeground}"></TextBox>
+            <Button Grid.Row="3" Grid.ColumnSpan="2" VerticalAlignment="Center" Style="{StaticResource BaseButton}" Command="{Binding SendCommand}" HorizontalAlignment="Center" Margin="10">
+                <StackPanel Orientation="Horizontal">
+                    <TextBlock Text="Send" VerticalAlignment="Center" Margin="0 0 5 0"></TextBlock>
+                    <TextBlock Text="&#xf0e0;" FontFamily="{StaticResource FontAwesome}" VerticalAlignment="Center"></TextBlock>
+                </StackPanel>
+            </Button>
+            <ScrollViewer Grid.Row="4" Grid.ColumnSpan="2" Style="{StaticResource ScrollViewer}">
+                <ListView ItemsSource="{Binding IOHistory}" VerticalAlignment="Stretch" HorizontalAlignment="Stretch" VirtualizingPanel.IsVirtualizing="True"></ListView>
+            </ScrollViewer>
+        </Grid>
+    </Grid>
+</mah:MetroWindow>

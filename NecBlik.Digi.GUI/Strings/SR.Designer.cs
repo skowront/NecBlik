@@ -79,6 +79,15 @@ namespace NecBlik.Digi.GUI.Strings {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to AT Commands.
+        /// </summary>
+        public static string GPATCommands {
+            get {
+                return ResourceManager.GetString("GPATCommands", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Baud rate.
         /// </summary>
         public static string GPBaudRate {
@@ -97,6 +106,15 @@ namespace NecBlik.Digi.GUI.Strings {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Command.
+        /// </summary>
+        public static string GPCommand {
+            get {
+                return ResourceManager.GetString("GPCommand", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Confirm.
         /// </summary>
         public static string GPConfirm {
@@ -106,11 +124,20 @@ namespace NecBlik.Digi.GUI.Strings {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Coordinator type.
+        ///   Looks up a localized string similar to Coordinator class.
         /// </summary>
         public static string GPCoordinatorType {
             get {
                 return ResourceManager.GetString("GPCoordinatorType", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Current value.
+        /// </summary>
+        public static string GPCurrentValue {
+            get {
+                return ResourceManager.GetString("GPCurrentValue", resourceCulture);
             }
         }
         
@@ -120,6 +147,42 @@ namespace NecBlik.Digi.GUI.Strings {
         public static string GPDescription {
             get {
                 return ResourceManager.GetString("GPDescription", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Diagnostics.
+        /// </summary>
+        public static string GPDiagnostics {
+            get {
+                return ResourceManager.GetString("GPDiagnostics", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Last poll.
+        /// </summary>
+        public static string GPLastPoll {
+            get {
+                return ResourceManager.GetString("GPLastPoll", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Local range.
+        /// </summary>
+        public static string GPLocalRange {
+            get {
+                return ResourceManager.GetString("GPLocalRange", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Mean.
+        /// </summary>
+        public static string GPMean {
+            get {
+                return ResourceManager.GetString("GPMean", resourceCulture);
             }
         }
         
@@ -142,11 +205,29 @@ namespace NecBlik.Digi.GUI.Strings {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Network type.
+        ///   Looks up a localized string similar to Network class.
         /// </summary>
         public static string GPNetworkType {
             get {
                 return ResourceManager.GetString("GPNetworkType", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Parameter.
+        /// </summary>
+        public static string GPParameter {
+            get {
+                return ResourceManager.GetString("GPParameter", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Payload size.
+        /// </summary>
+        public static string GPPayloadSize {
+            get {
+                return ResourceManager.GetString("GPPayloadSize", resourceCulture);
             }
         }
         
@@ -169,6 +250,33 @@ namespace NecBlik.Digi.GUI.Strings {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Range.
+        /// </summary>
+        public static string GPRange {
+            get {
+                return ResourceManager.GetString("GPRange", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Remote address.
+        /// </summary>
+        public static string GPRemoteAddress {
+            get {
+                return ResourceManager.GetString("GPRemoteAddress", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Remote range.
+        /// </summary>
+        public static string GPRemoteRange {
+            get {
+                return ResourceManager.GetString("GPRemoteRange", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Select.
         /// </summary>
         public static string GPSelect {
@@ -187,6 +295,15 @@ namespace NecBlik.Digi.GUI.Strings {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Send.
+        /// </summary>
+        public static string GPSend {
+            get {
+                return ResourceManager.GetString("GPSend", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Serial port.
         /// </summary>
         public static string GPSerialPort {
@@ -196,11 +313,74 @@ namespace NecBlik.Digi.GUI.Strings {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Start.
+        /// </summary>
+        public static string GPStart {
+            get {
+                return ResourceManager.GetString("GPStart", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Stop.
+        /// </summary>
+        public static string GPStop {
+            get {
+                return ResourceManager.GetString("GPStop", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Temperature.
+        /// </summary>
+        public static string GPTemperature {
+            get {
+                return ResourceManager.GetString("GPTemperature", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Throughput.
+        /// </summary>
+        public static string GPThroughput {
+            get {
+                return ResourceManager.GetString("GPThroughput", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to VID.
         /// </summary>
         public static string GPVID {
             get {
                 return ResourceManager.GetString("GPVID", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Select a custom view model for your coordinator. Leave empty if you do not have one..
+        /// </summary>
+        public static string TTCoordinatorClass {
+            get {
+                return ResourceManager.GetString("TTCoordinatorClass", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Select a custom view model for your network. Leave empty if you do not have one..
+        /// </summary>
+        public static string TTNetworkClass {
+            get {
+                return ResourceManager.GetString("TTNetworkClass", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Baud rate between serial port controller and your coordinator device..
+        /// </summary>
+        public static string TTSerialPortBaudRate {
+            get {
+                return ResourceManager.GetString("TTSerialPortBaudRate", resourceCulture);
             }
         }
     }

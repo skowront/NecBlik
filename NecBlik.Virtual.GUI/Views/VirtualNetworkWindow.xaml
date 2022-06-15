@@ -26,12 +26,20 @@
                 <TextBox Text="{Binding ViewModel.Name,UpdateSourceTrigger=PropertyChanged}" Foreground="{StaticResource MaterialDesignDarkForeground}"></TextBox>
                 <TextBlock Text="{lex:Loc GPNetworkPanId}" Foreground="{StaticResource MaterialDesignDarkForeground}"></TextBlock>
                 <TextBlock Text="{Binding ViewModel.PanId,UpdateSourceTrigger=PropertyChanged}" Foreground="{StaticResource MaterialDesignDarkForeground}"></TextBlock>
+                <StackPanel Orientation="Horizontal">
+                    <TextBlock Text="{lex:Loc GPPollingInterval}" Foreground="{StaticResource MaterialDesignDarkForeground}"></TextBlock>
+                    <TextBlock Text="[" Margin="5 0 0 0"  Foreground="{StaticResource MaterialDesignDarkForeground}"></TextBlock>
+                    <TextBlock Text="{lex:Loc NecBlik.Core.GUI:SR:GPms}" Foreground="{StaticResource MaterialDesignDarkForeground}"></TextBlock>
+                    <TextBlock Text="]" Foreground="{StaticResource MaterialDesignDarkForeground}"></TextBlock>
+                </StackPanel>
+                <TextBox Text="{Binding ViewModel.PollingInterval, UpdateSourceTrigger=PropertyChanged}" Foreground="{StaticResource MaterialDesignDarkForeground}"></TextBox>
                 <!--<StackPanel Orientation="Horizontal">
                     <TextBlock Text="{lex:Loc GPStayOpen}" Foreground="{StaticResource MaterialDesignDarkForeground}"></TextBlock>
                     <CheckBox IsChecked="{Binding ViewModel.IsOpen,UpdateSourceTrigger=PropertyChanged}" Style="{StaticResource MaterialDesignCheckBox}" HorizontalAlignment="Left" Foreground="{StaticResource MaterialDesignDarkForeground}"></CheckBox>
                 </StackPanel>-->
                 <Grid>
                     <Grid.ColumnDefinitions>
+                        <ColumnDefinition Width="auto"></ColumnDefinition>
                         <ColumnDefinition Width="auto"></ColumnDefinition>
                         <ColumnDefinition Width="auto"></ColumnDefinition>
                         <ColumnDefinition Width="auto"></ColumnDefinition>
@@ -43,9 +51,9 @@
                             <TextBlock Text="&#xf002;" FontFamily="{StaticResource FontAwesome}"  VerticalAlignment="Center"></TextBlock>
                         </StackPanel>
                     </Button>
-                    <Button Grid.Column="2" VerticalAlignment="Center" Style="{StaticResource BaseButton}" Command="{Binding ViewModel.RefreshCommand}" HorizontalAlignment="Center" Margin="0" MinWidth="50">
+                    <Button Grid.Column="2" VerticalAlignment="Center" Style="{StaticResource BaseButton}" Command="{Binding ViewModel.PollDevicesCommand}" HorizontalAlignment="Center" Margin="0" MinWidth="50">
                         <StackPanel Orientation="Horizontal">
-                            <TextBlock Text="{lex:Loc GPSynchronize}" Margin="0 0 5 0" VerticalAlignment="Center"></TextBlock>
+                            <TextBlock Text="{lex:Loc GPPollDevices}" Margin="0 0 5 0" VerticalAlignment="Center"></TextBlock>
                             <TextBlock Text="&#xf021;" FontFamily="{StaticResource FontAwesome}" VerticalAlignment="Center"></TextBlock>
                         </StackPanel>
                     </Button>
@@ -55,28 +63,45 @@
                             <TextBlock Text="&#xf02d;" FontFamily="{StaticResource FontAwesome}" VerticalAlignment="Center"></TextBlock>
                         </StackPanel>
                     </Button>
+                    <Button Grid.Column="4" VerticalAlignment="Center" Style="{StaticResource BaseButton}" Command="{Binding ViewModel.PingCommand}" HorizontalAlignment="Center" Margin="0" MinWidth="50">
+                        <StackPanel Orientation="Horizontal">
+                            <TextBlock Text="{lex:Loc NecBlik.Core.GUI:SR:GPPing}" Margin="0 0 5 0" VerticalAlignment="Center"></TextBlock>
+                            <TextBlock Text="&#xf1ce;" FontFamily="{StaticResource FontAwesome}" VerticalAlignment="Center"></TextBlock>
+                        </StackPanel>
+                    </Button>
                 </Grid>
                 <Separator Grid.Row="1"></Separator>
             </StackPanel>
             <StackPanel Grid.Row="1">
                 <TextBlock Text="{lex:Loc GPCoordinator}" Foreground="{StaticResource MaterialDesignDarkForeground}" HorizontalAlignment="Center"></TextBlock>
             </StackPanel>
-            <ContentPresenter Grid.Row="2" Content="{Binding ViewModel.Coordinator}">
-                <ContentPresenter.ContentTemplate>
-                    <DataTemplate DataType="{x:Type viewModels:VirtualDeviceViewModel}">
-                        <StackPanel Orientation="Vertical">
-                            <TextBlock Text="{Binding InternalFactoryType}" Foreground="{StaticResource MaterialDesignDarkForeground}"></TextBlock>
-                            <TextBlock Text="{Binding Name, UpdateSourceTrigger=PropertyChanged}" Foreground="{StaticResource MaterialDesignDarkForeground}"></TextBlock>
-                            <TextBlock Text="{Binding Guid, UpdateSourceTrigger=PropertyChanged}" Foreground="{StaticResource MaterialDesignDarkForeground}"></TextBlock>
-                            <StackPanel Orientation="Horizontal">
-                                <Button Command="{Binding EditCommand}" Style="{StaticResource BaseButton}" Content="{lex:Loc GPOpen}"></Button>
-                                <Button Command="{Binding SelectCommand}" Style="{StaticResource BaseButton}" Content="{lex:Loc GPSendToMap}"></Button>
+            <Grid Grid.Row="2">
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="*"></ColumnDefinition>
+                    <ColumnDefinition Width="auto"></ColumnDefinition>
+                </Grid.ColumnDefinitions>
+                <ContentPresenter Content="{Binding ViewModel.Coordinator}">
+                    <ContentPresenter.ContentTemplate>
+                        <DataTemplate DataType="{x:Type viewModels:VirtualDeviceViewModel}">
+                            <StackPanel Orientation="Vertical">
+                                <TextBlock Text="{Binding InternalFactoryType}" Foreground="{StaticResource MaterialDesignDarkForeground}"></TextBlock>
+                                <TextBlock Text="{Binding Name, UpdateSourceTrigger=PropertyChanged}" Foreground="{StaticResource MaterialDesignDarkForeground}"></TextBlock>
+                                <TextBlock Text="{Binding Guid, UpdateSourceTrigger=PropertyChanged}" Foreground="{StaticResource MaterialDesignDarkForeground}"></TextBlock>
+                                <StackPanel Orientation="Horizontal">
+                                    <Button Command="{Binding EditCommand}" Style="{StaticResource BaseButton}" Content="{lex:Loc GPOpen}"></Button>
+                                    <Button Command="{Binding SelectCommand}" Style="{StaticResource BaseButton}" Content="{lex:Loc GPSendToMap}"></Button>
+                                </StackPanel>
                             </StackPanel>
-                            <Separator Grid.Row="1"></Separator>
-                        </StackPanel>
-                    </DataTemplate>
-                </ContentPresenter.ContentTemplate>
-            </ContentPresenter>
+                        </DataTemplate>
+                    </ContentPresenter.ContentTemplate>
+                </ContentPresenter>
+                <Button Grid.Column="1" VerticalAlignment="Bottom" Style="{StaticResource BaseButton}" Command="{Binding ViewModel.EditCoordinatorRuleCommand}" HorizontalAlignment="Right" Margin="0" MinWidth="0">
+                    <StackPanel Orientation="Horizontal">
+                        <TextBlock Text="{lex:Loc GPRules}" Margin="0 0 5 0" VerticalAlignment="Center"></TextBlock>
+                        <TextBlock Text="&#xf02d;" FontFamily="{StaticResource FontAwesome}" VerticalAlignment="Center"></TextBlock>
+                    </StackPanel>
+                </Button>
+            </Grid>
             <Grid Grid.Row="3">
                 <Grid.RowDefinitions>
                     <RowDefinition Height="auto"></RowDefinition>

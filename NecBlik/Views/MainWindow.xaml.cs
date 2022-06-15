@@ -153,6 +153,12 @@ namespace NecBlik.Views
                 return this.LoadMap(o.Item1,o.Item2);
             });
 
+            this.ViewModel.ProjectMapRemoveProvider = new GenericResponseProvider<object, object>(o =>
+            {
+                this.RemoveMap();
+                return null;
+            });
+
             this.ViewModel.NewProjectLoadedProvider = new GenericResponseProvider<object, object>((o) =>
             {
                 this.designerCanvas.ClearCanvas();
@@ -210,6 +216,7 @@ namespace NecBlik.Views
                     this.designerCanvas.RemoveDevice(item.GetCacheId());
                 }
                 this.designerCanvas.RemoveDevice(o.Coordinator);
+                this.designerCanvas.RemoveNetworkGhostDevices(o.Guid);
                 return true;
             });
         }
@@ -221,7 +228,16 @@ namespace NecBlik.Views
 
         public void NotifyUpdated(DeviceViewModel obj)
         {
-            this.designerCanvas.UpdateDevice(obj);
+            this.Dispatcher.Invoke(() =>
+            {
+                this.designerCanvas.UpdateDevice(obj);
+            });
+        }
+
+        private object RemoveMap()
+        {
+            this.designerCanvas.RemoveBackground();
+            return null;
         }
 
         private object LoadMap(string path, DiagramItemMetadata metadata)

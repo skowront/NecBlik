@@ -21,7 +21,7 @@
         WindowStartupLocation="CenterScreen"
         WindowState="Maximized"
         mc:Ignorable="d"
-        Title="Device Map" Height="450" Width="800">
+        Title="Nec Blik" Height="450" Width="800">
     <mah:MetroWindow.Resources>
         <ContextMenu x:Key="DesignerCanvasContextMenu">
             <MenuItem Header="Paste" Command="{x:Static ApplicationCommands.Paste}" IsEnabled="True"/>
@@ -40,24 +40,26 @@
                 <ColumnDefinition Width="auto"></ColumnDefinition>
             </Grid.ColumnDefinitions>
             <Grid.RowDefinitions>
-                <RowDefinition Height="1*"></RowDefinition>
+                <RowDefinition Height="auto"></RowDefinition>
                 <RowDefinition Height="2"></RowDefinition>
             </Grid.RowDefinitions>
-            <Menu Grid.Row="0" VerticalAlignment="Top" Height="auto" VerticalContentAlignment="Bottom">
-                <MenuItem Header="{lex:Loc MainWindowMenuHeaderNew}" Margin="4">
-                    <MenuItem Header="{lex:Loc MainWindowMenuHeaderProject}" Command="{Binding NewProjectCommand}"/>
+            <Menu Style="{StaticResource MahApps.Styles.Menu}" Background="{StaticResource MaterialDesignDarkBackground}" Foreground="{StaticResource MaterialDesignDarkForeground}" Grid.Row="0" VerticalAlignment="Top" Height="auto" VerticalContentAlignment="Bottom">
+                <MenuItem Header="{lex:Loc MainWindowMenuHeaderProject }">
+                    <MenuItem Header="{lex:Loc MainWindowMenuHeaderNew}" Command="{Binding NewProjectCommand}"/>
                     <MenuItem Header="{lex:Loc MainWindowMenuHeaderProjectLoad}" Command="{Binding LoadProjectCommand}"/>
                     <MenuItem Header="{lex:Loc MainWindowMenuHeaderProjectSave}" Command="{Binding SaveProjectCommand}"/>
-                    <MenuItem Header="{lex:Loc MainWindowManuHeaderProjectLoadMap}" Command="{Binding LoadProjectMapCommand}"/>
+                    <MenuItem Header="{lex:Loc MainWindowMenuHeaderProjectSaveAs}" Command="{Binding SaveProjectAsCommand}"/>
+                    <MenuItem Header="{lex:Loc MainWindowMenuHeaderProjectRename}" Command="{Binding EditProjectCommand}"/>
                     <MenuItem Header="{lex:Loc MainWindowMenuHeaderProjectAddNetwork}" Command="{Binding AddNetworkCommand}"/>
                 </MenuItem>
-                <MenuItem Header="{lex:Loc MainWindowMenuHeaderProjectEdit}" Margin="4">
+                <MenuItem Header="{lex:Loc MainWindowMenuHeaderMap}">
+                    <MenuItem Header="{lex:Loc MainWindowManuHeaderProjectLoadMap}" Command="{Binding LoadProjectMapCommand}"/>
+                    <MenuItem Header="{lex:Loc MainWindowManuHeaderProjectRemoveMap}" Command="{Binding RemoveProjectMapCommand}"/>
                     <MenuItem Header="{lex:Loc MainWindowMenuHeaderResizeMap}" Click="ResizeMapMenuItemClick"/>
-                    <MenuItem Header="{lex:Loc MainWindowMenuHeaderProjectRename}" Command="{Binding EditProjectCommand}"/>
                 </MenuItem>
-                <MenuItem Header="{lex:Loc MainWindowMenuSettings}" Command="{Binding ApplicationSettingsCommand}" Margin="4">
+                <MenuItem Header="{lex:Loc MainWindowMenuSettings}" Command="{Binding ApplicationSettingsCommand}">
                 </MenuItem>
-                <MenuItem Header="{lex:Loc MainWindowMenuAbout}" Margin="4">
+                <MenuItem Header="{lex:Loc MainWindowMenuAbout}" Command="{Binding AboutCommand}">
                 </MenuItem>
             </Menu>
             <TextBlock Grid.Row="0" 
@@ -69,7 +71,9 @@
         </Grid>
         <Grid Grid.Row="1">
             <Grid.ColumnDefinitions>
-                <ColumnDefinition Width="4*"></ColumnDefinition>
+                <ColumnDefinition Width="1*"></ColumnDefinition>
+                <ColumnDefinition Width="20*"></ColumnDefinition>
+                <ColumnDefinition Width="10*"></ColumnDefinition>
                 <ColumnDefinition Width="1*"></ColumnDefinition>
             </Grid.ColumnDefinitions>
             <Grid.RowDefinitions>
@@ -77,58 +81,12 @@
                 <RowDefinition Height="9*"></RowDefinition>
                 <RowDefinition Height="*"></RowDefinition>
             </Grid.RowDefinitions>
-            <Grid Grid.Column="1" Grid.RowSpan="3" Background="{StaticResource MaterialDesignDarkBackground}">
-                <Grid.RowDefinitions>
-                    <RowDefinition Height="auto"></RowDefinition>
-                    <RowDefinition Height="9*"></RowDefinition>
-                </Grid.RowDefinitions>
-                <Grid Grid.Column="1" Background="{StaticResource MaterialDesignDarkBackground}">
-                    <TextBlock  Text="{lex:Loc MainWindowNetworks}"
-                       Background="{StaticResource MaterialDesignDarkBackground}"
-                       Foreground="{StaticResource MaterialDesignDarkForeground}" 
-                       HorizontalAlignment="Center" VerticalAlignment="Center" FontSize="15" Margin="5"></TextBlock>
-                </Grid>
-                <Grid Grid.Column="1" Grid.Row="1" Grid.RowSpan="2">
-                    <ScrollViewer Style="{StaticResource ScrollViewer}">
-                        <Expander ExpandDirection="Down" Style="{StaticResource MaterialDesignExpander}" IsExpanded="True"
-                          Foreground="{StaticResource ForegroundLightBrush}"
-                          Header="">
-                            <ListView ItemsSource="{Binding Networks}" 
-                          PreviewMouseLeftButtonDown="ListView_PreviewMouseLeftButtonDown" 
-                          MouseMove="ListView_MouseMove"
-                          HorizontalAlignment="Stretch"
-                          HorizontalContentAlignment="Stretch">
-                                <ListView.ItemTemplate>
-                                    <DataTemplate>
-                                        <Border BorderThickness="1 1 1 1">
-                                            <Grid Width="auto">
-                                                <Grid.ColumnDefinitions>
-                                                    <ColumnDefinition Width="*"></ColumnDefinition>
-                                                    <ColumnDefinition Width="auto"></ColumnDefinition>
-                                                </Grid.ColumnDefinitions>
-                                                <ContentPresenter Grid.Column="0" ContentTemplateSelector="{StaticResource NetworkBriefDataTemplateSelector}" VerticalAlignment="Center" HorizontalAlignment="Stretch">
-                                                </ContentPresenter>
-                                                <Button Grid.Column="1" Command="{Binding RelativeSource={RelativeSource FindAncestor, AncestorType=ListView}, Path=DataContext.RemoveNetworkCommand}" 
-                                                CommandParameter="{Binding RelativeSource={RelativeSource Mode=FindAncestor, AncestorType={x:Type ListViewItem}},Path=DataContext}"
-                                                Style="{StaticResource BaseButton}"
-                                                HorizontalAlignment="Right" VerticalAlignment="Center">
-                                                    <TextBlock Text="&#xf057;" FontFamily="{StaticResource FontAwesome}" VerticalAlignment="Center"></TextBlock>
-                                                </Button>
-                                            </Grid>
-                                        </Border>
-                                    </DataTemplate>
-                                </ListView.ItemTemplate>
-                            </ListView>
-                        </Expander>
-                    </ScrollViewer>
-                </Grid>
-            </Grid>
 
-            <ScrollViewer Grid.Column="0" Grid.Row="0" Grid.RowSpan="3" HorizontalScrollBarVisibility="Visible" Style="{StaticResource ScrollViewer}">
+            <ScrollViewer Grid.Column="0" Grid.ColumnSpan="4" Grid.Row="0" Grid.RowSpan="3" HorizontalScrollBarVisibility="Visible" Style="{StaticResource ScrollViewerLeft}">
                 <Grid>
                     <Grid.ColumnDefinitions>
-                        <ColumnDefinition Width="100*"/>
-                        <ColumnDefinition Width="500*"/>
+                        <ColumnDefinition Width="1*"/>
+                        <ColumnDefinition Width="5*"/>
                     </Grid.ColumnDefinitions>
                     <Grid.LayoutTransform>
                         <ScaleTransform ScaleX="{Binding ElementName=sldZoom, Path=Value}" ScaleY="{Binding ElementName=sldZoom, Path=Value}" />
@@ -140,7 +98,61 @@
                                                ContextMenu="{StaticResource DesignerCanvasContextMenu}" Grid.ColumnSpan="2"/>
                 </Grid>
             </ScrollViewer>
-            <Slider Grid.Row="0" Grid.RowSpan="2" Minimum="1" Maximum="10" x:Name="sldZoom" Margin="10" Orientation="Vertical" HorizontalAlignment="Left"/>
+            <Slider Grid.Row="0" Grid.Column="2" Grid.RowSpan="2" Minimum="1" Maximum="10" x:Name="sldZoom" Margin="10" HorizontalAlignment="Right" Orientation="Vertical"/>
+
+            <Expander Opacity="1" ExpandDirection="Left" Grid.Column="0" Grid.ColumnSpan="4" Grid.RowSpan="3"
+                      HorizontalAlignment="Right" MaxWidth="500"
+                      Background="{StaticResource MaterialDesignDarkBackground}"
+                      Style="{StaticResource MahApps.Styles.Expander}">
+                <Grid Grid.Column="1" Grid.RowSpan="3" Background="{StaticResource MaterialDesignDarkBackground}">
+                    <Grid.RowDefinitions>
+                        <RowDefinition Height="auto"></RowDefinition>
+                        <RowDefinition Height="9*"></RowDefinition>
+                    </Grid.RowDefinitions>
+                    <Grid Grid.Column="1" Background="{StaticResource MaterialDesignDarkBackground}">
+                        <TextBlock  Text="{lex:Loc MainWindowNetworks}"
+                       Background="{StaticResource MaterialDesignDarkBackground}"
+                       Foreground="{StaticResource MaterialDesignDarkForeground}" 
+                       HorizontalAlignment="Center" VerticalAlignment="Center" FontSize="15" Margin="5"></TextBlock>
+                    </Grid>
+                    <Grid Grid.Column="1" Grid.Row="1" Grid.RowSpan="2">
+                        <ScrollViewer Style="{StaticResource ScrollViewer}">
+                            <Expander ExpandDirection="Down" Style="{StaticResource MaterialDesignExpander}" IsExpanded="True"
+                          Foreground="{StaticResource ForegroundLightBrush}"
+                          Header="Networks">
+                                <ListView ItemsSource="{Binding Networks}" 
+                          PreviewMouseLeftButtonDown="ListView_PreviewMouseLeftButtonDown" 
+                          MouseMove="ListView_MouseMove"
+                          HorizontalAlignment="Stretch"
+                          HorizontalContentAlignment="Stretch">
+                                    <ListView.ItemTemplate>
+                                        <DataTemplate>
+                                            <Border BorderThickness="1 1 1 1">
+                                                <Grid Width="auto">
+                                                    <Grid.ColumnDefinitions>
+                                                        <ColumnDefinition Width="*"></ColumnDefinition>
+                                                        <ColumnDefinition Width="auto"></ColumnDefinition>
+                                                    </Grid.ColumnDefinitions>
+                                                    <ContentPresenter Grid.Column="0" ContentTemplateSelector="{StaticResource NetworkBriefDataTemplateSelector}" VerticalAlignment="Center" HorizontalAlignment="Stretch">
+                                                    </ContentPresenter>
+                                                    <Button Grid.Column="1" Command="{Binding RelativeSource={RelativeSource FindAncestor, AncestorType=ListView}, Path=DataContext.RemoveNetworkCommand}" 
+                                                CommandParameter="{Binding RelativeSource={RelativeSource Mode=FindAncestor, AncestorType={x:Type ListViewItem}},Path=DataContext}"
+                                                Style="{StaticResource BaseButton}"
+                                                HorizontalAlignment="Right" VerticalAlignment="Center">
+                                                        <TextBlock Text="&#xf057;" FontFamily="{StaticResource FontAwesome}" VerticalAlignment="Center"></TextBlock>
+                                                    </Button>
+                                                </Grid>
+                                            </Border>
+                                        </DataTemplate>
+                                    </ListView.ItemTemplate>
+                                </ListView>
+                            </Expander>
+                        </ScrollViewer>
+                    </Grid>
+                </Grid>
+            </Expander>
+
+            
         </Grid>
     </Grid>
 </mah:MetroWindow>

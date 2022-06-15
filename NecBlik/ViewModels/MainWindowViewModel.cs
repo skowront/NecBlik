@@ -18,6 +18,7 @@ using NecBlik.Core.GUI.Views;
 using System.Threading;
 using NecBlik.Models;
 using System.Threading.Tasks;
+using NecBlik.Views;
 
 namespace NecBlik.ViewModels
 {
@@ -31,14 +32,19 @@ namespace NecBlik.ViewModels
         public string ProjectName
         {
             get { return this.model.ProjectName; }
-            set { this.model.ProjectName = value; this.OnPropertyChanged(); }
+            set { this.model.ProjectName = value; this.ProjectDirectory = string.Empty; this.OnPropertyChanged(); }
         }
 
         public string MapFilePath
         {
-            get { return this.model.MapFile; }
-            set { this.model.MapFile = value; this.OnPropertyChanged(); }
+            get { return this.guiModel.MapFile; }
+            set { this.guiModel.MapFile = value; this.OnPropertyChanged(); }
         }
+
+        public string ProjectDirectory
+        {
+            get; set;
+        } = string.Empty;
 
         public Collection<DeviceViewModel> AvailableDevices 
         {
@@ -74,6 +80,7 @@ namespace NecBlik.ViewModels
         public IResponseProvider<DiagramItemMetadata, object> DiagramMapMetadataProvider { get; set; } = new GenericResponseProvider<DiagramItemMetadata, object>(new DiagramItemMetadata());
         public IResponseProvider<string, object> ProjectMapPathProvider { get; set; } = new GenericResponseProvider<string, object>(string.Empty);
         public IResponseProvider<object, Tuple<string, DiagramItemMetadata>> ProjectMapLoadedProvider { get; set; } = new GenericResponseProvider<object, Tuple<string,DiagramItemMetadata>>();
+        public IResponseProvider<object, object> ProjectMapRemoveProvider { get; set; } = new GenericResponseProvider<object, object>();
         public IResponseProvider<object, object> NewProjectLoadedProvider { get; set; } = new GenericResponseProvider<object, object>();
         public IResponseProvider<bool, object> NewProjectLoadEnsureResponseProvider { get; set; } = new GenericResponseProvider<bool, object>(true);
         public IResponseProvider<bool, object> ActionEnsureResponseProvider { get; set; } = new GenericResponseProvider<bool, object>(true);
@@ -92,12 +99,15 @@ namespace NecBlik.ViewModels
         #region Commands
         public RelayCommand NewProjectCommand { get; set; }
         public RelayCommand SaveProjectCommand { get; set; }
+        public RelayCommand SaveProjectAsCommand { get; set; }
         public RelayCommand LoadProjectCommand { get; set; }
         public RelayCommand AddNetworkCommand { get; set; }
         public RelayCommand LoadProjectMapCommand { get; set; }
+        public RelayCommand RemoveProjectMapCommand { get; set; }
         public RelayCommand EditProjectCommand { get; set; }
         public RelayCommand ApplicationSettingsCommand { get; set; }
         public RelayCommand RemoveNetworkCommand { get; set; }
+        public RelayCommand AboutCommand { get; set; }
 
         #endregion
 
@@ -155,6 +165,11 @@ namespace NecBlik.ViewModels
                 this.SaveProject();
             });
 
+            this.SaveProjectAsCommand = new RelayCommand(o =>
+            {
+                this.SaveProjectAs();
+            });
+
             this.LoadProjectCommand = new RelayCommand(o =>
             {
                 if (this.NewProjectLoadEnsureResponseProvider.ProvideResponse() == false)
@@ -168,6 +183,11 @@ namespace NecBlik.ViewModels
             {
                 var path = this.ProjectMapPathProvider.ProvideResponse();
                 this.LoadProjectMap(path);
+            });
+
+            this.RemoveProjectMapCommand = new RelayCommand((o) =>
+            {
+                this.RemoveProjectMap();
             });
 
             this.EditProjectCommand = new RelayCommand(o =>
@@ -189,9 +209,13 @@ namespace NecBlik.ViewModels
 
             this.RemoveNetworkCommand = new RelayCommand(o => 
             {   
-                var vm = o as NetworkViewModel;
-                vm.Dispose();
                 this.RemoveNetwork(o as NetworkViewModel); 
+            });
+
+            this.AboutCommand = new RelayCommand((o) =>
+            {
+                var window = new AboutWindow();
+                window.Show();
             });
         }
 
@@ -205,8 +229,23 @@ namespace NecBlik.ViewModels
             {
                 return;
             }
-            this.MapFilePath = path;
-            this.ProjectMapLoadedProvider.ProvideResponse(new Tuple<string, DiagramItemMetadata>(this.MapFilePath, this.guiModel.mapDiagramMetadata));
+            if (this.ProjectDirectory != string.Empty)
+            { 
+                if(path != this.ProjectDirectory + "\\" + Path.GetFileName(path))
+                    File.Copy(path, this.ProjectDirectory + "\\" + Path.GetFileName(path), true);
+                this.MapFilePath = this.ProjectDirectory + "\\" + Path.GetFileName(path);
+                this.ProjectMapLoadedProvider.ProvideResponse(new Tuple<string, DiagramItemMetadata>(this.MapFilePath, this.guiModel.mapDiagramMetadata));
+            }
+            else
+            {
+                this.MapFilePath = path;
+                this.ProjectMapLoadedProvider.ProvideResponse(new Tuple<string, DiagramItemMetadata>(this.MapFilePath, this.guiModel.mapDiagramMetadata));
+            }
+        }
+
+        private void RemoveProjectMap()
+        {
+            this.ProjectMapRemoveProvider.ProvideResponse();
         }
 
         private async void LoadProject()
@@ -220,6 +259,7 @@ namespace NecBlik.ViewModels
             {
                 return;
             }
+            this.ProjectDirectory = Path.GetDirectoryName(path);
             this.NewProjectLoadedProvider?.ProvideResponse();
             var file = path;
             var dir = Path.GetDirectoryName(path);
@@ -266,6 +306,42 @@ namespace NecBlik.ViewModels
 
         private void SaveProject()
         {
+            var path = this.ProjectDirectory != string.Empty ? this.ProjectDirectory : this.SaveProjectFilePathProvider?.ProvideResponse();
+            if (path == null)
+            {
+                return;
+            }
+            if (path == string.Empty)
+            {
+                return;
+            }
+            this.SyncToModel();
+            var file = path + "\\" + this.ProjectName + "\\" + this.ProjectName + ".json";
+            var dir = path + "\\" + this.ProjectName;
+            if (File.Exists(file))
+            {
+                File.WriteAllText(file, JsonConvert.SerializeObject(this.model, Formatting.Indented));
+            }
+            else
+            {
+                if (!Directory.Exists(dir))
+                {
+                    Directory.CreateDirectory(dir);
+                }
+                if (Directory.Exists(dir))
+                {
+                    if(Directory.Exists(dir + NecBlik.Core.Resources.Resources.DeviceNetworksDirectory))
+                        Directory.Delete(dir + NecBlik.Core.Resources.Resources.DeviceNetworksDirectory, true);
+                    File.AppendAllText(file, JsonConvert.SerializeObject(this.model, Formatting.Indented));
+                }
+            }
+            this.ProjectDirectory = dir;
+            this.model.Save(dir, this.SavingProgressBarResponseProvider.ProvideResponse());
+            this.SaveProjectGui(dir);
+        }
+
+        private void SaveProjectAs()
+        {
             var path = this.SaveProjectFilePathProvider.ProvideResponse();
             if (path == null)
             {
@@ -290,11 +366,13 @@ namespace NecBlik.ViewModels
                 }
                 if (Directory.Exists(dir))
                 {
-                    Directory.Delete(dir,true);
+                    if (Directory.Exists(dir + NecBlik.Core.Resources.Resources.DeviceNetworksDirectory))
+                        Directory.Delete(dir + NecBlik.Core.Resources.Resources.DeviceNetworksDirectory, true);
                     Directory.CreateDirectory(dir);
                     File.AppendAllText(file, JsonConvert.SerializeObject(this.model, Formatting.Indented));
                 }
             }
+            this.ProjectDirectory = dir;
             this.model.Save(dir, this.SavingProgressBarResponseProvider.ProvideResponse());
             this.SaveProjectGui(dir);
         }
@@ -314,6 +392,12 @@ namespace NecBlik.ViewModels
             var dir = path;
             if (File.Exists(file))
             {
+                if (!File.Exists(this.ProjectDirectory + "\\" + Path.GetFileName(this.MapFilePath)))
+                {
+                    var nmf = this.ProjectDirectory + "\\" + Path.GetFileName(this.MapFilePath);
+                    File.Copy(this.MapFilePath, nmf);
+                    this.MapFilePath = Path.GetFileName(nmf);
+                }
                 File.WriteAllText(file, JsonConvert.SerializeObject(this.guiModel, Formatting.Indented));
             }
             else
@@ -324,9 +408,17 @@ namespace NecBlik.ViewModels
                 }
                 if (Directory.Exists(dir))
                 {
+                    if(this.MapFilePath !=null && this.MapFilePath!=String.Empty && this.ProjectDirectory!=string.Empty)
+                        if (!File.Exists(this.ProjectDirectory + "\\" + Path.GetFileName(this.MapFilePath)))
+                        {
+                            var nmf = this.ProjectDirectory + "\\" + Path.GetFileName(this.MapFilePath);
+                            File.Copy(this.MapFilePath, nmf);
+                            this.MapFilePath = Path.GetFileName(nmf);
+                        }
                     File.AppendAllText(file, JsonConvert.SerializeObject(this.guiModel, Formatting.Indented));
                 }
             }
+            
             this.guiModel.Save(dir);
         }
 
@@ -367,7 +459,10 @@ namespace NecBlik.ViewModels
             //    this.AvailableZigBees.Add(new ZigBeeViewModel(item));
             //}
             //this.DiagramZigBeesLoadedProvider.ProvideResponse(this.model.DiagramZigBees);
-            this.LoadProjectMap(this.model.MapFile);
+            if (this.ProjectDirectory != string.Empty && this.MapFilePath!=null)
+                this.LoadProjectMap(this.ProjectDirectory + "\\" + Path.GetFileName(this.MapFilePath));
+            else if(this.MapFilePath!=null)
+                this.LoadProjectMap(this.MapFilePath);
             this.Refresh();
         }
 
@@ -379,12 +474,16 @@ namespace NecBlik.ViewModels
             if (resp == false)
                 return;
             this.NetworkRemovedResponseProvider?.ProvideResponse(networkViewModel);
+            networkViewModel.Dispose();
             this.Networks.Remove(networkViewModel);
             this.Refresh();
         }
 
         private void Refresh()
         {
+            if(this.MapFilePath!=null&&this.ProjectDirectory!=string.Empty)
+                this.MapFilePath = Path.GetFullPath(this.ProjectDirectory + "\\" + Path.GetFileName(this.MapFilePath));
+            this.ProjectDirectory = string.Empty;
             this.OnPropertyChanged(nameof(this.ProjectName));
         }
     }

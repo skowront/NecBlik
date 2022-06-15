@@ -160,9 +160,69 @@
     <value>Add</value>
   </data>
   <data name="GPCoordinatorType" xml:space="preserve">
-    <value>Coordinator type</value>
+    <value>Coordinator class</value>
   </data>
   <data name="GPNetworkType" xml:space="preserve">
-    <value>Network type</value>
+    <value>Network class</value>
+  </data>
+  <data name="GPTemperature" xml:space="preserve">
+    <value>Temperature</value>
+  </data>
+  <data name="GPDiagnostics" xml:space="preserve">
+    <value>Diagnostics</value>
+  </data>
+  <data name="GPThroughput" xml:space="preserve">
+    <value>Throughput</value>
+  </data>
+  <data name="GPRange" xml:space="preserve">
+    <value>Range</value>
+  </data>
+  <data name="TTSerialPortBaudRate" xml:space="preserve">
+    <value>Baud rate between serial port controller and your coordinator device.</value>
+  </data>
+  <data name="TTNetworkClass" xml:space="preserve">
+    <value>Select a custom view model for your network. Leave empty if you do not have one.</value>
+  </data>
+  <data name="TTCoordinatorClass" xml:space="preserve">
+    <value>Select a custom view model for your coordinator. Leave empty if you do not have one.</value>
+  </data>
+  <data name="GPParameter" xml:space="preserve">
+    <value>Parameter</value>
+  </data>
+  <data name="GPCommand" xml:space="preserve">
+    <value>Command</value>
+  </data>
+  <data name="GPATCommands" xml:space="preserve">
+    <value>AT Commands</value>
+  </data>
+  <data name="GPSend" xml:space="preserve">
+    <value>Send</value>
+  </data>
+  <data name="GPCurrentValue" xml:space="preserve">
+    <value>Current value</value>
+  </data>
+  <data name="GPLocalRange" xml:space="preserve">
+    <value>Local range</value>
+  </data>
+  <data name="GPMean" xml:space="preserve">
+    <value>Mean</value>
+  </data>
+  <data name="GPRemoteAddress" xml:space="preserve">
+    <value>Remote address</value>
+  </data>
+  <data name="GPRemoteRange" xml:space="preserve">
+    <value>Remote range</value>
+  </data>
+  <data name="GPPayloadSize" xml:space="preserve">
+    <value>Payload size</value>
+  </data>
+  <data name="GPStart" xml:space="preserve">
+    <value>Start</value>
+  </data>
+  <data name="GPStop" xml:space="preserve">
+    <value>Stop</value>
+  </data>
+  <data name="GPLastPoll" xml:space="preserve">
+    <value>Last poll</value>
   </data>
 </root>

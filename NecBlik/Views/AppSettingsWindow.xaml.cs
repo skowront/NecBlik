@@ -19,7 +19,7 @@ namespace NecBlik.Views
     /// <summary>
     /// Interaction logic for AppSettingsWindow.xaml
     /// </summary>
-    public partial class AppSettingsWindow : Window, IResponseProvider<Task<ApplicationSettingsViewModel>,ApplicationSettingsViewModel>
+    public partial class AppSettingsWindow : IResponseProvider<Task<ApplicationSettingsViewModel>,ApplicationSettingsViewModel>
     {
         public ApplicationSettingsViewModel ViewModel { get; set; }
 

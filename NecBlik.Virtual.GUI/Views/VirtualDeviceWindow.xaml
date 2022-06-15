@@ -7,10 +7,11 @@
         xmlns:local="clr-namespace:NecBlik.Virtual.GUI.Views"
         xmlns:lexp="clr-namespace:WPFLocalizeExtension.Providers;assembly=WPFLocalizeextension"
         xmlns:lex="clr-namespace:WPFLocalizeExtension.Extensions;assembly=WPFLocalizeextension"
+        xmlns:ext="clr-namespace:NecBlik.Common.WpfExtensions.UI;assembly=NecBlik.Common"
         lexp:ResxLocalizationProvider.DefaultAssembly="NecBlik.Virtual.GUI"
         lexp:ResxLocalizationProvider.DefaultDictionary="SR"
         mc:Ignorable="d"
-        Title="Virtual Device Window" MinHeight="200" MinWidth="200" Width="500" Height="250">
+        Title="{Binding Name}" MinHeight="200" MinWidth="200" Width="500" Height="500">
     <Grid Background="{StaticResource MaterialDesignDarkBackground}">
         <Grid Margin="10" MinHeight="200">
             <Grid.RowDefinitions>
@@ -24,6 +25,8 @@
                 <TextBlock Text="{Binding Version,UpdateSourceTrigger=PropertyChanged}" Foreground="{StaticResource MaterialDesignDarkForeground}"></TextBlock>
                 <TextBlock Text="{lex:Loc GPAddress}" Foreground="{StaticResource MaterialDesignDarkForeground}"></TextBlock>
                 <TextBlock Text="{Binding Address,UpdateSourceTrigger=PropertyChanged}" Foreground="{StaticResource MaterialDesignDarkForeground}"></TextBlock>
+                <TextBlock Text="{lex:Loc GPStatus}" Foreground="{StaticResource MaterialDesignDarkForeground}"></TextBlock>
+                <TextBlock Text="{Binding Status}" Foreground="{StaticResource MaterialDesignDarkForeground}"></TextBlock>
             </StackPanel>
             <Expander Header="{lex:Loc GPAdvanced}" Grid.Row="1" Style="{StaticResource MaterialDesignExpander}" IsExpanded="False" Foreground="{StaticResource MaterialDesignDarkForeground}">
                 <Grid>
@@ -32,7 +35,9 @@
                         <RowDefinition Height="auto" MinHeight="100"></RowDefinition>
                     </Grid.RowDefinitions>
                     <ScrollViewer Grid.RowSpan="1" Style="{StaticResource ScrollViewer}" VerticalAlignment="Bottom" HorizontalAlignment="Stretch" VerticalContentAlignment="Center">
-                        <TextBlock Text="{Binding IOHistoryBuffer,UpdateSourceTrigger=PropertyChanged}" TextWrapping="Wrap" MinHeight="200"></TextBlock>
+                        <ListView ItemsSource="{Binding IOHistoryBuffer,UpdateSourceTrigger=PropertyChanged}" VirtualizingPanel.IsVirtualizing="True" MinHeight="200">
+                            
+                        </ListView>
                     </ScrollViewer>
                     <Grid Grid.Row="1" VerticalAlignment="Center">
                         <Grid.ColumnDefinitions>

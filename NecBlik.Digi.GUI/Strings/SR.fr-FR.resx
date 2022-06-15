@@ -160,9 +160,15 @@
     <value>Ajouter</value>
   </data>
   <data name="GPCoordinatorType" xml:space="preserve">
-    <value>Type de coordinateur</value>
+    <value>Class de coordinateur</value>
   </data>
   <data name="GPNetworkType" xml:space="preserve">
-    <value>Type du réseau</value>
+    <value>Class du réseau</value>
+  </data>
+  <data name="GPTemperature" xml:space="preserve">
+    <value>Temperature</value>
+  </data>
+  <data name="GPSend" xml:space="preserve">
+    <value>Envoyer</value>
   </data>
 </root>

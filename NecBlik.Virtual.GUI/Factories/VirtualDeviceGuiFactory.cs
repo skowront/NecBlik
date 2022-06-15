@@ -86,7 +86,7 @@ namespace NecBlik.Virtual.GUI.Factories
                     if (typeof(IDeviceControl).IsAssignableFrom(type) && !type.IsAbstract && type.FullName == rule.Value)
                     {
                         return Activator.CreateInstance(type, deviceViewModel) as UserControl;
-                    }
+                    }  
                 }
                 var currentAssembly = Assembly.GetAssembly(typeof(VirtualDeviceGuiFactory));
                 foreach (var type in currentAssembly.GetExportedTypes())
@@ -254,7 +254,7 @@ namespace NecBlik.Virtual.GUI.Factories
                     var dllfiles = Directory.EnumerateFiles(dir, "*.dll");
                     foreach (var dll in dllfiles)
                     {
-                        var absPath = Path.Combine(dir, dll);
+                        var absPath = dll;
                         Assembly assembly;
                         try
                         {

@@ -19,7 +19,7 @@ namespace NecBlik.Common.WpfElements.PopupValuePickers
     /// <summary>
     /// Interaction logic for DateTimeValuePicker.xaml
     /// </summary>
-    public partial class DateTimeValuePicker : Window
+    public partial class DateTimeValuePicker
     {
         public DateTimeValuePickerViewModel ViewModel;
 

@@ -13,7 +13,7 @@ namespace NecBlik.PyDigi.GUI.ViewModels
     {
         public PyDigiZigBeeViewModel(DeviceModel model = null, NetworkViewModel networkModel = null) : base(model, networkModel)
         {
-            this.Model = model;
+            this.Icon = FontAwesome.WPF.FontAwesomeIcon.Desktop;
         }
 
         public override string GetCacheId()

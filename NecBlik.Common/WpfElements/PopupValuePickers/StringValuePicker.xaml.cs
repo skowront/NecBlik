@@ -18,7 +18,7 @@ namespace NecBlik.Common.WpfElements.PopupValuePickers
     /// <summary>
     /// Interaction logic for StringValuePicker.xaml
     /// </summary>
-    public partial class StringValuePicker : Window
+    public partial class StringValuePicker
     {
         public StringValuePicker(Action<string> onConfirm, Action<string> onCancel)
         {

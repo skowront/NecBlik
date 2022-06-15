@@ -1,0 +1,97 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<ClassDiagram MajorVersion="1" MinorVersion="1">
+  <Class Name="NecBlik.Digi.GUI.Examples.ViewModels.Coordinators.TemperatureCoordinatorViewModel" Collapsed="true">
+    <Position X="5.25" Y="5.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAAAAAAAAACAAAAAAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>Examples\ViewModels\Coordinators\TemperatureCoordinatorViewModel.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="NecBlik.Digi.GUI.Examples.ViewModels.Sources.TemperatureDeviceViewModel" Collapsed="true">
+    <Position X="7.5" Y="4" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAABAgAAAAAAAAAAAAIAAAAIABAAAAAQAAABEAAA=</HashCode>
+      <FileName>Examples\ViewModels\Sources\TemperatureDeviceViewModel.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="NecBlik.Digi.GUI.Examples.Views.Controls.TemperatureControl" Collapsed="true" BaseTypeListCollapsed="true">
+    <Position X="11.75" Y="4.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAAAAAAAAAAgAAAAAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>Examples\Views\Controls\TemperatureControl.xaml.cs</FileName>
+    </TypeIdentifier>
+    <Lollipop Position="0.2" Collapsed="true" />
+  </Class>
+  <Class Name="NecBlik.Digi.GUI.Examples.Views.Sources.TemperatureDeviceWindow" Collapsed="true" BaseTypeListCollapsed="true">
+    <Position X="13.5" Y="4.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>Examples\Views\Sources\TemperatureDeviceWindow.xaml.cs</FileName>
+    </TypeIdentifier>
+    <Lollipop Position="0.2" Collapsed="true" />
+  </Class>
+  <Class Name="NecBlik.Digi.GUI.Factories.DigiZigBeeGuiFactory" Collapsed="true">
+    <Position X="10" Y="3.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAgAAAAAAAAAAIAAACAEgIEAAAAgAAAAEAAAAAABAAA=</HashCode>
+      <FileName>Factories\DigiZigBeeGuiFactory.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="NecBlik.Digi.GUI.Resources.Resources" Collapsed="true">
+    <Position X="13.5" Y="3.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAAAAAABEAAAAQAAAAAAAAAAAAAAAIA=</HashCode>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="NecBlik.Digi.GUI.Strings.SR" Collapsed="true">
+    <Position X="10" Y="4.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>EAAACElBAAQgAAAKAAABEgAAAQAAAAIAAAEAAAAgIIA=</HashCode>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="NecBlik.Digi.GUI.ViewModels.Wizard.DigiNetworkWizardViewModel" Collapsed="true">
+    <Position X="13.5" Y="2.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>CEQAAQgAAAgAAAMAACIAAAAAAAAAAIoIAAAACABMAAA=</HashCode>
+      <FileName>ViewModels\Wizard\DigiNetworkWizardViewModel.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="NecBlik.Digi.GUI.ViewModels.DigiZigBeeCoordinatorViewModel" Collapsed="true">
+    <Position X="5.25" Y="4" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAAAAEAAAAAAAAAAAAAAAAAAAAAABAA=</HashCode>
+      <FileName>ViewModels\DigiZigBeeCoordinatorViewModel.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="NecBlik.Digi.GUI.ViewModels.DigiZigBeeNetworkViewModel" Collapsed="true">
+    <Position X="11.75" Y="3.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAIIACAAAAAAAAAAAAAAYAAAAAEACBAAA=</HashCode>
+      <FileName>ViewModels\DigiZigBeeNetworkViewModel.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="NecBlik.Digi.GUI.ViewModels.DigiZigBeeViewModel" Collapsed="true">
+    <Position X="6.5" Y="2.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAAAAEAAAAAAAAAAAAAAAAAAkAAABAA=</HashCode>
+      <FileName>ViewModels\DigiZigBeeViewModel.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="NecBlik.Digi.GUI.Views.Wizard.DigiNetworkWizard" Collapsed="true" BaseTypeListCollapsed="true">
+    <Position X="11.75" Y="2.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAACAAAAAAAAAAAAAAAAAEAAAAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>Views\Wizard\DigiNetworkWizard.xaml.cs</FileName>
+    </TypeIdentifier>
+    <Lollipop Position="0.2" Collapsed="true" />
+  </Class>
+  <Class Name="NecBlik.Digi.GUI.Views.DigiNetworkWindow" Collapsed="true" BaseTypeListCollapsed="true">
+    <Position X="10" Y="2.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAAAAAAAAAAAEAAAAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>Views\DigiNetworkWindow.xaml.cs</FileName>
+    </TypeIdentifier>
+    <Lollipop Position="0.2" Collapsed="true" />
+  </Class>
+  <Font Name="Segoe UI" Size="9" />
+</ClassDiagram>
