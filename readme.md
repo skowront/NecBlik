@@ -578,41 +578,362 @@ In constructor we have access to most parent features and we can edit them. For 
 
 REMARK!!! Keep in mind that after adding a network in NecBlik you cant change it from the user's side, you may change coordinator class and control, you may change device viewmodels and controls but you cant change network viewmodel.
 
-### Submodule extension
+### Submodule extension
 
-#### Presentation
+A submodule extension is almost as easy as a hardcoded extension. You now know how to create classes that represent physical devices and how to customize their behaviour. We will show you now how to add new windows and viewmodels in a separate project and how to make it visible for NecBlik.
 
-##### Device
+1. Create new project (with NecBlik and Module name in it for example NecBlik.Digi.Example),
 
-##### Coordinator
+2. Change traget framework for:
 
-##### Network
+3. ```xml
+   <TargetFramework>net6.0-windows</TargetFramework>
+   ```
 
-#### Behaviour
+4. Attach NecBlik.Digi.Gui to dependencies (Add project reference)
 
-##### Device
+5. Create a viewmodel class (you can do the same for windows and other viewmodels) //code below.
 
-##### Coordinator
+6. Compile.
 
-##### Network
+7. Take compiled binary (NecBlik.Digi.Example.dll) and add it to your NecBlik folder in Libraries/[modulename]/
+
+8. Done.
+
+Viewmodel code:
+
+```csharp
+using NecBlik.Common.WpfExtensions.Base;
+using NecBlik.Core.GUI.ViewModels;
+using NecBlik.Core.Models;
+using NecBlik.Digi.GUI.Examples.Views.Sources;
+using NecBlik.Digi.GUI.ViewModels;
+using System.Windows.Media;
+
+namespace NecBlik.Digi.Example.ViewModels.Sources
+{
+    public class ExternalTemperatureDeviceViewModel : DigiZigBeeViewModel
+    {
+        private double maxRecordedTemperature = 0;
+        private double minRecordedTemperature = 0;
+
+        private double? temperature = null;
+        public double? Temperature
+        {
+            get
+            {
+                return temperature;
+            }
+            set
+            {
+                if (value > this.maxRecordedTemperature)
+                {
+                    this.maxRecordedTemperature = value ?? this.maxRecordedTemperature;
+                }
+                if (value < this.minRecordedTemperature)
+                {
+                    this.minRecordedTemperature = value ?? this.minRecordedTemperature;
+                }
+                this.temperature = value;
+                this.TemperatureColor = ExternalTemperatureDeviceViewModel.TemperatureToColor(this.temperature ?? 0, this.minRecordedTemperature, this.maxRecordedTemperature);
+                this.OnPropertyChanged();
+            }
+        }
+
+        private Color temperatureColor = Colors.White;
+        public Color TemperatureColor
+        {
+            get
+            {
+                return this.temperatureColor;
+            }
+            set
+            {
+                this.temperatureColor = value; this.OnPropertyChanged();
+            }
+        }
+
+        public ExternalTemperatureDeviceViewModel(DeviceModel model, NetworkViewModel networkModel) : base(model, networkModel)
+        {
+            this.EditCommand = new RelayCommand((o) =>
+            {
+                var window = new TemperatureDeviceWindow(this);
+                window.Show();
+            });
+        }
+
+        public override void OnRecievedDataSentFromSourceDevice(string data, string sourceAddress)
+        {
+            var splitData = data.Split(':');
+            var parsed = 0.0d;
+            if (splitData.Count() > 1)
+                if (double.TryParse(splitData[1], out parsed))
+                    this.Temperature = parsed;
+                else if (double.TryParse(data, out parsed))
+                    this.Temperature = parsed;
+        }
+
+        private static Color TemperatureToColor(double temperature, double min, double max)
+        {
+            var color = new Color();
+            color.A = 255;
+            if (temperature >= 0)
+            {
+                color.R = 255;
+                color.G = (byte)(255 - (temperature / max) * 255);
+                color.B = (byte)(255 - (temperature / max) * 255);
+            }
+            else
+            {
+                color.R = (byte)(255 - (Math.Abs(temperature) / Math.Abs(min)) * 255);
+                color.G = (byte)(255 - (Math.Abs(temperature) / Math.Abs(min)) * 255);
+                color.B = 255;
+            }
+            return color;
+        }
+    }
+}
+
+
+```
+
+This process can be repeated for Coordinator/Device/Network ViewModels (Behaviour) and Coordinator/Device/Network UserControls (Presentation). When you create all your vms, and ucs simply run NecBlik and configure your Network to use them in runtime or if done earlier in backend network constructor.
 
 ### Module extension
 
-#### Presentation
+Extendind NecBlik with a module can add a functionality that will allow usage of other Networks. It is however not that easy and simple as it requires to create a new NetworkFactory and NetworkGuiFactory. 
 
-##### Device
+It is however worth a while to analyze module extension because it allows us also to extend backend of an existing library - Models. (For example Coordinators are created by passing a backend factory that creates backend Models of Devices, when we create a new Module, we can override BuildNewSource function in factory and our coordinator will produce our new custom sources Models on discovery that will be later available for viewmodels).
 
-##### Coordinator
+This process can be simplified by using VirtualDeviceFactory and VirtualGuiDeviceFactory as base instead of default NecBlik.Core and NecBlik.Core.GUI classes.
 
-##### Network
+REMARK!!! Nec blik was created in such a way that if you do not implement a feature (or forget to override a function) the application should still work and take default/classes/templates and try to apply them to your application.
 
-#### Behaviour
+#### Backend (NecBlik.[moduleName])
 
-##### Device
+First of all we need to understand the basic architecture of factory/module model.
 
-##### Coordinator
+##### DeviceFactory
 
-##### Network
+DeviceFactory in NecBlik.Core has some important functions. It's most important function is to save/load backend from .json files and generate new backend objects.
+
+1. Constructor - parameterless, here we specify in base classes new unique factory identifier by writing this.internalFactoryType = "{myFactoryIdentifier}". It works like a vendor id in real life.
+
+2. string GetVendorId() - it returns the unique identifier of the module. Must always be overriden when creating a new module.
+
+3. IDeviceSource BuildNewSource() - it is used when discovering devices so here we should return a new Device() or a child of Device();
+
+4. Coordinator BuildCoordinator() - here we return our coordinator backend.
+
+5. Network BuildNetwork() - here we return a network backend.
+
+6. IDeviceSource BuildSourceFromJsonFile(string pathToFile) - this is particularly important because after detecting a folder with network saved in it (where name of folder is equal to name of vendorId) this function is called to analyze the content's of the folder and return it.
+
+7. virtual Coordinator BuildCoordinatorFromJsonFile(string pathToFile) - works in the same fashion as BuildSourceFromJsonFile but for coordinator located in network directory.
+
+A good practical example of implementation of DeviceFactory is VirtualDeviceFactory.
+
+#### Frontend (NecBlik.[moduleName].GUI)
+
+##### DeviceGuiFactory
+
+While DeviceFactory provides backend this class provides basic gui controls, but also ViewModels. 
+
+Remark!!! DeviceGuiFactory.internalFactoryId should be the same as DeviceFactory.internalFactoryId and should be returned in GetVendorId().
+
+We have several important functions to override here:
+
+1. string GetVendorID()
+
+2. UIElement GetDeviceControl(DeviceViewModel deviceViewModel) - returning the UserControl that will be visible on the map.
+
+3. async Task<NetworkViewModel> NetworkViewModelFromWizard(Network network) - this function may open a WizardWindow and wait till user configures network parameters.
+
+4. void Initalize(object args = null) - this function is called when the factory is being loaded into application it should for example create a submodules folder if necessary.
+
+Remark!!! Note that DeviceGuiFactory does not support submodules at all and does not care about FactoryRules.
+
+If you want to add a submodules mechanism you need to use VirtualDeviceGuiFactory as base for your Frontend part of the module.
+
+##### VirtualDeviceGuiFactory
+
+Here in VirtualDeviceGuiFactory we have a few other functions that will interest us during child implementation:
+
+1. GetAvailableControls(), GetAvailableNetworkViewModels(), GetAvailableDeviceViewModels() - those functions must return all detected controls/viewmodels in this and other submodules (if supported),
+
+2. DeviceViewModelFromRule(DeviceModel model, NetworkViewModel network, FactoryRule rule) and DeviceViewModelFromRules(DeviceModel model, NetworkViewModel network, List<FactoryRule> rules) must return a specific class based on given rules.
+
+3. GetTypesTInOtherSubAssemblies<T>() - this function scans submodule directories (can be used in child guifactories under condition that they were properly assigned a specific internal factory type).
+
+#### Example
+
+##### Backend
+
+A good example of backend implementation is DigiZigBeeFactory.cs, it skips all the process of implementing submodule/rules functionalities because it uses VirtualGuiFactory.cs as base.
+
+Except for basic functions that MUST be implemented:
+
+```csharp
+public DigiZigBeeFactory()
+        {
+            this.internalFactoryType = Resources.Resources.DigiFactoryId;
+        }
+
+        public override IDeviceSource BuildNewSource()
+        {
+            return base.BuildNewSource();
+        }
+
+        public override Coordinator BuildCoordinator()
+        {
+            return new DigiZigBeeUSBCoordinator(this);
+        }
+```
+
+ It also implements the way the network is being recovered from a .json file.
+
+```csharp
+public override async Task<Network> BuildNetworkFromDirectory(string pathToDirectory, IUpdatableResponseProvider<int, bool, string> updatableResponseProvider)
+        {
+            if (pathToDirectory.Split('.').LastOrDefault() != this.GetVendorID())
+            {
+                return null;
+            }
+
+            var path = Path.GetDirectoryName(pathToDirectory);
+            var fileName = Path.GetFileName(pathToDirectory);
+            var connectionData = JsonConvert.DeserializeObject<DigiZigBeeUSBCoordinator.DigiUSBConnectionData>(File.ReadAllText(pathToDirectory + "\\"+Resources.Resources.CoordinatorFile));
+            var network = JsonConvert.DeserializeObject<DigiZigBeeNetwork>(File.ReadAllText(pathToDirectory + "\\"+Resources.Resources.NetworkFile));
+            if (network == null)
+            {
+                return null;
+            }
+
+            foreach (var file in Directory.EnumerateFiles(pathToDirectory + "\\Sources"))
+            {
+                IDeviceSource source = this.BuildSourceFromJsonFile(file);
+                if (source == null)
+                {
+                    foreach (var factory in this.OtherFactories)
+                    {
+                        source = factory.BuildSourceFromJsonFile(file);
+                        if (source != null)
+                            break;
+                    }
+                }
+                if (source != null)
+                {
+                    network.AddSource(source);
+                }
+            }
+
+            network.ProgressResponseProvider = updatableResponseProvider;
+            await network.Initialize(new DigiZigBeeUSBCoordinator(this, connectionData));
+            return network;
+        }
+```
+
+The way network is saved in .json file is defined in Network class.
+
+##### Frontend
+
+Now, let's talk about frontend example, also from Digi module, because it is pretty simple.
+
+Except from basic functions that must be overriden:
+
+```csharp
+public DigiZigBeeGuiFactory()
+        {
+            this.internalFactoryType = NecBlik.Digi.Resources.Resources.DigiFactoryId;
+        }
+
+public override NetworkViewModel GetNetworkViewModel(Network zigBeeNetwork)
+        {
+            if (zigBeeNetwork.GetVendorID() != this.internalFactoryType)
+                return null;
+            return new DigiZigBeeNetworkViewModel(zigBeeNetwork);
+        }
+```
+
+We implement dataTemplate functions for network
+
+```cshtml
+public override DataTemplate GetNetworkDataTemplate(Network zigBeeNetwork)
+        {
+            if (zigBeeNetwork.GetVendorID() == this.GetVendorID())
+            {
+                var myResourceDictionary = new ResourceDictionary();
+                myResourceDictionary.Source = new Uri("/NecBlik.Digi.GUI;component/Styles/MergedDictionaries.xaml", UriKind.RelativeOrAbsolute);
+                var template = myResourceDictionary["DigiNetworkDataTemplate"] as DataTemplate;
+                return template;
+            }
+            return null;
+        }
+
+public override DataTemplate GetNetworkBriefDataTemplate(Network zigBeeNetwork)
+        {
+            if (zigBeeNetwork.GetVendorID() == this.GetVendorID())
+            {
+                var myResourceDictionary = new ResourceDictionary();
+                myResourceDictionary.Source = new Uri("/NecBlik.Digi.GUI;component/Styles/MergedDictionaries.xaml", UriKind.RelativeOrAbsolute);
+                var template = myResourceDictionary["DigiNetworkBriefDataTemplate"] as DataTemplate;
+                return template;
+            }
+            return null;
+        }
+```
+
+Then we implement calling the Wizard
+
+```csharp
+public override async Task<NetworkViewModel> NetworkViewModelFromWizard(Network zigBeeNetwork)
+        {
+            var vm = new DigiNetworkWizardViewModel();
+            var rp = new DigiNetworkWizard(vm);
+            return await rp.ProvideResponseAsync();
+        }
+```
+
+And now the hardest part - the rules/submodules which one should just take from DigiZigBeeGuiFactory.cs and analyze on his own. 
+
+Following functions must be overriden here:
+
+1. public override VirtualNetworkViewModel NetworkViewModelBySubType(Network network, string subType)
+
+2. public override VirtualDeviceViewModel DeviceViewModelFromRule(DeviceModel model, NetworkViewModel network, FactoryRule rule)
+
+3. public override VirtualDeviceViewModel DeviceViewModelFromRules(DeviceModel model, NetworkViewModel network, List<FactoryRule> rules)
+
+4. public override UIElement GetDeviceControl(DeviceViewModel deviceViewModel)
+
+5. public override List<string> GetAvailableControls()
+
+6. public override List<string> GetAvailableNetworkViewModels()
+
+7. public override List<string> GetAvailableDeviceViewModels()
+
+Because in parent class the assembly won't be able to detect submodule components in current assembly.
+
+When implementing a module please just copy-paste code from 7 functions above and adjust it to your [FactoryClassName] of course instead of rebuilding the submodules/rules functionality you can simply type
+
+```csharp
+if (model.DeviceSource.GetVendorID() != this.GetVendorID())
+                return base.DeviceViewModelFromRules(model, network, rules);
+```
+
+or similar code, depending on the function.
+
+
+
+
+
+
+
+#### General remarks concerning modules extensions
+
+All modules are being loaded by DeviceGuiAnyFactory and DeviceAnyFactory.
+
+ 
 
 ### General remarks concerning Xbee application layer adjustments for NecBlik
 
