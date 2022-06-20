@@ -2,6 +2,8 @@
 
 NecBlik is an open-source, C#, application for monitoring and controlling networks. It was created for ZigBee network using XBee devices but can be easily extended to support any network. NecBlik is a name taken from silesian language, where Nec can be translated as Network and Blik can be translated as a glimpse, because the application allows us to take a glimpse on our network :).
 
+![](https://github.com/skowront/NecBlik/blob/virtual/Manual/Images/app.png)
+
 ## Questions
 
 Please feel free to post questions in issues section as this application is indeed quite complex, and contains many projects and solutions, i will try to answer them asap.
@@ -19,6 +21,8 @@ Please feel free to post questions in issues section as this application is inde
 ## Installation
 
 Simply download a release package from this repository and run NecBlik.exe.
+
+If you want a particular extension to work, you should download a specific extension package and copy-paste it's contents to main NecBlik folder.
 
 ## Compiling
 
@@ -240,6 +244,14 @@ Any extension of the application will inherit classes from NecBlik.Core and NecB
 Keep in mind that the application uses MahApps metro windows and therefore created windows should not inherit from window, and should be changed to MahApps.MetroWindow control in xaml.
 
 Note that EVERY object has a unique CacheId for a Network and each network must have a unique CacheId in whole application or you may expect the app to be unstable or crash.
+
+Any project that generates .dll should have 
+
+```xml
+<CopyLocalLockFileAssemblies>true</CopyLocalLockFileAssemblies>
+```
+
+This allows us to add all referenced nuget packages to the output of the directory.
 
 #### Translation and localization
 

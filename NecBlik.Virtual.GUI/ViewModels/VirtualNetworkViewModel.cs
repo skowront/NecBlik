@@ -230,7 +230,7 @@ namespace NecBlik.Virtual.GUI.ViewModels
 
         public virtual void SyncFromModel()
         {
-            //this.Devices.Clear();
+            this.Devices.Clear();
            
             foreach (var device in this.model.DeviceSources)
             {

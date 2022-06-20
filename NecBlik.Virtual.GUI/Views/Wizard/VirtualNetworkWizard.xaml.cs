@@ -44,15 +44,18 @@ namespace NecBlik.Virtual.GUI.Views.Wizard
                 CacheObjectId = coordinator.GetCacheId(), 
                 Property = VirtualDeviceGuiFactory.DeviceViewModelRuledProperties.ViewModel };
             List<IDeviceSource> sources = new List<IDeviceSource>();
-            for(int i = 0; i<this.ViewModel.VirtualDevices; i++)
+            for (int i = 0; i < this.ViewModel.VirtualDevices; i++)
             {
                 var source = new VirtualDevice();
                 sources.Add(source);
             }
             coordinator.SetDevices(sources);
-            network.DeviceSources = new System.Collections.ObjectModel.Collection<IDeviceSource>(sources);
+            await network.SetCoordinator(coordinator);
+            await network.SyncCoordinator();
             var factory = new VirtualDeviceGuiFactory();
-            return factory.NetworkViewModelBySubType(network,this.ViewModel.NetworkType);
+            var vm = factory.NetworkViewModelBySubType(network,this.ViewModel.NetworkType);
+            vm.SyncFromModel();
+            return vm;
         }
     }
 }
