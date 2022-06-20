@@ -24,10 +24,6 @@
     <ProjectReference Include="..\NecBlik.Common\NecBlik.Common.csproj" />
     <ProjectReference Include="..\NecBlik.Core.GUI\NecBlik.Core.GUI.csproj" />
     <ProjectReference Include="..\NecBlik.Core\NecBlik.Core.csproj" />
-    <ProjectReference Include="..\NecBlik.Digi.GUI\NecBlik.Digi.GUI.csproj" />
-    <ProjectReference Include="..\NecBlik.Digi\NecBlik.Digi.csproj" />
-    <ProjectReference Include="..\NecBlik.PyDigi.GUI\NecBlik.PyDigi.GUI.csproj" />
-    <ProjectReference Include="..\NecBlik.PyDigi\NecBlik.PyDigi.csproj" />
     <ProjectReference Include="..\NecBlik.Virtual.GUI\NecBlik.Virtual.GUI.csproj" />
     <ProjectReference Include="..\NecBlik.Virtual\NecBlik.Virtual.csproj" />
     <ProjectReference Include="..\WPFLocalizeextension\WPFLocalizeextension.csproj" />

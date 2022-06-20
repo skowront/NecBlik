@@ -22,6 +22,8 @@ Please feel free to post questions in issues section as this application is inde
 
 Simply download a release package from this repository and run NecBlik.exe.
 
+If you want a particular extension to work, you should download a specific extension package and copy-paste it's contents to main NecBlik folder.
+
 ## Compiling
 
 If you want to compile this project on your own please keep in mind that by default it allows usage of PyDigi module that uses python 3.7.9. To turn off PyDigi, simply remove it from NecBlik project attached dependency projects and remove post build events (in NecBlik project) that copies Python scripts to output directory.  
@@ -242,6 +244,14 @@ Any extension of the application will inherit classes from NecBlik.Core and NecB
 Keep in mind that the application uses MahApps metro windows and therefore created windows should not inherit from window, and should be changed to MahApps.MetroWindow control in xaml.
 
 Note that EVERY object has a unique CacheId for a Network and each network must have a unique CacheId in whole application or you may expect the app to be unstable or crash.
+
+Any project that generates .dll should have 
+
+```xml
+<CopyLocalLockFileAssemblies>true</CopyLocalLockFileAssemblies>
+```
+
+This allows us to add all referenced nuget packages to the output of the directory.
 
 #### Translation and localization
 
