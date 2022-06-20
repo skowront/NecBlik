@@ -10,7 +10,7 @@ Please feel free to post questions in issues section as this application is inde
 
 ## Features
 
-- ## Requirements
+## Requirements
 
 - Windows,
 
