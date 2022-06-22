@@ -177,4 +177,43 @@
   <data name="GPms" xml:space="preserve">
     <value>ms</value>
   </data>
+  <data name="GPMessage" xml:space="preserve">
+    <value>Wiadomość</value>
+  </data>
+  <data name="GPPayload" xml:space="preserve">
+    <value>Ładunek</value>
+  </data>
+  <data name="GPPayloadSize" xml:space="preserve">
+    <value>Rozmiar ładunku</value>
+  </data>
+  <data name="GPPingPacket" xml:space="preserve">
+    <value>Ping z pakietem</value>
+  </data>
+  <data name="GPPing" xml:space="preserve">
+    <value>Ping</value>
+  </data>
+  <data name="GPReturned" xml:space="preserve">
+    <value>Zwrócono</value>
+  </data>
+  <data name="GPResponseTime" xml:space="preserve">
+    <value>Czas odpowiedzi</value>
+  </data>
+  <data name="GPResult" xml:space="preserve">
+    <value>Rezultat</value>
+  </data>
+  <data name="GPRun" xml:space="preserve">
+    <value>Uruchom</value>
+  </data>
+  <data name="GPSelectedRemoteAddress" xml:space="preserve">
+    <value>Adres zdalny</value>
+  </data>
+  <data name="GPSendingTime" xml:space="preserve">
+    <value>Czas wysyłania</value>
+  </data>
+  <data name="GPStatus" xml:space="preserve">
+    <value>Status</value>
+  </data>
+  <data name="GPTimeout" xml:space="preserve">
+    <value>Koniec czasu</value>
+  </data>
 </root>

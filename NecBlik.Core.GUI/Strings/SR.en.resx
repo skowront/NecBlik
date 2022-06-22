@@ -196,7 +196,7 @@
     <value>Returned</value>
   </data>
   <data name="GPSelectedRemoteAddress" xml:space="preserve">
-    <value>Select</value>
+    <value>Remote address</value>
   </data>
   <data name="GPTimeout" xml:space="preserve">
     <value>Timeout</value>

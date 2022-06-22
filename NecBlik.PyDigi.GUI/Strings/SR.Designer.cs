@@ -70,7 +70,7 @@ namespace NecBlik.PyDigi.GUI.Strings {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to ATCommands.
+        ///   Looks up a localized string similar to AT Commands.
         /// </summary>
         public static string GPATCommands {
             get {

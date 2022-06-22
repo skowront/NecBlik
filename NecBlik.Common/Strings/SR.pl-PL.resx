@@ -117,4 +117,22 @@
   <resheader name="writer">
     <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </resheader>
+  <data name="GPContains" xml:space="preserve">
+    <value>Zawiera</value>
+  </data>
+  <data name="GPEquals" xml:space="preserve">
+    <value>Jest równa</value>
+  </data>
+  <data name="GPGreaterThan" xml:space="preserve">
+    <value>Większa niż</value>
+  </data>
+  <data name="GPLowerThan" xml:space="preserve">
+    <value>Mniej niż</value>
+  </data>
+  <data name="GPNotEquals" xml:space="preserve">
+    <value>Nie równy</value>
+  </data>
+  <data name="PopupMessageFunctionalityNotImplementedYet" xml:space="preserve">
+    <value>Funkcjonalność jeszcze nie zaimplementowana</value>
+  </data>
 </root>

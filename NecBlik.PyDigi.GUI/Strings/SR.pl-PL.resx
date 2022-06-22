@@ -153,4 +153,7 @@
   <data name="CantSendFromRemoteDevices" xml:space="preserve">
     <value>Nie można wysyłać ze zdalnego urządzenia.</value>
   </data>
+  <data name="GPATCommands" xml:space="preserve">
+    <value>Komendy AT</value>
+  </data>
 </root>

@@ -171,4 +171,58 @@
   <data name="GPSend" xml:space="preserve">
     <value>Envoyer</value>
   </data>
+  <data name="GPATCommands" xml:space="preserve">
+    <value>Commandes AT</value>
+  </data>
+  <data name="GPCommand" xml:space="preserve">
+    <value>Commande</value>
+  </data>
+  <data name="GPCurrentValue" xml:space="preserve">
+    <value>Valeur actuelle</value>
+  </data>
+  <data name="GPDiagnostics" xml:space="preserve">
+    <value>Diagnostique</value>
+  </data>
+  <data name="GPLastPoll" xml:space="preserve">
+    <value>Dernière sondage</value>
+  </data>
+  <data name="GPLocalRange" xml:space="preserve">
+    <value>Couverture locale</value>
+  </data>
+  <data name="GPMean" xml:space="preserve">
+    <value>Moyenne</value>
+  </data>
+  <data name="GPParameter" xml:space="preserve">
+    <value>Parametre</value>
+  </data>
+  <data name="GPPayloadSize" xml:space="preserve">
+    <value>Taille de la charge</value>
+  </data>
+  <data name="GPRange" xml:space="preserve">
+    <value>Accueil</value>
+  </data>
+  <data name="GPRemoteAddress" xml:space="preserve">
+    <value>Adresse distante</value>
+  </data>
+  <data name="GPRemoteRange" xml:space="preserve">
+    <value>Accueil distante</value>
+  </data>
+  <data name="GPStart" xml:space="preserve">
+    <value>Commencer</value>
+  </data>
+  <data name="GPStop" xml:space="preserve">
+    <value>Arreter</value>
+  </data>
+  <data name="GPThroughput" xml:space="preserve">
+    <value>Débit</value>
+  </data>
+  <data name="TTCoordinatorClass" xml:space="preserve">
+    <value>Sélectionnez un modèle de vue personnalisé pour votre coordinateur. Laissez vide si vous n'en avez pas.</value>
+  </data>
+  <data name="TTNetworkClass" xml:space="preserve">
+    <value>Sélectionnez un modèle de vue personnalisé pour votre réseau. Laissez vide si vous n'en avez pas.</value>
+  </data>
+  <data name="TTSerialPortBaudRate" xml:space="preserve">
+    <value>Débit en bauds entre le contrôleur de port série et votre appareil coordinateur.</value>
+  </data>
 </root>

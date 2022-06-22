@@ -180,4 +180,49 @@
   <data name="GPSend" xml:space="preserve">
     <value>Wyślij</value>
   </data>
+  <data name="GPATCommands" xml:space="preserve">
+    <value>Komendy AT</value>
+  </data>
+  <data name="GPCommand" xml:space="preserve">
+    <value>Komenda</value>
+  </data>
+  <data name="GPCurrentValue" xml:space="preserve">
+    <value>Wartość aktualna</value>
+  </data>
+  <data name="GPLastPoll" xml:space="preserve">
+    <value>Ostatni sondaż</value>
+  </data>
+  <data name="GPLocalRange" xml:space="preserve">
+    <value>Lokalny zasięg</value>
+  </data>
+  <data name="GPMean" xml:space="preserve">
+    <value>Średnia</value>
+  </data>
+  <data name="GPParameter" xml:space="preserve">
+    <value>Parametr</value>
+  </data>
+  <data name="GPPayloadSize" xml:space="preserve">
+    <value>Rozmiar ładnuku</value>
+  </data>
+  <data name="GPRemoteAddress" xml:space="preserve">
+    <value>Adres zdalny</value>
+  </data>
+  <data name="GPRemoteRange" xml:space="preserve">
+    <value>Zasięg zdalny</value>
+  </data>
+  <data name="GPStart" xml:space="preserve">
+    <value>Rozpocznij</value>
+  </data>
+  <data name="GPStop" xml:space="preserve">
+    <value>Zatrzymaj</value>
+  </data>
+  <data name="TTCoordinatorClass" xml:space="preserve">
+    <value>Wybierz niestandardowy model widoku dla swojego koordynatora. Pozostaw puste, jeśli go nie masz.</value>
+  </data>
+  <data name="TTNetworkClass" xml:space="preserve">
+    <value>Wybierz niestandardowy model widoku dla swojej sieci. Pozostaw puste, jeśli go nie masz.</value>
+  </data>
+  <data name="TTSerialPortBaudRate" xml:space="preserve">
+    <value>Szybkość transmisji między kontrolerem portu szeregowego a urządzeniem koordynatora.</value>
+  </data>
 </root>
