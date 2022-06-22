@@ -24,7 +24,7 @@ int errorLed = 13;
 
 const char SetValueCommand [] = "SetValue";
 const char EchoCommand [] = "Echo";
-const char HoldCommand [] = "Hold";
+const char HoldCommand [] = "Toggle";
 const char GetValueCommand [] = "GetValue";
 const char GetChangingValueCommand [] = "GetCValue";
 
