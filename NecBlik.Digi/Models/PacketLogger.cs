@@ -49,6 +49,7 @@ namespace NecBlik.Digi.Models
         public class PacketLoggerEntry
         {
             public DateTime Timestamp { get; set; }
+            public string Miliseconds { get { return this.Timestamp.Millisecond.ToString(); }}
             public string Attribute { get; set; } = string.Empty;
             public string Payload { get; set; } = string.Empty;
             public string Kind { get; set; } = string.Empty;
