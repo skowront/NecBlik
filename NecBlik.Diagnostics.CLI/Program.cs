@@ -10,7 +10,7 @@ public class Program
     public static void Main(string[] args)
     {
         string port = string.Empty;
-        int baud = 9600;
+        int baud = 115200;
         string input = string.Empty;
         while(input!="exit")
         {
@@ -32,7 +32,7 @@ public class Program
             {
                 Task.Run(async () =>
                 {
-                    await TestThroughput(port, baud, "0013A20040A739ED", 10, 239);
+                    await TestThroughput(port, baud, "0013A20040A739ED", 10, 200);
                 }).Wait();
                 Console.WriteLine("Press enter to continue.");
                 Console.ReadLine();

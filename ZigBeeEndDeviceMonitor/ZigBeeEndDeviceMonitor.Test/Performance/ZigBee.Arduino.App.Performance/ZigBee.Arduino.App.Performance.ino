@@ -132,7 +132,7 @@ void SendValue(String value)
 	}
 }
 
-RecievedData RecieveValue(int timeout = 1000)
+RecievedData RecieveValue(int timeout = 1)
 {
 	xbee.readPacket(timeout);
 	if (xbee.getResponse().isAvailable())
@@ -211,7 +211,7 @@ void HandleRemoteCommunication()
 					SetStoredValue(newValue);
 					Serial.print("Setting value to:");
 					Serial.println(newValue);
-					SendValue("New value set");
+					//SendValue("New value set");
 				}
 			}
 			else
@@ -232,7 +232,7 @@ void HandleRemoteCommunication()
 				}
 			}
 		}
-		unsigned long serviceEndTime = millis();
+    unsigned long serviceEndTime = millis();
 		Serial.print("ServiceTime[ms]:");
 		Serial.println(serviceEndTime-serviceStartTime);
 	}
@@ -249,9 +249,9 @@ void setup() {
 	pinMode(statusLed, OUTPUT);
 	pinMode(errorLed, OUTPUT);
 
-	Serial.begin(9600);
+	Serial.begin(115200);
 	Serial.println("Serial initialized.");
-	Serial1.begin(9600);
+	Serial1.begin(115200);
 	Serial.println("Serial Xbee communication initialized.");
 
 
@@ -272,6 +272,7 @@ void loop() {
   sprintf(perfBuffer, "C#TD:Loop time:%d", loopTime);
 	Serial.println(perfBuffer);
 	clearPerfBuffer();
+  delay(1000);
 }
 
 void clearPerfBuffer()

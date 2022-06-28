@@ -375,12 +375,12 @@ namespace NecBlik.Digi.Models
                 XBeePacket rpacket = null;
                 if (!awaitConfirmation)
                 {
-                    this.zigBee.SendPacketAsync(packet);
                     this.PacketLogger?.AddEntry(DateTime.Now, payload, "NO_ACK", nameof(TransmitPacket));
+                    this.zigBee.SendPacketAsync(packet);
                     return new PingModel() { ResponseTime = double.NaN };
                 }
-                rpacket = this.zigBee.SendPacket(packet);
                 this.PacketLogger?.AddEntry(DateTime.Now, payload, "ACK", nameof(TransmitPacket));
+                rpacket = this.zigBee.SendPacket(packet);
                 if (rpacket == null)
                 {
                     result.Result = PingModel.PingResult.NotOk;

@@ -80,7 +80,6 @@ void OnTickChangeStoredChangingValue()
   perfTime=micros()-perfTime;
 	Serial.print("C#TD:Changing value simulation time:");
   Serial.println(perfTime);
-	clearPerfBuffer();
 }
 
 int StoredValue = 31337;
@@ -131,7 +130,7 @@ void SendValue(String value)
 	}
 }
 
-RecievedData RecieveValue(int timeout = 1000)
+RecievedData RecieveValue(int timeout = 1)
 {
 	xbee.readPacket(timeout);
 	if (xbee.getResponse().isAvailable())
@@ -210,7 +209,7 @@ void HandleRemoteCommunication()
 					SetStoredValue(newValue);
 					Serial.print("Setting value to:");
 					Serial.println(newValue);
-					SendValue("New value set");
+					//SendValue("New value set");
 				}
 			}
 			else
@@ -248,9 +247,9 @@ void setup() {
 	pinMode(statusLed, OUTPUT);
 	pinMode(errorLed, OUTPUT);
 
-	Serial.begin(9600);
+	Serial.begin(115200);
 	Serial.println("Serial initialized.");
-	Serial1.begin(9600);
+	Serial1.begin(115200);
 	Serial.println("Serial Xbee communication initialized.");
 
 
@@ -271,6 +270,8 @@ void loop() {
 	Serial.print("C#TD:Loop time:");
   Serial.println(loopTime);
 	clearPerfBuffer();
+  
+  delay(1000);
 }
 
 void clearPerfBuffer()

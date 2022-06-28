@@ -10,8 +10,8 @@ using System.Globalization;
 public class Program
 {
     public static string Port = "COM4" ;
-    public static int iterations = 500;
-
+    public static int iterations = 1000;
+    public static int baud = 115200;
     /// <summary>
     /// Mostly for testing purposes
     /// </summary>
@@ -94,7 +94,7 @@ public class Program
         Console.WriteLine($"Environment initialization time:{pm.EnvironmentInitializationTime}");
 
         var coordinator = new DigiZigBeeUSBCoordinator(new NecBlik.Digi.Factories.DigiZigBeeFactory(),
-            new DigiZigBeeUSBCoordinator.DigiUSBConnectionData() { baud = 9600, port = Port });
+            new DigiZigBeeUSBCoordinator.DigiUSBConnectionData() { baud = baud, port = Port });
         pm.CoordinatorCreationTime = DateTime.Now - dt;
         Console.WriteLine($"Coordinator initialization time:{pm.CoordinatorCreationTime}");
 
@@ -110,7 +110,9 @@ public class Program
 
         bool gotMessage = false;
         coordinator.SubscribeToDataRecieved(new DataRecievedListener(
-            (s) => { gotMessage = true; })
+            (s) => { 
+                gotMessage = true; 
+            })
             );
         for (int i = 0; i < iterations; i++)
         {
@@ -119,7 +121,7 @@ public class Program
 #if RELEASE
             Task.Delay(200).Wait();
 #endif
-            while (!gotMessage) { }
+            while (!gotMessage) {  }
             pm.RoundTripTimes.Add(DateTime.Now - dt);
             gotMessage = false;
             Console.WriteLine($"Round trip time:{pm.RoundTripTimes.Last()} Test number: {i}");
@@ -140,7 +142,7 @@ public class Program
         Console.WriteLine($"Environment initialization time:{pm.EnvironmentInitializationTime}");
 
         var coordinator = new PyDigiZigBeeUSBCoordinator(new NecBlik.PyDigi.Factories.PyDigiZigBeeFactory(),
-            new PyDigiZigBeeUSBCoordinator.PyDigiUSBConnectionData() { baud = 9600, port = Port });
+            new PyDigiZigBeeUSBCoordinator.PyDigiUSBConnectionData() { baud = baud, port = Port });
         pm.CoordinatorCreationTime = DateTime.Now - dt;
         Console.WriteLine($"Coordinator initialization time:{pm.CoordinatorCreationTime}");
 

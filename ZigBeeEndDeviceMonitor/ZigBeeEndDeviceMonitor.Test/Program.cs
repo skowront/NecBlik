@@ -95,6 +95,7 @@ public static class Program
                                 }
                                 break;
                             case 'x':
+                                Console.Clear();
                                 endConfiguration = true;
                                 break;
                             default:

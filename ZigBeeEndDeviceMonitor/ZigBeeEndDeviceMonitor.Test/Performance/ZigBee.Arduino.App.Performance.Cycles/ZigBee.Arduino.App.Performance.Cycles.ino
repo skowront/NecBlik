@@ -133,7 +133,7 @@ void SendValue(String value)
 	}
 }
 
-RecievedData RecieveValue(int timeout = 1000)
+RecievedData RecieveValue(int timeout = 1)
 {
 	xbee.readPacket(timeout);
 	if (xbee.getResponse().isAvailable())
@@ -168,6 +168,10 @@ void HandleRemoteCommunication()
 	const int rxBufferSize = 512;
 	char rxBuffer[rxBufferSize];
 	unsigned long serviceStartTime = millis();
+
+  TCCR1A = 0;
+  TCCR1B = bit(CS10);
+  TCNT1 = 0;
 
 	RecievedData recieved = RecieveValue();
 
@@ -210,7 +214,7 @@ void HandleRemoteCommunication()
 					SetStoredValue(newValue);
 					Serial.print("Setting value to:");
 					Serial.println(newValue);
-					SendValue("New value set");
+					//SendValue("New value set");
 				}
 			}
 			else
@@ -234,7 +238,14 @@ void HandleRemoteCommunication()
 		unsigned long serviceEndTime = millis();
 		Serial.print("ServiceTime[ms]:");
 		Serial.println(serviceEndTime-serviceStartTime);
+
+    
 	}
+
+  unsigned int cycles = TCNT1;
+  sprintf(perfBuffer, "C#TD:ServiceTime:%d", cycles);
+	Serial.println(perfBuffer);
+	clearPerfBuffer();
 	//delete rxBuffer;
 }
 
@@ -245,9 +256,9 @@ void setup() {
 	pinMode(statusLed, OUTPUT);
 	pinMode(errorLed, OUTPUT);
 
-	Serial.begin(9600);
+	Serial.begin(115200);
 	Serial.println("Serial initialized.");
-	Serial1.begin(9600);
+	Serial1.begin(115200);
 	Serial.println("Serial Xbee communication initialized.");
 
 
@@ -265,6 +276,7 @@ void loop() {
 	HandleRemoteCommunication();
 	OnTickChangeStoredChangingValue();
 
+  delay(1000);
 }
 
 void clearPerfBuffer()
