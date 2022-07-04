@@ -16,7 +16,7 @@ namespace NecBlik.Digi.GUI.ViewModels
         DigiZigBeeNetworkViewModel networkViewModel;
 
         public int MinPayloadSize { get; set; } = 0;
-        public int MaxPayloadSize { get; set; } = 255;
+        public int MaxPayloadSize { get; set; } = 254;
 
         private int payloadDesiredSize;
         public int PayloadDesiredSize
@@ -137,7 +137,7 @@ namespace NecBlik.Digi.GUI.ViewModels
             {
                 var s = "";
                 s += i.ToString();
-                for (int j = 0; j < MaxPayloadSize - i.ToString().Length; j++)
+                for (int j = 0; j < PayloadDesiredSize - i.ToString().Length - 1; j++)
                 {
                     s += 'x';
                 }

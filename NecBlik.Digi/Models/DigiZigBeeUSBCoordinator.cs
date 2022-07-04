@@ -397,7 +397,7 @@ namespace NecBlik.Digi.Models
             }
             catch (Exception ex)
             {
-                result.Result = PingModel.PingResult.NotOk;
+                result.Result = PingModel.PingResult.Timeout;
                 result.ResponseTime = double.PositiveInfinity;
                 result.Message = ex.Message;
                 return result;

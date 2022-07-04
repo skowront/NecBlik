@@ -42,7 +42,9 @@ namespace NecBlik.Core.Enums
             //When the packet returned without harm.
             Ok,
             //When the packet did not return at all.
-            NotOk
+            NotOk,
+            //When sometghing timed out
+            Timeout
         }
     }
 }
