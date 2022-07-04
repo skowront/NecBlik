@@ -94,6 +94,10 @@
   </ItemGroup>
 
   <ItemGroup>
+    <ProjectReference Include="..\WPFLocalizeextension\WPFLocalizeextension.csproj" />
+  </ItemGroup>
+
+  <ItemGroup>
     <Compile Update="Strings\SR.Designer.cs">
       <DesignTime>True</DesignTime>
       <AutoGen>True</AutoGen>

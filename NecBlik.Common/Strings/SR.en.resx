@@ -135,4 +135,10 @@
   <data name="PopupMessageFunctionalityNotImplementedYet" xml:space="preserve">
     <value>Functionality not implemented yet</value>
   </data>
+  <data name="GPCancel" xml:space="preserve">
+    <value>Cancel</value>
+  </data>
+  <data name="GPConfirm" xml:space="preserve">
+    <value>Confirm</value>
+  </data>
 </root>

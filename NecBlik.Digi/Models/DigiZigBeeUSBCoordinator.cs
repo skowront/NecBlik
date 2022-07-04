@@ -367,7 +367,7 @@ namespace NecBlik.Digi.Models
                 }
                 var rawPayload = Encoding.ASCII.GetBytes(payload);
                 TransmitPacket packet = awaitConfirmation ? new TransmitPacket(this.frameId, new XBee64BitAddress(remoteAddress), new XBee16BitAddress("FFFE"), 0, 0, rawPayload) :
-                    new TransmitPacket(0, new XBee64BitAddress(remoteAddress), new XBee16BitAddress("FFFE"), 0, 0, rawPayload);
+                    new TransmitPacket(0, new XBee64BitAddress(remoteAddress), new XBee16BitAddress("FFFE"), 0, 01, rawPayload);
                 var api2 = packet.GenerateByteArrayEscaped();
                 var br = ByteArrayToString(api2);
                 this.IncrementFrameId();

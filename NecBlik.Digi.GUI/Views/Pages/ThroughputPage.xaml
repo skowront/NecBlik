@@ -51,16 +51,23 @@
         <TextBlock Grid.Row="1" Grid.Column="0" Text="{lex:Loc GPRemoteAddress}" Margin="0 10" Foreground="{StaticResource ForegroundLightBrush}"></TextBlock>
         <ComboBox Grid.Row="1" Grid.Column="1" ItemsSource="{Binding AvailableDevices}" SelectedItem="{Binding ThroughputVM.DeviceAddress}" IsEnabled="{Binding ThroughputVM.IsRunning, Converter={StaticResource BoolInverter}}" Margin="0 10" Foreground="{StaticResource ForegroundLightBrush}"></ComboBox>
         <TextBlock Grid.Row="2" Grid.Column="0" Text="{lex:Loc GPPayloadSize}" Margin="0 10" Foreground="{StaticResource ForegroundLightBrush}"></TextBlock>
-        <Slider Grid.Row="2" Grid.Column="1" Minimum="{Binding ThroughputVM.MinPayloadSize}" 
+        <Grid Grid.Row="2" Grid.Column="1">
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="5*"></ColumnDefinition>
+                <ColumnDefinition Width="1*"></ColumnDefinition>
+            </Grid.ColumnDefinitions>
+            <Slider Grid.Row="0" Grid.Column="0" Minimum="{Binding ThroughputVM.MinPayloadSize}" 
                 Maximum="{Binding ThroughputVM.MaxPayloadSize}" 
                 Value="{Binding ThroughputVM.PayloadDesiredSize}"
                 Margin="0 10">
-            <Slider.ToolTip>
-                <ToolTip>
-                    <TextBlock Text="{Binding ThroughputVM.PayloadDesiredSize}" Foreground="{StaticResource BackgroundDarkBrush}"></TextBlock>
-                </ToolTip>
-            </Slider.ToolTip>
-        </Slider>
+                <Slider.ToolTip>
+                    <ToolTip>
+                        <TextBlock Text="{Binding ThroughputVM.PayloadDesiredSize}" Foreground="{StaticResource BackgroundDarkBrush}"></TextBlock>
+                    </ToolTip>
+                </Slider.ToolTip>
+            </Slider>
+            <TextBlock Grid.Column="1" Text="{Binding ThroughputVM.PayloadDesiredSize}" VerticalAlignment="Center" HorizontalAlignment="Center" Foreground="{StaticResource ForegroundLightBrush}"></TextBlock>
+        </Grid>
         <Button Grid.Row="4" Grid.Column="0" Content="{lex:Loc GPStart}" Command="{Binding ThroughputVM.StartCommand}" IsEnabled="{Binding ThroughputVM.IsRunning, Converter={StaticResource BoolInverter}}" Margin="0 10" Style="{StaticResource BaseButton}" ></Button>
         <Button Grid.Row="5" Grid.Column="1" Content="{lex:Loc GPStop}" Command="{Binding ThroughputVM.StopCommand}" IsEnabled="{Binding ThroughputVM.IsRunning}" Margin="0 10" Style="{StaticResource BaseButton}" ></Button>
     </Grid>

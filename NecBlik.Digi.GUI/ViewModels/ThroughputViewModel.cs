@@ -83,7 +83,7 @@ namespace NecBlik.Digi.GUI.ViewModels
 
         private DateTime PreparationTime;
         private DateTime? LastUpdateTime = null;
-        private const int PreparedPackets = 100;
+        private const int PreparedPackets = 1000;
         private int SendingIterator = 0;
         private bool cancellationRequested = false;
         public List<string> ToSend = new List<string>();
