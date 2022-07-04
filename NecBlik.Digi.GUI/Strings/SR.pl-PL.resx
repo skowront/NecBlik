@@ -225,4 +225,7 @@
   <data name="TTSerialPortBaudRate" xml:space="preserve">
     <value>Szybkość transmisji między kontrolerem portu szeregowego a urządzeniem koordynatora.</value>
   </data>
+  <data name="GPSentLost" xml:space="preserve">
+    <value>Wysłane/Stracone</value>
+  </data>
 </root>

@@ -76,6 +76,14 @@ namespace NecBlik.Digi.GUI.ViewModels
             set { isRunning = value; this.OnPropertyChanged(); }
         }
 
+        private int sent = 0;
+        private int lost = 0;
+        public  string SentLost
+        {
+            get { return $"{this.sent}/{this.lost}"; }
+            set { this.OnPropertyChanged(); }
+        }
+
         public RelayCommand StartCommand { get; set; }
         public RelayCommand StopCommand { get; set; }
 
@@ -141,6 +149,8 @@ namespace NecBlik.Digi.GUI.ViewModels
             this.cancellationRequested = false;
             this.ThroughputValue = 0;
             this.throughputHistory.Clear();
+            this.sent = 0;
+            this.lost = 0;
         }
 
         public async void DoWork(object sender, DoWorkEventArgs e)
@@ -150,6 +160,12 @@ namespace NecBlik.Digi.GUI.ViewModels
                 if (SendingIterator >= this.ToSend.Count)
                     this.PrepareTest();
                 var pm = await this.networkViewModel.Model.Coordinator.PingPacket(0, this.ToSend[SendingIterator], this.deviceAddress, true);
+                if(pm.Result == Core.Enums.PingModel.PingResult.NotOk)
+                {
+                    lost++;
+                }
+                sent++;
+                this.SentLost = String.Empty;
                 this.Sent.Add(this.ToSend[SendingIterator]);
                 this.NotifySubscriber(new RecievedData() { Data = this.ToSend[SendingIterator], SourceAddress = this.DeviceAddress });
                 SendingIterator++;

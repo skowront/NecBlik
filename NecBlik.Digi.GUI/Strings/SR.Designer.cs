@@ -304,6 +304,15 @@ namespace NecBlik.Digi.GUI.Strings {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Sent/Lost.
+        /// </summary>
+        public static string GPSentLost {
+            get {
+                return ResourceManager.GetString("GPSentLost", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Serial port.
         /// </summary>
         public static string GPSerialPort {

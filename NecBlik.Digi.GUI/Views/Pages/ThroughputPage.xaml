@@ -47,6 +47,11 @@
                 <TextBlock Text=" " Foreground="{StaticResource ForegroundLightBrush}"></TextBlock>
                 <TextBlock Text="{Binding ThroughputVM.LastPoll}" Foreground="{StaticResource ForegroundLightBrush}"></TextBlock>
             </StackPanel>
+            <StackPanel Orientation="Horizontal" HorizontalAlignment="Center" VerticalAlignment="Center">
+                <TextBlock Text="{lex:Loc GPSentLost}" Foreground="{StaticResource ForegroundLightBrush}"></TextBlock>
+                <TextBlock Text=" " Foreground="{StaticResource ForegroundLightBrush}"></TextBlock>
+                <TextBlock Text="{Binding ThroughputVM.SentLost}" Foreground="{StaticResource ForegroundLightBrush}"></TextBlock>
+            </StackPanel>
         </StackPanel>
         <TextBlock Grid.Row="1" Grid.Column="0" Text="{lex:Loc GPRemoteAddress}" Margin="0 10" Foreground="{StaticResource ForegroundLightBrush}"></TextBlock>
         <ComboBox Grid.Row="1" Grid.Column="1" ItemsSource="{Binding AvailableDevices}" SelectedItem="{Binding ThroughputVM.DeviceAddress}" IsEnabled="{Binding ThroughputVM.IsRunning, Converter={StaticResource BoolInverter}}" Margin="0 10" Foreground="{StaticResource ForegroundLightBrush}"></ComboBox>

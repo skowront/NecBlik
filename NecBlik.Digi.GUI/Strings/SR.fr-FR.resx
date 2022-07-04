@@ -225,4 +225,7 @@
   <data name="TTSerialPortBaudRate" xml:space="preserve">
     <value>Débit en bauds entre le contrôleur de port série et votre appareil coordinateur.</value>
   </data>
+  <data name="GPSentLost" xml:space="preserve">
+    <value>Envoyee/Perdu</value>
+  </data>
 </root>

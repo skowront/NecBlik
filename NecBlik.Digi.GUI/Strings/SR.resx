@@ -225,4 +225,7 @@
   <data name="GPLastPoll" xml:space="preserve">
     <value>Last poll</value>
   </data>
+  <data name="GPSentLost" xml:space="preserve">
+    <value>Sent/Lost</value>
+  </data>
 </root>
