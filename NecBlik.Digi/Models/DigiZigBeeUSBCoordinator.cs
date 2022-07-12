@@ -376,7 +376,8 @@ namespace NecBlik.Digi.Models
                 if (!awaitConfirmation)
                 {
                     this.PacketLogger?.AddEntry(DateTime.Now, payload, "NO_ACK", nameof(TransmitPacket));
-                    this.zigBee.SendPacketAsync(packet);
+                    this.zigBee.ReceiveTimeout = (int)timeout;
+                    rpacket = this.zigBee.SendPacket(packet);
                     return new PingModel() { ResponseTime = double.NaN };
                 }
                 this.PacketLogger?.AddEntry(DateTime.Now, payload, "ACK", nameof(TransmitPacket));
@@ -434,10 +435,10 @@ namespace NecBlik.Digi.Models
             double remote = 0.0f;
             if (r != null)
                 if(r is RemoteATCommandResponsePacket)
-                    remote = (r as RemoteATCommandResponsePacket).CommandValue[0]*(-1);
+                    remote = ((r as RemoteATCommandResponsePacket).CommandValue?.ElementAt(0) ?? 0) * (-1);  
             if (l != null)
                 if (l is ATCommandResponsePacket)
-                    local = (l as ATCommandResponsePacket).CommandValue[0] * (-1);
+                    local = ((l as ATCommandResponsePacket).CommandValue?.ElementAt(0) ?? 0) * (-1);
             return (local,remote);
         }
 

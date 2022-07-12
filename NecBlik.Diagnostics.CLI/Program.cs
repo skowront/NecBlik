@@ -32,7 +32,7 @@ public class Program
             {
                 Task.Run(async () =>
                 {
-                    await TestThroughput(port, baud, "0013A20040A739ED", 10, 200);
+                    await TestThroughput(port, baud, "0013A20040A739ED", 1, 100);
                 }).Wait();
                 Console.WriteLine("Press enter to continue.");
                 Console.ReadLine();
@@ -109,7 +109,10 @@ public class Program
         Console.WriteLine("Sleeping for 1 second.");
         Thread.Sleep(1000);
 
+        coordinator.Dispose();
+        coordinator = new(new DigiZigBeeFactory(), new DigiZigBeeUSBCoordinator.DigiUSBConnectionData() { baud = baud, port = port });
         coordinator.PacketLogger = new PacketLogger("TestAck", TestTime, "ACK");
+        coordinator.Open();
 
         endTime = DateTime.Now.AddSeconds(testingTime);
         iterator = 0;
