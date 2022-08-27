@@ -2,7 +2,9 @@
 using NecBlik.Core.Interfaces;
 using NecBlik.Core.Models;
 using System;
+using System.Collections.Concurrent;
 using System.Collections.Generic;
+using System.Collections.ObjectModel;
 using System.ComponentModel;
 using System.Linq;
 using System.Text;
@@ -84,6 +86,17 @@ namespace NecBlik.Digi.GUI.ViewModels
             set { this.OnPropertyChanged(); }
         }
 
+        private double meanRetryCount=0;
+        public double MeanRetryCount
+        {
+            get { return this.meanRetryCount; }
+            set { this.meanRetryCount=value; this.OnPropertyChanged(); }
+        }
+
+        public ObservableConcurrentDictionary<double, int> RetryCounts { get; set; } = new ObservableConcurrentDictionary<double, int>();
+
+        public ObservableConcurrentDictionary<string, int> Statuses { get; set; } = new ObservableConcurrentDictionary<string, int>();
+
         public RelayCommand StartCommand { get; set; }
         public RelayCommand StopCommand { get; set; }
 
@@ -151,6 +164,9 @@ namespace NecBlik.Digi.GUI.ViewModels
             this.throughputHistory.Clear();
             this.sent = 0;
             this.lost = 0;
+            this.MeanRetryCount = 0;
+            ((ICollection<KeyValuePair<double, int>>)(this.RetryCounts)).Clear();
+            ((ICollection<KeyValuePair<string, int>>)(this.Statuses)).Clear();
         }
 
         public async void DoWork(object sender, DoWorkEventArgs e)
@@ -164,6 +180,24 @@ namespace NecBlik.Digi.GUI.ViewModels
                 {
                     lost++;
                 }
+
+                if (this.RetryCounts.ContainsKey(pm.RetryCount))
+                {
+                    this.RetryCounts[pm.RetryCount] += 1;
+                }
+                else
+                {
+                    this.RetryCounts.Add(pm.RetryCount, 1);
+                }
+                if(this.Statuses.ContainsKey(pm?.DeliveryStatus??"Not delivered."))
+                {
+                    this.Statuses[pm?.DeliveryStatus?? "Not delivered."] += 1;
+                }
+                else
+                {
+                    this.Statuses.Add(pm?.DeliveryStatus?? "Not delivered.", 1);
+                }
+                this.OnPropertyChanged(nameof(this.Statuses));
                 sent++;
                 this.SentLost = String.Empty;
                 this.Sent.Add(this.ToSend[SendingIterator]);

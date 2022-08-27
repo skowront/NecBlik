@@ -216,4 +216,10 @@
   <data name="GPSendingTime" xml:space="preserve">
     <value>Sending time</value>
   </data>
+  <data name="GPDeliveryStatus" xml:space="preserve">
+    <value>Delivery status</value>
+  </data>
+  <data name="GPRetryCount" xml:space="preserve">
+    <value>Retransmission count</value>
+  </data>
 </root>

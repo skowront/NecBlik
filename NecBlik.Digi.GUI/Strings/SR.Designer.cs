@@ -187,6 +187,15 @@ namespace NecBlik.Digi.GUI.Strings {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Mean retransmission count.
+        /// </summary>
+        public static string GPMeanRetryCount {
+            get {
+                return ResourceManager.GetString("GPMeanRetryCount", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Name.
         /// </summary>
         public static string GPName {
@@ -277,6 +286,15 @@ namespace NecBlik.Digi.GUI.Strings {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Retransmission count.
+        /// </summary>
+        public static string GPRetryCounts {
+            get {
+                return ResourceManager.GetString("GPRetryCounts", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Select.
         /// </summary>
         public static string GPSelect {
@@ -327,6 +345,15 @@ namespace NecBlik.Digi.GUI.Strings {
         public static string GPStart {
             get {
                 return ResourceManager.GetString("GPStart", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Statuses.
+        /// </summary>
+        public static string GPStatuses {
+            get {
+                return ResourceManager.GetString("GPStatuses", resourceCulture);
             }
         }
         

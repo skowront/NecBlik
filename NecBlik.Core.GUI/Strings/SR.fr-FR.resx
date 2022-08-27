@@ -216,4 +216,10 @@
   <data name="GPTimeout" xml:space="preserve">
     <value>Temps libre</value>
   </data>
+  <data name="GPDeliveryStatus" xml:space="preserve">
+    <value>Statut de livraison</value>
+  </data>
+  <data name="GPRetryCount" xml:space="preserve">
+    <value>Nombre de retransmission</value>
+  </data>
 </root>

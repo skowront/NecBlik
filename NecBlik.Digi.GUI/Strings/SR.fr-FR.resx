@@ -228,4 +228,13 @@
   <data name="GPSentLost" xml:space="preserve">
     <value>Envoyee/Perdu</value>
   </data>
+  <data name="GPMeanRetryCount" xml:space="preserve">
+    <value>Nombre moyen de retransmissions</value>
+  </data>
+  <data name="GPRetryCounts" xml:space="preserve">
+    <value>Nombre de retransmissions</value>
+  </data>
+  <data name="GPStatuses" xml:space="preserve">
+    <value>Statuses</value>
+  </data>
 </root>

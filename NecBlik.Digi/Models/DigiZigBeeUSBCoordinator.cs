@@ -16,6 +16,7 @@ using XBeeLibrary.Core.Models;
 using XBeeLibrary.Core.Packet;
 using XBeeLibrary.Core.Packet.Common;
 using NecBlik.Digi.Packets;
+using System.Diagnostics;
 
 namespace NecBlik.Digi.Models
 {
@@ -390,9 +391,27 @@ namespace NecBlik.Digi.Models
                 }
                 else
                 {
+                    if (rpacket.Parameters.ContainsKey("Tx. retry count"))
+                    {
+                        int rtc = 0;
+                        var strs = rpacket.Parameters["Tx. retry count"].Split(" ");
+                        if(strs.Count() > 1)
+                        {
+                            var str = strs[1];
+                            if (int.TryParse(str.Replace("(","").Replace(")",""), out rtc))
+                            {
+                                result.RetryCount = rtc;
+                            }
+                        }
+                    }
+                    if(rpacket.Parameters.ContainsKey("Delivery status"))
+                    {
+                        result.DeliveryStatus = rpacket.Parameters["Delivery status"];
+                        Trace.WriteLine(result.DeliveryStatus);
+                    }
                     result.Result = PingModel.PingResult.Ok;
                     result.ResponseTime = (DateTime.Now - sendingTime).TotalMilliseconds;
-                    //result.Message = rpacket.TransmitStatus.ToString();
+                    result.Message = rpacket.ToPrettyString();
                     return result;
                 }
             }
