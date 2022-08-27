@@ -213,4 +213,7 @@
   <data name="MainWindowMenuHeaderProjectSaveAs" xml:space="preserve">
     <value>Sauvegarder le projet comme</value>
   </data>
+  <data name="GPEmail" xml:space="preserve">
+    <value>Email</value>
+  </data>
 </root>
