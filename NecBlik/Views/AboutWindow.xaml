@@ -28,10 +28,10 @@
                 <ColumnDefinition></ColumnDefinition>
             </Grid.ColumnDefinitions>
             <TextBlock Grid.Row="0" Margin="0 0 0 20" Grid.ColumnSpan="2" HorizontalAlignment="Center" FontSize="30" Text="NecBlik"></TextBlock>
-            <TextBlock Grid.Row="1" HorizontalAlignment="Left" Text="{lex:Loc GPAuthor}"></TextBlock>
-            <TextBlock Grid.Row="2" HorizontalAlignment="Left" Text="{lex:Loc GPLicense}"></TextBlock>
-            <TextBlock Grid.Row="3" HorizontalAlignment="Left" Text="{lex:Loc GPVersion}"></TextBlock>
-            <TextBlock Grid.Row="4" HorizontalAlignment="Left" Text="{lex:Loc GPEmail}"></TextBlock>
+            <TextBlock Grid.Row="1" HorizontalAlignment="Left" Text="{lex:Loc NecBlik:SR:GPAuthor}"></TextBlock>
+            <TextBlock Grid.Row="2" HorizontalAlignment="Left" Text="{lex:Loc NecBlik:SR:GPLicense}"></TextBlock>
+            <TextBlock Grid.Row="3" HorizontalAlignment="Left" Text="{lex:Loc NecBlik:SR:GPVersion}"></TextBlock>
+            <TextBlock Grid.Row="4" HorizontalAlignment="Left" Text="{lex:Loc NecBlik:SR:GPEmail}"></TextBlock>
             <TextBlock Grid.Row="1" Grid.Column="1" HorizontalAlignment="Left" Text="Tomasz Skowron"></TextBlock>
             <TextBlock Grid.Row="2" Grid.Column="1" HorizontalAlignment="Left" Text="No license yet."></TextBlock>
             <TextBlock Grid.Row="3" Grid.Column="1" HorizontalAlignment="Left" Text="{Binding Version}"></TextBlock>
