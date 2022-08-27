@@ -117,4 +117,22 @@
   <resheader name="writer">
     <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </resheader>
+  <data name="Disconnected" xml:space="preserve">
+    <value>Disjoint</value>
+  </data>
+  <data name="Unknown" xml:space="preserve">
+    <value>Inconnu</value>
+  </data>
+  <data name="Idle" xml:space="preserve">
+    <value>Inactif</value>
+  </data>
+  <data name="Other" xml:space="preserve">
+    <value>Autre</value>
+  </data>
+  <data name="Connected" xml:space="preserve">
+    <value>Connecte</value>
+  </data>
+  <data name="Running" xml:space="preserve">
+    <value>Fonctionne</value>
+  </data>
 </root>

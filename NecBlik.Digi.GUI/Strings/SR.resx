@@ -225,4 +225,16 @@
   <data name="GPLastPoll" xml:space="preserve">
     <value>Last poll</value>
   </data>
+  <data name="GPSentLost" xml:space="preserve">
+    <value>Sent/Lost</value>
+  </data>
+  <data name="GPMeanRetryCount" xml:space="preserve">
+    <value>Mean retransmission count</value>
+  </data>
+  <data name="GPStatuses" xml:space="preserve">
+    <value>Statuses</value>
+  </data>
+  <data name="GPRetryCounts" xml:space="preserve">
+    <value>Retransmission count</value>
+  </data>
 </root>

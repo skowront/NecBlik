@@ -15,6 +15,7 @@
   </ItemGroup>
 
   <ItemGroup>
+    <PackageReference Include="MSFT.ParallelExtensionsExtras" Version="1.2.0" />
     <PackageReference Include="XBeeLibrary.Core" Version="1.0.1" />
   </ItemGroup>
 

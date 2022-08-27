@@ -61,6 +61,24 @@ namespace NecBlik.Common.Strings {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Cancel.
+        /// </summary>
+        internal static string GPCancel {
+            get {
+                return ResourceManager.GetString("GPCancel", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Confirm.
+        /// </summary>
+        internal static string GPConfirm {
+            get {
+                return ResourceManager.GetString("GPConfirm", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Contains.
         /// </summary>
         internal static string GPContains {

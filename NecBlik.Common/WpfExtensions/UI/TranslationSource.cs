@@ -12,7 +12,7 @@ using System.Xaml;
 namespace NecBlik.Common.WpfExtensions.UI
 {
     /// <summary>
-    /// Class taken from the internet. Dunno where from exactly. Works nice, no clue how exactly though.
+    /// Source: https://programmer.ink/think/dotnetcore-3.0-helps-wpf-localization.html>
     /// </summary>
     public class TranslationSource : INotifyPropertyChanged
     {

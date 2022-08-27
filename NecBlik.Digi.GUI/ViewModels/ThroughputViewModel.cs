@@ -2,7 +2,9 @@
 using NecBlik.Core.Interfaces;
 using NecBlik.Core.Models;
 using System;
+using System.Collections.Concurrent;
 using System.Collections.Generic;
+using System.Collections.ObjectModel;
 using System.ComponentModel;
 using System.Linq;
 using System.Text;
@@ -16,7 +18,7 @@ namespace NecBlik.Digi.GUI.ViewModels
         DigiZigBeeNetworkViewModel networkViewModel;
 
         public int MinPayloadSize { get; set; } = 0;
-        public int MaxPayloadSize { get; set; } = 255;
+        public int MaxPayloadSize { get; set; } = 254;
 
         private int payloadDesiredSize;
         public int PayloadDesiredSize
@@ -76,6 +78,25 @@ namespace NecBlik.Digi.GUI.ViewModels
             set { isRunning = value; this.OnPropertyChanged(); }
         }
 
+        private int sent = 0;
+        private int lost = 0;
+        public  string SentLost
+        {
+            get { return $"{this.sent}/{this.lost}"; }
+            set { this.OnPropertyChanged(); }
+        }
+
+        private double meanRetryCount=0;
+        public double MeanRetryCount
+        {
+            get { return this.meanRetryCount; }
+            set { this.meanRetryCount=value; this.OnPropertyChanged(); }
+        }
+
+        public ObservableConcurrentDictionary<double, int> RetryCounts { get; set; } = new ObservableConcurrentDictionary<double, int>();
+
+        public ObservableConcurrentDictionary<string, int> Statuses { get; set; } = new ObservableConcurrentDictionary<string, int>();
+
         public RelayCommand StartCommand { get; set; }
         public RelayCommand StopCommand { get; set; }
 
@@ -83,7 +104,7 @@ namespace NecBlik.Digi.GUI.ViewModels
 
         private DateTime PreparationTime;
         private DateTime? LastUpdateTime = null;
-        private const int PreparedPackets = 100;
+        private const int PreparedPackets = 1000;
         private int SendingIterator = 0;
         private bool cancellationRequested = false;
         public List<string> ToSend = new List<string>();
@@ -129,7 +150,7 @@ namespace NecBlik.Digi.GUI.ViewModels
             {
                 var s = "";
                 s += i.ToString();
-                for (int j = 0; j < MaxPayloadSize - i.ToString().Length; j++)
+                for (int j = 0; j < PayloadDesiredSize - i.ToString().Length - 1; j++)
                 {
                     s += 'x';
                 }
@@ -141,6 +162,11 @@ namespace NecBlik.Digi.GUI.ViewModels
             this.cancellationRequested = false;
             this.ThroughputValue = 0;
             this.throughputHistory.Clear();
+            this.sent = 0;
+            this.lost = 0;
+            this.MeanRetryCount = 0;
+            ((ICollection<KeyValuePair<double, int>>)(this.RetryCounts)).Clear();
+            ((ICollection<KeyValuePair<string, int>>)(this.Statuses)).Clear();
         }
 
         public async void DoWork(object sender, DoWorkEventArgs e)
@@ -150,6 +176,30 @@ namespace NecBlik.Digi.GUI.ViewModels
                 if (SendingIterator >= this.ToSend.Count)
                     this.PrepareTest();
                 var pm = await this.networkViewModel.Model.Coordinator.PingPacket(0, this.ToSend[SendingIterator], this.deviceAddress, true);
+                if(pm.Result == Core.Enums.PingModel.PingResult.NotOk)
+                {
+                    lost++;
+                }
+
+                if (this.RetryCounts.ContainsKey(pm.RetryCount))
+                {
+                    this.RetryCounts[pm.RetryCount] += 1;
+                }
+                else
+                {
+                    this.RetryCounts.Add(pm.RetryCount, 1);
+                }
+                if(this.Statuses.ContainsKey(pm?.DeliveryStatus??"Not delivered."))
+                {
+                    this.Statuses[pm?.DeliveryStatus?? "Not delivered."] += 1;
+                }
+                else
+                {
+                    this.Statuses.Add(pm?.DeliveryStatus?? "Not delivered.", 1);
+                }
+                this.OnPropertyChanged(nameof(this.Statuses));
+                sent++;
+                this.SentLost = String.Empty;
                 this.Sent.Add(this.ToSend[SendingIterator]);
                 this.NotifySubscriber(new RecievedData() { Data = this.ToSend[SendingIterator], SourceAddress = this.DeviceAddress });
                 SendingIterator++;

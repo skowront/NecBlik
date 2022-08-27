@@ -10,7 +10,7 @@ public class Program
     public static void Main(string[] args)
     {
         string port = string.Empty;
-        int baud = 9600;
+        int baud = 115200;
         string input = string.Empty;
         while(input!="exit")
         {
@@ -32,7 +32,7 @@ public class Program
             {
                 Task.Run(async () =>
                 {
-                    await TestThroughput(port, baud, "0013A20040A739ED", 1, 239);
+                    await TestThroughput(port, baud, "0013A20040A739ED", 1, 100);
                 }).Wait();
                 Console.WriteLine("Press enter to continue.");
                 Console.ReadLine();
@@ -109,7 +109,10 @@ public class Program
         Console.WriteLine("Sleeping for 1 second.");
         Thread.Sleep(1000);
 
+        coordinator.Dispose();
+        coordinator = new(new DigiZigBeeFactory(), new DigiZigBeeUSBCoordinator.DigiUSBConnectionData() { baud = baud, port = port });
         coordinator.PacketLogger = new PacketLogger("TestAck", TestTime, "ACK");
+        coordinator.Open();
 
         endTime = DateTime.Now.AddSeconds(testingTime);
         iterator = 0;
@@ -129,5 +132,6 @@ public class Program
 
         Console.WriteLine($"Sent {iterator} packets of size {toSend[0].Length} waiting for confirmation in {testingTime} seconds.");
 
+        coordinator.Dispose();
     }
 }

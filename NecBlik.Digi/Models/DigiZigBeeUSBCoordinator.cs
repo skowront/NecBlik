@@ -16,6 +16,7 @@ using XBeeLibrary.Core.Models;
 using XBeeLibrary.Core.Packet;
 using XBeeLibrary.Core.Packet.Common;
 using NecBlik.Digi.Packets;
+using System.Diagnostics;
 
 namespace NecBlik.Digi.Models
 {
@@ -367,7 +368,7 @@ namespace NecBlik.Digi.Models
                 }
                 var rawPayload = Encoding.ASCII.GetBytes(payload);
                 TransmitPacket packet = awaitConfirmation ? new TransmitPacket(this.frameId, new XBee64BitAddress(remoteAddress), new XBee16BitAddress("FFFE"), 0, 0, rawPayload) :
-                    new TransmitPacket(0, new XBee64BitAddress(remoteAddress), new XBee16BitAddress("FFFE"), 0, 0, rawPayload);
+                    new TransmitPacket(0, new XBee64BitAddress(remoteAddress), new XBee16BitAddress("FFFE"), 0, 01, rawPayload);
                 var api2 = packet.GenerateByteArrayEscaped();
                 var br = ByteArrayToString(api2);
                 this.IncrementFrameId();
@@ -375,12 +376,13 @@ namespace NecBlik.Digi.Models
                 XBeePacket rpacket = null;
                 if (!awaitConfirmation)
                 {
-                    this.zigBee.SendPacketAsync(packet);
                     this.PacketLogger?.AddEntry(DateTime.Now, payload, "NO_ACK", nameof(TransmitPacket));
+                    this.zigBee.ReceiveTimeout = (int)timeout;
+                    rpacket = this.zigBee.SendPacket(packet);
                     return new PingModel() { ResponseTime = double.NaN };
                 }
-                rpacket = this.zigBee.SendPacket(packet);
                 this.PacketLogger?.AddEntry(DateTime.Now, payload, "ACK", nameof(TransmitPacket));
+                rpacket = this.zigBee.SendPacket(packet);
                 if (rpacket == null)
                 {
                     result.Result = PingModel.PingResult.NotOk;
@@ -389,15 +391,33 @@ namespace NecBlik.Digi.Models
                 }
                 else
                 {
+                    if (rpacket.Parameters.ContainsKey("Tx. retry count"))
+                    {
+                        int rtc = 0;
+                        var strs = rpacket.Parameters["Tx. retry count"].Split(" ");
+                        if(strs.Count() > 1)
+                        {
+                            var str = strs[1];
+                            if (int.TryParse(str.Replace("(","").Replace(")",""), out rtc))
+                            {
+                                result.RetryCount = rtc;
+                            }
+                        }
+                    }
+                    if(rpacket.Parameters.ContainsKey("Delivery status"))
+                    {
+                        result.DeliveryStatus = rpacket.Parameters["Delivery status"];
+                        Trace.WriteLine(result.DeliveryStatus);
+                    }
                     result.Result = PingModel.PingResult.Ok;
                     result.ResponseTime = (DateTime.Now - sendingTime).TotalMilliseconds;
-                    //result.Message = rpacket.TransmitStatus.ToString();
+                    result.Message = rpacket.ToPrettyString();
                     return result;
                 }
             }
             catch (Exception ex)
             {
-                result.Result = PingModel.PingResult.NotOk;
+                result.Result = PingModel.PingResult.Timeout;
                 result.ResponseTime = double.PositiveInfinity;
                 result.Message = ex.Message;
                 return result;
@@ -434,10 +454,10 @@ namespace NecBlik.Digi.Models
             double remote = 0.0f;
             if (r != null)
                 if(r is RemoteATCommandResponsePacket)
-                    remote = (r as RemoteATCommandResponsePacket).CommandValue[0]*(-1);
+                    remote = ((r as RemoteATCommandResponsePacket).CommandValue?.ElementAt(0) ?? 0) * (-1);  
             if (l != null)
                 if (l is ATCommandResponsePacket)
-                    local = (l as ATCommandResponsePacket).CommandValue[0] * (-1);
+                    local = ((l as ATCommandResponsePacket).CommandValue?.ElementAt(0) ?? 0) * (-1);
             return (local,remote);
         }
 

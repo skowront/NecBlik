@@ -1,7 +1,3 @@
-
-
-
-
 #include "Printers.h"
 //Xbee library defines max packet size = 110 bytes (100 bytes + overhead)-> #define MAX_FRAME_DATA_SIZE 110
 //Therefore a fork of this library was attached with max sending value equal to 255. 
@@ -28,7 +24,7 @@ int errorLed = 13;
 
 const char SetValueCommand [] = "SetValue";
 const char EchoCommand [] = "Echo";
-const char HoldCommand [] = "Hold";
+const char HoldCommand [] = "Toggle";
 const char GetValueCommand [] = "GetValue";
 const char GetChangingValueCommand [] = "GetCValue";
 
@@ -199,7 +195,7 @@ void HandleRemoteCommunication()
 					SetStoredValue(newValue);
 					Serial.print("Setting value to:");
 					Serial.println(newValue);
-					SendValue("New value set");
+					//SendValue("New value set");
 				}
 			}
 			else
@@ -231,9 +227,9 @@ void setup() {
 	pinMode(statusLed, OUTPUT);
 	pinMode(errorLed, OUTPUT);
 
-	Serial.begin(9600);
+	Serial.begin(115200);
 	Serial.println("Serial initialized.");
-	Serial1.begin(9600);
+	Serial1.begin(115200);
 	Serial.println("Serial Xbee communication initialized.");
 
 	xbee.setSerial(Serial1);

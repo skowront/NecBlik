@@ -2,7 +2,7 @@
   "profiles": {
     "ZigBeeEndDeviceMonitor.Test": {
       "commandName": "Project",
-      "commandLineArgs": "COM5 9600"
+      "commandLineArgs": "COM3 115200"
     }
   }
 }

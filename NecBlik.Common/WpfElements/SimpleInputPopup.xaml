@@ -1,10 +1,14 @@
-﻿<Window x:Class="NecBlik.Common.WpfElements.SimpleInputPopup"
+﻿<mah:MetroWindow x:Class="NecBlik.Common.WpfElements.SimpleInputPopup"
         xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
         xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
         xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:mah="http://metro.mahapps.com/winfx/xaml/controls"
         xmlns:local="clr-namespace:NecBlik.Common.WpfElements"
+        xmlns:lexp="clr-namespace:WPFLocalizeExtension.Providers;assembly=WPFLocalizeextension"
+        xmlns:lex="clr-namespace:WPFLocalizeExtension.Extensions;assembly=WPFLocalizeextension"
+        lexp:ResxLocalizationProvider.DefaultAssembly="NecBlik.Common"
+        lexp:ResxLocalizationProvider.DefaultDictionary="SR"
         mc:Ignorable="d"
         WindowStyle="None"
         AllowsTransparency="True"
@@ -42,12 +46,18 @@
                     <RowDefinition Height="50"></RowDefinition>
                 </Grid.RowDefinitions>
                 <Button Grid.Column="0" Grid.Row="2" Style="{StaticResource BaseButton}" Command="{Binding ConfirmCommand}">
-                    <TextBlock FontFamily="{StaticResource FontAwesome}" Text="&#xf00c;"></TextBlock>
+                    <StackPanel Orientation="Horizontal">
+                        <TextBlock Text="{lex:Loc NecBlik.Common:SR:GPConfirm}" Margin="0 0 5 0"></TextBlock>
+                        <TextBlock FontFamily="{StaticResource FontAwesome}" Text="&#xf00c;"></TextBlock>
+                    </StackPanel>
                 </Button>
                 <Button Grid.Column="1" Grid.Row="2" Style="{StaticResource BaseButton}" Command="{Binding CancelCommand}">
-                    <TextBlock FontFamily="{StaticResource FontAwesome}" Text="&#xf00d;"></TextBlock>
+                    <StackPanel Orientation="Horizontal">
+                        <TextBlock Text="{lex:Loc NecBlik.Common:SR:GPCancel}" Margin="0 0 5 0"></TextBlock>
+                        <TextBlock FontFamily="{StaticResource FontAwesome}" Text="&#xf00d;"></TextBlock>
+                    </StackPanel>
                 </Button>
             </Grid>
         </Grid>
     </Grid>
-</Window>
+</mah:MetroWindow>

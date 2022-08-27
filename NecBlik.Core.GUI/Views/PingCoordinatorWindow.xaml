@@ -53,6 +53,8 @@
                     <RowDefinition></RowDefinition>
                     <RowDefinition></RowDefinition>
                     <RowDefinition></RowDefinition>
+                    <RowDefinition></RowDefinition>
+                    <RowDefinition></RowDefinition>
                 </Grid.RowDefinitions>
                 <Grid.ColumnDefinitions>
                     <ColumnDefinition></ColumnDefinition>
@@ -63,11 +65,15 @@
                 <TextBlock Grid.Row="2" VerticalAlignment="Center" Text="{lex:Loc GPResult}" Foreground="{StaticResource MaterialDesignDarkForeground}"></TextBlock>
                 <TextBlock Grid.Row="3" VerticalAlignment="Center" Text="{lex:Loc GPPayload}" Foreground="{StaticResource MaterialDesignDarkForeground}"></TextBlock>
                 <TextBlock Grid.Row="4" VerticalAlignment="Center" Text="{lex:Loc GPMessage}" Foreground="{StaticResource MaterialDesignDarkForeground}"></TextBlock>
+                <TextBlock Grid.Row="5" VerticalAlignment="Center" Text="{lex:Loc GPRetryCount}" Foreground="{StaticResource MaterialDesignDarkForeground}"></TextBlock>
+                <TextBlock Grid.Row="6" VerticalAlignment="Center" Text="{lex:Loc GPDeliveryStatus}" Foreground="{StaticResource MaterialDesignDarkForeground}"></TextBlock>
                 <TextBlock Grid.Row="0" VerticalAlignment="Center" Grid.Column="1" Text="{Binding SendingTime}" Foreground="{StaticResource MaterialDesignDarkForeground}"></TextBlock>
                 <TextBlock Grid.Row="1" VerticalAlignment="Center" Grid.Column="1" Text="{Binding ResponseTime}" Foreground="{StaticResource MaterialDesignDarkForeground}"></TextBlock>
                 <TextBlock Grid.Row="2" VerticalAlignment="Center" Grid.Column="1" Text="{Binding Result}" Foreground="{StaticResource MaterialDesignDarkForeground}"></TextBlock>
                 <TextBlock Grid.Row="3" VerticalAlignment="Center" Grid.Column="1" Text="{Binding ReturnedPayload}" TextWrapping="Wrap"  Foreground="{StaticResource MaterialDesignDarkForeground}"></TextBlock>
                 <TextBlock Grid.Row="4" VerticalAlignment="Center" Grid.Column="1" Text="{Binding Message}" Foreground="{StaticResource MaterialDesignDarkForeground}"></TextBlock>
+                <TextBlock Grid.Row="5" VerticalAlignment="Center" Grid.Column="1" Text="{Binding RetryCount}" Foreground="{StaticResource MaterialDesignDarkForeground}"></TextBlock>
+                <TextBlock Grid.Row="6" VerticalAlignment="Center" Grid.Column="1" Text="{Binding DeliveryStatus}" Foreground="{StaticResource MaterialDesignDarkForeground}"></TextBlock>
             </Grid>
         </Grid>
     </Grid>

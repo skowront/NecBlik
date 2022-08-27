@@ -205,4 +205,13 @@ générer.</value>
   <data name="GPStatus" xml:space="preserve">
     <value>Status</value>
   </data>
+  <data name="GPPollDevices" xml:space="preserve">
+    <value>Vérifier les appareils</value>
+  </data>
+  <data name="GPPolling" xml:space="preserve">
+    <value>Sondage</value>
+  </data>
+  <data name="GPPollingInterval" xml:space="preserve">
+    <value>Intervalle de sondage</value>
+  </data>
 </root>

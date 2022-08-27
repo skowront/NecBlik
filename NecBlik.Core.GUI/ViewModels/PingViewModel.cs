@@ -45,6 +45,18 @@ namespace NecBlik.Core.GUI.ViewModels
             set { model.Message = value; this.OnPropertyChanged(); }
         }
 
+        public int RetryCount
+        {
+            get { return model.RetryCount; }
+            set { model.RetryCount = value; this.OnPropertyChanged(); }
+        }
+
+        public string DeliveryStatus
+        {
+            get { return model.DeliveryStatus; }
+            set { model.DeliveryStatus = value; this.OnPropertyChanged(); }
+        }
+
         IDeviceCoordinator coordinator = null;
 
         private int timeout = 0;
@@ -122,6 +134,8 @@ namespace NecBlik.Core.GUI.ViewModels
                 this.ReturnedPayload = result.Payload;
                 this.Message = result.Message;
                 this.ResponseTime = result.ResponseTime;
+                this.DeliveryStatus = result.DeliveryStatus;
+                this.RetryCount = result.RetryCount;
                 this.Result = result.Result;
             });
         }

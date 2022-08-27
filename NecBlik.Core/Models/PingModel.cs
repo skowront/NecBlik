@@ -16,6 +16,10 @@ namespace NecBlik.Core.Enums
 
         public string Message { get; set; }
 
+        public int RetryCount { get; set; } = 0;
+
+        public string DeliveryStatus { get; set; }
+
         public PingModel(double responseTime, PingResult result, string payload = "")
         {
             this.ResponseTime = responseTime;
@@ -42,7 +46,9 @@ namespace NecBlik.Core.Enums
             //When the packet returned without harm.
             Ok,
             //When the packet did not return at all.
-            NotOk
+            NotOk,
+            //When sometghing timed out
+            Timeout
         }
     }
 }

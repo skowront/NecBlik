@@ -115,6 +115,15 @@ namespace NecBlik.Core.GUI.Strings {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Delivery status.
+        /// </summary>
+        public static string GPDeliveryStatus {
+            get {
+                return ResourceManager.GetString("GPDeliveryStatus", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Device unavailable.
         /// </summary>
         public static string GPDeviceUnavailable {
@@ -264,6 +273,15 @@ namespace NecBlik.Core.GUI.Strings {
         public static string GPResult {
             get {
                 return ResourceManager.GetString("GPResult", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Retransmission count.
+        /// </summary>
+        public static string GPRetryCount {
+            get {
+                return ResourceManager.GetString("GPRetryCount", resourceCulture);
             }
         }
         
